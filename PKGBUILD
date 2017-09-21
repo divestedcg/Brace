@@ -1,14 +1,16 @@
 # Maintainer: Tad D <tad@spotco.us>
 pkgname=brace
 pkgver=1.0
-pkgrel=4
+pkgrel=6
 pkgdesc="Increases security through various configs"
 arch=('any')
 license=('custom')
 conflicts=('dnu')
-optdepends=('extirpater: erase your freespace'
-	'firejail: sandbox your programs'
+optdepends=('arch-audit: check for insecure packages'
+	'extirpater: erase drive freespace'
+	'firejail: sandbox programs'
 	'linux-hardened: harden against exploits'
+	'rkhunter: scan for rootkits'
 	'scfw: seal your ports')
 source=('60-restrict.conf'
 	'blacklist-dma.conf'
