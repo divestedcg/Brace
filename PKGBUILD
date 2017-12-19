@@ -1,7 +1,7 @@
 # Maintainer: Tad <tad@spotco.us>
 pkgname=brace
 pkgver=1.2
-pkgrel=7
+pkgrel=8
 pkgdesc="Increases privacy/security through various configs. Firefox hardening credit: @pyllyukko"
 arch=('any')
 license=('custom')
@@ -68,6 +68,14 @@ build() {
 	echo 'pref("media.hardware-video-decoding.force-enabled", true);' >> user.js;
 	echo 'pref("browser.tabs.remote.autostart", true);' >> user.js;
 	echo 'pref("browser.tabs.remote.force-enabled", true);' >> user.js;
+	echo 'pref("media.eme.enabled", false);' >> user.js;
+	echo 'pref("general.useragent.updates.enabled", false);' >> user.js;
+	echo 'pref("browser.snippets.updateUrl", "");' >> user.js;
+	echo 'pref("browser.snippets.enabled", false);' >> user.js;
+	echo 'pref("browser.snippets.syncPromo.enabled", false);' >> user.js;
+	echo 'pref("browser.snippets.firstrunHomepage.enabled", false);' >> user.js;
+	echo 'pref("dom.push.serverURL", "");' >> user.js;
+	echo 'pref("dom.push.enabled", false);' >> user.js;
 	echo "//END OF BRACE EXTRAS" >> user.js;
 }
 
