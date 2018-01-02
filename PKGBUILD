@@ -1,7 +1,7 @@
 # Maintainer: Tad <tad@spotco.us>
 pkgname=brace
 pkgver=1.2
-pkgrel=8
+pkgrel=11
 pkgdesc="Increases privacy/security through various configs. Firefox hardening credit: @pyllyukko"
 arch=('any')
 license=('custom')
@@ -54,20 +54,27 @@ build() {
 	sed -i 's/pref("security.OCSP.enabled"/\/\/BRACE-DISABLED: pref("security.OCSP.enabled"/' user.js
 
 	#Enable some preferences
-	sed -i 's/\/\/pref("security.ssl.require_safe_negotiation"/pref("security.ssl.require_safe_negotiation"/' user.js
+	sed -i 's/\/\/pref("security.ssl.require_safe_negotiation"/pref("security.ssl.require_safe_negotiation"/' user.js #XXX: Breaks some sites
 
 	#Fix https://github.com/pyllyukko/user.js/issues/347
 	sed -i 's/pref("browser.cache.offline.enable"/\/\/DISABLED: pref("browser.cache.offline.enable"/' user.js
 
+	#Fix https://github.com/pyllyukko/user.js/pull/355
+	sed -i 's/en-us, en/en-US, en/' user.js
+
 	#Add our extras
 	echo -e "\n" >> user.js;
 	echo "//START OF BRACE EXTRAS" >> user.js;
+	##Performance
 	echo 'pref("general.smoothScroll", false);' >> user.js;
-	echo 'pref("extensions.screenshots.disabled", true);' >> user.js;
 	echo 'pref("layers.acceleration.force-enabled", true);' >> user.js;
 	echo 'pref("media.hardware-video-decoding.force-enabled", true);' >> user.js;
 	echo 'pref("browser.tabs.remote.autostart", true);' >> user.js;
 	echo 'pref("browser.tabs.remote.force-enabled", true);' >> user.js;
+	##Privacy
+	echo 'pref("privacy.firstparty.isolate", true);' >> user.js;
+	echo 'pref("privacy.firstparty.isolate.restrict_opener_access", false);' >> user.js;
+	echo 'pref("extensions.screenshots.disabled", true);' >> user.js;
 	echo 'pref("media.eme.enabled", false);' >> user.js;
 	echo 'pref("general.useragent.updates.enabled", false);' >> user.js;
 	echo 'pref("browser.snippets.updateUrl", "");' >> user.js;
@@ -76,6 +83,10 @@ build() {
 	echo 'pref("browser.snippets.firstrunHomepage.enabled", false);' >> user.js;
 	echo 'pref("dom.push.serverURL", "");' >> user.js;
 	echo 'pref("dom.push.enabled", false);' >> user.js;
+	echo 'pref("plugin.expose_full_path", false);' >> user.js;
+	echo 'pref("browser.link.open_newwindow_restriction", true);' >> user.js;
+	echo 'pref("reader.parse-on-load.enabled", false);' >> user.js;
+	echo 'pref("browser.reader.detectedFirstArticle", true);' >> user.js;
 	echo "//END OF BRACE EXTRAS" >> user.js;
 }
 
