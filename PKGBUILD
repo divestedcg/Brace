@@ -1,7 +1,7 @@
 # Maintainer: Tad <tad@spotco.us>
 pkgname=brace
 pkgver=1.2
-pkgrel=11
+pkgrel=12
 pkgdesc="Increases privacy/security through various configs. Firefox hardening credit: @pyllyukko"
 arch=('any')
 license=('custom')
@@ -87,6 +87,8 @@ build() {
 	echo 'pref("browser.link.open_newwindow_restriction", true);' >> user.js;
 	echo 'pref("reader.parse-on-load.enabled", false);' >> user.js;
 	echo 'pref("browser.reader.detectedFirstArticle", true);' >> user.js;
+	##Security
+	echo 'pref("javascript.options.shared_memory", false);' >> user.js;
 	echo "//END OF BRACE EXTRAS" >> user.js;
 }
 

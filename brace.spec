@@ -1,6 +1,6 @@
 Name: brace
 Version: 1.2
-Release: 11
+Release: 12
 Summary: Increases privacy/security through various configs.
 License: GPLv3+
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
@@ -75,6 +75,8 @@ echo 'pref("plugin.expose_full_path", false);' >> %{buildroot}/usr/lib64/firefox
 echo 'pref("browser.link.open_newwindow_restriction", true);' >> %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/all-brace.js;
 echo 'pref("reader.parse-on-load.enabled", false);' >> %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/all-brace.js;
 echo 'pref("browser.reader.detectedFirstArticle", true);' >> %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/all-brace.js;
+##Security
+echo 'pref("javascript.options.shared_memory", false);' >> user.js;
 echo "//END OF BRACE EXTRAS" >> %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/all-brace.js;
 
 %files
