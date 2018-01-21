@@ -1,6 +1,6 @@
 Name: brace
 Version: 1.2
-Release: 12
+Release: 14
 Summary: Increases privacy/security through various configs.
 License: GPLv3+
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
@@ -40,6 +40,7 @@ sed -i 's/pref("signon.rememberSignons"/\/\/BRACE-DISABLED: pref("signon.remembe
 sed -i 's/pref("network.cookie.lifetimePolicy"/\/\/BRACE-DISABLED: pref("network.cookie.lifetimePolicy"/' %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/all-brace.js
 sed -i 's/pref("browser.urlbar.autocomplete.enabled"/\/\/BRACE-DISABLED: pref("browser.urlbar.autocomplete.enabled"/' %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/all-brace.js
 sed -i 's/pref("security.OCSP.enabled"/\/\/BRACE-DISABLED: pref("security.OCSP.enabled"/' %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/all-brace.js
+sed -i 's/pref("security.OCSP.required"/\/\/BRACE-DISABLED: pref("security.OCSP.required"/' %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/all-brace.js
 
 #Enable some preferences
 sed -i 's/\/\/pref("security.ssl.require_safe_negotiation"/pref("security.ssl.require_safe_negotiation"/' %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/all-brace.js #XXX: Breaks some sites
@@ -76,7 +77,7 @@ echo 'pref("browser.link.open_newwindow_restriction", true);' >> %{buildroot}/us
 echo 'pref("reader.parse-on-load.enabled", false);' >> %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/all-brace.js;
 echo 'pref("browser.reader.detectedFirstArticle", true);' >> %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/all-brace.js;
 ##Security
-echo 'pref("javascript.options.shared_memory", false);' >> user.js;
+echo 'pref("javascript.options.shared_memory", false);' >> %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/all-brace.js;
 echo "//END OF BRACE EXTRAS" >> %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/all-brace.js;
 
 %files
