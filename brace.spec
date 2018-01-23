@@ -1,6 +1,6 @@
 Name: brace
 Version: 1.2
-Release: 14
+Release: 15
 Summary: Increases privacy/security through various configs.
 License: GPLv3+
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
@@ -25,7 +25,7 @@ sed -i 's/pref("dom.workers.enabled"/\/\/BRACE-DISABLED: pref("dom.workers.enabl
 sed -i 's/pref("dom.allow_cut_copy"/\/\/BRACE-DISABLED: pref("dom.allow_cut_copy"/' %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/all-brace.js
 sed -i 's/pref("keyword.enabled"/\/\/BRACE-DISABLED: pref("keyword.enabled"/' %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/all-brace.js
 sed -i 's/pref("svg.disabled"/\/\/BRACE-DISABLED: pref("svg.disabled"/' %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/all-brace.js
-#sed -i 's/pref("browser.display.use_document_fonts"/\/\/BRACE-DISABLED: pref("browser.display.use_document_fonts"/' %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/all-brace.js
+sed -i 's/pref("browser.display.use_document_fonts"/\/\/BRACE-DISABLED: pref("browser.display.use_document_fonts"/' %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/all-brace.js
 sed -i 's/pref("pdfjs.disabled"/\/\/BRACE-DISABLED: pref("pdfjs.disabled"/' %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/all-brace.js
 sed -i 's/pref("app.update.enabled"/\/\/BRACE-DISABLED: pref("app.update.enabled"/' %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/all-brace.js
 sed -i 's/pref("browser.search.suggest.enabled"/\/\/BRACE-DISABLED: pref("browser.search.suggest.enabled"/' %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/all-brace.js
