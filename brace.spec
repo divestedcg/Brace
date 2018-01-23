@@ -1,6 +1,6 @@
 Name: brace
 Version: 1.2
-Release: 15
+Release: 16
 Summary: Increases privacy/security through various configs.
 License: GPLv3+
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
@@ -49,7 +49,7 @@ sed -i 's/\/\/pref("security.ssl.require_safe_negotiation"/pref("security.ssl.re
 sed -i 's/pref("browser.cache.offline.enable"/\/\/DISABLED: pref("browser.cache.offline.enable"/' %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/all-brace.js
 
 #Fix https://github.com/pyllyukko/%{buildroot}/usr/lib64/firefox/browser/defaults/preferences/all-brace.js/pull/355
-sed -i 's/en-us, en/en-US, en/' %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/all-brace.js
+sed -i 's/en-us, en/en-US/' %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/all-brace.js
 
 #Add our extras
 echo -e "\n" >> %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/all-brace.js;
@@ -60,6 +60,7 @@ echo 'pref("layers.acceleration.force-enabled", true);' >> %{buildroot}/usr/lib6
 echo 'pref("media.hardware-video-decoding.force-enabled", true);' >> %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/all-brace.js;
 echo 'pref("browser.tabs.remote.autostart", true);' >> %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/all-brace.js;
 echo 'pref("browser.tabs.remote.force-enabled", true);' >> %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/all-brace.js;
+echo 'pref("layers.omtp.enabled", true);' >> %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/all-brace.js;
 ##Privacy
 echo 'pref("privacy.firstparty.isolate", true);' >> %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/all-brace.js;
 echo 'pref("privacy.firstparty.isolate.restrict_opener_access", false);' >> %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/all-brace.js;

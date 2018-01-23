@@ -1,7 +1,7 @@
 # Maintainer: Tad <tad@spotco.us>
 pkgname=brace
 pkgver=1.2
-pkgrel=15
+pkgrel=16
 pkgdesc="Increases privacy/security through various configs. Firefox hardening credit: @pyllyukko"
 arch=('any')
 license=('custom')
@@ -61,7 +61,7 @@ build() {
 	sed -i 's/pref("browser.cache.offline.enable"/\/\/DISABLED: pref("browser.cache.offline.enable"/' user.js
 
 	#Fix https://github.com/pyllyukko/user.js/pull/355
-	sed -i 's/en-us, en/en-US, en/' user.js
+	sed -i 's/en-us, en/en-US/' user.js
 
 	#Add our extras
 	echo -e "\n" >> user.js;
@@ -72,6 +72,7 @@ build() {
 	echo 'pref("media.hardware-video-decoding.force-enabled", true);' >> user.js;
 	echo 'pref("browser.tabs.remote.autostart", true);' >> user.js;
 	echo 'pref("browser.tabs.remote.force-enabled", true);' >> user.js;
+	echo 'pref("layers.omtp.enabled", true);' >> user.js;
 	##Privacy
 	echo 'pref("privacy.firstparty.isolate", true);' >> user.js;
 	echo 'pref("privacy.firstparty.isolate.restrict_opener_access", false);' >> user.js;
