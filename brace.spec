@@ -1,6 +1,6 @@
 Name: brace
-Version: 1.2
-Release: 16
+Version: 1.3
+Release: 17
 Summary: Increases privacy/security through various configs.
 License: GPLv3+
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
@@ -9,11 +9,9 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 Firefox hardening credit: @pyllyukko
 
 %install
-install -Dm755 umask.sh %{buildroot}/etc/profile.d/umask.sh
 install -Dm644 blacklist-dma.conf %{buildroot}/usr/lib/modprobe.d/blacklist-dma.conf
 install -Dm644 blacklist-usbnet.conf %{buildroot}/usr/lib/modprobe.d/blacklist-usbnet.conf
 install -Dm644 60-restrict.conf %{buildroot}/usr/lib/sysctl.d/60-restrict.conf
-install -Dm644 dnu.service %{buildroot}/usr/lib/systemd/system/dnu.service
 install -Dm644 user.js %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/all-brace.js
 
 #Mark preferences properly
@@ -82,9 +80,7 @@ echo 'pref("javascript.options.shared_memory", false);' >> %{buildroot}/usr/lib6
 echo "//END OF BRACE EXTRAS" >> %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/all-brace.js;
 
 %files
-/etc/profile.d/umask.sh
 /usr/lib/modprobe.d/blacklist-dma.conf
 /usr/lib/modprobe.d/blacklist-usbnet.conf
 /usr/lib/sysctl.d/60-restrict.conf
-/usr/lib/systemd/system/dnu.service
 /usr/lib64/firefox/browser/defaults/preferences/all-brace.js
