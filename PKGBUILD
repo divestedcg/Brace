@@ -1,7 +1,7 @@
 # Maintainer: Tad <tad@spotco.us>
 pkgname=brace
 pkgver=1.4
-pkgrel=18
+pkgrel=19
 pkgdesc="Increases privacy/security through various configs. Firefox hardening credit: @pyllyukko"
 arch=('any')
 license=('custom')
@@ -19,6 +19,7 @@ source=('21-disable-connectivity-check.conf'
 	'60-restrict.conf'
 	'blacklist-dma.conf'
 	'blacklist-usbnet.conf'
+	'iwlwifi.conf'
 	'dnu.service'
 	'umask.sh'
 	'https://raw.githubusercontent.com/pyllyukko/user.js/master/user.js')
@@ -27,6 +28,7 @@ sha512sums=('8ec47524685a59ed1ca45d5ba5334248cc505c07d71f1340d77a20e96e647b32c7a
             '6cb5351444dc9cb12883a44f3895a211388eccc2f0ad00aad5c29add7e721cab846d9b6d048d4bb1a70cc840a53a56c5e946ac72ef0a9bc673fa7131283c5680'
             'fcee1964b26f4309f20c8917a71d448e26f0f2c340ccea0a67f99d704dd009249d09aa215bd2424e234bc9b7927e4679043c2dad78f3fe8e8d744b07485ae655'
             '7f7d833f4b1437a99e0f30e6dd3b474ac75a52f830864f88b2d1337845daa59e46b4558437568067a7040c7d6bb72bdecc5490fedb71ac8049dccafb334bdda1'
+            'c07d4f5d591a07db530deb77065e488e788fd964c081c2859cee07cb0820c69ab8236b8713425c77b47a75435907643cd9a021719f7389c09b20787df1b0860b'
             '2bb7c4306b94687583caf5db2a8c384ffeeedcbaba72acc96a686e91a49c48e7b73a34e2dba74f8532d59ee250560fc6bf819e1308e37d9028d2138297d18b94'
             'e81b8fad493ee9dc66b1b0e728195b483a4da8edbf8d19771d0b86a2b1883283c7a58ebee97c8daf255355103f47b8d97645b1c5dac6947ca01efac0bdd4a6da'
             'SKIP')
@@ -103,6 +105,7 @@ package() {
   install -Dm755 umask.sh "$pkgdir"/etc/profile.d/umask.sh
   install -Dm644 blacklist-dma.conf "$pkgdir"/usr/lib/modprobe.d/blacklist-dma.conf
   install -Dm644 blacklist-usbnet.conf "$pkgdir"/usr/lib/modprobe.d/blacklist-usbnet.conf
+  install -Dm644 iwlwifi.conf "$pkgdir"/usr/lib/modprobe.d/iwlwifi.conf
   install -Dm644 21-disable-connectivity-check.conf "$pkgdir"/usr/lib/NetworkManager/conf.d/21-disable-connectivity-check.conf
   install -Dm644 30-mac-randomization.conf "$pkgdir"/usr/lib/NetworkManager/conf.d/30-mac-randomization.conf
   install -Dm644 60-restrict.conf "$pkgdir"/usr/lib/sysctl.d/60-restrict.conf

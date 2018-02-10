@@ -1,6 +1,6 @@
 Name: brace
 Version: 1.4
-Release: 18
+Release: 19
 Summary: Increases privacy/security through various configs.
 License: GPLv3+
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
@@ -11,6 +11,7 @@ Firefox hardening credit: @pyllyukko
 %install
 install -Dm644 blacklist-dma.conf %{buildroot}/usr/lib/modprobe.d/blacklist-dma.conf
 install -Dm644 blacklist-usbnet.conf %{buildroot}/usr/lib/modprobe.d/blacklist-usbnet.conf
+install -Dm644 iwlwifi.conf %{buildroot}/usr/lib/modprobe.d/iwlwifi.conf
 install -Dm644 21-disable-connectivity-check.conf %{buildroot}/usr/lib/NetworkManager/conf.d/21-disable-connectivity-check.conf
 install -Dm644 30-mac-randomization.conf %{buildroot}/usr/lib/NetworkManager/conf.d/30-mac-randomization.conf
 install -Dm644 60-restrict.conf %{buildroot}/usr/lib/sysctl.d/60-restrict.conf
@@ -84,6 +85,7 @@ echo "//END OF BRACE EXTRAS" >> %{buildroot}/usr/lib64/firefox/browser/defaults/
 %files
 /usr/lib/modprobe.d/blacklist-dma.conf
 /usr/lib/modprobe.d/blacklist-usbnet.conf
+/usr/lib/modprobe.d/iwlwifi.conf
 /usr/lib/NetworkManager/conf.d/21-disable-connectivity-check.conf
 /usr/lib/NetworkManager/conf.d/30-mac-randomization.conf
 /usr/lib/sysctl.d/60-restrict.conf
