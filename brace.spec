@@ -1,6 +1,6 @@
 Name: brace
 Version: 1.4
-Release: 19
+Release: 20
 Summary: Increases privacy/security through various configs.
 License: GPLv3+
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
@@ -9,6 +9,7 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 Firefox hardening credit: @pyllyukko
 
 %install
+install -Dm755 helpers.sh %{buildroot}/etc/profile.d/helpers.sh
 install -Dm644 blacklist-dma.conf %{buildroot}/usr/lib/modprobe.d/blacklist-dma.conf
 install -Dm644 blacklist-usbnet.conf %{buildroot}/usr/lib/modprobe.d/blacklist-usbnet.conf
 install -Dm644 iwlwifi.conf %{buildroot}/usr/lib/modprobe.d/iwlwifi.conf
@@ -83,6 +84,7 @@ echo 'pref("javascript.options.shared_memory", false);' >> %{buildroot}/usr/lib6
 echo "//END OF BRACE EXTRAS" >> %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/all-brace.js;
 
 %files
+/etc/profile.d/helpers.sh
 /usr/lib/modprobe.d/blacklist-dma.conf
 /usr/lib/modprobe.d/blacklist-usbnet.conf
 /usr/lib/modprobe.d/iwlwifi.conf
