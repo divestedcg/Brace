@@ -1,12 +1,18 @@
 Name: brace
 Version: 1.4
-Release: 20
+Release: 21
 Summary: Increases privacy/security through various configs.
 License: GPLv3+
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
 %description
-Firefox hardening credit: @pyllyukko
+- Adds many aliases for clearing logs
+- Blacklists DMA drivers such as Firewire and Thunderbolt
+- Blacklists USB ethernet drivers
+- Enables MAC address randomization on all interfaces
+- Restricts dmesg and ptrace
+- Hardens Firefox to prevent tracking, credit @pyllyukko
+- Increases performance on select Intel Wi-Fi adapters
 
 %install
 install -Dm755 helpers.sh %{buildroot}/etc/profile.d/helpers.sh
@@ -43,9 +49,6 @@ sed -i 's/pref("network.cookie.lifetimePolicy"/\/\/BRACE-DISABLED: pref("network
 sed -i 's/pref("browser.urlbar.autocomplete.enabled"/\/\/BRACE-DISABLED: pref("browser.urlbar.autocomplete.enabled"/' %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/all-brace.js
 sed -i 's/pref("security.OCSP.enabled"/\/\/BRACE-DISABLED: pref("security.OCSP.enabled"/' %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/all-brace.js
 sed -i 's/pref("security.OCSP.required"/\/\/BRACE-DISABLED: pref("security.OCSP.required"/' %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/all-brace.js
-
-#Enable some preferences
-sed -i 's/\/\/pref("security.ssl.require_safe_negotiation"/pref("security.ssl.require_safe_negotiation"/' %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/all-brace.js #XXX: Breaks some sites
 
 #Fix https://github.com/pyllyukko/%{buildroot}/usr/lib64/firefox/browser/defaults/preferences/all-brace.js/issues/347
 sed -i 's/pref("browser.cache.offline.enable"/\/\/DISABLED: pref("browser.cache.offline.enable"/' %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/all-brace.js
