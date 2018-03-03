@@ -1,7 +1,7 @@
 # Maintainer: Tad <tad@spotco.us>
 pkgname=brace
 pkgver=1.4
-pkgrel=21
+pkgrel=22
 pkgdesc="Increases privacy/security through various configs. Firefox hardening credit: @pyllyukko"
 arch=('any')
 license=('custom')
@@ -71,6 +71,9 @@ build() {
 	#Add our extras
 	echo -e "\n" >> user.js;
 	echo "//START OF BRACE EXTRAS" >> user.js;
+	##Look
+	echo 'pref("browser.tabs.drawInTitlebar", true);' >> user.js;
+	echo 'pref("widget.allow-client-side-decoration", true);' >> user.js;
 	##Performance
 	echo 'pref("general.smoothScroll", false);' >> user.js;
 	echo 'pref("layers.acceleration.force-enabled", true);' >> user.js;

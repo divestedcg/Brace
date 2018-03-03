@@ -1,6 +1,6 @@
 Name: brace
 Version: 1.4
-Release: 21
+Release: 22
 Summary: Increases privacy/security through various configs.
 License: GPLv3+
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
@@ -59,6 +59,9 @@ sed -i 's/en-us, en/en-US/' %{buildroot}/usr/lib64/firefox/browser/defaults/pref
 #Add our extras
 echo -e "\n" >> %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/all-brace.js;
 echo "//START OF BRACE EXTRAS" >> %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/all-brace.js;
+##Look
+echo 'pref("browser.tabs.drawInTitlebar", true);' >> %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/all-brace.js;
+echo 'pref("widget.allow-client-side-decoration", true);' >> %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/all-brace.js;
 ##Performance
 echo 'pref("general.smoothScroll", false);' >> %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/all-brace.js;
 echo 'pref("layers.acceleration.force-enabled", true);' >> %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/all-brace.js;
