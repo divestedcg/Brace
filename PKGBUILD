@@ -4,7 +4,7 @@ pkgver=1.4
 pkgrel=22
 pkgdesc="Increases privacy/security through various configs. Firefox hardening credit: @pyllyukko"
 arch=('any')
-license=('custom')
+license=('GPLv3')
 conflicts=('dnu' 'brace-ff')
 optdepends=('arch-audit: check for insecure packages'
 	'extirpater: erase drive freespace'
