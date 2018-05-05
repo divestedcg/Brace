@@ -1,7 +1,7 @@
 # Maintainer: Tad <tad@spotco.us>
 pkgname=brace
-pkgver=1.4
-pkgrel=23
+pkgver=1.5
+pkgrel=25
 pkgdesc="Increases privacy/security through various configs. Firefox hardening credit: @pyllyukko"
 arch=('any')
 license=('GPLv3')
@@ -14,7 +14,8 @@ optdepends=('arch-audit: check for insecure packages'
 	'scfw: seal your ports'
 	'firefox: browser'
 	'firefox-nightly: browser')
-source=('21-disable-connectivity-check.conf'
+source=('00-gnome_defaults'
+	'21-disable-connectivity-check.conf'
 	'30-mac-randomization.conf'
 	'60-restrict.conf'
 	'blacklist-dma.conf'
@@ -24,7 +25,8 @@ source=('21-disable-connectivity-check.conf'
 	'helpers.sh'
 	'umask.sh'
 	'https://raw.githubusercontent.com/pyllyukko/user.js/master/user.js')
-sha512sums=('8ec47524685a59ed1ca45d5ba5334248cc505c07d71f1340d77a20e96e647b32c7a10cac1f1a2e32b0477a53c7ce14c57e839057b2b4fe7191932001c5679364'
+sha512sums=('6ed87a19868847b99a3c786fcb08307adee4e3ed511aa52dae3ed70718f804844f48db8fdfde268cbf26c5233ae65830fedd219c4fa88cf15385e35bc32285db'
+            '8ec47524685a59ed1ca45d5ba5334248cc505c07d71f1340d77a20e96e647b32c7a10cac1f1a2e32b0477a53c7ce14c57e839057b2b4fe7191932001c5679364'
             'cd03db723b789e9084cc2474edb3bf3f878cc5a751b437f69dd6f06a8015070e7c3f6750b581c15524e869f9fd8dd7db7eff9dad0650930e04387f5a36b4510e'
             'a6aceec23666bc7788c43d649e89ed5da0eaf637671e456d12a6de593fff459601a7d4a2bd1ae7707260faea80cfba382f8a785bfecfffaec51b6e1be259ac2f'
             'fcee1964b26f4309f20c8917a71d448e26f0f2c340ccea0a67f99d704dd009249d09aa215bd2424e234bc9b7927e4679043c2dad78f3fe8e8d744b07485ae655'
@@ -34,6 +36,7 @@ sha512sums=('8ec47524685a59ed1ca45d5ba5334248cc505c07d71f1340d77a20e96e647b32c7a
             '68f29b8c373a06ff4e8ed842717e7d7497d3f99f5ac68c6314534652d0080c64934e780c7c3ec324bcee84a1b905fe5db813589bcf9b37937a11810570a6611f'
             'e81b8fad493ee9dc66b1b0e728195b483a4da8edbf8d19771d0b86a2b1883283c7a58ebee97c8daf255355103f47b8d97645b1c5dac6947ca01efac0bdd4a6da'
             'ec2d90935ae3b4baca62ca87da840a183f3e3314082c5e0df1cf7a9fd723a1250a49c661143554ba5bb26a5bd9817e1b6b237dceabed5b90e31564664c5a9dc6')
+install=brace.install
 
 build() {
 	#Mark preferences properly
@@ -104,6 +107,7 @@ build() {
 
 package() {
   cd "$srcdir"
+  install -Dm644 00-gnome_defaults "$pkgdir"/etc/dconf/db/local.d/00-brace-gnome
   install -Dm755 helpers.sh "$pkgdir"/etc/profile.d/helpers.sh
   install -Dm755 umask.sh "$pkgdir"/etc/profile.d/umask.sh
   install -Dm644 blacklist-dma.conf "$pkgdir"/usr/lib/modprobe.d/blacklist-dma.conf
