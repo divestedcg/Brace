@@ -1,6 +1,6 @@
 Name: brace
 Version: 1.6
-Release: 28
+Release: 29
 Summary: Increases privacy/security through various configs.
 License: GPLv3+
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
@@ -16,6 +16,12 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 - Hardens Firefox to prevent tracking, credit @pyllyukko, license MIT
 - Increases performance on select Intel Wi-Fi adapters
 
+%post
+dconf update
+
+%postun
+dconf update
+
 %install
 install -Dm644 00-gnome_defaults %{buildroot}/etc/dconf/db/local.d/00-brace-gnome
 install -Dm755 helpers.sh %{buildroot}/etc/profile.d/helpers.sh
@@ -27,12 +33,6 @@ install -Dm644 21-disable-connectivity-check.conf %{buildroot}/usr/lib/NetworkMa
 install -Dm644 30-mac-randomization.conf %{buildroot}/usr/lib/NetworkManager/conf.d/30-mac-randomization.conf
 install -Dm644 60-restrict.conf %{buildroot}/usr/lib/sysctl.d/60-restrict.conf
 install -Dm644 user.js %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/all-brace.js
-
-%post
-dconf update
-
-%postun
-dconf update
 
 #Mark preferences properly
 sed -i 's/user_pref(/pref(/' %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/all-brace.js;
