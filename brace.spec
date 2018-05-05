@@ -1,6 +1,6 @@
 Name: brace
-Version: 1.5
-Release: 25
+Version: 1.6
+Release: 26
 Summary: Increases privacy/security through various configs.
 License: GPLv3+
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
@@ -12,11 +12,13 @@ Requires: adobe-source-code-pro-fonts numix-icon-theme-circle
 - Blacklists DMA drivers such as Firewire and Thunderbolt
 - Blacklists USB ethernet drivers
 - Enables MAC address randomization on all interfaces
+- Disables network connectivity checking
 - Restricts dmesg and ptrace
-- Hardens Firefox to prevent tracking, credit @pyllyukko
+- Hardens Firefox to prevent tracking, credit @pyllyukko, license MIT
 - Increases performance on select Intel Wi-Fi adapters
 
 %install
+install -Dm755 brace-supplemental-changes.sh %{buildroot}/bin/brace-supplemental-changes
 install -Dm644 00-gnome_defaults %{buildroot}/etc/dconf/db/local.d/00-brace-gnome
 install -Dm755 helpers.sh %{buildroot}/etc/profile.d/helpers.sh
 install -Dm644 blacklist-dma.conf %{buildroot}/usr/lib/modprobe.d/blacklist-dma.conf
@@ -99,6 +101,7 @@ echo 'pref("javascript.options.shared_memory", false);' >> %{buildroot}/usr/lib6
 echo "//END OF BRACE EXTRAS" >> %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/all-brace.js;
 
 %files
+/bin/brace-supplemental-changes
 /etc/dconf/db/local.d/00-brace-gnome
 /etc/profile.d/helpers.sh
 /usr/lib/modprobe.d/blacklist-dma.conf

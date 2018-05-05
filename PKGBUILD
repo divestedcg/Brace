@@ -1,7 +1,7 @@
 # Maintainer: Tad <tad@spotco.us>
 pkgname=brace
-pkgver=1.5
-pkgrel=25
+pkgver=1.6
+pkgrel=26
 pkgdesc="Increases privacy/security through various configs. Firefox hardening credit: @pyllyukko"
 arch=('any')
 license=('GPLv3')
@@ -20,6 +20,7 @@ source=('00-gnome_defaults'
 	'60-restrict.conf'
 	'blacklist-dma.conf'
 	'blacklist-usbnet.conf'
+	'brace-supplemental-changes.sh'
 	'iwlwifi.conf'
 	'dnu.service'
 	'helpers.sh'
@@ -31,6 +32,7 @@ sha512sums=('6ed87a19868847b99a3c786fcb08307adee4e3ed511aa52dae3ed70718f804844f4
             'a6aceec23666bc7788c43d649e89ed5da0eaf637671e456d12a6de593fff459601a7d4a2bd1ae7707260faea80cfba382f8a785bfecfffaec51b6e1be259ac2f'
             'fcee1964b26f4309f20c8917a71d448e26f0f2c340ccea0a67f99d704dd009249d09aa215bd2424e234bc9b7927e4679043c2dad78f3fe8e8d744b07485ae655'
             '7f7d833f4b1437a99e0f30e6dd3b474ac75a52f830864f88b2d1337845daa59e46b4558437568067a7040c7d6bb72bdecc5490fedb71ac8049dccafb334bdda1'
+            '1d51fffb4c6d8a951f19645b644cd4b693536b4fd1acacada2ae6fd6c9967053960d3ec71f257b432c48b8a1e7993fe502ee0f53a05c03b388a7617b30689eb7'
             'c07d4f5d591a07db530deb77065e488e788fd964c081c2859cee07cb0820c69ab8236b8713425c77b47a75435907643cd9a021719f7389c09b20787df1b0860b'
             '2bb7c4306b94687583caf5db2a8c384ffeeedcbaba72acc96a686e91a49c48e7b73a34e2dba74f8532d59ee250560fc6bf819e1308e37d9028d2138297d18b94'
             '68f29b8c373a06ff4e8ed842717e7d7497d3f99f5ac68c6314534652d0080c64934e780c7c3ec324bcee84a1b905fe5db813589bcf9b37937a11810570a6611f'
@@ -107,6 +109,7 @@ build() {
 
 package() {
   cd "$srcdir"
+  install -Dm755 brace-supplemental-changes.sh "$pkgdir"/bin/brace-supplemental-changes
   install -Dm644 00-gnome_defaults "$pkgdir"/etc/dconf/db/local.d/00-brace-gnome
   install -Dm755 helpers.sh "$pkgdir"/etc/profile.d/helpers.sh
   install -Dm755 umask.sh "$pkgdir"/etc/profile.d/umask.sh
