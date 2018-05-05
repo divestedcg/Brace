@@ -34,7 +34,6 @@ show-map=false
 highlight-current-line=true
 auto-hide-map=true
 highlight-matching-brackets=true
-font-name='Source Code Pro 11'
 style-scheme-name='cobalt'
 wrap-text=true
 
@@ -84,8 +83,6 @@ encrypt-header=true
 clock-format='12h'
 show-battery-percentage=true
 clock-show-seconds=true
-icon-theme='Numix-Circle'
-monospace-font-name='Source Code Pro 11'
 enable-animations=false
 clock-show-date=true
 

@@ -1,10 +1,9 @@
 Name: brace
 Version: 1.6
-Release: 27
+Release: 28
 Summary: Increases privacy/security through various configs.
 License: GPLv3+
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
-Requires: adobe-source-code-pro-fonts numix-icon-theme-circle
 
 %description
 - Changes many default settings for GNOME

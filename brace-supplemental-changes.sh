@@ -1,5 +1,14 @@
 #!/bin/bash
 
+if [ -d "/usr/share/fonts/adobe-source-code-pro" ]; then
+	gsettings set org.gnome.builder.editor font-name 'Source Code Pro 11';
+	gsettings set org.gnome.desktop.interface monospace-font-name 'Source Code Pro 11';
+fi;
+
+if [ -d "/usr/share/icons/Numix-Circle" ]; then
+	gsettings set org.gnome.desktop.interface icon-theme 'Numix-Circle';
+fi;
+
 #Night Light
 echo "Do you want Night Light enabled?"
 select yn in "Yes" "No"; do

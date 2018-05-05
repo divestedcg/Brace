@@ -1,7 +1,7 @@
 # Maintainer: Tad <tad@spotco.us>
 pkgname=brace
 pkgver=1.6
-pkgrel=27
+pkgrel=28
 pkgdesc="Increases privacy/security through various configs. Firefox hardening credit: @pyllyukko"
 arch=('any')
 license=('GPLv3')
