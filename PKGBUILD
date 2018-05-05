@@ -1,7 +1,7 @@
 # Maintainer: Tad <tad@spotco.us>
 pkgname=brace
 pkgver=1.6
-pkgrel=26
+pkgrel=27
 pkgdesc="Increases privacy/security through various configs. Firefox hardening credit: @pyllyukko"
 arch=('any')
 license=('GPLv3')
@@ -109,10 +109,10 @@ build() {
 
 package() {
   cd "$srcdir"
-  install -Dm755 brace-supplemental-changes.sh "$pkgdir"/bin/brace-supplemental-changes
   install -Dm644 00-gnome_defaults "$pkgdir"/etc/dconf/db/local.d/00-brace-gnome
   install -Dm755 helpers.sh "$pkgdir"/etc/profile.d/helpers.sh
   install -Dm755 umask.sh "$pkgdir"/etc/profile.d/umask.sh
+  install -Dm755 brace-supplemental-changes.sh "$pkgdir"/usr/bin/brace-supplemental-changes
   install -Dm644 blacklist-dma.conf "$pkgdir"/usr/lib/modprobe.d/blacklist-dma.conf
   install -Dm644 blacklist-usbnet.conf "$pkgdir"/usr/lib/modprobe.d/blacklist-usbnet.conf
   install -Dm644 iwlwifi.conf "$pkgdir"/usr/lib/modprobe.d/iwlwifi.conf

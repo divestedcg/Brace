@@ -1,6 +1,6 @@
 Name: brace
 Version: 1.6
-Release: 26
+Release: 27
 Summary: Increases privacy/security through various configs.
 License: GPLv3+
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
@@ -18,9 +18,9 @@ Requires: adobe-source-code-pro-fonts numix-icon-theme-circle
 - Increases performance on select Intel Wi-Fi adapters
 
 %install
-install -Dm755 brace-supplemental-changes.sh %{buildroot}/bin/brace-supplemental-changes
 install -Dm644 00-gnome_defaults %{buildroot}/etc/dconf/db/local.d/00-brace-gnome
 install -Dm755 helpers.sh %{buildroot}/etc/profile.d/helpers.sh
+install -Dm755 brace-supplemental-changes.sh %{buildroot}/usr/bin/brace-supplemental-changes
 install -Dm644 blacklist-dma.conf %{buildroot}/usr/lib/modprobe.d/blacklist-dma.conf
 install -Dm644 blacklist-usbnet.conf %{buildroot}/usr/lib/modprobe.d/blacklist-usbnet.conf
 install -Dm644 iwlwifi.conf %{buildroot}/usr/lib/modprobe.d/iwlwifi.conf
@@ -101,9 +101,9 @@ echo 'pref("javascript.options.shared_memory", false);' >> %{buildroot}/usr/lib6
 echo "//END OF BRACE EXTRAS" >> %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/all-brace.js;
 
 %files
-/bin/brace-supplemental-changes
 /etc/dconf/db/local.d/00-brace-gnome
 /etc/profile.d/helpers.sh
+/usr/bin/brace-supplemental-changes
 /usr/lib/modprobe.d/blacklist-dma.conf
 /usr/lib/modprobe.d/blacklist-usbnet.conf
 /usr/lib/modprobe.d/iwlwifi.conf
