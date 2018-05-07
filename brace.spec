@@ -1,19 +1,19 @@
 Name: brace
 Version: 1.6
-Release: 29
+Release: 30
 Summary: Increases privacy/security through various configs.
 License: GPLv3+
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
 %description
 - Changes many default settings for GNOME
+- Hardens Firefox to prevent tracking, credit @pyllyukko, license MIT
 - Adds many aliases for clearing logs
 - Blacklists DMA drivers such as Firewire and Thunderbolt
 - Blacklists USB ethernet drivers
 - Enables MAC address randomization on all interfaces
 - Disables network connectivity checking
 - Restricts dmesg and ptrace
-- Hardens Firefox to prevent tracking, credit @pyllyukko, license MIT
 - Increases performance on select Intel Wi-Fi adapters
 
 %post

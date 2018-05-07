@@ -34,7 +34,7 @@ show-map=false
 highlight-current-line=true
 auto-hide-map=true
 highlight-matching-brackets=true
-style-scheme-name='cobalt'
+style-scheme-name='solarized-dark'
 wrap-text=true
 
 [org/gnome/shell]
@@ -51,7 +51,7 @@ highlight-current-line=true
 display-right-margin=false
 display-overview-map=true
 bracket-matching=true
-scheme='cobalt'
+scheme='solarized-dark'
 display-line-numbers=true
 background-pattern='grid'
 use-default-font=true
