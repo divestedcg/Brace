@@ -1,6 +1,6 @@
 Name: brace
 Version: 1.6
-Release: 30
+Release: 32
 Summary: Increases privacy/security through various configs.
 License: GPLv3+
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root

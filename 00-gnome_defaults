@@ -38,7 +38,7 @@ style-scheme-name='solarized-dark'
 wrap-text=true
 
 [org/gnome/shell]
-favorite-apps=['org.gnome.Nautilus.desktop', 'firefox.desktop', 'org.gnome.Evolution.desktop', 'libreoffice-startcenter.desktop', 'org.keepassxc.KeePassXC.desktop', 'org.gnome.Lollypop.desktop', 'yelp.desktop']
+favorite-apps=['org.gnome.Nautilus.desktop', 'firefox.desktop', 'evolution.desktop', 'org.gnome.Evolution.desktop', 'libreoffice-startcenter.desktop', 'org.keepassxc.KeePassXC.desktop', 'org.gnome.Lollypop.desktop', 'yelp.desktop']
 disable-user-extensions=false
 
 [org/gnome/shell/overrides]
@@ -109,7 +109,7 @@ disable-while-typing=false
 natural-scroll=false
 
 [org/gnome/desktop/search-providers]
-disabled=['org.gnome.Calculator.desktop', 'org.gnome.Documents.desktop', 'org.gnome.Characters.desktop', 'org.gnome.Software.desktop', 'org.gnome.Lollypop.desktop', 'seahorse.desktop']
+disabled=['gnome-calculator.desktop', 'org.gnome.Calculator.desktop', 'org.gnome.Documents.desktop', 'org.gnome.Characters.desktop', 'org.gnome.Software.desktop', 'org.gnome.Lollypop.desktop', 'seahorse.desktop']
 
 [org/gnome/desktop/thumbnail-cache]
 maximum-age=7
