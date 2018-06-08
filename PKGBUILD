@@ -1,7 +1,7 @@
 # Maintainer: Tad <tad@spotco.us>
 pkgname=brace
 pkgver=1.6
-pkgrel=32
+pkgrel=33
 pkgdesc="Increases privacy/security through various configs. Firefox hardening credit: @pyllyukko"
 arch=('any')
 license=('GPLv3')
@@ -37,7 +37,7 @@ sha512sums=('3698215587472c6d96d4defb4275269f087ad9728f6b0e2b174caced0dd21c3f1ee
             '2bb7c4306b94687583caf5db2a8c384ffeeedcbaba72acc96a686e91a49c48e7b73a34e2dba74f8532d59ee250560fc6bf819e1308e37d9028d2138297d18b94'
             '68f29b8c373a06ff4e8ed842717e7d7497d3f99f5ac68c6314534652d0080c64934e780c7c3ec324bcee84a1b905fe5db813589bcf9b37937a11810570a6611f'
             'e81b8fad493ee9dc66b1b0e728195b483a4da8edbf8d19771d0b86a2b1883283c7a58ebee97c8daf255355103f47b8d97645b1c5dac6947ca01efac0bdd4a6da'
-            'ec2d90935ae3b4baca62ca87da840a183f3e3314082c5e0df1cf7a9fd723a1250a49c661143554ba5bb26a5bd9817e1b6b237dceabed5b90e31564664c5a9dc6')
+            '6c7d60e6cb655e3b8931a1afeab7a39cfd37672eb639f0c93c7d6acffa5ed885ebf065cc5c1a18783f206dbb94f74ad4fad3292054511217727db320b1ff02d4')
 install=brace.install
 
 build() {
@@ -71,7 +71,7 @@ build() {
 	sed -i 's/pref("browser.cache.offline.enable"/\/\/DISABLED: pref("browser.cache.offline.enable"/' user.js
 
 	#Fix https://github.com/pyllyukko/user.js/pull/355
-	sed -i 's/en-us, en/en-US/' user.js
+	sed -i 's/en-us, en/en-US, en/' user.js
 
 	#Add our extras
 	echo -e "\n" >> user.js;

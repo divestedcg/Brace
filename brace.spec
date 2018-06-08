@@ -1,6 +1,6 @@
 Name: brace
 Version: 1.6
-Release: 32
+Release: 33
 Summary: Increases privacy/security through various configs.
 License: GPLv3+
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
@@ -60,11 +60,11 @@ sed -i 's/pref("browser.urlbar.autocomplete.enabled"/\/\/BRACE-DISABLED: pref("b
 sed -i 's/pref("security.OCSP.enabled"/\/\/BRACE-DISABLED: pref("security.OCSP.enabled"/' %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/all-brace.js
 sed -i 's/pref("security.OCSP.required"/\/\/BRACE-DISABLED: pref("security.OCSP.required"/' %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/all-brace.js
 
-#Fix https://github.com/pyllyukko/%{buildroot}/usr/lib64/firefox/browser/defaults/preferences/all-brace.js/issues/347
+#Fix https://github.com/pyllyukko/user.js/pull/347
 sed -i 's/pref("browser.cache.offline.enable"/\/\/DISABLED: pref("browser.cache.offline.enable"/' %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/all-brace.js
 
-#Fix https://github.com/pyllyukko/%{buildroot}/usr/lib64/firefox/browser/defaults/preferences/all-brace.js/pull/355
-sed -i 's/en-us, en/en-US/' %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/all-brace.js
+#Fix https://github.com/pyllyukko/user.js/pull/355
+sed -i 's/en-us, en/en-US, en/' %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/all-brace.js
 
 #Add our extras
 echo -e "\n" >> %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/all-brace.js;
