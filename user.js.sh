@@ -1,3 +1,5 @@
+#!/bin/bash
+
 userjs=$1;
 
 #Mark preferences properly
