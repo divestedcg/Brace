@@ -1,12 +1,13 @@
 Name: brace
 Version: 1.7
-Release: 2
+Release: 3
 Summary: Increases privacy/security through various configs.
 License: GPLv3+
 BuildArch: noarch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
 %description
+- Adds many helper scripts, brace-*
 - Changes many default settings for GNOME
 - Hardens Firefox to prevent tracking, credit @pyllyukko, license MIT
 - Adds many aliases for clearing logs

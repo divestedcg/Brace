@@ -13,7 +13,7 @@ infoColor=${green}
 questionColor=${yellow}
 outputColor=${yellow}
 
-if [ -f /etc/centos-release ]; then yum install epel-release fi;
+if [ -f /etc/centos-release ]; then yum install epel-release; fi;
 
 echo -e ${questionColor}Do you want packages from the Core category?${coloroff}
 select yn in "Yes" "No"; do
