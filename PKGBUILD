@@ -102,6 +102,7 @@ build() {
 	echo 'pref("browser.link.open_newwindow_restriction", true);' >> user.js;
 	echo 'pref("reader.parse-on-load.enabled", false);' >> user.js;
 	echo 'pref("browser.reader.detectedFirstArticle", true);' >> user.js;
+	echo 'pref("network.negotiate-auth.trusted-uris", "");' >> user.js;
 	##Security
 	echo 'pref("javascript.options.shared_memory", false);' >> user.js;
 	echo "//END OF BRACE EXTRAS" >> user.js;
