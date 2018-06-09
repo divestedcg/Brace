@@ -1,7 +1,7 @@
 # Maintainer: Tad <tad@spotco.us>
 pkgname=brace
 pkgver=1.6
-pkgrel=34
+pkgrel=35
 pkgdesc="Increases privacy/security through various configs. Firefox hardening credit: @pyllyukko"
 arch=('any')
 license=('GPLv3')
@@ -25,6 +25,7 @@ source=('00-gnome_defaults'
 	'dnu.service'
 	'helpers.sh'
 	'umask.sh'
+	'user.js.sh'
 	'https://raw.githubusercontent.com/pyllyukko/user.js/master/user.js')
 sha512sums=('3698215587472c6d96d4defb4275269f087ad9728f6b0e2b174caced0dd21c3f1eeda733b6563cc1666cb84660a7583a990052dd6ca8ddb3dffc0720955fc3ff'
             '8ec47524685a59ed1ca45d5ba5334248cc505c07d71f1340d77a20e96e647b32c7a10cac1f1a2e32b0477a53c7ce14c57e839057b2b4fe7191932001c5679364'
@@ -37,75 +38,12 @@ sha512sums=('3698215587472c6d96d4defb4275269f087ad9728f6b0e2b174caced0dd21c3f1ee
             '2bb7c4306b94687583caf5db2a8c384ffeeedcbaba72acc96a686e91a49c48e7b73a34e2dba74f8532d59ee250560fc6bf819e1308e37d9028d2138297d18b94'
             '68f29b8c373a06ff4e8ed842717e7d7497d3f99f5ac68c6314534652d0080c64934e780c7c3ec324bcee84a1b905fe5db813589bcf9b37937a11810570a6611f'
             'e81b8fad493ee9dc66b1b0e728195b483a4da8edbf8d19771d0b86a2b1883283c7a58ebee97c8daf255355103f47b8d97645b1c5dac6947ca01efac0bdd4a6da'
+            'ec94199cddb6174e02aebd35c11bf4f175e5b49fad3c8099d500a3bd3c43061cb80456b5cd20a411e24e0955d80c296547a7244b8ba118c5ef368c60be2d5c98'
             '6c7d60e6cb655e3b8931a1afeab7a39cfd37672eb639f0c93c7d6acffa5ed885ebf065cc5c1a18783f206dbb94f74ad4fad3292054511217727db320b1ff02d4')
 install=brace.install
 
 build() {
-	#Mark preferences properly
-	sed -i 's/user_pref(/pref(/' user.js;
-
-	#Disable some aggressive preferences
-	sed -i 's/pref("dom.serviceWorkers.enabled"/\/\/BRACE-DISABLED: pref("dom.serviceWorkers.enabled"/' user.js;
-	sed -i 's/pref("dom.workers.enabled"/\/\/BRACE-DISABLED: pref("dom.workers.enabled"/' user.js;
-	sed -i 's/pref("dom.allow_cut_copy"/\/\/BRACE-DISABLED: pref("dom.allow_cut_copy"/' user.js;
-	sed -i 's/pref("keyword.enabled"/\/\/BRACE-DISABLED: pref("keyword.enabled"/' user.js;
-	sed -i 's/pref("svg.disabled"/\/\/BRACE-DISABLED: pref("svg.disabled"/' user.js;
-	sed -i 's/pref("browser.display.use_document_fonts"/\/\/BRACE-DISABLED: pref("browser.display.use_document_fonts"/' user.js;
-	sed -i 's/pref("pdfjs.disabled"/\/\/BRACE-DISABLED: pref("pdfjs.disabled"/' user.js;
-	sed -i 's/pref("app.update.enabled"/\/\/BRACE-DISABLED: pref("app.update.enabled"/' user.js;
-	sed -i 's/pref("browser.search.suggest.enabled"/\/\/BRACE-DISABLED: pref("browser.search.suggest.enabled"/' user.js;
-	sed -i 's/pref("browser.urlbar.suggest.history"/\/\/BRACE-DISABLED: pref("browser.urlbar.suggest.history"/' user.js;
-	sed -i 's/pref("browser.privatebrowsing.autostart"/\/\/BRACE-DISABLED: pref("browser.privatebrowsing.autostart"/' user.js;
-	sed -i 's/pref("privacy.sanitize.sanitizeOnShutdown"/\/\/BRACE-DISABLED: pref("privacy.sanitize.sanitizeOnShutdown"/' user.js;
-	sed -i 's/pref("places.history.enabled"/\/\/BRACE-DISABLED: pref("places.history.enabled"/' user.js;
-	sed -i 's/pref("browser.cache.disk.enable"/\/\/BRACE-DISABLED: pref("browser.cache.disk.enable"/' user.js;
-	sed -i 's/pref("browser.cache.disk_cache_ssl"/\/\/BRACE-DISABLED: pref("browser.cache.disk_cache_ssl"/' user.js;
-	sed -i 's/pref("browser.download.manager.retention"/\/\/BRACE-DISABLED: pref("browser.download.manager.retention"/' user.js;
-	sed -i 's/pref("signon.rememberSignons"/\/\/BRACE-DISABLED: pref("signon.rememberSignons"/' user.js;
-	sed -i 's/pref("network.cookie.lifetimePolicy"/\/\/BRACE-DISABLED: pref("network.cookie.lifetimePolicy"/' user.js;
-	sed -i 's/pref("browser.urlbar.autocomplete.enabled"/\/\/BRACE-DISABLED: pref("browser.urlbar.autocomplete.enabled"/' user.js;
-	sed -i 's/pref("security.OCSP.enabled"/\/\/BRACE-DISABLED: pref("security.OCSP.enabled"/' user.js;
-	sed -i 's/pref("security.OCSP.required"/\/\/BRACE-DISABLED: pref("security.OCSP.required"/' user.js;
-
-	#Fix https://github.com/pyllyukko/user.js/issues/347
-	sed -i 's/pref("browser.cache.offline.enable"/\/\/DISABLED: pref("browser.cache.offline.enable"/' user.js;
-
-	#Fix https://github.com/pyllyukko/user.js/pull/355
-	sed -i 's/en-US, en/data:text\/plain,intl.accept_languages=en-US, en/' user.js;
-
-	#Add our extras
-	echo -e "\n" >> user.js;
-	echo "//START OF BRACE EXTRAS" >> user.js;
-	##Look
-	echo 'pref("browser.tabs.drawInTitlebar", true);' >> user.js;
-	echo 'pref("widget.allow-client-side-decoration", true);' >> user.js;
-	##Performance
-	echo 'pref("general.smoothScroll", false);' >> user.js;
-	echo 'pref("layers.acceleration.force-enabled", true);' >> user.js;
-	echo 'pref("media.hardware-video-decoding.force-enabled", true);' >> user.js;
-	echo 'pref("browser.tabs.remote.autostart", true);' >> user.js;
-	echo 'pref("browser.tabs.remote.force-enabled", true);' >> user.js;
-	echo 'pref("layers.omtp.enabled", true);' >> user.js;
-	##Privacy
-	echo 'pref("privacy.firstparty.isolate", true);' >> user.js;
-	echo 'pref("privacy.firstparty.isolate.restrict_opener_access", false);' >> user.js;
-	echo 'pref("extensions.screenshots.disabled", true);' >> user.js;
-	echo 'pref("media.eme.enabled", false);' >> user.js;
-	echo 'pref("general.useragent.updates.enabled", false);' >> user.js;
-	echo 'pref("browser.snippets.updateUrl", "");' >> user.js;
-	echo 'pref("browser.snippets.enabled", false);' >> user.js;
-	echo 'pref("browser.snippets.syncPromo.enabled", false);' >> user.js;
-	echo 'pref("browser.snippets.firstrunHomepage.enabled", false);' >> user.js;
-	echo 'pref("dom.push.serverURL", "");' >> user.js;
-	echo 'pref("dom.push.enabled", false);' >> user.js;
-	echo 'pref("plugin.expose_full_path", false);' >> user.js;
-	echo 'pref("browser.link.open_newwindow_restriction", true);' >> user.js;
-	echo 'pref("reader.parse-on-load.enabled", false);' >> user.js;
-	echo 'pref("browser.reader.detectedFirstArticle", true);' >> user.js;
-	echo 'pref("network.negotiate-auth.trusted-uris", "");' >> user.js;
-	##Security
-	echo 'pref("javascript.options.shared_memory", false);' >> user.js;
-	echo "//END OF BRACE EXTRAS" >> user.js;
+	sh user.js.sh user.js;
 }
 
 package() {
