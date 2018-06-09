@@ -15,8 +15,8 @@ packages=$packages" gnumeric abiword midori xpad pidgin asunder lxmusic clipit";
 #LXQT
 packages=$packages" yarock qlipper quassel qupzilla";
 #MATE
-packages=$packages" xfburn gnote filezilla hexchat transmission exaile gparted";
+packages=$packages" xfburn gnote filezilla hexchat exaile gparted";
 #XFCE
-packages=$packages" clipman xfburn geany pidgin transmission asunder pragha abiword gnumeric gparted xfdashboard";
+packages=$packages" clipman xfburn geany pidgin asunder pragha abiword gnumeric gparted xfdashboard";
 
-sudo dnf remove $packages
+yum remove $packages

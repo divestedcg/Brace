@@ -1,5 +1,4 @@
 #!/bin/bash
-
 coloroff='\e[0m'
 black='\e[0;30m'
 blue='\e[0;34m'

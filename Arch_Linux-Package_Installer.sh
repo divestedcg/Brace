@@ -629,7 +629,7 @@ echo -e ${questionColor}Do you want packages from the Development category?${col
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed  gitg asp intellij-idea-community-edition proguard bless sqlitebrowser ;
+			pacman -S --needed  gitg gnome-builder asp intellij-idea-community-edition proguard bless sqlitebrowser ;
 			if [ "$aurPackagesEnabled" = "true" ]; then
 				yaourt -S --needed jd-gui launch4j;
 			fi
@@ -637,6 +637,7 @@ select yns in "Yes" "No" "Skip"; do
 		No )
 			if [ "$uninstallPackagesEnabled" = "true" ]; then
 				pacman -Rsc gitg;
+				pacman -Rsc gnome-builder;
 				pacman -Rsc asp;
 				pacman -Rsc intellij-idea-community-edition;
 				pacman -Rsc proguard;
@@ -1510,7 +1511,7 @@ done
 
 if [ "$aurPackagesEnabled" = "false" ]; then
 	echo -e ${infoColor}Here are all the AUR packages that were not installed some may not of been chosen${coloroff}
-	echo downgrade gnome-shell-extension-volume-mixer numix-circle-icon-theme-git numix-icon-theme-git jd-gui launch4j android-apktool dex2jar jd-gui sdat2img android-studio sirikali-git gocryptfs multimc5 opsu chromium-pepper-flash chromium-widevine filebot pithos-git peek firejail-git lostfiles ;
+	echo downgrade gnome-shell-extension-volume-mixer numix-circle-icon-theme-git numix-icon-theme-git jd-gui launch4j android-apktool dex2jar jd-gui sdat2img android-studio sirikali-git gocryptfs multimc5 opsu chromium-pepper-flash chromium-widevine filebot pithos-git peek firejail-git lostfiles 
 fi
 pacman -Rns $(pacman -Qttdq)
 paccache -rk0
