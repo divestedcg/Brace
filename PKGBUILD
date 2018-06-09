@@ -1,7 +1,7 @@
 # Maintainer: Tad <tad@spotco.us>
 pkgname=brace
-pkgver=1.6
-pkgrel=35
+pkgver=1.7
+pkgrel=1
 pkgdesc="Increases privacy/security through various configs. Firefox hardening credit: @pyllyukko"
 arch=('any')
 license=('GPLv3')
@@ -21,6 +21,7 @@ source=('00-gnome_defaults'
 	'blacklist-dma.conf'
 	'blacklist-usbnet.conf'
 	'brace-supplemental-changes.sh'
+	'brace-arch-installer.sh'
 	'iwlwifi.conf'
 	'dnu.service'
 	'helpers.sh'
@@ -34,6 +35,7 @@ sha512sums=('3698215587472c6d96d4defb4275269f087ad9728f6b0e2b174caced0dd21c3f1ee
             'fcee1964b26f4309f20c8917a71d448e26f0f2c340ccea0a67f99d704dd009249d09aa215bd2424e234bc9b7927e4679043c2dad78f3fe8e8d744b07485ae655'
             '7f7d833f4b1437a99e0f30e6dd3b474ac75a52f830864f88b2d1337845daa59e46b4558437568067a7040c7d6bb72bdecc5490fedb71ac8049dccafb334bdda1'
             'cb28f68be1c5596cc2d411df4dc2c258e5bdcd6bd497332098768b2c0cd163cf064d75df5d4a23e687e09fc256545ae80f8e44f33162698be0e28d0b69b6f8f7'
+            'fa5670b68c5579bcbe4aa5d9df6dc755f9a12ea9c72afa9659293a87ee39dc851348db7f6f3b4de79d8608b7cb7b8ea51b2527547a879be1656ae06f1f1c3b14'
             'c07d4f5d591a07db530deb77065e488e788fd964c081c2859cee07cb0820c69ab8236b8713425c77b47a75435907643cd9a021719f7389c09b20787df1b0860b'
             '2bb7c4306b94687583caf5db2a8c384ffeeedcbaba72acc96a686e91a49c48e7b73a34e2dba74f8532d59ee250560fc6bf819e1308e37d9028d2138297d18b94'
             '68f29b8c373a06ff4e8ed842717e7d7497d3f99f5ac68c6314534652d0080c64934e780c7c3ec324bcee84a1b905fe5db813589bcf9b37937a11810570a6611f'
@@ -52,6 +54,7 @@ package() {
   install -Dm755 helpers.sh "$pkgdir"/etc/profile.d/helpers.sh
   install -Dm755 umask.sh "$pkgdir"/etc/profile.d/umask.sh
   install -Dm755 brace-supplemental-changes.sh "$pkgdir"/usr/bin/brace-supplemental-changes
+  install -Dm755 brace-arch-installer.sh "$pkgdir"/usr/bin/brace-installer
   install -Dm644 blacklist-dma.conf "$pkgdir"/usr/lib/modprobe.d/blacklist-dma.conf
   install -Dm644 blacklist-usbnet.conf "$pkgdir"/usr/lib/modprobe.d/blacklist-usbnet.conf
   install -Dm644 iwlwifi.conf "$pkgdir"/usr/lib/modprobe.d/iwlwifi.conf
