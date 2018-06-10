@@ -3,6 +3,8 @@
 #License: GPLv3
 #Automatically generated! Please edit with care.
 
+if [[ $EUID -ne 0 ]]; then echo 'This script needs to be run as root!'; exit 1; fi;
+
 coloroff='\e[0m';
 black='\e[0;30m';
 blue='\e[0;34m';

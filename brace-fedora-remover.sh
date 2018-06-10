@@ -2,6 +2,8 @@
 #Copyright (c) 2018 Divested Computing, Inc.
 #License: GPLv3
 
+if [[ $EUID -ne 0 ]]; then echo 'This script needs to be run as root!'; exit 1; fi;
+
 packages="";
 
 #Personally Installed

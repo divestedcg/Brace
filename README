@@ -1,0 +1,44 @@
+brace
+=====
+
+Compatibility
+-------------
+- Arch Linux
+- Fedora 28
+- CentOS 7
+
+Contents
+--------
+Installed
+	00-gnome_defaults			= GNOME: change default settings
+	21-disable-connectivity-check.conf	= NetworkManager: disable connectivity checking
+	30-mac-randomization.conf		= Networkmanager: enable mac randomization
+	60-restrict.conf			= kernel: restrict dmesg and ptrace
+	blacklist-dma.conf			= kernel: blacklist modules that provide direct memory access
+	blacklist-usbnet.conf			= kernel: blacklist modules that allow for USB networking
+	brace-arch-installer.sh			= Arch: package installer
+	brace-fedora-enable-auto-updates.sh	= Fedora: enables DNF automatic updates
+	brace-fedora-installer.sh		= Fedora: package installer
+	brace-fedora-installer-base.sh		= Fedora: simplified package installer
+	brace-fedora-remover.sh			= Fedora: package remover
+	brace-supplemental-changes.sh		= GNOME: change extra default settings
+	dnu.service				= kernel: systemd target to toggle linux-hardened's deny_new_usb sysctl
+	helpers.sh				= profile: adds helper aliases
+	iwlwifi.sh				= kernel: iwlwifi: enables link aggregation
+	user.js					= Firefox: change default settings
+Unused
+	umask.sh				= profile: sets umask 077
+	uBlock0@raymondhill.net.json		= Firefox: uBlock Origin: change default settings
+Package Creation
+	brace.install				= pacman helper script
+	brace.spec				= RPM specfile
+	PKGBUILD				= pacman PKGBUILD
+	user.js.sh				= applies changes to user.js
+Repository Necessaries
+	LICENSE
+	README
+
+Credits
+-------
+dnu.service	- lizzie	- UNKNOWN	- https://blog.lizzie.io/preventing-usb-attacks-with-grsecurity.html
+user.js 	- @pyllyukko	- MIT		- https://github.com/pyllyukko/user.js
