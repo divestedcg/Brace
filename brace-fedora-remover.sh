@@ -21,4 +21,4 @@ packages=$packages" xfburn gnote filezilla hexchat exaile gparted";
 #XFCE
 packages=$packages" clipman xfburn geany pidgin asunder pragha abiword gnumeric gparted xfdashboard";
 
-yum remove $packages
+yum remove $packages;

@@ -12,7 +12,7 @@ if [ -d "/usr/share/icons/Numix-Circle" ]; then
 fi;
 
 #Night Light
-echo "Do you want Night Light enabled?"
+echo "Do you want Night Light enabled?";
 select yn in "Yes" "No"; do
 	case $yn in
 		Yes )
@@ -25,7 +25,7 @@ select yn in "Yes" "No"; do
 done
 
 #Power
-echo "Do you want auto suspend enabled?"
+echo "Do you want auto suspend enabled?";
 select yn in "Yes" "No"; do
 	case $yn in
 		Yes )
@@ -40,7 +40,7 @@ select yn in "Yes" "No"; do
 done
 
 #Search
-echo "Do you want search enabled? (disable on low performance systems)"
+echo "Do you want search enabled? (disable on low performance systems)";
 select yn in "Yes" "No"; do
 	case $yn in
 		Yes )
@@ -51,7 +51,7 @@ select yn in "Yes" "No"; do
 			break;;
 	esac
 done
-echo "Do you want Tracker enabled? (disable for increased security/privacy at the expense of weirdness)"
+echo "Do you want Tracker enabled? (disable for increased security/privacy at the expense of weirdness)";
 select yn in "Yes" "No"; do
 	case $yn in
 		Yes )
@@ -64,7 +64,7 @@ select yn in "Yes" "No"; do
 done
 
 #Themes
-echo "Do you want the dark theme?"
+echo "Do you want the dark theme?";
 select yn in "Yes" "No"; do
 	case $yn in
 		Yes )
@@ -77,4 +77,4 @@ select yn in "Yes" "No"; do
 done
 
 
-echo "Applied the way better settings. Ensure brace is installed for the rest!"
+echo "Applied the way better settings. Ensure brace is installed for the rest!";
