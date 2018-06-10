@@ -16,18 +16,6 @@ infoColor=${green};
 questionColor=${yellow};
 outputColor=${yellow};
 
-echo -e ${questionColor}Would you like to uninstall packages from groups that arent selected?${coloroff};
-select yn in "Yes" "No"; do
-	case $yn in
-		Yes )
-			uninstallPackagesEnabled=true;
-			break;;
-		No )
-			uninstallPackagesEnabled=false;
-			break;;
-	esac
-done
-
 if [ -f /etc/centos-release ]; then yum install epel-release; fi;
 
 echo -e ${questionColor}Do you want packages from the Core category?${coloroff};
@@ -37,9 +25,7 @@ select yns in "Yes" "No" "Skip"; do
 			yum install irqbalance nano htop screen p7zip pixz lm_sensors parallel screenfetch;
 			break;;
 		No )
-			if [ "$uninstallPackagesEnabled" = "true" ]; then
-				yum remove irqbalance nano htop screen p7zip pixz lm_sensors parallel screenfetch;
-			fi;
+			yum remove irqbalance nano htop screen p7zip pixz lm_sensors parallel screenfetch;
 			break;;
 		Skip )
 			break;;
@@ -53,9 +39,7 @@ select yns in "Yes" "No" "Skip"; do
 			yum install java-1.8.0-openjdk;
 			break;;
 		No )
-			if [ "$uninstallPackagesEnabled" = "true" ]; then
-				yum remove java-1.8.0-openjdk;
-			fi;
+			yum remove java-1.8.0-openjdk;
 			break;;
 		Skip )
 			break;;
@@ -69,9 +53,7 @@ select yns in "Yes" "No" "Skip"; do
 			yum install @multimedia aspell aspell-en gnome-terminal-nautilus gnome-tweak-tool dconf-editor numix-icon-theme-circle seahorse;
 			break;;
 		No )
-			if [ "$uninstallPackagesEnabled" = "true" ]; then
-				yum remove @multimedia aspell aspell-en gnome-terminal-nautilus gnome-tweak-tool dconf-editor numix-icon-theme-circle seahorse;
-			fi;
+			yum remove @multimedia aspell aspell-en gnome-terminal-nautilus gnome-tweak-tool dconf-editor numix-icon-theme-circle seahorse;
 			break;;
 		Skip )
 			break;;
@@ -85,9 +67,7 @@ select yns in "Yes" "No" "Skip"; do
 			yum install adobe-source-code-pro-fonts mozilla-fira-mono-fonts mozilla-fira-sans-fonts google-droid-sans-fonts google-droid-sans-mono-fonts google-droid-serif-fonts;
 			break;;
 		No )
-			if [ "$uninstallPackagesEnabled" = "true" ]; then
-				yum remove adobe-source-code-pro-fonts mozilla-fira-mono-fonts mozilla-fira-sans-fonts google-droid-sans-fonts google-droid-sans-mono-fonts google-droid-serif-fonts;
-			fi;
+			yum remove adobe-source-code-pro-fonts mozilla-fira-mono-fonts mozilla-fira-sans-fonts google-droid-sans-fonts google-droid-sans-mono-fonts google-droid-serif-fonts;
 			break;;
 		Skip )
 			break;;
@@ -101,9 +81,7 @@ select yns in "Yes" "No" "Skip"; do
 			yum install audacity;
 			break;;
 		No )
-			if [ "$uninstallPackagesEnabled" = "true" ]; then
-				yum remove audacity;
-			fi;
+			yum remove audacity;
 			break;;
 		Skip )
 			break;;
@@ -117,9 +95,7 @@ select yns in "Yes" "No" "Skip"; do
 			yum install lynis checksec;
 			break;;
 		No )
-			if [ "$uninstallPackagesEnabled" = "true" ]; then
-				yum remove lynis checksec;
-			fi;
+			yum remove lynis checksec;
 			break;;
 		Skip )
 			break;;
@@ -133,9 +109,7 @@ select yns in "Yes" "No" "Skip"; do
 			yum install borgbackup;
 			break;;
 		No )
-			if [ "$uninstallPackagesEnabled" = "true" ]; then
-				yum remove borgbackup;
-			fi;
+			yum remove borgbackup;
 			break;;
 		Skip )
 			break;;
@@ -149,9 +123,7 @@ select yns in "Yes" "No" "Skip"; do
 			yum install evolution;
 			break;;
 		No )
-			if [ "$uninstallPackagesEnabled" = "true" ]; then
-				yum remove evolution;
-			fi;
+			yum remove evolution;
 			break;;
 		Skip )
 			break;;
@@ -165,9 +137,7 @@ select yns in "Yes" "No" "Skip"; do
 			yum install polari mumble;
 			break;;
 		No )
-			if [ "$uninstallPackagesEnabled" = "true" ]; then
-				yum remove polari mumble;
-			fi;
+			yum remove polari mumble;
 			break;;
 		Skip )
 			break;;
@@ -181,9 +151,7 @@ select yns in "Yes" "No" "Skip"; do
 			yum install java-1.8.0-openjdk-devel gitg proguard bless sqlitebrowser fedpkg @development-tools;
 			break;;
 		No )
-			if [ "$uninstallPackagesEnabled" = "true" ]; then
-				yum remove java-1.8.0-openjdk-devel gitg proguard bless sqlitebrowser fedpkg @development-tools;
-			fi;
+			yum remove java-1.8.0-openjdk-devel gitg proguard bless sqlitebrowser fedpkg @development-tools;
 			break;;
 		Skip )
 			break;;
@@ -197,9 +165,7 @@ select yns in "Yes" "No" "Skip"; do
 			yum install android-tools;
 			break;;
 		No )
-			if [ "$uninstallPackagesEnabled" = "true" ]; then
-				yum remove android-tools;
-			fi;
+			yum remove android-tools;
 			break;;
 		Skip )
 			break;;
@@ -213,9 +179,7 @@ select yns in "Yes" "No" "Skip"; do
 			yum install testdisk smartmontools mediawriter hdparm;
 			break;;
 		No )
-			if [ "$uninstallPackagesEnabled" = "true" ]; then
-				yum remove testdisk smartmontools mediawriter hdparm;
-			fi;
+			yum remove testdisk smartmontools mediawriter hdparm;
 			break;;
 		Skip )
 			break;;
@@ -229,9 +193,7 @@ select yns in "Yes" "No" "Skip"; do
 			yum install libreoffice meld pdfmod;
 			break;;
 		No )
-			if [ "$uninstallPackagesEnabled" = "true" ]; then
-				yum remove libreoffice meld pdfmod;
-			fi;
+			yum remove libreoffice meld pdfmod;
 			break;;
 		Skip )
 			break;;
@@ -245,9 +207,7 @@ select yns in "Yes" "No" "Skip"; do
 			yum install ecryptfs-utils encfs;
 			break;;
 		No )
-			if [ "$uninstallPackagesEnabled" = "true" ]; then
-				yum remove ecryptfs-utils encfs;
-			fi;
+			yum remove ecryptfs-utils encfs;
 			break;;
 		Skip )
 			break;;
@@ -261,9 +221,7 @@ select yns in "Yes" "No" "Skip"; do
 			yum install syncthing;
 			break;;
 		No )
-			if [ "$uninstallPackagesEnabled" = "true" ]; then
-				yum remove syncthing;
-			fi;
+			yum remove syncthing;
 			break;;
 		Skip )
 			break;;
@@ -277,9 +235,7 @@ select yns in "Yes" "No" "Skip"; do
 			yum install quadrapassel gnome-2048 gnome-mines aisleriot;
 			break;;
 		No )
-			if [ "$uninstallPackagesEnabled" = "true" ]; then
-				yum remove quadrapassel gnome-2048 gnome-mines aisleriot;
-			fi;
+			yum remove quadrapassel gnome-2048 gnome-mines aisleriot;
 			break;;
 		Skip )
 			break;;
@@ -293,9 +249,7 @@ select yns in "Yes" "No" "Skip"; do
 			yum install aircrack-ng nmap wireshark-gtk;
 			break;;
 		No )
-			if [ "$uninstallPackagesEnabled" = "true" ]; then
-				yum remove aircrack-ng nmap wireshark-gtk;
-			fi;
+			yum remove aircrack-ng nmap wireshark-gtk;
 			break;;
 		Skip )
 			break;;
@@ -309,9 +263,7 @@ select yns in "Yes" "No" "Skip"; do
 			yum install gimp inkscape darktable pitivi jpegoptim optipng;
 			break;;
 		No )
-			if [ "$uninstallPackagesEnabled" = "true" ]; then
-				yum remove gimp inkscape darktable pitivi jpegoptim optipng;
-			fi;
+			yum remove gimp inkscape darktable pitivi jpegoptim optipng;
 			break;;
 		Skip )
 			break;;
@@ -325,9 +277,7 @@ select yns in "Yes" "No" "Skip"; do
 			yum install firefox mozilla-https-everywhere mozilla-ublock-origin;
 			break;;
 		No )
-			if [ "$uninstallPackagesEnabled" = "true" ]; then
-				yum remove firefox mozilla-https-everywhere mozilla-ublock-origin;
-			fi;
+			yum remove firefox mozilla-https-everywhere mozilla-ublock-origin;
 			break;;
 		Skip )
 			break;;
@@ -341,9 +291,7 @@ select yns in "Yes" "No" "Skip"; do
 			yum install viking;
 			break;;
 		No )
-			if [ "$uninstallPackagesEnabled" = "true" ]; then
-				yum remove viking;
-			fi;
+			yum remove viking;
 			break;;
 		Skip )
 			break;;
@@ -357,9 +305,7 @@ select yns in "Yes" "No" "Skip"; do
 			yum install picard soundconverter sound-juicer;
 			break;;
 		No )
-			if [ "$uninstallPackagesEnabled" = "true" ]; then
-				yum remove picard soundconverter sound-juicer;
-			fi;
+			yum remove picard soundconverter sound-juicer;
 			break;;
 		Skip )
 			break;;
@@ -373,9 +319,7 @@ select yns in "Yes" "No" "Skip"; do
 			yum install calibre;
 			break;;
 		No )
-			if [ "$uninstallPackagesEnabled" = "true" ]; then
-				yum remove calibre;
-			fi;
+			yum remove calibre;
 			break;;
 		Skip )
 			break;;
@@ -389,9 +333,7 @@ select yns in "Yes" "No" "Skip"; do
 			yum install lollypop youtube-dl;
 			break;;
 		No )
-			if [ "$uninstallPackagesEnabled" = "true" ]; then
-				yum remove lollypop youtube-dl;
-			fi;
+			yum remove lollypop youtube-dl;
 			break;;
 		Skip )
 			break;;
@@ -405,9 +347,7 @@ select yns in "Yes" "No" "Skip"; do
 			yum install keepassxc pwgen;
 			break;;
 		No )
-			if [ "$uninstallPackagesEnabled" = "true" ]; then
-				yum remove keepassxc pwgen;
-			fi;
+			yum remove keepassxc pwgen;
 			break;;
 		Skip )
 			break;;
@@ -421,9 +361,7 @@ select yns in "Yes" "No" "Skip"; do
 			yum install bleachbit srm;
 			break;;
 		No )
-			if [ "$uninstallPackagesEnabled" = "true" ]; then
-				yum remove bleachbit srm;
-			fi;
+			yum remove bleachbit srm;
 			break;;
 		Skip )
 			break;;
@@ -437,9 +375,7 @@ select yns in "Yes" "No" "Skip"; do
 			yum install clamav clamav-data-empty clamav-update clamtk unhide chkrootkit firewall-config;
 			break;;
 		No )
-			if [ "$uninstallPackagesEnabled" = "true" ]; then
-				yum remove clamav clamav-data-empty clamav-update clamtk unhide chkrootkit firewall-config;
-			fi;
+			yum remove clamav clamav-data-empty clamav-update clamtk unhide chkrootkit firewall-config;
 			break;;
 		Skip )
 			break;;
@@ -453,9 +389,7 @@ select yns in "Yes" "No" "Skip"; do
 			yum install tor torsocks tor-arm onionshare torbrowser-launcher;
 			break;;
 		No )
-			if [ "$uninstallPackagesEnabled" = "true" ]; then
-				yum remove tor torsocks tor-arm onionshare torbrowser-launcher;
-			fi;
+			yum remove tor torsocks tor-arm onionshare torbrowser-launcher;
 			break;;
 		Skip )
 			break;;
@@ -469,9 +403,7 @@ select yns in "Yes" "No" "Skip"; do
 			yum install transmission;
 			break;;
 		No )
-			if [ "$uninstallPackagesEnabled" = "true" ]; then
-				yum remove transmission;
-			fi;
+			yum remove transmission;
 			break;;
 		Skip )
 			break;;
@@ -485,9 +417,7 @@ select yns in "Yes" "No" "Skip"; do
 			yum install whois mtr vdpauinfo stress iotop wavemon tree pv iperf3 bmon powertop ncdu;
 			break;;
 		No )
-			if [ "$uninstallPackagesEnabled" = "true" ]; then
-				yum remove whois mtr vdpauinfo stress iotop wavemon tree pv iperf3 bmon powertop ncdu;
-			fi;
+			yum remove whois mtr vdpauinfo stress iotop wavemon tree pv iperf3 bmon powertop ncdu;
 			break;;
 		Skip )
 			break;;
@@ -501,9 +431,7 @@ select yns in "Yes" "No" "Skip"; do
 			yum install winetricks wine;
 			break;;
 		No )
-			if [ "$uninstallPackagesEnabled" = "true" ]; then
-				yum remove winetricks wine;
-			fi;
+			yum remove winetricks wine;
 			break;;
 		Skip )
 			break;;
@@ -517,9 +445,7 @@ select yns in "Yes" "No" "Skip"; do
 			yum install yubikey-personalization-gui;
 			break;;
 		No )
-			if [ "$uninstallPackagesEnabled" = "true" ]; then
-				yum remove yubikey-personalization-gui;
-			fi;
+			yum remove yubikey-personalization-gui;
 			break;;
 		Skip )
 			break;;
