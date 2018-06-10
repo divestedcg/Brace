@@ -7,16 +7,16 @@ BuildArch: noarch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
 %description
-- Adds many helper scripts, brace-*
-- Changes many default settings for GNOME
-- Hardens Firefox to prevent tracking, credit @pyllyukko, license MIT
-- Adds many aliases for clearing logs
-- Blacklists DMA drivers such as Firewire and Thunderbolt
-- Blacklists USB ethernet drivers
-- Enables MAC address randomization on all interfaces
-- Disables network connectivity checking
-- Restricts dmesg and ptrace
-- Increases performance on select Intel Wi-Fi adapters
+- Adds many helper scripts: brace-installer, brace-remover, brace-supplemental-changes
+- GNOME: change default settings
+- Firefox: change default settings, credit @pyllyukko, license MIT
+- NetworkManager: disable connectivity checking
+- Networkmanager: enable MAC address randomization
+- kernel: restrict dmesg and ptrace
+- kernel: blacklist modules that provide direct memory access externally
+- kernel: blacklist modules that allow for USB networking
+- profile: adds helper aliases
+- kernel: iwlwifi: enables link aggregation for increased performance
 
 %post
 dconf update

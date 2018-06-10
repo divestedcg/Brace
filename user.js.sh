@@ -28,10 +28,10 @@ sed -i 's/pref("browser.urlbar.autocomplete.enabled"/\/\/BRACE-DISABLED: pref("b
 sed -i 's/pref("security.OCSP.enabled"/\/\/BRACE-DISABLED: pref("security.OCSP.enabled"/' $userjs;
 sed -i 's/pref("security.OCSP.required"/\/\/BRACE-DISABLED: pref("security.OCSP.required"/' $userjs;
 
-#Fix https://github.com/pyllyukko/$userjs/issues/347
+#Fix https://github.com/pyllyukko/user.js/issues/347
 sed -i 's/pref("browser.cache.offline.enable"/\/\/DISABLED: pref("browser.cache.offline.enable"/' $userjs;
 
-#Fix https://github.com/pyllyukko/$userjs/pull/355
+#Fix https://github.com/pyllyukko/user.js/pull/355
 sed -i 's/en-US, en/data:text\/plain,intl.accept_languages=en-US, en/' $userjs;
 
 #Add our extras

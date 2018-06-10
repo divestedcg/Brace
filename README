@@ -4,17 +4,18 @@ brace
 Compatibility
 -------------
 - Arch Linux
-- Fedora 28
 - CentOS 7
+- Fedora 28 (preferred)
+- Scientific Linux 7.4
 
 Contents
 --------
 Installed
 	00-gnome_defaults			= GNOME: change default settings
 	21-disable-connectivity-check.conf	= NetworkManager: disable connectivity checking
-	30-mac-randomization.conf		= Networkmanager: enable mac randomization
+	30-mac-randomization.conf		= Networkmanager: enable MAC address randomization
 	60-restrict.conf			= kernel: restrict dmesg and ptrace
-	blacklist-dma.conf			= kernel: blacklist modules that provide direct memory access
+	blacklist-dma.conf			= kernel: blacklist modules that provide direct memory access externally
 	blacklist-usbnet.conf			= kernel: blacklist modules that allow for USB networking
 	brace-arch-installer.sh			= Arch: package installer
 	brace-fedora-enable-auto-updates.sh	= Fedora: enables DNF automatic updates
@@ -24,7 +25,7 @@ Installed
 	brace-supplemental-changes.sh		= GNOME: change extra default settings
 	dnu.service				= kernel: systemd target to toggle linux-hardened's deny_new_usb sysctl
 	helpers.sh				= profile: adds helper aliases
-	iwlwifi.sh				= kernel: iwlwifi: enables link aggregation
+	iwlwifi.sh				= kernel: iwlwifi: enables link aggregation for increased performance
 	user.js					= Firefox: change default settings
 Unused
 	umask.sh				= profile: sets umask 077
