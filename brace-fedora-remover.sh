@@ -1,4 +1,6 @@
 #!/bin/bash
+#Copyright (c) 2018 Divested Computing, Inc.
+#License: GPLv3
 
 packages="";
 

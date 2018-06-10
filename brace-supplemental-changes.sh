@@ -1,4 +1,6 @@
 #!/bin/bash
+#Copyright (c) 2017-2018 Divested Computing, Inc.
+#License: GPLv3
 
 if [ -d "/usr/share/fonts/adobe-source-code-pro" ]; then
 	gsettings set org.gnome.builder.editor font-name 'Source Code Pro 11';

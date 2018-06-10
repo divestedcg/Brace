@@ -1,30 +1,22 @@
 #!/bin/bash
-coloroff='\e[0m'
-black='\e[0;30m'
-blue='\e[0;34m'
-cyan='\e[0;36m'
-green='\e[0;32m'
-purple='\e[0;35m'
-red='\e[0;31m'
-white='\e[0;37m'
-yellow='\e[0;33m'
-infoColor=${green}
-questionColor=${yellow}
-outputColor=${yellow}
+#Copyright (c) 2015-2018 Divested Computing, Inc.
+#License: GPLv3
+#Automatically generated! Please edit with care.
 
-echo -e ${questionColor}Would you like to skip all AUR packages? They will be printed out later${coloroff}
-select yn in "Yes" "No"; do
-	case $yn in
-		Yes )
-			aurPackagesEnabled=false;
-			break;;
-		No )
-			aurPackagesEnabled=true;
-			break;;
-	esac
-done
+coloroff='\e[0m';
+black='\e[0;30m';
+blue='\e[0;34m';
+cyan='\e[0;36m';
+green='\e[0;32m';
+purple='\e[0;35m';
+red='\e[0;31m';
+white='\e[0;37m';
+yellow='\e[0;33m';
+infoColor=${green};
+questionColor=${yellow};
+outputColor=${yellow};
 
-echo -e ${questionColor}Would you like to uninstall packages from groups that arent selected? Not responsible if anything breaks${coloroff}
+echo -e ${questionColor}Would you like to uninstall packages from groups that arent selected?${coloroff};
 select yn in "Yes" "No"; do
 	case $yn in
 		Yes )
@@ -36,11 +28,27 @@ select yn in "Yes" "No"; do
 	esac
 done
 
-echo -e ${questionColor}Do you want packages from the Core category?${coloroff}
+if [ -f /usr/bin/yaourt ]; then
+	echo -e ${questionColor}Would you like to skip all AUR packages? They will be printed out later${coloroff};
+	select yn in "Yes" "No"; do
+		case $yn in
+			Yes )
+				aurPackagesEnabled=false;
+				break;;
+			No )
+				aurPackagesEnabled=true;
+				break;;
+		esac
+	done
+else
+	aurPackagesEnabled=false;
+fi;
+
+echo -e ${questionColor}Do you want packages from the Core category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed  irqbalance git openssh nano htop wget screen zip p7zip unrar pixz pigz lm_sensors dialog crda android-udev parallel screenfetch ;
+			pacman -S --needed irqbalance git openssh nano htop wget screen zip p7zip unrar pixz pigz lm_sensors dialog crda android-udev parallel screenfetch;
 			if [ "$aurPackagesEnabled" = "true" ]; then
 				yaourt -S --needed downgrade;
 			fi
@@ -66,18 +74,18 @@ select yns in "Yes" "No" "Skip"; do
 				pacman -Rsc parallel;
 				pacman -Rsc screenfetch;
 				pacman -Rsc downgrade;
-			fi
+			fi;
 			break;;
 		Skip )
 			break;;
-	esac
-done
+	esac;
+done;
 
-echo -e ${questionColor}Do you want packages from the Frameworks category?${coloroff}
+echo -e ${questionColor}Do you want packages from the Frameworks category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed  gcc-multilib jdk8-openjdk jre8-openjdk jdk9-openjdk jre9-openjdk python;
+			pacman -S --needed gcc-multilib jdk8-openjdk jre8-openjdk jdk9-openjdk jre9-openjdk python;
 			break;;
 		No )
 			if [ "$uninstallPackagesEnabled" = "true" ]; then
@@ -87,18 +95,18 @@ select yns in "Yes" "No" "Skip"; do
 				pacman -Rsc jdk9-openjdk;
 				pacman -Rsc jre9-openjdk;
 				pacman -Rsc python;
-			fi
+			fi;
 			break;;
 		Skip )
 			break;;
-	esac
-done
+	esac;
+done;
 
-echo -e ${questionColor}Do you want packages from the Xorg category?${coloroff}
+echo -e ${questionColor}Do you want packages from the Xorg category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed  xorg-server xorg xorg-xinit xorg-server-xwayland;
+			pacman -S --needed xorg-server xorg xorg-xinit xorg-server-xwayland;
 			break;;
 		No )
 			if [ "$uninstallPackagesEnabled" = "true" ]; then
@@ -106,18 +114,18 @@ select yns in "Yes" "No" "Skip"; do
 				pacman -Rsc xorg;
 				pacman -Rsc xorg-xinit;
 				pacman -Rsc xorg-server-xwayland;
-			fi
+			fi;
 			break;;
 		Skip )
 			break;;
-	esac
-done
+	esac;
+done;
 
-echo -e ${questionColor}Do you want packages from the Xorg Remove category?${coloroff}
+echo -e ${questionColor}Do you want packages from the Xorg Remove category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed  xorg-iceauth xorg-luit xorg-server-xephyr xorg-sessreg xorg-smproxy xorg-x11perf xorg-xbacklight xorg-xcmsdb xorg-xcursorgen xorg-xdriinfo xorg-xev xorg-xgamma xorg-xkbevd xorg-xkbutils xorg-xkill xorg-xlsatoms xorg-xlsclients xorg-xpr xorg-xrefresh xorg-xsetroot xorg-xvinfo xorg-xwd xorg-xwininfo xorg-xwud;
+			pacman -S --needed xorg-iceauth xorg-luit xorg-server-xephyr xorg-sessreg xorg-smproxy xorg-x11perf xorg-xbacklight xorg-xcmsdb xorg-xcursorgen xorg-xdriinfo xorg-xev xorg-xgamma xorg-xkbevd xorg-xkbutils xorg-xkill xorg-xlsatoms xorg-xlsclients xorg-xpr xorg-xrefresh xorg-xsetroot xorg-xvinfo xorg-xwd xorg-xwininfo xorg-xwud;
 			break;;
 		No )
 			if [ "$uninstallPackagesEnabled" = "true" ]; then
@@ -145,34 +153,34 @@ select yns in "Yes" "No" "Skip"; do
 				pacman -Rsc xorg-xwd;
 				pacman -Rsc xorg-xwininfo;
 				pacman -Rsc xorg-xwud;
-			fi
+			fi;
 			break;;
 		Skip )
 			break;;
-	esac
-done
+	esac;
+done;
 
-echo -e ${questionColor}Do you want packages from the Intel CPU Drivers category?${coloroff}
+echo -e ${questionColor}Do you want packages from the Intel CPU Drivers category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed  intel-ucode;
+			pacman -S --needed intel-ucode;
 			break;;
 		No )
 			if [ "$uninstallPackagesEnabled" = "true" ]; then
 				pacman -Rsc intel-ucode;
-			fi
+			fi;
 			break;;
 		Skip )
 			break;;
-	esac
-done
+	esac;
+done;
 
-echo -e ${questionColor}Do you want packages from the AMD/Intel/Nvidia FOSS GPU Drivers category?${coloroff}
+echo -e ${questionColor}Do you want packages from the AMD/Intel/Nvidia FOSS GPU Drivers category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed  mesa lib32-mesa mesa-libgl lib32-mesa-libgl opencl-mesa libglvnd lib32-libglvnd;
+			pacman -S --needed mesa lib32-mesa mesa-libgl lib32-mesa-libgl opencl-mesa libglvnd lib32-libglvnd;
 			break;;
 		No )
 			if [ "$uninstallPackagesEnabled" = "true" ]; then
@@ -183,18 +191,18 @@ select yns in "Yes" "No" "Skip"; do
 				pacman -Rsc opencl-mesa;
 				pacman -Rsc libglvnd;
 				pacman -Rsc lib32-libglvnd;
-			fi
+			fi;
 			break;;
 		Skip )
 			break;;
-	esac
-done
+	esac;
+done;
 
-echo -e ${questionColor}Do you want packages from the NVIDIA Proprietary GPU Drivers category?${coloroff}
+echo -e ${questionColor}Do you want packages from the NVIDIA Proprietary GPU Drivers category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed  nvidia nvidia-libgl opencl-nvidia nvidia-utils lib32-nvidia-libgl lib32-nvidia-utils lib32-opencl-nvidia nvidia-settings;
+			pacman -S --needed nvidia nvidia-libgl opencl-nvidia nvidia-utils lib32-nvidia-libgl lib32-nvidia-utils lib32-opencl-nvidia nvidia-settings;
 			break;;
 		No )
 			if [ "$uninstallPackagesEnabled" = "true" ]; then
@@ -206,18 +214,18 @@ select yns in "Yes" "No" "Skip"; do
 				pacman -Rsc lib32-nvidia-utils;
 				pacman -Rsc lib32-opencl-nvidia;
 				pacman -Rsc nvidia-settings;
-			fi
+			fi;
 			break;;
 		Skip )
 			break;;
-	esac
-done
+	esac;
+done;
 
-echo -e ${questionColor}Do you want packages from the AMD/Intel/Nvidia FOSS GPU Acceleration category?${coloroff}
+echo -e ${questionColor}Do you want packages from the AMD/Intel/Nvidia FOSS GPU Acceleration category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed  libvdpau libvdpau-va-gl libva-vdpau-driver gstreamer-vaapi lib32-libvdpau lib32-libva-vdpau-driver libva-mesa-driver mesa-vdpau lib32-mesa-vdpau;
+			pacman -S --needed libvdpau libvdpau-va-gl libva-vdpau-driver gstreamer-vaapi lib32-libvdpau lib32-libva-vdpau-driver libva-mesa-driver mesa-vdpau lib32-mesa-vdpau;
 			break;;
 		No )
 			if [ "$uninstallPackagesEnabled" = "true" ]; then
@@ -230,34 +238,34 @@ select yns in "Yes" "No" "Skip"; do
 				pacman -Rsc libva-mesa-driver;
 				pacman -Rsc mesa-vdpau;
 				pacman -Rsc lib32-mesa-vdpau;
-			fi
+			fi;
 			break;;
 		Skip )
 			break;;
-	esac
-done
+	esac;
+done;
 
-echo -e ${questionColor}Do you want packages from the Intel FOSS GPU Acceleration Extra category?${coloroff}
+echo -e ${questionColor}Do you want packages from the Intel FOSS GPU Acceleration Extra category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed  libva-intel-driver;
+			pacman -S --needed libva-intel-driver;
 			break;;
 		No )
 			if [ "$uninstallPackagesEnabled" = "true" ]; then
 				pacman -Rsc libva-intel-driver;
-			fi
+			fi;
 			break;;
 		Skip )
 			break;;
-	esac
-done
+	esac;
+done;
 
-echo -e ${questionColor}Do you want packages from the Networking category?${coloroff}
+echo -e ${questionColor}Do you want packages from the Networking category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed  networkmanager openvpn dnsmasq networkmanager-openvpn;
+			pacman -S --needed networkmanager openvpn dnsmasq networkmanager-openvpn;
 			break;;
 		No )
 			if [ "$uninstallPackagesEnabled" = "true" ]; then
@@ -265,18 +273,18 @@ select yns in "Yes" "No" "Skip"; do
 				pacman -Rsc openvpn;
 				pacman -Rsc dnsmasq;
 				pacman -Rsc networkmanager-openvpn;
-			fi
+			fi;
 			break;;
 		Skip )
 			break;;
-	esac
-done
+	esac;
+done;
 
-echo -e ${questionColor}Do you want packages from the Gnome category?${coloroff}
+echo -e ${questionColor}Do you want packages from the Gnome category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed  file-roller gnome gnome-terminal gnome-tweak-tool dconf-editor xdg-user-dirs;
+			pacman -S --needed file-roller gnome gnome-terminal gnome-tweak-tool dconf-editor xdg-user-dirs;
 			break;;
 		No )
 			if [ "$uninstallPackagesEnabled" = "true" ]; then
@@ -286,14 +294,14 @@ select yns in "Yes" "No" "Skip"; do
 				pacman -Rsc gnome-tweak-tool;
 				pacman -Rsc dconf-editor;
 				pacman -Rsc xdg-user-dirs;
-			fi
+			fi;
 			break;;
 		Skip )
 			break;;
-	esac
-done
+	esac;
+done;
 
-echo -e ${questionColor}Do you want packages from the Gnome Extensions category?${coloroff}
+echo -e ${questionColor}Do you want packages from the Gnome Extensions category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
@@ -304,34 +312,34 @@ select yns in "Yes" "No" "Skip"; do
 		No )
 			if [ "$uninstallPackagesEnabled" = "true" ]; then
 				pacman -Rsc gnome-shell-extension-volume-mixer;
-			fi
+			fi;
 			break;;
 		Skip )
 			break;;
-	esac
-done
+	esac;
+done;
 
-echo -e ${questionColor}Do you want packages from the Gnome Extensions Extra category?${coloroff}
+echo -e ${questionColor}Do you want packages from the Gnome Extensions Extra category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed  gnome-shell-extensions;
+			pacman -S --needed gnome-shell-extensions;
 			break;;
 		No )
 			if [ "$uninstallPackagesEnabled" = "true" ]; then
 				pacman -Rsc gnome-shell-extensions;
-			fi
+			fi;
 			break;;
 		Skip )
 			break;;
-	esac
-done
+	esac;
+done;
 
-echo -e ${questionColor}Do you want packages from the Gnome Extra category?${coloroff}
+echo -e ${questionColor}Do you want packages from the Gnome Extra category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed  gnome-user-docs gnome-calendar gnome-characters gnome-font-viewer gnome-logs gnome-sound-recorder gnome-clocks gnome-maps gnome-contacts;
+			pacman -S --needed gnome-user-docs gnome-calendar gnome-characters gnome-font-viewer gnome-logs gnome-sound-recorder gnome-clocks gnome-maps gnome-contacts;
 			break;;
 		No )
 			if [ "$uninstallPackagesEnabled" = "true" ]; then
@@ -344,18 +352,18 @@ select yns in "Yes" "No" "Skip"; do
 				pacman -Rsc gnome-clocks;
 				pacman -Rsc gnome-maps;
 				pacman -Rsc gnome-contacts;
-			fi
+			fi;
 			break;;
 		Skip )
 			break;;
-	esac
-done
+	esac;
+done;
 
-echo -e ${questionColor}Do you want packages from the Gnome REMOVE category?${coloroff}
+echo -e ${questionColor}Do you want packages from the Gnome REMOVE category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed  apache empathy epiphany five-or-more four-in-a-row gnome-boxes gnome-dictionary gnome-documents gnome-hearts gnome-initial-setup gnome-klotski gnome-weather gnome-music gnome-nettool gnome-nibbles gnome-phone-manager gnome-photos gnome-power-manager gnome-robots gnome-software gnome-system-log gnome-system-monitor gnome-tetravex gnome-todo gnome-user-share gucharmap gvfs-afc gvfs-goa gvfs-google gvfs-gphoto2 mod_dnssd sushi tracker vino virtviewer;
+			pacman -S --needed apache empathy epiphany five-or-more four-in-a-row gnome-boxes gnome-dictionary gnome-documents gnome-hearts gnome-initial-setup gnome-klotski gnome-weather gnome-music gnome-nettool gnome-nibbles gnome-phone-manager gnome-photos gnome-power-manager gnome-robots gnome-software gnome-system-log gnome-system-monitor gnome-tetravex gnome-todo gnome-user-share gucharmap gvfs-afc gvfs-goa gvfs-google gvfs-gphoto2 mod_dnssd sushi tracker vino virtviewer;
 			break;;
 		No )
 			if [ "$uninstallPackagesEnabled" = "true" ]; then
@@ -394,51 +402,51 @@ select yns in "Yes" "No" "Skip"; do
 				pacman -Rsc tracker;
 				pacman -Rsc vino;
 				pacman -Rsc virtviewer;
-			fi
+			fi;
 			break;;
 		Skip )
 			break;;
-	esac
-done
+	esac;
+done;
 
-echo -e ${questionColor}Do you want packages from the Nemo category?${coloroff}
+echo -e ${questionColor}Do you want packages from the Nemo category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed  nemo nemo-fileroller;
+			pacman -S --needed nemo nemo-fileroller;
 			break;;
 		No )
 			if [ "$uninstallPackagesEnabled" = "true" ]; then
 				pacman -Rsc nemo;
 				pacman -Rsc nemo-fileroller;
-			fi
+			fi;
 			break;;
 		Skip )
 			break;;
-	esac
-done
+	esac;
+done;
 
-echo -e ${questionColor}Do you want packages from the Nautilus category?${coloroff}
+echo -e ${questionColor}Do you want packages from the Nautilus category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed  nautilus;
+			pacman -S --needed nautilus;
 			break;;
 		No )
 			if [ "$uninstallPackagesEnabled" = "true" ]; then
 				pacman -Rsc nautilus;
-			fi
+			fi;
 			break;;
 		Skip )
 			break;;
-	esac
-done
+	esac;
+done;
 
-echo -e ${questionColor}Do you want packages from the Base category?${coloroff}
+echo -e ${questionColor}Do you want packages from the Base category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed  gksu gnome-keyring seahorse gvfs-mtp hyphen hyphen-en libmythes mythes-en hunspell hunspell-en aspell aspell-en gnome-screenshot gnome-calculator ;
+			pacman -S --needed gksu gnome-keyring seahorse gvfs-mtp hyphen hyphen-en libmythes mythes-en hunspell hunspell-en aspell aspell-en gnome-screenshot gnome-calculator;
 			if [ "$aurPackagesEnabled" = "true" ]; then
 				yaourt -S --needed numix-circle-icon-theme-git numix-icon-theme-git;
 			fi
@@ -461,18 +469,18 @@ select yns in "Yes" "No" "Skip"; do
 				pacman -Rsc gnome-calculator;
 				pacman -Rsc numix-circle-icon-theme-git;
 				pacman -Rsc numix-icon-theme-git;
-			fi
+			fi;
 			break;;
 		Skip )
 			break;;
-	esac
-done
+	esac;
+done;
 
-echo -e ${questionColor}Do you want packages from the Fonts category?${coloroff}
+echo -e ${questionColor}Do you want packages from the Fonts category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed  ttf-dejavu ttf-ubuntu-font-family ttf-droid adobe-source-code-pro-fonts ttf-fira-mono ttf-fira-sans ttf-liberation ttf-roboto cantarell-fonts gsfonts noto-fonts noto-fonts-emoji tex-gyre-fonts ttf-anonymous-pro ttf-hack ttf-inconsolata ttf-freefont ttf-croscore ttf-symbola otf-overpass;
+			pacman -S --needed ttf-dejavu ttf-ubuntu-font-family ttf-droid adobe-source-code-pro-fonts ttf-fira-mono ttf-fira-sans ttf-liberation ttf-roboto cantarell-fonts gsfonts noto-fonts noto-fonts-emoji tex-gyre-fonts ttf-anonymous-pro ttf-hack ttf-inconsolata ttf-freefont ttf-croscore ttf-symbola otf-overpass;
 			break;;
 		No )
 			if [ "$uninstallPackagesEnabled" = "true" ]; then
@@ -496,18 +504,18 @@ select yns in "Yes" "No" "Skip"; do
 				pacman -Rsc ttf-croscore;
 				pacman -Rsc ttf-symbola;
 				pacman -Rsc otf-overpass;
-			fi
+			fi;
 			break;;
 		Skip )
 			break;;
-	esac
-done
+	esac;
+done;
 
-echo -e ${questionColor}Do you want packages from the Audio category?${coloroff}
+echo -e ${questionColor}Do you want packages from the Audio category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed  pavucontrol paprefs pulseaudio pulseaudio-alsa pulseaudio-gconf pulseaudio-zeroconf lib32-libcanberra-pulse;
+			pacman -S --needed pavucontrol paprefs pulseaudio pulseaudio-alsa pulseaudio-gconf pulseaudio-zeroconf lib32-libcanberra-pulse;
 			break;;
 		No )
 			if [ "$uninstallPackagesEnabled" = "true" ]; then
@@ -518,118 +526,118 @@ select yns in "Yes" "No" "Skip"; do
 				pacman -Rsc pulseaudio-gconf;
 				pacman -Rsc pulseaudio-zeroconf;
 				pacman -Rsc lib32-libcanberra-pulse;
-			fi
+			fi;
 			break;;
 		Skip )
 			break;;
-	esac
-done
+	esac;
+done;
 
-echo -e ${questionColor}Do you want packages from the Audio Manipulation category?${coloroff}
+echo -e ${questionColor}Do you want packages from the Audio Manipulation category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed  audacity;
+			pacman -S --needed audacity;
 			break;;
 		No )
 			if [ "$uninstallPackagesEnabled" = "true" ]; then
 				pacman -Rsc audacity;
-			fi
+			fi;
 			break;;
 		Skip )
 			break;;
-	esac
-done
+	esac;
+done;
 
-echo -e ${questionColor}Do you want packages from the Audit category?${coloroff}
+echo -e ${questionColor}Do you want packages from the Audit category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed  lynis arch-audit checksec;
+			pacman -S --needed lynis arch-audit checksec;
 			break;;
 		No )
 			if [ "$uninstallPackagesEnabled" = "true" ]; then
 				pacman -Rsc lynis;
 				pacman -Rsc arch-audit;
 				pacman -Rsc checksec;
-			fi
+			fi;
 			break;;
 		Skip )
 			break;;
-	esac
-done
+	esac;
+done;
 
-echo -e ${questionColor}Do you want packages from the Backup category?${coloroff}
+echo -e ${questionColor}Do you want packages from the Backup category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed  borg;
+			pacman -S --needed borg;
 			break;;
 		No )
 			if [ "$uninstallPackagesEnabled" = "true" ]; then
 				pacman -Rsc borg;
-			fi
+			fi;
 			break;;
 		Skip )
 			break;;
-	esac
-done
+	esac;
+done;
 
-echo -e ${questionColor}Do you want packages from the Bluetooth category?${coloroff}
+echo -e ${questionColor}Do you want packages from the Bluetooth category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed  pulseaudio-bluetooth bluez-utils;
+			pacman -S --needed pulseaudio-bluetooth bluez-utils;
 			break;;
 		No )
 			if [ "$uninstallPackagesEnabled" = "true" ]; then
 				pacman -Rsc pulseaudio-bluetooth;
 				pacman -Rsc bluez-utils;
-			fi
+			fi;
 			break;;
 		Skip )
 			break;;
-	esac
-done
+	esac;
+done;
 
-echo -e ${questionColor}Do you want packages from the Communication category?${coloroff}
+echo -e ${questionColor}Do you want packages from the Communication category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed  evolution;
+			pacman -S --needed evolution;
 			break;;
 		No )
 			if [ "$uninstallPackagesEnabled" = "true" ]; then
 				pacman -Rsc evolution;
-			fi
+			fi;
 			break;;
 		Skip )
 			break;;
-	esac
-done
+	esac;
+done;
 
-echo -e ${questionColor}Do you want packages from the Communication Realtime category?${coloroff}
+echo -e ${questionColor}Do you want packages from the Communication Realtime category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed  hexchat mumble;
+			pacman -S --needed hexchat mumble;
 			break;;
 		No )
 			if [ "$uninstallPackagesEnabled" = "true" ]; then
 				pacman -Rsc hexchat;
 				pacman -Rsc mumble;
-			fi
+			fi;
 			break;;
 		Skip )
 			break;;
-	esac
-done
+	esac;
+done;
 
-echo -e ${questionColor}Do you want packages from the Development category?${coloroff}
+echo -e ${questionColor}Do you want packages from the Development category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed  gitg asp intellij-idea-community-edition proguard bless sqlitebrowser ;
+			pacman -S --needed gitg asp intellij-idea-community-edition proguard bless sqlitebrowser;
 			if [ "$aurPackagesEnabled" = "true" ]; then
 				yaourt -S --needed jd-gui launch4j;
 			fi
@@ -644,18 +652,18 @@ select yns in "Yes" "No" "Skip"; do
 				pacman -Rsc sqlitebrowser;
 				pacman -Rsc jd-gui;
 				pacman -Rsc launch4j;
-			fi
+			fi;
 			break;;
 		Skip )
 			break;;
-	esac
-done
+	esac;
+done;
 
-echo -e ${questionColor}Do you want packages from the Development Android category?${coloroff}
+echo -e ${questionColor}Do you want packages from the Development Android category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed  android-tools ;
+			pacman -S --needed android-tools;
 			if [ "$aurPackagesEnabled" = "true" ]; then
 				yaourt -S --needed android-apktool dex2jar jd-gui sdat2img android-studio;
 			fi
@@ -668,18 +676,18 @@ select yns in "Yes" "No" "Skip"; do
 				pacman -Rsc jd-gui;
 				pacman -Rsc sdat2img;
 				pacman -Rsc android-studio;
-			fi
+			fi;
 			break;;
 		Skip )
 			break;;
-	esac
-done
+	esac;
+done;
 
-echo -e ${questionColor}Do you want packages from the Disks category?${coloroff}
+echo -e ${questionColor}Do you want packages from the Disks category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed  gnome-disk-utility baobab testdisk parted ntfs-3g dosfstools mtools exfat-utils smartmontools;
+			pacman -S --needed gnome-disk-utility baobab testdisk parted ntfs-3g dosfstools mtools exfat-utils smartmontools;
 			break;;
 		No )
 			if [ "$uninstallPackagesEnabled" = "true" ]; then
@@ -692,18 +700,18 @@ select yns in "Yes" "No" "Skip"; do
 				pacman -Rsc mtools;
 				pacman -Rsc exfat-utils;
 				pacman -Rsc smartmontools;
-			fi
+			fi;
 			break;;
 		Skip )
 			break;;
-	esac
-done
+	esac;
+done;
 
-echo -e ${questionColor}Do you want packages from the Documents category?${coloroff}
+echo -e ${questionColor}Do you want packages from the Documents category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed  libreoffice-fresh evince gedit meld pdfmod;
+			pacman -S --needed libreoffice-fresh evince gedit meld pdfmod;
 			break;;
 		No )
 			if [ "$uninstallPackagesEnabled" = "true" ]; then
@@ -712,18 +720,18 @@ select yns in "Yes" "No" "Skip"; do
 				pacman -Rsc gedit;
 				pacman -Rsc meld;
 				pacman -Rsc pdfmod;
-			fi
+			fi;
 			break;;
 		Skip )
 			break;;
-	esac
-done
+	esac;
+done;
 
-echo -e ${questionColor}Do you want packages from the File Encryption category?${coloroff}
+echo -e ${questionColor}Do you want packages from the File Encryption category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed  ecryptfs-utils encfs cryfs ;
+			pacman -S --needed ecryptfs-utils encfs cryfs;
 			if [ "$aurPackagesEnabled" = "true" ]; then
 				yaourt -S --needed sirikali-git gocryptfs;
 			fi
@@ -735,50 +743,50 @@ select yns in "Yes" "No" "Skip"; do
 				pacman -Rsc cryfs;
 				pacman -Rsc sirikali-git;
 				pacman -Rsc gocryptfs;
-			fi
+			fi;
 			break;;
 		Skip )
 			break;;
-	esac
-done
+	esac;
+done;
 
-echo -e ${questionColor}Do you want packages from the File Syncing category?${coloroff}
+echo -e ${questionColor}Do you want packages from the File Syncing category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed  syncthing;
+			pacman -S --needed syncthing;
 			break;;
 		No )
 			if [ "$uninstallPackagesEnabled" = "true" ]; then
 				pacman -Rsc syncthing;
-			fi
+			fi;
 			break;;
 		Skip )
 			break;;
-	esac
-done
+	esac;
+done;
 
-echo -e ${questionColor}Do you want packages from the Firmware Updates category?${coloroff}
+echo -e ${questionColor}Do you want packages from the Firmware Updates category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed  fwupd;
+			pacman -S --needed fwupd;
 			break;;
 		No )
 			if [ "$uninstallPackagesEnabled" = "true" ]; then
 				pacman -Rsc fwupd;
-			fi
+			fi;
 			break;;
 		Skip )
 			break;;
-	esac
-done
+	esac;
+done;
 
-echo -e ${questionColor}Do you want packages from the Games - Tiny category?${coloroff}
+echo -e ${questionColor}Do you want packages from the Games - Tiny category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed  quadrapassel gnome-2048 gnome-mines aisleriot;
+			pacman -S --needed quadrapassel gnome-2048 gnome-mines aisleriot;
 			break;;
 		No )
 			if [ "$uninstallPackagesEnabled" = "true" ]; then
@@ -786,30 +794,30 @@ select yns in "Yes" "No" "Skip"; do
 				pacman -Rsc gnome-2048;
 				pacman -Rsc gnome-mines;
 				pacman -Rsc aisleriot;
-			fi
+			fi;
 			break;;
 		Skip )
 			break;;
-	esac
-done
+	esac;
+done;
 
-echo -e ${questionColor}Do you want packages from the Games - Steam category?${coloroff}
+echo -e ${questionColor}Do you want packages from the Games - Steam category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed  steam;
+			pacman -S --needed steam;
 			break;;
 		No )
 			if [ "$uninstallPackagesEnabled" = "true" ]; then
 				pacman -Rsc steam;
-			fi
+			fi;
 			break;;
 		Skip )
 			break;;
-	esac
-done
+	esac;
+done;
 
-echo -e ${questionColor}Do you want packages from the Games - Minecraft category?${coloroff}
+echo -e ${questionColor}Do you want packages from the Games - Minecraft category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
@@ -820,34 +828,34 @@ select yns in "Yes" "No" "Skip"; do
 		No )
 			if [ "$uninstallPackagesEnabled" = "true" ]; then
 				pacman -Rsc multimc5;
-			fi
+			fi;
 			break;;
 		Skip )
 			break;;
-	esac
-done
+	esac;
+done;
 
-echo -e ${questionColor}Do you want packages from the Games - Xonotic category?${coloroff}
+echo -e ${questionColor}Do you want packages from the Games - Xonotic category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed  xonotic;
+			pacman -S --needed xonotic;
 			break;;
 		No )
 			if [ "$uninstallPackagesEnabled" = "true" ]; then
 				pacman -Rsc xonotic;
-			fi
+			fi;
 			break;;
 		Skip )
 			break;;
-	esac
-done
+	esac;
+done;
 
-echo -e ${questionColor}Do you want packages from the Games - Misc category?${coloroff}
+echo -e ${questionColor}Do you want packages from the Games - Misc category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed  supertux neverball ;
+			pacman -S --needed supertux neverball;
 			if [ "$aurPackagesEnabled" = "true" ]; then
 				yaourt -S --needed opsu;
 			fi
@@ -857,35 +865,35 @@ select yns in "Yes" "No" "Skip"; do
 				pacman -Rsc supertux;
 				pacman -Rsc neverball;
 				pacman -Rsc opsu;
-			fi
+			fi;
 			break;;
 		Skip )
 			break;;
-	esac
-done
+	esac;
+done;
 
-echo -e ${questionColor}Do you want packages from the Games - Misc - Large category?${coloroff}
+echo -e ${questionColor}Do you want packages from the Games - Misc - Large category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed  0ad wesnoth;
+			pacman -S --needed 0ad wesnoth;
 			break;;
 		No )
 			if [ "$uninstallPackagesEnabled" = "true" ]; then
 				pacman -Rsc 0ad;
 				pacman -Rsc wesnoth;
-			fi
+			fi;
 			break;;
 		Skip )
 			break;;
-	esac
-done
+	esac;
+done;
 
-echo -e ${questionColor}Do you want packages from the Hacking category?${coloroff}
+echo -e ${questionColor}Do you want packages from the Hacking category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed  aircrack-ng nmap wireshark-gtk hashcat;
+			pacman -S --needed aircrack-ng nmap wireshark-gtk hashcat;
 			break;;
 		No )
 			if [ "$uninstallPackagesEnabled" = "true" ]; then
@@ -893,18 +901,18 @@ select yns in "Yes" "No" "Skip"; do
 				pacman -Rsc nmap;
 				pacman -Rsc wireshark-gtk;
 				pacman -Rsc hashcat;
-			fi
+			fi;
 			break;;
 		Skip )
 			break;;
-	esac
-done
+	esac;
+done;
 
-echo -e ${questionColor}Do you want packages from the Image Manipulation category?${coloroff}
+echo -e ${questionColor}Do you want packages from the Image Manipulation category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed  gimp inkscape jpegoptim optipng;
+			pacman -S --needed gimp inkscape jpegoptim optipng;
 			break;;
 		No )
 			if [ "$uninstallPackagesEnabled" = "true" ]; then
@@ -912,31 +920,31 @@ select yns in "Yes" "No" "Skip"; do
 				pacman -Rsc inkscape;
 				pacman -Rsc jpegoptim;
 				pacman -Rsc optipng;
-			fi
+			fi;
 			break;;
 		Skip )
 			break;;
-	esac
-done
+	esac;
+done;
 
-echo -e ${questionColor}Do you want packages from the Internet category?${coloroff}
+echo -e ${questionColor}Do you want packages from the Internet category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed  chromium firefox;
+			pacman -S --needed chromium firefox;
 			break;;
 		No )
 			if [ "$uninstallPackagesEnabled" = "true" ]; then
 				pacman -Rsc chromium;
 				pacman -Rsc firefox;
-			fi
+			fi;
 			break;;
 		Skip )
 			break;;
-	esac
-done
+	esac;
+done;
 
-echo -e ${questionColor}Do you want packages from the Proprietary Chromium Extensions category?${coloroff}
+echo -e ${questionColor}Do you want packages from the Proprietary Chromium Extensions category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
@@ -948,34 +956,34 @@ select yns in "Yes" "No" "Skip"; do
 			if [ "$uninstallPackagesEnabled" = "true" ]; then
 				pacman -Rsc chromium-pepper-flash;
 				pacman -Rsc chromium-widevine;
-			fi
+			fi;
 			break;;
 		Skip )
 			break;;
-	esac
-done
+	esac;
+done;
 
-echo -e ${questionColor}Do you want packages from the Maps category?${coloroff}
+echo -e ${questionColor}Do you want packages from the Maps category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed  viking;
+			pacman -S --needed viking;
 			break;;
 		No )
 			if [ "$uninstallPackagesEnabled" = "true" ]; then
 				pacman -Rsc viking;
-			fi
+			fi;
 			break;;
 		Skip )
 			break;;
-	esac
-done
+	esac;
+done;
 
-echo -e ${questionColor}Do you want packages from the Media Management category?${coloroff}
+echo -e ${questionColor}Do you want packages from the Media Management category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed  picard soundconverter sound-juicer ;
+			pacman -S --needed picard soundconverter sound-juicer;
 			if [ "$aurPackagesEnabled" = "true" ]; then
 				yaourt -S --needed filebot;
 			fi
@@ -986,35 +994,35 @@ select yns in "Yes" "No" "Skip"; do
 				pacman -Rsc soundconverter;
 				pacman -Rsc sound-juicer;
 				pacman -Rsc filebot;
-			fi
+			fi;
 			break;;
 		Skip )
 			break;;
-	esac
-done
+	esac;
+done;
 
-echo -e ${questionColor}Do you want packages from the Media Management Other category?${coloroff}
+echo -e ${questionColor}Do you want packages from the Media Management Other category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed  calibre brasero;
+			pacman -S --needed calibre brasero;
 			break;;
 		No )
 			if [ "$uninstallPackagesEnabled" = "true" ]; then
 				pacman -Rsc calibre;
 				pacman -Rsc brasero;
-			fi
+			fi;
 			break;;
 		Skip )
 			break;;
-	esac
-done
+	esac;
+done;
 
-echo -e ${questionColor}Do you want packages from the Media category?${coloroff}
+echo -e ${questionColor}Do you want packages from the Media category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed  lollypop totem eog youtube-dl ;
+			pacman -S --needed lollypop totem eog youtube-dl;
 			if [ "$aurPackagesEnabled" = "true" ]; then
 				yaourt -S --needed pithos-git;
 			fi
@@ -1026,85 +1034,85 @@ select yns in "Yes" "No" "Skip"; do
 				pacman -Rsc eog;
 				pacman -Rsc youtube-dl;
 				pacman -Rsc pithos-git;
-			fi
+			fi;
 			break;;
 		Skip )
 			break;;
-	esac
-done
+	esac;
+done;
 
-echo -e ${questionColor}Do you want packages from the Media HTPC category?${coloroff}
+echo -e ${questionColor}Do you want packages from the Media HTPC category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed  kodi;
+			pacman -S --needed kodi;
 			break;;
 		No )
 			if [ "$uninstallPackagesEnabled" = "true" ]; then
 				pacman -Rsc kodi;
-			fi
+			fi;
 			break;;
 		Skip )
 			break;;
-	esac
-done
+	esac;
+done;
 
-echo -e ${questionColor}Do you want packages from the Passwords category?${coloroff}
+echo -e ${questionColor}Do you want packages from the Passwords category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed  keepassxc pwgen;
+			pacman -S --needed keepassxc pwgen;
 			break;;
 		No )
 			if [ "$uninstallPackagesEnabled" = "true" ]; then
 				pacman -Rsc keepassxc;
 				pacman -Rsc pwgen;
-			fi
+			fi;
 			break;;
 		Skip )
 			break;;
-	esac
-done
+	esac;
+done;
 
-echo -e ${questionColor}Do you want packages from the Privacy category?${coloroff}
+echo -e ${questionColor}Do you want packages from the Privacy category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed  bleachbit srm;
+			pacman -S --needed bleachbit srm;
 			break;;
 		No )
 			if [ "$uninstallPackagesEnabled" = "true" ]; then
 				pacman -Rsc bleachbit;
 				pacman -Rsc srm;
-			fi
+			fi;
 			break;;
 		Skip )
 			break;;
-	esac
-done
+	esac;
+done;
 
-echo -e ${questionColor}Do you want packages from the Remote category?${coloroff}
+echo -e ${questionColor}Do you want packages from the Remote category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed  remmina freerdp;
+			pacman -S --needed remmina freerdp;
 			break;;
 		No )
 			if [ "$uninstallPackagesEnabled" = "true" ]; then
 				pacman -Rsc remmina;
 				pacman -Rsc freerdp;
-			fi
+			fi;
 			break;;
 		Skip )
 			break;;
-	esac
-done
+	esac;
+done;
 
-echo -e ${questionColor}Do you want packages from the Screencast category?${coloroff}
+echo -e ${questionColor}Do you want packages from the Screencast category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed  obs-studio ;
+			pacman -S --needed obs-studio;
 			if [ "$aurPackagesEnabled" = "true" ]; then
 				yaourt -S --needed peek;
 			fi
@@ -1113,18 +1121,18 @@ select yns in "Yes" "No" "Skip"; do
 			if [ "$uninstallPackagesEnabled" = "true" ]; then
 				pacman -Rsc obs-studio;
 				pacman -Rsc peek;
-			fi
+			fi;
 			break;;
 		Skip )
 			break;;
-	esac
-done
+	esac;
+done;
 
-echo -e ${questionColor}Do you want packages from the Security category?${coloroff}
+echo -e ${questionColor}Do you want packages from the Security category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed  clamav rkhunter rng-tools unhide ;
+			pacman -S --needed clamav rkhunter rng-tools unhide;
 			if [ "$aurPackagesEnabled" = "true" ]; then
 				yaourt -S --needed firejail-git;
 			fi
@@ -1136,53 +1144,53 @@ select yns in "Yes" "No" "Skip"; do
 				pacman -Rsc rng-tools;
 				pacman -Rsc unhide;
 				pacman -Rsc firejail-git;
-			fi
+			fi;
 			break;;
 		Skip )
 			break;;
-	esac
-done
+	esac;
+done;
 
-echo -e ${questionColor}Do you want packages from the Tor category?${coloroff}
+echo -e ${questionColor}Do you want packages from the Tor category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed  tor torsocks arm;
+			pacman -S --needed tor torsocks arm;
 			break;;
 		No )
 			if [ "$uninstallPackagesEnabled" = "true" ]; then
 				pacman -Rsc tor;
 				pacman -Rsc torsocks;
 				pacman -Rsc arm;
-			fi
+			fi;
 			break;;
 		Skip )
 			break;;
-	esac
-done
+	esac;
+done;
 
-echo -e ${questionColor}Do you want packages from the Torrenting category?${coloroff}
+echo -e ${questionColor}Do you want packages from the Torrenting category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed  transmission-cli transmission-gtk;
+			pacman -S --needed transmission-cli transmission-gtk;
 			break;;
 		No )
 			if [ "$uninstallPackagesEnabled" = "true" ]; then
 				pacman -Rsc transmission-cli;
 				pacman -Rsc transmission-gtk;
-			fi
+			fi;
 			break;;
 		Skip )
 			break;;
-	esac
-done
+	esac;
+done;
 
-echo -e ${questionColor}Do you want packages from the Utility category?${coloroff}
+echo -e ${questionColor}Do you want packages from the Utility category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed  whois mtr vdpauinfo stress iotop expac wavemon tree iperf3 ;
+			pacman -S --needed whois mtr vdpauinfo stress iotop expac wavemon tree iperf3;
 			if [ "$aurPackagesEnabled" = "true" ]; then
 				yaourt -S --needed lostfiles;
 			fi
@@ -1199,18 +1207,18 @@ select yns in "Yes" "No" "Skip"; do
 				pacman -Rsc tree;
 				pacman -Rsc iperf3;
 				pacman -Rsc lostfiles;
-			fi
+			fi;
 			break;;
 		Skip )
 			break;;
-	esac
-done
+	esac;
+done;
 
-echo -e ${questionColor}Do you want packages from the Virtualization libvirt category?${coloroff}
+echo -e ${questionColor}Do you want packages from the Virtualization libvirt category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed  libvirt virt-manager qemu ebtables;
+			pacman -S --needed libvirt virt-manager qemu ebtables;
 			break;;
 		No )
 			if [ "$uninstallPackagesEnabled" = "true" ]; then
@@ -1218,18 +1226,18 @@ select yns in "Yes" "No" "Skip"; do
 				pacman -Rsc virt-manager;
 				pacman -Rsc qemu;
 				pacman -Rsc ebtables;
-			fi
+			fi;
 			break;;
 		Skip )
 			break;;
-	esac
-done
+	esac;
+done;
 
-echo -e ${questionColor}Do you want packages from the Virtualization VirtualBox category?${coloroff}
+echo -e ${questionColor}Do you want packages from the Virtualization VirtualBox category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed  virtualbox virtualbox-guest-iso virtualbox-host-dkms linux-headers;
+			pacman -S --needed virtualbox virtualbox-guest-iso virtualbox-host-dkms linux-headers;
 			break;;
 		No )
 			if [ "$uninstallPackagesEnabled" = "true" ]; then
@@ -1237,18 +1245,18 @@ select yns in "Yes" "No" "Skip"; do
 				pacman -Rsc virtualbox-guest-iso;
 				pacman -Rsc virtualbox-host-dkms;
 				pacman -Rsc linux-headers;
-			fi
+			fi;
 			break;;
 		Skip )
 			break;;
-	esac
-done
+	esac;
+done;
 
-echo -e ${questionColor}Do you want packages from the Wine category?${coloroff}
+echo -e ${questionColor}Do you want packages from the Wine category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed  winetricks wine-staging-nine wine-mono wine_gecko;
+			pacman -S --needed winetricks wine-staging-nine wine-mono wine_gecko;
 			break;;
 		No )
 			if [ "$uninstallPackagesEnabled" = "true" ]; then
@@ -1256,35 +1264,35 @@ select yns in "Yes" "No" "Skip"; do
 				pacman -Rsc wine-staging-nine;
 				pacman -Rsc wine-mono;
 				pacman -Rsc wine_gecko;
-			fi
+			fi;
 			break;;
 		Skip )
 			break;;
-	esac
-done
+	esac;
+done;
 
-echo -e ${questionColor}Do you want packages from the Yubikey category?${coloroff}
+echo -e ${questionColor}Do you want packages from the Yubikey category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed  yubikey-manager-qt yubikey-personalization-gui;
+			pacman -S --needed yubikey-manager-qt yubikey-personalization-gui;
 			break;;
 		No )
 			if [ "$uninstallPackagesEnabled" = "true" ]; then
 				pacman -Rsc yubikey-manager-qt;
 				pacman -Rsc yubikey-personalization-gui;
-			fi
+			fi;
 			break;;
 		Skip )
 			break;;
-	esac
-done
+	esac;
+done;
 
-echo -e ${questionColor}Do you want packages from the REMOVE category?${coloroff}
+echo -e ${questionColor}Do you want packages from the REMOVE category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed  pulseaudio-equalizer python-pip python2-pip qrencode terminus-font kexec-tools intel-opencl-runtime jdk7-openjdk jre7-openjdk jre7-openjdk-headless turbostat i7z s-nail vi tmon x264 acpi_call speedtest-cli doge alsa-utils cinnamon bc docbook-xsl eclipse-java libopenraw mousetweaks tcpdump gnome-vfs libgnome libbonoboui libgnomeui orbit2 libbonobo libsexy gstreamer0.10 gstreamer0.10-base gstreamer0.10-bad gstreamer0.10-bad-plugins gstreamer0.10-base-plugins gstreamer0.10-ffmpeg gtk-engines gradm boost openssh-askpass polkit-gnome pyalpm python-engineio python-socketio qt5-tools python2-gtkspellcheck python2-gmpy2 python-chardet python-lxml python-requests python-urllib3 x11-ssh-askpass xdg-user-dirs-gtk yasm xorg-xvidtune bridge-utils gtkspell libwnck3 licenses linux-docs nemo-python cryptboot flatabulous-theme-git lib32-at-spi2-atk lib32-colord lib32-flex lib32-json-glib lib32-libepoxy lib32-libgusb  lib32-libproxy lib32-libxkbcommon lib32-libxkbcommon-x11 libfilteraudio-git libstdc++5 netctl numix-themes-git perl-text-csv xorg-fonts-100dpi xorg-fonts-75dpi numix-themes dhcpcd dri3proto dri2proto xorg-server-devel gobject-introspection mint-cinnamon-themes pcmciautils vim vim-runtime xorg-server-xvfb xorg-server-xdmx xorg-server-xnest gom grilo-plugins libdmapsharing libftdi libmediaart lirc ncurses5-compat-libs libtinfo gputest android-studio android-ndk phonon-qt4 bluez-firmware bison gperf squashfs-tools perl-switch python2-virtualenv opus-tools vorbis-tools f2fs-tools jfsutils reiserfsprogs gpart nilfs-utils nxproxy xorg-server-xephyr imagemagick apache-ant pdfcrack pdf-decrypt clamav-unofficial-sigs clinfo virtualgl lib32-virtualgl shellcheck sloccount swftools arduino android-ndk android-studio repo gnome-shell-extension-refresh-wifi-git webkitgtk webkitgtk2 qtwebkit ccache gnome-shell-extension-battery-percentage-git gnome-video-effects lxc keepassx2 lxc yubikey-neo-manager grsec-common ipset pg2ipset modprobed-db powertop perf elfutils linux-headers linux-sc-docs linux-sc-headers gnome-shell-extension-caffeine-git paxd linux-pax-flags paxtest paxctl linux-sc gnome-encfs-manager libgee06 abs hardening-wrapper keepass multimc5-git vlc haveged gnome-shell-extension-dash-to-dock-git oh-my-zsh-git gnome-shell-extension-topicons-plus-git gnome-shell-extension-suspend-button-git gnome-shell-extension-mediaplayer-git neofetch-git sensei-raw-ctl-git pg2ipset-git syncthing-gtk pdfsam gnome-shell-extension-freon-git nano-syntax-highlighting-git radeontop-git networkmanager-openconnect networkmanager-pptp networkmanager-vpnc networkmanager-strongswan gnome-shell-extension-dash-to-panel-git gtk-engine-murrine xfce4-terminal arc-gtk-theme zsh prezto-git;
+			pacman -S --needed pulseaudio-equalizer python-pip python2-pip qrencode terminus-font kexec-tools intel-opencl-runtime jdk7-openjdk jre7-openjdk jre7-openjdk-headless turbostat i7z s-nail vi tmon x264 acpi_call speedtest-cli doge alsa-utils cinnamon bc docbook-xsl eclipse-java libopenraw mousetweaks tcpdump gnome-vfs libgnome libbonoboui libgnomeui orbit2 libbonobo libsexy gstreamer0.10 gstreamer0.10-base gstreamer0.10-bad gstreamer0.10-bad-plugins gstreamer0.10-base-plugins gstreamer0.10-ffmpeg gtk-engines gradm boost openssh-askpass polkit-gnome pyalpm python-engineio python-socketio qt5-tools python2-gtkspellcheck python2-gmpy2 python-chardet python-lxml python-requests python-urllib3 x11-ssh-askpass xdg-user-dirs-gtk yasm xorg-xvidtune bridge-utils gtkspell libwnck3 licenses linux-docs nemo-python cryptboot flatabulous-theme-git lib32-at-spi2-atk lib32-colord lib32-flex lib32-json-glib lib32-libepoxy lib32-libgusb lib32-libproxy lib32-libxkbcommon lib32-libxkbcommon-x11 libfilteraudio-git libstdc++5 netctl numix-themes-git perl-text-csv xorg-fonts-100dpi xorg-fonts-75dpi numix-themes dhcpcd dri3proto dri2proto xorg-server-devel gobject-introspection mint-cinnamon-themes pcmciautils vim vim-runtime xorg-server-xvfb xorg-server-xdmx xorg-server-xnest gom grilo-plugins libdmapsharing libftdi libmediaart lirc ncurses5-compat-libs libtinfo gputest android-studio android-ndk phonon-qt4 bluez-firmware bison gperf squashfs-tools perl-switch python2-virtualenv opus-tools vorbis-tools f2fs-tools jfsutils reiserfsprogs gpart nilfs-utils nxproxy xorg-server-xephyr imagemagick apache-ant pdfcrack pdf-decrypt clamav-unofficial-sigs clinfo virtualgl lib32-virtualgl shellcheck sloccount swftools arduino android-ndk android-studio repo gnome-shell-extension-refresh-wifi-git webkitgtk webkitgtk2 qtwebkit ccache gnome-shell-extension-battery-percentage-git gnome-video-effects lxc keepassx2 lxc yubikey-neo-manager grsec-common ipset pg2ipset modprobed-db powertop perf elfutils linux-headers linux-sc-docs linux-sc-headers gnome-shell-extension-caffeine-git paxd linux-pax-flags paxtest paxctl linux-sc gnome-encfs-manager libgee06 abs hardening-wrapper keepass multimc5-git vlc haveged gnome-shell-extension-dash-to-dock-git oh-my-zsh-git gnome-shell-extension-topicons-plus-git gnome-shell-extension-suspend-button-git gnome-shell-extension-mediaplayer-git neofetch-git sensei-raw-ctl-git pg2ipset-git syncthing-gtk pdfsam gnome-shell-extension-freon-git nano-syntax-highlighting-git radeontop-git networkmanager-openconnect networkmanager-pptp networkmanager-vpnc networkmanager-strongswan gnome-shell-extension-dash-to-panel-git gtk-engine-murrine xfce4-terminal arc-gtk-theme zsh prezto-git;
 			break;;
 		No )
 			if [ "$uninstallPackagesEnabled" = "true" ]; then
@@ -1484,33 +1492,17 @@ select yns in "Yes" "No" "Skip"; do
 				pacman -Rsc arc-gtk-theme;
 				pacman -Rsc zsh;
 				pacman -Rsc prezto-git;
-			fi
+			fi;
 			break;;
 		Skip )
 			break;;
-	esac
-done
-
-echo -e ${questionColor}Do you want packages from the REMOVE D category?${coloroff}
-select yns in "Yes" "No" "Skip"; do
-	case $yns in
-		Yes )
-			pacman -S --needed  yelp yelp-xsl;
-			break;;
-		No )
-			if [ "$uninstallPackagesEnabled" = "true" ]; then
-				pacman -Rsc yelp;
-				pacman -Rsc yelp-xsl;
-			fi
-			break;;
-		Skip )
-			break;;
-	esac
-done
+	esac;
+done;
 
 if [ "$aurPackagesEnabled" = "false" ]; then
 	echo -e ${infoColor}Here are all the AUR packages that were not installed some may not of been chosen${coloroff}
 	echo downgrade gnome-shell-extension-volume-mixer numix-circle-icon-theme-git numix-icon-theme-git jd-gui launch4j android-apktool dex2jar jd-gui sdat2img android-studio sirikali-git gocryptfs multimc5 opsu chromium-pepper-flash chromium-widevine filebot pithos-git peek firejail-git lostfiles ;
 fi
-pacman -Rns $(pacman -Qttdq)
-paccache -rk0
+
+pacman -Rns $(pacman -Qttdq);
+paccache -rk0;
