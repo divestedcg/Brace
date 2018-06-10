@@ -77,4 +77,4 @@ select yn in "Yes" "No"; do
 done
 
 
-echo "Applied the way better settings. Ensure brace is installed for the rest!";
+echo "Applied the supplemental changes";
