@@ -24,7 +24,7 @@ echo -e ${questionColor}Do you want packages from the Core category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install irqbalance nano htop screen p7zip pixz lm_sensors parallel screenfetch;
+			yum install --skip-broken irqbalance nano htop screen p7zip pixz lm_sensors parallel screenfetch;
 			break;;
 		No )
 			yum remove irqbalance nano htop screen p7zip pixz lm_sensors parallel screenfetch;
@@ -38,7 +38,7 @@ echo -e ${questionColor}Do you want packages from the Frameworks category?${colo
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install java-1.8.0-openjdk;
+			yum install --skip-broken java-1.8.0-openjdk;
 			break;;
 		No )
 			yum remove java-1.8.0-openjdk;
@@ -52,7 +52,7 @@ echo -e ${questionColor}Do you want packages from the Base category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install @multimedia aspell aspell-en gnome-terminal-nautilus gnome-tweak-tool dconf-editor numix-icon-theme-circle seahorse;
+			yum install --skip-broken @multimedia aspell aspell-en gnome-terminal-nautilus gnome-tweak-tool dconf-editor numix-icon-theme-circle seahorse;
 			break;;
 		No )
 			yum remove @multimedia aspell aspell-en gnome-terminal-nautilus gnome-tweak-tool dconf-editor numix-icon-theme-circle seahorse;
@@ -66,7 +66,7 @@ echo -e ${questionColor}Do you want packages from the HW Compute Acceleration ca
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install clinfo mesa-libOpenCL beignet pocl;
+			yum install --skip-broken clinfo mesa-libOpenCL beignet pocl;
 			break;;
 		No )
 			yum remove clinfo mesa-libOpenCL beignet pocl;
@@ -80,7 +80,7 @@ echo -e ${questionColor}Do you want packages from the HW Video Acceleration cate
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install libva-utils vdpauinfo mesa-dri-drivers libva-intel-driver libvdpau-va-gl gstreamer1-vaapi;
+			yum install --skip-broken libva-utils vdpauinfo mesa-dri-drivers libva-intel-driver libvdpau-va-gl gstreamer1-vaapi;
 			break;;
 		No )
 			yum remove libva-utils vdpauinfo mesa-dri-drivers libva-intel-driver libvdpau-va-gl gstreamer1-vaapi;
@@ -94,7 +94,7 @@ echo -e ${questionColor}Do you want packages from the Fonts category?${coloroff}
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install adobe-source-code-pro-fonts mozilla-fira-mono-fonts mozilla-fira-sans-fonts google-droid-sans-fonts google-droid-sans-mono-fonts google-droid-serif-fonts;
+			yum install --skip-broken adobe-source-code-pro-fonts mozilla-fira-mono-fonts mozilla-fira-sans-fonts google-droid-sans-fonts google-droid-sans-mono-fonts google-droid-serif-fonts;
 			break;;
 		No )
 			yum remove adobe-source-code-pro-fonts mozilla-fira-mono-fonts mozilla-fira-sans-fonts google-droid-sans-fonts google-droid-sans-mono-fonts google-droid-serif-fonts;
@@ -108,7 +108,7 @@ echo -e ${questionColor}Do you want packages from the Audio Manipulation categor
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install audacity;
+			yum install --skip-broken audacity;
 			break;;
 		No )
 			yum remove audacity;
@@ -122,7 +122,7 @@ echo -e ${questionColor}Do you want packages from the Audit category?${coloroff}
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install lynis checksec;
+			yum install --skip-broken lynis checksec;
 			break;;
 		No )
 			yum remove lynis checksec;
@@ -136,7 +136,7 @@ echo -e ${questionColor}Do you want packages from the Backup category?${coloroff
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install borgbackup;
+			yum install --skip-broken borgbackup;
 			break;;
 		No )
 			yum remove borgbackup;
@@ -150,7 +150,7 @@ echo -e ${questionColor}Do you want packages from the Communication category?${c
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install evolution;
+			yum install --skip-broken evolution;
 			break;;
 		No )
 			yum remove evolution;
@@ -164,7 +164,7 @@ echo -e ${questionColor}Do you want packages from the Communication Realtime cat
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install polari mumble;
+			yum install --skip-broken polari mumble;
 			break;;
 		No )
 			yum remove polari mumble;
@@ -178,7 +178,7 @@ echo -e ${questionColor}Do you want packages from the Development category?${col
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install java-1.8.0-openjdk-devel gitg proguard bless sqlitebrowser fedpkg @development-tools;
+			yum install --skip-broken java-1.8.0-openjdk-devel gitg proguard bless sqlitebrowser fedpkg @development-tools;
 			break;;
 		No )
 			yum remove java-1.8.0-openjdk-devel gitg proguard bless sqlitebrowser fedpkg @development-tools;
@@ -192,7 +192,7 @@ echo -e ${questionColor}Do you want packages from the Development Android catego
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install android-tools;
+			yum install --skip-broken android-tools;
 			break;;
 		No )
 			yum remove android-tools;
@@ -206,7 +206,7 @@ echo -e ${questionColor}Do you want packages from the Disks category?${coloroff}
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install testdisk smartmontools mediawriter hdparm;
+			yum install --skip-broken testdisk smartmontools mediawriter hdparm;
 			break;;
 		No )
 			yum remove testdisk smartmontools mediawriter hdparm;
@@ -220,7 +220,7 @@ echo -e ${questionColor}Do you want packages from the Documents category?${color
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install libreoffice meld pdfmod;
+			yum install --skip-broken libreoffice meld pdfmod;
 			break;;
 		No )
 			yum remove libreoffice meld pdfmod;
@@ -234,7 +234,7 @@ echo -e ${questionColor}Do you want packages from the File Encryption category?$
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install ecryptfs-utils encfs;
+			yum install --skip-broken ecryptfs-utils encfs;
 			break;;
 		No )
 			yum remove ecryptfs-utils encfs;
@@ -248,7 +248,7 @@ echo -e ${questionColor}Do you want packages from the File Syncing category?${co
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install syncthing;
+			yum install --skip-broken syncthing;
 			break;;
 		No )
 			yum remove syncthing;
@@ -262,7 +262,7 @@ echo -e ${questionColor}Do you want packages from the Games - Tiny category?${co
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install quadrapassel gnome-2048 gnome-mines aisleriot;
+			yum install --skip-broken quadrapassel gnome-2048 gnome-mines aisleriot;
 			break;;
 		No )
 			yum remove quadrapassel gnome-2048 gnome-mines aisleriot;
@@ -276,7 +276,7 @@ echo -e ${questionColor}Do you want packages from the Hacking category?${colorof
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install aircrack-ng nmap wireshark-gtk;
+			yum install --skip-broken aircrack-ng nmap wireshark-gtk;
 			break;;
 		No )
 			yum remove aircrack-ng nmap wireshark-gtk;
@@ -290,7 +290,7 @@ echo -e ${questionColor}Do you want packages from the Image Manipulation categor
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install gimp inkscape darktable pitivi jpegoptim optipng;
+			yum install --skip-broken gimp inkscape darktable pitivi jpegoptim optipng;
 			break;;
 		No )
 			yum remove gimp inkscape darktable pitivi jpegoptim optipng;
@@ -304,7 +304,7 @@ echo -e ${questionColor}Do you want packages from the Internet category?${coloro
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install firefox mozilla-https-everywhere mozilla-ublock-origin liferea;
+			yum install --skip-broken firefox mozilla-https-everywhere mozilla-ublock-origin liferea;
 			break;;
 		No )
 			yum remove firefox mozilla-https-everywhere mozilla-ublock-origin liferea;
@@ -318,7 +318,7 @@ echo -e ${questionColor}Do you want packages from the Maps category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install viking;
+			yum install --skip-broken viking;
 			break;;
 		No )
 			yum remove viking;
@@ -332,7 +332,7 @@ echo -e ${questionColor}Do you want packages from the Media Management category?
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install picard soundconverter sound-juicer;
+			yum install --skip-broken picard soundconverter sound-juicer;
 			break;;
 		No )
 			yum remove picard soundconverter sound-juicer;
@@ -346,7 +346,7 @@ echo -e ${questionColor}Do you want packages from the Media Management Books cat
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install calibre;
+			yum install --skip-broken calibre;
 			break;;
 		No )
 			yum remove calibre;
@@ -360,7 +360,7 @@ echo -e ${questionColor}Do you want packages from the Media category?${coloroff}
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install lollypop youtube-dl;
+			yum install --skip-broken lollypop youtube-dl;
 			break;;
 		No )
 			yum remove lollypop youtube-dl;
@@ -374,7 +374,7 @@ echo -e ${questionColor}Do you want packages from the Passwords category?${color
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install keepassxc pwgen;
+			yum install --skip-broken keepassxc pwgen;
 			break;;
 		No )
 			yum remove keepassxc pwgen;
@@ -388,7 +388,7 @@ echo -e ${questionColor}Do you want packages from the Privacy category?${colorof
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install bleachbit srm;
+			yum install --skip-broken bleachbit srm;
 			break;;
 		No )
 			yum remove bleachbit srm;
@@ -402,7 +402,7 @@ echo -e ${questionColor}Do you want packages from the Security category?${coloro
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install clamav clamav-data-empty clamav-update clamtk unhide chkrootkit firewall-config;
+			yum install --skip-broken clamav clamav-data-empty clamav-update clamtk unhide chkrootkit firewall-config;
 			break;;
 		No )
 			yum remove clamav clamav-data-empty clamav-update clamtk unhide chkrootkit firewall-config;
@@ -416,7 +416,7 @@ echo -e ${questionColor}Do you want packages from the Tor category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install tor torsocks tor-arm onionshare torbrowser-launcher;
+			yum install --skip-broken tor torsocks tor-arm onionshare torbrowser-launcher;
 			break;;
 		No )
 			yum remove tor torsocks tor-arm onionshare torbrowser-launcher;
@@ -430,7 +430,7 @@ echo -e ${questionColor}Do you want packages from the Torrenting category?${colo
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install transmission;
+			yum install --skip-broken transmission;
 			break;;
 		No )
 			yum remove transmission;
@@ -444,7 +444,7 @@ echo -e ${questionColor}Do you want packages from the Utility category?${colorof
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install whois mtr stress iotop wavemon tree pv iperf3 bmon powertop ncdu;
+			yum install --skip-broken whois mtr stress iotop wavemon tree pv iperf3 bmon powertop ncdu;
 			break;;
 		No )
 			yum remove whois mtr stress iotop wavemon tree pv iperf3 bmon powertop ncdu;
@@ -458,7 +458,7 @@ echo -e ${questionColor}Do you want packages from the Wine category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install winetricks wine;
+			yum install --skip-broken winetricks wine;
 			break;;
 		No )
 			yum remove winetricks wine;
@@ -472,7 +472,7 @@ echo -e ${questionColor}Do you want packages from the Yubikey category?${colorof
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install yubikey-personalization-gui;
+			yum install --skip-broken yubikey-personalization-gui;
 			break;;
 		No )
 			yum remove yubikey-personalization-gui;
