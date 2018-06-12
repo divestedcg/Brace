@@ -1,6 +1,6 @@
 Name: brace
-Version: 1.8
-Release: 5
+Version: 1.9
+Release: 1
 Summary: Increases privacy/security through various configs.
 License: GPLv3+
 BuildArch: noarch
@@ -29,6 +29,7 @@ install -Dm644 00-gnome_defaults %{buildroot}/etc/dconf/db/local.d/00-brace-gnom
 install -Dm755 helpers.sh %{buildroot}/etc/profile.d/helpers.sh
 install -Dm755 brace-supplemental-changes.sh %{buildroot}/usr/bin/brace-supplemental-changes
 install -Dm755 brace-fedora-enable-auto-updates.sh %{buildroot}/usr/bin/brace-enable-auto-updates
+install -Dm755 brace-fedora-enable-rpmfusion.sh %{buildroot}/usr/bin/brace-enable-rpmfusion
 install -Dm755 brace-fedora-installer.sh %{buildroot}/usr/bin/brace-installer
 install -Dm755 brace-fedora-installer-base.sh %{buildroot}/usr/bin/brace-installer-base
 install -Dm755 brace-fedora-remover.sh %{buildroot}/usr/bin/brace-remover
@@ -47,6 +48,7 @@ sh user.js.sh %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/all-br
 /etc/profile.d/helpers.sh
 /usr/bin/brace-supplemental-changes
 /usr/bin/brace-enable-auto-updates
+/usr/bin/brace-enable-rpmfusion
 /usr/bin/brace-installer
 /usr/bin/brace-installer-base
 /usr/bin/brace-remover
