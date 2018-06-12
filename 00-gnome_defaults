@@ -145,6 +145,10 @@ statusbar=false
 sidebar=false
 image-gallery=false
 
+[org/gnome/liferea]
+disable-javascript=true
+do-not-track=true
+
 [org/gnome/Lollypop]
 save-state=true
 network-access=false

@@ -62,6 +62,34 @@ select yns in "Yes" "No" "Skip"; do
 	esac;
 done;
 
+echo -e ${questionColor}Do you want packages from the HW Compute Acceleration category?${coloroff};
+select yns in "Yes" "No" "Skip"; do
+	case $yns in
+		Yes )
+			yum install clinfo mesa-libOpenCL beignet pocl;
+			break;;
+		No )
+			yum remove clinfo mesa-libOpenCL beignet pocl;
+			break;;
+		Skip )
+			break;;
+	esac;
+done;
+
+echo -e ${questionColor}Do you want packages from the HW Video Acceleration category?${coloroff};
+select yns in "Yes" "No" "Skip"; do
+	case $yns in
+		Yes )
+			yum install libva-utils vdpauinfo mesa-dri-drivers libva-intel-driver libvdpau-va-gl gstreamer1-vaapi;
+			break;;
+		No )
+			yum remove libva-utils vdpauinfo mesa-dri-drivers libva-intel-driver libvdpau-va-gl gstreamer1-vaapi;
+			break;;
+		Skip )
+			break;;
+	esac;
+done;
+
 echo -e ${questionColor}Do you want packages from the Fonts category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
@@ -276,10 +304,10 @@ echo -e ${questionColor}Do you want packages from the Internet category?${coloro
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install firefox mozilla-https-everywhere mozilla-ublock-origin;
+			yum install firefox mozilla-https-everywhere mozilla-ublock-origin liferea;
 			break;;
 		No )
-			yum remove firefox mozilla-https-everywhere mozilla-ublock-origin;
+			yum remove firefox mozilla-https-everywhere mozilla-ublock-origin liferea;
 			break;;
 		Skip )
 			break;;
@@ -416,10 +444,10 @@ echo -e ${questionColor}Do you want packages from the Utility category?${colorof
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install whois mtr vdpauinfo stress iotop wavemon tree pv iperf3 bmon powertop ncdu;
+			yum install whois mtr stress iotop wavemon tree pv iperf3 bmon powertop ncdu;
 			break;;
 		No )
-			yum remove whois mtr vdpauinfo stress iotop wavemon tree pv iperf3 bmon powertop ncdu;
+			yum remove whois mtr stress iotop wavemon tree pv iperf3 bmon powertop ncdu;
 			break;;
 		Skip )
 			break;;

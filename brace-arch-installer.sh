@@ -839,11 +839,12 @@ echo -e ${questionColor}Do you want packages from the Internet category?${coloro
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed chromium firefox;
+			pacman -S --needed chromium firefox liferea;
 			break;;
 		No )
 			pacman -Rsc chromium;
 			pacman -Rsc firefox;
+			pacman -Rsc liferea;
 			break;;
 		Skip )
 			break;;
