@@ -454,6 +454,20 @@ select yns in "Yes" "No" "Skip"; do
 	esac;
 done;
 
+echo -e ${questionColor}Do you want packages from the Virtualization category?${coloroff};
+select yns in "Yes" "No" "Skip"; do
+	case $yns in
+		Yes )
+			yum install --skip-broken virt-manager;
+			break;;
+		No )
+			yum remove virt-manager;
+			break;;
+		Skip )
+			break;;
+	esac;
+done;
+
 echo -e ${questionColor}Do you want packages from the Wine category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
