@@ -374,10 +374,10 @@ echo -e ${questionColor}Do you want packages from the Passwords category?${color
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install --skip-broken keepassxc pwgen;
+			yum install --skip-broken keepassxc pwgen u2f-hidraw-policy;
 			break;;
 		No )
-			yum remove keepassxc pwgen;
+			yum remove keepassxc pwgen u2f-hidraw-policy;
 			break;;
 		Skip )
 			break;;

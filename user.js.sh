@@ -66,4 +66,5 @@ echo 'pref("browser.reader.detectedFirstArticle", true);' >> $userjs;
 echo 'pref("network.negotiate-auth.trusted-uris", "");' >> $userjs;
 ##Security
 echo 'pref("javascript.options.shared_memory", false);' >> $userjs;
+echo 'pref("security.webauth.u2f", true);' >> $userjs;
 echo "//END OF BRACE EXTRAS" >> $userjs;
