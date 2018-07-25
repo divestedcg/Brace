@@ -24,10 +24,10 @@ echo -e ${questionColor}Do you want packages from the Core category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install --skip-broken irqbalance nano htop screen p7zip pixz lm_sensors parallel screenfetch;
+			yum install --skip-broken irqbalance nano htop screen p7zip pixz lm_sensors parallel screenfetch ripgrep;
 			break;;
 		No )
-			yum remove irqbalance nano htop screen p7zip pixz lm_sensors parallel screenfetch;
+			yum remove irqbalance nano htop screen p7zip pixz lm_sensors parallel screenfetch ripgrep;
 			break;;
 		Skip )
 			break;;

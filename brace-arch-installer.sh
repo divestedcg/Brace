@@ -38,7 +38,7 @@ echo -e ${questionColor}Do you want packages from the Core category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed irqbalance git openssh nano htop wget screen zip p7zip unrar pixz pigz lm_sensors dialog crda android-udev parallel screenfetch;
+			pacman -S --needed irqbalance git openssh nano htop wget screen zip p7zip unrar pixz pigz lm_sensors dialog crda android-udev parallel screenfetch ripgrep;
 			if [ "$aurPackagesEnabled" = "true" ]; then
 				yaourt -S --needed downgrade;
 			fi
@@ -62,6 +62,7 @@ select yns in "Yes" "No" "Skip"; do
 			pacman -Rsc android-udev;
 			pacman -Rsc parallel;
 			pacman -Rsc screenfetch;
+			pacman -Rsc ripgrep;
 			pacman -Rsc downgrade;
 			break;;
 		Skip )
