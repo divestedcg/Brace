@@ -1,15 +1,23 @@
+[org/gnome/desktop/applications/terminal]
+exec='gnome-terminal'
+
 [org/cinnamon]
+desktop-effects=false
+enable-app-monitoring=false
 workspace-osd-duration=200
 
 [org/cinnamon/desktop/interface]
 clock-use-24h=false
 clock-show-seconds=true
 clock-show-date=true
+enable-animations=false
 
 [org/cinnamon/desktop/keybindings/media-keys]
 screensaver=['<Super>l', 'XF86ScreenSaver']
 
 [org/cinnamon/desktop/media-handling]
+automount-open=false
+automount=false
 autorun-never=true
 
 [org/cinnamon/desktop/notifications]
@@ -17,16 +25,36 @@ remove-old=true
 
 [org/cinnamon/desktop/privacy]
 recent-files-max-age=-1
+remove-old-temp-files=true
+old-files-age=uint32 1
+remove-old-trash-files=true
 
 [org/cinnamon/desktop/screensaver]
-lock-delay=uint32 15
+lock-delay=uint32 30
+lock-enabled=true
+user-switch-enabled=true
+show-notifications=false
 
 [org/cinnamon/desktop/session]
 idle-delay=uint32 600
 
+[org/cinnamon/desktop/thumbnail-cache]
+maximum-age=7
+
+[org/cinnamon/desktop/thumbnailers]
+disable-all=true
+
+[org/cinnamon/desktop/wm/preferences]
+button-layout=':minimize,maximize,close'
+num-workspaces=8
+
 [org/cinnamon/muffin]
+attach-modal-dialogs=false
 unredirect-fullscreen-windows=true
 workspace-cycle=true
+
+[org/cinnamon/settings-daemon/peripherals/keyboard]
+numlock-state='on'
 
 [org/cinnamon/settings-daemon/peripherals/touchpad]
 natural-scroll=false
@@ -42,6 +70,10 @@ lid-close-battery-action='suspend'
 sleep-inactive-ac-timeout=0
 sleep-display-ac=600
 sleep-display-battery=600
+
+[org/cinnamon/settings-daemon/plugins/xsettings]
+antialiasing='rgba'
+hinting='full'
 
 [org/nemo/preferences]
 click-double-parent-folder=false
