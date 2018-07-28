@@ -37,6 +37,7 @@ preview-sound='never'
 show-icon-text='never'
 enable-delete='true'
 always-use-location-entry=true
+show-advanced-permissions=true
 
 [org/mata/caja/icon-view]
 default-zoom-level='standard'

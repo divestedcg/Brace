@@ -49,7 +49,7 @@ active-plugins=['docinfo', 'findinfiles', 'git', 'sort', 'spell', 'filebrowser',
 include-icc-profile=false
 
 [org/gnome/nautilus/preferences]
-executable-text-activation='display'
+executable-text-activation='ask'
 default-folder-viewer='icon-view'
 always-use-location-entry=true
 show-delete-permanently=true
@@ -85,6 +85,8 @@ exec='gnome-terminal'
 [org/gnome/desktop/screensaver]
 lock-delay=uint32 30
 show-full-name-in-top-bar=false
+lock-enabled=true
+user-switch-enabled=true
 
 [org/gnome/desktop/peripherals/touchpad]
 natural-scroll=false
@@ -129,6 +131,9 @@ show-desktop-icons=false
 statusbar=false
 sidebar=false
 image-gallery=false
+
+[org/gnome/Totem]
+repeat=true
 
 [org/gnome/terminal/legacy/profiles:]
 default='b1dcc9dd-5262-4d8d-a863-c897e6d979b9'
