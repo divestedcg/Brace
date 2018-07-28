@@ -10,6 +10,7 @@ fi;
 
 if [ -d "/usr/share/icons/Numix-Circle" ]; then
 	gsettings set org.gnome.desktop.interface icon-theme 'Numix-Circle';
+	gsettings set org.cinnamon.desktop.interface icon-theme 'Numix-Circle';
 	gsettings set org.mate.desktop.interface icon-theme 'Numix-Circle';
 fi;
 
@@ -71,13 +72,17 @@ select yn in "Yes" "No"; do
 	case $yn in
 		Yes )
 			gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark';
-			#gsettings set org.mate.desktop.interface gtk-theme 'BlackMATE';
-			gsettings set org.mate.desktop.interface gtk-theme 'Adapta-Nokto-Eta';
+			gsettings set org.cinnamon.theme name 'Mint-Y-Dark';
+			gsettings set org.cinnamon.desktop.interface gtk-theme 'Mint-Y-Dark';
+			gsettings set org.cinnamon.desktop.wm.preferences theme 'Mint-Y-Dark';
+			gsettings set org.mate.desktop.interface gtk-theme 'BlackMATE';
 			break;;
 		No )
 			gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita';
-			#gsettings set org.mate.desktop.interface gtk-theme 'BlueMenta';
-			gsettings set org.mate.desktop.interface gtk-theme 'Adapta-Eta';
+			gsettings set org.cinnamon.theme name 'Mint-Y';
+			gsettings set org.cinnamon.desktop.interface gtk-theme 'Mint-Y';
+			gsettings set org.cinnamon.desktop.wm.preferences theme 'Mint-Y';
+			gsettings set org.mate.desktop.interface gtk-theme 'BlueMenta';
 			break;;
 	esac
 done
