@@ -11,7 +11,7 @@ Compatibility
 Contents
 --------
 Installed
-	00-gnome_defaults			= GNOME: change default settings
+	00-gnome_defaults			= GNOME/MATE: change default settings
 	21-disable-connectivity-check.conf	= NetworkManager: disable connectivity checking
 	30-mac-randomization.conf		= NetworkManager: enable MAC address randomization
 	60-restrict.conf			= kernel: restrict dmesg and ptrace

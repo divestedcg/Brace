@@ -52,10 +52,10 @@ echo -e ${questionColor}Do you want packages from the Base category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install --skip-broken @multimedia aspell aspell-en gnome-terminal-nautilus gnome-tweak-tool dconf-editor numix-icon-theme-circle seahorse;
+			yum install --skip-broken @multimedia aspell aspell-en gnome-terminal-nautilus gnome-tweak-tool dconf-editor numix-icon-theme-circle adapta-gtk-theme seahorse;
 			break;;
 		No )
-			yum remove @multimedia aspell aspell-en gnome-terminal-nautilus gnome-tweak-tool dconf-editor numix-icon-theme-circle seahorse;
+			yum remove @multimedia aspell aspell-en gnome-terminal-nautilus gnome-tweak-tool dconf-editor numix-icon-theme-circle adapta-gtk-theme seahorse;
 			break;;
 		Skip )
 			break;;
@@ -164,10 +164,10 @@ echo -e ${questionColor}Do you want packages from the Communication Realtime cat
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install --skip-broken polari mumble;
+			yum install --skip-broken hexchat mumble;
 			break;;
 		No )
-			yum remove polari mumble;
+			yum remove hexchat mumble;
 			break;;
 		Skip )
 			break;;

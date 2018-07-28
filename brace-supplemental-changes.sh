@@ -5,14 +5,16 @@
 if [ -d "/usr/share/fonts/adobe-source-code-pro" ]; then
 	gsettings set org.gnome.builder.editor font-name 'Source Code Pro 11';
 	gsettings set org.gnome.desktop.interface monospace-font-name 'Source Code Pro 11';
+	gsettings set org.mate.desktop.interface monospace-font-name 'Source Code Pro 11';
 fi;
 
 if [ -d "/usr/share/icons/Numix-Circle" ]; then
 	gsettings set org.gnome.desktop.interface icon-theme 'Numix-Circle';
+	gsettings set org.mate.desktop.interface icon-theme 'Numix-Circle';
 fi;
 
 #Night Light
-echo "Do you want Night Light enabled?";
+echo "Do you want GNOME Night Light enabled?";
 select yn in "Yes" "No"; do
 	case $yn in
 		Yes )
@@ -24,7 +26,7 @@ select yn in "Yes" "No"; do
 	esac
 done
 
-#Power
+#Power #TODO: MATE
 echo "Do you want auto suspend enabled?";
 select yn in "Yes" "No"; do
 	case $yn in
@@ -69,9 +71,13 @@ select yn in "Yes" "No"; do
 	case $yn in
 		Yes )
 			gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark';
+			#gsettings set org.mate.desktop.interface gtk-theme 'BlackMATE';
+			gsettings set org.mate.desktop.interface gtk-theme 'Adapta-Nokto-Eta';
 			break;;
 		No )
 			gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita';
+			#gsettings set org.mate.desktop.interface gtk-theme 'BlueMenta';
+			gsettings set org.mate.desktop.interface gtk-theme 'Adapta-Eta';
 			break;;
 	esac
 done
