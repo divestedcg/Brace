@@ -52,10 +52,10 @@ echo -e ${questionColor}Do you want packages from the Base category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install --skip-broken @multimedia aspell aspell-en gnome-terminal-nautilus gnome-tweak-tool dconf-editor numix-icon-theme-circle adapta-gtk-theme seahorse;
+			yum install --skip-broken @multimedia aspell aspell-en gnome-terminal-nautilus gnome-tweak-tool dconf-editor numix-icon-theme-circle seahorse;
 			break;;
 		No )
-			yum remove @multimedia aspell aspell-en gnome-terminal-nautilus gnome-tweak-tool dconf-editor numix-icon-theme-circle adapta-gtk-theme seahorse;
+			yum remove @multimedia aspell aspell-en gnome-terminal-nautilus gnome-tweak-tool dconf-editor numix-icon-theme-circle seahorse;
 			break;;
 		Skip )
 			break;;

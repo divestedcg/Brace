@@ -1,13 +1,49 @@
-[org/mate/power-manager]
-idle-dim-ac=true
-button-power='interactive'
-button-lid-ac='suspend'
-button-suspend='suspend'
-button-lid-battery='suspend'
+[org/mate/atril]
+override-restrictions=true
 
-[org/mate/settings-daemon/plugins/media-keys]
-screemsaver='<Mod4>l'
-home='<Mod4>e'
+[org/mata/caja/icon-view]
+default-zoom-level='standard'
+
+[org/mate/caja/preferences]
+show-image-thumbnails='never'
+preview-sound='never'
+show-icon-text='never'
+enable-delete='true'
+always-use-location-entry=true
+show-advanced-permissions=true
+
+[org/mate/desktop/background]
+show-desktop-icons=false
+
+[org/mate/desktop/font-rendering]
+antialiasing='rgba'
+hinting='full'
+
+[org/mate/desktop/media-handling]
+automount-open=false
+automount=false
+autorun-never=true
+
+[org/mate/desktop/peripherals/touchpad]
+natural-scroll=false
+disable-while-typing=false
+
+[org/mate/desktop/session]
+idle-delay=uint32 600
+
+[org/mate/desktop/thumbnail-cache]
+maximum-age=7
+
+[org/mate/desktop/thumbnailers]
+disable-all=true
+
+[org/mate/engrampa/general]
+encrypt-header=true
+
+[org/mate/eom/ui]
+statusbar=false
+sidebar=false
+image-collection=false
 
 [org/mate/marco/global-keybindings]
 run-command-terminal='<Primary><Alt>t'
@@ -17,9 +53,14 @@ maximize='<Mod4>Up'
 tile-to-side-w='<Mod4>Left'
 tile-to-side-e='<Mod4>Right'
 
-[org/mate/desktop/font-rendering]
-antialiasing='rgba'
-hinting='full'
+[org/mate/panel/objects/clock/prefs]
+show-temperature=false
+temperature-unit='Fahrenheit'
+format='12-hour'
+speed-unit='mph'
+custom-format=''
+show-seconds=true
+show-weather=false
 
 [org/mate/pluma]
 active-plugins=['docinfo', 'findinfiles', 'git', 'sort', 'spell', 'filebrowser', 'colorpicker', 'time', 'terminal']
@@ -31,64 +72,23 @@ statusbar-visible=true
 display-right-margin=false
 bracket-matching=true
 
-[org/mate/caja/preferences]
-show-image-thumbnails='never'
-preview-sound='never'
-show-icon-text='never'
-enable-delete='true'
-always-use-location-entry=true
-show-advanced-permissions=true
-
-[org/mata/caja/icon-view]
-default-zoom-level='standard'
-
-[org/mate/atril]
-override-restrictions=true
-
-[org/mate/engrampa/general]
-encrypt-header=true
-
-[org/mate/panel/objects/clock/prefs]
-show-temperature=false
-temperature-unit='Fahrenheit'
-format='12-hour'
-speed-unit='mph'
-custom-format=''
-show-seconds=true
-show-weather=false
+[org/mate/power-manager]
+idle-dim-ac=true
+button-power='interactive'
+button-lid-ac='suspend'
+button-suspend='suspend'
+button-lid-battery='suspend'
 
 [org/mate/notification-daemon]
 popup-location='top_right'
 theme='coco'
 
-[org/mate/desktop/media-handling]
-automount-open=false
-automount=false
-autorun-never=true
-
 [org/mate/screensaver]
 mode='blank-only'
 
-[org/mate/desktop/peripherals/touchpad]
-natural-scroll=false
-disable-while-typing=false
-
-[org/mate/desktop/thumbnail-cache]
-maximum-age=7
-
-[org/mate/desktop/session]
-idle-delay=uint32 600
-
-[org/mate/desktop/thumbnailers]
-disable-all=true
-
-[org/mate/desktop/background]
-show-desktop-icons=false
-
-[org/mate/eom/ui]
-statusbar=false
-sidebar=false
-image-collection=false
+[org/mate/settings-daemon/plugins/media-keys]
+screemsaver='<Mod4>l'
+home='<Mod4>e'
 
 [org/mate/terminal/profiles/default]
 default-show-menubar=false

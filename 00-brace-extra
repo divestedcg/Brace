@@ -1,9 +1,17 @@
-[system/proxy]
-mode='none'
+[apps/seahorse]
+server-auto-retrieve=false
+server-auto-publish=false
+
+[apps/telepathy-logger]
+enabled=false
 
 [ca/desrt/dconf-editor]
 show-warning=false
 behaviour='always-confirm-implicit'
+
+[desktop/gnome/crypto/pgp]
+encrypt-to-self=true
+ascii-armor=true
 
 [org/gnome/builder]
 night-mode=true
@@ -16,13 +24,14 @@ highlight-matching-brackets=true
 style-scheme-name='solarized-dark'
 wrap-text=true
 
-[desktop/gnome/crypto/pgp]
-encrypt-to-self=true
-ascii-armor=true
-
-[org/gnome/system/location]
-max-accuracy-level='city'
-enabled=false
+[org/gnome/evolution/mail]
+composer-request-receipt=true
+composer-send-html=false
+composer-show-bcc=true
+composer-show-from-override=true
+composer-show-reply-to=true
+image-loading-policy='never'
+search-gravatar-for-photo=false
 
 [org/gnome/liferea]
 disable-javascript=true
@@ -41,18 +50,9 @@ checkin-foursquare-privacy='followers'
 [org/gnome/nm-applet]
 suppress-wireless-networks-available=true
 
-[apps/telepathy-logger]
+[org/gnome/system/location]
+max-accuracy-level='city'
 enabled=false
 
-[apps/seahorse]
-server-auto-retrieve=false
-server-auto-publish=false
-
-[org/gnome/evolution/mail]
-composer-request-receipt=true
-composer-send-html=false
-composer-show-bcc=true
-composer-show-from-override=true
-composer-show-reply-to=true
-image-loading-policy='never'
-search-gravatar-for-photo=false
+[system/proxy]
+mode='none'

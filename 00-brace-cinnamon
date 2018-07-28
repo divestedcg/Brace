@@ -1,19 +1,5 @@
-[org/cinnamon/settings-daemon/plugins/power]
-button-power='interactive'
-idle-brightness=10
-sleep-inactive-battery-timeout=0
-lid-close-ac-action='suspend'
-lid-close-battery-action='suspend'
-sleep-inactive-ac-timeout=0
-sleep-display-ac=600
-sleep-display-battery=600
-
 [org/cinnamon]
 workspace-osd-duration=200
-
-[org/cinnamon/muffin]
-unredirect-fullscreen-windows=true
-workspace-cycle=true
 
 [org/cinnamon/desktop/interface]
 clock-use-24h=false
@@ -26,22 +12,36 @@ screensaver=['<Super>l', 'XF86ScreenSaver']
 [org/cinnamon/desktop/media-handling]
 autorun-never=true
 
-[org/cinnamon/desktop/screensaver]
-lock-delay=uint32 15
-
 [org/cinnamon/desktop/notifications]
 remove-old=true
+
+[org/cinnamon/desktop/privacy]
+recent-files-max-age=-1
+
+[org/cinnamon/desktop/screensaver]
+lock-delay=uint32 15
 
 [org/cinnamon/desktop/session]
 idle-delay=uint32 600
 
-[org/cinnamon/desktop/privacy]
-recent-files-max-age=-1
+[org/cinnamon/muffin]
+unredirect-fullscreen-windows=true
+workspace-cycle=true
 
 [org/cinnamon/settings-daemon/peripherals/touchpad]
 natural-scroll=false
 disable-while-typing=false
 tap-to-click=false
+
+[org/cinnamon/settings-daemon/plugins/power]
+button-power='interactive'
+idle-brightness=10
+sleep-inactive-battery-timeout=0
+lid-close-ac-action='suspend'
+lid-close-battery-action='suspend'
+sleep-inactive-ac-timeout=0
+sleep-display-ac=600
+sleep-display-battery=600
 
 [org/nemo/preferences]
 click-double-parent-folder=false
