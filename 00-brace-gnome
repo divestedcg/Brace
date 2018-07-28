@@ -1,18 +1,8 @@
-[system/proxy]
-mode='none'
-
 [org/gnome/settings-daemon/plugins/power]
 idle-dim=true
 sleep-inactive-ac-timeout=2700
 idle-brightness=10
 sleep-inactive-battery-timeout=1200
-
-[org/mate/power-manager]
-idle-dim-ac=true
-button-power='interactive'
-button-lid-ac='suspend'
-button-suspend='suspend'
-button-lid-battery='suspend'
 
 [org/gnome/settings-daemon/plugins/color]
 night-light-schedule-automatic=false
@@ -21,43 +11,17 @@ night-light-schedule-automatic=false
 custom-keybindings=['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']
 home='<Super>e'
 
-[org/mate/settings-daemon/plugins/media-keys]
-home='<Mod4>e'
-
 [org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0]
 binding='<Primary><Alt>t'
 command='gnome-terminal'
 name='Launch terminal'
 
-[org/mate/marco/global-keybindings]
-run-command-terminal='<Primary><Alt>t'
-
-[org/mate/marco/window-keybindings]
-maximize='<Mod4>Up'
-tile-to-side-w='<Mod4>Left'
-tile-to-side-e='<Mod4>Right'
-
 [org/gnome/settings-daemon/plugins/xsettings]
-antialiasing='rgba'
-hinting='full'
-
-[org/mate/desktop/font-rendering]
 antialiasing='rgba'
 hinting='full'
 
 [org/gnome/settings-daemon/peripherals/keyboard]
 numlock-state='on'
-
-[org/gnome/builder]
-night-mode=true
-
-[org/gnome/builder/editor]
-show-map=false
-highlight-current-line=true
-auto-hide-map=true
-highlight-matching-brackets=true
-style-scheme-name='solarized-dark'
-wrap-text=true
 
 [org/gnome/shell]
 favorite-apps=['org.gnome.Nautilus.desktop', 'firefox.desktop', 'evolution.desktop', 'org.gnome.Evolution.desktop', 'libreoffice-startcenter.desktop', 'org.keepassxc.KeePassXC.desktop', 'org.gnome.Lollypop.desktop', 'yelp.desktop']
@@ -81,16 +45,6 @@ use-default-font=true
 [org/gnome/gedit/plugins]
 active-plugins=['docinfo', 'findinfiles', 'git', 'sort', 'spell', 'filebrowser', 'colorpicker', 'time', 'terminal']
 
-[org/mate/pluma]
-active-plugins=['docinfo', 'findinfiles', 'git', 'sort', 'spell', 'filebrowser', 'colorpicker', 'time', 'terminal']
-color-scheme='solarized-dark'
-display-line-numbers=true
-highlight-current-line=true
-toolbar-visible=false
-statusbar-visible=true
-display-right-margin=false
-bracket-matching=true
-
 [org/gnome/gnome-screenshot]
 include-icc-profile=false
 
@@ -101,33 +55,13 @@ always-use-location-entry=true
 show-delete-permanently=true
 show-create-link=true
 
-[org/mate/caja/preferences]
-show-image-thumbnails='never'
-preview-sound='never'
-show-icon-text='never'
-enable-delete='true'
-always-use-location-entry=true
-
 [org/gnome/nautilus/icon-view]
 default-zoom-level='standard'
-
-[org/mata/caja/icon-view]
-default-zoom-level='standard'
-
-[org/gnome/system/location]
-max-accuracy-level='city'
-enabled=false
 
 [org/gnome/evince]
 override-restrictions=true
 
-[org/mate/atril]
-override-restrictions=true
-
 [org/gnome/file-roller/general]
-encrypt-header=true
-
-[org/mate/engrampa/general]
 encrypt-header=true
 
 [org/gnome/desktop/interface]
@@ -137,28 +71,10 @@ clock-show-seconds=true
 enable-animations=false
 clock-show-date=true
 
-[org/mate/panel/objects/clock/prefs]
-show-temperature=false
-temperature-unit='Fahrenheit'
-format='12-hour'
-speed-unit='mph'
-custom-format=''
-show-seconds=true
-show-weather=false
-
 [org/gnome/desktop/notifications]
 show-in-lock-screen=false
 
-[org/mate/notification-daemon]
-popup-location='top_right'
-theme='coco'
-
 [org/gnome/desktop/media-handling]
-automount-open=false
-automount=false
-autorun-never=true
-
-[org/mate/desktop/media-handling]
 automount-open=false
 automount=false
 autorun-never=true
@@ -170,14 +86,7 @@ exec='gnome-terminal'
 lock-delay=uint32 30
 show-full-name-in-top-bar=false
 
-[org/mate/screensaver]
-mode='blank-only'
-
 [org/gnome/desktop/peripherals/touchpad]
-natural-scroll=false
-disable-while-typing=false
-
-[org/mate/desktop/peripherals/touchpad]
 natural-scroll=false
 disable-while-typing=false
 
@@ -190,13 +99,7 @@ disabled=['gnome-calculator.desktop', 'org.gnome.Calculator.desktop', 'org.gnome
 [org/gnome/desktop/thumbnail-cache]
 maximum-age=7
 
-[org/mate/desktop/thumbnail-cache]
-maximum-age=7
-
 [org/gnome/desktop/session]
-idle-delay=uint32 600
-
-[org/mate/desktop/session]
 idle-delay=uint32 600
 
 [org/gnome/desktop/privacy]
@@ -212,9 +115,6 @@ show-full-name-in-top-bar=false
 [org/gnome/desktop/thumbnailers]
 disable-all=true
 
-[org/mate/desktop/thumbnailers]
-disable-all=true
-
 [org/gnome/desktop/wm/preferences]
 button-layout='appmenu:minimize,maximize,close'
 num-workspaces=8
@@ -225,27 +125,10 @@ toggle-fullscreen=['<Alt>F11']
 [org/gnome/desktop/background]
 show-desktop-icons=false
 
-[org/mate/desktop/background]
-show-desktop-icons=false
-
 [org/gnome/eog/ui]
 statusbar=false
 sidebar=false
 image-gallery=false
-
-[org/mate/eom/ui]
-statusbar=false
-sidebar=false
-image-collection=false
-
-[org/gnome/liferea]
-disable-javascript=true
-do-not-track=true
-
-[org/gnome/Lollypop]
-save-state=true
-network-access=false
-artist-artwork=false
 
 [org/gnome/terminal/legacy/profiles:]
 default='b1dcc9dd-5262-4d8d-a863-c897e6d979b9'
@@ -262,32 +145,3 @@ use-theme-background=false
 bold-color-same-as-fg=true
 bold-color='#c5c8c6'
 background-color='#1d1f21'
-
-[org/mate/terminal/profiles/default]
-default-show-menubar=false
-foreground-color='#c5c8c6'
-bold-color='#c5c8c6'
-background-color='#1d1f21'
-palette=['#1d1f21', '#cc342b', '#198844', '#fba922', '#3971ed', '#a36ac7', '#3971ed', '#c5c8c6', '#969896', '#cc342b', '#198844', '#fba922', '#3971ed', '#a36ac7', '#3971ed', '#ffffff']
-
-[org/nemo/preferences]
-click-double-parent-folder=false
-close-device-view-on-device-eject=true
-context-menus-show-all-actions=true
-default-folder-viewer='compact-view'
-show-advanced-permissions=true
-show-full-path-titles=true
-show-home-icon-toolbar=true
-show-image-thumbnails='never'
-show-location-entry=true
-show-new-folder-icon-toolbar=true
-show-open-in-terminal-toolbar=true
-show-reload-icon-toolbar=true
-start-with-dual-pane=true
-
-[apps/telepathy-logger]
-enabled=false
-
-[apps/seahorse]
-server-auto-retrieve=false
-server-auto-publish=false

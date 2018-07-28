@@ -1,0 +1,14 @@
+[org/nemo/preferences]
+click-double-parent-folder=false
+close-device-view-on-device-eject=true
+context-menus-show-all-actions=true
+default-folder-viewer='compact-view'
+show-advanced-permissions=true
+show-full-path-titles=true
+show-home-icon-toolbar=true
+show-image-thumbnails='never'
+show-location-entry=true
+show-new-folder-icon-toolbar=true
+show-open-in-terminal-toolbar=true
+show-reload-icon-toolbar=true
+start-with-dual-pane=true

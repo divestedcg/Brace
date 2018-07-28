@@ -1,7 +1,7 @@
 # Maintainer: Tad <tad@spotco.us>
 pkgname=brace
 pkgver=2.0
-pkgrel=1
+pkgrel=2
 pkgdesc="Increases privacy/security through various configs. Firefox hardening credit: @pyllyukko"
 arch=('any')
 license=('GPLv3')
@@ -12,7 +12,10 @@ optdepends=('arch-audit: check for insecure packages'
 	'rkhunter: scan for rootkits'
 	'scfw: seal your ports'
 	'firefox: browser')
-source=('00-gnome_defaults'
+source=('00-brace-gnome'
+	'00-brace-mate'
+	'00-brace-cinnamon'
+	'00-brace-extra'
 	'21-disable-connectivity-check.conf'
 	'30-mac-randomization.conf'
 	'60-restrict.conf'
@@ -25,7 +28,10 @@ source=('00-gnome_defaults'
 	'helpers.sh'
 	'user.js.sh'
 	'https://raw.githubusercontent.com/pyllyukko/user.js/master/user.js')
-sha512sums=('1610b6d9ef088c638c639a7e50435ae2f4b50b01d16a75fbb76227cb41c41ecc6d0af38205a6e89bc48f182579b36aff8b2dbc3968513f503ee2ad07589b35eb'
+sha512sums=('1ba81251cd6d484754bfbfa51787d49b8b744f0c1c986f78f758f8a5545330a056558da1389e51b3519a5ffe90f4a44930b3b20bff49d493d2d1dc191b825ca6'
+            '28dd0d35e029921547158ad9e75b2b9f25efff9e52f7685ac892307540ee2225432268e1ed57458dc054d7a4128e02e024d89e84c53cb68561e8087baaa5011f'
+            '6e5ae5fd9d278423d404ece70a9e66bf299f76ecc17e1b0ca2d8b55e1e2f0d6c970cec9bb7cd841ffe4f288c7d34fd01cb5df5aafc29f2678b6d06ca7bcfe8f3'
+            '40061dd53d5c65dd460ecd7e36fda9cc0ee2e5c05aa39ad2ec70fcd140952ea2d139afcf3525dfc1d3b7066ef9a3a08cbfe24954fc639f40959ca75f1aa046ce'
             '8ec47524685a59ed1ca45d5ba5334248cc505c07d71f1340d77a20e96e647b32c7a10cac1f1a2e32b0477a53c7ce14c57e839057b2b4fe7191932001c5679364'
             'cd03db723b789e9084cc2474edb3bf3f878cc5a751b437f69dd6f06a8015070e7c3f6750b581c15524e869f9fd8dd7db7eff9dad0650930e04387f5a36b4510e'
             'a6aceec23666bc7788c43d649e89ed5da0eaf637671e456d12a6de593fff459601a7d4a2bd1ae7707260faea80cfba382f8a785bfecfffaec51b6e1be259ac2f'
@@ -46,7 +52,10 @@ build() {
 
 package() {
   cd "$srcdir"
-  install -Dm644 00-gnome_defaults "$pkgdir"/etc/dconf/db/local.d/00-brace-gnome
+  install -Dm644 00-brace-gnome "$pkgdir"/etc/dconf/db/local.d/00-brace-gnome
+  install -Dm644 00-brace-mate "$pkgdir"/etc/dconf/db/local.d/00-brace-mate
+  install -Dm644 00-brace-cinnamon "$pkgdir"/etc/dconf/db/local.d/00-brace-cinnamon
+  install -Dm644 00-brace-extra "$pkgdir"/etc/dconf/db/local.d/00-brace-extra
   install -Dm755 helpers.sh "$pkgdir"/etc/profile.d/helpers.sh
   install -Dm755 brace-supplemental-changes.sh "$pkgdir"/usr/bin/brace-supplemental-changes
   install -Dm755 brace-arch-installer.sh "$pkgdir"/usr/bin/brace-installer
