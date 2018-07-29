@@ -2,7 +2,7 @@
 override-restrictions=true
 
 [org/mata/caja/icon-view]
-default-zoom-level='standard'
+default-zoom-level='small'
 
 [org/mate/caja/preferences]
 show-image-thumbnails='never'
@@ -61,6 +61,9 @@ speed-unit='mph'
 custom-format=''
 show-seconds=true
 show-weather=false
+
+[org/mate/panel/objects/workspace-switcher/prefs]
+wrap-workspaces=true
 
 [org/mate/pluma]
 active-plugins=['docinfo', 'findinfiles', 'git', 'sort', 'spell', 'filebrowser', 'colorpicker', 'time', 'terminal']
