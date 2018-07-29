@@ -12,6 +12,8 @@ packages=$packages" brasero";
 packages=$packages" empathy";
 #Workstation (GNOME)
 packages=$packages" rhythmbox gnome-documents gnome-weather";
+#Cinnamon
+packages=$packages" xawtv";
 #KDE
 packages=$packages" kmahjongg konqueror amarok k3b";
 #LXDE

@@ -9,7 +9,7 @@ workspace-osd-duration=200
 [org/cinnamon/desktop/interface]
 clock-use-24h=false
 clock-show-seconds=true
-clock-show-date=true
+clock-show-date=false
 enable-animations=false
 
 [org/cinnamon/desktop/keybindings/media-keys]

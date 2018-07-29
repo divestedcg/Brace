@@ -52,10 +52,24 @@ echo -e ${questionColor}Do you want packages from the Base category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install --skip-broken @multimedia aspell aspell-en gnome-terminal-nautilus gnome-tweak-tool dconf-editor numix-icon-theme-circle seahorse;
+			yum install --skip-broken @multimedia aspell aspell-en dconf-editor numix-icon-theme-circle seahorse;
 			break;;
 		No )
-			yum remove @multimedia aspell aspell-en gnome-terminal-nautilus gnome-tweak-tool dconf-editor numix-icon-theme-circle seahorse;
+			yum remove @multimedia aspell aspell-en dconf-editor numix-icon-theme-circle seahorse;
+			break;;
+		Skip )
+			break;;
+	esac;
+done;
+
+echo -e ${questionColor}Do you want packages from the GNOME Extras category?${coloroff};
+select yns in "Yes" "No" "Skip"; do
+	case $yns in
+		Yes )
+			yum install --skip-broken gnome-terminal-nautilus gnome-tweak-tool;
+			break;;
+		No )
+			yum remove gnome-terminal-nautilus gnome-tweak-tool;
 			break;;
 		Skip )
 			break;;
@@ -140,20 +154,6 @@ select yns in "Yes" "No" "Skip"; do
 			break;;
 		No )
 			yum remove borgbackup;
-			break;;
-		Skip )
-			break;;
-	esac;
-done;
-
-echo -e ${questionColor}Do you want packages from the Communication category?${coloroff};
-select yns in "Yes" "No" "Skip"; do
-	case $yns in
-		Yes )
-			yum install --skip-broken evolution;
-			break;;
-		No )
-			yum remove evolution;
 			break;;
 		Skip )
 			break;;
