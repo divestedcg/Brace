@@ -75,6 +75,9 @@ sleep-display-battery=600
 antialiasing='rgba'
 hinting='full'
 
+[org/nemo/desktop]
+desktop-layout='false::false'
+
 [org/nemo/preferences]
 click-double-parent-folder=false
 close-device-view-on-device-eject=true

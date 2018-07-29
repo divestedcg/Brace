@@ -19,7 +19,7 @@ packages=$packages" gnumeric abiword midori xpad pidgin asunder lxmusic clipit";
 #LXQT
 packages=$packages" yarock qlipper quassel qupzilla";
 #MATE
-packages=$packages" xfburn gnote filezilla hexchat exaile *compiz*";
+packages=$packages" xfburn gnote filezilla hexchat exaile compiz emerald";
 #XFCE
 packages=$packages" clipman xfburn geany pidgin asunder pragha abiword gnumeric xfdashboard";
 
