@@ -90,7 +90,7 @@ theme='coco'
 mode='blank-only'
 
 [org/mate/settings-daemon/plugins/media-keys]
-screemsaver='<Mod4>l'
+screensaver='<Mod4>l'
 home='<Mod4>e'
 
 [org/mate/terminal/profiles/default]
