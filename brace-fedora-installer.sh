@@ -178,10 +178,10 @@ echo -e ${questionColor}Do you want packages from the Development category?${col
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install --skip-broken java-1.8.0-openjdk-devel gitg proguard bless sqlitebrowser fedpkg @development-tools;
+			yum install --skip-broken java-1.8.0-openjdk-devel gitg proguard ghex sqlitebrowser fedpkg @development-tools;
 			break;;
 		No )
-			yum remove java-1.8.0-openjdk-devel gitg proguard bless sqlitebrowser fedpkg @development-tools;
+			yum remove java-1.8.0-openjdk-devel gitg proguard ghex sqlitebrowser fedpkg @development-tools;
 			break;;
 		Skip )
 			break;;

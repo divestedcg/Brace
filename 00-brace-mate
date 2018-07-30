@@ -47,6 +47,7 @@ image-collection=false
 
 [org/mate/marco/global-keybindings]
 run-command-terminal='<Primary><Alt>t'
+panel-main-menu='<Mod4>s'
 
 [org/mate/marco/window-keybindings]
 maximize='<Mod4>Up'
@@ -92,6 +93,7 @@ mode='blank-only'
 [org/mate/settings-daemon/plugins/media-keys]
 screensaver='<Mod4>l'
 home='<Mod4>e'
+search='<Mod4>q'
 
 [org/mate/terminal/profiles/default]
 default-show-menubar=false

@@ -576,7 +576,7 @@ echo -e ${questionColor}Do you want packages from the Development category?${col
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed gitg asp intellij-idea-community-edition proguard bless sqlitebrowser;
+			pacman -S --needed gitg asp intellij-idea-community-edition proguard ghex sqlitebrowser;
 			if [ "$aurPackagesEnabled" = "true" ]; then
 				yaourt -S --needed jd-gui launch4j;
 			fi
@@ -586,7 +586,7 @@ select yns in "Yes" "No" "Skip"; do
 			pacman -Rsc asp;
 			pacman -Rsc intellij-idea-community-edition;
 			pacman -Rsc proguard;
-			pacman -Rsc bless;
+			pacman -Rsc ghex;
 			pacman -Rsc sqlitebrowser;
 			pacman -Rsc jd-gui;
 			pacman -Rsc launch4j;
