@@ -45,6 +45,9 @@ statusbar=false
 sidebar=false
 image-collection=false
 
+[org/mate/marco/general]
+compositing-manager=false
+
 [org/mate/marco/global-keybindings]
 run-command-terminal='<Primary><Alt>t'
 panel-main-menu='<Mod4>s'
@@ -77,7 +80,8 @@ display-right-margin=false
 bracket-matching=true
 
 [org/mate/power-manager]
-idle-dim-ac=true
+idle-dim-ac=false
+idle-dim=false
 button-power='interactive'
 button-lid-ac='suspend'
 button-suspend='suspend'
