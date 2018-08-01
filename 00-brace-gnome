@@ -121,8 +121,8 @@ idle-brightness=10
 sleep-inactive-battery-timeout=1200
 
 [org/gnome/settings-daemon/plugins/xsettings]
-antialiasing='rgba'
-hinting='full'
+antialiasing='grayscale'
+hinting='slight'
 
 [org/gnome/shell]
 favorite-apps=['org.gnome.Nautilus.desktop', 'firefox.desktop', 'evolution.desktop', 'org.gnome.Evolution.desktop', 'libreoffice-startcenter.desktop', 'org.keepassxc.KeePassXC.desktop', 'org.gnome.Lollypop.desktop', 'yelp.desktop']

@@ -72,8 +72,8 @@ sleep-display-ac=600
 sleep-display-battery=600
 
 [org/cinnamon/settings-daemon/plugins/xsettings]
-antialiasing='rgba'
-hinting='full'
+antialiasing='grayscale'
+hinting='slight'
 
 [org/nemo/desktop]
 desktop-layout='false::false'

@@ -16,8 +16,8 @@ show-advanced-permissions=true
 show-desktop-icons=false
 
 [org/mate/desktop/font-rendering]
-antialiasing='rgba'
-hinting='full'
+antialiasing='grayscale'
+hinting='slight'
 
 [org/mate/desktop/media-handling]
 automount-open=false
