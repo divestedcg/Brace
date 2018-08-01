@@ -33,6 +33,9 @@ composer-show-reply-to=true
 image-loading-policy='never'
 search-gravatar-for-photo=false
 
+[org/gnome/Geary]
+compose-as-html=false
+
 [org/gnome/liferea]
 disable-javascript=true
 do-not-track=true

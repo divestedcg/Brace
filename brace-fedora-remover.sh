@@ -26,3 +26,8 @@ packages=$packages" xfburn gnote filezilla hexchat exaile compiz emerald";
 packages=$packages" clipman xfburn geany pidgin asunder pragha abiword gnumeric xfdashboard";
 
 yum remove $packages;
+
+if [ -f /usr/share/applications/mozilla-thunderbird.desktop ]; then
+	yum remove thunderbird;
+	yum install geary;
+fi;
