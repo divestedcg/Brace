@@ -76,6 +76,7 @@ select yn in "Yes" "No"; do
 			gsettings set org.cinnamon.desktop.interface gtk-theme 'Mint-Y-Dark';
 			gsettings set org.cinnamon.desktop.wm.preferences theme 'Mint-Y-Dark';
 			gsettings set org.mate.desktop.interface gtk-theme 'BlackMATE';
+			gsettings set org.mate.marco.general theme 'BlackMATE';
 			break;;
 		No )
 			gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita';
@@ -83,6 +84,7 @@ select yn in "Yes" "No"; do
 			gsettings set org.cinnamon.desktop.interface gtk-theme 'Mint-Y';
 			gsettings set org.cinnamon.desktop.wm.preferences theme 'Mint-Y';
 			gsettings set org.mate.desktop.interface gtk-theme 'BlueMenta';
+			gsettings set org.mate.marco.general theme 'BlueMenta';
 			break;;
 	esac
 done

@@ -1,8 +1,8 @@
 post_install() {
-  dconf update
+  if [ -f /usr/bin/dconf ]; then dconf update; fi;
 }
 
 post_remove() {
-  dconf update
+  if [ -f /usr/bin/dconf ]; then dconf update; fi;
 }
 

@@ -1,6 +1,6 @@
 Name: brace
 Version: 2.2
-Release: 5
+Release: 6
 Summary: Increases privacy/security through various configs.
 License: GPLv3+
 BuildArch: noarch
@@ -19,10 +19,10 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 - kernel: iwlwifi: enables link aggregation for increased performance
 
 %post
-dconf update
+if [ -f /usr/bin/dconf ]; then dconf update; fi;
 
 %postun
-dconf update
+if [ -f /usr/bin/dconf ]; then dconf update; fi;
 
 %install
 install -Dm644 00-brace-gnome %{buildroot}/etc/dconf/db/local.d/00-brace-gnome
