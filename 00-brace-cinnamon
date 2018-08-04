@@ -5,6 +5,7 @@ exec='gnome-terminal'
 desktop-effects=false
 enable-app-monitoring=false
 workspace-osd-duration=200
+workspace-expo-view-as-grid=true
 
 [org/cinnamon/desktop/interface]
 clock-use-24h=false
@@ -70,6 +71,7 @@ lid-close-battery-action='suspend'
 sleep-inactive-ac-timeout=0
 sleep-display-ac=600
 sleep-display-battery=600
+lock-on-suspend=true
 
 [org/cinnamon/settings-daemon/plugins/xsettings]
 antialiasing='grayscale'

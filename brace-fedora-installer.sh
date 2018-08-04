@@ -164,10 +164,24 @@ echo -e ${questionColor}Do you want packages from the Communication Realtime cat
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install --skip-broken hexchat mumble;
+			yum install --skip-broken hexchat mumble gajim;
 			break;;
 		No )
-			yum remove hexchat mumble;
+			yum remove hexchat mumble gajim;
+			break;;
+		Skip )
+			break;;
+	esac;
+done;
+
+echo -e ${questionColor}Do you want packages from the Cryptocurrency category?${coloroff};
+select yns in "Yes" "No" "Skip"; do
+	case $yns in
+		Yes )
+			yum install --skip-broken electrum;
+			break;;
+		No )
+			yum remove electrum;
 			break;;
 		Skip )
 			break;;
@@ -220,10 +234,10 @@ echo -e ${questionColor}Do you want packages from the Documents category?${color
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install --skip-broken libreoffice meld pdfmod;
+			yum install --skip-broken libreoffice meld pdfmod scribus;
 			break;;
 		No )
-			yum remove libreoffice meld pdfmod;
+			yum remove libreoffice meld pdfmod scribus;
 			break;;
 		Skip )
 			break;;
@@ -276,10 +290,10 @@ echo -e ${questionColor}Do you want packages from the Hacking category?${colorof
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install --skip-broken aircrack-ng nmap wireshark-gtk;
+			yum install --skip-broken aircrack-ng nmap wireshark-gtk pdfcrack;
 			break;;
 		No )
-			yum remove aircrack-ng nmap wireshark-gtk;
+			yum remove aircrack-ng nmap wireshark-gtk pdfcrack;
 			break;;
 		Skip )
 			break;;
@@ -374,10 +388,10 @@ echo -e ${questionColor}Do you want packages from the Passwords category?${color
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install --skip-broken keepassxc pwgen u2f-hidraw-policy;
+			yum install --skip-broken keepassxc pwgen diceware u2f-hidraw-policy pam-u2f pamu2fcfg ssss;
 			break;;
 		No )
-			yum remove keepassxc pwgen u2f-hidraw-policy;
+			yum remove keepassxc pwgen diceware u2f-hidraw-policy pam-u2f pamu2fcfg ssss;
 			break;;
 		Skip )
 			break;;
@@ -388,10 +402,10 @@ echo -e ${questionColor}Do you want packages from the Privacy category?${colorof
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install --skip-broken bleachbit srm;
+			yum install --skip-broken bleachbit srm wipe nwipe;
 			break;;
 		No )
-			yum remove bleachbit srm;
+			yum remove bleachbit srm wipe nwipe;
 			break;;
 		Skip )
 			break;;
@@ -402,10 +416,10 @@ echo -e ${questionColor}Do you want packages from the Security category?${coloro
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install --skip-broken clamav clamav-data-empty clamav-update clamtk unhide chkrootkit firewall-config;
+			yum install --skip-broken clamav clamav-data-empty clamav-update clamtk unhide chkrootkit firewall-config gtkhash;
 			break;;
 		No )
-			yum remove clamav clamav-data-empty clamav-update clamtk unhide chkrootkit firewall-config;
+			yum remove clamav clamav-data-empty clamav-update clamtk unhide chkrootkit firewall-config gtkhash;
 			break;;
 		Skip )
 			break;;

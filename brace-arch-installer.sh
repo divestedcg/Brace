@@ -561,11 +561,26 @@ echo -e ${questionColor}Do you want packages from the Communication Realtime cat
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed hexchat mumble;
+			pacman -S --needed hexchat mumble gajim;
 			break;;
 		No )
 			pacman -Rsc hexchat;
 			pacman -Rsc mumble;
+			pacman -Rsc gajim;
+			break;;
+		Skip )
+			break;;
+	esac;
+done;
+
+echo -e ${questionColor}Do you want packages from the Cryptocurrency category?${coloroff};
+select yns in "Yes" "No" "Skip"; do
+	case $yns in
+		Yes )
+			pacman -S --needed electrum;
+			break;;
+		No )
+			pacman -Rsc electrum;
 			break;;
 		Skip )
 			break;;
@@ -644,7 +659,7 @@ echo -e ${questionColor}Do you want packages from the Documents category?${color
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed libreoffice-fresh evince gedit meld pdfmod;
+			pacman -S --needed libreoffice-fresh evince gedit meld pdfmod scribus;
 			break;;
 		No )
 			pacman -Rsc libreoffice-fresh;
@@ -652,6 +667,7 @@ select yns in "Yes" "No" "Skip"; do
 			pacman -Rsc gedit;
 			pacman -Rsc meld;
 			pacman -Rsc pdfmod;
+			pacman -Rsc scribus;
 			break;;
 		Skip )
 			break;;
@@ -972,11 +988,11 @@ echo -e ${questionColor}Do you want packages from the Privacy category?${colorof
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed bleachbit srm;
+			pacman -S --needed bleachbit wipe;
 			break;;
 		No )
 			pacman -Rsc bleachbit;
-			pacman -Rsc srm;
+			pacman -Rsc wipe;
 			break;;
 		Skip )
 			break;;
