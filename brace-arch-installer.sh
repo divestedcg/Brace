@@ -637,7 +637,7 @@ echo -e ${questionColor}Do you want packages from the Disks category?${coloroff}
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed gnome-disk-utility baobab testdisk parted ntfs-3g dosfstools mtools exfat-utils smartmontools;
+			pacman -S --needed gnome-disk-utility baobab testdisk parted ntfs-3g dosfstools mtools exfat-utils smartmontools gnome-multi-writer;
 			break;;
 		No )
 			pacman -Rsc gnome-disk-utility;
@@ -649,6 +649,7 @@ select yns in "Yes" "No" "Skip"; do
 			pacman -Rsc mtools;
 			pacman -Rsc exfat-utils;
 			pacman -Rsc smartmontools;
+			pacman -Rsc gnome-multi-writer;
 			break;;
 		Skip )
 			break;;
@@ -727,12 +728,14 @@ echo -e ${questionColor}Do you want packages from the Games - Tiny category?${co
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed quadrapassel gnome-2048 gnome-mines aisleriot;
+			pacman -S --needed quadrapassel gnome-2048 gnome-mines gnome-chess gnome-sudoku aisleriot;
 			break;;
 		No )
 			pacman -Rsc quadrapassel;
 			pacman -Rsc gnome-2048;
 			pacman -Rsc gnome-mines;
+			pacman -Rsc gnome-chess;
+			pacman -Rsc gnome-sudoku;
 			pacman -Rsc aisleriot;
 			break;;
 		Skip )

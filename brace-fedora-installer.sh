@@ -52,10 +52,10 @@ echo -e ${questionColor}Do you want packages from the Base category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install --skip-broken @multimedia aspell aspell-en dconf-editor numix-icon-theme-circle arc-theme seahorse;
+			yum install --skip-broken @multimedia aspell aspell-en dconf-editor numix-icon-theme-circle arc-theme seahorse gtkhash;
 			break;;
 		No )
-			yum remove @multimedia aspell aspell-en dconf-editor numix-icon-theme-circle arc-theme seahorse;
+			yum remove @multimedia aspell aspell-en dconf-editor numix-icon-theme-circle arc-theme seahorse gtkhash;
 			break;;
 		Skip )
 			break;;
@@ -136,10 +136,10 @@ echo -e ${questionColor}Do you want packages from the Audit category?${coloroff}
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install --skip-broken lynis checksec;
+			yum install --skip-broken lynis checksec spectre-meltdown-checker;
 			break;;
 		No )
-			yum remove lynis checksec;
+			yum remove lynis checksec spectre-meltdown-checker;
 			break;;
 		Skip )
 			break;;
@@ -220,10 +220,10 @@ echo -e ${questionColor}Do you want packages from the Disks category?${coloroff}
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install --skip-broken testdisk smartmontools mediawriter hdparm;
+			yum install --skip-broken testdisk smartmontools mediawriter gnome-multi-writer hdparm nwipe;
 			break;;
 		No )
-			yum remove testdisk smartmontools mediawriter hdparm;
+			yum remove testdisk smartmontools mediawriter gnome-multi-writer hdparm nwipe;
 			break;;
 		Skip )
 			break;;
@@ -276,10 +276,10 @@ echo -e ${questionColor}Do you want packages from the Games - Tiny category?${co
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install --skip-broken quadrapassel gnome-2048 gnome-mines aisleriot;
+			yum install --skip-broken quadrapassel gnome-2048 gnome-mines gnome-chess gnome-sudoku aisleriot;
 			break;;
 		No )
-			yum remove quadrapassel gnome-2048 gnome-mines aisleriot;
+			yum remove quadrapassel gnome-2048 gnome-mines gnome-chess gnome-sudoku aisleriot;
 			break;;
 		Skip )
 			break;;
@@ -402,10 +402,10 @@ echo -e ${questionColor}Do you want packages from the Privacy category?${colorof
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install --skip-broken bleachbit srm wipe nwipe;
+			yum install --skip-broken bleachbit srm wipe;
 			break;;
 		No )
-			yum remove bleachbit srm wipe nwipe;
+			yum remove bleachbit srm wipe;
 			break;;
 		Skip )
 			break;;
@@ -416,10 +416,10 @@ echo -e ${questionColor}Do you want packages from the Security category?${coloro
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install --skip-broken clamav clamav-data-empty clamav-update clamtk unhide chkrootkit firewall-config gtkhash;
+			yum install --skip-broken clamav clamav-data-empty clamav-update clamtk unhide chkrootkit firewall-config;
 			break;;
 		No )
-			yum remove clamav clamav-data-empty clamav-update clamtk unhide chkrootkit firewall-config gtkhash;
+			yum remove clamav clamav-data-empty clamav-update clamtk unhide chkrootkit firewall-config;
 			break;;
 		Skip )
 			break;;
