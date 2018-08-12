@@ -1,6 +1,6 @@
 Name: brace
-Version: 2.2
-Release: 9
+Version: 2.3
+Release: 1
 Summary: Increases privacy/security through various configs.
 License: GPLv3+
 BuildArch: noarch
@@ -29,7 +29,7 @@ install -Dm644 00-brace-gnome %{buildroot}/etc/dconf/db/local.d/00-brace-gnome
 install -Dm644 00-brace-mate %{buildroot}/etc/dconf/db/local.d/00-brace-mate
 install -Dm644 00-brace-cinnamon %{buildroot}/etc/dconf/db/local.d/00-brace-cinnamon
 install -Dm644 00-brace-extra %{buildroot}/etc/dconf/db/local.d/00-brace-extra
-install -Dm755 helpers.sh %{buildroot}/etc/profile.d/helpers.sh
+install -Dm755 brace-helpers.sh %{buildroot}/etc/profile.d/brace-helpers.sh
 install -Dm755 brace-supplemental-changes.sh %{buildroot}/usr/bin/brace-supplemental-changes
 install -Dm755 brace-fedora-enable-auto-updates.sh %{buildroot}/usr/bin/brace-enable-auto-updates
 install -Dm755 brace-fedora-enable-rpmfusion.sh %{buildroot}/usr/bin/brace-enable-rpmfusion
@@ -51,7 +51,7 @@ sh user.js.sh %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/all-br
 /etc/dconf/db/local.d/00-brace-mate
 /etc/dconf/db/local.d/00-brace-cinnamon
 /etc/dconf/db/local.d/00-brace-extra
-/etc/profile.d/helpers.sh
+/etc/profile.d/brace-helpers.sh
 /usr/bin/brace-supplemental-changes
 /usr/bin/brace-enable-auto-updates
 /usr/bin/brace-enable-rpmfusion

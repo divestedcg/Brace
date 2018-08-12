@@ -1,7 +1,7 @@
 # Maintainer: Tad <tad@spotco.us>
 pkgname=brace
-pkgver=2.2
-pkgrel=9
+pkgver=2.3
+pkgrel=1
 pkgdesc="Increases privacy/security through various configs. Firefox hardening credit: @pyllyukko"
 arch=('any')
 license=('GPLv3')
@@ -25,7 +25,7 @@ source=('00-brace-gnome'
 	'brace-arch-installer.sh'
 	'iwlwifi.conf'
 	'dnu.service'
-	'helpers.sh'
+	'brace-helpers.sh'
 	'user.js.sh'
 	'https://raw.githubusercontent.com/pyllyukko/user.js/master/user.js')
 sha512sums=('0cef04c8d406a814d606af07aac655d0205b1da03673bc3a618949135e2c2d5b86d4a9ac2aa2fc0a79a855ba8eb1da0d51ff19aaa1658c99240b0e12f60237e8'
@@ -56,7 +56,7 @@ package() {
   install -Dm644 00-brace-mate "$pkgdir"/etc/dconf/db/local.d/00-brace-mate
   install -Dm644 00-brace-cinnamon "$pkgdir"/etc/dconf/db/local.d/00-brace-cinnamon
   install -Dm644 00-brace-extra "$pkgdir"/etc/dconf/db/local.d/00-brace-extra
-  install -Dm755 helpers.sh "$pkgdir"/etc/profile.d/helpers.sh
+  install -Dm755 brace-helpers.sh "$pkgdir"/etc/profile.d/brace-helpers.sh
   install -Dm755 brace-supplemental-changes.sh "$pkgdir"/usr/bin/brace-supplemental-changes
   install -Dm755 brace-arch-installer.sh "$pkgdir"/usr/bin/brace-installer
   install -Dm644 blacklist-dma.conf "$pkgdir"/usr/lib/modprobe.d/blacklist-dma.conf
