@@ -286,14 +286,28 @@ select yns in "Yes" "No" "Skip"; do
 	esac;
 done;
 
+echo -e ${questionColor}Do you want packages from the Headless category?${coloroff};
+select yns in "Yes" "No" "Skip"; do
+	case $yns in
+		Yes )
+			yum install --skip-broken @"Headless-Management";
+			break;;
+		No )
+			yum remove @"Headless-Management";
+			break;;
+		Skip )
+			break;;
+	esac;
+done;
+
 echo -e ${questionColor}Do you want packages from the Hacking category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install --skip-broken aircrack-ng nmap wireshark-gtk pdfcrack;
+			yum install --skip-broken @"Security Lab";
 			break;;
 		No )
-			yum remove aircrack-ng nmap wireshark-gtk pdfcrack;
+			yum remove @"Security Lab";
 			break;;
 		Skip )
 			break;;
@@ -304,10 +318,10 @@ echo -e ${questionColor}Do you want packages from the Image Manipulation categor
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install --skip-broken gimp inkscape darktable pitivi jpegoptim optipng;
+			yum install --skip-broken gimp gimpfx-foundry inkscape darktable pitivi jpegoptim optipng;
 			break;;
 		No )
-			yum remove gimp inkscape darktable pitivi jpegoptim optipng;
+			yum remove gimp gimpfx-foundry inkscape darktable pitivi jpegoptim optipng;
 			break;;
 		Skip )
 			break;;
@@ -430,10 +444,10 @@ echo -e ${questionColor}Do you want packages from the Tor category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install --skip-broken tor torsocks tor-arm onionshare torbrowser-launcher;
+			yum install --skip-broken tor obfs4 torsocks nyx onionshare torbrowser-launcher;
 			break;;
 		No )
-			yum remove tor torsocks tor-arm onionshare torbrowser-launcher;
+			yum remove tor obfs4 torsocks nyx onionshare torbrowser-launcher;
 			break;;
 		Skip )
 			break;;
@@ -472,10 +486,10 @@ echo -e ${questionColor}Do you want packages from the Virtualization category?${
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install --skip-broken virt-manager;
+			yum install --skip-broken @virtualization;
 			break;;
 		No )
-			yum remove virt-manager;
+			yum remove @virtualization;
 			break;;
 		Skip )
 			break;;
