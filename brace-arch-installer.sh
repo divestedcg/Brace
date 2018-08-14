@@ -859,11 +859,11 @@ echo -e ${questionColor}Do you want packages from the Internet category?${coloro
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed chromium firefox liferea;
+			pacman -S --needed firefox firefox-extension-https-everywhere liferea;
 			break;;
 		No )
-			pacman -Rsc chromium;
 			pacman -Rsc firefox;
+			pacman -Rsc firefox-extension-https-everywhere;
 			pacman -Rsc liferea;
 			break;;
 		Skip )
