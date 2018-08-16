@@ -286,6 +286,20 @@ select yns in "Yes" "No" "Skip"; do
 	esac;
 done;
 
+echo -e ${questionColor}Do you want packages from the Games - Misc category?${coloroff};
+select yns in "Yes" "No" "Skip"; do
+	case $yns in
+		Yes )
+			yum install --skip-broken neverball supertuxkart;
+			break;;
+		No )
+			yum remove neverball supertuxkart;
+			break;;
+		Skip )
+			break;;
+	esac;
+done;
+
 echo -e ${questionColor}Do you want packages from the Games - Sandbox category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
@@ -322,6 +336,20 @@ select yns in "Yes" "No" "Skip"; do
 			break;;
 		No )
 			yum remove 0ad wesnoth;
+			break;;
+		Skip )
+			break;;
+	esac;
+done;
+
+echo -e ${questionColor}Do you want packages from the Games - Emulators category?${coloroff};
+select yns in "Yes" "No" "Skip"; do
+	case $yns in
+		Yes )
+			yum install --skip-broken dolphin-emu pcsx;
+			break;;
+		No )
+			yum remove dolphin-emu pcsx;
 			break;;
 		Skip )
 			break;;

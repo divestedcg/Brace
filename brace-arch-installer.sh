@@ -106,43 +106,6 @@ select yns in "Yes" "No" "Skip"; do
 	esac;
 done;
 
-echo -e ${questionColor}Do you want packages from the Xorg Remove category?${coloroff};
-select yns in "Yes" "No" "Skip"; do
-	case $yns in
-		Yes )
-			pacman -S --needed xorg-iceauth xorg-luit xorg-server-xephyr xorg-sessreg xorg-smproxy xorg-x11perf xorg-xbacklight xorg-xcmsdb xorg-xcursorgen xorg-xdriinfo xorg-xev xorg-xgamma xorg-xkbevd xorg-xkbutils xorg-xkill xorg-xlsatoms xorg-xlsclients xorg-xpr xorg-xrefresh xorg-xsetroot xorg-xvinfo xorg-xwd xorg-xwininfo xorg-xwud;
-			break;;
-		No )
-			pacman -Rsc xorg-iceauth;
-			pacman -Rsc xorg-luit;
-			pacman -Rsc xorg-server-xephyr;
-			pacman -Rsc xorg-sessreg;
-			pacman -Rsc xorg-smproxy;
-			pacman -Rsc xorg-x11perf;
-			pacman -Rsc xorg-xbacklight;
-			pacman -Rsc xorg-xcmsdb;
-			pacman -Rsc xorg-xcursorgen;
-			pacman -Rsc xorg-xdriinfo;
-			pacman -Rsc xorg-xev;
-			pacman -Rsc xorg-xgamma;
-			pacman -Rsc xorg-xkbevd;
-			pacman -Rsc xorg-xkbutils;
-			pacman -Rsc xorg-xkill;
-			pacman -Rsc xorg-xlsatoms;
-			pacman -Rsc xorg-xlsclients;
-			pacman -Rsc xorg-xpr;
-			pacman -Rsc xorg-xrefresh;
-			pacman -Rsc xorg-xsetroot;
-			pacman -Rsc xorg-xvinfo;
-			pacman -Rsc xorg-xwd;
-			pacman -Rsc xorg-xwininfo;
-			pacman -Rsc xorg-xwud;
-			break;;
-		Skip )
-			break;;
-	esac;
-done;
-
 echo -e ${questionColor}Do you want packages from the Intel CPU Drivers category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
@@ -271,22 +234,6 @@ select yns in "Yes" "No" "Skip"; do
 done;
 
 echo -e ${questionColor}Do you want packages from the Gnome Extensions category?${coloroff};
-select yns in "Yes" "No" "Skip"; do
-	case $yns in
-		Yes )
-			if [ "$aurPackagesEnabled" = "true" ]; then
-				yaourt -S --needed gnome-shell-extension-volume-mixer;
-			fi
-			break;;
-		No )
-			pacman -Rsc gnome-shell-extension-volume-mixer;
-			break;;
-		Skip )
-			break;;
-	esac;
-done;
-
-echo -e ${questionColor}Do you want packages from the Gnome Extensions Extra category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
@@ -743,6 +690,21 @@ select yns in "Yes" "No" "Skip"; do
 	esac;
 done;
 
+echo -e ${questionColor}Do you want packages from the Games - Misc category?${coloroff};
+select yns in "Yes" "No" "Skip"; do
+	case $yns in
+		Yes )
+			pacman -S --needed neverball supertuxkart;
+			break;;
+		No )
+			pacman -Rsc neverball;
+			pacman -Rsc supertuxkart;
+			break;;
+		Skip )
+			break;;
+	esac;
+done;
+
 echo -e ${questionColor}Do you want packages from the Games - Sandbox category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
@@ -780,6 +742,22 @@ select yns in "Yes" "No" "Skip"; do
 		No )
 			pacman -Rsc 0ad;
 			pacman -Rsc wesnoth;
+			break;;
+		Skip )
+			break;;
+	esac;
+done;
+
+echo -e ${questionColor}Do you want packages from the Games - Emulators category?${coloroff};
+select yns in "Yes" "No" "Skip"; do
+	case $yns in
+		Yes )
+			pacman -S --needed dolphin-emu pcsx2 ppsspp;
+			break;;
+		No )
+			pacman -Rsc dolphin-emu;
+			pacman -Rsc pcsx2;
+			pacman -Rsc ppsspp;
 			break;;
 		Skip )
 			break;;
@@ -830,23 +808,6 @@ select yns in "Yes" "No" "Skip"; do
 			pacman -Rsc firefox;
 			pacman -Rsc firefox-extension-https-everywhere;
 			pacman -Rsc liferea;
-			break;;
-		Skip )
-			break;;
-	esac;
-done;
-
-echo -e ${questionColor}Do you want packages from the Proprietary Chromium Extensions category?${coloroff};
-select yns in "Yes" "No" "Skip"; do
-	case $yns in
-		Yes )
-			if [ "$aurPackagesEnabled" = "true" ]; then
-				yaourt -S --needed chromium-pepper-flash chromium-widevine;
-			fi
-			break;;
-		No )
-			pacman -Rsc chromium-pepper-flash;
-			pacman -Rsc chromium-widevine;
 			break;;
 		Skip )
 			break;;
@@ -1004,17 +965,14 @@ echo -e ${questionColor}Do you want packages from the Security category?${coloro
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed clamav rkhunter rng-tools unhide;
-			if [ "$aurPackagesEnabled" = "true" ]; then
-				yaourt -S --needed firejail-git;
-			fi
+			pacman -S --needed clamav rkhunter rng-tools unhide firejail;
 			break;;
 		No )
 			pacman -Rsc clamav;
 			pacman -Rsc rkhunter;
 			pacman -Rsc rng-tools;
 			pacman -Rsc unhide;
-			pacman -Rsc firejail-git;
+			pacman -Rsc firejail;
 			break;;
 		Skip )
 			break;;
@@ -1144,218 +1102,9 @@ select yns in "Yes" "No" "Skip"; do
 	esac;
 done;
 
-echo -e ${questionColor}Do you want packages from the REMOVE category?${coloroff};
-select yns in "Yes" "No" "Skip"; do
-	case $yns in
-		Yes )
-			pacman -S --needed pulseaudio-equalizer python-pip python2-pip qrencode terminus-font kexec-tools intel-opencl-runtime jdk7-openjdk jre7-openjdk jre7-openjdk-headless turbostat i7z s-nail vi tmon x264 acpi_call speedtest-cli doge alsa-utils cinnamon bc docbook-xsl eclipse-java libopenraw mousetweaks tcpdump gnome-vfs libgnome libbonoboui libgnomeui orbit2 libbonobo libsexy gstreamer0.10 gstreamer0.10-base gstreamer0.10-bad gstreamer0.10-bad-plugins gstreamer0.10-base-plugins gstreamer0.10-ffmpeg gtk-engines gradm boost openssh-askpass polkit-gnome pyalpm python-engineio python-socketio qt5-tools python2-gtkspellcheck python2-gmpy2 python-chardet python-lxml python-requests python-urllib3 x11-ssh-askpass xdg-user-dirs-gtk yasm xorg-xvidtune bridge-utils gtkspell libwnck3 licenses linux-docs nemo-python cryptboot flatabulous-theme-git lib32-at-spi2-atk lib32-colord lib32-flex lib32-json-glib lib32-libepoxy lib32-libgusb lib32-libproxy lib32-libxkbcommon lib32-libxkbcommon-x11 libfilteraudio-git libstdc++5 netctl numix-themes-git perl-text-csv xorg-fonts-100dpi xorg-fonts-75dpi numix-themes dhcpcd dri3proto dri2proto xorg-server-devel gobject-introspection mint-cinnamon-themes pcmciautils vim vim-runtime xorg-server-xvfb xorg-server-xdmx xorg-server-xnest gom grilo-plugins libdmapsharing libftdi libmediaart lirc ncurses5-compat-libs libtinfo gputest android-studio android-ndk phonon-qt4 bluez-firmware bison gperf squashfs-tools perl-switch python2-virtualenv opus-tools vorbis-tools f2fs-tools jfsutils reiserfsprogs gpart nilfs-utils nxproxy xorg-server-xephyr imagemagick apache-ant pdfcrack pdf-decrypt clamav-unofficial-sigs clinfo virtualgl lib32-virtualgl shellcheck sloccount swftools arduino android-ndk android-studio repo gnome-shell-extension-refresh-wifi-git webkitgtk webkitgtk2 qtwebkit ccache gnome-shell-extension-battery-percentage-git gnome-video-effects lxc keepassx2 lxc yubikey-neo-manager grsec-common ipset pg2ipset modprobed-db powertop perf elfutils linux-headers linux-sc-docs linux-sc-headers gnome-shell-extension-caffeine-git paxd linux-pax-flags paxtest paxctl linux-sc gnome-encfs-manager libgee06 abs hardening-wrapper keepass multimc5-git vlc haveged gnome-shell-extension-dash-to-dock-git oh-my-zsh-git gnome-shell-extension-topicons-plus-git gnome-shell-extension-suspend-button-git gnome-shell-extension-mediaplayer-git neofetch-git sensei-raw-ctl-git pg2ipset-git syncthing-gtk pdfsam gnome-shell-extension-freon-git nano-syntax-highlighting-git radeontop-git networkmanager-openconnect networkmanager-pptp networkmanager-vpnc networkmanager-strongswan gnome-shell-extension-dash-to-panel-git gtk-engine-murrine xfce4-terminal arc-gtk-theme zsh prezto-git;
-			break;;
-		No )
-			pacman -Rsc pulseaudio-equalizer;
-			pacman -Rsc python-pip;
-			pacman -Rsc python2-pip;
-			pacman -Rsc qrencode;
-			pacman -Rsc terminus-font;
-			pacman -Rsc kexec-tools;
-			pacman -Rsc intel-opencl-runtime;
-			pacman -Rsc jdk7-openjdk;
-			pacman -Rsc jre7-openjdk;
-			pacman -Rsc jre7-openjdk-headless;
-			pacman -Rsc turbostat;
-			pacman -Rsc i7z;
-			pacman -Rsc s-nail;
-			pacman -Rsc vi;
-			pacman -Rsc tmon;
-			pacman -Rsc x264;
-			pacman -Rsc acpi_call;
-			pacman -Rsc speedtest-cli;
-			pacman -Rsc doge;
-			pacman -Rsc alsa-utils;
-			pacman -Rsc cinnamon;
-			pacman -Rsc bc;
-			pacman -Rsc docbook-xsl;
-			pacman -Rsc eclipse-java;
-			pacman -Rsc libopenraw;
-			pacman -Rsc mousetweaks;
-			pacman -Rsc tcpdump;
-			pacman -Rsc gnome-vfs;
-			pacman -Rsc libgnome;
-			pacman -Rsc libbonoboui;
-			pacman -Rsc libgnomeui;
-			pacman -Rsc orbit2;
-			pacman -Rsc libbonobo;
-			pacman -Rsc libsexy;
-			pacman -Rsc gstreamer0.10;
-			pacman -Rsc gstreamer0.10-base;
-			pacman -Rsc gstreamer0.10-bad;
-			pacman -Rsc gstreamer0.10-bad-plugins;
-			pacman -Rsc gstreamer0.10-base-plugins;
-			pacman -Rsc gstreamer0.10-ffmpeg;
-			pacman -Rsc gtk-engines;
-			pacman -Rsc gradm;
-			pacman -Rsc boost;
-			pacman -Rsc openssh-askpass;
-			pacman -Rsc polkit-gnome;
-			pacman -Rsc pyalpm;
-			pacman -Rsc python-engineio;
-			pacman -Rsc python-socketio;
-			pacman -Rsc qt5-tools;
-			pacman -Rsc python2-gtkspellcheck;
-			pacman -Rsc python2-gmpy2;
-			pacman -Rsc python-chardet;
-			pacman -Rsc python-lxml;
-			pacman -Rsc python-requests;
-			pacman -Rsc python-urllib3;
-			pacman -Rsc x11-ssh-askpass;
-			pacman -Rsc xdg-user-dirs-gtk;
-			pacman -Rsc yasm;
-			pacman -Rsc xorg-xvidtune;
-			pacman -Rsc bridge-utils;
-			pacman -Rsc gtkspell;
-			pacman -Rsc libwnck3;
-			pacman -Rsc licenses;
-			pacman -Rsc linux-docs;
-			pacman -Rsc nemo-python;
-			pacman -Rsc cryptboot;
-			pacman -Rsc flatabulous-theme-git;
-			pacman -Rsc lib32-at-spi2-atk;
-			pacman -Rsc lib32-colord;
-			pacman -Rsc lib32-flex;
-			pacman -Rsc lib32-json-glib;
-			pacman -Rsc lib32-libepoxy;
-			pacman -Rsc lib32-libgusb;
-			pacman -Rsc lib32-libproxy;
-			pacman -Rsc lib32-libxkbcommon;
-			pacman -Rsc lib32-libxkbcommon-x11;
-			pacman -Rsc libfilteraudio-git;
-			pacman -Rsc libstdc++5;
-			pacman -Rsc netctl;
-			pacman -Rsc numix-themes-git;
-			pacman -Rsc perl-text-csv;
-			pacman -Rsc xorg-fonts-100dpi;
-			pacman -Rsc xorg-fonts-75dpi;
-			pacman -Rsc numix-themes;
-			pacman -Rsc dhcpcd;
-			pacman -Rsc dri3proto;
-			pacman -Rsc dri2proto;
-			pacman -Rsc xorg-server-devel;
-			pacman -Rsc gobject-introspection;
-			pacman -Rsc mint-cinnamon-themes;
-			pacman -Rsc pcmciautils;
-			pacman -Rsc vim;
-			pacman -Rsc vim-runtime;
-			pacman -Rsc xorg-server-xvfb;
-			pacman -Rsc xorg-server-xdmx;
-			pacman -Rsc xorg-server-xnest;
-			pacman -Rsc gom;
-			pacman -Rsc grilo-plugins;
-			pacman -Rsc libdmapsharing;
-			pacman -Rsc libftdi;
-			pacman -Rsc libmediaart;
-			pacman -Rsc lirc;
-			pacman -Rsc ncurses5-compat-libs;
-			pacman -Rsc libtinfo;
-			pacman -Rsc gputest;
-			pacman -Rsc android-studio;
-			pacman -Rsc android-ndk;
-			pacman -Rsc phonon-qt4;
-			pacman -Rsc bluez-firmware;
-			pacman -Rsc bison;
-			pacman -Rsc gperf;
-			pacman -Rsc squashfs-tools;
-			pacman -Rsc perl-switch;
-			pacman -Rsc python2-virtualenv;
-			pacman -Rsc opus-tools;
-			pacman -Rsc vorbis-tools;
-			pacman -Rsc f2fs-tools;
-			pacman -Rsc jfsutils;
-			pacman -Rsc reiserfsprogs;
-			pacman -Rsc gpart;
-			pacman -Rsc nilfs-utils;
-			pacman -Rsc nxproxy;
-			pacman -Rsc xorg-server-xephyr;
-			pacman -Rsc imagemagick;
-			pacman -Rsc apache-ant;
-			pacman -Rsc pdfcrack;
-			pacman -Rsc pdf-decrypt;
-			pacman -Rsc clamav-unofficial-sigs;
-			pacman -Rsc clinfo;
-			pacman -Rsc virtualgl;
-			pacman -Rsc lib32-virtualgl;
-			pacman -Rsc shellcheck;
-			pacman -Rsc sloccount;
-			pacman -Rsc swftools;
-			pacman -Rsc arduino;
-			pacman -Rsc android-ndk;
-			pacman -Rsc android-studio;
-			pacman -Rsc repo;
-			pacman -Rsc gnome-shell-extension-refresh-wifi-git;
-			pacman -Rsc webkitgtk;
-			pacman -Rsc webkitgtk2;
-			pacman -Rsc qtwebkit;
-			pacman -Rsc ccache;
-			pacman -Rsc gnome-shell-extension-battery-percentage-git;
-			pacman -Rsc gnome-video-effects;
-			pacman -Rsc lxc;
-			pacman -Rsc keepassx2;
-			pacman -Rsc lxc;
-			pacman -Rsc yubikey-neo-manager;
-			pacman -Rsc grsec-common;
-			pacman -Rsc ipset;
-			pacman -Rsc pg2ipset;
-			pacman -Rsc modprobed-db;
-			pacman -Rsc powertop;
-			pacman -Rsc perf;
-			pacman -Rsc elfutils;
-			pacman -Rsc linux-headers;
-			pacman -Rsc linux-sc-docs;
-			pacman -Rsc linux-sc-headers;
-			pacman -Rsc gnome-shell-extension-caffeine-git;
-			pacman -Rsc paxd;
-			pacman -Rsc linux-pax-flags;
-			pacman -Rsc paxtest;
-			pacman -Rsc paxctl;
-			pacman -Rsc linux-sc;
-			pacman -Rsc gnome-encfs-manager;
-			pacman -Rsc libgee06;
-			pacman -Rsc abs;
-			pacman -Rsc hardening-wrapper;
-			pacman -Rsc keepass;
-			pacman -Rsc multimc5-git;
-			pacman -Rsc vlc;
-			pacman -Rsc haveged;
-			pacman -Rsc gnome-shell-extension-dash-to-dock-git;
-			pacman -Rsc oh-my-zsh-git;
-			pacman -Rsc gnome-shell-extension-topicons-plus-git;
-			pacman -Rsc gnome-shell-extension-suspend-button-git;
-			pacman -Rsc gnome-shell-extension-mediaplayer-git;
-			pacman -Rsc neofetch-git;
-			pacman -Rsc sensei-raw-ctl-git;
-			pacman -Rsc pg2ipset-git;
-			pacman -Rsc syncthing-gtk;
-			pacman -Rsc pdfsam;
-			pacman -Rsc gnome-shell-extension-freon-git;
-			pacman -Rsc nano-syntax-highlighting-git;
-			pacman -Rsc radeontop-git;
-			pacman -Rsc networkmanager-openconnect;
-			pacman -Rsc networkmanager-pptp;
-			pacman -Rsc networkmanager-vpnc;
-			pacman -Rsc networkmanager-strongswan;
-			pacman -Rsc gnome-shell-extension-dash-to-panel-git;
-			pacman -Rsc gtk-engine-murrine;
-			pacman -Rsc xfce4-terminal;
-			pacman -Rsc arc-gtk-theme;
-			pacman -Rsc zsh;
-			pacman -Rsc prezto-git;
-			break;;
-		Skip )
-			break;;
-	esac;
-done;
-
 if [ "$aurPackagesEnabled" = "false" ]; then
 	echo -e ${infoColor}Here are all the AUR packages that were not installed some may not of been chosen${coloroff}
-	echo downgrade gnome-shell-extension-volume-mixer numix-circle-icon-theme-git numix-icon-theme-git jd-gui launch4j android-apktool dex2jar jd-gui sdat2img android-studio sirikali-git gocryptfs chromium-pepper-flash chromium-widevine filebot pithos-git peek firejail-git lostfiles ;
+	echo downgrade numix-circle-icon-theme-git numix-icon-theme-git jd-gui launch4j android-apktool dex2jar jd-gui sdat2img android-studio sirikali-git gocryptfs filebot pithos-git peek lostfiles ;
 fi
 
 pacman -Rns $(pacman -Qttdq);
