@@ -1053,23 +1053,6 @@ select yns in "Yes" "No" "Skip"; do
 	esac;
 done;
 
-echo -e ${questionColor}Do you want packages from the Virtualization VirtualBox category?${coloroff};
-select yns in "Yes" "No" "Skip"; do
-	case $yns in
-		Yes )
-			pacman -S --needed virtualbox virtualbox-guest-iso virtualbox-host-dkms linux-headers;
-			break;;
-		No )
-			pacman -Rsc virtualbox;
-			pacman -Rsc virtualbox-guest-iso;
-			pacman -Rsc virtualbox-host-dkms;
-			pacman -Rsc linux-headers;
-			break;;
-		Skip )
-			break;;
-	esac;
-done;
-
 echo -e ${questionColor}Do you want packages from the Wine category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
