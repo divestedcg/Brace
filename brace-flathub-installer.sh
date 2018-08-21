@@ -20,7 +20,7 @@ outputColor=${yellow};
 
 flatpak remote-add flathub 'https://flathub.org/repo/flathub.flatpakrepo' &>/dev/null || true;
 
-echo -e ${questionColor}Do you want packages from the Riot category?${coloroff};
+echo -e ${questionColor}Do you want Riot?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
@@ -34,7 +34,7 @@ select yns in "Yes" "No" "Skip"; do
 	esac;
 done;
 
-echo -e ${questionColor}Do you want packages from the Ring category?${coloroff};
+echo -e ${questionColor}Do you want Ring?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
@@ -48,7 +48,7 @@ select yns in "Yes" "No" "Skip"; do
 	esac;
 done;
 
-echo -e ${questionColor}Do you want packages from the Signal category?${coloroff};
+echo -e ${questionColor}Do you want Signal?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
@@ -62,7 +62,7 @@ select yns in "Yes" "No" "Skip"; do
 	esac;
 done;
 
-echo -e ${questionColor}Do you want packages from the GNOME Games category?${coloroff};
+echo -e ${questionColor}Do you want GNOME Games?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
@@ -76,7 +76,7 @@ select yns in "Yes" "No" "Skip"; do
 	esac;
 done;
 
-echo -e ${questionColor}Do you want packages from the PPSSPP category?${coloroff};
+echo -e ${questionColor}Do you want PPSSPP?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
@@ -90,7 +90,7 @@ select yns in "Yes" "No" "Skip"; do
 	esac;
 done;
 
-echo -e ${questionColor}Do you want packages from the Shattered Pixel Dungeon category?${coloroff};
+echo -e ${questionColor}Do you want Shattered Pixel Dungeon?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
@@ -104,7 +104,7 @@ select yns in "Yes" "No" "Skip"; do
 	esac;
 done;
 
-echo -e ${questionColor}Do you want packages from the Twitch category?${coloroff};
+echo -e ${questionColor}Do you want Twitch?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
@@ -118,7 +118,7 @@ select yns in "Yes" "No" "Skip"; do
 	esac;
 done;
 
-echo -e ${questionColor}Do you want packages from the Android Studio category?${coloroff};
+echo -e ${questionColor}Do you want Android Studio?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
@@ -132,7 +132,7 @@ select yns in "Yes" "No" "Skip"; do
 	esac;
 done;
 
-echo -e ${questionColor}Do you want packages from the Arduino category?${coloroff};
+echo -e ${questionColor}Do you want Arduino?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
@@ -146,7 +146,7 @@ select yns in "Yes" "No" "Skip"; do
 	esac;
 done;
 
-echo -e ${questionColor}Do you want packages from the PyCharm category?${coloroff};
+echo -e ${questionColor}Do you want PyCharm?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
@@ -160,7 +160,7 @@ select yns in "Yes" "No" "Skip"; do
 	esac;
 done;
 
-echo -e ${questionColor}Do you want packages from the Pithos category?${coloroff};
+echo -e ${questionColor}Do you want Pithos?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
@@ -174,7 +174,7 @@ select yns in "Yes" "No" "Skip"; do
 	esac;
 done;
 
-echo -e ${questionColor}Do you want packages from the Podcasts category?${coloroff};
+echo -e ${questionColor}Do you want Podcasts?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
@@ -188,7 +188,7 @@ select yns in "Yes" "No" "Skip"; do
 	esac;
 done;
 
-echo -e ${questionColor}Do you want packages from the Fedora Media Writer category?${coloroff};
+echo -e ${questionColor}Do you want Fedora Media Writer?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
@@ -202,7 +202,7 @@ select yns in "Yes" "No" "Skip"; do
 	esac;
 done;
 
-echo -e ${questionColor}Do you want packages from the Peek category?${coloroff};
+echo -e ${questionColor}Do you want Peek?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
