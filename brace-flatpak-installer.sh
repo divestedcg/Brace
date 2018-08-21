@@ -18,7 +18,7 @@ infoColor=${green};
 questionColor=${yellow};
 outputColor=${yellow};
 
-if [ ! -f /usr/bin/flatpak ]; then echo 'flatpak is not installed!'; fi;
+if [ ! -f /usr/bin/flatpak ]; then echo 'flatpak is not installed!'; exit 1; fi;
 
 flatpak remote-add flathub 'https://flathub.org/repo/flathub.flatpakrepo' &>/dev/null || true;
 

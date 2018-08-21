@@ -622,6 +622,20 @@ select yns in "Yes" "No" "Skip"; do
 	esac;
 done;
 
+echo -e ${questionColor}Do you want packages from the Flatpak category?${coloroff};
+select yns in "Yes" "No" "Skip"; do
+	case $yns in
+		Yes )
+			pacman -S --needed flatpak;
+			break;;
+		No )
+			pacman -Rsc flatpak;
+			break;;
+		Skip )
+			break;;
+	esac;
+done;
+
 echo -e ${questionColor}Do you want packages from the File Encryption category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
