@@ -18,6 +18,8 @@ infoColor=${green};
 questionColor=${yellow};
 outputColor=${yellow};
 
+if [ ! -f /usr/bin/flatpak ]; then echo 'flatpak is not installed!'; fi;
+
 flatpak remote-add flathub 'https://flathub.org/repo/flathub.flatpakrepo' &>/dev/null || true;
 
 echo -e ${questionColor}Do you want Riot?${coloroff};

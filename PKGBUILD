@@ -1,7 +1,7 @@
 # Maintainer: Tad <tad@spotco.us>
 pkgname=brace
 pkgver=2.4
-pkgrel=2
+pkgrel=5
 pkgdesc="Increases privacy/security through various configs. Firefox hardening credit: @pyllyukko"
 arch=('any')
 license=('GPLv3')
@@ -23,7 +23,7 @@ source=('00-brace-gnome'
 	'blacklist-usbnet.conf'
 	'brace-supplemental-changes.sh'
 	'brace-arch-installer.sh'
-	'brace-flathub-installer.sh'
+	'brace-flatpak-installer.sh'
 	'iwlwifi.conf'
 	'dnu.service'
 	'brace-helpers.sh'
@@ -40,7 +40,7 @@ sha512sums=('0cef04c8d406a814d606af07aac655d0205b1da03673bc3a618949135e2c2d5b86d
             '7f7d833f4b1437a99e0f30e6dd3b474ac75a52f830864f88b2d1337845daa59e46b4558437568067a7040c7d6bb72bdecc5490fedb71ac8049dccafb334bdda1'
             '337a3dd60e424eab8dc5ed73a5ef00f137815173788893e6b025fdc2389e2267e28aaf4845cea611cdf500c8fe544b6de6d6fe5c93a8a4d05803a33389044484'
             '7c80ef0b59d639f5bc5dbbf2d3c3281ab5a0d427d4124b4826596299be6bc71a8adb89002190c2105e9a7cb19e12dfa427b30ea179d1a7f35d421edf2a01a429'
-            '2b13562c0815519a1951906d9a4429cfa35fcf7b89b9b1af15e9d2da81c4a2a4ed4710a224dc6d4e1e32c16e18d9e159c8b4ec07ca9a95da49c52255c5d946f7'
+            'fb0195c57cfaad2cc3c75438618527a8cece7e49fd3f8459d46f6e02fa681d73941a319c40be67c7bf6fdd38936d7c211b900aa673afb8775e3d4b892fcc2a1c'
             'c07d4f5d591a07db530deb77065e488e788fd964c081c2859cee07cb0820c69ab8236b8713425c77b47a75435907643cd9a021719f7389c09b20787df1b0860b'
             '2bb7c4306b94687583caf5db2a8c384ffeeedcbaba72acc96a686e91a49c48e7b73a34e2dba74f8532d59ee250560fc6bf819e1308e37d9028d2138297d18b94'
             'd196beb86379b2df316d3698cf3827ebdb7ab8120e41a4085bcf87ae2d445c2f1e8875821b5aa18eac1d7c04685fa6ba480c455c1b9f92a072a06883b621df04'
@@ -61,7 +61,7 @@ package() {
   install -Dm755 brace-helpers.sh "$pkgdir"/etc/profile.d/brace-helpers.sh
   install -Dm755 brace-supplemental-changes.sh "$pkgdir"/usr/bin/brace-supplemental-changes
   install -Dm755 brace-arch-installer.sh "$pkgdir"/usr/bin/brace-installer
-  install -Dm755 brace-flathub-installer.sh "$pkgdir"/usr/bin/brace-installer-flatpak
+  install -Dm755 brace-flatpak-installer.sh "$pkgdir"/usr/bin/brace-installer-flatpak
   install -Dm644 blacklist-dma.conf "$pkgdir"/usr/lib/modprobe.d/blacklist-dma.conf
   install -Dm644 blacklist-usbnet.conf "$pkgdir"/usr/lib/modprobe.d/blacklist-usbnet.conf
   install -Dm644 iwlwifi.conf "$pkgdir"/usr/lib/modprobe.d/iwlwifi.conf
