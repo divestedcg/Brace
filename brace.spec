@@ -1,6 +1,6 @@
 Name: brace
-Version: 2.3
-Release: 6
+Version: 2.4
+Release: 1
 Summary: Increases privacy/security through various configs.
 License: GPLv3+
 BuildArch: noarch
@@ -35,6 +35,7 @@ install -Dm755 brace-fedora-enable-auto-updates.sh %{buildroot}/usr/bin/brace-en
 install -Dm755 brace-fedora-enable-rpmfusion.sh %{buildroot}/usr/bin/brace-enable-rpmfusion
 install -Dm755 brace-fedora-installer.sh %{buildroot}/usr/bin/brace-installer
 install -Dm755 brace-fedora-installer-base.sh %{buildroot}/usr/bin/brace-installer-base
+install -Dm755 brace-flathub-installer.sh %{buildroot}/usr/bin/brace-installer-flatpak
 install -Dm755 brace-fedora-remover.sh %{buildroot}/usr/bin/brace-remover
 install -Dm644 blacklist-dma.conf %{buildroot}/usr/lib/modprobe.d/blacklist-dma.conf
 install -Dm644 blacklist-usbnet.conf %{buildroot}/usr/lib/modprobe.d/blacklist-usbnet.conf
