@@ -1,7 +1,7 @@
 # Maintainer: Tad <tad@spotco.us>
 pkgname=brace
 pkgver=2.4
-pkgrel=6
+pkgrel=7
 pkgdesc="Increases privacy/security through various configs. Firefox hardening credit: @pyllyukko"
 arch=('any')
 license=('GPLv3')
@@ -23,7 +23,7 @@ source=('00-brace-gnome'
 	'blacklist-usbnet.conf'
 	'brace-supplemental-changes.sh'
 	'brace-arch-installer.sh'
-	'brace-flatpak-installer.sh'
+	'brace-flathub-installer.sh'
 	'iwlwifi.conf'
 	'dnu.service'
 	'brace-helpers.sh'
@@ -61,7 +61,7 @@ package() {
   install -Dm755 brace-helpers.sh "$pkgdir"/etc/profile.d/brace-helpers.sh
   install -Dm755 brace-supplemental-changes.sh "$pkgdir"/usr/bin/brace-supplemental-changes
   install -Dm755 brace-arch-installer.sh "$pkgdir"/usr/bin/brace-installer
-  install -Dm755 brace-flatpak-installer.sh "$pkgdir"/usr/bin/brace-installer-flatpak
+  install -Dm755 brace-flathub-installer.sh "$pkgdir"/usr/bin/brace-installer-flathub
   install -Dm644 blacklist-dma.conf "$pkgdir"/usr/lib/modprobe.d/blacklist-dma.conf
   install -Dm644 blacklist-usbnet.conf "$pkgdir"/usr/lib/modprobe.d/blacklist-usbnet.conf
   install -Dm644 iwlwifi.conf "$pkgdir"/usr/lib/modprobe.d/iwlwifi.conf

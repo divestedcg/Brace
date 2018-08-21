@@ -1,6 +1,6 @@
 Name: brace
 Version: 2.4
-Release: 6
+Release: 7
 Summary: Increases privacy/security through various configs.
 License: GPLv3+
 BuildArch: noarch
@@ -35,7 +35,8 @@ install -Dm755 brace-fedora-enable-auto-updates.sh %{buildroot}/usr/bin/brace-en
 install -Dm755 brace-fedora-enable-rpmfusion.sh %{buildroot}/usr/bin/brace-enable-rpmfusion
 install -Dm755 brace-fedora-installer.sh %{buildroot}/usr/bin/brace-installer
 install -Dm755 brace-fedora-installer-base.sh %{buildroot}/usr/bin/brace-installer-base
-install -Dm755 brace-flatpak-installer.sh %{buildroot}/usr/bin/brace-installer-flatpak
+install -Dm755 brace-flathub-installer.sh %{buildroot}/usr/bin/brace-installer-flathub
+install -Dm755 brace-atomic-installer.sh %{buildroot}/usr/bin/brace-installer-atomic
 install -Dm755 brace-fedora-remover.sh %{buildroot}/usr/bin/brace-remover
 install -Dm644 blacklist-dma.conf %{buildroot}/usr/lib/modprobe.d/blacklist-dma.conf
 install -Dm644 blacklist-usbnet.conf %{buildroot}/usr/lib/modprobe.d/blacklist-usbnet.conf
@@ -58,7 +59,8 @@ sh user.js.sh %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/all-br
 /usr/bin/brace-enable-rpmfusion
 /usr/bin/brace-installer
 /usr/bin/brace-installer-base
-/usr/bin/brace-installer-flatpak
+/usr/bin/brace-installer-flathub
+/usr/bin/brace-installer-atomic
 /usr/bin/brace-remover
 /usr/lib/modprobe.d/blacklist-dma.conf
 /usr/lib/modprobe.d/blacklist-usbnet.conf
