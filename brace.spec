@@ -1,6 +1,6 @@
 Name: brace
-Version: 2.4
-Release: 7
+Version: 2.5
+Release: 2
 Summary: Increases privacy/security through various configs.
 License: GPLv3+
 BuildArch: noarch
@@ -45,8 +45,10 @@ install -Dm644 21-disable-connectivity-check.conf %{buildroot}/usr/lib/NetworkMa
 install -Dm644 30-mac-randomization.conf %{buildroot}/usr/lib/NetworkManager/conf.d/30-mac-randomization.conf
 install -Dm644 60-restrict.conf %{buildroot}/usr/lib/sysctl.d/60-restrict.conf
 install -Dm644 user.js %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/all-brace.js;
+install -Dm644 user.js %{buildroot}/usr/lib64/thunderbird/defaults/pref/all-brace.js;
 
 sh user.js.sh %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/all-brace.js;
+sh user.js.sh %{buildroot}/usr/lib64/thunderbird/defaults/pref/all-brace.js;
 
 %files
 /etc/dconf/db/local.d/00-brace-gnome
@@ -69,3 +71,4 @@ sh user.js.sh %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/all-br
 /usr/lib/NetworkManager/conf.d/30-mac-randomization.conf
 /usr/lib/sysctl.d/60-restrict.conf
 /usr/lib64/firefox/browser/defaults/preferences/all-brace.js
+/usr/lib64/thunderbird/defaults/pref/all-brace.js

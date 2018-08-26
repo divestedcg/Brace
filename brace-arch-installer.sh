@@ -494,10 +494,10 @@ echo -e ${questionColor}Do you want packages from the Communication category?${c
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed evolution;
+			pacman -S --needed thunderbird;
 			break;;
 		No )
-			pacman -Rsc evolution;
+			pacman -Rsc thunderbird;
 			break;;
 		Skip )
 			break;;

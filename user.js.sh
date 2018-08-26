@@ -40,6 +40,8 @@ echo "//START OF BRACE EXTRAS" >> $userjs;
 ##Look
 echo 'pref("browser.tabs.drawInTitlebar", true);' >> $userjs;
 echo 'pref("widget.allow-client-side-decoration", true);' >> $userjs;
+echo 'pref("mailnews.start_page.enabled", false);' >> $userjs;
+#echo 'pref("mail.SpellCheckBeforeSend", true);' >> $userjs;
 ##Performance
 echo 'pref("general.smoothScroll", false);' >> $userjs;
 echo 'pref("layers.acceleration.force-enabled", true);' >> $userjs;
@@ -64,7 +66,10 @@ echo 'pref("browser.link.open_newwindow_restriction", true);' >> $userjs;
 echo 'pref("reader.parse-on-load.enabled", false);' >> $userjs;
 echo 'pref("browser.reader.detectedFirstArticle", true);' >> $userjs;
 echo 'pref("network.negotiate-auth.trusted-uris", "");' >> $userjs;
+echo 'pref("messenger.status.reportIdle", false);' >> $userjs;
 ##Security
 echo 'pref("javascript.options.shared_memory", false);' >> $userjs;
 echo 'pref("security.webauth.u2f", true);' >> $userjs;
+echo 'pref("mailnews.message_display.disable_remote_image", true);' >> $userjs;
+echo 'pref("mail.phishing.detection.enabled", true);' >> $userjs;
 echo "//END OF BRACE EXTRAS" >> $userjs;

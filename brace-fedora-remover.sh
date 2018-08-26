@@ -6,10 +6,12 @@ if [[ $EUID -ne 0 ]]; then echo 'This script needs to be run as root!'; exit 1; 
 
 packages="";
 
+#Unsorted
+packages=$packages" geary";
 #CentOS 7
 packages=$packages" empathy";
 #Workstation (GNOME)
-packages=$packages" rhythmbox gnome-documents gnome-weather";
+packages=$packages" rhythmbox gnome-documents gnome-weather evolution";
 #Cinnamon
 packages=$packages" xawtv";
 #KDE
@@ -24,8 +26,3 @@ packages=$packages" xfburn gnote filezilla hexchat exaile compiz emerald";
 packages=$packages" clipman xfburn geany pidgin asunder pragha abiword gnumeric xfdashboard";
 
 yum remove $packages;
-
-if [ -f /usr/share/applications/mozilla-thunderbird.desktop ]; then
-	yum remove thunderbird;
-	yum install geary;
-fi;

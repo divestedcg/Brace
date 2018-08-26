@@ -1,7 +1,7 @@
 # Maintainer: Tad <tad@spotco.us>
 pkgname=brace
-pkgver=2.4
-pkgrel=7
+pkgver=2.5
+pkgrel=2
 pkgdesc="Increases privacy/security through various configs. Firefox hardening credit: @pyllyukko"
 arch=('any')
 license=('GPLv3')
@@ -11,7 +11,8 @@ optdepends=('arch-audit: check for insecure packages'
 	'linux-hardened: harden against exploits'
 	'rkhunter: scan for rootkits'
 	'scfw: seal your ports'
-	'firefox: browser')
+	'firefox: browser'
+	'thunderbird: e-mail')
 source=('00-brace-gnome'
 	'00-brace-mate'
 	'00-brace-cinnamon'
@@ -39,12 +40,12 @@ sha512sums=('0cef04c8d406a814d606af07aac655d0205b1da03673bc3a618949135e2c2d5b86d
             'fcee1964b26f4309f20c8917a71d448e26f0f2c340ccea0a67f99d704dd009249d09aa215bd2424e234bc9b7927e4679043c2dad78f3fe8e8d744b07485ae655'
             '7f7d833f4b1437a99e0f30e6dd3b474ac75a52f830864f88b2d1337845daa59e46b4558437568067a7040c7d6bb72bdecc5490fedb71ac8049dccafb334bdda1'
             '337a3dd60e424eab8dc5ed73a5ef00f137815173788893e6b025fdc2389e2267e28aaf4845cea611cdf500c8fe544b6de6d6fe5c93a8a4d05803a33389044484'
-            '060ff811066c5db087dfbeac830635a8b9c4b1bee93fdf6544f48ff4a915ffc5cf21d593a44b27f6f7a6c93bb5784ecd8c22a80b1f094064ce4e110cc271787d'
+            '49a14b282afc592a5c649f585045e47af379a586fb98d186c99d69a035cd32e7652ea0e585f86ef5acd62fcc9f27ec89fd861c1117c152ed5bdef954de694bc5'
             'aee25fbd5d7a525a02ee80665ab89ecf9e7874b3b4f5bedb4a33c0aa588b97a2fb0e4ff24744390d286ca635b620915ebf870979481cc2d2ae799c8b8bebd4fd'
             'c07d4f5d591a07db530deb77065e488e788fd964c081c2859cee07cb0820c69ab8236b8713425c77b47a75435907643cd9a021719f7389c09b20787df1b0860b'
             '2bb7c4306b94687583caf5db2a8c384ffeeedcbaba72acc96a686e91a49c48e7b73a34e2dba74f8532d59ee250560fc6bf819e1308e37d9028d2138297d18b94'
             'd196beb86379b2df316d3698cf3827ebdb7ab8120e41a4085bcf87ae2d445c2f1e8875821b5aa18eac1d7c04685fa6ba480c455c1b9f92a072a06883b621df04'
-            '5ed86f308ce297a38c36d25055f4fbb53634d2cb2860099aef284e8b83e89b38c97a8365c8e0e855e964d7738c900d7b6ee205dd14539f7613e8f2e563280ed3'
+            'e5713391d5ce03dcf160e07af1c48645fa6e6a4b19d24187ae665f5c3ffbcb0e6527892de71fc4067d665094954b1bb2b73a8b7744060e09c8a7397b59287280'
             '6c7d60e6cb655e3b8931a1afeab7a39cfd37672eb639f0c93c7d6acffa5ed885ebf065cc5c1a18783f206dbb94f74ad4fad3292054511217727db320b1ff02d4')
 install=brace.install
 
@@ -70,4 +71,5 @@ package() {
   install -Dm644 60-restrict.conf "$pkgdir"/usr/lib/sysctl.d/60-restrict.conf
   install -Dm644 dnu.service "$pkgdir"/usr/lib/systemd/system/dnu.service
   install -Dm644 user.js "$pkgdir"/usr/lib/firefox/browser/defaults/preferences/all-brace.js
+  install -Dm644 user.js "$pkgdir"/usr/lib/thunderbird/defaults/preferences/all-brace.js
 }

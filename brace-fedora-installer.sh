@@ -160,6 +160,20 @@ select yns in "Yes" "No" "Skip"; do
 	esac;
 done;
 
+echo -e ${questionColor}Do you want packages from the Communication category?${coloroff};
+select yns in "Yes" "No" "Skip"; do
+	case $yns in
+		Yes )
+			yum install --skip-broken thunderbird thunderbird-enigmail;
+			break;;
+		No )
+			yum remove thunderbird thunderbird-enigmail;
+			break;;
+		Skip )
+			break;;
+	esac;
+done;
+
 echo -e ${questionColor}Do you want packages from the Communication Realtime category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in

@@ -278,10 +278,10 @@ echo -e ${questionColor}Do you want Torrenting?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			flatpak install flathub com.transmission.bt.Transmission;
+			flatpak install flathub com.transmissionbt.Transmission;
 			break;;
 		No )
-			flatpak remove com.transmission.bt.Transmission;
+			flatpak remove com.transmissionbt.Transmission;
 			break;;
 		Skip )
 			break;;
