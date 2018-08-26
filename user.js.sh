@@ -67,6 +67,7 @@ echo 'pref("reader.parse-on-load.enabled", false);' >> $userjs;
 echo 'pref("browser.reader.detectedFirstArticle", true);' >> $userjs;
 echo 'pref("network.negotiate-auth.trusted-uris", "");' >> $userjs;
 echo 'pref("messenger.status.reportIdle", false);' >> $userjs;
+echo 'pref("extensions.enigmail.autoWkdLookup", 0);' >> $userjs;
 ##Security
 echo 'pref("javascript.options.shared_memory", false);' >> $userjs;
 echo 'pref("security.webauth.u2f", true);' >> $userjs;

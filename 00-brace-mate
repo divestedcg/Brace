@@ -67,7 +67,7 @@ show-seconds=true
 show-weather=false
 
 [org/mate/panel/objects/email-client]
-launcher-location='/usr/share/applications/org.gnome.Geary.desktop'
+launcher-location='/usr/share/applications/mozilla-thunderbird.desktop'
 
 [org/mate/panel/objects/workspace-switcher/prefs]
 wrap-workspaces=true
