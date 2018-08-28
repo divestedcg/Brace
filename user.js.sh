@@ -49,6 +49,8 @@ echo 'pref("media.hardware-video-decoding.force-enabled", true);' >> $userjs;
 echo 'pref("browser.tabs.remote.autostart", true);' >> $userjs;
 echo 'pref("browser.tabs.remote.force-enabled", true);' >> $userjs;
 echo 'pref("layers.omtp.enabled", true);' >> $userjs;
+echo 'pref("gfx.webrenderer.enabled", true);' >> $userjs;
+echo 'pref("extensions.webextensions.remote", true);' >> $userjs;
 ##Privacy
 echo 'pref("privacy.firstparty.isolate", true);' >> $userjs;
 echo 'pref("privacy.firstparty.isolate.restrict_opener_access", false);' >> $userjs;
@@ -68,6 +70,8 @@ echo 'pref("browser.reader.detectedFirstArticle", true);' >> $userjs;
 echo 'pref("network.negotiate-auth.trusted-uris", "");' >> $userjs;
 echo 'pref("messenger.status.reportIdle", false);' >> $userjs;
 echo 'pref("extensions.enigmail.autoWkdLookup", 0);' >> $userjs;
+echo 'pref("extensions.webcompat-reporter.enabled", false);' >> $userjs;
+echo 'pref("browser.contentblocking.ui.enabled", true);' >> $userjs;
 ##Security
 echo 'pref("javascript.options.shared_memory", false);' >> $userjs;
 echo 'pref("security.webauth.u2f", true);' >> $userjs;

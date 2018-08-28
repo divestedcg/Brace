@@ -1,7 +1,7 @@
 # Maintainer: Tad <tad@spotco.us>
 pkgname=brace
 pkgver=2.5
-pkgrel=3
+pkgrel=4
 pkgdesc="Increases privacy/security through various configs. Firefox hardening credit: @pyllyukko"
 arch=('any')
 license=('GPLv3')
@@ -45,7 +45,7 @@ sha512sums=('f230a0e1b4792207288a91e9f2aff6155be3b835f277fc9441bf24f9dc8d2623c5a
             'c07d4f5d591a07db530deb77065e488e788fd964c081c2859cee07cb0820c69ab8236b8713425c77b47a75435907643cd9a021719f7389c09b20787df1b0860b'
             '2bb7c4306b94687583caf5db2a8c384ffeeedcbaba72acc96a686e91a49c48e7b73a34e2dba74f8532d59ee250560fc6bf819e1308e37d9028d2138297d18b94'
             'd196beb86379b2df316d3698cf3827ebdb7ab8120e41a4085bcf87ae2d445c2f1e8875821b5aa18eac1d7c04685fa6ba480c455c1b9f92a072a06883b621df04'
-            '52697911ebbb7d44a8b7925e7fb1cf6a58383c6da7066a033a1dd55bc2219615478fa0f8d54b63350f381f47d02a2510651535805bd8fc7825cc40f1f9ac19ca'
+            'dca9b4cf502ff408a7ba8d5a29a9e91d7975c35bfa53a3ca49651fc80bd1dc9b9ebaadebe7fff70b8dee3e2fc74a7d2c8bea9ca3087ece4e5d33f68d3483b486'
             '6c7d60e6cb655e3b8931a1afeab7a39cfd37672eb639f0c93c7d6acffa5ed885ebf065cc5c1a18783f206dbb94f74ad4fad3292054511217727db320b1ff02d4')
 install=brace.install
 
@@ -71,5 +71,7 @@ package() {
   install -Dm644 60-restrict.conf "$pkgdir"/usr/lib/sysctl.d/60-restrict.conf
   install -Dm644 dnu.service "$pkgdir"/usr/lib/systemd/system/dnu.service
   install -Dm644 user.js "$pkgdir"/usr/lib/firefox/browser/defaults/preferences/all-brace.js
+  install -Dm644 user.js "$pkgdir"/usr/lib/firefox-developer-edition/browser/defaults/preferences/all-brace.js
+  install -Dm644 user.js "$pkgdir"/usr/lib/icecat/browser/defaults/preferences/all-brace.js
   install -Dm644 user.js "$pkgdir"/usr/lib/thunderbird/defaults/preferences/all-brace.js
 }
