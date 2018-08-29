@@ -50,6 +50,20 @@ select yns in "Yes" "No" "Skip"; do
 	esac;
 done;
 
+echo -e ${questionColor}Do you want Communication?${coloroff};
+select yns in "Yes" "No" "Skip"; do
+	case $yns in
+		Yes )
+			flatpak install flathub org.mozilla.Thunderbird;
+			break;;
+		No )
+			flatpak remove org.mozilla.Thunderbird;
+			break;;
+		Skip )
+			break;;
+	esac;
+done;
+
 echo -e ${questionColor}Do you want Communication Realtime?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in

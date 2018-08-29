@@ -162,42 +162,14 @@ select yns in "Yes" "No" "Skip"; do
 	esac;
 done;
 
-echo -e ${questionColor}Do you want Pithos?${coloroff};
+echo -e ${questionColor}Do you want OBS Studio?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			flatpak install flathub io.github.Pithos;
+			flatpak install flathub com.obsproject.Studio;
 			break;;
 		No )
-			flatpak remove io.github.Pithos;
-			break;;
-		Skip )
-			break;;
-	esac;
-done;
-
-echo -e ${questionColor}Do you want Podcasts?${coloroff};
-select yns in "Yes" "No" "Skip"; do
-	case $yns in
-		Yes )
-			flatpak install flathub org.gnome.Podcasts;
-			break;;
-		No )
-			flatpak remove org.gnome.Podcasts;
-			break;;
-		Skip )
-			break;;
-	esac;
-done;
-
-echo -e ${questionColor}Do you want Fedora Media Writer?${coloroff};
-select yns in "Yes" "No" "Skip"; do
-	case $yns in
-		Yes )
-			flatpak install flathub org.fedoraproject.MediaWriter;
-			break;;
-		No )
-			flatpak remove org.fedoraproject.MediaWriter;
+			flatpak remove com.obsproject.Studio;
 			break;;
 		Skip )
 			break;;
@@ -212,6 +184,20 @@ select yns in "Yes" "No" "Skip"; do
 			break;;
 		No )
 			flatpak remove com.uploadedlobster.peek;
+			break;;
+		Skip )
+			break;;
+	esac;
+done;
+
+echo -e ${questionColor}Do you want Fedora Media Writer?${coloroff};
+select yns in "Yes" "No" "Skip"; do
+	case $yns in
+		Yes )
+			flatpak install flathub org.fedoraproject.MediaWriter;
+			break;;
+		No )
+			flatpak remove org.fedoraproject.MediaWriter;
 			break;;
 		Skip )
 			break;;

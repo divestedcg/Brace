@@ -38,14 +38,13 @@ echo -e ${questionColor}Do you want packages from the Core category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed irqbalance git openssh nano htop wget screen zip p7zip unrar pixz pigz lm_sensors dialog crda android-udev parallel screenfetch ripgrep;
+			pacman -S --needed irqbalance openssh nano htop wget screen zip p7zip unrar pixz pigz lm_sensors dialog crda screenfetch ripgrep;
 			if [ "$aurPackagesEnabled" = "true" ]; then
 				yaourt -S --needed downgrade;
 			fi
 			break;;
 		No )
 			pacman -Rsc irqbalance;
-			pacman -Rsc git;
 			pacman -Rsc openssh;
 			pacman -Rsc nano;
 			pacman -Rsc htop;
@@ -59,8 +58,6 @@ select yns in "Yes" "No" "Skip"; do
 			pacman -Rsc lm_sensors;
 			pacman -Rsc dialog;
 			pacman -Rsc crda;
-			pacman -Rsc android-udev;
-			pacman -Rsc parallel;
 			pacman -Rsc screenfetch;
 			pacman -Rsc ripgrep;
 			pacman -Rsc downgrade;
@@ -273,7 +270,7 @@ echo -e ${questionColor}Do you want packages from the Gnome REMOVE category?${co
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed apache empathy epiphany five-or-more four-in-a-row gnome-boxes gnome-dictionary gnome-documents gnome-hearts gnome-initial-setup gnome-klotski gnome-weather gnome-music gnome-nettool gnome-nibbles gnome-phone-manager gnome-photos gnome-power-manager gnome-robots gnome-software gnome-system-log gnome-system-monitor gnome-tetravex gnome-todo gnome-user-share gucharmap gvfs-afc gvfs-goa gvfs-google gvfs-gphoto2 mod_dnssd sushi tracker vino virtviewer;
+			pacman -S --needed apache empathy epiphany five-or-more four-in-a-row gnome-dictionary gnome-documents gnome-hearts gnome-klotski gnome-weather gnome-music gnome-nettool gnome-nibbles gnome-phone-manager gnome-power-manager gnome-robots gnome-tetravex gnome-todo gnome-user-share gvfs-afc gvfs-goa gvfs-google gvfs-gphoto2 mod_dnssd sushi vino virtviewer;
 			break;;
 		No )
 			pacman -Rsc apache;
@@ -281,34 +278,26 @@ select yns in "Yes" "No" "Skip"; do
 			pacman -Rsc epiphany;
 			pacman -Rsc five-or-more;
 			pacman -Rsc four-in-a-row;
-			pacman -Rsc gnome-boxes;
 			pacman -Rsc gnome-dictionary;
 			pacman -Rsc gnome-documents;
 			pacman -Rsc gnome-hearts;
-			pacman -Rsc gnome-initial-setup;
 			pacman -Rsc gnome-klotski;
 			pacman -Rsc gnome-weather;
 			pacman -Rsc gnome-music;
 			pacman -Rsc gnome-nettool;
 			pacman -Rsc gnome-nibbles;
 			pacman -Rsc gnome-phone-manager;
-			pacman -Rsc gnome-photos;
 			pacman -Rsc gnome-power-manager;
 			pacman -Rsc gnome-robots;
-			pacman -Rsc gnome-software;
-			pacman -Rsc gnome-system-log;
-			pacman -Rsc gnome-system-monitor;
 			pacman -Rsc gnome-tetravex;
 			pacman -Rsc gnome-todo;
 			pacman -Rsc gnome-user-share;
-			pacman -Rsc gucharmap;
 			pacman -Rsc gvfs-afc;
 			pacman -Rsc gvfs-goa;
 			pacman -Rsc gvfs-google;
 			pacman -Rsc gvfs-gphoto2;
 			pacman -Rsc mod_dnssd;
 			pacman -Rsc sushi;
-			pacman -Rsc tracker;
 			pacman -Rsc vino;
 			pacman -Rsc virtviewer;
 			break;;
@@ -382,29 +371,18 @@ echo -e ${questionColor}Do you want packages from the Fonts category?${coloroff}
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed ttf-dejavu ttf-ubuntu-font-family ttf-droid adobe-source-code-pro-fonts ttf-fira-mono ttf-fira-sans ttf-liberation ttf-roboto cantarell-fonts gsfonts noto-fonts noto-fonts-emoji tex-gyre-fonts ttf-anonymous-pro ttf-hack ttf-inconsolata ttf-freefont ttf-croscore ttf-symbola otf-overpass;
+			pacman -S --needed adobe-source-code-pro-fonts ttf-fira-mono ttf-fira-sans ttf-liberation cantarell-fonts gsfonts noto-fonts noto-fonts-emoji ttf-freefont;
 			break;;
 		No )
-			pacman -Rsc ttf-dejavu;
-			pacman -Rsc ttf-ubuntu-font-family;
-			pacman -Rsc ttf-droid;
 			pacman -Rsc adobe-source-code-pro-fonts;
 			pacman -Rsc ttf-fira-mono;
 			pacman -Rsc ttf-fira-sans;
 			pacman -Rsc ttf-liberation;
-			pacman -Rsc ttf-roboto;
 			pacman -Rsc cantarell-fonts;
 			pacman -Rsc gsfonts;
 			pacman -Rsc noto-fonts;
 			pacman -Rsc noto-fonts-emoji;
-			pacman -Rsc tex-gyre-fonts;
-			pacman -Rsc ttf-anonymous-pro;
-			pacman -Rsc ttf-hack;
-			pacman -Rsc ttf-inconsolata;
 			pacman -Rsc ttf-freefont;
-			pacman -Rsc ttf-croscore;
-			pacman -Rsc ttf-symbola;
-			pacman -Rsc otf-overpass;
 			break;;
 		Skip )
 			break;;
@@ -455,20 +433,6 @@ select yns in "Yes" "No" "Skip"; do
 			pacman -Rsc lynis;
 			pacman -Rsc arch-audit;
 			pacman -Rsc checksec;
-			break;;
-		Skip )
-			break;;
-	esac;
-done;
-
-echo -e ${questionColor}Do you want packages from the Backup category?${coloroff};
-select yns in "Yes" "No" "Skip"; do
-	case $yns in
-		Yes )
-			pacman -S --needed borg;
-			break;;
-		No )
-			pacman -Rsc borg;
 			break;;
 		Skip )
 			break;;
@@ -538,20 +502,13 @@ echo -e ${questionColor}Do you want packages from the Development category?${col
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed gitg asp intellij-idea-community-edition proguard ghex sqlitebrowser;
-			if [ "$aurPackagesEnabled" = "true" ]; then
-				yaourt -S --needed jd-gui launch4j;
-			fi
+			pacman -S --needed git gitg ghex sqlitebrowser;
 			break;;
 		No )
+			pacman -Rsc git;
 			pacman -Rsc gitg;
-			pacman -Rsc asp;
-			pacman -Rsc intellij-idea-community-edition;
-			pacman -Rsc proguard;
 			pacman -Rsc ghex;
 			pacman -Rsc sqlitebrowser;
-			pacman -Rsc jd-gui;
-			pacman -Rsc launch4j;
 			break;;
 		Skip )
 			break;;
@@ -562,18 +519,53 @@ echo -e ${questionColor}Do you want packages from the Development Android catego
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed android-tools;
+			pacman -S --needed android-udev android-tools;
 			if [ "$aurPackagesEnabled" = "true" ]; then
 				yaourt -S --needed android-apktool dex2jar jd-gui sdat2img android-studio;
 			fi
 			break;;
 		No )
+			pacman -Rsc android-udev;
 			pacman -Rsc android-tools;
 			pacman -Rsc android-apktool;
 			pacman -Rsc dex2jar;
 			pacman -Rsc jd-gui;
 			pacman -Rsc sdat2img;
 			pacman -Rsc android-studio;
+			break;;
+		Skip )
+			break;;
+	esac;
+done;
+
+echo -e ${questionColor}Do you want packages from the Development Java category?${coloroff};
+select yns in "Yes" "No" "Skip"; do
+	case $yns in
+		Yes )
+			pacman -S --needed intellij-idea-community-edition proguard;
+			if [ "$aurPackagesEnabled" = "true" ]; then
+				yaourt -S --needed jd-gui launch4j;
+			fi
+			break;;
+		No )
+			pacman -Rsc intellij-idea-community-edition;
+			pacman -Rsc proguard;
+			pacman -Rsc jd-gui;
+			pacman -Rsc launch4j;
+			break;;
+		Skip )
+			break;;
+	esac;
+done;
+
+echo -e ${questionColor}Do you want packages from the Development category?${coloroff};
+select yns in "Yes" "No" "Skip"; do
+	case $yns in
+		Yes )
+			pacman -S --needed Pacman;
+			break;;
+		No )
+			pacman -Rsc Pacman;
 			break;;
 		Skip )
 			break;;
@@ -616,6 +608,20 @@ select yns in "Yes" "No" "Skip"; do
 			pacman -Rsc meld;
 			pacman -Rsc pdfmod;
 			pacman -Rsc scribus;
+			break;;
+		Skip )
+			break;;
+	esac;
+done;
+
+echo -e ${questionColor}Do you want packages from the E-Books category?${coloroff};
+select yns in "Yes" "No" "Skip"; do
+	case $yns in
+		Yes )
+			pacman -S --needed calibre;
+			break;;
+		No )
+			pacman -Rsc calibre;
 			break;;
 		Skip )
 			break;;
@@ -828,7 +834,7 @@ select yns in "Yes" "No" "Skip"; do
 	esac;
 done;
 
-echo -e ${questionColor}Do you want packages from the Maps category?${coloroff};
+echo -e ${questionColor}Do you want packages from the Mapping category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
@@ -842,35 +848,16 @@ select yns in "Yes" "No" "Skip"; do
 	esac;
 done;
 
-echo -e ${questionColor}Do you want packages from the Media Management category?${coloroff};
+echo -e ${questionColor}Do you want packages from the Music Management category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
 			pacman -S --needed picard soundconverter sound-juicer;
-			if [ "$aurPackagesEnabled" = "true" ]; then
-				yaourt -S --needed filebot;
-			fi
 			break;;
 		No )
 			pacman -Rsc picard;
 			pacman -Rsc soundconverter;
 			pacman -Rsc sound-juicer;
-			pacman -Rsc filebot;
-			break;;
-		Skip )
-			break;;
-	esac;
-done;
-
-echo -e ${questionColor}Do you want packages from the Media Management Other category?${coloroff};
-select yns in "Yes" "No" "Skip"; do
-	case $yns in
-		Yes )
-			pacman -S --needed calibre brasero;
-			break;;
-		No )
-			pacman -Rsc calibre;
-			pacman -Rsc brasero;
 			break;;
 		Skip )
 			break;;
@@ -882,16 +869,12 @@ select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
 			pacman -S --needed lollypop totem eog youtube-dl;
-			if [ "$aurPackagesEnabled" = "true" ]; then
-				yaourt -S --needed pithos-git;
-			fi
 			break;;
 		No )
 			pacman -Rsc lollypop;
 			pacman -Rsc totem;
 			pacman -Rsc eog;
 			pacman -Rsc youtube-dl;
-			pacman -Rsc pithos-git;
 			break;;
 		Skip )
 			break;;
@@ -936,21 +919,6 @@ select yns in "Yes" "No" "Skip"; do
 		No )
 			pacman -Rsc bleachbit;
 			pacman -Rsc wipe;
-			break;;
-		Skip )
-			break;;
-	esac;
-done;
-
-echo -e ${questionColor}Do you want packages from the Remote category?${coloroff};
-select yns in "Yes" "No" "Skip"; do
-	case $yns in
-		Yes )
-			pacman -S --needed remmina freerdp;
-			break;;
-		No )
-			pacman -Rsc remmina;
-			pacman -Rsc freerdp;
 			break;;
 		Skip )
 			break;;
@@ -1101,7 +1069,7 @@ done;
 
 if [ "$aurPackagesEnabled" = "false" ]; then
 	echo -e ${infoColor}Here are all the AUR packages that were not installed some may not of been chosen${coloroff}
-	echo downgrade numix-circle-icon-theme-git numix-icon-theme-git jd-gui launch4j android-apktool dex2jar jd-gui sdat2img android-studio sirikali-git gocryptfs filebot pithos-git peek lostfiles ;
+	echo downgrade numix-circle-icon-theme-git numix-icon-theme-git android-apktool dex2jar jd-gui sdat2img android-studio jd-gui launch4j sirikali-git gocryptfs peek lostfiles ;
 fi
 
 pacman -Rns $(pacman -Qttdq);

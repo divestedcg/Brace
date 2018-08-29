@@ -24,10 +24,10 @@ echo -e ${questionColor}Do you want packages from the Core category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install --skip-broken irqbalance nano htop screen p7zip pixz lm_sensors parallel screenfetch ripgrep;
+			yum install --skip-broken irqbalance nano htop screen p7zip pixz lm_sensors screenfetch ripgrep tree;
 			break;;
 		No )
-			yum remove irqbalance nano htop screen p7zip pixz lm_sensors parallel screenfetch ripgrep;
+			yum remove irqbalance nano htop screen p7zip pixz lm_sensors screenfetch ripgrep tree;
 			break;;
 		Skip )
 			break;;
@@ -108,10 +108,10 @@ echo -e ${questionColor}Do you want packages from the Fonts category?${coloroff}
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install --skip-broken adobe-source-code-pro-fonts mozilla-fira-mono-fonts mozilla-fira-sans-fonts google-droid-sans-fonts google-droid-sans-mono-fonts google-droid-serif-fonts;
+			yum install --skip-broken adobe-source-code-pro-fonts mozilla-fira-mono-fonts mozilla-fira-sans-fonts;
 			break;;
 		No )
-			yum remove adobe-source-code-pro-fonts mozilla-fira-mono-fonts mozilla-fira-sans-fonts google-droid-sans-fonts google-droid-sans-mono-fonts google-droid-serif-fonts;
+			yum remove adobe-source-code-pro-fonts mozilla-fira-mono-fonts mozilla-fira-sans-fonts;
 			break;;
 		Skip )
 			break;;
@@ -140,20 +140,6 @@ select yns in "Yes" "No" "Skip"; do
 			break;;
 		No )
 			yum remove lynis checksec spectre-meltdown-checker;
-			break;;
-		Skip )
-			break;;
-	esac;
-done;
-
-echo -e ${questionColor}Do you want packages from the Backup category?${coloroff};
-select yns in "Yes" "No" "Skip"; do
-	case $yns in
-		Yes )
-			yum install --skip-broken borgbackup;
-			break;;
-		No )
-			yum remove borgbackup;
 			break;;
 		Skip )
 			break;;
@@ -206,10 +192,10 @@ echo -e ${questionColor}Do you want packages from the Development category?${col
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install --skip-broken java-1.8.0-openjdk-devel gitg proguard ghex sqlitebrowser fedpkg @development-tools;
+			yum install --skip-broken git gitg ghex sqlitebrowser @development-tools;
 			break;;
 		No )
-			yum remove java-1.8.0-openjdk-devel gitg proguard ghex sqlitebrowser fedpkg @development-tools;
+			yum remove git gitg ghex sqlitebrowser @development-tools;
 			break;;
 		Skip )
 			break;;
@@ -230,14 +216,42 @@ select yns in "Yes" "No" "Skip"; do
 	esac;
 done;
 
+echo -e ${questionColor}Do you want packages from the Development Java category?${coloroff};
+select yns in "Yes" "No" "Skip"; do
+	case $yns in
+		Yes )
+			yum install --skip-broken java-1.8.0-openjdk-devel proguard;
+			break;;
+		No )
+			yum remove java-1.8.0-openjdk-devel proguard;
+			break;;
+		Skip )
+			break;;
+	esac;
+done;
+
+echo -e ${questionColor}Do you want packages from the Development RPM category?${coloroff};
+select yns in "Yes" "No" "Skip"; do
+	case $yns in
+		Yes )
+			yum install --skip-broken fedpkg;
+			break;;
+		No )
+			yum remove fedpkg;
+			break;;
+		Skip )
+			break;;
+	esac;
+done;
+
 echo -e ${questionColor}Do you want packages from the Disks category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install --skip-broken testdisk smartmontools mediawriter gnome-multi-writer hdparm nwipe;
+			yum install --skip-broken testdisk smartmontools mediawriter gnome-multi-writer nwipe;
 			break;;
 		No )
-			yum remove testdisk smartmontools mediawriter gnome-multi-writer hdparm nwipe;
+			yum remove testdisk smartmontools mediawriter gnome-multi-writer nwipe;
 			break;;
 		Skip )
 			break;;
@@ -252,6 +266,20 @@ select yns in "Yes" "No" "Skip"; do
 			break;;
 		No )
 			yum remove libreoffice meld pdfmod scribus;
+			break;;
+		Skip )
+			break;;
+	esac;
+done;
+
+echo -e ${questionColor}Do you want packages from the E-Books category?${coloroff};
+select yns in "Yes" "No" "Skip"; do
+	case $yns in
+		Yes )
+			yum install --skip-broken calibre;
+			break;;
+		No )
+			yum remove calibre;
 			break;;
 		Skip )
 			break;;
@@ -440,7 +468,7 @@ select yns in "Yes" "No" "Skip"; do
 	esac;
 done;
 
-echo -e ${questionColor}Do you want packages from the Maps category?${coloroff};
+echo -e ${questionColor}Do you want packages from the Mapping category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
@@ -454,7 +482,7 @@ select yns in "Yes" "No" "Skip"; do
 	esac;
 done;
 
-echo -e ${questionColor}Do you want packages from the Media Management category?${coloroff};
+echo -e ${questionColor}Do you want packages from the Music Management category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
@@ -462,20 +490,6 @@ select yns in "Yes" "No" "Skip"; do
 			break;;
 		No )
 			yum remove picard soundconverter sound-juicer;
-			break;;
-		Skip )
-			break;;
-	esac;
-done;
-
-echo -e ${questionColor}Do you want packages from the Media Management Books category?${coloroff};
-select yns in "Yes" "No" "Skip"; do
-	case $yns in
-		Yes )
-			yum install --skip-broken calibre;
-			break;;
-		No )
-			yum remove calibre;
 			break;;
 		Skip )
 			break;;
@@ -500,10 +514,10 @@ echo -e ${questionColor}Do you want packages from the Passwords category?${color
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install --skip-broken keepassxc pwgen diceware u2f-hidraw-policy pam-u2f pamu2fcfg ssss;
+			yum install --skip-broken keepassxc pwgen diceware u2f-hidraw-policy ssss;
 			break;;
 		No )
-			yum remove keepassxc pwgen diceware u2f-hidraw-policy pam-u2f pamu2fcfg ssss;
+			yum remove keepassxc pwgen diceware u2f-hidraw-policy ssss;
 			break;;
 		Skip )
 			break;;
@@ -514,10 +528,10 @@ echo -e ${questionColor}Do you want packages from the Privacy category?${colorof
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install --skip-broken bleachbit srm wipe;
+			yum install --skip-broken bleachbit srm;
 			break;;
 		No )
-			yum remove bleachbit srm wipe;
+			yum remove bleachbit srm;
 			break;;
 		Skip )
 			break;;
@@ -570,10 +584,10 @@ echo -e ${questionColor}Do you want packages from the Utility category?${colorof
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install --skip-broken whois mtr stress iotop wavemon tree pv iperf3 bmon powertop ncdu;
+			yum install --skip-broken whois mtr stress iotop wavemon pv iperf3 bmon powertop ncdu;
 			break;;
 		No )
-			yum remove whois mtr stress iotop wavemon tree pv iperf3 bmon powertop ncdu;
+			yum remove whois mtr stress iotop wavemon pv iperf3 bmon powertop ncdu;
 			break;;
 		Skip )
 			break;;
@@ -598,10 +612,10 @@ echo -e ${questionColor}Do you want packages from the Wine category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install --skip-broken winetricks wine;
+			yum install --skip-broken wine winetricks;
 			break;;
 		No )
-			yum remove winetricks wine;
+			yum remove wine winetricks;
 			break;;
 		Skip )
 			break;;
