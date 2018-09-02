@@ -528,10 +528,10 @@ echo -e ${questionColor}Do you want packages from the Privacy category?${colorof
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install --skip-broken bleachbit srm;
+			yum install --skip-broken bleachbit srm wipe scrub;
 			break;;
 		No )
-			yum remove bleachbit srm;
+			yum remove bleachbit srm wipe scrub;
 			break;;
 		Skip )
 			break;;
