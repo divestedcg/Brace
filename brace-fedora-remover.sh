@@ -17,7 +17,7 @@ packages=$packages" xawtv";
 #KDE
 packages=$packages" kmahjongg konqueror amarok k3b";
 #LXDE
-packages=$packages" gnumeric abiword midori xpad pidgin asunder lxmusic clipit gnomebaker";
+packages=$packages" gnumeric abiword midori xpad pidgin asunder lxmusic clipit gnomebaker osmo";
 #LXQT
 packages=$packages" yarock qlipper quassel qupzilla";
 #MATE

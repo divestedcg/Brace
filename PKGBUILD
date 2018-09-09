@@ -1,12 +1,12 @@
 # Maintainer: Tad <tad@spotco.us>
 pkgname=brace
 pkgver=2.5
-pkgrel=7
+pkgrel=9
 pkgdesc="Increases privacy/security through various configs. Firefox hardening credit: @pyllyukko"
 arch=('any')
 license=('GPLv3')
 optdepends=('arch-audit: check for insecure packages'
-	'extirpater: erase drive freespace'
+	'scrub: erase drive freespace'
 	'firejail: sandbox programs'
 	'linux-hardened: harden against exploits'
 	'rkhunter: scan for rootkits'
@@ -30,7 +30,7 @@ source=('00-brace-gnome'
 	'brace-helpers.sh'
 	'user.js.sh'
 	'https://raw.githubusercontent.com/pyllyukko/user.js/master/user.js')
-sha512sums=('f230a0e1b4792207288a91e9f2aff6155be3b835f277fc9441bf24f9dc8d2623c5ac1c772585cf983900016c76e47bbc04987506a4395e5a878c4042368ff8d8'
+sha512sums=('551c7247522518ed420089e3c138101464754110399652ba123af4d9af65da72e54b1c395b6eea30aa8d9891ccdb4fc5311e62fd04be5fe25d30af37fbe2b1a8'
             '43eff31649b0f07921efa032e952e3c9094bddb8ec8882ae44f25eca9449a44ae1fb28d38c6512d825d27a26e080390c84ac42a7a6d6f4f44e2ad7be77a7f122'
             '24616a6133608301d3c4016f2667bdf6982ab3f99ac231b5588bcb220545d992e3fcc97cceafd674f7b4ba00d5747f3f4d25da54130a1ff817d752ba6b93bf98'
             'd6a0629b2354fa2ddaf8e9a086aad384a9f60f36719281236bd180ed7205264862ffc2873ab86e5daa6b062647dbdd0b7251c26e51a76c22dfb4f6e58ffdbe09'
@@ -46,7 +46,7 @@ sha512sums=('f230a0e1b4792207288a91e9f2aff6155be3b835f277fc9441bf24f9dc8d2623c5a
             '2bb7c4306b94687583caf5db2a8c384ffeeedcbaba72acc96a686e91a49c48e7b73a34e2dba74f8532d59ee250560fc6bf819e1308e37d9028d2138297d18b94'
             'd196beb86379b2df316d3698cf3827ebdb7ab8120e41a4085bcf87ae2d445c2f1e8875821b5aa18eac1d7c04685fa6ba480c455c1b9f92a072a06883b621df04'
             'dca9b4cf502ff408a7ba8d5a29a9e91d7975c35bfa53a3ca49651fc80bd1dc9b9ebaadebe7fff70b8dee3e2fc74a7d2c8bea9ca3087ece4e5d33f68d3483b486'
-            '6c7d60e6cb655e3b8931a1afeab7a39cfd37672eb639f0c93c7d6acffa5ed885ebf065cc5c1a18783f206dbb94f74ad4fad3292054511217727db320b1ff02d4')
+            '612463b7bbf5cda6e87ef393fb617a2a823474a275177d0b86538da2d9c75f4c755c58990afe0877c0cf72b0267666c4a5b6f34a28f37667a2b516a428ece46f')
 install=brace.install
 
 build() {
