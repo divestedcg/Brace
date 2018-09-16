@@ -576,19 +576,36 @@ echo -e ${questionColor}Do you want packages from the Disks category?${coloroff}
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed gnome-disk-utility baobab testdisk parted ntfs-3g dosfstools mtools exfat-utils smartmontools gnome-multi-writer;
+			pacman -S --needed gnome-disk-utility baobab testdisk parted smartmontools gnome-multi-writer;
 			break;;
 		No )
 			pacman -Rsc gnome-disk-utility;
 			pacman -Rsc baobab;
 			pacman -Rsc testdisk;
 			pacman -Rsc parted;
-			pacman -Rsc ntfs-3g;
-			pacman -Rsc dosfstools;
-			pacman -Rsc mtools;
-			pacman -Rsc exfat-utils;
 			pacman -Rsc smartmontools;
 			pacman -Rsc gnome-multi-writer;
+			break;;
+		Skip )
+			break;;
+	esac;
+done;
+
+echo -e ${questionColor}Do you want packages from the Disk Support category?${coloroff};
+select yns in "Yes" "No" "Skip"; do
+	case $yns in
+		Yes )
+			pacman -S --needed btrfs-progs dosfstools exfat-utils f2fs-tools mtools ntfs-3g udftools xfsprogs;
+			break;;
+		No )
+			pacman -Rsc btrfs-progs;
+			pacman -Rsc dosfstools;
+			pacman -Rsc exfat-utils;
+			pacman -Rsc f2fs-tools;
+			pacman -Rsc mtools;
+			pacman -Rsc ntfs-3g;
+			pacman -Rsc udftools;
+			pacman -Rsc xfsprogs;
 			break;;
 		Skip )
 			break;;
@@ -915,10 +932,14 @@ select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
 			pacman -S --needed bleachbit wipe;
+			if [ "$aurPackagesEnabled" = "true" ]; then
+				yaourt -S --needed scrub;
+			fi
 			break;;
 		No )
 			pacman -Rsc bleachbit;
 			pacman -Rsc wipe;
+			pacman -Rsc scrub;
 			break;;
 		Skip )
 			break;;
@@ -1069,7 +1090,7 @@ done;
 
 if [ "$aurPackagesEnabled" = "false" ]; then
 	echo -e ${infoColor}Here are all the AUR packages that were not installed some may not of been chosen${coloroff}
-	echo downgrade numix-circle-icon-theme-git numix-icon-theme-git android-apktool dex2jar jd-gui sdat2img android-studio jd-gui launch4j sirikali-git gocryptfs peek lostfiles ;
+	echo downgrade numix-circle-icon-theme-git numix-icon-theme-git android-apktool dex2jar jd-gui sdat2img android-studio jd-gui launch4j sirikali-git gocryptfs scrub peek lostfiles ;
 fi
 
 pacman -Rns $(pacman -Qttdq);
