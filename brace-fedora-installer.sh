@@ -300,6 +300,20 @@ select yns in "Yes" "No" "Skip"; do
 	esac;
 done;
 
+echo -e ${questionColor}Do you want packages from the File Backup category?${coloroff};
+select yns in "Yes" "No" "Skip"; do
+	case $yns in
+		Yes )
+			yum install --skip-broken backintime-qt4;
+			break;;
+		No )
+			yum remove backintime-qt4;
+			break;;
+		Skip )
+			break;;
+	esac;
+done;
+
 echo -e ${questionColor}Do you want packages from the File Encryption category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
