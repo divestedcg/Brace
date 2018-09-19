@@ -44,7 +44,8 @@ lock-enabled=true
 user-switch-enabled=true
 
 [org/gnome/desktop/search-providers]
-disable-external=true
+disable-external=false
+disabled=['gnome-calculator.desktop', 'org.gnome.Calculator.desktop']
 
 [org/gnome/desktop/session]
 idle-delay=uint32 600

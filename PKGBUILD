@@ -1,7 +1,7 @@
 # Maintainer: Tad <tad@spotco.us>
 pkgname=brace
-pkgver=2.5
-pkgrel=13
+pkgver=2.6
+pkgrel=1
 pkgdesc="Increases privacy/security through various configs. Firefox hardening credit: @pyllyukko"
 arch=('any')
 license=('GPLv3')
@@ -30,7 +30,7 @@ source=('00-brace-gnome'
 	'brace-helpers.sh'
 	'user.js.sh'
 	'https://raw.githubusercontent.com/pyllyukko/user.js/master/user.js')
-sha512sums=('551c7247522518ed420089e3c138101464754110399652ba123af4d9af65da72e54b1c395b6eea30aa8d9891ccdb4fc5311e62fd04be5fe25d30af37fbe2b1a8'
+sha512sums=('f70505e602367d84e97a90117f4a1d419e8c51a1ba4d8ac58255bbe6df723db30591f48af84f5a61fbf19b0f8f17ba519ffd9aebb850945b620e10ddb3d8fb1d'
             '43eff31649b0f07921efa032e952e3c9094bddb8ec8882ae44f25eca9449a44ae1fb28d38c6512d825d27a26e080390c84ac42a7a6d6f4f44e2ad7be77a7f122'
             '24616a6133608301d3c4016f2667bdf6982ab3f99ac231b5588bcb220545d992e3fcc97cceafd674f7b4ba00d5747f3f4d25da54130a1ff817d752ba6b93bf98'
             'd6a0629b2354fa2ddaf8e9a086aad384a9f60f36719281236bd180ed7205264862ffc2873ab86e5daa6b062647dbdd0b7251c26e51a76c22dfb4f6e58ffdbe09'
