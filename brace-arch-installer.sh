@@ -210,95 +210,34 @@ select yns in "Yes" "No" "Skip"; do
 	esac;
 done;
 
-echo -e ${questionColor}Do you want packages from the Gnome category?${coloroff};
+echo -e ${questionColor}Do you want packages from the GNOME category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed file-roller gnome gnome-terminal gnome-tweak-tool dconf-editor xdg-user-dirs;
+			pacman -S --needed gnome gnome-tweak-tool seahorse dconf-editor;
 			break;;
 		No )
-			pacman -Rsc file-roller;
 			pacman -Rsc gnome;
-			pacman -Rsc gnome-terminal;
 			pacman -Rsc gnome-tweak-tool;
+			pacman -Rsc seahorse;
 			pacman -Rsc dconf-editor;
-			pacman -Rsc xdg-user-dirs;
 			break;;
 		Skip )
 			break;;
 	esac;
 done;
 
-echo -e ${questionColor}Do you want packages from the Gnome Extensions category?${coloroff};
+echo -e ${questionColor}Do you want packages from the GNOME Remove Me category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed gnome-shell-extensions;
+			pacman -S --needed epiphany gnome-documents gnome-music gnome-software;
 			break;;
 		No )
-			pacman -Rsc gnome-shell-extensions;
-			break;;
-		Skip )
-			break;;
-	esac;
-done;
-
-echo -e ${questionColor}Do you want packages from the Gnome Extra category?${coloroff};
-select yns in "Yes" "No" "Skip"; do
-	case $yns in
-		Yes )
-			pacman -S --needed gnome-user-docs gnome-calendar gnome-characters gnome-font-viewer gnome-logs gnome-sound-recorder gnome-clocks gnome-maps gnome-contacts;
-			break;;
-		No )
-			pacman -Rsc gnome-user-docs;
-			pacman -Rsc gnome-calendar;
-			pacman -Rsc gnome-characters;
-			pacman -Rsc gnome-font-viewer;
-			pacman -Rsc gnome-logs;
-			pacman -Rsc gnome-sound-recorder;
-			pacman -Rsc gnome-clocks;
-			pacman -Rsc gnome-maps;
-			pacman -Rsc gnome-contacts;
-			break;;
-		Skip )
-			break;;
-	esac;
-done;
-
-echo -e ${questionColor}Do you want packages from the Gnome REMOVE category?${coloroff};
-select yns in "Yes" "No" "Skip"; do
-	case $yns in
-		Yes )
-			pacman -S --needed apache empathy epiphany five-or-more four-in-a-row gnome-dictionary gnome-documents gnome-hearts gnome-klotski gnome-weather gnome-music gnome-nettool gnome-nibbles gnome-phone-manager gnome-power-manager gnome-robots gnome-tetravex gnome-todo gnome-user-share gvfs-afc gvfs-goa gvfs-google gvfs-gphoto2 mod_dnssd sushi vino virtviewer;
-			break;;
-		No )
-			pacman -Rsc apache;
-			pacman -Rsc empathy;
 			pacman -Rsc epiphany;
-			pacman -Rsc five-or-more;
-			pacman -Rsc four-in-a-row;
-			pacman -Rsc gnome-dictionary;
 			pacman -Rsc gnome-documents;
-			pacman -Rsc gnome-hearts;
-			pacman -Rsc gnome-klotski;
-			pacman -Rsc gnome-weather;
 			pacman -Rsc gnome-music;
-			pacman -Rsc gnome-nettool;
-			pacman -Rsc gnome-nibbles;
-			pacman -Rsc gnome-phone-manager;
-			pacman -Rsc gnome-power-manager;
-			pacman -Rsc gnome-robots;
-			pacman -Rsc gnome-tetravex;
-			pacman -Rsc gnome-todo;
-			pacman -Rsc gnome-user-share;
-			pacman -Rsc gvfs-afc;
-			pacman -Rsc gvfs-goa;
-			pacman -Rsc gvfs-google;
-			pacman -Rsc gvfs-gphoto2;
-			pacman -Rsc mod_dnssd;
-			pacman -Rsc sushi;
-			pacman -Rsc vino;
-			pacman -Rsc virtviewer;
+			pacman -Rsc gnome-software;
 			break;;
 		Skip )
 			break;;
@@ -320,34 +259,16 @@ select yns in "Yes" "No" "Skip"; do
 	esac;
 done;
 
-echo -e ${questionColor}Do you want packages from the Nautilus category?${coloroff};
-select yns in "Yes" "No" "Skip"; do
-	case $yns in
-		Yes )
-			pacman -S --needed nautilus;
-			break;;
-		No )
-			pacman -Rsc nautilus;
-			break;;
-		Skip )
-			break;;
-	esac;
-done;
-
 echo -e ${questionColor}Do you want packages from the Base category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed gksu gnome-keyring seahorse gvfs-mtp hyphen hyphen-en libmythes mythes-en hunspell hunspell-en aspell aspell-en gnome-screenshot gnome-calculator;
+			pacman -S --needed hyphen hyphen-en libmythes mythes-en hunspell hunspell-en aspell aspell-en;
 			if [ "$aurPackagesEnabled" = "true" ]; then
 				yaourt -S --needed numix-circle-icon-theme-git numix-icon-theme-git;
 			fi
 			break;;
 		No )
-			pacman -Rsc gksu;
-			pacman -Rsc gnome-keyring;
-			pacman -Rsc seahorse;
-			pacman -Rsc gvfs-mtp;
 			pacman -Rsc hyphen;
 			pacman -Rsc hyphen-en;
 			pacman -Rsc libmythes;
@@ -356,8 +277,6 @@ select yns in "Yes" "No" "Skip"; do
 			pacman -Rsc hunspell-en;
 			pacman -Rsc aspell;
 			pacman -Rsc aspell-en;
-			pacman -Rsc gnome-screenshot;
-			pacman -Rsc gnome-calculator;
 			pacman -Rsc numix-circle-icon-theme-git;
 			pacman -Rsc numix-icon-theme-git;
 			break;;
@@ -392,14 +311,13 @@ echo -e ${questionColor}Do you want packages from the Audio category?${coloroff}
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed pavucontrol paprefs pulseaudio pulseaudio-alsa pulseaudio-gconf pulseaudio-zeroconf lib32-libcanberra-pulse;
+			pacman -S --needed pavucontrol paprefs pulseaudio pulseaudio-alsa pulseaudio-zeroconf lib32-libcanberra-pulse;
 			break;;
 		No )
 			pacman -Rsc pavucontrol;
 			pacman -Rsc paprefs;
 			pacman -Rsc pulseaudio;
 			pacman -Rsc pulseaudio-alsa;
-			pacman -Rsc pulseaudio-gconf;
 			pacman -Rsc pulseaudio-zeroconf;
 			pacman -Rsc lib32-libcanberra-pulse;
 			break;;
@@ -539,9 +457,9 @@ echo -e ${questionColor}Do you want packages from the Development Java category?
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed jdk8-openjdk intellij-idea-community-edition proguard;
+			pacman -S --needed jdk8-openjdk intellij-idea-community-edition;
 			if [ "$aurPackagesEnabled" = "true" ]; then
-				yaourt -S --needed jd-gui launch4j;
+				yaourt -S --needed proguard jd-gui launch4j;
 			fi
 			break;;
 		No )
@@ -560,11 +478,10 @@ echo -e ${questionColor}Do you want packages from the Development Pacman categor
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed asp expac;
+			pacman -S --needed asp;
 			break;;
 		No )
 			pacman -Rsc asp;
-			pacman -Rsc expac;
 			break;;
 		Skip )
 			break;;
@@ -575,11 +492,9 @@ echo -e ${questionColor}Do you want packages from the Disks category?${coloroff}
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed gnome-disk-utility baobab testdisk smartmontools parted gnome-multi-writer;
+			pacman -S --needed testdisk smartmontools parted gnome-multi-writer;
 			break;;
 		No )
-			pacman -Rsc gnome-disk-utility;
-			pacman -Rsc baobab;
 			pacman -Rsc testdisk;
 			pacman -Rsc smartmontools;
 			pacman -Rsc parted;
@@ -615,12 +530,10 @@ echo -e ${questionColor}Do you want packages from the Documents category?${color
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed libreoffice-fresh evince gedit meld pdfmod scribus;
+			pacman -S --needed libreoffice-fresh meld pdfmod scribus;
 			break;;
 		No )
 			pacman -Rsc libreoffice-fresh;
-			pacman -Rsc evince;
-			pacman -Rsc gedit;
 			pacman -Rsc meld;
 			pacman -Rsc pdfmod;
 			pacman -Rsc scribus;
@@ -870,13 +783,11 @@ echo -e ${questionColor}Do you want packages from the Media category?${coloroff}
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed lollypop youtube-dl totem eog;
+			pacman -S --needed lollypop youtube-dl;
 			break;;
 		No )
 			pacman -Rsc lollypop;
 			pacman -Rsc youtube-dl;
-			pacman -Rsc totem;
-			pacman -Rsc eog;
 			break;;
 		Skip )
 			break;;
@@ -953,14 +864,17 @@ echo -e ${questionColor}Do you want packages from the Security category?${coloro
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed clamav rkhunter unhide rng-tools firejail;
+			pacman -S --needed clamav clamtk rkhunter unhide rng-tools firejail linux-hardened apparmor;
 			break;;
 		No )
 			pacman -Rsc clamav;
+			pacman -Rsc clamtk;
 			pacman -Rsc rkhunter;
 			pacman -Rsc unhide;
 			pacman -Rsc rng-tools;
 			pacman -Rsc firejail;
+			pacman -Rsc linux-hardened;
+			pacman -Rsc apparmor;
 			break;;
 		Skip )
 			break;;
@@ -1025,13 +939,12 @@ echo -e ${questionColor}Do you want packages from the Virtualization libvirt cat
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed libvirt virt-manager qemu ebtables;
+			pacman -S --needed libvirt virt-manager qemu;
 			break;;
 		No )
 			pacman -Rsc libvirt;
 			pacman -Rsc virt-manager;
 			pacman -Rsc qemu;
-			pacman -Rsc ebtables;
 			break;;
 		Skip )
 			break;;
@@ -1070,7 +983,7 @@ done;
 
 if [ "$aurPackagesEnabled" = "false" ]; then
 	echo -e ${infoColor}Here are all the AUR packages that were not installed some may not of been chosen${coloroff}
-	echo downgrade lostfiles numix-circle-icon-theme-git numix-icon-theme-git android-apktool sdat2img android-studio jd-gui launch4j sirikali-git gocryptfs scrub peek ;
+	echo downgrade lostfiles numix-circle-icon-theme-git numix-icon-theme-git android-apktool sdat2img android-studio proguard jd-gui launch4j sirikali-git gocryptfs scrub peek ;
 fi
 
 pacman -Rns $(pacman -Qttdq);
