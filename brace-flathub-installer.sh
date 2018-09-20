@@ -36,20 +36,6 @@ select yns in "Yes" "No" "Skip"; do
 	esac;
 done;
 
-echo -e ${questionColor}Do you want Ring?${coloroff};
-select yns in "Yes" "No" "Skip"; do
-	case $yns in
-		Yes )
-			flatpak install flathub cx.ring.Ring;
-			break;;
-		No )
-			flatpak remove cx.ring.Ring;
-			break;;
-		Skip )
-			break;;
-	esac;
-done;
-
 echo -e ${questionColor}Do you want Signal?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
@@ -58,62 +44,6 @@ select yns in "Yes" "No" "Skip"; do
 			break;;
 		No )
 			flatpak remove org.signal.Signal;
-			break;;
-		Skip )
-			break;;
-	esac;
-done;
-
-echo -e ${questionColor}Do you want GNOME Games?${coloroff};
-select yns in "Yes" "No" "Skip"; do
-	case $yns in
-		Yes )
-			flatpak install flathub org.gnome.Games;
-			break;;
-		No )
-			flatpak remove org.gnome.Games;
-			break;;
-		Skip )
-			break;;
-	esac;
-done;
-
-echo -e ${questionColor}Do you want PPSSPP?${coloroff};
-select yns in "Yes" "No" "Skip"; do
-	case $yns in
-		Yes )
-			flatpak install flathub org.ppsspp.PPSSPP;
-			break;;
-		No )
-			flatpak remove org.ppsspp.PPSSPP;
-			break;;
-		Skip )
-			break;;
-	esac;
-done;
-
-echo -e ${questionColor}Do you want Shattered Pixel Dungeon?${coloroff};
-select yns in "Yes" "No" "Skip"; do
-	case $yns in
-		Yes )
-			flatpak install flathub com.shatteredpixel.shatteredpixeldungeon;
-			break;;
-		No )
-			flatpak remove com.shatteredpixel.shatteredpixeldungeon;
-			break;;
-		Skip )
-			break;;
-	esac;
-done;
-
-echo -e ${questionColor}Do you want Twitch?${coloroff};
-select yns in "Yes" "No" "Skip"; do
-	case $yns in
-		Yes )
-			flatpak install flathub com.vinszent.GnomeTwitch;
-			break;;
-		No )
-			flatpak remove com.vinszent.GnomeTwitch;
 			break;;
 		Skip )
 			break;;
@@ -184,20 +114,6 @@ select yns in "Yes" "No" "Skip"; do
 			break;;
 		No )
 			flatpak remove com.uploadedlobster.peek;
-			break;;
-		Skip )
-			break;;
-	esac;
-done;
-
-echo -e ${questionColor}Do you want Fedora Media Writer?${coloroff};
-select yns in "Yes" "No" "Skip"; do
-	case $yns in
-		Yes )
-			flatpak install flathub org.fedoraproject.MediaWriter;
-			break;;
-		No )
-			flatpak remove org.fedoraproject.MediaWriter;
 			break;;
 		Skip )
 			break;;

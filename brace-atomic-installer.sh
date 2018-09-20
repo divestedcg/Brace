@@ -204,20 +204,6 @@ select yns in "Yes" "No" "Skip"; do
 	esac;
 done;
 
-echo -e ${questionColor}Do you want Games - Emulators?${coloroff};
-select yns in "Yes" "No" "Skip"; do
-	case $yns in
-		Yes )
-			flatpak install flathub org.DolphinEmu.dolphin-emu net.pcsx2.PCSX2 org.ppsspp.PPSSPP;
-			break;;
-		No )
-			flatpak remove org.DolphinEmu.dolphin-emu net.pcsx2.PCSX2 org.ppsspp.PPSSPP;
-			break;;
-		Skip )
-			break;;
-	esac;
-done;
-
 echo -e ${questionColor}Do you want Image Manipulation?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in

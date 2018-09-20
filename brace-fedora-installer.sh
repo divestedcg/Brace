@@ -24,10 +24,10 @@ echo -e ${questionColor}Do you want packages from the Core category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install --skip-broken irqbalance nano htop screen p7zip pixz lm_sensors screenfetch ripgrep tree;
+			yum install --skip-broken irqbalance openssh nano htop wget screen p7zip pixz lm_sensors screenfetch ripgrep;
 			break;;
 		No )
-			yum remove irqbalance nano htop screen p7zip pixz lm_sensors screenfetch ripgrep tree;
+			yum remove irqbalance openssh nano htop wget screen p7zip pixz lm_sensors screenfetch ripgrep;
 			break;;
 		Skip )
 			break;;
@@ -38,10 +38,10 @@ echo -e ${questionColor}Do you want packages from the Frameworks category?${colo
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install --skip-broken java-1.8.0-openjdk;
+			yum install --skip-broken java-1.8.0-openjdk java-9-openjdk;
 			break;;
 		No )
-			yum remove java-1.8.0-openjdk;
+			yum remove java-1.8.0-openjdk java-9-openjdk;
 			break;;
 		Skip )
 			break;;
@@ -206,10 +206,10 @@ echo -e ${questionColor}Do you want packages from the Development Android catego
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install --skip-broken android-tools;
+			yum install --skip-broken android-tools enjarify;
 			break;;
 		No )
-			yum remove android-tools;
+			yum remove android-tools enjarify;
 			break;;
 		Skip )
 			break;;
@@ -220,10 +220,10 @@ echo -e ${questionColor}Do you want packages from the Development Java category?
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install --skip-broken java-1.8.0-openjdk-devel proguard;
+			yum install --skip-broken java-1.8.0-openjdk-devel java-9-openjdk-devel proguard;
 			break;;
 		No )
-			yum remove java-1.8.0-openjdk-devel proguard;
+			yum remove java-1.8.0-openjdk-devel java-9-openjdk-devel proguard;
 			break;;
 		Skip )
 			break;;
@@ -248,10 +248,10 @@ echo -e ${questionColor}Do you want packages from the Disks category?${coloroff}
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install --skip-broken testdisk smartmontools mediawriter gnome-multi-writer nwipe;
+			yum install --skip-broken testdisk smartmontools parted mediawriter gnome-multi-writer nwipe;
 			break;;
 		No )
-			yum remove testdisk smartmontools mediawriter gnome-multi-writer nwipe;
+			yum remove testdisk smartmontools parted mediawriter gnome-multi-writer nwipe;
 			break;;
 		Skip )
 			break;;
@@ -426,34 +426,6 @@ select yns in "Yes" "No" "Skip"; do
 	esac;
 done;
 
-echo -e ${questionColor}Do you want packages from the Games - Emulators category?${coloroff};
-select yns in "Yes" "No" "Skip"; do
-	case $yns in
-		Yes )
-			yum install --skip-broken dolphin-emu pcsx;
-			break;;
-		No )
-			yum remove dolphin-emu pcsx;
-			break;;
-		Skip )
-			break;;
-	esac;
-done;
-
-echo -e ${questionColor}Do you want packages from the Headless category?${coloroff};
-select yns in "Yes" "No" "Skip"; do
-	case $yns in
-		Yes )
-			yum install --skip-broken @"Headless-Management";
-			break;;
-		No )
-			yum remove @"Headless-Management";
-			break;;
-		Skip )
-			break;;
-	esac;
-done;
-
 echo -e ${questionColor}Do you want packages from the Hacking category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
@@ -538,6 +510,20 @@ select yns in "Yes" "No" "Skip"; do
 	esac;
 done;
 
+echo -e ${questionColor}Do you want packages from the Media HTPC category?${coloroff};
+select yns in "Yes" "No" "Skip"; do
+	case $yns in
+		Yes )
+			yum install --skip-broken kodi;
+			break;;
+		No )
+			yum remove kodi;
+			break;;
+		Skip )
+			break;;
+	esac;
+done;
+
 echo -e ${questionColor}Do you want packages from the Passwords category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
@@ -584,10 +570,10 @@ echo -e ${questionColor}Do you want packages from the Tor category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install --skip-broken tor obfs4 torsocks nyx onionshare torbrowser-launcher;
+			yum install --skip-broken tor torsocks nyx obfs4 onionshare torbrowser-launcher;
 			break;;
 		No )
-			yum remove tor obfs4 torsocks nyx onionshare torbrowser-launcher;
+			yum remove tor torsocks nyx obfs4 onionshare torbrowser-launcher;
 			break;;
 		Skip )
 			break;;
@@ -612,10 +598,10 @@ echo -e ${questionColor}Do you want packages from the Utility category?${colorof
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install --skip-broken whois mtr stress iotop wavemon pv iperf3 bmon powertop ncdu;
+			yum install --skip-broken whois mtr stress iotop wavemon pv tree iperf3 bmon powertop ncdu;
 			break;;
 		No )
-			yum remove whois mtr stress iotop wavemon pv iperf3 bmon powertop ncdu;
+			yum remove whois mtr stress iotop wavemon pv tree iperf3 bmon powertop ncdu;
 			break;;
 		Skip )
 			break;;

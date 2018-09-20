@@ -40,7 +40,7 @@ select yns in "Yes" "No" "Skip"; do
 		Yes )
 			pacman -S --needed irqbalance openssh nano htop wget screen zip p7zip unrar pixz pigz lm_sensors dialog crda screenfetch ripgrep;
 			if [ "$aurPackagesEnabled" = "true" ]; then
-				yaourt -S --needed downgrade;
+				yaourt -S --needed downgrade lostfiles;
 			fi
 			break;;
 		No )
@@ -61,6 +61,7 @@ select yns in "Yes" "No" "Skip"; do
 			pacman -Rsc screenfetch;
 			pacman -Rsc ripgrep;
 			pacman -Rsc downgrade;
+			pacman -Rsc lostfiles;
 			break;;
 		Skip )
 			break;;
@@ -71,13 +72,11 @@ echo -e ${questionColor}Do you want packages from the Frameworks category?${colo
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed gcc-multilib jdk8-openjdk jre8-openjdk jdk9-openjdk jre9-openjdk python;
+			pacman -S --needed gcc-multilib jre8-openjdk jre9-openjdk python;
 			break;;
 		No )
 			pacman -Rsc gcc-multilib;
-			pacman -Rsc jdk8-openjdk;
 			pacman -Rsc jre8-openjdk;
-			pacman -Rsc jdk9-openjdk;
 			pacman -Rsc jre9-openjdk;
 			pacman -Rsc python;
 			break;;
@@ -162,9 +161,10 @@ echo -e ${questionColor}Do you want packages from the AMD/Intel/Nvidia FOSS GPU 
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed libvdpau libvdpau-va-gl libva-vdpau-driver gstreamer-vaapi lib32-libvdpau lib32-libva-vdpau-driver libva-mesa-driver mesa-vdpau lib32-mesa-vdpau;
+			pacman -S --needed vdpauinfo libvdpau libvdpau-va-gl libva-vdpau-driver gstreamer-vaapi lib32-libvdpau lib32-libva-vdpau-driver libva-mesa-driver mesa-vdpau lib32-mesa-vdpau;
 			break;;
 		No )
+			pacman -Rsc vdpauinfo;
 			pacman -Rsc libvdpau;
 			pacman -Rsc libvdpau-va-gl;
 			pacman -Rsc libva-vdpau-driver;
@@ -519,17 +519,16 @@ echo -e ${questionColor}Do you want packages from the Development Android catego
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed android-udev android-tools;
+			pacman -S --needed android-udev android-tools enjarify;
 			if [ "$aurPackagesEnabled" = "true" ]; then
-				yaourt -S --needed android-apktool dex2jar jd-gui sdat2img android-studio;
+				yaourt -S --needed android-apktool sdat2img android-studio;
 			fi
 			break;;
 		No )
 			pacman -Rsc android-udev;
 			pacman -Rsc android-tools;
+			pacman -Rsc enjarify;
 			pacman -Rsc android-apktool;
-			pacman -Rsc dex2jar;
-			pacman -Rsc jd-gui;
 			pacman -Rsc sdat2img;
 			pacman -Rsc android-studio;
 			break;;
@@ -542,12 +541,14 @@ echo -e ${questionColor}Do you want packages from the Development Java category?
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed intellij-idea-community-edition proguard;
+			pacman -S --needed jdk8-openjdk jdk9-openjdk intellij-idea-community-edition proguard;
 			if [ "$aurPackagesEnabled" = "true" ]; then
 				yaourt -S --needed jd-gui launch4j;
 			fi
 			break;;
 		No )
+			pacman -Rsc jdk8-openjdk;
+			pacman -Rsc jdk9-openjdk;
 			pacman -Rsc intellij-idea-community-edition;
 			pacman -Rsc proguard;
 			pacman -Rsc jd-gui;
@@ -558,14 +559,15 @@ select yns in "Yes" "No" "Skip"; do
 	esac;
 done;
 
-echo -e ${questionColor}Do you want packages from the Development category?${coloroff};
+echo -e ${questionColor}Do you want packages from the Development Pacman category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed Pacman;
+			pacman -S --needed asp expac;
 			break;;
 		No )
-			pacman -Rsc Pacman;
+			pacman -Rsc asp;
+			pacman -Rsc expac;
 			break;;
 		Skip )
 			break;;
@@ -576,14 +578,14 @@ echo -e ${questionColor}Do you want packages from the Disks category?${coloroff}
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed gnome-disk-utility baobab testdisk parted smartmontools gnome-multi-writer;
+			pacman -S --needed gnome-disk-utility baobab testdisk smartmontools parted gnome-multi-writer;
 			break;;
 		No )
 			pacman -Rsc gnome-disk-utility;
 			pacman -Rsc baobab;
 			pacman -Rsc testdisk;
-			pacman -Rsc parted;
 			pacman -Rsc smartmontools;
+			pacman -Rsc parted;
 			pacman -Rsc gnome-multi-writer;
 			break;;
 		Skip )
@@ -645,14 +647,14 @@ select yns in "Yes" "No" "Skip"; do
 	esac;
 done;
 
-echo -e ${questionColor}Do you want packages from the Flatpak category?${coloroff};
+echo -e ${questionColor}Do you want packages from the File Backup category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed flatpak;
+			pacman -S --needed deja-dup;
 			break;;
 		No )
-			pacman -Rsc flatpak;
+			pacman -Rsc deja-dup;
 			break;;
 		Skip )
 			break;;
@@ -694,14 +696,14 @@ select yns in "Yes" "No" "Skip"; do
 	esac;
 done;
 
-echo -e ${questionColor}Do you want packages from the Firmware Updates category?${coloroff};
+echo -e ${questionColor}Do you want packages from the Flatpak category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed fwupd;
+			pacman -S --needed flatpak;
 			break;;
 		No )
-			pacman -Rsc fwupd;
+			pacman -Rsc flatpak;
 			break;;
 		Skip )
 			break;;
@@ -785,22 +787,6 @@ select yns in "Yes" "No" "Skip"; do
 	esac;
 done;
 
-echo -e ${questionColor}Do you want packages from the Games - Emulators category?${coloroff};
-select yns in "Yes" "No" "Skip"; do
-	case $yns in
-		Yes )
-			pacman -S --needed dolphin-emu pcsx2 ppsspp;
-			break;;
-		No )
-			pacman -Rsc dolphin-emu;
-			pacman -Rsc pcsx2;
-			pacman -Rsc ppsspp;
-			break;;
-		Skip )
-			break;;
-	esac;
-done;
-
 echo -e ${questionColor}Do you want packages from the Hacking category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
@@ -822,11 +808,13 @@ echo -e ${questionColor}Do you want packages from the Image Manipulation categor
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed gimp inkscape jpegoptim optipng;
+			pacman -S --needed gimp inkscape darktable pitivi jpegoptim optipng;
 			break;;
 		No )
 			pacman -Rsc gimp;
 			pacman -Rsc inkscape;
+			pacman -Rsc darktable;
+			pacman -Rsc pitivi;
 			pacman -Rsc jpegoptim;
 			pacman -Rsc optipng;
 			break;;
@@ -885,13 +873,13 @@ echo -e ${questionColor}Do you want packages from the Media category?${coloroff}
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed lollypop totem eog youtube-dl;
+			pacman -S --needed lollypop youtube-dl totem eog;
 			break;;
 		No )
 			pacman -Rsc lollypop;
+			pacman -Rsc youtube-dl;
 			pacman -Rsc totem;
 			pacman -Rsc eog;
-			pacman -Rsc youtube-dl;
 			break;;
 		Skip )
 			break;;
@@ -968,13 +956,13 @@ echo -e ${questionColor}Do you want packages from the Security category?${coloro
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed clamav rkhunter rng-tools unhide firejail;
+			pacman -S --needed clamav rkhunter unhide rng-tools firejail;
 			break;;
 		No )
 			pacman -Rsc clamav;
 			pacman -Rsc rkhunter;
-			pacman -Rsc rng-tools;
 			pacman -Rsc unhide;
+			pacman -Rsc rng-tools;
 			pacman -Rsc firejail;
 			break;;
 		Skip )
@@ -1002,10 +990,9 @@ echo -e ${questionColor}Do you want packages from the Torrenting category?${colo
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed transmission-cli transmission-gtk;
+			pacman -S --needed transmission-gtk;
 			break;;
 		No )
-			pacman -Rsc transmission-cli;
 			pacman -Rsc transmission-gtk;
 			break;;
 		Skip )
@@ -1017,22 +1004,20 @@ echo -e ${questionColor}Do you want packages from the Utility category?${colorof
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed whois mtr vdpauinfo stress iotop expac wavemon tree iperf3;
-			if [ "$aurPackagesEnabled" = "true" ]; then
-				yaourt -S --needed lostfiles;
-			fi
+			pacman -S --needed whois mtr stress iotop wavemon pv tree iperf3 bmon powertop ncdu;
 			break;;
 		No )
 			pacman -Rsc whois;
 			pacman -Rsc mtr;
-			pacman -Rsc vdpauinfo;
 			pacman -Rsc stress;
 			pacman -Rsc iotop;
-			pacman -Rsc expac;
 			pacman -Rsc wavemon;
+			pacman -Rsc pv;
 			pacman -Rsc tree;
 			pacman -Rsc iperf3;
-			pacman -Rsc lostfiles;
+			pacman -Rsc bmon;
+			pacman -Rsc powertop;
+			pacman -Rsc ncdu;
 			break;;
 		Skip )
 			break;;
@@ -1060,13 +1045,11 @@ echo -e ${questionColor}Do you want packages from the Wine category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed winetricks wine-staging-nine wine-mono wine_gecko;
+			pacman -S --needed wine-staging winetricks;
 			break;;
 		No )
+			pacman -Rsc wine-staging;
 			pacman -Rsc winetricks;
-			pacman -Rsc wine-staging-nine;
-			pacman -Rsc wine-mono;
-			pacman -Rsc wine_gecko;
 			break;;
 		Skip )
 			break;;
@@ -1090,7 +1073,7 @@ done;
 
 if [ "$aurPackagesEnabled" = "false" ]; then
 	echo -e ${infoColor}Here are all the AUR packages that were not installed some may not of been chosen${coloroff}
-	echo downgrade numix-circle-icon-theme-git numix-icon-theme-git android-apktool dex2jar jd-gui sdat2img android-studio jd-gui launch4j sirikali-git gocryptfs scrub peek lostfiles ;
+	echo downgrade lostfiles numix-circle-icon-theme-git numix-icon-theme-git android-apktool sdat2img android-studio jd-gui launch4j sirikali-git gocryptfs scrub peek ;
 fi
 
 pacman -Rns $(pacman -Qttdq);
