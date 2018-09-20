@@ -72,12 +72,11 @@ echo -e ${questionColor}Do you want packages from the Frameworks category?${colo
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed gcc-multilib jre8-openjdk jre9-openjdk python;
+			pacman -S --needed gcc jre8-openjdk python;
 			break;;
 		No )
-			pacman -Rsc gcc-multilib;
+			pacman -Rsc gcc;
 			pacman -Rsc jre8-openjdk;
-			pacman -Rsc jre9-openjdk;
 			pacman -Rsc python;
 			break;;
 		Skip )
@@ -102,7 +101,7 @@ select yns in "Yes" "No" "Skip"; do
 	esac;
 done;
 
-echo -e ${questionColor}Do you want packages from the Intel CPU Drivers category?${coloroff};
+echo -e ${questionColor}Do you want packages from the Intel CPU Firmware category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
@@ -540,14 +539,13 @@ echo -e ${questionColor}Do you want packages from the Development Java category?
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed jdk8-openjdk jdk9-openjdk intellij-idea-community-edition proguard;
+			pacman -S --needed jdk8-openjdk intellij-idea-community-edition proguard;
 			if [ "$aurPackagesEnabled" = "true" ]; then
 				yaourt -S --needed jd-gui launch4j;
 			fi
 			break;;
 		No )
 			pacman -Rsc jdk8-openjdk;
-			pacman -Rsc jdk9-openjdk;
 			pacman -Rsc intellij-idea-community-edition;
 			pacman -Rsc proguard;
 			pacman -Rsc jd-gui;

@@ -38,10 +38,10 @@ echo -e ${questionColor}Do you want packages from the Frameworks category?${colo
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install --skip-broken java-1.8.0-openjdk java-9-openjdk;
+			yum install --skip-broken java-1.8.0-openjdk;
 			break;;
 		No )
-			yum remove java-1.8.0-openjdk java-9-openjdk;
+			yum remove java-1.8.0-openjdk;
 			break;;
 		Skip )
 			break;;
@@ -206,10 +206,10 @@ echo -e ${questionColor}Do you want packages from the Development Java category?
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install --skip-broken java-1.8.0-openjdk-devel java-9-openjdk-devel proguard;
+			yum install --skip-broken java-1.8.0-openjdk-devel proguard;
 			break;;
 		No )
-			yum remove java-1.8.0-openjdk-devel java-9-openjdk-devel proguard;
+			yum remove java-1.8.0-openjdk-devel proguard;
 			break;;
 		Skip )
 			break;;
