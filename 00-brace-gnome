@@ -126,7 +126,7 @@ antialiasing='grayscale'
 hinting='slight'
 
 [org/gnome/shell]
-favorite-apps=['org.gnome.Nautilus.desktop', 'firefox.desktop', 'evolution.desktop', 'org.gnome.Evolution.desktop', 'thunderbird.desktop', 'mozilla-thunderbird.desktop', 'libreoffice-startcenter.desktop', 'org.keepassxc.KeePassXC.desktop', 'org.gnome.Lollypop.desktop', 'yelp.desktop']
+favorite-apps=['org.gnome.Nautilus.desktop', 'firefox.desktop', 'evolution.desktop', 'org.gnome.Evolution.desktop', 'libreoffice-startcenter.desktop', 'org.keepassxc.KeePassXC.desktop', 'org.gnome.Lollypop.desktop', 'yelp.desktop']
 disable-user-extensions=false
 
 [org/gnome/shell/overrides]

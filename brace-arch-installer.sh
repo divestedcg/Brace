@@ -458,10 +458,10 @@ echo -e ${questionColor}Do you want packages from the Communication category?${c
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed thunderbird;
+			pacman -S --needed evolution;
 			break;;
 		No )
-			pacman -Rsc thunderbird;
+			pacman -Rsc evolution;
 			break;;
 		Skip )
 			break;;
@@ -472,11 +472,10 @@ echo -e ${questionColor}Do you want packages from the Communication Realtime cat
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed hexchat mumble gajim;
+			pacman -S --needed hexchat gajim;
 			break;;
 		No )
 			pacman -Rsc hexchat;
-			pacman -Rsc mumble;
 			pacman -Rsc gajim;
 			break;;
 		Skip )

@@ -6,12 +6,10 @@ if [[ $EUID -ne 0 ]]; then echo 'This script needs to be run as root!'; exit 1; 
 
 packages="";
 
-#Unsorted
-packages=$packages" geary";
 #CentOS 7
 packages=$packages" empathy";
 #Workstation (GNOME)
-packages=$packages" rhythmbox gnome-documents gnome-weather evolution";
+packages=$packages" rhythmbox gnome-documents gnome-weather";
 #Cinnamon
 packages=$packages" xawtv";
 #KDE
