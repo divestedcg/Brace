@@ -701,12 +701,12 @@ echo -e ${questionColor}Do you want packages from the Hacking category?${colorof
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed aircrack-ng nmap wireshark-gtk hashcat;
+			pacman -S --needed aircrack-ng nmap wireshark-qt hashcat;
 			break;;
 		No )
 			pacman -Rsc aircrack-ng;
 			pacman -Rsc nmap;
-			pacman -Rsc wireshark-gtk;
+			pacman -Rsc wireshark-qt;
 			pacman -Rsc hashcat;
 			break;;
 		Skip )

@@ -542,10 +542,10 @@ echo -e ${questionColor}Do you want packages from the Security category?${coloro
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install --skip-broken clamav clamav-data-empty clamav-update clamtk unhide chkrootkit firewall-config;
+			yum install --skip-broken clamav clamav-data-empty clamav-update clamtk unhide chkrootkit firewall-config setroubleshoot;
 			break;;
 		No )
-			yum remove clamav clamav-data-empty clamav-update clamtk unhide chkrootkit firewall-config;
+			yum remove clamav clamav-data-empty clamav-update clamtk unhide chkrootkit firewall-config setroubleshoot;
 			break;;
 		Skip )
 			break;;
