@@ -50,6 +50,9 @@ auto-update=false
 checkin-facebook-privacy='ALL_FRIENDS'
 checkin-foursquare-privacy='followers'
 
+[org/gnome/MultiWriter]
+blank-drive=true
+
 [org/gnome/nm-applet]
 suppress-wireless-networks-available=true
 

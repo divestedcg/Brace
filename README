@@ -23,6 +23,7 @@ Installed
 	brace-fedora-installer.sh		= Fedora: package installer
 	brace-fedora-installer-base.sh		= Fedora: simplified package installer
 	brace-fedora-remover.sh			= Fedora: package remover
+	brace-fedora-update-system.sh		= Fedora: update system using dnf-plugin-system-upgrade
 	brace-supplemental-changes.sh		= GNOME: change extra default settings
 	dnu.service				= kernel: systemd target to toggle linux-hardened's deny_new_usb sysctl
 	helpers.sh				= profile: adds helper aliases

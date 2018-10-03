@@ -50,6 +50,9 @@ disabled=['gnome-calculator.desktop', 'org.gnome.Calculator.desktop']
 [org/gnome/desktop/session]
 idle-delay=uint32 600
 
+[org/gnome/desktop/sound]
+allow-volume-above-100-percent=true
+
 [org/gnome/desktop/thumbnail-cache]
 maximum-age=7
 
@@ -149,6 +152,8 @@ palette=['#1d1f21', '#cc342b', '#198844', '#fba922', '#3971ed', '#a36ac7', '#397
 cursor-shape='underline'
 use-theme-colors=true
 use-theme-background=false
+use-transparent-background=true
+background-transparency-percent=15
 bold-color-same-as-fg=true
 bold-color='#c5c8c6'
 background-color='#1d1f21'
