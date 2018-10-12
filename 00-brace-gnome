@@ -93,6 +93,9 @@ use-default-font=true
 [org/gnome/gnome-screenshot]
 include-icc-profile=false
 
+[org/gnome/mutter]
+dynamic-workspaces=false
+
 [org/gnome/nautilus/icon-view]
 default-zoom-level='standard'
 
