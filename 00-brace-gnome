@@ -95,6 +95,8 @@ include-icc-profile=false
 
 [org/gnome/mutter]
 dynamic-workspaces=false
+workspaces-only-on-primary=false
+attach-modal-dialogs=false
 
 [org/gnome/nautilus/icon-view]
 default-zoom-level='standard'

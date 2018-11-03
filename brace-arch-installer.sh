@@ -264,9 +264,6 @@ select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
 			pacman -S --needed hyphen hyphen-en libmythes mythes-en hunspell hunspell-en aspell aspell-en;
-			if [ "$aurPackagesEnabled" = "true" ]; then
-				yaourt -S --needed numix-circle-icon-theme-git numix-icon-theme-git;
-			fi
 			break;;
 		No )
 			pacman -Rsc hyphen;
@@ -277,6 +274,21 @@ select yns in "Yes" "No" "Skip"; do
 			pacman -Rsc hunspell-en;
 			pacman -Rsc aspell;
 			pacman -Rsc aspell-en;
+			break;;
+		Skip )
+			break;;
+	esac;
+done;
+
+echo -e ${questionColor}Do you want packages from the Theming category?${coloroff};
+select yns in "Yes" "No" "Skip"; do
+	case $yns in
+		Yes )
+			if [ "$aurPackagesEnabled" = "true" ]; then
+				yaourt -S --needed numix-circle-icon-theme-git numix-icon-theme-git;
+			fi
+			break;;
+		No )
 			pacman -Rsc numix-circle-icon-theme-git;
 			pacman -Rsc numix-icon-theme-git;
 			break;;
@@ -530,12 +542,11 @@ echo -e ${questionColor}Do you want packages from the Documents category?${color
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed libreoffice-fresh meld pdfmod scribus;
+			pacman -S --needed libreoffice-fresh meld scribus;
 			break;;
 		No )
 			pacman -Rsc libreoffice-fresh;
 			pacman -Rsc meld;
-			pacman -Rsc pdfmod;
 			pacman -Rsc scribus;
 			break;;
 		Skip )

@@ -52,10 +52,10 @@ echo -e ${questionColor}Do you want packages from the Base category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install --skip-broken @multimedia aspell aspell-en dconf-editor numix-icon-theme-circle arc-theme seahorse gtkhash;
+			yum install --skip-broken @multimedia aspell aspell-en dconf-editor seahorse gtkhash;
 			break;;
 		No )
-			yum remove @multimedia aspell aspell-en dconf-editor numix-icon-theme-circle arc-theme seahorse gtkhash;
+			yum remove @multimedia aspell aspell-en dconf-editor seahorse gtkhash;
 			break;;
 		Skip )
 			break;;
@@ -98,6 +98,20 @@ select yns in "Yes" "No" "Skip"; do
 			break;;
 		No )
 			yum remove libva-utils vdpauinfo mesa-dri-drivers libva-intel-driver libvdpau-va-gl gstreamer1-vaapi;
+			break;;
+		Skip )
+			break;;
+	esac;
+done;
+
+echo -e ${questionColor}Do you want packages from the Theming category?${coloroff};
+select yns in "Yes" "No" "Skip"; do
+	case $yns in
+		Yes )
+			yum install --skip-broken numix-icon-theme-circle arc-theme;
+			break;;
+		No )
+			yum remove numix-icon-theme-circle arc-theme;
 			break;;
 		Skip )
 			break;;
@@ -248,10 +262,10 @@ echo -e ${questionColor}Do you want packages from the Disk Support category?${co
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install --skip-broken btrfs-progs dosfstools f2fs-tools mtools ntfs-3g ntfsprogs udftools xfsprogs;
+			yum install --skip-broken btrfs-progs dosfstools exfat-utils f2fs-tools mtools ntfs-3g ntfsprogs udftools xfsprogs;
 			break;;
 		No )
-			yum remove btrfs-progs dosfstools f2fs-tools mtools ntfs-3g ntfsprogs udftools xfsprogs;
+			yum remove btrfs-progs dosfstools exfat-utils f2fs-tools mtools ntfs-3g ntfsprogs udftools xfsprogs;
 			break;;
 		Skip )
 			break;;
@@ -262,10 +276,10 @@ echo -e ${questionColor}Do you want packages from the Documents category?${color
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install --skip-broken libreoffice meld pdfmod scribus;
+			yum install --skip-broken libreoffice meld scribus;
 			break;;
 		No )
-			yum remove libreoffice meld pdfmod scribus;
+			yum remove libreoffice meld scribus;
 			break;;
 		Skip )
 			break;;
@@ -542,10 +556,10 @@ echo -e ${questionColor}Do you want packages from the Security category?${coloro
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install --skip-broken clamav clamav-data-empty clamav-update clamtk unhide chkrootkit firewall-config setroubleshoot;
+			yum install --skip-broken clamav clamav-data-empty clamav-update clamtk unhide firewall-config setroubleshoot;
 			break;;
 		No )
-			yum remove clamav clamav-data-empty clamav-update clamtk unhide chkrootkit firewall-config setroubleshoot;
+			yum remove clamav clamav-data-empty clamav-update clamtk unhide firewall-config setroubleshoot;
 			break;;
 		Skip )
 			break;;
