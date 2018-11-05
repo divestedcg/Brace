@@ -2,17 +2,35 @@
 #Copyright (c) 2017-2018 Divested Computing, Inc.
 #License: GPLv3
 
+#Looks
 if [ -d "/usr/share/fonts/adobe-source-code-pro" ]; then
 	gsettings set org.gnome.builder.editor font-name 'Source Code Pro 11';
 	gsettings set org.gnome.desktop.interface monospace-font-name 'Source Code Pro 11';
 	gsettings set org.mate.desktop.interface monospace-font-name 'Source Code Pro 11';
 fi;
-
 if [ -d "/usr/share/icons/Numix-Circle" ]; then
 	gsettings set org.gnome.desktop.interface icon-theme 'Numix-Circle';
 	gsettings set org.cinnamon.desktop.interface icon-theme 'Numix-Circle';
 	gsettings set org.mate.desktop.interface icon-theme 'Numix-Circle';
 fi;
+
+#Thumbnails
+echo "Do you want thumbnails enabled? (disable for increased security)";
+select yn in "Yes" "No"; do
+	case $yn in
+		Yes )
+			#Only allow enabling thumbnailers where extra restrictions are in place
+			gsettings set org.gnome.desktop.thumbnailers disable-all false;
+			#gsettings set org.cinnamon.desktop.thumbnailers disable-all false;
+			#gsettings set org.mate.desktop.thumbnailers disable-all false;
+			break;;
+		No )
+			gsettings set org.gnome.desktop.thumbnailers disable-all true;
+			gsettings set org.cinnamon.desktop.thumbnailers disable-all true;
+			gsettings set org.mate.desktop.thumbnailers disable-all true;
+			break;;
+	esac
+done
 
 #Night Light
 echo "Do you want GNOME Night Light enabled?";

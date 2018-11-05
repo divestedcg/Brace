@@ -13,6 +13,9 @@ behaviour='always-confirm-implicit'
 encrypt-to-self=true
 ascii-armor=true
 
+[org/freedesktop/ibus/engine/typing-booster]
+offtherecord=true
+
 [org/gnome/builder]
 night-mode=true
 
