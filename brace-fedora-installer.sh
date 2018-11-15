@@ -52,10 +52,10 @@ echo -e ${questionColor}Do you want packages from the Base category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install --skip-broken @multimedia aspell aspell-en dconf-editor seahorse gtkhash;
+			yum install --skip-broken @multimedia aspell aspell-en dconf-editor seahorse;
 			break;;
 		No )
-			yum remove @multimedia aspell aspell-en dconf-editor seahorse gtkhash;
+			yum remove @multimedia aspell aspell-en dconf-editor seahorse;
 			break;;
 		Skip )
 			break;;
@@ -164,10 +164,10 @@ echo -e ${questionColor}Do you want packages from the Communication Realtime cat
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install --skip-broken hexchat gajim;
+			yum install --skip-broken hexchat;
 			break;;
 		No )
-			yum remove hexchat gajim;
+			yum remove hexchat;
 			break;;
 		Skip )
 			break;;
@@ -290,10 +290,10 @@ echo -e ${questionColor}Do you want packages from the E-Books category?${colorof
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install --skip-broken calibre;
+			yum install --skip-broken gnome-books;
 			break;;
 		No )
-			yum remove calibre;
+			yum remove gnome-books;
 			break;;
 		Skip )
 			break;;

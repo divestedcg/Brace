@@ -558,10 +558,10 @@ echo -e ${questionColor}Do you want packages from the E-Books category?${colorof
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed calibre;
+			pacman -S --needed gnome-books;
 			break;;
 		No )
-			pacman -Rsc calibre;
+			pacman -Rsc gnome-books;
 			break;;
 		Skip )
 			break;;

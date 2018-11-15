@@ -34,14 +34,17 @@ sed -i 's/pref("browser.cache.offline.enable"/\/\/DISABLED: pref("browser.cache.
 #Fix https://github.com/pyllyukko/user.js/pull/355
 sed -i 's/en-US, en/data:text\/plain,intl.accept_languages=en-US, en/' $userjs;
 
+
 #Add our extras
 echo -e "\n" >> $userjs;
 echo "//START OF BRACE EXTRAS" >> $userjs;
+
 ##Look
 echo 'pref("browser.tabs.drawInTitlebar", true);' >> $userjs;
 echo 'pref("widget.allow-client-side-decoration", true);' >> $userjs;
 echo 'pref("mailnews.start_page.enabled", false);' >> $userjs;
 #echo 'pref("mail.SpellCheckBeforeSend", true);' >> $userjs;
+
 ##Performance
 echo 'pref("general.smoothScroll", false);' >> $userjs;
 echo 'pref("layers.acceleration.force-enabled", true);' >> $userjs;
@@ -51,9 +54,10 @@ echo 'pref("browser.tabs.remote.force-enabled", true);' >> $userjs;
 echo 'pref("layers.omtp.enabled", true);' >> $userjs;
 echo 'pref("gfx.webrenderer.enabled", true);' >> $userjs;
 echo 'pref("extensions.webextensions.remote", true);' >> $userjs;
+
 ##Privacy
 echo 'pref("privacy.firstparty.isolate", true);' >> $userjs;
-echo 'pref("privacy.firstparty.isolate.restrict_opener_access", false);' >> $userjs;
+echo 'pref("privacy.firstparty.isolate.restrict_opener_access", true);' >> $userjs;
 echo 'pref("extensions.screenshots.disabled", true);' >> $userjs;
 echo 'pref("media.eme.enabled", false);' >> $userjs;
 echo 'pref("general.useragent.updates.enabled", false);' >> $userjs;
@@ -72,9 +76,11 @@ echo 'pref("messenger.status.reportIdle", false);' >> $userjs;
 echo 'pref("extensions.enigmail.autoWkdLookup", 0);' >> $userjs;
 echo 'pref("extensions.webcompat-reporter.enabled", false);' >> $userjs;
 echo 'pref("browser.contentblocking.ui.enabled", true);' >> $userjs;
+
 ##Security
 echo 'pref("javascript.options.shared_memory", false);' >> $userjs;
 echo 'pref("security.webauth.u2f", true);' >> $userjs;
 echo 'pref("mailnews.message_display.disable_remote_image", true);' >> $userjs;
 echo 'pref("mail.phishing.detection.enabled", true);' >> $userjs;
+
 echo "//END OF BRACE EXTRAS" >> $userjs;

@@ -101,6 +101,9 @@ attach-modal-dialogs=false
 [org/gnome/nautilus/icon-view]
 default-zoom-level='standard'
 
+[org/gnome/nautilus/list-view]
+default-zoom-level='small'
+
 [org/gnome/nautilus/preferences]
 executable-text-activation='ask'
 default-folder-viewer='icon-view'
