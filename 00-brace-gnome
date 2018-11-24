@@ -37,6 +37,11 @@ report-technical-problems=false
 hide-identity=true
 show-full-name-in-top-bar=false
 
+[org/gnome/desktop/remote-desktop]
+auth-method='prompt'
+encryption=['tls-anon']
+view-only=true
+
 [org/gnome/desktop/screensaver]
 lock-delay=uint32 30
 show-full-name-in-top-bar=false

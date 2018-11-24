@@ -36,6 +36,19 @@ composer-show-reply-to=true
 image-loading-policy='never'
 search-gravatar-for-photo=false
 
+[org/gnome/feedreader]
+content-grabber=false
+download-images=false
+drop-articles-after='1 Month'
+feedlist-sort-by='ALPHABETICAL'
+mediaplayer=false
+
+[org/gnome/feedreader/tweaks]
+allow-javascript=false
+do-not-track=true
+ignore-tls-errors=false
+smooth-scrolling=false
+
 [org/gnome/Geary]
 compose-as-html=false
 

@@ -44,6 +44,7 @@ echo 'pref("browser.tabs.drawInTitlebar", true);' >> $userjs;
 echo 'pref("widget.allow-client-side-decoration", true);' >> $userjs;
 echo 'pref("mailnews.start_page.enabled", false);' >> $userjs;
 #echo 'pref("mail.SpellCheckBeforeSend", true);' >> $userjs;
+echo 'pref("browser.ctrlTab.recentlyUsedOrder", false);' >> $userjs;
 
 ##Performance
 echo 'pref("general.smoothScroll", false);' >> $userjs;

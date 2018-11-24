@@ -598,10 +598,10 @@ echo -e ${questionColor}Do you want packages from the Utility category?${colorof
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install --skip-broken whois mtr stress iotop wavemon pv tree iperf3 bmon powertop ncdu;
+			yum install --skip-broken whois mtr stress iotop wavemon pv tree iperf3 bmon powertop ncdu vrms-rpm;
 			break;;
 		No )
-			yum remove whois mtr stress iotop wavemon pv tree iperf3 bmon powertop ncdu;
+			yum remove whois mtr stress iotop wavemon pv tree iperf3 bmon powertop ncdu vrms-rpm;
 			break;;
 		Skip )
 			break;;

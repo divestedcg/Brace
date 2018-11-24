@@ -3,10 +3,9 @@ brace
 
 Compatibility
 -------------
-- Fedora 28 (preferred)
+- Fedora 29 (preferred)
 - Arch Linux
-- CentOS 7
-- Scientific Linux 7.4
+- EL 7/8
 - openSUSE (very basic support)
 
 Contents
