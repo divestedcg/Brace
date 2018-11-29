@@ -1,0 +1,8 @@
+[io/elementary/code/services]
+set-private=true
+
+[io/elementary/desktop/agent-geoclue2]
+location-enabled=false
+
+[io/elementary/desktop/wingpanel/power]
+show-percentage=true

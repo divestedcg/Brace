@@ -36,6 +36,7 @@ remember-recent-files=false
 report-technical-problems=false
 hide-identity=true
 show-full-name-in-top-bar=false
+send-software-usage-stats=false
 
 [org/gnome/desktop/remote-desktop]
 auth-method='prompt'

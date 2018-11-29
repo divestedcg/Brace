@@ -72,6 +72,9 @@ blank-drive=true
 [org/gnome/nm-applet]
 suppress-wireless-networks-available=true
 
+[org/gnome/recipes]
+user='anonymous'
+
 [org/gnome/system/location]
 max-accuracy-level='city'
 enabled=false
