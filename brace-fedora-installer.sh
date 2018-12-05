@@ -24,10 +24,10 @@ echo -e ${questionColor}Do you want packages from the Core category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install --skip-broken irqbalance openssh nano htop wget screen p7zip pixz lm_sensors screenfetch ripgrep;
+			yum install --skip-broken irqbalance openssh nano htop wget screen p7zip pixz lm_sensors screenfetch ripgrep zram;
 			break;;
 		No )
-			yum remove irqbalance openssh nano htop wget screen p7zip pixz lm_sensors screenfetch ripgrep;
+			yum remove irqbalance openssh nano htop wget screen p7zip pixz lm_sensors screenfetch ripgrep zram;
 			break;;
 		Skip )
 			break;;
@@ -556,10 +556,10 @@ echo -e ${questionColor}Do you want packages from the Security category?${coloro
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install --skip-broken clamav clamav-data-empty clamav-update clamtk unhide firewall-config setroubleshoot;
+			yum install --skip-broken clamav clamav-data-empty clamav-update clamtk unhide firejail firewall-config setroubleshoot;
 			break;;
 		No )
-			yum remove clamav clamav-data-empty clamav-update clamtk unhide firewall-config setroubleshoot;
+			yum remove clamav clamav-data-empty clamav-update clamtk unhide firejail firewall-config setroubleshoot;
 			break;;
 		Skip )
 			break;;
