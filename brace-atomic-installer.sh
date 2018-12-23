@@ -22,6 +22,20 @@ if [ ! -f /usr/bin/flatpak ]; then echo 'flatpak is not installed!'; exit 1; fi;
 
 flatpak remote-add flathub 'https://flathub.org/repo/flathub.flatpakrepo' &>/dev/null || true;
 
+echo -e ${questionColor}Do you want Workstation Parity?${coloroff};
+select yns in "Yes" "No" "Skip"; do
+	case $yns in
+		Yes )
+			flatpak install flathub org.gnome.Boxes org.gnome.Calculator org.gnome.Calendar org.gnome.clocks org.gnome.Contacts org.gnome.eog org.gnome.Evince org.gnome.Evolution org.gnome.font-viewer org.gnome.gedit org.gnome.Maps org.gnome.Totem;
+			break;;
+		No )
+			flatpak remove org.gnome.Boxes org.gnome.Calculator org.gnome.Calendar org.gnome.clocks org.gnome.Contacts org.gnome.eog org.gnome.Evince org.gnome.Evolution org.gnome.font-viewer org.gnome.gedit org.gnome.Maps org.gnome.Totem;
+			break;;
+		Skip )
+			break;;
+	esac;
+done;
+
 echo -e ${questionColor}Do you want Base?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
@@ -44,20 +58,6 @@ select yns in "Yes" "No" "Skip"; do
 			break;;
 		No )
 			flatpak remove org.audacityteam.Audacity;
-			break;;
-		Skip )
-			break;;
-	esac;
-done;
-
-echo -e ${questionColor}Do you want Communication?${coloroff};
-select yns in "Yes" "No" "Skip"; do
-	case $yns in
-		Yes )
-			flatpak install flathub org.mozilla.Thunderbird;
-			break;;
-		No )
-			flatpak remove org.mozilla.Thunderbird;
 			break;;
 		Skip )
 			break;;
@@ -124,10 +124,24 @@ echo -e ${questionColor}Do you want Documents?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			flatpak install flathub org.libreoffice.LibreOffice org.gnome.meld;
+			flatpak install flathub org.libreoffice.LibreOffice org.gnome.meld net.scribus.Scribus;
 			break;;
 		No )
-			flatpak remove org.libreoffice.LibreOffice org.gnome.meld;
+			flatpak remove org.libreoffice.LibreOffice org.gnome.meld net.scribus.Scribus;
+			break;;
+		Skip )
+			break;;
+	esac;
+done;
+
+echo -e ${questionColor}Do you want E-Books?${coloroff};
+select yns in "Yes" "No" "Skip"; do
+	case $yns in
+		Yes )
+			flatpak install flathub org.gnome.Books;
+			break;;
+		No )
+			flatpak remove org.gnome.Books;
 			break;;
 		Skip )
 			break;;
@@ -138,10 +152,10 @@ echo -e ${questionColor}Do you want Games - Tiny?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			flatpak install flathub org.gnome.Aisleriot;
+			flatpak install flathub org.gnome.quadrapassel org.gnome.Chess org.gnome.Aisleriot;
 			break;;
 		No )
-			flatpak remove org.gnome.Aisleriot;
+			flatpak remove org.gnome.quadrapassel org.gnome.Chess org.gnome.Aisleriot;
 			break;;
 		Skip )
 			break;;
@@ -208,10 +222,10 @@ echo -e ${questionColor}Do you want Image Manipulation?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			flatpak install flathub org.gimp.GIMP org.inkscape.Inkscape org.darktable.Darktable org.pitivi.Pitivi;
+			flatpak install flathub org.gimp.GIMP org.inkscape.Inkscape org.darktable.Darktable org.pitivi.Pitivi com.github.gijsgoudzwaard.image-optimizer;
 			break;;
 		No )
-			flatpak remove org.gimp.GIMP org.inkscape.Inkscape org.darktable.Darktable org.pitivi.Pitivi;
+			flatpak remove org.gimp.GIMP org.inkscape.Inkscape org.darktable.Darktable org.pitivi.Pitivi com.github.gijsgoudzwaard.image-optimizer;
 			break;;
 		Skip )
 			break;;
@@ -232,7 +246,21 @@ select yns in "Yes" "No" "Skip"; do
 	esac;
 done;
 
-echo -e ${questionColor}Do you want Media Management?${coloroff};
+echo -e ${questionColor}Do you want Media HTPC?${coloroff};
+select yns in "Yes" "No" "Skip"; do
+	case $yns in
+		Yes )
+			flatpak install flathub tv.kodi.Kodi;
+			break;;
+		No )
+			flatpak remove tv.kodi.Kodi;
+			break;;
+		Skip )
+			break;;
+	esac;
+done;
+
+echo -e ${questionColor}Do you want Music Management?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )

@@ -1,6 +1,6 @@
 Name: brace
 Version: 2.6
-Release: 18
+Release: 19
 Summary: Increases privacy/security through various configs.
 License: GPLv3+
 BuildArch: noarch
@@ -20,6 +20,9 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
 %post
 if [ -f /usr/bin/dconf ]; then dconf update; fi;
+echo "For additional hardening try the following:";
+echo "Stealth Mode: firewall-cmd --set-default-zone=drop";
+echo "Stricter Ciphers: update-crypto-policies --set NEXT";
 
 %postun
 if [ -f /usr/bin/dconf ]; then dconf update; fi;

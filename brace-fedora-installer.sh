@@ -482,20 +482,6 @@ select yns in "Yes" "No" "Skip"; do
 	esac;
 done;
 
-echo -e ${questionColor}Do you want packages from the Music Management category?${coloroff};
-select yns in "Yes" "No" "Skip"; do
-	case $yns in
-		Yes )
-			yum install --skip-broken picard soundconverter sound-juicer;
-			break;;
-		No )
-			yum remove picard soundconverter sound-juicer;
-			break;;
-		Skip )
-			break;;
-	esac;
-done;
-
 echo -e ${questionColor}Do you want packages from the Media category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
@@ -518,6 +504,20 @@ select yns in "Yes" "No" "Skip"; do
 			break;;
 		No )
 			yum remove kodi;
+			break;;
+		Skip )
+			break;;
+	esac;
+done;
+
+echo -e ${questionColor}Do you want packages from the Music Management category?${coloroff};
+select yns in "Yes" "No" "Skip"; do
+	case $yns in
+		Yes )
+			yum install --skip-broken picard soundconverter sound-juicer;
+			break;;
+		No )
+			yum remove picard soundconverter sound-juicer;
 			break;;
 		Skip )
 			break;;
