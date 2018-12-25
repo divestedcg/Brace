@@ -152,10 +152,10 @@ echo -e ${questionColor}Do you want Games - Tiny?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			flatpak install flathub org.gnome.quadrapassel org.gnome.Chess org.gnome.Aisleriot;
+			flatpak install flathub org.gnome.quadrapassel org.gnome.chess org.gnome.Aisleriot;
 			break;;
 		No )
-			flatpak remove org.gnome.quadrapassel org.gnome.Chess org.gnome.Aisleriot;
+			flatpak remove org.gnome.quadrapassel org.gnome.chess org.gnome.Aisleriot;
 			break;;
 		Skip )
 			break;;
@@ -222,10 +222,10 @@ echo -e ${questionColor}Do you want Image Manipulation?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			flatpak install flathub org.gimp.GIMP org.inkscape.Inkscape org.darktable.Darktable org.pitivi.Pitivi com.github.gijsgoudzwaard.image-optimizer;
+			flatpak install flathub org.gimp.GIMP org.inkscape.Inkscape org.darktable.Darktable org.pitivi.Pitivi;
 			break;;
 		No )
-			flatpak remove org.gimp.GIMP org.inkscape.Inkscape org.darktable.Darktable org.pitivi.Pitivi com.github.gijsgoudzwaard.image-optimizer;
+			flatpak remove org.gimp.GIMP org.inkscape.Inkscape org.darktable.Darktable org.pitivi.Pitivi;
 			break;;
 		Skip )
 			break;;
