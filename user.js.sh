@@ -46,6 +46,9 @@ echo 'pref("mailnews.start_page.enabled", false);' >> $userjs;
 #echo 'pref("mail.SpellCheckBeforeSend", true);' >> $userjs;
 echo 'pref("browser.ctrlTab.recentlyUsedOrder", false);' >> $userjs;
 
+##Mobile
+#echo 'pref("browser.image_blocking", 2);' >> $userjs; #only load images over Wi-Fi
+
 ##Performance
 echo 'pref("general.smoothScroll", false);' >> $userjs;
 echo 'pref("layers.acceleration.force-enabled", true);' >> $userjs;
@@ -77,6 +80,7 @@ echo 'pref("messenger.status.reportIdle", false);' >> $userjs;
 echo 'pref("extensions.enigmail.autoWkdLookup", 0);' >> $userjs;
 echo 'pref("extensions.webcompat-reporter.enabled", false);' >> $userjs;
 echo 'pref("browser.contentblocking.ui.enabled", true);' >> $userjs;
+echo 'pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr", false);' >> $userjs;
 
 ##Security
 echo 'pref("javascript.options.shared_memory", false);' >> $userjs;
