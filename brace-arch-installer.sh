@@ -748,12 +748,11 @@ echo -e ${questionColor}Do you want packages from the Internet category?${coloro
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed firefox firefox-extension-https-everywhere mozilla-privacy-badger liferea;
+			pacman -S --needed firefox firefox-extension-https-everywhere liferea;
 			break;;
 		No )
 			pacman -Rsc firefox;
 			pacman -Rsc firefox-extension-https-everywhere;
-			pacman -Rsc mozilla-privacy-badger;
 			pacman -Rsc liferea;
 			break;;
 		Skip )
