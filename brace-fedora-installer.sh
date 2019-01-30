@@ -458,10 +458,10 @@ echo -e ${questionColor}Do you want packages from the Internet category?${coloro
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install --skip-broken firefox mozilla-https-everywhere mozilla-ublock-origin liferea;
+			yum install --skip-broken firefox mozilla-https-everywhere mozilla-ublock-origin mozilla-privacy-badger liferea;
 			break;;
 		No )
-			yum remove firefox mozilla-https-everywhere mozilla-ublock-origin liferea;
+			yum remove firefox mozilla-https-everywhere mozilla-ublock-origin mozilla-privacy-badger liferea;
 			break;;
 		Skip )
 			break;;
