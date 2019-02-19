@@ -61,6 +61,7 @@ save-state=true
 network-access=false
 artist-artwork=false
 auto-update=false
+disable-scrobbling=true
 
 [org/gnome/maps]
 checkin-facebook-privacy='ALL_FRIENDS'

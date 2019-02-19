@@ -38,9 +38,9 @@ echo -e ${questionColor}Do you want packages from the Core category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed irqbalance openssh nano htop wget screen zip p7zip unrar pixz pigz lm_sensors dialog crda screenfetch ripgrep;
+			pacman -S --needed irqbalance openssh nano htop wget screen zip p7zip unrar pixz pigz lm_sensors dialog crda ripgrep lostfiles;
 			if [ "$aurPackagesEnabled" = "true" ]; then
-				yaourt -S --needed downgrade lostfiles;
+				yaourt -S --needed downgrade;
 			fi
 			break;;
 		No )
@@ -58,10 +58,9 @@ select yns in "Yes" "No" "Skip"; do
 			pacman -Rsc lm_sensors;
 			pacman -Rsc dialog;
 			pacman -Rsc crda;
-			pacman -Rsc screenfetch;
 			pacman -Rsc ripgrep;
-			pacman -Rsc downgrade;
 			pacman -Rsc lostfiles;
+			pacman -Rsc downgrade;
 			break;;
 		Skip )
 			break;;
@@ -231,28 +230,12 @@ echo -e ${questionColor}Do you want packages from the GNOME Remove Me category?$
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed epiphany gnome-documents gnome-music gnome-software;
+			pacman -S --needed epiphany gnome-documents gnome-music;
 			break;;
 		No )
 			pacman -Rsc epiphany;
 			pacman -Rsc gnome-documents;
 			pacman -Rsc gnome-music;
-			pacman -Rsc gnome-software;
-			break;;
-		Skip )
-			break;;
-	esac;
-done;
-
-echo -e ${questionColor}Do you want packages from the Nemo category?${coloroff};
-select yns in "Yes" "No" "Skip"; do
-	case $yns in
-		Yes )
-			pacman -S --needed nemo nemo-fileroller;
-			break;;
-		No )
-			pacman -Rsc nemo;
-			pacman -Rsc nemo-fileroller;
 			break;;
 		Skip )
 			break;;
@@ -323,7 +306,7 @@ echo -e ${questionColor}Do you want packages from the Audio category?${coloroff}
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed pavucontrol paprefs pulseaudio pulseaudio-alsa pulseaudio-zeroconf lib32-libcanberra-pulse;
+			pacman -S --needed pavucontrol paprefs pulseaudio pulseaudio-alsa pulseaudio-zeroconf lib32-libcanberra-pulse pulseaudio-bluetooth bluez-utils;
 			break;;
 		No )
 			pacman -Rsc pavucontrol;
@@ -332,6 +315,8 @@ select yns in "Yes" "No" "Skip"; do
 			pacman -Rsc pulseaudio-alsa;
 			pacman -Rsc pulseaudio-zeroconf;
 			pacman -Rsc lib32-libcanberra-pulse;
+			pacman -Rsc pulseaudio-bluetooth;
+			pacman -Rsc bluez-utils;
 			break;;
 		Skip )
 			break;;
@@ -357,26 +342,15 @@ select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
 			pacman -S --needed lynis arch-audit checksec;
+			if [ "$aurPackagesEnabled" = "true" ]; then
+				yaourt -S --needed spectre-meltdown-checker;
+			fi
 			break;;
 		No )
 			pacman -Rsc lynis;
 			pacman -Rsc arch-audit;
 			pacman -Rsc checksec;
-			break;;
-		Skip )
-			break;;
-	esac;
-done;
-
-echo -e ${questionColor}Do you want packages from the Bluetooth category?${coloroff};
-select yns in "Yes" "No" "Skip"; do
-	case $yns in
-		Yes )
-			pacman -S --needed pulseaudio-bluetooth bluez-utils;
-			break;;
-		No )
-			pacman -Rsc pulseaudio-bluetooth;
-			pacman -Rsc bluez-utils;
+			pacman -Rsc spectre-meltdown-checker;
 			break;;
 		Skip )
 			break;;
@@ -572,10 +546,12 @@ echo -e ${questionColor}Do you want packages from the File Backup category?${col
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed deja-dup;
+			if [ "$aurPackagesEnabled" = "true" ]; then
+				yaourt -S --needed backintime;
+			fi
 			break;;
 		No )
-			pacman -Rsc deja-dup;
+			pacman -Rsc backintime;
 			break;;
 		Skip )
 			break;;
@@ -586,17 +562,17 @@ echo -e ${questionColor}Do you want packages from the File Encryption category?$
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed ecryptfs-utils encfs cryfs;
+			pacman -S --needed ecryptfs-utils encfs cryfs gocryptfs;
 			if [ "$aurPackagesEnabled" = "true" ]; then
-				yaourt -S --needed sirikali-git gocryptfs;
+				yaourt -S --needed sirikali-git;
 			fi
 			break;;
 		No )
 			pacman -Rsc ecryptfs-utils;
 			pacman -Rsc encfs;
 			pacman -Rsc cryfs;
-			pacman -Rsc sirikali-git;
 			pacman -Rsc gocryptfs;
+			pacman -Rsc sirikali-git;
 			break;;
 		Skip )
 			break;;
@@ -635,11 +611,10 @@ echo -e ${questionColor}Do you want packages from the Games - Tiny category?${co
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed quadrapassel gnome-2048 gnome-mines gnome-chess gnome-sudoku aisleriot;
+			pacman -S --needed quadrapassel gnome-mines gnome-chess gnome-sudoku aisleriot;
 			break;;
 		No )
 			pacman -Rsc quadrapassel;
-			pacman -Rsc gnome-2048;
 			pacman -Rsc gnome-mines;
 			pacman -Rsc gnome-chess;
 			pacman -Rsc gnome-sudoku;
@@ -857,10 +832,7 @@ echo -e ${questionColor}Do you want packages from the Screencast category?${colo
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed obs-studio;
-			if [ "$aurPackagesEnabled" = "true" ]; then
-				yaourt -S --needed peek;
-			fi
+			pacman -S --needed obs-studio peek;
 			break;;
 		No )
 			pacman -Rsc obs-studio;
@@ -896,12 +868,11 @@ echo -e ${questionColor}Do you want packages from the Tor category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed tor torsocks arm;
+			pacman -S --needed tor torsocks;
 			break;;
 		No )
 			pacman -Rsc tor;
 			pacman -Rsc torsocks;
-			pacman -Rsc arm;
 			break;;
 		Skip )
 			break;;
@@ -977,24 +948,9 @@ select yns in "Yes" "No" "Skip"; do
 	esac;
 done;
 
-echo -e ${questionColor}Do you want packages from the Yubikey category?${coloroff};
-select yns in "Yes" "No" "Skip"; do
-	case $yns in
-		Yes )
-			pacman -S --needed yubikey-manager-qt yubikey-personalization-gui;
-			break;;
-		No )
-			pacman -Rsc yubikey-manager-qt;
-			pacman -Rsc yubikey-personalization-gui;
-			break;;
-		Skip )
-			break;;
-	esac;
-done;
-
 if [ "$aurPackagesEnabled" = "false" ]; then
 	echo -e ${infoColor}Here are all the AUR packages that were not installed some may not of been chosen${coloroff}
-	echo downgrade lostfiles numix-circle-icon-theme-git numix-icon-theme-git android-apktool sdat2img android-studio proguard jd-gui launch4j sirikali-git gocryptfs scrub peek ;
+	echo downgrade numix-circle-icon-theme-git numix-icon-theme-git spectre-meltdown-checker android-apktool sdat2img android-studio proguard jd-gui launch4j backintime sirikali-git scrub ;
 fi
 
 pacman -Rns $(pacman -Qttdq);

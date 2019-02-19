@@ -24,10 +24,10 @@ echo -e ${questionColor}Do you want packages from the Core category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install --skip-broken irqbalance openssh nano htop wget screen p7zip pixz lm_sensors screenfetch ripgrep zram;
+			yum install --skip-broken irqbalance openssh nano htop wget screen p7zip pixz lm_sensors ripgrep zram;
 			break;;
 		No )
-			yum remove irqbalance openssh nano htop wget screen p7zip pixz lm_sensors screenfetch ripgrep zram;
+			yum remove irqbalance openssh nano htop wget screen p7zip pixz lm_sensors ripgrep zram;
 			break;;
 		Skip )
 			break;;
@@ -52,10 +52,10 @@ echo -e ${questionColor}Do you want packages from the Base category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install --skip-broken @multimedia aspell aspell-en dconf-editor seahorse;
+			yum install --skip-broken @multimedia aspell aspell-en dconf-editor;
 			break;;
 		No )
-			yum remove @multimedia aspell aspell-en dconf-editor seahorse;
+			yum remove @multimedia aspell aspell-en dconf-editor;
 			break;;
 		Skip )
 			break;;
@@ -66,10 +66,10 @@ echo -e ${questionColor}Do you want packages from the GNOME Extras category?${co
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install --skip-broken gnome-terminal-nautilus gnome-tweak-tool;
+			yum install --skip-broken gnome-terminal-nautilus gnome-tweak-tool seahorse;
 			break;;
 		No )
-			yum remove gnome-terminal-nautilus gnome-tweak-tool;
+			yum remove gnome-terminal-nautilus gnome-tweak-tool seahorse;
 			break;;
 		Skip )
 			break;;
@@ -108,10 +108,10 @@ echo -e ${questionColor}Do you want packages from the Theming category?${colorof
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install --skip-broken numix-icon-theme-circle arc-theme;
+			yum install --skip-broken numix-icon-theme-circle;
 			break;;
 		No )
-			yum remove numix-icon-theme-circle arc-theme;
+			yum remove numix-icon-theme-circle;
 			break;;
 		Skip )
 			break;;
@@ -248,10 +248,10 @@ echo -e ${questionColor}Do you want packages from the Disks category?${coloroff}
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install --skip-broken testdisk smartmontools parted mediawriter gnome-multi-writer nwipe;
+			yum install --skip-broken testdisk smartmontools parted mediawriter gnome-multi-writer;
 			break;;
 		No )
-			yum remove testdisk smartmontools parted mediawriter gnome-multi-writer nwipe;
+			yum remove testdisk smartmontools parted mediawriter gnome-multi-writer;
 			break;;
 		Skip )
 			break;;
@@ -360,10 +360,10 @@ echo -e ${questionColor}Do you want packages from the Games - Tiny category?${co
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install --skip-broken quadrapassel gnome-2048 gnome-mines gnome-chess gnome-sudoku aisleriot;
+			yum install --skip-broken quadrapassel gnome-mines gnome-chess gnome-sudoku aisleriot;
 			break;;
 		No )
-			yum remove quadrapassel gnome-2048 gnome-mines gnome-chess gnome-sudoku aisleriot;
+			yum remove quadrapassel gnome-mines gnome-chess gnome-sudoku aisleriot;
 			break;;
 		Skip )
 			break;;
@@ -570,10 +570,10 @@ echo -e ${questionColor}Do you want packages from the Tor category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install --skip-broken tor torsocks nyx obfs4 onionshare torbrowser-launcher;
+			yum install --skip-broken tor torsocks obfs4 onionshare torbrowser-launcher;
 			break;;
 		No )
-			yum remove tor torsocks nyx obfs4 onionshare torbrowser-launcher;
+			yum remove tor torsocks obfs4 onionshare torbrowser-launcher;
 			break;;
 		Skip )
 			break;;
@@ -630,20 +630,6 @@ select yns in "Yes" "No" "Skip"; do
 			break;;
 		No )
 			yum remove wine winetricks;
-			break;;
-		Skip )
-			break;;
-	esac;
-done;
-
-echo -e ${questionColor}Do you want packages from the Yubikey category?${coloroff};
-select yns in "Yes" "No" "Skip"; do
-	case $yns in
-		Yes )
-			yum install --skip-broken yubikey-personalization-gui;
-			break;;
-		No )
-			yum remove yubikey-personalization-gui;
 			break;;
 		Skip )
 			break;;
