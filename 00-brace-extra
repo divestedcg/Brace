@@ -16,6 +16,9 @@ ascii-armor=true
 [org/freedesktop/ibus/engine/typing-booster]
 offtherecord=true
 
+[org/freedesktop/tracker/miner/files]
+enable-monitors=false;
+
 [org/gnome/builder]
 night-mode=true
 
@@ -62,6 +65,7 @@ network-access=false
 artist-artwork=false
 auto-update=false
 disable-scrobbling=true
+power-management='suspend'
 
 [org/gnome/maps]
 checkin-facebook-privacy='ALL_FRIENDS'

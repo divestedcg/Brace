@@ -15,7 +15,7 @@ if [ -d "/usr/share/icons/Numix-Circle" ]; then
 fi;
 
 #Thumbnails
-echo "Do you want thumbnails enabled? (disable for increased security)";
+echo "Do you want thumbnails enabled? (brace default disabled)";
 select yn in "Yes" "No"; do
 	case $yn in
 		Yes )
@@ -72,7 +72,7 @@ select yn in "Yes" "No"; do
 			break;;
 	esac
 done
-echo "Do you want Tracker enabled? (disable for increased security/privacy at the expense of weirdness)";
+echo "Do you want Tracker enabled? (brace default disabled)";
 select yn in "Yes" "No"; do
 	case $yn in
 		Yes )

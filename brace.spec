@@ -1,6 +1,6 @@
 Name: brace
-Version: 2.7
-Release: 5
+Version: 2.8
+Release: 1
 Summary: Increases privacy/security through various configs.
 License: GPLv3+
 BuildArch: noarch
