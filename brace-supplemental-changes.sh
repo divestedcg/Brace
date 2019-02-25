@@ -77,9 +77,11 @@ select yn in "Yes" "No"; do
 	case $yn in
 		Yes )
 			gsettings set org.freedesktop.Tracker.Miner.Files enable-monitors true;
+			gsettings set org.freedesktop.Tracker.Miner.Files crawling-interval -1;
 			break;;
 		No )
 			gsettings set org.freedesktop.Tracker.Miner.Files enable-monitors false;
+			gsettings set org.freedesktop.Tracker.Miner.Files crawling-interval -2;
 			break;;
 	esac
 done

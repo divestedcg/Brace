@@ -5,26 +5,26 @@ alias clearDriveDiscard='sudo fstrim -av';
 alias clearall='clearUserMisc && clearLogins && clearVarLog && clearVarLogMisc && clearJournal && clearMemory && clearDriveDiscard';
 
 clearUserMisc() {
-	#rm -rv ~/.*_history;
+	#rm -fv ~/.*_history;
 	#rm -rfv ~/.esmtp_queue;
-	rm -rv ~/.lesshst;
+	rm -fv ~/.lesshst;
 
-	rm -rv ~/.android/adbkey*;
+	rm -fv ~/.android/adbkey*;
 	rm -rfv ~/.cache/thumbnails;
-	rm -rv ~/.clamtk/history/*.log;
-	rm -rv ~/.config/inkscape/extension-errors.log;
+	rm -fv ~/.clamtk/history/*.log;
+	rm -fv ~/.config/inkscape/extension-errors.log;
 	rm -rfv ~/.config/obs-studio/logs;
 	rm -rfv ~/.config/obs-studio/profiler_data;
-	rm -rv ~/.config/supertuxkart/stdout.log*;
-	#rm -rv ~/.config/wireshark/recent*;
+	rm -fv ~/.config/supertuxkart/stdout.log*;
+	#rm -fv ~/.config/wireshark/recent*;
 	rm -rfv ~/.jack-server/logs;
 	rm -rfv ~/.local/share/gvfs-metadata;
-	rm -rv ~/.local/share/ibus-typing-booster/*debug.log;
-	rm -rv ~/.local/share/recently-used.xbel;
+	rm -fv ~/.local/share/ibus-typing-booster/*debug.log;
+	rm -fv ~/.local/share/recently-used.xbel;
 
-	rm -rv ~/.wget-hsts
-	rm -rv ~/.gnutls/known_hosts;
-	#rm -rv ~/.ssh/known_hosts;
+	rm -fv ~/.wget-hsts
+	rm -fv ~/.gnutls/known_hosts;
+	#rm -fv ~/.ssh/known_hosts;
 }
 
 clearLogins() {
