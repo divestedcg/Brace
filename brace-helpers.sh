@@ -17,14 +17,20 @@ clearUserMisc() {
 	rm -rfv ~/.config/obs-studio/profiler_data;
 	rm -fv ~/.config/supertuxkart/stdout.log*;
 	#rm -fv ~/.config/wireshark/recent*;
-	rm -rfv ~/.jack-server/logs;
+	#rm -rfv ~/.jack-server/logs;
 	rm -rfv ~/.local/share/gvfs-metadata;
 	rm -fv ~/.local/share/ibus-typing-booster/*debug.log;
 	rm -fv ~/.local/share/recently-used.xbel;
+	rm -fv ~/.minetest/debug.txt;
 
 	rm -fv ~/.wget-hsts
 	rm -fv ~/.gnutls/known_hosts;
 	#rm -fv ~/.ssh/known_hosts;
+}
+
+clearUsersMisc() {
+	#contains list of all accessed/modified files on all connected drives (local or remote)
+	sudo wipe -irqc /home/*/.local/share/gvfs-metadata;
 }
 
 clearLogins() {

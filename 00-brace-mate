@@ -1,7 +1,7 @@
 [org/mate/atril]
 override-restrictions=true
 
-[org/mata/caja/icon-view]
+[org/mate/caja/icon-view]
 default-zoom-level='small'
 
 [org/mate/caja/preferences]
