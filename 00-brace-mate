@@ -51,6 +51,7 @@ compositing-manager=false
 [org/mate/marco/global-keybindings]
 run-command-terminal='<Primary><Alt>t'
 panel-main-menu='<Mod4>s'
+panel-run-dialog='<Mod4>d'
 
 [org/mate/marco/window-keybindings]
 maximize='<Mod4>Up'
