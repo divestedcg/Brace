@@ -1,7 +1,7 @@
 # Maintainer: Tad <tad@spotco.us>
 pkgname=brace
-pkgver=2.8
-pkgrel=4
+pkgver=3.0
+pkgrel=3
 pkgdesc="Increases privacy/security through various configs. Firefox hardening credit: @pyllyukko"
 arch=('any')
 license=('GPLv3')
@@ -27,8 +27,10 @@ source=('00-brace-gnome'
 	'iwlwifi.conf'
 	'dnu.service'
 	'brace-helpers.sh'
-	'user.js.sh'
-	'https://raw.githubusercontent.com/pyllyukko/user.js/master/user.js')
+	'userjs-brace.js'
+	'userjs-brace-perf.js'
+	'userjs-ghacks.js'
+	'userjs-pyllyukko.js')
 sha512sums=('72d4c3aabcc29d705b85a6591029d860ba1e22f52f2150710bf111770392a3c70162451722f479ce9c84f917ffee5151dc7b959a55a84a2d5cffa043383b502f'
             'a1d7c0dd18c53eb4cb54ab7851746e69695fc75e22ee7f43a415c86b5dbe9080cac33ee9dddb6d104027f9b7ad0899625a01fa1ae207a4b54410b7c9feaafd45'
             '24616a6133608301d3c4016f2667bdf6982ab3f99ac231b5588bcb220545d992e3fcc97cceafd674f7b4ba00d5747f3f4d25da54130a1ff817d752ba6b93bf98'
@@ -44,13 +46,11 @@ sha512sums=('72d4c3aabcc29d705b85a6591029d860ba1e22f52f2150710bf111770392a3c7016
             'c07d4f5d591a07db530deb77065e488e788fd964c081c2859cee07cb0820c69ab8236b8713425c77b47a75435907643cd9a021719f7389c09b20787df1b0860b'
             '2bb7c4306b94687583caf5db2a8c384ffeeedcbaba72acc96a686e91a49c48e7b73a34e2dba74f8532d59ee250560fc6bf819e1308e37d9028d2138297d18b94'
             '234d146b76e1ca572d856ba837848842ceced658a547ac058fd9bbcf5f04ac696756608339209b20b97956f80814b9393207dffddc109abda15ca6f98bb0e756'
-            'ecd423b428e72446d59bd8720d7cc324269da7ee9fd8e0ea04259ec5d1d4dd30efe9b8128c28c061af45e4ceb17e69a0871108c717db336b6583e43f082e427f'
-            'ab2d257c6023db09d1e460ba08d5336ae487cf4a5100fa5c45d9cbae904085a58c68ffafe138c6b7fb094fcf64d8cb685c58cb03bd401440aaf4c31b336a91e3')
+            '7479e4f001e572c3625b1a21811cdbb1b269cfaa8f816e2ecbac9b4950b0cb91f3ad1a476405b43ccd5d38a99c051b0e609fd93cab6e3f9400002748983df2f4'
+            'a0999164d4031a04ce10db848ea944b2db734f08dcf3554bfb6d651305cde95f852b46e3aea2cc4f1468a0a6c07c06623f0e925d025fdee848f122f412ee951a'
+            '577a40362f9ecb3e60c8a84b7f5c1db127953c91be323a682dfa17b2ecfd320fd9e2700e54378a026ec96141394628a13aaa7c9652fbd2c79d2d1bfa384b75fc'
+            '09f4b6507de79c9f4276bbf57dca88069bf2ed0f95c0fa1e5091063e897679bd99b40f30afb23226cf6b985ea4f95668294583d1bd8f919fae5578179ec6c3a4')
 install=brace.install
-
-build() {
-	sh user.js.sh user.js;
-}
 
 package() {
   cd "$srcdir"
@@ -69,8 +69,8 @@ package() {
   install -Dm644 30-mac-randomization.conf "$pkgdir"/usr/lib/NetworkManager/conf.d/30-mac-randomization.conf
   install -Dm644 60-restrict.conf "$pkgdir"/usr/lib/sysctl.d/60-restrict.conf
   install -Dm644 dnu.service "$pkgdir"/usr/lib/systemd/system/dnu.service
-  install -Dm644 user.js "$pkgdir"/usr/lib/firefox/browser/defaults/preferences/all-brace.js
-  install -Dm644 user.js "$pkgdir"/usr/lib/firefox-developer-edition/browser/defaults/preferences/all-brace.js
-  install -Dm644 user.js "$pkgdir"/usr/lib/icecat/browser/defaults/preferences/all-brace.js
-  install -Dm644 user.js "$pkgdir"/usr/lib/thunderbird/defaults/preferences/all-brace.js
+  mkdir -p "$pkgdir"/usr/lib/firefox/browser/defaults/preferences/
+  install -Dm644 userjs-*.js "$pkgdir"/usr/lib/firefox/browser/defaults/preferences/
+  mkdir -p "$pkgdir"/usr/lib/thunderbird/defaults/preferences/
+  install -Dm644 userjs-*.js "$pkgdir"/usr/lib/thunderbird/defaults/preferences/
 }

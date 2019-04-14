@@ -1,6 +1,6 @@
 Name: brace
-Version: 2.8
-Release: 4
+Version: 3.0
+Release: 3
 Summary: Increases privacy/security through various configs.
 License: GPLv3+
 BuildArch: noarch
@@ -49,13 +49,10 @@ install -Dm644 iwlwifi.conf %{buildroot}/usr/lib/modprobe.d/iwlwifi.conf
 install -Dm644 21-disable-connectivity-check.conf %{buildroot}/usr/lib/NetworkManager/conf.d/21-disable-connectivity-check.conf
 install -Dm644 30-mac-randomization.conf %{buildroot}/usr/lib/NetworkManager/conf.d/30-mac-randomization.conf
 install -Dm644 60-restrict.conf %{buildroot}/usr/lib/sysctl.d/60-restrict.conf
-install -Dm644 user.js %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/all-brace.js;
-install -Dm644 user.js %{buildroot}/usr/lib64/icecat/browser/defaults/preferences/all-brace.js;
-install -Dm644 user.js %{buildroot}/usr/lib64/thunderbird/defaults/pref/all-brace.js;
-
-sh user.js.sh %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/all-brace.js;
-sh user.js.sh %{buildroot}/usr/lib64/icecat/browser/defaults/preferences/all-brace.js;
-sh user.js.sh %{buildroot}/usr/lib64/thunderbird/defaults/pref/all-brace.js;
+mkdir -p %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/;
+install -Dm644 userjs-*.js %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/;
+mkdir -p %{buildroot}/usr/lib64/thunderbird/defaults/pref/;
+install -Dm644 userjs-*.js %{buildroot}/usr/lib64/thunderbird/defaults/pref/;
 
 %files
 /etc/dconf/db/local.d/00-brace-gnome
@@ -79,6 +76,5 @@ sh user.js.sh %{buildroot}/usr/lib64/thunderbird/defaults/pref/all-brace.js;
 /usr/lib/NetworkManager/conf.d/21-disable-connectivity-check.conf
 /usr/lib/NetworkManager/conf.d/30-mac-randomization.conf
 /usr/lib/sysctl.d/60-restrict.conf
-/usr/lib64/firefox/browser/defaults/preferences/all-brace.js
-/usr/lib64/icecat/browser/defaults/preferences/all-brace.js
-/usr/lib64/thunderbird/defaults/pref/all-brace.js
+/usr/lib64/firefox/browser/defaults/preferences/userjs-*.js
+/usr/lib64/thunderbird/defaults/pref/userjs-*.js

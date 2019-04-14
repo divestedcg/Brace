@@ -27,20 +27,17 @@ Installed
 	dnu.service				= kernel: systemd target to toggle linux-hardened's deny_new_usb sysctl
 	helpers.sh				= profile: adds helper aliases
 	iwlwifi.sh				= kernel: iwlwifi: enables link aggregation for increased performance
-	user.js					= Firefox: change default settings
-Unused
-	umask.sh				= profile: sets umask 077
-	uBlock0@raymondhill.net.json		= Firefox: uBlock Origin: change default settings
+	userjs-*.js				= Firefox: change default settings
 Package Creation
 	brace.install				= pacman helper script
 	brace.spec				= RPM specfile
 	PKGBUILD				= pacman PKGBUILD
-	user.js.sh				= applies changes to user.js
 Repository Necessaries
 	LICENSE
 	README
 
 Credits
 -------
-dnu.service	- lizzie	- UNKNOWN	- https://blog.lizzie.io/preventing-usb-attacks-with-grsecurity.html
-user.js		- @pyllyukko	- MIT		- https://github.com/pyllyukko/user.js
+dnu.service			- lizzie	- UNKNOWN	- https://blog.lizzie.io/preventing-usb-attacks-with-grsecurity.html
+userjs-ghacks.js		- ghacks	- MIT		- https://github.com/ghacksuserjs/ghacks-user.js
+userjs-pyllyukko.js		- @pyllyukko	- MIT		- https://github.com/pyllyukko/user.js
