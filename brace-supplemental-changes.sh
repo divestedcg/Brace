@@ -72,7 +72,7 @@ select yn in "Yes" "No"; do
 			break;;
 	esac
 done
-echo "Do you want Tracker enabled? (brace default disabled)";
+echo "Do you want Tracker enabled?";
 select yn in "Yes" "No"; do
 	case $yn in
 		Yes )

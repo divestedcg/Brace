@@ -1,8 +1,0 @@
-{
- "name": "uBlock0@raymondhill.net",
- "description": "ignored",
- "type": "storage",
- "data": {
-    "adminSettings": "{\"userSettings\":{\"cloudStorageEnabled\":false,\"externalLists\":\"https://spotco.us/blocklists/Analytics.ubl\\nhttps://spotco.us/blocklists/Fingerprinting.ubl\",\"hyperlinkAuditingDisabled\":true,\"prefetchingDisabled\":true,\"showIconBadge\":true,\"webrtcIPAddressHidden\":true},\"selectedFilterLists\":[\"https://spotco.us/blocklists/Fingerprinting.ubl\",\"https://spotco.us/blocklists/Analytics.ubl\",\"fanboy-social\",\"fanboy-cookiemonster\",\"fanboy-thirdparty_social\",\"fanboy-annoyance\",\"spam404-0\",\"malware-1\",\"malware-0\",\"disconnect-malvertising\",\"fanboy-enhanced\",\"easyprivacy\",\"easylist\",\"awrl-0\",\"ublock-unbreak\",\"ublock-abuse\",\"ublock-privacy\",\"ublock-experimental\",\"ublock-badware\",\"ublock-filters\",\"user-filters\"]}"
- }
-}

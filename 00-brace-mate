@@ -60,9 +60,7 @@ tile-to-side-e='<Mod4>Right'
 
 [org/mate/panel/objects/clock/prefs]
 show-temperature=false
-temperature-unit='Fahrenheit'
 format='12-hour'
-speed-unit='mph'
 custom-format=''
 show-seconds=true
 show-weather=false

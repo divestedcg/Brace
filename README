@@ -24,7 +24,6 @@ Installed
 	brace-fedora-remover.sh			= Fedora: package remover
 	brace-fedora-update-system.sh		= Fedora: update system using dnf-plugin-system-upgrade
 	brace-supplemental-changes.sh		= GNOME: change extra default settings
-	dnu.service				= kernel: systemd target to toggle linux-hardened's deny_new_usb sysctl
 	helpers.sh				= profile: adds helper aliases
 	iwlwifi.sh				= kernel: iwlwifi: enables link aggregation for increased performance
 	userjs-*.js				= Firefox: change default settings
@@ -38,6 +37,5 @@ Repository Necessaries
 
 Credits
 -------
-dnu.service			- lizzie	- UNKNOWN	- https://blog.lizzie.io/preventing-usb-attacks-with-grsecurity.html
 userjs-ghacks.js		- ghacks	- MIT		- https://github.com/ghacksuserjs/ghacks-user.js
 userjs-pyllyukko.js		- @pyllyukko	- MIT		- https://github.com/pyllyukko/user.js

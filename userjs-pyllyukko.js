@@ -4,12 +4,6 @@
  * https://github.com/pyllyukko/user.js                                       *
  ******************************************************************************/
 
-// PREF: Disable raw TCP socket support (mozTCPSocket)
-// https://trac.torproject.org/projects/tor/ticket/18863
-// https://www.mozilla.org/en-US/security/advisories/mfsa2015-97/
-// https://developer.mozilla.org/docs/Mozilla/B2G_OS/API/TCPSocket
-pref("dom.mozTCPSocket.enabled",				false);
-
 // PREF: Disable WebRTC getUserMedia, screen sharing, audio capture, video capture
 // https://wiki.mozilla.org/Media/getUserMedia
 // https://blog.mozilla.org/futurereleases/2013/01/12/capture-local-camera-and-microphone-streams-with-getusermedia-now-enabled-in-firefox/
@@ -67,34 +61,15 @@ pref("network.protocol-handler.expose.data",		true);
 // https://developer.mozilla.org/en-US/docs/Mozilla/Projects/Shumway
 pref("shumway.disabled", true);
 
-// PREF: Disable Gnome Shell Integration NPAPI plugin
-pref("plugin.state.libgnome-shell-browser-plugin",		0);
-
-// PREF: Disable remote debugging
-// https://developer.mozilla.org/en-US/docs/Tools/Remote_Debugging/Debugging_Firefox_Desktop
-// https://developer.mozilla.org/en-US/docs/Tools/Tools_Toolbox#Advanced_settings
-pref("devtools.debugger.force-local",                   true);
-
 // PREF: Reject .onion hostnames before passing the to DNS
 // https://bugzilla.mozilla.org/show_bug.cgi?id=1228457
 // RFC 7686
 pref("network.dns.blockDotOnion",				true);
 
-// PREF: Disallow NTLMv1
-// https://bugzilla.mozilla.org/show_bug.cgi?id=828183
-pref("network.negotiate-auth.allow-insecure-ntlm-v1",	false);
-// it is still allowed through HTTPS. uncomment the following to disable it completely.
-//pref("network.negotiate-auth.allow-insecure-ntlm-v1-https",		false);
-
 // PREF: Enable Subresource Integrity
 // https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity
 // https://wiki.mozilla.org/Security/Subresource_Integrity
 pref("security.sri.enable",				true);
-
-// PREF: Disable the "new tab page" feature and show a blank tab instead
-// https://wiki.mozilla.org/Privacy/Reviews/New_Tab
-// https://support.mozilla.org/en-US/kb/new-tab-page-show-hide-and-customize-top-sites#w_how-do-i-turn-the-new-tab-page-off
-pref("browser.newtab.url",					"about:blank");
 
 // PREF: Display a notification bar when websites offer data for offline use
 // http://kb.mozillazine.org/Browser.offline-apps.notify
