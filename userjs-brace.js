@@ -16,7 +16,6 @@ pref("browser.link.open_newwindow_restriction", true);
 pref("network.negotiate-auth.trusted-uris", "");
 pref("messenger.status.reportIdle", false);
 pref("extensions.enigmail.autoWkdLookup", 0);
-pref("extensions.webcompat-reporter.enabled", false);
 pref("browser.contentblocking.ui.enabled", true);
 
 //Security

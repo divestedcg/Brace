@@ -1,6 +1,6 @@
 Name: brace
 Version: 3.0
-Release: 5
+Release: 6
 Summary: Increases privacy/security through various configs.
 License: GPLv3+
 BuildArch: noarch
@@ -21,8 +21,11 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 %post
 if [ -f /usr/bin/dconf ]; then dconf update; fi;
 echo "For additional hardening try the following:";
+echo "Pepper your /etc/fstab with nodev,nosuid,noexec";
 echo "Stealth Mode: firewall-cmd --set-default-zone=drop";
 echo "Stricter Ciphers: update-crypto-policies --set NEXT";
+echo "Stricter Kernel Access: grubby --update-kernel=ALL --args=\"lockdown=1"\";
+echo "Strict IOMMU: grubby --update-kernel=ALL --args=\"iommu=force intel_iommu=on amd_iommu=force_isolation\"";
 
 %postun
 if [ -f /usr/bin/dconf ]; then dconf update; fi;
