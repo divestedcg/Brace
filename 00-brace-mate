@@ -47,6 +47,9 @@ image-collection=false
 
 [org/mate/marco/general]
 compositing-manager=false
+allow-tiling=true
+allow-top-tiling=true
+num-workspaces=6
 
 [org/mate/marco/global-keybindings]
 run-command-terminal='<Primary><Alt>t'
