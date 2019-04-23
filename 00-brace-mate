@@ -57,6 +57,8 @@ panel-run-dialog='<Mod4>d'
 maximize='<Mod4>Up'
 tile-to-side-w='<Mod4>Left'
 tile-to-side-e='<Mod4>Right'
+move-to-monitor-e='<Shift><Mod4>Right'
+move-to-monitor-w='<Shift><Mod4>Left'
 
 [org/mate/panel/objects/clock/prefs]
 show-temperature=false

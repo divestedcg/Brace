@@ -20,7 +20,7 @@
   2. READ this
      * https://github.com/ghacksuserjs/ghacks-user.js/wiki/1.3-Implementation
   3. If you skipped steps 1 and 2 above (shame on you), then here is the absolute minimum
-     * Auto-installing updates for Firefox and extensions are disabled (section 0302's)
+     * You will still get prompts to update Firefox, but auto-installing them is disabled (0302a)
      * Some user data is erased on close (section 2800). Change this to suit your needs
      * EACH RELEASE check:
          - 4600s: reset prefs made redundant due to privacy.resistFingerprinting (RPF)
@@ -175,10 +175,14 @@ pref("geo.provider.use_corelocation", false); // [MAC]
 pref("geo.provider.use_gpsd", false); // [LINUX]
 
 /*** [SECTION 0300]: QUIET FOX
-     We choose to not disable auto-CHECKs (0301's) but to disable auto-INSTALLs (0302's).
-     There are many legitimate reasons to turn off auto-INSTALLS, including hijacked or
-     monetized extensions, time constraints, legacy issues, and fear of breakage/bugs.
-     It is still important to do updates for security reasons, please do so manually. ***/
+     Starting in user.js v67, we only disable the auto-INSTALL of Firefox. You still get prompts
+     to update, in one click. We have NEVER disabled auto-CHECKING, and highly discourage that.
+     Previously we also disabled auto-INSTALLING of extensions (302b).
+
+     There are many legitimate reasons to turn off auto-INSTALLS, including hijacked or monetized
+     extensions, time constraints, legacy issues, dev/testing, and fear of breakage/bugs. It is
+     still important to do updates for security reasons, please do so manually if you make changes.
+***/
 pref("_user.js.parrot", "0300 syntax error: the parrot's not pinin' for the fjords!");
 /* 0301b: disable auto-CHECKING for extension and theme updates ***/
    // pref("extensions.update.enabled", false);
@@ -188,7 +192,7 @@ pref("_user.js.parrot", "0300 syntax error: the parrot's not pinin' for the fjor
 pref("app.update.auto", false);
 /* 0302b: disable auto-INSTALLING extension and theme updates (after the check in 0301b)
  * [SETTING] about:addons>Extensions>[cog-wheel-icon]>Update Add-ons Automatically (toggle) ***/
-   // pref("extensions.update.autoUpdateDefault", false); //BRACE-COMMENTED
+   // pref("extensions.update.autoUpdateDefault", false);
 /* 0303: disable background update service [WINDOWS]
  * [SETTING] General>Firefox Updates>Use a background service to install updates ***/
 pref("app.update.service.enabled", false);
@@ -469,20 +473,20 @@ pref("_user.js.parrot", "0700 syntax error: the parrot's given up the ghost!");
  * [1] https://github.com/ghacksuserjs/ghacks-user.js/issues/437#issuecomment-403740626
  * [2] https://www.internetsociety.org/tag/ipv6-security/ (see Myths 2,4,5,6) ***/
    // pref("network.dns.disableIPv6", true); //BRACE-COMMENTED
-/* 0702: disable HTTP2 (which was based on SPDY which is now deprecated)
- * HTTP2 raises concerns with "multiplexing" and "server push", does nothing to enhance
- * privacy, and in fact opens up a number of server-side fingerprinting opportunities
- * [SETUP-PERF] Relax this if you have FPI enabled (see 4000) *AND* you understand the
- * consequences. FPI isolates these, but it was designed with the Tor protocol in mind,
- * and the Tor Browser has extra protection, including enhanced sanitizing per Identity.
+/* 0702: disable HTTP2
+ * HTTP2 raises concerns with "multiplexing" and "server push", does nothing to
+ * enhance privacy, and opens up a number of server-side fingerprinting opportunities.
+ * [WARNING] Disabling this made sense in the past, and doesn't break anything, but HTTP2 is
+ * at 35% (April 2019) and growing [5]. Don't be that one person using HTTP1.1 on HTTP2 sites
  * [1] https://http2.github.io/faq/
  * [2] https://blog.scottlogic.com/2014/11/07/http-2-a-quick-look.html
- * [3] https://queue.acm.org/detail.cfm?id=2716278
- * [4] https://github.com/ghacksuserjs/ghacks-user.js/issues/107 ***/
-   // pref("network.http.spdy.enabled", false); //BRACE-COMMENTED
-   // pref("network.http.spdy.enabled.deps", false); //BRACE-COMMENTED
-   // pref("network.http.spdy.enabled.http2", false); //BRACE-COMMENTED
-   // pref("network.http.spdy.websockets", false); // [FF65+] //BRACE-COMMENTED
+ * [3] https://http2.github.io/http2-spec/#rfc.section.10.8
+ * [4] https://queue.acm.org/detail.cfm?id=2716278
+ * [5] https://w3techs.com/technologies/details/ce-http2/all/all ***/
+   // pref("network.http.spdy.enabled", false);
+   // pref("network.http.spdy.enabled.deps", false);
+   // pref("network.http.spdy.enabled.http2", false);
+   // pref("network.http.spdy.websockets", false); // [FF65+]
 /* 0703: disable HTTP Alternative Services [FF37+]
  * [SETUP-PERF] Relax this if you have FPI enabled (see 4000) *AND* you understand the
  * consequences. FPI isolates these, but it was designed with the Tor protocol in mind,
@@ -526,7 +530,7 @@ pref("network.file.disable_unc_paths", true); // [HIDDEN PREF]
  * [4] https://en.wikipedia.org/wiki/GIO_(software) ***/
 pref("network.gio.supported-protocols", ""); // [HIDDEN PREF]
 
-/*** [SECTION 0800]: LOCATION BAR / SEARCH BAR / SUGGESTIONS / HISTORY / FORMS [SETUP-CHROME]
+/*** [SECTION 0800]: LOCATION BAR / SEARCH BAR / SUGGESTIONS / HISTORY / FORMS
      Change items 0850 and above to suit for privacy vs convenience and functionality. Consider
      your environment (no unwanted eyeballs), your device (restricted access), your device's
      unattended state (locked, encrypted, forensic hardened). Likewise, you may want to check
@@ -578,7 +582,7 @@ pref("browser.urlbar.usepreloadedtopurls.enabled", false);
  * [1] https://bugzilla.mozilla.org/1348275 ***/
 pref("browser.urlbar.speculativeConnect.enabled", false);
 /* 0850a: disable location bar suggestion types
- * [SETUP-CHROME] If all three suggestion types are false, search engine keywords are disabled
+ * If all three suggestion types are false, search engine keywords are disabled
  * [SETTING] Privacy & Security>Address Bar>When using the address bar, suggest ***/
    // pref("browser.urlbar.suggest.history", false);
    // pref("browser.urlbar.suggest.bookmark", false);
@@ -598,8 +602,10 @@ pref("browser.urlbar.speculativeConnect.enabled", false);
  * [1] https://www.ghacks.net/2016/08/09/firefox-one-off-searches-address-bar/ ***/
    // pref("browser.urlbar.oneOffSearches", false);
 /* 0860: disable search and form history
+ * Autocomplete form data is still (in April 2019) easily read by third parties, see [1]
  * [NOTE] You can clear formdata on exiting Firefox (see 2803)
- * [SETTING] Privacy & Security>History>Custom Settings>Remember search and form history ***/
+ * [SETTING] Privacy & Security>History>Custom Settings>Remember search and form history
+ * [1] https://blog.mindedsecurity.com/2011/10/autocompleteagain.html ***/
 pref("browser.formfill.enable", false);
 /* 0862: disable browsing and download history
  * [NOTE] You can clear history and downloads on exiting Firefox (see 2803)
@@ -883,11 +889,10 @@ pref("security.insecure_connection_text.enabled", true); // [FF60+]
 /*** [SECTION 1400]: FONTS ***/
 pref("_user.js.parrot", "1400 syntax error: the parrot's bereft of life!");
 /* 1401: disable websites choosing fonts (0=block, 1=allow)
- * If you disallow fonts, this drastically limits/reduces font
- * enumeration (by JS) which is a high entropy fingerprinting vector.
- * [NOTE] Disabling fonts can uglify the web a fair bit.
+ * [WARNING] Blocking fonts can *sometimes* reduce JS font enumeration, but not entropy.
+ * There are also other methods to fingerprint fonts. Wait for RFP (4500) to cover this.
  * [SETTING] General>Language and Appearance>Fonts & Colors>Advanced>Allow pages to choose... ***/
-pref("browser.display.use_document_fonts", 0);
+pref("browser.display.use_document_fonts", 0); //BRACE-UNCOMMENTED
 /* 1402: set more legible default fonts
  * [NOTE] Example below for Windows/Western only
  * [SETTING] General>Language and Appearance>Fonts & Colors>Advanced>Serif|Sans-serif|Monospace ***/
@@ -1053,7 +1058,6 @@ pref("media.peerconnection.ice.no_host", true); // [FF51+]
  * [1] https://www.contextis.com/resources/blog/webgl-new-dimension-browser-exploitation/
  * [2] https://security.stackexchange.com/questions/13799/is-webgl-a-security-concern ***/
 pref("webgl.disabled", true);
-pref("pdfjs.enableWebGL", false);
 pref("webgl.min_capability_mode", true);
 pref("webgl.disable-extensions", true);
 pref("webgl.disable-fail-if-major-performance-caveat", true);
@@ -1070,9 +1074,6 @@ pref("media.getusermedia.audiocapture.enabled", false);
  * [SETTING] to manage site exceptions: Options>Privacy & Security>Permissions>Camera/Microphone>Settings ***/
    // pref("permissions.default.camera", 2);
    // pref("permissions.default.microphone", 2);
-/* 2026: disable canvas capture stream [FF41+]
- * [1] https://developer.mozilla.org/docs/Web/API/HTMLCanvasElement/captureStream ***/
-pref("canvas.capturestream.enabled", false);
 /* 2027: disable camera image capture [FF35+]
  * [1] https://trac.torproject.org/projects/tor/ticket/16339 ***/
 pref("dom.imagecapture.enabled", false); // [DEFAULT: false]
@@ -1202,7 +1203,7 @@ pref("dom.vibrator.enabled", false);
  * [6] https://rh0dev.github.io/blog/2017/the-return-of-the-jit/ ***/
 pref("javascript.options.asmjs", false);
 /* 2421: disable Ion and baseline JIT to help harden JS against exploits
- * [SETUP-PERF] If false, causes the odd site issue and there is also a performance loss
+ * [WARNING] If false, causes the odd site issue and there is also a performance loss
  * [1] https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-0817 ***/
    // pref("javascript.options.ion", false);
    // pref("javascript.options.baselinejit", false);
@@ -1246,13 +1247,13 @@ pref("dom.vr.enabled", false); //BRACE-UNCOMMENTED
  * [1] https://wiki.mozilla.org/Media/getUserMedia
  * [2] https://developer.mozilla.org/docs/Web/API/MediaDevices/enumerateDevices ***/
 pref("media.navigator.enabled", false);
-/* 2508: disable hardware acceleration to reduce graphics fingerprinting
- * [SETUP-PERF] Affects text rendering (fonts will look different), impacts video performance,
+/* 2508: disable hardware acceleration to reduce graphics fingerprinting [SETUP-HARDEN]
+ * [WARNING] Affects text rendering (fonts will look different), impacts video performance,
  * and parts of Quantum that utilize the GPU will also be affected as they are rolled out
  * [SETTING] General>Performance>Custom>Use hardware acceleration when available
  * [1] https://wiki.mozilla.org/Platform/GFX/HardwareAcceleration ***/
    // pref("gfx.direct2d.disabled", true); // [WINDOWS]
-   // pref("layers.acceleration.disabled", true); //BRACE-COMMENTED
+   // pref("layers.acceleration.disabled", true);
 /* 2510: disable Web Audio API [FF51+]
  * [1] https://bugzilla.mozilla.org/1288359 ***/
 pref("dom.webaudio.enabled", false);
@@ -1293,10 +1294,10 @@ pref("devtools.chrome.enabled", false);
 pref("devtools.debugger.remote-enabled", false);
 pref("devtools.webide.enabled", false);
 pref("devtools.webide.autoinstallADBExtension", false); // [FF64+]
-/* 2609: disable MathML (Mathematical Markup Language) [FF51+]
+/* 2609: disable MathML (Mathematical Markup Language) [FF51+] [SETUP-HARDEN]
  * [TEST] http://browserspy.dk/mathml.php
  * [1] https://bugzilla.mozilla.org/1173199 ***/
-pref("mathml.disabled", true);
+pref("mathml.disabled", true); //BRACE-UNCOMMENTED
 /* 2610: disable in-content SVG (Scalable Vector Graphics) [FF53+]
  * [SETUP-WEB] Expect breakage incl. youtube player controls. Best left for a "hardened" profile.
  * [1] https://bugzilla.mozilla.org/1216893 ***/
@@ -1333,8 +1334,8 @@ pref("ui.use_standins_for_native_colors", true);
  * [3] CVE-2017-5383: https://www.mozilla.org/security/advisories/mfsa2017-02/
  * [4] https://www.xudongz.com/blog/2017/idn-phishing/ ***/
 pref("network.IDN_show_punycode", true);
-/* 2620: enable Firefox's built-in PDF reader
- * This setting controls if the option "Display in Firefox" in the above setting is available
+/* 2620: enable Firefox's built-in PDF reader [SETUP-CHROME]
+ * This setting controls if the option "Display in Firefox" is available in the setting below
  *   and by effect controls whether PDFs are handled in-browser or externally ("Ask" or "Open With")
  * PROS: pdfjs is lightweight, open source, and as secure/vetted as any pdf reader out there (more than most)
  *   Exploits are rare (1 serious case in 4 yrs), treated seriously and patched quickly.
@@ -1343,28 +1344,29 @@ pref("network.IDN_show_punycode", true);
  * CONS: You may prefer a different pdf reader for security reasons
  * CAVEAT: JS can still force a pdf to open in-browser by bundling its own code (rare)
  * [SETTING] General>Applications>Portable Document Format (PDF) ***/
-pref("pdfjs.disabled", false);
+pref("pdfjs.disabled", false); // [DEFAULT: false]
 /* 2621: disable links launching Windows Store on Windows 8/8.1/10 [WINDOWS]
  * [1] https://www.ghacks.net/2016/03/25/block-firefox-chrome-windows-store/ ***/
 pref("network.protocol-handler.external.ms-windows-store", false);
 
 /** DOWNLOADS ***/
-/* 2650: discourage downloading to desktop (0=desktop 1=downloads 2=last used)
+/* 2650: discourage downloading to desktop
+ * 0=desktop 1=downloads 2=last used
  * [SETTING] To set your default "downloads": General>Downloads>Save files to ***/
-pref("browser.download.folderList", 2);
-/* 2651: enforce user interaction for security by always asking the user where to download
+   // pref("browser.download.folderList", 2);
+/* 2651: enforce user interaction for security by always asking where to download [SETUP-CHROME]
  * [SETTING] General>Downloads>Always ask you where to save files ***/
 pref("browser.download.useDownloadDir", false);
 /* 2652: disable adding downloads to the system's "recent documents" list ***/
 pref("browser.download.manager.addToRecentDocs", false);
 /* 2653: disable hiding mime types (Options>General>Applications) not associated with a plugin ***/
 pref("browser.download.hide_plugins_without_extensions", false);
-/* 2654: disable "open with" in download dialog [FF50+]
+/* 2654: disable "open with" in download dialog [FF50+] [SETUP-HARDEN]
  * This is very useful to enable when the browser is sandboxed (e.g. via AppArmor)
  * in such a way that it is forbidden to run external applications.
- * [SETUP-CHROME] This may interfere with some users' workflow or methods
+ * [WARNING] This may interfere with some users' workflow or methods
  * [1] https://bugzilla.mozilla.org/1281959 ***/
-pref("browser.download.forbid_open_with", true);
+pref("browser.download.forbid_open_with", true); //BRACE-UNCOMMENTED
 
 /** EXTENSIONS ***/
 /* 2660: lock down allowed extension directories
@@ -1413,7 +1415,7 @@ pref("security.dialog_enable_delay", 700);
      accessible to websites except shared/service workers where the cookie setting *must* be "Allow"
 ***/
 pref("_user.js.parrot", "2700 syntax error: the parrot's joined the bleedin' choir invisible!");
-/* 2701: disable 3rd-party cookies and site-data
+/* 2701: disable 3rd-party cookies and site-data [SETUP-WEB]
  * 0=Accept cookies and site data (default), 1=(Block) All third-party cookies, 2=(Block) All cookies,
  * 3=(Block) Cookies from unvisited sites, 4=(Block) Third-party trackers (FF63+)
  * [NOTE] Value 4 is tied to the Tracking Protection lists
@@ -1477,7 +1479,7 @@ pref("dom.caches.enabled", false);
  * [1] https://developer.mozilla.org/en-US/docs/Web/API/Storage_Access_API ***/
    // pref("dom.storage_access.enabled", false);
 
-/*** [SECTION 2800]: SHUTDOWN [SETUP-CHROME]
+/*** [SECTION 2800]: SHUTDOWN
      You should set the values to what suits you best.
      - "Offline Website Data" includes appCache (2730), localStorage (2710),
        Service Worker cache (2740), and QuotaManager (IndexedDB (2720), asm-cache)
@@ -1488,7 +1490,7 @@ pref("_user.js.parrot", "2800 syntax error: the parrot's bleedin' demised!");
 /* 2802: enable Firefox to clear items on shutdown (see 2803)
  * [SETTING] Privacy & Security>History>Custom Settings>Clear history when Firefox closes ***/
 pref("privacy.sanitize.sanitizeOnShutdown", false); //BRACE-DISABLED
-/* 2803: set what items to clear on shutdown (if 2802 is true)
+/* 2803: set what items to clear on shutdown (if 2802 is true) [SETUP-CHROME]
  * [NOTE] If 'history' is true, downloads will also be cleared regardless of the value
  * but if 'history' is false, downloads can still be cleared independently
  * However, this may not always be the case. The interface combines and syncs these
@@ -1502,7 +1504,7 @@ pref("privacy.clearOnShutdown.history", true); // Browsing & Download History
 pref("privacy.clearOnShutdown.offlineApps", true); // Offline Website Data
 pref("privacy.clearOnShutdown.sessions", true); // Active Logins
 pref("privacy.clearOnShutdown.siteSettings", false); // Site Preferences
-/* 2804: reset default items to clear with Ctrl-Shift-Del (to match 2803)
+/* 2804: reset default items to clear with Ctrl-Shift-Del (to match 2803) [SETUP-CHROME]
  * This dialog can also be accessed from the menu History>Clear Recent History
  * Firefox remembers your last choices. This will reset them when you start Firefox.
  * [NOTE] Regardless of what you set privacy.cpd.downloads to, as soon as the dialog
@@ -1544,6 +1546,7 @@ pref("privacy.sanitize.timeSpan", 0);
  ** 1300671 - isolate data:, about: URLs (FF55+)
  ** 1473247 - isolate IP addresses (FF63+)
  ** 1492607 - isolate postMessage with targetOrigin "*" (requires 4002) (FF65+)
+ ** 1542309 - isolate top-level domain URLs (FF68+)
 ***/
 pref("_user.js.parrot", "4000 syntax error: the parrot's pegged out");
 /* 4001: enable First Party Isolation [FF51+]
