@@ -601,14 +601,14 @@ pref("browser.urlbar.speculativeConnect.enabled", false);
 /* 0850e: disable location bar one-off searches [FF51+]
  * [1] https://www.ghacks.net/2016/08/09/firefox-one-off-searches-address-bar/ ***/
    // pref("browser.urlbar.oneOffSearches", false);
-/* 0860: disable search and form history
- * Autocomplete form data is still (in April 2019) easily read by third parties, see [1]
- * [NOTE] You can clear formdata on exiting Firefox (see 2803)
+/* 0860: disable search and form history [SETUP-WEB]
+ * [WARNING] Autocomplete form data is still (in April 2019) easily read by third parties, see [1]
+ * [NOTE] We also clear formdata on exiting Firefox (see 2803)
  * [SETTING] Privacy & Security>History>Custom Settings>Remember search and form history
  * [1] https://blog.mindedsecurity.com/2011/10/autocompleteagain.html ***/
 pref("browser.formfill.enable", false);
 /* 0862: disable browsing and download history
- * [NOTE] You can clear history and downloads on exiting Firefox (see 2803)
+ * [NOTE] We also clear history and downloads on exiting Firefox (see 2803)
  * [SETTING] Privacy & Security>History>Custom Settings>Remember browsing and download history ***/
    // pref("places.history.enabled", false);
 /* 0864: disable date/time picker
@@ -911,7 +911,7 @@ pref("browser.display.use_document_fonts", 0); //BRACE-UNCOMMENTED
  * [1] https://wiki.mozilla.org/SVGOpenTypeFonts - iSECPartnersReport recommends to disable this ***/
 pref("gfx.font_rendering.opentype_svg.enabled", false);
 /* 1405: disable WOFF2 (Web Open Font Format) [FF35+] ***/
-pref("gfx.downloadable_fonts.woff2.enabled", false);
+   // pref("gfx.downloadable_fonts.woff2.enabled", false);
 /* 1406: disable CSS Font Loading API
  * [NOTE] Disabling fonts can uglify the web a fair bit. ***/
 pref("layout.css.font-loading-api.enabled", false);
@@ -1038,10 +1038,10 @@ pref("media.gmp-widevinecdm.autoupdate", false);
  * [SETTING] General>DRM Content>Play DRM-controlled content
  * [1] https://www.eff.org/deeplinks/2017/10/drms-dead-canary-how-we-just-lost-web-what-we-learned-it-and-what-we-need-do-next ***/
 pref("media.eme.enabled", false);
-/* 1840: disable the OpenH264 Video Codec by Cisco to "Never Activate" [SETUP-WEB]
+/* 1840: disable the OpenH264 Video Codec by Cisco to "Never Activate" [SETUP-HARDEN]
  * This is the bundled codec used for video chat in WebRTC ***/
-pref("media.gmp-gmpopenh264.enabled", false);
-pref("media.gmp-gmpopenh264.autoupdate", false);
+pref("media.gmp-gmpopenh264.enabled", false); //BRACE-UNCOMMENTED
+pref("media.gmp-gmpopenh264.autoupdate", false); //BRACE-UNCOMMENTED
 
 /*** [SECTION 2000]: MEDIA / CAMERA / MIC ***/
 pref("_user.js.parrot", "2000 syntax error: the parrot's snuffed it!");
@@ -1123,7 +1123,7 @@ pref("browser.link.open_newwindow.restriction", 0);
 pref("dom.disable_open_during_load", true);
 /* 2211: set max popups from a single non-click event - default is 20! ***/
 pref("dom.popup_maximum", 3);
-/* 2212: limit events that can cause a popup
+/* 2212: limit events that can cause a popup [SETUP-WEB]
  * default is "change click dblclick mouseup pointerup notificationclick reset submit touchend contextmenu"
  * [1] http://kb.mozillazine.org/Dom.popup_allowed_events ***/
 pref("dom.popup_allowed_events", "click dblclick");
@@ -1295,7 +1295,7 @@ pref("devtools.debugger.remote-enabled", false);
 pref("devtools.webide.enabled", false);
 pref("devtools.webide.autoinstallADBExtension", false); // [FF64+]
 /* 2609: disable MathML (Mathematical Markup Language) [FF51+] [SETUP-HARDEN]
- * [TEST] http://browserspy.dk/mathml.php
+ * [TEST] https://ghacksuserjs.github.io/TorZillaPrint/TorZillaPrint.html#misc
  * [1] https://bugzilla.mozilla.org/1173199 ***/
 pref("mathml.disabled", true); //BRACE-UNCOMMENTED
 /* 2610: disable in-content SVG (Scalable Vector Graphics) [FF53+]
@@ -1571,14 +1571,10 @@ pref("privacy.firstparty.isolate.restrict_opener_access", true); // [DEFAULT: tr
    IMPORTANT: As existing prefs become redundant, and some of them WILL interfere
    with how RFP works, they will be moved to section 4600 and made inactive
 
- ** 418986 - limit window.screen & CSS media queries leaking identifiable info (FF41+)
-      [POC] http://ip-check.info/?lang=en (screen, usable screen, and browser window will match)
-      [NOTE] Does not cover everything yet - https://bugzilla.mozilla.org/1216800
-      [NOTE] This will probably make your values pretty unique until you resize or snap the
-      inner window width + height into standard/common resolutions (such as 1366x768)
-      To set a size, open a XUL (chrome) page (such as about:config) which is at 100% zoom, hit
-      Shift+F4 to open the scratchpad, type window.resizeTo(1366,768), hit Ctrl+R to run. Test
-      your window size, do some math, resize to allow for all the non inner window elements
+  ** 418986 - limit window.screen & CSS media queries leaking identifiable info (FF41+)
+      [NOTE] Info only: To set a size, open a XUL (chrome) page (such as about:config) which is at
+      100% zoom, hit Shift+F4 to open the scratchpad, type window.resizeTo(1366,768), hit Ctrl+R to run.
+      Test your window size, do some math, resize to allow for all the non inner window elements
       [TEST] https://ghacksuserjs.github.io/TorZillaPrint/TorZillaPrint.html#screen
  ** 1281949 - spoof screen orientation (FF50+)
  ** 1281963 - hide the contents of navigator.plugins and navigator.mimeTypes (FF50+)

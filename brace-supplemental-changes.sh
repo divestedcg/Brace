@@ -4,9 +4,9 @@
 
 #Looks
 if [ -d "/usr/share/fonts/adobe-source-code-pro" ]; then
-	gsettings set org.gnome.builder.editor font-name 'Source Code Pro 11';
-	gsettings set org.gnome.desktop.interface monospace-font-name 'Source Code Pro 11';
-	gsettings set org.mate.desktop.interface monospace-font-name 'Source Code Pro 11';
+	gsettings set org.gnome.builder.editor font-name 'Source Code Pro 10';
+	gsettings set org.gnome.desktop.interface monospace-font-name 'Source Code Pro 10';
+	gsettings set org.mate.desktop.interface monospace-font-name 'Source Code Pro 10';
 fi;
 if [ -d "/usr/share/icons/Numix-Circle" ]; then
 	gsettings set org.gnome.desktop.interface icon-theme 'Numix-Circle';

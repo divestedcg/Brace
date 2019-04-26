@@ -146,7 +146,7 @@ hinting='slight'
 
 [org/gnome/shell]
 favorite-apps=['org.gnome.Nautilus.desktop', 'firefox.desktop', 'evolution.desktop', 'org.gnome.Evolution.desktop', 'libreoffice-startcenter.desktop', 'yelp.desktop']
-disable-user-extensions=false
+disable-user-extensions=true
 
 [org/gnome/shell/overrides]
 dynamic-workspaces=false

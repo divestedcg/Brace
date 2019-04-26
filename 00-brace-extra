@@ -67,6 +67,7 @@ artist-artwork=false
 auto-update=false
 disable-scrobbling=true
 power-management='suspend'
+sidebar-content='artists'
 
 [org/gnome/maps]
 checkin-facebook-privacy='ALL_FRIENDS'
