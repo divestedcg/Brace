@@ -540,7 +540,13 @@ pref("network.gio.supported-protocols", ""); // [HIDDEN PREF]
 ***/
 pref("_user.js.parrot", "0800 syntax error: the parrot's ceased to be!");
 /* 0801: disable location bar using search
- * don't leak typos to a search engine, give an error message instead ***/
+ * Don't leak URL typos to a search engine, give an error message instead.
+ * Examples: "secretplace,com", "secretplace/com", "secretplace com", "secret place.com"
+ * [NOTE] Search buttons in the dropdown work, but hitting 'enter' in the location bar will fail
+ * [TIP] You can add keywords to search engines in options (e.g. 'd' for DuckDuckGo) and
+ * the dropdown will now auto-select it and you can then hit 'enter' and it will work
+ * [SETUP-CHROME] If you don't, or rarely, type URLs, or you use a default search
+ * engine that respects privacy, then you probably don't need this ***/
    // pref("keyword.enabled", false); //BRACE-COMMENTED
 /* 0802: disable location bar domain guessing
  * domain guessing intercepts DNS "hostname not found errors" and resends a
@@ -667,7 +673,7 @@ pref("security.insecure_field_warning.contextual.enabled", true);
  * [1] https://www.fxsitecompat.com/en-CA/docs/2015/http-auth-dialog-can-no-longer-be-triggered-by-cross-origin-resources/ ***/
 pref("network.auth.subresource-http-auth-allow", 1);
 
-/*** [SECTION 1000]: CACHE / SESSION (RE)STORE / FAVICONS [SETUP-CHROME]
+/*** [SECTION 1000]: CACHE / SESSION (RE)STORE / FAVICONS
      ETAG [1] and other [2][3] cache tracking/fingerprinting techniques can be averted by
      disabling *BOTH* disk (1001) and memory (1003) cache. ETAGs can also be neutralized
      by modifying response headers [4]. Another solution is to use a hardened configuration
@@ -681,11 +687,11 @@ pref("network.auth.subresource-http-auth-allow", 1);
 ***/
 pref("_user.js.parrot", "1000 syntax error: the parrot's gone to meet 'is maker!");
 /** CACHE ***/
-/* 1001: disable disk cache ***/
+/* 1001: disable disk cache
+ * [SETUP-PERF] If you think disk cache may help (heavy tab user, high-res video),
+ * or you use a hardened Temporary Containers, then feel free to override this
+ * [NOTE] We also clear cache on close (see 2803) ***/
    // pref("browser.cache.disk.enable", false); //BRACE-COMMENTED
-   // pref("browser.cache.disk.capacity", 0); //BRACE-COMMENTED
-   // pref("browser.cache.disk.smart_size.enabled", false); //BRACE-COMMENTED
-   // pref("browser.cache.disk.smart_size.first_run", false); //BRACE-COMMENTED
 /* 1002: disable disk cache for SSL pages
  * [1] http://kb.mozillazine.org/Browser.cache.disk_cache_ssl ***/
    // pref("browser.cache.disk_cache_ssl", false); //BRACE-COMMENTED
@@ -844,7 +850,7 @@ pref("security.cert_pinning.enforcement_level", 2);
 /* 1240: disable insecure active content on https pages
  * [1] https://trac.torproject.org/projects/tor/ticket/21323 ***/
 pref("security.mixed_content.block_active_content", true); // [DEFAULT: true]
-/* 1241: disable insecure passive content (such as images) on https pages ***/
+/* 1241: disable insecure passive content (such as images) on https pages [SETUP-WEB] ***/
 pref("security.mixed_content.block_display_content", true);
 /* 1243: block unencrypted requests from Flash on encrypted pages to mitigate MitM attacks [FF59+]
  * [1] https://bugzilla.mozilla.org/1190623 ***/
@@ -1054,16 +1060,16 @@ pref("media.peerconnection.enabled", false);
  * [2] https://wiki.mozilla.org/Media/WebRTC/Privacy ***/
 pref("media.peerconnection.ice.default_address_only", true);
 pref("media.peerconnection.ice.no_host", true); // [FF51+]
-/* 2010: disable WebGL (Web Graphics Library), force bare minimum feature set if used & disable WebGL extensions
+/* 2010: disable WebGL (Web Graphics Library)
  * [1] https://www.contextis.com/resources/blog/webgl-new-dimension-browser-exploitation/
  * [2] https://security.stackexchange.com/questions/13799/is-webgl-a-security-concern ***/
 pref("webgl.disabled", true);
+pref("webgl.dxgl.enabled", false); // [WINDOWS]
+pref("webgl.enable-webgl2", false);
+/* 2012: limit WebGL ***/
 pref("webgl.min_capability_mode", true);
 pref("webgl.disable-extensions", true);
 pref("webgl.disable-fail-if-major-performance-caveat", true);
-/* 2012: disable two more webgl preferences [FF51+] ***/
-pref("webgl.dxgl.enabled", false); // [WINDOWS]
-pref("webgl.enable-webgl2", false);
 /* 2022: disable screensharing ***/
 pref("media.getusermedia.screensharing.enabled", false);
 pref("media.getusermedia.browser.enabled", false);
@@ -1153,17 +1159,11 @@ pref("_user.js.parrot", "2300 syntax error: the parrot's off the twig!");
  * [NOTE] Service worker APIs are hidden (in Firefox) and cannot be used when in PB mode.
  * [NOTE] Service workers only run over HTTPS. Service Workers have no DOM access. ***/
 pref("dom.serviceWorkers.enabled", false);
-/* 2304: disable web notifications
+/* 2304: disable Web Notifications
  * [1] https://developer.mozilla.org/docs/Web/API/Notifications_API ***/
 pref("dom.webnotifications.enabled", false); // [FF22+]
 pref("dom.webnotifications.serviceworker.enabled", false); // [FF44+]
-/* 2305: set a default permission for Notifications (see 2304) [FF58+]
- * 0=always ask (default), 1=allow, 2=block
- * [NOTE] Best left at default "always ask", fingerprintable via Permissions API
- * [SETTING] to add site exceptions: Page Info>Permissions>Receive Notifications
- * [SETTING] to manage site exceptions: Options>Privacy & Security>Permissions>Notifications>Settings ***/
-   // pref("permissions.default.desktop-notification", 2);
-/* 2306: disable push notifications [FF44+]
+/* 2305: disable Push Notifications [FF44+]
  * web apps can receive messages pushed to them from a server, whether or
  * not the web app is in the foreground, or even currently loaded
  * [1] https://developer.mozilla.org/docs/Web/API/Push_API ***/
@@ -1171,6 +1171,12 @@ pref("dom.push.enabled", false);
 pref("dom.push.connection.enabled", false);
 pref("dom.push.serverURL", "");
 pref("dom.push.userAgentID", "");
+/* 2306: set a default permission for Notifications (both 2305 and 2306) [FF58+]
+ * 0=always ask (default), 1=allow, 2=block
+ * [NOTE] Best left at default "always ask", fingerprintable via Permissions API
+ * [SETTING] to add site exceptions: Page Info>Permissions>Receive Notifications
+ * [SETTING] to manage site exceptions: Options>Privacy & Security>Permissions>Notifications>Settings ***/
+   // pref("permissions.default.desktop-notification", 2);
 
 /*** [SECTION 2400]: DOM (DOCUMENT OBJECT MODEL) & JAVASCRIPT ***/
 pref("_user.js.parrot", "2400 syntax error: the parrot's kicked the bucket!");
@@ -1258,7 +1264,7 @@ pref("media.navigator.enabled", false);
  * [1] https://bugzilla.mozilla.org/1288359 ***/
 pref("dom.webaudio.enabled", false);
 /* 2517: disable Media Capabilities API [FF63+]
- * [SETUP-PERF] This *may* affect media performance if disabled, no one is sure
+ * [WARNING] This *may* affect media performance if disabled, no one is sure
  * [1] https://github.com/WICG/media-capabilities
  * [2] https://wicg.github.io/media-capabilities/#security-privacy-considerations ***/
    // pref("media.media-capabilities.enabled", false);
@@ -1299,7 +1305,7 @@ pref("devtools.webide.autoinstallADBExtension", false); // [FF64+]
  * [1] https://bugzilla.mozilla.org/1173199 ***/
 pref("mathml.disabled", true); //BRACE-UNCOMMENTED
 /* 2610: disable in-content SVG (Scalable Vector Graphics) [FF53+]
- * [SETUP-WEB] Expect breakage incl. youtube player controls. Best left for a "hardened" profile.
+ * [WARNING] Expect breakage incl. youtube player controls. Best left for a "hardened" profile.
  * [1] https://bugzilla.mozilla.org/1216893 ***/
    // pref("svg.disabled", true);
 /* 2611: disable middle mouse click opening links from clipboard
@@ -2187,7 +2193,7 @@ pref("extensions.shield-recipe-client.api_url", "");
    // [-] https://bugzilla.mozilla.org/1433324
 pref("browser.newtabpage.activity-stream.enabled", false);
 // 2301: disable workers
-   // [SETUP-WEB] Disabling workers *will* break sites (e.g. Google Street View, Twitter)
+   // Disabling workers *will* break sites (e.g. Google Street View, Twitter)
    // [NOTE] CVE-2016-5259, CVE-2016-2812, CVE-2016-1949, CVE-2016-5287 (fixed)
    // [-] https://bugzilla.mozilla.org/1434934
 pref("dom.workers.enabled", false);
@@ -2242,7 +2248,7 @@ pref("shield.savant.enabled", false);
    // [-] https://bugzilla.mozilla.org/1453751
    // pref("browser.chrome.favicons", false);
 // 2030: disable autoplay of HTML5 media - replaced by media.autoplay.default
-   // [SETUP-WEB] This may break video playback on various sites
+   // This may break video playback on various sites
    // [-] https://bugzilla.mozilla.org/1470082
 pref("media.autoplay.enabled", false);
 // 2704: set cookie lifetime in days (see 2703)
