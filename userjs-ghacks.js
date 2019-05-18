@@ -302,9 +302,7 @@ pref("extensions.blocklist.url", "https://blocklists.settings.services.mozilla.c
  * This is a real-time check with Google services
  * [SETUP-SECURITY] If you do not understand this, or if you want this protection, then override it ***/
 pref("browser.safebrowsing.downloads.remote.enabled", false);
-/* 0403: disable data sharing [FF58+] ***/
-pref("browser.safebrowsing.provider.google4.dataSharing.enabled", false);
-/* 0404: disable 'ignore this warning' on Safe Browsing warnings
+/* 0403: disable 'ignore this warning' on Safe Browsing warnings
  * If clicked, it bypasses the block for that session. This is a means for admins to enforce SB
  * [TEST] see github wiki APPENDIX A: Test Sites: Section 5
  * [1] https://bugzilla.mozilla.org/1226490 ***/
@@ -985,14 +983,14 @@ pref("dom.disable_window_move_resize", true);
 /* 2203: open links targeting new windows in a new tab instead
  * This stops malicious window sizes and some screen resolution leaks.
  * You can still right-click a link and open in a new window.
- * [TEST] https://people.torproject.org/~gk/misc/entire_desktop.html
+ * [TEST] https://ghacksuserjs.github.io/TorZillaPrint/TorZillaPrint.html#screen
  * [1] https://trac.torproject.org/projects/tor/ticket/9881 ***/
 pref("browser.link.open_newwindow", 3);
 pref("browser.link.open_newwindow.restriction", 0);
 /* 2204: disable Fullscreen API (requires user interaction) to prevent screen-resolution leaks
  * [NOTE] You can still manually toggle the browser's fullscreen state (F11),
  * but this pref will disable embedded video/game fullscreen controls, e.g. youtube
- * [TEST] https://developer.mozilla.org/samples/domref/fullscreen.html ***/
+ * [TEST] https://ghacksuserjs.github.io/TorZillaPrint/TorZillaPrint.html#screen ***/
    // pref("full-screen-api.enabled", false);
 /* 2210: block popup windows
  * [SETTING] Privacy & Security>Permissions>Block pop-up windows ***/
@@ -1101,7 +1099,7 @@ pref("dom.IntersectionObserver.enabled", false);
 pref("dom.event.highrestimestamp.enabled", true); // [DEFAULT: true]
 /* 2429: enable (limited but sufficient) window.opener protection [FF65+]
  * Makes rel=noopener implicit for target=_blank in anchor and area elements when no rel attribute is set ***/
-pref("dom.targetBlankNoOpener.enabled", true); // [DEFAULT: true]
+pref("dom.targetBlankNoOpener.enabled", true);
 
 /*** [SECTION 2500]: HARDWARE FINGERPRINTING ***/
 pref("_user.js.parrot", "2500 syntax error: the parrot's shuffled off 'is mortal coil!");
@@ -1252,9 +1250,6 @@ pref("browser.download.forbid_open_with", true); //BRACE-UNCOMMENTED
 /* 2662: disable webextension restrictions on certain mozilla domains (also see 4503) [FF60+]
  * [1] https://bugzilla.mozilla.org/buglist.cgi?bug_id=1384330,1406795,1415644,1453988 ***/
    // pref("extensions.webextensions.restrictedDomains", "");
-/* 2663: enable warning when websites try to install add-ons
- * [SETTING] Privacy & Security>Permissions>Warn you when websites try to install add-ons ***/
-pref("xpinstall.whitelist.required", true); // [DEFAULT: true]
 
 /** SECURITY ***/
 /* 2680: enable CSP (Content Security Policy)
@@ -1263,11 +1258,6 @@ pref("security.csp.enable", true); // [DEFAULT: true]
 /* 2682: enable CSP 1.1 experimental hash-source directive [FF29+]
  * [1] https://bugzilla.mozilla.org/buglist.cgi?bug_id=855326,883975 ***/
 pref("security.csp.experimentalEnabled", true);
-/* 2683: block top level window data: URIs [FF56+]
- * [1] https://bugzilla.mozilla.org/1331351
- * [2] https://www.wordfence.com/blog/2017/01/gmail-phishing-data-uri/
- * [3] https://www.fxsitecompat.com/en-CA/docs/2017/data-url-navigations-on-top-level-window-will-be-blocked/ ***/
-pref("security.data_uri.block_toplevel_data_uri_navigations", true); // [DEFAULT: true]
 /* 2684: enforce a security delay on some confirmation dialogs such as install, open/save
  * [1] http://kb.mozillazine.org/Disable_extension_install_delay_-_Firefox
  * [2] https://www.squarefree.com/2004/07/01/race-conditions-in-security-dialogs/ ***/
@@ -1308,14 +1298,6 @@ pref("network.cookie.thirdparty.nonsecureSessionOnly", true); // [FF58+]
  * [NOTE] The setting below is disabled (but not changed) if you block all cookies (2701 = 2)
  * [SETTING] Privacy & Security>Cookies and Site Data>Delete cookies and site data when Firefox is closed ***/
    // pref("network.cookie.lifetimePolicy", 2);
-/* 2705: disable HTTP sites setting cookies with the "secure" directive [FF52+]
- * [1] https://developer.mozilla.org/Firefox/Releases/52#HTTP ***/
-pref("network.cookie.leave-secure-alone", true); // [DEFAULT: true]
-/* 2706: enable support for same-site cookies [FF60+]
- * [1] https://bugzilla.mozilla.org/795346
- * [2] https://blog.mozilla.org/security/2018/04/24/same-site-cookies-in-firefox-60/
- * [3] https://www.sjoerdlangkemper.nl/2016/04/14/preventing-csrf-with-samesite-cookie-attribute/ ***/
-   // pref("network.cookie.same-site.enabled", true); // [DEFAULT: true]
 /* 2710: disable DOM (Document Object Model) Storage
  * [WARNING] This will break a LOT of sites' functionality AND extensions!
  * You are better off using an extension for more granular control ***/
@@ -1330,9 +1312,6 @@ pref("network.cookie.leave-secure-alone", true); // [DEFAULT: true]
 pref("dom.indexedDB.enabled", true); // [DEFAULT: true]
 /* 2730: disable offline cache ***/
    // pref("browser.cache.offline.enable", false); //BRACE-COMMENTED
-/* 2730b: disable offline cache on insecure sites [FF60+]
- * [1] https://blog.mozilla.org/security/2018/02/12/restricting-appcache-secure-contexts/ ***/
-pref("browser.cache.offline.insecure.enable", false); // [DEFAULT: false in FF62+]
 /* 2731: enforce websites to ask to store data for offline use
  * [1] https://support.mozilla.org/questions/1098540
  * [2] https://bugzilla.mozilla.org/959985 ***/
@@ -1421,6 +1400,8 @@ pref("privacy.sanitize.timeSpan", 0);
  ** 1473247 - isolate IP addresses (FF63+)
  ** 1492607 - isolate postMessage with targetOrigin "*" (requires 4002) (FF65+)
  ** 1542309 - isolate top-level domain URLs (FF68+)
+ ** 1330467 - isolate site permissions (FF68+)
+ ** 1506693 - isolate pdfjs range-based requests (FF68+)
 ***/
 pref("_user.js.parrot", "4000 syntax error: the parrot's pegged out");
 /* 4001: enable First Party Isolation [FF51+]
@@ -1492,11 +1473,12 @@ pref("privacy.firstparty.isolate.restrict_opener_access", true); // [DEFAULT: tr
       FF60: Fix keydown/keyup events (1438795)
  ** 1337157 - disable WebGL debug renderer info (see 4613) (FF60+)
  ** 1459089 - disable OS locale in HTTP Accept-Language headers (ANDROID) (FF62+)
+ ** 1479239 - return "no-preference" with prefers-reduced-motion (FF63+)
  ** 1363508 - spoof/suppress Pointer Events (see 4614) (FF64+)
       FF65: pointerEvent.pointerid (1492766)
  ** 1485266 - disable exposure of system colors to CSS or canvas (see 2618) (FF67+)
  ** 1407366 - enable inner window letterboxing (see 4504) (FF67+)
- ** 1540726 - enforce "light" with prefers-color-scheme (FF67+)
+ ** 1540726 - return "light" with prefers-color-scheme (FF67+)
         [1] https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme
 ***/
 pref("_user.js.parrot", "4500 syntax error: the parrot's popped 'is clogs");
@@ -1518,9 +1500,9 @@ pref("privacy.resistFingerprinting", true);
  * [1] https://bugzilla.mozilla.org/buglist.cgi?bug_id=1384330,1406795,1415644,1453988 ***/
 pref("privacy.resistFingerprinting.block_mozAddonManager", true); // [HIDDEN PREF]
 /* 4504: enable RFP letterboxing [FF67+]
- * Dynamically resizes the inner window in 200w x100h steps by applying letterboxing, using dimensions
- * which waste the least content area, If you use the dimension pref, then it will only apply those
- * resolutions. The format is "width1xheight1, width2xheight2, ..." (e.g. "800x600, 1000x1000, 1600x900")
+ * Dynamically resizes the inner window (FF67; 200w x100h: FF68+; stepped ranges) by applying letterboxing,
+ * using dimensions which waste the least content area, If you use the dimension pref, then it will only apply
+ * those resolutions. The format is "width1xheight1, width2xheight2, ..." (e.g. "800x600, 1000x1000, 1600x900")
  * [NOTE] This does NOT require RFP (see 4501) **for now**
  * [WARNING] The dimension pref is only meant for testing, and we recommend you DO NOT USE it
  * [1] https://bugzilla.mozilla.org/1407366 ***/
