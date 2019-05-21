@@ -40,6 +40,9 @@ send-software-usage-stats=false
 disable-camera=true
 disable-microphone=true
 
+[org/gnome/desktop/remote-access]
+require-encryption=true
+
 [org/gnome/desktop/remote-desktop]
 auth-method='prompt'
 encryption=['tls-anon']
@@ -69,6 +72,7 @@ disable-all=true
 
 [org/gnome/desktop/wm/keybindings]
 toggle-fullscreen=['<Alt>F11']
+panel-run-dialog=['<Mod4>d']
 
 [org/gnome/desktop/wm/preferences]
 button-layout='appmenu:minimize,maximize,close'
@@ -100,6 +104,9 @@ use-default-font=true
 
 [org/gnome/gnome-screenshot]
 include-icc-profile=false
+
+[org/gnome/metacity]
+compositing-manager=false
 
 [org/gnome/mutter]
 dynamic-workspaces=false
