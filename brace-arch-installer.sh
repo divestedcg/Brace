@@ -134,27 +134,6 @@ select yns in "Yes" "No" "Skip"; do
 	esac;
 done;
 
-echo -e ${questionColor}Do you want packages from the NVIDIA Proprietary GPU Drivers category?${coloroff};
-select yns in "Yes" "No" "Skip"; do
-	case $yns in
-		Yes )
-			pacman -S --needed nvidia nvidia-libgl opencl-nvidia nvidia-utils lib32-nvidia-libgl lib32-nvidia-utils lib32-opencl-nvidia nvidia-settings;
-			break;;
-		No )
-			pacman -Rsc nvidia;
-			pacman -Rsc nvidia-libgl;
-			pacman -Rsc opencl-nvidia;
-			pacman -Rsc nvidia-utils;
-			pacman -Rsc lib32-nvidia-libgl;
-			pacman -Rsc lib32-nvidia-utils;
-			pacman -Rsc lib32-opencl-nvidia;
-			pacman -Rsc nvidia-settings;
-			break;;
-		Skip )
-			break;;
-	esac;
-done;
-
 echo -e ${questionColor}Do you want packages from the AMD/Intel/Nvidia FOSS GPU Acceleration category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
@@ -516,12 +495,13 @@ echo -e ${questionColor}Do you want packages from the Documents category?${color
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed libreoffice-fresh meld scribus;
+			pacman -S --needed libreoffice-fresh meld scribus gnucash;
 			break;;
 		No )
 			pacman -Rsc libreoffice-fresh;
 			pacman -Rsc meld;
 			pacman -Rsc scribus;
+			pacman -Rsc gnucash;
 			break;;
 		Skip )
 			break;;
@@ -822,6 +802,20 @@ select yns in "Yes" "No" "Skip"; do
 			pacman -Rsc bleachbit;
 			pacman -Rsc wipe;
 			pacman -Rsc scrub;
+			break;;
+		Skip )
+			break;;
+	esac;
+done;
+
+echo -e ${questionColor}Do you want packages from the Remote category?${coloroff};
+select yns in "Yes" "No" "Skip"; do
+	case $yns in
+		Yes )
+			pacman -S --needed x2goclient;
+			break;;
+		No )
+			pacman -Rsc x2goclient;
 			break;;
 		Skip )
 			break;;

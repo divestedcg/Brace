@@ -124,10 +124,10 @@ echo -e ${questionColor}Do you want Documents?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			flatpak install flathub org.libreoffice.LibreOffice org.gnome.meld net.scribus.Scribus;
+			flatpak install flathub org.libreoffice.LibreOffice org.gnome.meld net.scribus.Scribus org.gnucash.GnuCash;
 			break;;
 		No )
-			flatpak remove org.libreoffice.LibreOffice org.gnome.meld net.scribus.Scribus;
+			flatpak remove org.libreoffice.LibreOffice org.gnome.meld net.scribus.Scribus org.gnucash.GnuCash;
 			break;;
 		Skip )
 			break;;

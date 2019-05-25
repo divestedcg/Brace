@@ -276,10 +276,10 @@ echo -e ${questionColor}Do you want packages from the Documents category?${color
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install --skip-broken libreoffice meld scribus;
+			yum install --skip-broken libreoffice meld scribus gnucash;
 			break;;
 		No )
-			yum remove libreoffice meld scribus;
+			yum remove libreoffice meld scribus gnucash;
 			break;;
 		Skip )
 			break;;
@@ -318,10 +318,10 @@ echo -e ${questionColor}Do you want packages from the File Encryption category?$
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install --skip-broken ecryptfs-utils ecryptfs-simple encfs;
+			yum install --skip-broken cryptsetup-reencrypt ecryptfs-utils ecryptfs-simple encfs;
 			break;;
 		No )
-			yum remove ecryptfs-utils ecryptfs-simple encfs;
+			yum remove cryptsetup-reencrypt ecryptfs-utils ecryptfs-simple encfs;
 			break;;
 		Skip )
 			break;;
@@ -546,6 +546,20 @@ select yns in "Yes" "No" "Skip"; do
 			break;;
 		No )
 			yum remove bleachbit srm wipe scrub;
+			break;;
+		Skip )
+			break;;
+	esac;
+done;
+
+echo -e ${questionColor}Do you want packages from the Remote category?${coloroff};
+select yns in "Yes" "No" "Skip"; do
+	case $yns in
+		Yes )
+			yum install --skip-broken x2goclient;
+			break;;
+		No )
+			yum remove x2goclient;
 			break;;
 		Skip )
 			break;;

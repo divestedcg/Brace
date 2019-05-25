@@ -78,6 +78,20 @@ select yns in "Yes" "No" "Skip"; do
 	esac;
 done;
 
+echo -e ${questionColor}Do you want IntelliJ IDEA?${coloroff};
+select yns in "Yes" "No" "Skip"; do
+	case $yns in
+		Yes )
+			flatpak install flathub com.jetbrains.IntelliJ-IDEA-Community org.freedesktop.Sdk.Extension.openjdk11;
+			break;;
+		No )
+			flatpak remove com.jetbrains.IntelliJ-IDEA-Community org.freedesktop.Sdk.Extension.openjdk11;
+			break;;
+		Skip )
+			break;;
+	esac;
+done;
+
 echo -e ${questionColor}Do you want PyCharm?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
