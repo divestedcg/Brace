@@ -496,13 +496,14 @@ echo -e ${questionColor}Do you want packages from the Documents category?${color
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed libreoffice-fresh meld scribus gnucash;
+			pacman -S --needed libreoffice-fresh meld scribus gnucash dia;
 			break;;
 		No )
 			pacman -Rsc libreoffice-fresh;
 			pacman -Rsc meld;
 			pacman -Rsc scribus;
 			pacman -Rsc gnucash;
+			pacman -Rsc dia;
 			break;;
 		Skip )
 			break;;

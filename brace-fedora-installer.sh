@@ -290,10 +290,10 @@ echo -e ${questionColor}Do you want packages from the Documents category?${color
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install --skip-broken libreoffice meld scribus gnucash;
+			yum install --skip-broken libreoffice meld scribus gnucash dia;
 			break;;
 		No )
-			yum remove libreoffice meld scribus gnucash;
+			yum remove libreoffice meld scribus gnucash dia;
 			break;;
 		Skip )
 			break;;
