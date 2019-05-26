@@ -134,37 +134,38 @@ select yns in "Yes" "No" "Skip"; do
 	esac;
 done;
 
-echo -e ${questionColor}Do you want packages from the AMD/Intel/Nvidia FOSS GPU Acceleration category?${coloroff};
+echo -e ${questionColor}Do you want packages from the VA-API category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed vdpauinfo libvdpau libvdpau-va-gl libva-vdpau-driver gstreamer-vaapi lib32-libvdpau lib32-libva-vdpau-driver libva-mesa-driver mesa-vdpau lib32-mesa-vdpau;
+			pacman -S --needed gstreamer-vaapi libva-mesa-driver libva-intel-driver intel-media-driver;
 			break;;
 		No )
-			pacman -Rsc vdpauinfo;
-			pacman -Rsc libvdpau;
-			pacman -Rsc libvdpau-va-gl;
-			pacman -Rsc libva-vdpau-driver;
 			pacman -Rsc gstreamer-vaapi;
-			pacman -Rsc lib32-libvdpau;
-			pacman -Rsc lib32-libva-vdpau-driver;
 			pacman -Rsc libva-mesa-driver;
-			pacman -Rsc mesa-vdpau;
-			pacman -Rsc lib32-mesa-vdpau;
+			pacman -Rsc libva-intel-driver;
+			pacman -Rsc intel-media-driver;
 			break;;
 		Skip )
 			break;;
 	esac;
 done;
 
-echo -e ${questionColor}Do you want packages from the Intel FOSS GPU Acceleration Extra category?${coloroff};
+echo -e ${questionColor}Do you want packages from the VDPAU category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			pacman -S --needed libva-intel-driver;
+			pacman -S --needed vdpauinfo libvdpau libvdpau-va-gl libva-vdpau-driver lib32-libvdpau lib32-libva-vdpau-driver mesa-vdpau lib32-mesa-vdpau;
 			break;;
 		No )
-			pacman -Rsc libva-intel-driver;
+			pacman -Rsc vdpauinfo;
+			pacman -Rsc libvdpau;
+			pacman -Rsc libvdpau-va-gl;
+			pacman -Rsc libva-vdpau-driver;
+			pacman -Rsc lib32-libvdpau;
+			pacman -Rsc lib32-libva-vdpau-driver;
+			pacman -Rsc mesa-vdpau;
+			pacman -Rsc lib32-mesa-vdpau;
 			break;;
 		Skip )
 			break;;

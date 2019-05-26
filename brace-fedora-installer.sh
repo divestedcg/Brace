@@ -76,7 +76,7 @@ select yns in "Yes" "No" "Skip"; do
 	esac;
 done;
 
-echo -e ${questionColor}Do you want packages from the HW Compute Acceleration category?${coloroff};
+echo -e ${questionColor}Do you want packages from the OpenCL category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
@@ -90,14 +90,28 @@ select yns in "Yes" "No" "Skip"; do
 	esac;
 done;
 
-echo -e ${questionColor}Do you want packages from the HW Video Acceleration category?${coloroff};
+echo -e ${questionColor}Do you want packages from the VA-API category?${coloroff};
 select yns in "Yes" "No" "Skip"; do
 	case $yns in
 		Yes )
-			yum install --skip-broken libva-utils vdpauinfo mesa-dri-drivers libva-intel-driver libvdpau-va-gl gstreamer1-vaapi;
+			yum install --skip-broken mesa-dri-drivers libva-utils gstreamer1-vaapi libva-intel-driver libva-intel-hybrid-driver;
 			break;;
 		No )
-			yum remove libva-utils vdpauinfo mesa-dri-drivers libva-intel-driver libvdpau-va-gl gstreamer1-vaapi;
+			yum remove mesa-dri-drivers libva-utils gstreamer1-vaapi libva-intel-driver libva-intel-hybrid-driver;
+			break;;
+		Skip )
+			break;;
+	esac;
+done;
+
+echo -e ${questionColor}Do you want packages from the VDPAU category?${coloroff};
+select yns in "Yes" "No" "Skip"; do
+	case $yns in
+		Yes )
+			yum install --skip-broken vdpauinfo libvdpau libvdpau-va-gl libva-vdpau-driver;
+			break;;
+		No )
+			yum remove vdpauinfo libvdpau libvdpau-va-gl libva-vdpau-driver;
 			break;;
 		Skip )
 			break;;

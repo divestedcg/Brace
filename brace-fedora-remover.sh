@@ -10,6 +10,8 @@ packages="";
 packages=$packages" empathy";
 #Workstation (GNOME)
 packages=$packages" rhythmbox gnome-documents gnome-weather";
+#Common
+packages=$packages" dnfdragora";
 #Cinnamon
 packages=$packages" xawtv";
 #KDE
