@@ -1239,7 +1239,7 @@ pref("browser.download.forbid_open_with", true); //BRACE-UNCOMMENTED
  * [1] https://mike.kaply.com/2012/02/21/understanding-add-on-scopes/
  * [1] archived: https://archive.is/DYjAM ***/
    // pref("extensions.enabledScopes", 5); // [HIDDEN PREF] //BRACE-COMMENTED
-pref("extensions.autoDisableScopes", 15); // [DEFAULT: 15]
+   // pref("extensions.autoDisableScopes", 15); // [DEFAULT: 15] //BRACE-COMMENTED
 /* 2662: disable webextension restrictions on certain mozilla domains (also see 4503) [FF60+]
  * [1] https://bugzilla.mozilla.org/buglist.cgi?bug_id=1384330,1406795,1415644,1453988 ***/
    // pref("extensions.webextensions.restrictedDomains", "");
