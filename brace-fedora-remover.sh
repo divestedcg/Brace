@@ -10,12 +10,10 @@ packages="";
 packages=$packages" empathy";
 #Workstation (GNOME)
 packages=$packages" rhythmbox gnome-documents gnome-weather";
-#Common
-packages=$packages" dnfdragora";
 #Cinnamon
 packages=$packages" xawtv";
 #KDE
-packages=$packages" kmahjongg konqueror amarok k3b";
+packages=$packages" kmahjongg konqueror amarok k3b ktorrent akregator falkon kget juk calligra* ktnef konversation kpatience kmines";
 #LXDE
 packages=$packages" gnumeric abiword midori xpad pidgin asunder lxmusic clipit gnomebaker osmo";
 #LXQT

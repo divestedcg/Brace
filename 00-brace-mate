@@ -108,4 +108,6 @@ default-show-menubar=false
 foreground-color='#c5c8c6'
 bold-color='#c5c8c6'
 background-color='#1d1f21'
+background-type='transparent'
+background-darkness=0.90
 palette=['#1d1f21', '#cc342b', '#198844', '#fba922', '#3971ed', '#a36ac7', '#3971ed', '#c5c8c6', '#969896', '#cc342b', '#198844', '#fba922', '#3971ed', '#a36ac7', '#3971ed', '#ffffff']

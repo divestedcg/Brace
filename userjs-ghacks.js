@@ -230,7 +230,6 @@ pref("toolkit.telemetry.unified", false);
 pref("toolkit.telemetry.enabled", false); // see [NOTE] above FF58+
 pref("toolkit.telemetry.server", "data:,");
 pref("toolkit.telemetry.archive.enabled", false);
-pref("toolkit.telemetry.cachedClientID", "");
 pref("toolkit.telemetry.newProfilePing.enabled", false); // [FF55+]
 pref("toolkit.telemetry.shutdownPingSender.enabled", false); // [FF55+]
 pref("toolkit.telemetry.updatePing.enabled", false); // [FF56+]
@@ -784,10 +783,10 @@ pref("security.insecure_connection_text.enabled", true); // [FF60+]
 /*** [SECTION 1400]: FONTS ***/
 pref("_user.js.parrot", "1400 syntax error: the parrot's bereft of life!");
 /* 1401: disable websites choosing fonts (0=block, 1=allow)
- * [WARNING] Blocking fonts can *sometimes* reduce JS font enumeration, but not entropy.
- * There are also other methods to fingerprint fonts. Wait for RFP (4500) to cover this.
+ * This can limit most (but not all) JS font enumeration which is a high entropy fingerprinting vector
+ * [SETUP-WEB] Disabling fonts can uglify the web a fair bit.
  * [SETTING] General>Language and Appearance>Fonts & Colors>Advanced>Allow pages to choose... ***/
-pref("browser.display.use_document_fonts", 0); //BRACE-UNCOMMENTED
+pref("browser.display.use_document_fonts", 0);
 /* 1402: set more legible default fonts
  * [NOTE] Example below for Windows/Western only
  * [SETTING] General>Language and Appearance>Fonts & Colors>Advanced>Serif|Sans-serif|Monospace ***/
@@ -807,9 +806,8 @@ pref("browser.display.use_document_fonts", 0); //BRACE-UNCOMMENTED
 pref("gfx.font_rendering.opentype_svg.enabled", false);
 /* 1405: disable WOFF2 (Web Open Font Format) [FF35+] ***/
    // pref("gfx.downloadable_fonts.woff2.enabled", false);
-/* 1406: disable CSS Font Loading API
- * [NOTE] Disabling fonts can uglify the web a fair bit. ***/
-pref("layout.css.font-loading-api.enabled", false);
+/* 1406: disable CSS Font Loading API ***/
+   // pref("layout.css.font-loading-api.enabled", false);
 /* 1407: disable special underline handling for a few fonts which you will probably never use [RESTART]
  * Any of these fonts on your system can be enumerated for fingerprinting.
  * [1] http://kb.mozillazine.org/Font.blacklist.underline_offset ***/
@@ -1087,14 +1085,11 @@ pref("javascript.options.asmjs", false);
 /* 2422: disable WebAssembly [FF52+] [SETUP-PERF]
  * [1] https://developer.mozilla.org/docs/WebAssembly ***/
 pref("javascript.options.wasm", false);
-/* 2426: disable Intersection Observer API [FF53+]
- * Almost a year to complete, three versions late to stable (as default false),
- * number #1 cause of crashes in nightly numerous times, and is (primarily) an
- * ad network API for "ad viewability checks" down to a pixel level
+/* 2426: disable Intersection Observer API [FF55+]
  * [1] https://developer.mozilla.org/docs/Web/API/Intersection_Observer_API
  * [2] https://w3c.github.io/IntersectionObserver/
  * [3] https://bugzilla.mozilla.org/1243846 ***/
-pref("dom.IntersectionObserver.enabled", false);
+pref("dom.IntersectionObserver.enabled", false); //BRACE-UNCOMMENTED
 /* 2429: enable (limited but sufficient) window.opener protection [FF65+]
  * Makes rel=noopener implicit for target=_blank in anchor and area elements when no rel attribute is set ***/
 pref("dom.targetBlankNoOpener.enabled", true);
@@ -1212,6 +1207,9 @@ pref("pdfjs.disabled", false); // [DEFAULT: false]
 /* 2621: disable links launching Windows Store on Windows 8/8.1/10 [WINDOWS]
  * [1] https://www.ghacks.net/2016/03/25/block-firefox-chrome-windows-store/ ***/
 pref("network.protocol-handler.external.ms-windows-store", false);
+/* 2622: disable middlemouse paste leaking on Linux
+ * [1] https://bugzilla.mozilla.org/1528289 */
+pref("middlemouse.paste", false); // [DEFAULT: false on Windows]
 
 /** DOWNLOADS ***/
 /* 2650: discourage downloading to desktop

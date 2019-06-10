@@ -5,11 +5,12 @@ exec='gnome-terminal'
 show-desktop-icons=false
 
 [org/gnome/desktop/interface]
-clock-format='12h'
 show-battery-percentage=true
-clock-show-seconds=true
 enable-animations=false
+clock-format='12h'
+clock-show-seconds=true
 clock-show-date=true
+clock-show-weekday=true
 
 [org/gnome/desktop/media-handling]
 automount-open=false
@@ -62,7 +63,7 @@ disabled=['gnome-calculator.desktop', 'org.gnome.Calculator.desktop']
 idle-delay=uint32 600
 
 [org/gnome/desktop/sound]
-allow-volume-above-100-percent=true
+allow-volume-above-100-percent=false
 
 [org/gnome/desktop/thumbnail-cache]
 maximum-age=7
