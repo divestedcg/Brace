@@ -1,5 +1,5 @@
 #!/bin/bash
-#Copyright (c) 2015-2018 Divested Computing, Inc.
+#Copyright (c) 2015-2018 Divested Computing Group
 #License: GPLv3
 #Automatically generated! Please edit with care.
 
