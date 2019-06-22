@@ -2,7 +2,7 @@
 override-restrictions=true
 
 [org/mate/caja/icon-view]
-default-zoom-level='small'
+default-zoom-level='standard'
 
 [org/mate/caja/preferences]
 show-image-thumbnails='never'

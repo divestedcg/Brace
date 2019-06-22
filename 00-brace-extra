@@ -33,12 +33,16 @@ wrap-text=true
 
 [org/gnome/evolution/mail]
 composer-request-receipt=true
+prompt-on-unwanted-html=true
 composer-send-html=false
 composer-show-bcc=true
 composer-show-from-override=true
 composer-show-reply-to=true
 image-loading-policy='never'
 search-gravatar-for-photo=false
+
+[org/gnome/evolution/mail/plugin/prefer-plain]
+mode='prefer_plain'
 
 [org/gnome/feedreader]
 content-grabber=false

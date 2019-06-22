@@ -1,6 +1,6 @@
 Name: brace
-Version: 20190610
-Release: 4
+Version: 20190622
+Release: 2
 Summary: Increases privacy/security through various configs.
 License: GPLv3+
 BuildArch: noarch
@@ -10,6 +10,7 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 - Adds many helper scripts: brace-installer, brace-remover, brace-supplemental-changes
 - GNOME/Cinnamon/MATE: change default settings
 - Firefox: change default settings, credit @pyllyukko, license MIT
+- Chromium: change default settings
 - NetworkManager: disable connectivity checking
 - Networkmanager: enable MAC address randomization
 - kernel: restrict dmesg and ptrace
@@ -52,12 +53,15 @@ install -Dm644 iwlwifi.conf %{buildroot}/usr/lib/modprobe.d/iwlwifi.conf
 install -Dm644 21-disable-connectivity-check.conf %{buildroot}/usr/lib/NetworkManager/conf.d/21-disable-connectivity-check.conf
 install -Dm644 30-mac-randomization.conf %{buildroot}/usr/lib/NetworkManager/conf.d/30-mac-randomization.conf
 install -Dm644 60-restrict.conf %{buildroot}/usr/lib/sysctl.d/60-restrict.conf
+mkdir -p %{buildroot}/etc/chromium/policies/managed/;
+install -Dm644 chromium-brace.json %{buildroot}/etc/chromium/policies/managed/brace.json
 mkdir -p %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/;
 install -Dm644 userjs-*.js %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/;
 mkdir -p %{buildroot}/usr/lib64/thunderbird/defaults/pref/;
 install -Dm644 userjs-*.js %{buildroot}/usr/lib64/thunderbird/defaults/pref/;
 
 %files
+/etc/chromium/policies/managed/brace.json
 /etc/dconf/db/local.d/00-brace-gnome
 /etc/dconf/db/local.d/00-brace-mate
 /etc/dconf/db/local.d/00-brace-cinnamon

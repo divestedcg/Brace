@@ -1,7 +1,7 @@
 # Maintainer: Tad <tad@spotco.us>
 pkgname=brace
-pkgver=20190610
-pkgrel=4
+pkgver=20190622
+pkgrel=2
 pkgdesc="Increases privacy/security through various configs. Firefox hardening credit: @pyllyukko"
 arch=('any')
 license=('GPLv3')
@@ -25,28 +25,30 @@ source=('00-brace-gnome'
 	'brace-arch-installer.sh'
 	'brace-flathub-installer.sh'
 	'iwlwifi.conf'
+	'chromium-brace.json'
 	'brace-helpers.sh'
 	'userjs-brace.js'
 	'userjs-brace-perf.js'
 	'userjs-ghacks.js'
 	'userjs-pyllyukko.js')
 sha512sums=('d759332dafa53824b99f1317c3823aed2861007a53dfe87c1f42b6a927b69b0f4a4376c921c3a731b272928702bd00d9e16d2a554f6df218ca23a3d972832a0f'
-            '4783e712fdeb46303666165352b993daf35bf91a77317c68ae340e9d5a89db5757e9ca3b3c016ee2a40e3dff8b059c10c41f3e4771fe1c2449156c3ec1cbdedc'
+            '79814e1dd242ddc3128b929d755ee7bc84431a700f945c2e9a849d925131654b32e46a3763cb54734cb1612d9cc27277a315d02517c3c06020383040a5d94ba6'
             '24616a6133608301d3c4016f2667bdf6982ab3f99ac231b5588bcb220545d992e3fcc97cceafd674f7b4ba00d5747f3f4d25da54130a1ff817d752ba6b93bf98'
-            '1f11c17dfcd63be4ac26e395d4ab1ce6f3433d66a7baa0900a5e022ac9cc41e93e58dd5e6d30bd8419b4ab1ad77283ac435db6df2b80dc56e8309c1513dc88e5'
+            '3625e53fee7a1bf755a9de3b5f702e75ba67bb4160c6fd8b36f6cf28a9e939e8db982151c507f76b7955391c5bb93654695a2da39724e88309fe350242689d90'
             '8ec47524685a59ed1ca45d5ba5334248cc505c07d71f1340d77a20e96e647b32c7a10cac1f1a2e32b0477a53c7ce14c57e839057b2b4fe7191932001c5679364'
             'cd03db723b789e9084cc2474edb3bf3f878cc5a751b437f69dd6f06a8015070e7c3f6750b581c15524e869f9fd8dd7db7eff9dad0650930e04387f5a36b4510e'
             '7a98bf2eaab140e60aeeb11d87ea1f2a390f1fdf5be6a9e245abd8906d10be62e4de9c5485f7368eea6e09b843cf913978fa1509b444f6d46a03a7c8dc09d78d'
             'ba57603a85b3e25f8146269cadbb4953b6b3d66a25e251b1478fc85704c884eb56ef8b1cd17a547631d5778ffab37fd212c9cf0eb0525e4c46b9c7418836146a'
             '7f7d833f4b1437a99e0f30e6dd3b474ac75a52f830864f88b2d1337845daa59e46b4558437568067a7040c7d6bb72bdecc5490fedb71ac8049dccafb334bdda1'
-            'e91c1479f49d35d57f8be80c4f819f3029b172b9e1a3badae82949a052a84acd5635949b768d2d8e4333f813ce947aef6d3fe46a5b1228252b524313e6bdc229'
-            '508789e2a229534745b823bda81e7757f92b8afb76ee2dbf7e81b70321258aa2de4aca933fbf2105c053600829753f830f1f2870f899bf493b8fc90c15d428dc'
-            '795e3144004db0598d0cd6b5127ebe818ceeb65d1d74e744520ab5e698fd418ec1e6021bede60015957fece0d79123fc3f290b1e41d6927cd3819125b31ecd33'
+            '788403d186d3d0c310fd5947fb2ce0b73e157e632f2059f067f791509d3150876e5280fb9792d983f04bd7fd4b91bb027eb96ced969109757720b0406138e6a0'
+            'a920e63691928f474111d818a652f9cd1f6ea041e97f145e43bafecfa5b941fa1c29af320f6c615481605278b9f85b43e1a49b32d0b26f86b453ee626d3851e8'
+            '06c4d7d94600147a0060984525e28c79bbf731da5a3248b4e14e93e7b86b9fc21a3aa9cbf0418735ffe0be5acd60274b0f1f4384dbfcea2a0b06889ed53eba49'
             'c07d4f5d591a07db530deb77065e488e788fd964c081c2859cee07cb0820c69ab8236b8713425c77b47a75435907643cd9a021719f7389c09b20787df1b0860b'
+            'a7e91772d3c87770ede052c6c5225e67951e7e9153031a64c530e54ef2812df76a63c1ee4dbe1b83fa3173a001a41b4518a0f0081465bf69ce2c7a559ebf9eb8'
             '234d146b76e1ca572d856ba837848842ceced658a547ac058fd9bbcf5f04ac696756608339209b20b97956f80814b9393207dffddc109abda15ca6f98bb0e756'
             '26ee849b74c6f871e651531fd25dc4932901ff513a86d4c01f6a66e8ade2d8038171229087b46cb486a867e23f471f79e4ddb597cb11e5b5669d83b25a0a906a'
             'a0999164d4031a04ce10db848ea944b2db734f08dcf3554bfb6d651305cde95f852b46e3aea2cc4f1468a0a6c07c06623f0e925d025fdee848f122f412ee951a'
-            'b2c4148b59915fe4b97a38049a28c1c0a29efece15fccfa8854b3f02efcb5ba034b2e0f67299f75f2f9f95bbb9fe250d4b3380068ce121349ee29a6210834e17'
+            '087556cd92925531c244761da21e8cc40bbe7d71751a653e4b9b73709c22742c4b1c3e024b774897b10b3e2e64e242df9edf3257544a9be40a17c9c09a7acde5'
             'b168818030095032e1d7c417c1bd1dcce494751df2f78ed5193c07ad120bac8de4aac876d01446642295c6ef4603ac5cf97c53ca17a95cc6e971ec554f6610c1')
 install=brace.install
 
@@ -66,6 +68,8 @@ package() {
   install -Dm644 21-disable-connectivity-check.conf "$pkgdir"/usr/lib/NetworkManager/conf.d/21-disable-connectivity-check.conf
   install -Dm644 30-mac-randomization.conf "$pkgdir"/usr/lib/NetworkManager/conf.d/30-mac-randomization.conf
   install -Dm644 60-restrict.conf "$pkgdir"/usr/lib/sysctl.d/60-restrict.conf
+  mkdir -p "$pkgdir"/etc/chromium/policies/managed/
+  install -Dm644 chromium-brace.json "$pkgdir"/etc/chromium/policies/managed/brace.json
   mkdir -p "$pkgdir"/usr/lib/firefox/browser/defaults/preferences/
   install -Dm644 userjs-*.js "$pkgdir"/usr/lib/firefox/browser/defaults/preferences/
   mkdir -p "$pkgdir"/usr/lib/thunderbird/defaults/preferences/
