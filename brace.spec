@@ -1,6 +1,6 @@
 Name: brace
-Version: 20190622
-Release: 2
+Version: 20190625
+Release: 1
 Summary: Increases privacy/security through various configs.
 License: GPLv3+
 BuildArch: noarch
@@ -9,7 +9,7 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 %description
 - Adds many helper scripts: brace-installer, brace-remover, brace-supplemental-changes
 - GNOME/Cinnamon/MATE: change default settings
-- Firefox: change default settings, credit @pyllyukko, license MIT
+- Firefox: change default settings, credit @ghacksuserjs + @pyllyukko, license MIT
 - Chromium: change default settings
 - NetworkManager: disable connectivity checking
 - Networkmanager: enable MAC address randomization
@@ -17,7 +17,7 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 - kernel: blacklist modules that provide direct memory access externally
 - kernel: blacklist modules that allow for USB networking
 - profile: adds helper aliases
-- kernel: iwlwifi: enables link aggregation for increased performance
+- kernel: increases wi-fi performance for b43 and iwlwifi
 
 %post
 if [ -f /usr/bin/dconf ]; then dconf update; fi;
@@ -49,7 +49,7 @@ install -Dm755 brace-fedora-update-system.sh %{buildroot}/usr/bin/brace-update-s
 install -Dm755 brace-rpm-verify.sh %{buildroot}/usr/bin/brace-rpm-verify
 install -Dm644 blacklist-dma.conf %{buildroot}/usr/lib/modprobe.d/blacklist-dma.conf
 install -Dm644 blacklist-usbnet.conf %{buildroot}/usr/lib/modprobe.d/blacklist-usbnet.conf
-install -Dm644 iwlwifi.conf %{buildroot}/usr/lib/modprobe.d/iwlwifi.conf
+install -Dm644 wireless-perf.conf %{buildroot}/usr/lib/modprobe.d/wireless-perf.conf
 install -Dm644 21-disable-connectivity-check.conf %{buildroot}/usr/lib/NetworkManager/conf.d/21-disable-connectivity-check.conf
 install -Dm644 30-mac-randomization.conf %{buildroot}/usr/lib/NetworkManager/conf.d/30-mac-randomization.conf
 install -Dm644 60-restrict.conf %{buildroot}/usr/lib/sysctl.d/60-restrict.conf
@@ -79,7 +79,7 @@ install -Dm644 userjs-*.js %{buildroot}/usr/lib64/thunderbird/defaults/pref/;
 /usr/bin/brace-rpm-verify
 /usr/lib/modprobe.d/blacklist-dma.conf
 /usr/lib/modprobe.d/blacklist-usbnet.conf
-/usr/lib/modprobe.d/iwlwifi.conf
+/usr/lib/modprobe.d/wireless-perf.conf
 /usr/lib/NetworkManager/conf.d/21-disable-connectivity-check.conf
 /usr/lib/NetworkManager/conf.d/30-mac-randomization.conf
 /usr/lib/sysctl.d/60-restrict.conf

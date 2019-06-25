@@ -25,7 +25,7 @@ Installed
 	brace-fedora-update-system.sh		= Fedora: update system using dnf-plugin-system-upgrade
 	brace-supplemental-changes.sh		= GNOME: change extra default settings
 	helpers.sh				= profile: adds helper aliases
-	iwlwifi.sh				= kernel: iwlwifi: enables link aggregation for increased performance
+	wireless-perf.conf			= kernel: increases wi-fi performance for b43 and iwlwifi
 	userjs-*.js				= Firefox: change default settings
 Package Creation
 	brace.install				= pacman helper script
@@ -37,5 +37,5 @@ Repository Necessaries
 
 Credits
 -------
-userjs-ghacks.js		- ghacks	- MIT		- https://github.com/ghacksuserjs/ghacks-user.js
+userjs-ghacks.js		- @ghacksuserjs	- MIT		- https://github.com/ghacksuserjs/ghacks-user.js
 userjs-pyllyukko.js		- @pyllyukko	- MIT		- https://github.com/pyllyukko/user.js

@@ -1,8 +1,8 @@
 # Maintainer: Tad <tad@spotco.us>
 pkgname=brace
-pkgver=20190622
-pkgrel=2
-pkgdesc="Increases privacy/security through various configs. Firefox hardening credit: @pyllyukko"
+pkgver=20190625
+pkgrel=1
+pkgdesc="Increases privacy/security through various configs."
 arch=('any')
 license=('GPLv3')
 optdepends=('arch-audit: check for insecure packages'
@@ -24,7 +24,7 @@ source=('00-brace-gnome'
 	'brace-supplemental-changes.sh'
 	'brace-arch-installer.sh'
 	'brace-flathub-installer.sh'
-	'iwlwifi.conf'
+	'wireless-perf.conf'
 	'chromium-brace.json'
 	'brace-helpers.sh'
 	'userjs-brace.js'
@@ -43,8 +43,8 @@ sha512sums=('d759332dafa53824b99f1317c3823aed2861007a53dfe87c1f42b6a927b69b0f4a4
             '788403d186d3d0c310fd5947fb2ce0b73e157e632f2059f067f791509d3150876e5280fb9792d983f04bd7fd4b91bb027eb96ced969109757720b0406138e6a0'
             'a920e63691928f474111d818a652f9cd1f6ea041e97f145e43bafecfa5b941fa1c29af320f6c615481605278b9f85b43e1a49b32d0b26f86b453ee626d3851e8'
             '06c4d7d94600147a0060984525e28c79bbf731da5a3248b4e14e93e7b86b9fc21a3aa9cbf0418735ffe0be5acd60274b0f1f4384dbfcea2a0b06889ed53eba49'
-            'c07d4f5d591a07db530deb77065e488e788fd964c081c2859cee07cb0820c69ab8236b8713425c77b47a75435907643cd9a021719f7389c09b20787df1b0860b'
-            'a7e91772d3c87770ede052c6c5225e67951e7e9153031a64c530e54ef2812df76a63c1ee4dbe1b83fa3173a001a41b4518a0f0081465bf69ce2c7a559ebf9eb8'
+            'd60121d7746936387e058287008ba720c7b389c25cb9654527ccc81a2ce2523ce343fc89f61005a6376e814319c959a794ada076addbe2639971ff0bbee001c5'
+            'a7ae1adb596acb21a76fd265b789b6464f4025e61f28266bad49fdbe74f81caf35c36758991da02dfae801a7b62c9b9ecbb11abec2f3f56e2af34a6f5f623113'
             '234d146b76e1ca572d856ba837848842ceced658a547ac058fd9bbcf5f04ac696756608339209b20b97956f80814b9393207dffddc109abda15ca6f98bb0e756'
             '26ee849b74c6f871e651531fd25dc4932901ff513a86d4c01f6a66e8ade2d8038171229087b46cb486a867e23f471f79e4ddb597cb11e5b5669d83b25a0a906a'
             'a0999164d4031a04ce10db848ea944b2db734f08dcf3554bfb6d651305cde95f852b46e3aea2cc4f1468a0a6c07c06623f0e925d025fdee848f122f412ee951a'
@@ -64,7 +64,7 @@ package() {
   install -Dm755 brace-flathub-installer.sh "$pkgdir"/usr/bin/brace-installer-flathub
   install -Dm644 blacklist-dma.conf "$pkgdir"/usr/lib/modprobe.d/blacklist-dma.conf
   install -Dm644 blacklist-usbnet.conf "$pkgdir"/usr/lib/modprobe.d/blacklist-usbnet.conf
-  install -Dm644 iwlwifi.conf "$pkgdir"/usr/lib/modprobe.d/iwlwifi.conf
+  install -Dm644 wireless-perf.conf "$pkgdir"/usr/lib/modprobe.d/wireless-perf.conf
   install -Dm644 21-disable-connectivity-check.conf "$pkgdir"/usr/lib/NetworkManager/conf.d/21-disable-connectivity-check.conf
   install -Dm644 30-mac-randomization.conf "$pkgdir"/usr/lib/NetworkManager/conf.d/30-mac-randomization.conf
   install -Dm644 60-restrict.conf "$pkgdir"/usr/lib/sysctl.d/60-restrict.conf
