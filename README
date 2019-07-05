@@ -12,8 +12,7 @@ Contents
 --------
 Installed
 	00-brace*				= GNOME/Cinnamon/MATE: change default settings
-	21-disable-connectivity-check.conf	= NetworkManager: disable connectivity checking
-	30-mac-randomization.conf		= NetworkManager: enable MAC address randomization
+	30-nm-privacy.conf			= NetworkManager: enable MAC address randomization, disable connectivity checking, enable IPv6 privacy extensions
 	60-restrict.conf			= kernel: restrict dmesg and ptrace
 	blacklist-dma.conf			= kernel: blacklist modules that provide direct memory access externally
 	blacklist-usbnet.conf			= kernel: blacklist modules that allow for USB networking

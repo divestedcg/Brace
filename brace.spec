@@ -1,6 +1,6 @@
 Name: brace
-Version: 20190702
-Release: 1
+Version: 20190705
+Release: 2
 Summary: Increases privacy/security through various configs.
 License: GPLv3+
 BuildArch: noarch
@@ -13,6 +13,7 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 - Chromium: change default settings
 - NetworkManager: disable connectivity checking
 - Networkmanager: enable MAC address randomization
+- NetworkManager: enable IPv6 privacy extensions
 - kernel: restrict dmesg and ptrace
 - kernel: blacklist modules that provide direct memory access externally
 - kernel: blacklist modules that allow for USB networking
@@ -50,8 +51,7 @@ install -Dm755 brace-rpm-verify.sh %{buildroot}/usr/bin/brace-rpm-verify
 install -Dm644 blacklist-dma.conf %{buildroot}/usr/lib/modprobe.d/blacklist-dma.conf
 install -Dm644 blacklist-usbnet.conf %{buildroot}/usr/lib/modprobe.d/blacklist-usbnet.conf
 install -Dm644 wireless-perf.conf %{buildroot}/usr/lib/modprobe.d/wireless-perf.conf
-install -Dm644 21-disable-connectivity-check.conf %{buildroot}/usr/lib/NetworkManager/conf.d/21-disable-connectivity-check.conf
-install -Dm644 30-mac-randomization.conf %{buildroot}/usr/lib/NetworkManager/conf.d/30-mac-randomization.conf
+install -Dm644 30-nm-privacy.conf %{buildroot}/usr/lib/NetworkManager/conf.d/30-nm-privacy.conf
 install -Dm644 60-restrict.conf %{buildroot}/usr/lib/sysctl.d/60-restrict.conf
 mkdir -p %{buildroot}/etc/chromium/policies/managed/;
 install -Dm644 chromium-brace.json %{buildroot}/etc/chromium/policies/managed/brace.json
@@ -80,8 +80,7 @@ install -Dm644 userjs-*.js %{buildroot}/usr/lib64/thunderbird/defaults/pref/;
 /usr/lib/modprobe.d/blacklist-dma.conf
 /usr/lib/modprobe.d/blacklist-usbnet.conf
 /usr/lib/modprobe.d/wireless-perf.conf
-/usr/lib/NetworkManager/conf.d/21-disable-connectivity-check.conf
-/usr/lib/NetworkManager/conf.d/30-mac-randomization.conf
+/usr/lib/NetworkManager/conf.d/30-nm-privacy.conf
 /usr/lib/sysctl.d/60-restrict.conf
 /usr/lib64/firefox/browser/defaults/preferences/userjs-*.js
 /usr/lib64/thunderbird/defaults/pref/userjs-*.js

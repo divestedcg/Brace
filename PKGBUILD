@@ -1,7 +1,7 @@
 # Maintainer: Tad <tad@spotco.us>
 pkgname=brace
-pkgver=20190702
-pkgrel=1
+pkgver=20190705
+pkgrel=2
 pkgdesc="Increases privacy/security through various configs."
 arch=('any')
 license=('GPLv3')
@@ -16,8 +16,7 @@ source=('00-brace-gnome'
 	'00-brace-mate'
 	'00-brace-cinnamon'
 	'00-brace-extra'
-	'21-disable-connectivity-check.conf'
-	'30-mac-randomization.conf'
+	'30-nm-privacy.conf'
 	'60-restrict.conf'
 	'blacklist-dma.conf'
 	'blacklist-usbnet.conf'
@@ -35,9 +34,8 @@ sha512sums=('d759332dafa53824b99f1317c3823aed2861007a53dfe87c1f42b6a927b69b0f4a4
             '79814e1dd242ddc3128b929d755ee7bc84431a700f945c2e9a849d925131654b32e46a3763cb54734cb1612d9cc27277a315d02517c3c06020383040a5d94ba6'
             '24616a6133608301d3c4016f2667bdf6982ab3f99ac231b5588bcb220545d992e3fcc97cceafd674f7b4ba00d5747f3f4d25da54130a1ff817d752ba6b93bf98'
             '3625e53fee7a1bf755a9de3b5f702e75ba67bb4160c6fd8b36f6cf28a9e939e8db982151c507f76b7955391c5bb93654695a2da39724e88309fe350242689d90'
-            '8ec47524685a59ed1ca45d5ba5334248cc505c07d71f1340d77a20e96e647b32c7a10cac1f1a2e32b0477a53c7ce14c57e839057b2b4fe7191932001c5679364'
-            'cd03db723b789e9084cc2474edb3bf3f878cc5a751b437f69dd6f06a8015070e7c3f6750b581c15524e869f9fd8dd7db7eff9dad0650930e04387f5a36b4510e'
-            '7a98bf2eaab140e60aeeb11d87ea1f2a390f1fdf5be6a9e245abd8906d10be62e4de9c5485f7368eea6e09b843cf913978fa1509b444f6d46a03a7c8dc09d78d'
+            '6e585be661b1494f285356b56eafe9a501674e5d8502f8562d2ee7e33715c50a67c5eca178bef69d602d407cdd309a5ef7bbddc6e0a33002ebb7ca6598b79528'
+            'c1c4bf258ba5075159bdf55d8bc15fcc8f8170b6399979ee950ca80970fad41539eb2c518e7bf98e6f0a299e76aed38acd62b032f9068ecc347f9e6c219ff186'
             'ba57603a85b3e25f8146269cadbb4953b6b3d66a25e251b1478fc85704c884eb56ef8b1cd17a547631d5778ffab37fd212c9cf0eb0525e4c46b9c7418836146a'
             '7f7d833f4b1437a99e0f30e6dd3b474ac75a52f830864f88b2d1337845daa59e46b4558437568067a7040c7d6bb72bdecc5490fedb71ac8049dccafb334bdda1'
             '788403d186d3d0c310fd5947fb2ce0b73e157e632f2059f067f791509d3150876e5280fb9792d983f04bd7fd4b91bb027eb96ced969109757720b0406138e6a0'
@@ -48,7 +46,7 @@ sha512sums=('d759332dafa53824b99f1317c3823aed2861007a53dfe87c1f42b6a927b69b0f4a4
             '234d146b76e1ca572d856ba837848842ceced658a547ac058fd9bbcf5f04ac696756608339209b20b97956f80814b9393207dffddc109abda15ca6f98bb0e756'
             '26ee849b74c6f871e651531fd25dc4932901ff513a86d4c01f6a66e8ade2d8038171229087b46cb486a867e23f471f79e4ddb597cb11e5b5669d83b25a0a906a'
             'a0999164d4031a04ce10db848ea944b2db734f08dcf3554bfb6d651305cde95f852b46e3aea2cc4f1468a0a6c07c06623f0e925d025fdee848f122f412ee951a'
-            '087556cd92925531c244761da21e8cc40bbe7d71751a653e4b9b73709c22742c4b1c3e024b774897b10b3e2e64e242df9edf3257544a9be40a17c9c09a7acde5'
+            '801135c6e600b4d4017016054f71a8ffb151d90f37dd9b5b7fc5ed073c48a6021e8560169a9dc0307e486b80d76d64ec9b8800acdfea879949bc6cde43a1bc5d'
             'b168818030095032e1d7c417c1bd1dcce494751df2f78ed5193c07ad120bac8de4aac876d01446642295c6ef4603ac5cf97c53ca17a95cc6e971ec554f6610c1')
 install=brace.install
 
@@ -66,7 +64,7 @@ package() {
   install -Dm644 blacklist-usbnet.conf "$pkgdir"/usr/lib/modprobe.d/blacklist-usbnet.conf
   install -Dm644 wireless-perf.conf "$pkgdir"/usr/lib/modprobe.d/wireless-perf.conf
   install -Dm644 21-disable-connectivity-check.conf "$pkgdir"/usr/lib/NetworkManager/conf.d/21-disable-connectivity-check.conf
-  install -Dm644 30-mac-randomization.conf "$pkgdir"/usr/lib/NetworkManager/conf.d/30-mac-randomization.conf
+  install -Dm644 30-nm-privacy.conf "$pkgdir"/usr/lib/NetworkManager/conf.d/30-nm-privacy.conf
   install -Dm644 60-restrict.conf "$pkgdir"/usr/lib/sysctl.d/60-restrict.conf
   mkdir -p "$pkgdir"/etc/chromium/policies/managed/
   install -Dm644 chromium-brace.json "$pkgdir"/etc/chromium/policies/managed/brace.json
