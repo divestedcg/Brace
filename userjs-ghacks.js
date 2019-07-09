@@ -220,6 +220,7 @@ pref("extensions.webservice.discoverURL", "");
 /* 0321: disable recommendations in about:addons' Extensions and Themes panes [FF68+] ***/
 pref("extensions.getAddons.discovery.api_url", "");
 pref("extensions.htmlaboutaddons.discover.enabled", false);
+pref("extensions.htmlaboutaddons.recommendations.enabled", false);
 /* 0330: disable telemetry
  * the pref (.unified) affects the behaviour of the pref (.enabled)
  * IF unified=false then .enabled controls the telemetry module

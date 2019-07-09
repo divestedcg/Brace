@@ -81,7 +81,7 @@
 	"ContextualSuggestionsEnabled": false,
 	"DataCompressionProxyEnabled": false,
 	"DeveloperToolsAvailability": 1,
-	"Disable3DAPIs": false,
+	"Disable3DAPIs": true,
 	"DownloadRestrictions": 0,
 	"EasyUnlockAllowed": false,
 	"EnableSyncConsent": true,
