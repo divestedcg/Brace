@@ -105,9 +105,10 @@ search='<Mod4>q'
 
 [org/mate/terminal/profiles/default]
 default-show-menubar=false
-foreground-color='#c5c8c6'
-bold-color='#c5c8c6'
-background-color='#1d1f21'
+foreground-color='#C5C5C8C8C6C6'
+bold-color='#C5C5C8C8C6C6'
+background-color='#1D1D1F1F2121'
+use-theme-colors=false
 background-type='transparent'
 background-darkness=0.90
-palette=['#1d1f21', '#cc342b', '#198844', '#fba922', '#3971ed', '#a36ac7', '#3971ed', '#c5c8c6', '#969896', '#cc342b', '#198844', '#fba922', '#3971ed', '#a36ac7', '#3971ed', '#ffffff']
+palette='#1D1D1F1F2121:#CCCC34342B2B:#191988884444:#FBFBA9A92222:#39397171EDED:#A3A36A6AC7C7:#39397171EDED:#C5C5C8C8C6C6:#969698989696:#CCCC34342B2B:#191988884444:#FBFBA9A92222:#39397171EDED:#A3A36A6AC7C7:#39397171EDED:#FFFFFFFFFFFF'
