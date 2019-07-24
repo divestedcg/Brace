@@ -1,6 +1,6 @@
 Name: brace
-Version: 20190718
-Release: 2
+Version: 20190724
+Release: 1
 Summary: Increases privacy/security through various configs.
 License: GPLv3+
 BuildArch: noarch
@@ -37,6 +37,7 @@ if [ -f /usr/bin/dconf ]; then dconf update; fi;
 install -Dm644 00-brace-gnome %{buildroot}/etc/dconf/db/local.d/00-brace-gnome
 install -Dm644 00-brace-mate %{buildroot}/etc/dconf/db/local.d/00-brace-mate
 install -Dm644 00-brace-cinnamon %{buildroot}/etc/dconf/db/local.d/00-brace-cinnamon
+install -Dm644 00-brace-pantheon %{buildroot}/etc/dconf/db/local.d/00-brace-pantheon
 install -Dm644 00-brace-extra %{buildroot}/etc/dconf/db/local.d/00-brace-extra
 install -Dm755 brace-helpers.sh %{buildroot}/etc/profile.d/brace-helpers.sh
 install -Dm755 brace-supplemental-changes.sh %{buildroot}/usr/bin/brace-supplemental-changes
@@ -66,6 +67,7 @@ install -Dm644 userjs-*.js %{buildroot}/usr/lib64/thunderbird/defaults/pref/;
 /etc/dconf/db/local.d/00-brace-gnome
 /etc/dconf/db/local.d/00-brace-mate
 /etc/dconf/db/local.d/00-brace-cinnamon
+/etc/dconf/db/local.d/00-brace-pantheon
 /etc/dconf/db/local.d/00-brace-extra
 /etc/profile.d/brace-helpers.sh
 /usr/bin/brace-supplemental-changes

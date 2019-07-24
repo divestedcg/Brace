@@ -1,4 +1,4 @@
-[org/gnome/desktop/applications/terminal]
+[org/cinnamon/desktop/applications/terminal]
 exec='gnome-terminal'
 
 [org/cinnamon]
@@ -12,6 +12,9 @@ clock-use-24h=false
 clock-show-seconds=true
 clock-show-date=false
 enable-animations=false
+
+[org/cinnamon/desktop/keybindings]
+looking-glass-keybinding=['<Alt><Super>l']
 
 [org/cinnamon/desktop/keybindings/media-keys]
 screensaver=['<Super>l', 'XF86ScreenSaver']
