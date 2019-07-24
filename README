@@ -4,9 +4,10 @@ brace
 Compatibility
 -------------
 - Fedora (preferred)
-- Arch Linux
-- EL 7/8
-- openSUSE (very basic support)
+- CentOS 7/8
+- Arch Linux (bugged scriptlet)
+- openSUSE (basic)
+- Debian (basic, no package)
 
 Contents
 --------
@@ -16,20 +17,18 @@ Installed
 	60-restrict.conf			= kernel: restrict dmesg and ptrace
 	blacklist-dma.conf			= kernel: blacklist modules that provide direct memory access externally
 	blacklist-usbnet.conf			= kernel: blacklist modules that allow for USB networking
-	brace-arch-installer.sh			= Arch: package installer
+	brace-helpers.sh			= profile: adds helper aliases
+	brace-installer.sh			= unified package installer
 	brace-fedora-enable-auto-updates.sh	= Fedora: enables DNF automatic updates
-	brace-fedora-installer.sh		= Fedora: package installer
-	brace-fedora-installer-base.sh		= Fedora: simplified package installer
 	brace-fedora-remover.sh			= Fedora: package remover
 	brace-fedora-update-system.sh		= Fedora: update system using dnf-plugin-system-upgrade
 	brace-supplemental-changes.sh		= GNOME: change extra default settings
-	helpers.sh				= profile: adds helper aliases
 	wireless-perf.conf			= kernel: increases wi-fi performance for b43 and iwlwifi
 	userjs-*.js				= Firefox: change default settings
 Package Creation
-	brace.install				= pacman helper script
 	brace.spec				= RPM specfile
 	PKGBUILD				= pacman PKGBUILD
+	brace.install				= pacman helper script
 Repository Necessaries
 	LICENSE
 	README
