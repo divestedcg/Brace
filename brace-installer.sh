@@ -48,7 +48,7 @@ whichPackageManager() {
 
 handleInstall() {
 	if [ "$packageManager" == "apt" ]; then
-		#TODO: maybe call for each individual package? also skip if unavailable?
+		#TODO: skip if unavailable?
 		$packageManager install --no-install-recommends $packagesDebian $packagesBaseDebian;
 	fi;
 	if [ "$packageManager" == "dnf" ] || [ "$packageManager" == "yum" ]; then
@@ -71,8 +71,10 @@ handleRemove() {
 		$packageManager remove --skip-broken $packagesFedora;
 	fi;
 	if [ "$packageManager" == "pacman" ]; then
-		#TODO: call for each individual package
-		$packageManager -Rsc $packagesArch;
+		#$packageManager -Rsc $packagesArch;
+		for package in $packagesArch; do
+			$packageManager -Rsc $package;
+		done;
 	fi;
 	if [ "$packageManager" == "zypper" ]; then
 		$packageManager remove $packagesSuse;
@@ -145,7 +147,7 @@ handleCleanup() {
 #Start glue
 #
 if [[ $EUID -ne 0 ]]; then echo -e "${red}ERROR: This script needs to be run as root!${coloroff}"; exit 1; fi;
-echo -e "${cyan}INFO: This script is fully intended for use on desktop machines, not servers!${coloroff}";
+echo -e "${cyan}INFO: This script is intended for use on desktop machines, not servers!${coloroff}";
 echo -e "${cyan}INFO: This script is geared towards personal use and some packages may not be appropiate for business systems!${coloroff}";
 if [ -f /etc/centos-release ]; then yum install epel-release; fi;
 
@@ -226,7 +228,7 @@ category='Theming';
 	handleOperation;
 category='Fonts';
 	baseIncluded=true;
-	packagesArch='adobe-source-code-pro-fonts ttf-fira-mono ttf-fira-sans ttf-liberation cantarell-fonts gsfonts noto-fonts noto-fonts-emoji ttf-freefont';
+	packagesArch='adobe-source-code-pro-fonts ttf-fira-mono ttf-fira-sans ttf-liberation cantarell-fonts gsfonts noto-fonts noto-fonts-emoji';
 	packagesDebian='adobe-source-code-pro-fonts fonts-firacode';
 	packagesFedora='adobe-source-code-pro-fonts mozilla-fira-mono-fonts mozilla-fira-sans-fonts';
 	packagesSuse='adobe-sourcecodepro-fonts';
@@ -318,8 +320,8 @@ category='Files - Backup';
 category='Files - Encryption';
 	baseIncluded=true;
 	packagesArch='ecryptfs-utils encfs cryfs gocryptfs'; packagesAUR='sirikali';
-	packagesDebian='ecryptfs-utils encfs cryfs gocryptfs sirikali';
-	packagesFedora='ecryptfs-utils encfs cryptsetup-reencrypt sirikali';
+	packagesDebian='ecryptfs-utils encfs cryfs gocryptfs'; #sirikali
+	packagesFedora='ecryptfs-utils encfs cryptsetup-reencrypt'; #sirikali
 	packagesSuse='ecryptfs-utils encfs cryfs';
 	handleOperation;
 category='Files - Sharing';
@@ -394,14 +396,14 @@ category='Media - Music Management';
 	handleOperation;
 category='Office';
 	baseIncluded=true;
-	packagesArch='libreoffice-fresh meld scribus gnucash dia aspell aspell-en hyphen hyphen-en libmythes mythes-en hunspell hunspell-en';
+	packagesArch='libreoffice-fresh meld scribus gnucash dia aspell aspell-en hyphen hyphen-en libmythes mythes-en';
 	packagesDebian='libreoffice meld scribus gnucash dia aspell aspell-en';
 	packagesFedora='libreoffice meld scribus gnucash dia aspell aspell-en';
 	packagesSuse='libreoffice meld scribus gnucash dia aspell';
 	handleOperation;
 category='Passwords';
 	baseIncluded=true;
-	packagesArch='keepassxc pwgen u2f-hidraw-policy';
+	packagesArch='keepassxc pwgen'; packagesAUR='u2f-hidraw-policy';
 	packagesDebian='keepassxc pwgen diceware ssss libu2f-udev';
 	packagesFedora='keepassxc pwgen diceware ssss u2f-hidraw-policy';
 	packagesSuse='keepassxc pwgen libu2f-host0';
