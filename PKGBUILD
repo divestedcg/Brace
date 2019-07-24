@@ -1,7 +1,7 @@
 # Maintainer: Tad <tad@spotco.us>
 pkgname=brace
 pkgver=20190724
-pkgrel=2
+pkgrel=3
 pkgdesc="Increases privacy/security through various configs."
 arch=('any')
 license=('GPLv3')
@@ -22,7 +22,7 @@ source=('00-brace-gnome'
 	'blacklist-dma.conf'
 	'blacklist-usbnet.conf'
 	'brace-supplemental-changes.sh'
-	'brace-arch-installer.sh'
+	'brace-installer.sh'
 	'wireless-perf.conf'
 	'chromium-brace.json'
 	'brace-helpers.sh'
@@ -40,7 +40,7 @@ sha512sums=('4ff46c2c94f129d0663e11b89ed4130ae2106d30da3ab20ed0f9d8627f5e9b5b3a3
             'ba57603a85b3e25f8146269cadbb4953b6b3d66a25e251b1478fc85704c884eb56ef8b1cd17a547631d5778ffab37fd212c9cf0eb0525e4c46b9c7418836146a'
             '7f7d833f4b1437a99e0f30e6dd3b474ac75a52f830864f88b2d1337845daa59e46b4558437568067a7040c7d6bb72bdecc5490fedb71ac8049dccafb334bdda1'
             '788403d186d3d0c310fd5947fb2ce0b73e157e632f2059f067f791509d3150876e5280fb9792d983f04bd7fd4b91bb027eb96ced969109757720b0406138e6a0'
-            'a920e63691928f474111d818a652f9cd1f6ea041e97f145e43bafecfa5b941fa1c29af320f6c615481605278b9f85b43e1a49b32d0b26f86b453ee626d3851e8'
+            '8715066d0499fc238d90f168300901e9a0a59fa4a1cb37f91cd054b56dc8793283605af6c293626ac79585c4576b3d0ad279cab4498f46d1590d3d20604cf238'
             'd60121d7746936387e058287008ba720c7b389c25cb9654527ccc81a2ce2523ce343fc89f61005a6376e814319c959a794ada076addbe2639971ff0bbee001c5'
             '8112ae304bdafe1f6fa611a001e6e5674001a62abf45e8ab947474536c0e90e28ada821003208ecd91555a94c4d60d1a96cac02cb0a534bfc95a1fddac33f29f'
             '234d146b76e1ca572d856ba837848842ceced658a547ac058fd9bbcf5f04ac696756608339209b20b97956f80814b9393207dffddc109abda15ca6f98bb0e756'
@@ -59,7 +59,7 @@ package() {
   install -Dm644 00-brace-extra "$pkgdir"/etc/dconf/db/local.d/00-brace-extra
   install -Dm755 brace-helpers.sh "$pkgdir"/etc/profile.d/brace-helpers.sh
   install -Dm755 brace-supplemental-changes.sh "$pkgdir"/usr/bin/brace-supplemental-changes
-  install -Dm755 brace-arch-installer.sh "$pkgdir"/usr/bin/brace-installer
+  install -Dm755 brace-installer.sh "$pkgdir"/usr/bin/brace-installer
   install -Dm644 blacklist-dma.conf "$pkgdir"/usr/lib/modprobe.d/blacklist-dma.conf
   install -Dm644 blacklist-usbnet.conf "$pkgdir"/usr/lib/modprobe.d/blacklist-usbnet.conf
   install -Dm644 wireless-perf.conf "$pkgdir"/usr/lib/modprobe.d/wireless-perf.conf

@@ -43,8 +43,7 @@ install -Dm755 brace-helpers.sh %{buildroot}/etc/profile.d/brace-helpers.sh
 install -Dm755 brace-supplemental-changes.sh %{buildroot}/usr/bin/brace-supplemental-changes
 install -Dm755 brace-fedora-enable-auto-updates.sh %{buildroot}/usr/bin/brace-enable-auto-updates
 install -Dm755 brace-fedora-enable-rpmfusion.sh %{buildroot}/usr/bin/brace-enable-rpmfusion
-install -Dm755 brace-fedora-installer.sh %{buildroot}/usr/bin/brace-installer
-install -Dm755 brace-fedora-installer-base.sh %{buildroot}/usr/bin/brace-installer-base
+install -Dm755 brace-installer.sh %{buildroot}/usr/bin/brace-installer
 install -Dm755 brace-fedora-remover.sh %{buildroot}/usr/bin/brace-remover
 install -Dm755 brace-fedora-update-system.sh %{buildroot}/usr/bin/brace-update-system
 install -Dm755 brace-rpm-verify.sh %{buildroot}/usr/bin/brace-rpm-verify
@@ -72,7 +71,6 @@ install -Dm644 userjs-*.js %{buildroot}/usr/lib64/thunderbird/defaults/pref/;
 /usr/bin/brace-enable-auto-updates
 /usr/bin/brace-enable-rpmfusion
 /usr/bin/brace-installer
-/usr/bin/brace-installer-base
 /usr/bin/brace-remover
 /usr/bin/brace-update-system
 /usr/bin/brace-rpm-verify
