@@ -1,7 +1,7 @@
 # Maintainer: Tad <tad@spotco.us>
 pkgname=brace
 pkgver=20190724
-pkgrel=8
+pkgrel=9
 pkgdesc="Increases privacy/security through various configs."
 arch=('any')
 license=('GPLv3')
@@ -17,6 +17,7 @@ source=('00-brace-gnome'
 	'00-brace-cinnamon'
 	'00-brace-pantheon'
 	'00-brace-extra'
+	'dconf-profile-user'
 	'30-nm-privacy.conf'
 	'60-restrict.conf'
 	'blacklist-dma.conf'
@@ -35,6 +36,7 @@ sha512sums=('4ff46c2c94f129d0663e11b89ed4130ae2106d30da3ab20ed0f9d8627f5e9b5b3a3
             '16c6f76cf2339f6fb9167e98e4b817301a6faeb40788249f86421891c4cef187c6cca5027274bd57a9ed94d395bf9d7dc4877389650bfd1fa5c91b1f5b03770f'
             'ecf9a3951359519f157e1bf2a433b4753e2cbb8b2dc921bd0349903ba09360b5938a017cc4dbd859040ae851c6be6ed12903eca2aaee3c7367e47dac6da30e2d'
             '3625e53fee7a1bf755a9de3b5f702e75ba67bb4160c6fd8b36f6cf28a9e939e8db982151c507f76b7955391c5bb93654695a2da39724e88309fe350242689d90'
+            '1314c63c629f5970820718aacab764457fbd51dd3dafa091b437bb5cf0ebde8448668dfe2ff7f7d659bd1b005cbb41cd0b65e978e48915b04ea43ae772364633'
             '6e585be661b1494f285356b56eafe9a501674e5d8502f8562d2ee7e33715c50a67c5eca178bef69d602d407cdd309a5ef7bbddc6e0a33002ebb7ca6598b79528'
             'c1c4bf258ba5075159bdf55d8bc15fcc8f8170b6399979ee950ca80970fad41539eb2c518e7bf98e6f0a299e76aed38acd62b032f9068ecc347f9e6c219ff186'
             'ba57603a85b3e25f8146269cadbb4953b6b3d66a25e251b1478fc85704c884eb56ef8b1cd17a547631d5778ffab37fd212c9cf0eb0525e4c46b9c7418836146a'
@@ -57,6 +59,7 @@ package() {
   install -Dm644 00-brace-cinnamon "$pkgdir"/etc/dconf/db/local.d/00-brace-cinnamon
   install -Dm644 00-brace-pantheon "$pkgdir"/etc/dconf/db/local.d/00-brace-pantheon
   install -Dm644 00-brace-extra "$pkgdir"/etc/dconf/db/local.d/00-brace-extra
+  install -Dm644 dconf-profile-user "$pkgdir"/etc/dconf/profile/user
   install -Dm755 brace-helpers.sh "$pkgdir"/etc/profile.d/brace-helpers.sh
   install -Dm755 brace-supplemental-changes.sh "$pkgdir"/usr/bin/brace-supplemental-changes
   install -Dm755 brace-installer.sh "$pkgdir"/usr/bin/brace-installer
