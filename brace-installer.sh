@@ -48,7 +48,7 @@ whichPackageManager() {
 
 handleInstall() {
 	if [ "$packageManager" == "apt" ]; then
-		#TODO: skip if unavailable?
+		#TODO: skip if unavailable doesn't exist, handle?
 		$packageManager install --no-install-recommends $packagesDebian $packagesBaseDebian;
 	fi;
 	if [ "$packageManager" == "dnf" ] || [ "$packageManager" == "yum" ]; then
@@ -180,21 +180,21 @@ done;
 category='Core';
 	baseIncluded=true;
 	packagesArch='rng-tools irqbalance openssh nano htop wget screen zip p7zip pixz pigz lm_sensors ripgrep dialog crda lostfiles'; packagesAUR='downgrade';
-	packagesDebian='rng-tools irqbalance openssh nano htop wget screen p7zip pixz lm-sensors ripgrep';
+	packagesDebian='rng-tools irqbalance ssh nano htop wget screen p7zip pixz lm-sensors ripgrep';
 	packagesFedora='rng-tools irqbalance openssh nano htop wget screen p7zip pixz lm_sensors ripgrep zram';
 	packagesSuse='rng-tools irqbalance openssh nano htop wget screen p7zip pixz sensors ripgrep';
 	handleOperation;
 category='Frameworks';
 	baseIncluded=true;
 	packagesArch='jre8-openjdk python';
-	packagesDebian='openjdk-8-jre';
+	packagesDebian='default-jre';
 	packagesFedora='java-1.8.0-openjdk';
 	packagesSuse='java-1_8_0-openjdk';
 	handleOperation;
 category='GNOME Extras';
 	baseIncluded=false;
 	packagesArch='nautilus-terminal gnome-tweak-tool seahorse';
-	packagesDebian='gnome-terminal-nautilus gnome-tweak-tool seahorse';
+	packagesDebian='nautilus-extension-gnome-terminal gnome-tweak-tool seahorse';
 	packagesFedora='gnome-terminal-nautilus gnome-tweak-tool seahorse';
 	packagesSuse='nautilus-terminal gnome-tweaks seahorse';
 	handleOperation;
@@ -208,14 +208,14 @@ category='OpenCL';
 category='VA-API';
 	baseIncluded=true;
 	packagesArch='libva-mesa-driver libva-intel-driver intel-media-driver'; #gstreamer-vaapi
-	packagesDebian='mesa-dri-drivers libva-utils libva-intel-driver'; #gstreamer1-vaapi
+	packagesDebian='mesa-va-drivers vainfo i965-va-driver intel-media-va-driver'; #gstreamer1-vaapi
 	packagesFedora='mesa-dri-drivers libva-utils libva-intel-driver libva-intel-hybrid-driver'; #gstreamer1-vaapi
 	packagesSuse=''; #TODO
 	handleOperation;
 category='VDPAU';
 	baseIncluded=false;
 	packagesArch='vdpauinfo libvdpau libvdpau-va-gl libva-vdpau-driver mesa-vdpau';
-	packagesDebian='vdpauinfo libvdpau-va-gl';
+	packagesDebian='vdpauinfo libvdpau-va-gl vdpau-va-driver';
 	packagesFedora='vdpauinfo libvdpau libvdpau-va-gl libva-vdpau-driver';
 	packagesSuse=''; #TODO
 	handleOperation;
@@ -229,7 +229,7 @@ category='Theming';
 category='Fonts';
 	baseIncluded=true;
 	packagesArch='adobe-source-code-pro-fonts ttf-fira-mono ttf-fira-sans ttf-liberation cantarell-fonts gsfonts noto-fonts noto-fonts-emoji';
-	packagesDebian='adobe-source-code-pro-fonts fonts-firacode';
+	packagesDebian='fonts-firacode';
 	packagesFedora='adobe-source-code-pro-fonts mozilla-fira-mono-fonts mozilla-fira-sans-fonts';
 	packagesSuse='adobe-sourcecodepro-fonts';
 	handleOperation;
@@ -249,7 +249,7 @@ category='Audit';
 	handleOperation;
 category='Chat';
 	baseIncluded=false;
-	packagesArch='hexchat gajim mumble';
+	packagesArch='hexchat gajim mumble'; packagesAUR='gajim-plugin-omemo';
 	packagesDebian='hexchat dino-im mumble';
 	packagesFedora='hexchat dino mumble';
 	packagesSuse='hexchat gajim gajim-plugin-omemo mumble';
@@ -264,7 +264,7 @@ category='Communication';
 category='Cryptocurrency';
 	baseIncluded=false;
 	packagesArch='electrum';
-	packagesDebian='electrum';
+	packagesDebian=''; #electrum
 	packagesFedora='electrum';
 	packagesSuse=''; #unavailable
 	handleOperation;
@@ -285,7 +285,7 @@ category='Development - Android';
 category='Development - Java';
 	baseIncluded=false;
 	packagesArch='jdk8-openjdk eclipse-java'; packagesAUR='proguard jd-gui launch4j';
-	packagesDebian='openjdk-8-jdk eclipse-jdt proguard';
+	packagesDebian='default-jdk proguard'; #eclipse-jdt
 	packagesFedora='java-1.8.0-openjdk-devel eclipse-jdt proguard';
 	packagesSuse=''; #unavailable
 	handleOperation;
@@ -320,8 +320,8 @@ category='Files - Backup';
 category='Files - Encryption';
 	baseIncluded=true;
 	packagesArch='ecryptfs-utils encfs cryfs gocryptfs'; packagesAUR='sirikali';
-	packagesDebian='ecryptfs-utils encfs cryfs gocryptfs'; #sirikali
-	packagesFedora='ecryptfs-utils encfs cryptsetup-reencrypt'; #sirikali
+	packagesDebian='encfs cryfs gocryptfs'; #ecryptfs-utils sirikali
+	packagesFedora='ecryptfs-utils encfs gocryptfs cryptsetup-reencrypt'; #sirikali
 	packagesSuse='ecryptfs-utils encfs cryfs';
 	handleOperation;
 category='Files - Sharing';
@@ -355,7 +355,7 @@ category='Games - Sandbox';
 category='Games - Arena';
 	baseIncluded=false;
 	packagesArch='xonotic';
-	packagesDebian='xonotic';
+	packagesDebian=''; #unavailable
 	packagesFedora='xonotic';
 	packagesSuse='xonotic';
 	handleOperation;
@@ -376,7 +376,7 @@ category='Internet';
 category='Media - Consumption';
 	baseIncluded=true;
 	packagesArch='vlc lollypop gnome-books youtube-dl'; #TODO: codecs
-	packagesDebian='multimedia-codecs vlc pragha gnome-books youtube-dl';
+	packagesDebian='vlc pragha gnome-books youtube-dl'; #TODO: codecs
 	packagesFedora='@multimedia vlc lollypop gnome-books youtube-dl';
 	packagesSuse='vlc lollypop gnome-books youtube-dl'; #TODO: codecs
 	handleOperation;
@@ -439,7 +439,7 @@ category='Security - System';
 category='Tor';
 	baseIncluded=true;
 	packagesArch='tor torsocks'; packagesAUR='onionshare';
-	packagesDebian='tor torsocks obfs4proxy onionshare torbrowser-launcher';
+	packagesDebian='tor torsocks obfs4proxy onionshare'; #torbrowser-launcher
 	packagesFedora='tor torsocks obfs4 onionshare torbrowser-launcher';
 	packagesSuse='tor torsocks python3-onionshare torbrowser-launcher';
 	handleOperation;
@@ -460,7 +460,7 @@ category='Virtualization';
 category='Wine';
 	baseIncluded=false;
 	packagesArch='wine-staging winetricks';
-	packagesDebian='wine winetricks';
+	packagesDebian='wine'; #winetricks
 	packagesFedora='wine winetricks';
 	packagesSuse='wine-staging winetricks';
 	handleOperation;
