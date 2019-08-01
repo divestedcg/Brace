@@ -1,5 +1,5 @@
 Name: brace
-Version: 20190727
+Version: 20190731
 Release: 1
 Summary: Increases privacy/security through various configs.
 License: GPLv3+
@@ -27,8 +27,8 @@ echo "Pepper your /etc/fstab with nodev,nosuid,noexec";
 echo "Stealth Mode: firewall-cmd --set-default-zone=drop";
 echo "Stealth IPv6 Fix: firewall-cmd --permanent --direct --add-rule ipv6 filter INPUT 0 -p icmpv6 -j ACCEPT";
 echo "Stricter Ciphers: update-crypto-policies --set NEXT";
-echo "Stricter Kernel: grubby --update-kernel=ALL --args=\"lockdown=1 pti=on vsyscall=none page_poison=1 slab_nomerge slub_debug=FZP\"";
-echo "Strict IOMMU: grubby --update-kernel=ALL --args=\"iommu=force intel_iommu=on amd_iommu=force_isolation\"";
+echo "Stricter Kernel: grubby --update-kernel=ALL --args=\"lockdown=1 pti=on vsyscall=none page_poison=1 slab_nomerge slub_debug=FZP page_alloc.shuffle=1\"";
+echo "Strict IOMMU: grubby --update-kernel=ALL --args=\"iommu=force intel_iommu=on amd_iommu=on\"";
 
 %postun
 if [ -f /usr/bin/dconf ]; then dconf update; fi;
