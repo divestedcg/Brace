@@ -32,6 +32,7 @@ recent-files-max-age=-1
 remove-old-temp-files=true
 old-files-age=uint32 1
 remove-old-trash-files=true
+remember-recent-files=false
 
 [org/cinnamon/desktop/screensaver]
 lock-delay=uint32 30

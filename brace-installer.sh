@@ -185,7 +185,7 @@ category='Core';
 	packagesSuse='rng-tools irqbalance openssh nano htop wget screen p7zip pixz sensors ripgrep grubby';
 	handleOperation;
 category='Frameworks';
-	baseIncluded=true;
+	baseIncluded=false;
 	packagesArch='jre8-openjdk python';
 	packagesDebian='default-jre';
 	packagesFedora='java-1.8.0-openjdk';
@@ -241,7 +241,7 @@ category='Audio Manipulation';
 	packagesSuse='audacity';
 	handleOperation;
 category='Audit';
-	baseIncluded=true;
+	baseIncluded=false;
 	packagesArch='lynis checksec arch-audit'; packagesAUR='spectre-meltdown-checker';
 	packagesDebian='lynis checksec spectre-meltdown-checker';
 	packagesFedora='lynis checksec spectre-meltdown-checker';
@@ -339,7 +339,7 @@ category='Files - Syncing';
 	packagesSuse='syncthing';
 	handleOperation;
 category='Games - Tiny';
-	baseIncluded=true;
+	baseIncluded=false;
 	packagesArch='quadrapassel gnome-mines gnome-chess gnome-sudoku aisleriot';
 	packagesDebian='quadrapassel gnome-mines gnome-chess gnome-sudoku aisleriot';
 	packagesFedora='quadrapassel gnome-mines gnome-chess gnome-sudoku aisleriot';
@@ -375,10 +375,10 @@ category='Internet';
 	handleOperation;
 category='Media - Consumption';
 	baseIncluded=true;
-	packagesArch='vlc lollypop gnome-books youtube-dl'; #TODO: codecs
-	packagesDebian='vlc pragha gnome-books youtube-dl'; #TODO: codecs
-	packagesFedora='@multimedia vlc lollypop gnome-books youtube-dl';
-	packagesSuse='vlc lollypop gnome-books youtube-dl'; #TODO: codecs
+	packagesArch='vlc lollypop youtube-dl'; #TODO: codecs
+	packagesDebian='vlc pragha youtube-dl'; #TODO: codecs
+	packagesFedora='@multimedia vlc lollypop youtube-dl';
+	packagesSuse='vlc lollypop youtube-dl'; #TODO: codecs
 	handleOperation;
 category='Media - HTPC';
 	baseIncluded=false;
@@ -467,7 +467,7 @@ category='Wine';
 category='Remove - Distro Bloat';
 	baseIncluded=false;
 	packagesArch='gnome-documents gnome-weather gnome-music';
-	packagesDebian='gnome-games'; #TODO
+	packagesDebian='gnome-documents gnome-weather gnome-music gnome-games'; #TODO
 	packagesFedora=''; #TODO: move brace-fedora-remover.sh into here
 	packagesSuse='gnome-documents gnome-weather gnome-music brasero iagno lightsoff gnome-mahjongg pidgin polari tigervnc swell-foop xterm';
 	handleOperation;

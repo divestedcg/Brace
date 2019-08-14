@@ -11,7 +11,7 @@ packages=$packages" empathy";
 #Workstation (GNOME)
 packages=$packages" rhythmbox gnome-documents gnome-weather";
 #Cinnamon
-packages=$packages" xawtv";
+packages=$packages" adapta-gtk-theme paper-icon-theme pidgin *powerline xawtv xfburn";
 #KDE
 packages=$packages" kmahjongg konqueror amarok k3b ktorrent akregator falkon kget juk calligra* ktnef konversation kpatience kmines";
 #LXDE
