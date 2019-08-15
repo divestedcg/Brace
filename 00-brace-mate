@@ -19,6 +19,10 @@ show-desktop-icons=false
 antialiasing='grayscale'
 hinting='slight'
 
+[org/mate/desktop/interface]
+enable-animations=false
+gtk-enable-animations=false
+
 [org/mate/desktop/media-handling]
 automount-open=false
 automount=false
