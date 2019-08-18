@@ -67,6 +67,9 @@ tile-to-side-e='<Mod4>Right'
 move-to-monitor-e='<Shift><Mod4>Right'
 move-to-monitor-w='<Shift><Mod4>Left'
 
+[org/mate/panel/general]
+show-program-list=true
+
 [org/mate/panel/objects/clock/prefs]
 show-temperature=false
 format='12-hour'
