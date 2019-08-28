@@ -368,7 +368,7 @@ category='Image Manipulation';
 	handleOperation;
 category='Internet';
 	baseIncluded=true;
-	packagesArch='firefox firefox-extension-https-everywhere liferea';
+	packagesArch='firefox firefox-extension-https-everywhere firefox-ublock-origin liferea';
 	packagesDebian='firefox-esr webext-https-everywhere webext-ublock-origin liferea';
 	packagesFedora='firefox mozilla-https-everywhere mozilla-ublock-origin liferea';
 	packagesSuse='MozillaFirefox liferea';

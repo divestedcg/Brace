@@ -1,7 +1,7 @@
 /******
 * name: ghacks user.js
-* date: 26 June 2019
-* version 68-alpha: Knock on Pants
+* date: 18 August 2019
+* version 68-beta: Knock on Pants
 *   "It's like thunder, lightning... the way you wear me is frightening"
 * authors: v52+ github | v51- www.ghacks.net
 * url: https://github.com/ghacksuserjs/ghacks-user.js
@@ -267,9 +267,8 @@ pref("browser.crashReports.unsubmittedCheck.autoSubmit2", false); // [FF58+]
  * [2] https://www.gnu.gl/blog/Posts/multiple-vulnerabilities-in-pocket/ ***/
 pref("extensions.pocket.enabled", false);
 /* 0390: disable Captive Portal detection
- * [1] https://en.wikipedia.org/wiki/Captive_portal
- * [2] https://wiki.mozilla.org/Necko/CaptivePortal
- * [3] https://trac.torproject.org/projects/tor/ticket/21790 ***/
+ * [1] https://www.eff.org/deeplinks/2017/08/how-captive-portals-interfere-wireless-security-and-privacy
+ * [2] https://wiki.mozilla.org/Necko/CaptivePortal ***/
 pref("captivedetect.canonicalURL", "");
 pref("network.captive-portal-service.enabled", false); // [FF52+]
 /* 0391: disable Network Connectivity checks [FF65+]
@@ -586,6 +585,7 @@ pref("_user.js.parrot", "1000 syntax error: the parrot's gone to meet 'is maker!
  * [1] http://kb.mozillazine.org/Browser.cache.disk_cache_ssl ***/
    // pref("browser.cache.disk_cache_ssl", false); //BRACE-COMMENTED
 /* 1003: disable memory cache
+/* capacity: -1=determine dynamically (default), 0=none, n=memory capacity in kilobytes
  * [NOTE] Not recommended due to performance issues ***/
    // pref("browser.cache.memory.enable", false);
    // pref("browser.cache.memory.capacity", 0); // [HIDDEN PREF]
@@ -869,7 +869,6 @@ pref("privacy.userContext.enabled", true);
 pref("privacy.usercontext.about_newtab_segregation.enabled", true); // [DEFAULT: true in FF61+]
 /* 1704: set behaviour on "+ Tab" button to display container menu [FF53+] [SETUP-CHROME]
  * 0=no menu (default), 1=show when clicked, 2=show on long press
- * [NOTE] The menu does not contain a non-container tab option (use Ctrl+T to open non-container tab)
  * [1] https://bugzilla.mozilla.org/1328756 ***/
 pref("privacy.userContext.longPressBehavior", 2);
 
@@ -942,6 +941,8 @@ pref("media.autoplay.enabled.user-gestures-needed", false);
 /* 2032: disable audio autoplay in non-active tabs [FF51+]
  * [1] https://www.ghacks.net/2016/11/14/firefox-51-blocks-automatic-audio-playback-in-non-active-tabs/ ***/
 pref("media.block-autoplay-until-in-foreground", true); // [DEFAULT: true]
+/* 2033: disable autoplay for muted videos [FF63+] ***/
+   // pref("media.autoplay.allow-muted", false);
 
 /*** [SECTION 2200]: WINDOW MEDDLING & LEAKS / POPUPS ***/
 pref("_user.js.parrot", "2200 syntax error: the parrot's 'istory!");
@@ -1037,11 +1038,15 @@ pref("_user.js.parrot", "2400 syntax error: the parrot's kicked the bucket!");
  * the website for it to look at the clipboard
  * [1] https://www.ghacks.net/2014/01/08/block-websites-reading-modifying-clipboard-contents-firefox/ ***/
 pref("dom.event.clipboardevents.enabled", false);
-/* 2403: disable clipboard commands (cut/copy) from "non-privileged" content [FF41+]
+/* 2403: disable middlemouse paste leaking clipboard content on Linux after autoscroll
+ * Defense in depth if clipboard events are enabled (see 2402)
+ * [1] https://bugzilla.mozilla.org/1528289 */
+pref("middlemouse.paste", false); // [DEFAULT: false on Windows]
+/* 2404: disable clipboard commands (cut/copy) from "non-privileged" content [FF41+]
  * this disables document.execCommand("cut"/"copy") to protect your clipboard
  * [1] https://bugzilla.mozilla.org/1170911 ***/
 pref("dom.allow_cut_copy", false);
-/* 2404: disable "Confirm you want to leave" dialog on page close
+/* 2405: disable "Confirm you want to leave" dialog on page close
  * Does not prevent JS leaks of the page close event.
  * [1] https://developer.mozilla.org/docs/Web/Events/beforeunload
  * [2] https://support.mozilla.org/questions/1043508 ***/
@@ -1186,9 +1191,6 @@ pref("pdfjs.disabled", false); // [DEFAULT: false]
 /* 2621: disable links launching Windows Store on Windows 8/8.1/10 [WINDOWS]
  * [1] https://www.ghacks.net/2016/03/25/block-firefox-chrome-windows-store/ ***/
 pref("network.protocol-handler.external.ms-windows-store", false);
-/* 2622: disable middlemouse paste leaking on Linux
- * [1] https://bugzilla.mozilla.org/1528289 */
-pref("middlemouse.paste", false); // [DEFAULT: false on Windows]
 
 /** DOWNLOADS ***/
 /* 2650: discourage downloading to desktop
