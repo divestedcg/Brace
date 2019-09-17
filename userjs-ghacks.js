@@ -1,6 +1,6 @@
 /******
 * name: ghacks user.js
-* date: 1 September 2019
+* date: 4 September 2019
 * version 69-beta: Pants One More Time
 *   "When I'm not with pants I lose my mind. Give me a sign. Hit me, pants, one more time."
 * authors: v52+ github | v51- www.ghacks.net
@@ -112,8 +112,8 @@ pref("browser.newtabpage.activity-stream.telemetry.ping.endpoint", "");
 /* 0105b: disable Activity Stream Snippets
  * Runs code received from a server (aka Remote Code Execution) and sends information back to a metrics server
  * [1] https://abouthome-snippets-service.readthedocs.io/ ***/
-pref("browser.newtabpage.activity-stream.asrouter.providers.snippets", "");
 pref("browser.newtabpage.activity-stream.feeds.snippets", false);
+pref("browser.newtabpage.activity-stream.asrouter.providers.snippets", "");
 /* 0105c: disable Activity Stream Top Stories, Pocket-based and/or sponsored content ***/
 pref("browser.newtabpage.activity-stream.feeds.section.topstories", false);
 pref("browser.newtabpage.activity-stream.section.highlights.includePocket", false);
@@ -209,10 +209,7 @@ pref("dom.ipc.plugins.flash.subprocess.crashreporter.enabled", false);
 pref("dom.ipc.plugins.reportCrashURL", false);
 /* 0320: disable about:addons' Recommendations pane (uses Google Analytics) ***/
 pref("extensions.getAddons.showPane", false); // [HIDDEN PREF]
-pref("extensions.webservice.discoverURL", "");
 /* 0321: disable recommendations in about:addons' Extensions and Themes panes [FF68+] ***/
-pref("extensions.getAddons.discovery.api_url", "");
-pref("extensions.htmlaboutaddons.discover.enabled", false);
 pref("extensions.htmlaboutaddons.recommendations.enabled", false);
 /* 0330: disable telemetry
  * the pref (.unified) affects the behaviour of the pref (.enabled)
@@ -261,11 +258,6 @@ pref("browser.crashReports.unsubmittedCheck.enabled", false); // [FF51+]
 /* 0351: disable backlogged Crash Reports
  * [SETTING] Privacy & Security>Firefox Data Collection & Use>Allow Firefox to send backlogged crash reports  ***/
 pref("browser.crashReports.unsubmittedCheck.autoSubmit2", false); // [FF58+]
-/* 0370: disable Pocket [FF46+]
- * Pocket is a third party (now owned by Mozilla) "save for later" cloud service
- * [1] https://en.wikipedia.org/wiki/Pocket_(application)
- * [2] https://www.gnu.gl/blog/Posts/multiple-vulnerabilities-in-pocket/ ***/
-pref("extensions.pocket.enabled", false);
 /* 0390: disable Captive Portal detection
  * [1] https://www.eff.org/deeplinks/2017/08/how-captive-portals-interfere-wireless-security-and-privacy
  * [2] https://wiki.mozilla.org/Necko/CaptivePortal ***/
@@ -417,7 +409,8 @@ pref("network.http.altsvc.oe", false);
 pref("network.proxy.socks_remote_dns", true);
 /* 0707: disable (or setup) DNS-over-HTTPS (DoH) [FF60+]
  * TRR = Trusted Recursive Resolver
- * .mode: 0=off, 1=race, 2=TRR first, 3=TRR only, 4=race for stats but always use native result
+ * 0=off by default, 1=race (removed in FF69), 2=TRR first, 3=TRR only,
+ * 4=race for stats but always use native result (removed in FF69), 5=explicitly off
  * [WARNING] DoH bypasses hosts and gives info to yet another party (e.g. Cloudflare)
  * [1] https://www.ghacks.net/2018/04/02/configure-dns-over-https-in-firefox/
  * [2] https://hacks.mozilla.org/2018/05/a-cartoon-intro-to-dns-over-https/ ***/
@@ -563,16 +556,20 @@ pref("signon.formlessCapture.enabled", false);
 pref("network.auth.subresource-http-auth-allow", 1);
 
 /*** [SECTION 1000]: CACHE / SESSION (RE)STORE / FAVICONS
-     ETAG [1] and other [2][3] cache tracking/fingerprinting techniques can be averted by
-     disabling *BOTH* disk (1001) and memory (1003) cache. ETAGs can also be neutralized
-     by modifying response headers [4]. Another solution is to use a hardened configuration
-     with Temporary Containers [5]. Alternatively, you can *LIMIT* exposure by clearing
-     cache on close (2803). or on a regular basis manually or with an extension.
+     Cache tracking/fingerprinting techniques [1][2][3] require a cache. Disabling disk (1001)
+     *and* memory (1003) caches is one solution; but that's extreme and fingerprintable. A hardened
+     Temporary Containers configuration can effectively do the same thing, by isolating every tab [4].
+
+     We consider avoiding disk cache (1001) so cache is session/memory only (like Private Browsing
+     mode), and isolating cache to first party (4001) is sufficient and a good balance between
+     risk and performance. ETAGs can also be neutralized by modifying response headers [5], and
+     you can clear the cache manually or on a regular basis with an extension.
+
      [1] https://en.wikipedia.org/wiki/HTTP_ETag#Tracking_using_ETags
      [2] https://robertheaton.com/2014/01/20/cookieless-user-tracking-for-douchebags/
      [3] https://www.grepular.com/Preventing_Web_Tracking_via_the_Browser_Cache
-     [4] https://github.com/ghacksuserjs/ghacks-user.js/wiki/4.2.4-Header-Editor
-     [5] https://medium.com/@stoically/enhance-your-privacy-in-firefox-with-temporary-containers-33925cd6cd21
+     [4] https://medium.com/@stoically/enhance-your-privacy-in-firefox-with-temporary-containers-33925cd6cd21
+     [5] https://github.com/ghacksuserjs/ghacks-user.js/wiki/4.2.4-Header-Editor
 ***/
 pref("_user.js.parrot", "1000 syntax error: the parrot's gone to meet 'is maker!");
 /** CACHE ***/
@@ -581,12 +578,8 @@ pref("_user.js.parrot", "1000 syntax error: the parrot's gone to meet 'is maker!
  * or you use a hardened Temporary Containers, then feel free to override this
  * [NOTE] We also clear cache on exiting Firefox (see 2803) ***/
    // pref("browser.cache.disk.enable", false); //BRACE-COMMENTED
-/* 1002: disable disk cache for SSL pages
- * [1] http://kb.mozillazine.org/Browser.cache.disk_cache_ssl ***/
-   // pref("browser.cache.disk_cache_ssl", false); //BRACE-COMMENTED
 /* 1003: disable memory cache
-/* capacity: -1=determine dynamically (default), 0=none, n=memory capacity in kilobytes
- * [NOTE] Not recommended due to performance issues ***/
+/* capacity: -1=determine dynamically (default), 0=none, n=memory capacity in kilobytes ***/
    // pref("browser.cache.memory.enable", false);
    // pref("browser.cache.memory.capacity", 0); // [HIDDEN PREF]
 /* 1006: disable permissions manager from writing to disk [RESTART]
@@ -927,10 +920,10 @@ pref("media.getusermedia.audiocapture.enabled", false);
    // pref("permissions.default.camera", 2);
    // pref("permissions.default.microphone", 2);
 /* 2030: disable autoplay of HTML5 media [FF63+]
- * 0=Allow all, 1=Block non-muted media, 2=Prompt (removed in FF66), 5=Block all (added in FF69+)
+ * 0=Allow all, 1=Block non-muted media (default in FF67+), 2=Prompt (removed in FF66), 5=Block all (FF69+)
  * [NOTE] You can set exceptions under site permissions
- * [SETTING] Privacy & Security>Permissions>Autoplay>Settings>Default... ***/
-   // pref("media.autoplay.default", 5); // [DEFAULT: 1 in FF67+]
+ * [SETTING] Privacy & Security>Permissions>Autoplay>Settings>Default for all websites ***/
+   // pref("media.autoplay.default", 5);
 /* 2031: disable autoplay of HTML5 media if you interacted with the site [FF66+] ***/
 pref("media.autoplay.enabled.user-gestures-needed", false);
 /* 2032: disable autoplay of HTML5 media in non-active tabs [FF51+]
@@ -990,30 +983,32 @@ pref("dom.popup_allowed_events", "click dblclick");
 ***/
 pref("_user.js.parrot", "2300 syntax error: the parrot's off the twig!");
 /* 2302: disable service workers [FF32, FF44-compat]
- * Service workers essentially act as proxy servers that sit between web apps, and the browser
- * and network, are event driven, and can control the web page/site it is associated with,
- * intercepting and modifying navigation and resource requests, and caching resources.
+ * Service workers essentially act as proxy servers that sit between web apps, and the
+ * browser and network, are event driven, and can control the web page/site it is associated
+ * with, intercepting and modifying navigation and resource requests, and caching resources.
  * [NOTE] Service worker APIs are hidden (in Firefox) and cannot be used when in PB mode.
  * [NOTE] Service workers only run over HTTPS. Service workers have no DOM access.
- * [SETUP-WEB] Disabling service workers will break some sites. This pref is a master switch, and controls
- * notifications (2304, 2305) and service worker cache (2740) - all three are inactive. Notifications are
- * behind a prompt (2306). If you enable service workers, then you may want to look at those as well ***/
+ * [SETUP-WEB] Disabling service workers will break some sites. This pref is required true for
+ * service worker notifications (2304), push notifications (disabled, 2305) and service worker
+ * cache (2740). If you enable this pref, then check those settings as well ***/
 pref("dom.serviceWorkers.enabled", false);
 /* 2304: disable Web Notifications
- * [NOTE] Web Notifications require service workers (2302) and are behind a prompt (2306)
+ * [NOTE] Web Notifications can also use service workers (2302) and are behind a prompt (2306)
  * [1] https://developer.mozilla.org/docs/Web/API/Notifications_API ***/
    // pref("dom.webnotifications.enabled", false); // [FF22+]
    // pref("dom.webnotifications.serviceworker.enabled", false); // [FF44+]
 /* 2305: disable Push Notifications [FF44+]
- * web apps can receive messages pushed to them from a server, whether or
- * not the web app is in the foreground, or even currently loaded
- * [NOTE] Push Notifications require service workers (2302) and are behind a prompt (2306)
- * [1] https://developer.mozilla.org/docs/Web/API/Push_API ***/
-   // pref("dom.push.enabled", false);
-   // pref("dom.push.connection.enabled", false);
-   // pref("dom.push.serverURL", "");
+ * Push is an API that allows websites to send you (subscribed) messages even when the site
+ * isn’t loaded, by pushing messages to your userAgentID through Mozilla's Push Server.
+ * [NOTE] Push requires service workers (2302) to subscribe to and display, and is behind
+ * a prompt (2306). Disabling service workers alone doesn't stop Firefox polling the
+ * Mozilla Push Server. To remove all subscriptions, reset your userAgentID (in about:config
+ * or on start), and you will get a new one within a few seconds.
+ * [1] https://support.mozilla.org/en-US/kb/push-notifications-firefox
+ * [2] https://developer.mozilla.org/en-US/docs/Web/API/Push_API ***/
+pref("dom.push.enabled", false);
    // pref("dom.push.userAgentID", "");
-/* 2306: set a default permission for Notifications (both 2305 and 2306) [FF58+]
+/* 2306: set a default permission for Notifications (both 2304 and 2305) [FF58+]
  * 0=always ask (default), 1=allow, 2=block
  * [NOTE] Best left at default "always ask", fingerprintable via Permissions API
  * [SETTING] to add site exceptions: Page Info>Permissions>Receive Notifications
@@ -1187,10 +1182,11 @@ pref("network.protocol-handler.external.ms-windows-store", false);
 
 /** DOWNLOADS ***/
 /* 2650: discourage downloading to desktop
- * 0=desktop 1=downloads 2=last used
+ * 0=desktop, 1=downloads (default), 2=last used
  * [SETTING] To set your default "downloads": General>Downloads>Save files to ***/
    // pref("browser.download.folderList", 2);
-/* 2651: enforce user interaction for security by always asking where to download [SETUP-CHROME]
+/* 2651: enforce user interaction for security by always asking where to download
+ * [SETUP-CHROME] On Android this blocks longtapping and saving images
  * [SETTING] General>Downloads>Always ask you where to save files ***/
 pref("browser.download.useDownloadDir", false);
 /* 2652: disable adding downloads to the system's "recent documents" list ***/
@@ -1242,11 +1238,10 @@ pref("security.dialog_enable_delay", 700);
 pref("_user.js.parrot", "2700 syntax error: the parrot's joined the bleedin' choir invisible!");
 /* 2701: disable 3rd-party cookies and site-data [SETUP-WEB]
  * 0=Accept cookies and site data, 1=(Block) All third-party cookies, 2=(Block) All cookies,
- * 3=(Block) Cookies from unvisited sites, 4=(Block) Third-party trackers (FF63+)
- * [NOTE] Value 4 is tied to the Tracking Protection lists
+ * 3=(Block) Cookies from unvisited sites, 4=(Block) Third-party trackers (FF63+) (default FF69+)
  * [NOTE] You can set exceptions under site permissions or use an extension
  * [SETTING] Privacy & Security>Content Blocking>Custom>Choose what to block>Cookies ***/
-pref("network.cookie.cookieBehavior", 1); // [DEFAULT: 4 in FF69+]
+pref("network.cookie.cookieBehavior", 1);
 /* 2702: set third-party cookies (i.e ALL) (if enabled, see 2701) to session-only
    and (FF58+) set third-party non-secure (i.e HTTP) cookies to session-only
    [NOTE] .sessionOnly overrides .nonsecureSessionOnly except when .sessionOnly=false and
@@ -1361,7 +1356,7 @@ pref("privacy.sanitize.timeSpan", 0);
  ** 1300671 - isolate data:, about: URLs (FF55+)
  ** 1473247 - isolate IP addresses (FF63+)
  ** 1492607 - isolate postMessage with targetOrigin "*" (requires 4002) (FF65+)
- ** 1542309 - isolate top-level domain URLs (FF68+)
+ ** 1542309 - isolate top-level domain URLs when host is in the public suffix list (FF68+)
  ** 1506693 - isolate pdfjs range-based requests (FF68+)
  ** 1330467 - isolate site permissions (FF69+)
 ***/
@@ -1632,6 +1627,7 @@ pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons", false);
       // [SETTING] General>Browsing>Recommend extensions as you browse
 pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features", false); // disable CFR [FF67+] //BRACE-UNCOMMENTED
       // [SETTING] General>Browsing>Recommend features as you browse
+pref("extensions.pocket.enabled", false); // disable and hide Pocket [FF46+] //BRACE-UNCOMMENTED
 pref("identity.fxaccounts.enabled", false); // disable and hide Firefox Accounts and Sync [FF60+] [RESTART] //BRACE-UNCOMMENTED
 pref("network.manage-offline-status", false); // see bugzilla 620472 //BRACE-UNCOMMENTED
    // pref("reader.parse-on-load.enabled", false); // "Reader View"
@@ -1748,10 +1744,10 @@ pref("dom.event.highrestimestamp.enabled", true); // [DEFAULT: true]
    // pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr", false);
 // * * * /
 // FF68
-// 0105b: disable Activity Stream Snippets
-   // [-] https://bugzilla.mozilla.org/1540939
-pref("browser.aboutHomeSnippets.updateUrl", "");
+// 0105b: disable Activity Stream Legacy Snippets
+   // [-] https://bugzilla.mozilla.org/buglist.cgi?bug_id=1546190,1540939
 pref("browser.newtabpage.activity-stream.disableSnippets", true);
+pref("browser.aboutHomeSnippets.updateUrl", "");
 // 0307: disable auto updating of lightweight themes (LWT)
    // Not to be confused with themes in 0301* + 0302*, which use the FF55+ Theme API
    // Mozilla plan to convert existing LWTs and remove LWT support in the future, see [1]
@@ -1769,11 +1765,11 @@ pref("security.csp.experimentalEnabled", true);
 // [NOTE] replace the * with a slash in the line above to re-enable them
 // FF69
 // 1405: disable WOFF2 (Web Open Font Format) [FF35+]
-   // pref("gfx.downloadable_fonts.woff2.enabled", false);
    // [-] https://bugzilla.mozilla.org/1556991
-// 1802: enable click to play
+   // pref("gfx.downloadable_fonts.woff2.enabled", false);
+// 1802: enforce click-to-play for plugins
    // [-] https://bugzilla.mozilla.org/1519434
-pref("plugins.click_to_play", true);
+pref("plugins.click_to_play", true); // [DEFAULT: true in FF25+]
 // 2033: disable autoplay for muted videos [FF63+] - replaced by `media.autoplay.default` options (2030)
    // [-] https://bugzilla.mozilla.org/1562331
    // pref("media.autoplay.allow-muted", false);
