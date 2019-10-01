@@ -4,6 +4,15 @@
 
 if [[ $EUID -ne 0 ]]; then echo 'This script needs to be run as root!'; exit 1; fi;
 
+whichPackageManager() {
+	if type "dnf" &> /dev/null; then
+		echo "dnf" && return 0;
+	fi;
+	if type "yum" &> /dev/null; then
+		echo "yum" && return 0;
+	fi;
+}
+
 packages="";
 
 #CentOS 7
@@ -23,4 +32,4 @@ packages=$packages" xfburn gnote filezilla hexchat exaile compiz emerald";
 #XFCE
 packages=$packages" clipman xfburn geany pidgin asunder pragha abiword gnumeric xfdashboard";
 
-yum remove $packages;
+$(whichPackageManager) remove $packages;

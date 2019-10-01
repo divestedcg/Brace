@@ -375,10 +375,10 @@ category='Internet';
 	handleOperation;
 category='Media - Consumption';
 	baseIncluded=true;
-	packagesArch='vlc lollypop youtube-dl'; #TODO: codecs
+	packagesArch='vlc lollypop youtube-dl';  packagesAUR='foliate'; #TODO: codecs
 	packagesDebian='vlc pragha youtube-dl'; #TODO: codecs
-	packagesFedora='@multimedia vlc lollypop youtube-dl';
-	packagesSuse='vlc lollypop youtube-dl'; #TODO: codecs
+	packagesFedora='@multimedia gstreamer1-plugin-openh264 vlc lollypop youtube-dl foliate';
+	packagesSuse='vlc lollypop youtube-dl foliate'; #TODO: codecs
 	handleOperation;
 category='Media - HTPC';
 	baseIncluded=false;
