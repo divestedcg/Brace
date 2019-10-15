@@ -28,7 +28,11 @@ automount-open=false
 automount=false
 autorun-never=true
 
+[org/mate/desktop/peripherals/mouse]
+middle-button-enabled=false
+
 [org/mate/desktop/peripherals/touchpad]
+horizontal-two-finger-scrolling=true
 natural-scroll=false
 disable-while-typing=false
 
