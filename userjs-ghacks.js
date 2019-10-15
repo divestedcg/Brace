@@ -20,7 +20,7 @@
   2. READ this
      * https://github.com/ghacksuserjs/ghacks-user.js/wiki/1.3-Implementation
   3. If you skipped steps 1 and 2 above (shame on you), then here is the absolute minimum
-     * Real time binary checks with Google services are disabled (0402)
+     * Real time binary checks with Google services are disabled (0412)
      * You will still get prompts to update Firefox, but auto-installing them is disabled (0302a)
      * Some user data is erased on close (section 2800). Change this to suit your needs
      * EACH RELEASE check:
@@ -45,7 +45,7 @@
 * INDEX:
 
   0100: STARTUP
-  0200: GEOLOCATION
+  0200: GEOLOCATION / LANGUAGE / LOCALE
   0300: QUIET FOX
   0400: BLOCKLISTS / SAFE BROWSING
   0500: SYSTEM ADD-ONS / EXPERIMENTS
@@ -133,49 +133,52 @@ pref("browser.newtabpage.activity-stream.feeds.discoverystreamfeed", false); // 
  * [2] https://spreadprivacy.com/is-private-browsing-really-private/ ***/
    // pref("browser.privatebrowsing.autostart", true);
 
-/*** [SECTION 0200]: GEOLOCATION ***/
+/*** [SECTION 0200]: GEOLOCATION / LANGUAGE / LOCALE ***/
 pref("_user.js.parrot", "0200 syntax error: the parrot's definitely deceased!");
+/** GEOLOCATION ***/
 /* 0201: disable Location-Aware Browsing
+ * [NOTE] Best left at default "true", fingerprintable, is already behind a prompt (see 0202)
  * [1] https://www.mozilla.org/firefox/geolocation/ ***/
 pref("geo.enabled", false); //BRACE-UNCOMMENTED
-/* 0201b: set a default permission for Location [FF58+]
+/* 0202: set a default permission for Location (see 0201) [FF58+]
  * 0=always ask (default), 1=allow, 2=block
  * [NOTE] Best left at default "always ask", fingerprintable via Permissions API
  * [SETTING] to add site exceptions: Page Info>Permissions>Access Your Location
  * [SETTING] to manage site exceptions: Options>Privacy & Security>Permissions>Location>Settings ***/
    // pref("permissions.default.geo", 2);
-/* 0202: disable GeoIP-based search results
+/* 0203: use Mozilla geolocation service instead of Google when geolocation is enabled
+ * Optionally enable logging to the console (defaults to false) ***/
+pref("geo.wifi.uri", "https://location.services.mozilla.com/v1/geolocate?key=%MOZILLA_API_KEY%");
+   // pref("geo.wifi.logging.enabled", true); // [HIDDEN PREF]
+/* 0204: disable using the OS's geolocation service ***/
+pref("geo.provider.ms-windows-location", false); // [WINDOWS]
+pref("geo.provider.use_corelocation", false); // [MAC]
+pref("geo.provider.use_gpsd", false); // [LINUX]
+/* 0205: disable GeoIP-based search results
  * [NOTE] May not be hidden if Firefox has changed your settings due to your locale
  * [1] https://trac.torproject.org/projects/tor/ticket/16254
  * [2] https://support.mozilla.org/en-US/kb/how-stop-firefox-making-automatic-connections#w_geolocation-for-default-search-engine ***/
 pref("browser.search.region", "US"); // [HIDDEN PREF]
 pref("browser.search.geoip.url", "");
-/* 0205: set Firefox language [FF59+] [RESTART]
- * Go to the end of about:support to view Internationalization & Localization settings
- * If set to empty, the OS locales are used. If not set at all, default locale is used
- * This is the language used in menus, about pages, messages, and notifications from Firefox ***/
-   // pref("intl.locale.requested", "en-US"); // [HIDDEN PREF]
 /* 0206: disable geographically specific results/search engines e.g. "browser.search.*.US"
  * i.e. ignore all of Mozilla's various search engines in multiple locales ***/
 pref("browser.search.geoSpecificDefaults", false);
 pref("browser.search.geoSpecificDefaults.url", "");
-/* 0207: set preferred language for diplaying web pages
+
+/** LANGUAGE / LOCALE ***/
+/* 0210: set preferred language for displaying web pages
  * [TEST] https://addons.mozilla.org/about ***/
 pref("intl.accept_languages", "data:text/plain,intl.accept_languages=en-US, en"); //BRACE-MODIFIED
-/* 0208: enforce US English locale regardless of the system locale
+/* 0211: enforce US English locale regardless of the system locale
  * [1] https://bugzilla.mozilla.org/867501 ***/
 pref("javascript.use_us_english_locale", true); // [HIDDEN PREF]
-/* 0209: use APP locale over OS locale in regional preferences [FF56+]
- * [1] https://bugzilla.mozilla.org/buglist.cgi?bug_id=1379420,1364789 ***/
-pref("intl.regional_prefs.use_os_locales", false);
-/* 0210: use Mozilla geolocation service instead of Google when geolocation is enabled
- * Optionally enable logging to the console (defaults to false) ***/
-pref("geo.wifi.uri", "https://location.services.mozilla.com/v1/geolocate?key=%MOZILLA_API_KEY%");
-   // pref("geo.wifi.logging.enabled", true); // [HIDDEN PREF]
-/* 0211: disable using the OS's geolocation service ***/
-pref("geo.provider.ms-windows-location", false); // [WINDOWS]
-pref("geo.provider.use_corelocation", false); // [MAC]
-pref("geo.provider.use_gpsd", false); // [LINUX]
+/* 0212: enforce fallback text encoding to match en-US
+ * When the content or server doesn't declare a charset the browser will
+ * fallback to the "Current locale" based on your application language
+ * [SETTING] General>Language and Appearance>Fonts and Colors>Advanced>Text Encoding for Legacy Content
+ * [TEST] https://hsivonen.com/test/moz/check-charset.htm
+ * [1] https://trac.torproject.org/projects/tor/ticket/20025 ***/
+pref("intl.charset.fallback.override", "windows-1252");
 
 /*** [SECTION 0300]: QUIET FOX
      Starting in user.js v67, we only disable the auto-INSTALL of Firefox. You still get prompts
@@ -216,7 +219,7 @@ pref("extensions.htmlaboutaddons.recommendations.enabled", false);
  * IF unified=false then .enabled controls the telemetry module
  * IF unified=true then .enabled ONLY controls whether to record extended data
  * so make sure to have both set as false
- * [NOTE] FF58+ `toolkit.telemetry.enabled` is now LOCKED to reflect prerelease
+ * [NOTE] FF58+ 'toolkit.telemetry.enabled' is now LOCKED to reflect prerelease
  * or release builds (true and false respectively), see [2]
  * [1] https://firefox-source-docs.mozilla.org/toolkit/components/telemetry/telemetry/internals/preferences.html
  * [2] https://medium.com/georg-fritzsche/data-preference-changes-in-firefox-58-2d5df9c428b5 ***/
@@ -267,28 +270,48 @@ pref("network.captive-portal-service.enabled", false); // [FF52+]
  * [1] https://bugzilla.mozilla.org/1460537 ***/
 pref("network.connectivity-service.enabled", false);
 
-/*** [SECTION 0400]: BLOCKLISTS / SAFE BROWSING (SB)
-     Safe Browsing has taken many steps to preserve privacy. *IF* required, a full url is never
-     sent to Google, only a PART-hash of the prefix, and this is hidden with noise of other real
-     PART-hashes. Google also swear it is anonymized and only used to flag malicious sites.
-     Firefox also takes measures such as striping out identifying parameters and since SBv4 (FF57+)
-     doesn't even use cookies. (#Turn on browser.safebrowsing.debug to monitor this activity)
-
-     #Required reading [#] https://feeding.cloud.geek.nz/posts/how-safe-browsing-works-in-firefox/
-     [1] https://wiki.mozilla.org/Security/Safe_Browsing
-***/
+/*** [SECTION 0400]: BLOCKLISTS / SAFE BROWSING (SB) ***/
 pref("_user.js.parrot", "0400 syntax error: the parrot's passed on!");
+/** BLOCKLISTS ***/
 /* 0401: enforce Firefox blocklist, but sanitize blocklist url
  * [NOTE] It includes updates for "revoked certificates"
  * [1] https://blog.mozilla.org/security/2015/03/03/revoking-intermediate-certificates-introducing-onecrl/
  * [2] https://trac.torproject.org/projects/tor/ticket/16931 ***/
 pref("extensions.blocklist.enabled", true); // [DEFAULT: true]
 pref("extensions.blocklist.url", "https://blocklists.settings.services.mozilla.com/v1/blocklist/3/%APP_ID%/%APP_VERSION%/");
-/* 0402: disable binaries NOT in Safe Browsing local lists being checked
- * This is a real-time check with Google services
- * [SETUP-SECURITY] If you do not understand this, or if you want this protection, then override it ***/
+
+/** SAFE BROWSING (SB)
+    Safe Browsing has taken many steps to preserve privacy. *IF* required, a full url is never
+    sent to Google, only a PART-hash of the prefix, and this is hidden with noise of other real
+    PART-hashes. Google also swear it is anonymized and only used to flag malicious sites.
+    Firefox also takes measures such as striping out identifying parameters and since SBv4 (FF57+)
+    doesn't even use cookies. (#Turn on browser.safebrowsing.debug to monitor this activity)
+
+    #Required reading [#] https://feeding.cloud.geek.nz/posts/how-safe-browsing-works-in-firefox/
+    [1] https://wiki.mozilla.org/Security/Safe_Browsing
+    [2] https://support.mozilla.org/en-US/kb/how-does-phishing-and-malware-protection-work
+***/
+/* 0410: disable SB (Safe Browsing)
+ * [WARNING] Do this at your own risk! These are the master switches.
+ * [SETTING] Privacy & Security>Security>... "Block dangerous and deceptive content" ***/
+   // pref("browser.safebrowsing.malware.enabled", false);
+   // pref("browser.safebrowsing.phishing.enabled", false);
+/* 0411: disable SB checks for downloads (both local lookups + remote)
+ * This is the master switch for the safebrowsing.downloads* prefs (0412, 0413)
+ * [SETTING] Privacy & Security>Security>... "Block dangerous downloads" ***/
+   // pref("browser.safebrowsing.downloads.enabled", false);
+/* 0412: disable SB checks for downloads (remote)
+ * To verify the safety of certain executable files, Firefox may submit some information about the
+ * file, including the name, origin, size and a cryptographic hash of the contents, to the Google
+ * Safe Browsing service which helps Firefox determine whether or not the file should be blocked
+ * [SETUP-SECURITY] If you do not understand this, or you want this protection, then override it ***/
 pref("browser.safebrowsing.downloads.remote.enabled", false);
-/* 0403: disable 'ignore this warning' on Safe Browsing warnings
+pref("browser.safebrowsing.downloads.remote.url", "");
+/* 0413: disable SB checks for unwanted software
+ * [SETTING] Privacy & Security>Security>... "Warn you about unwanted and uncommon software" ***/
+   // pref("browser.safebrowsing.downloads.remote.block_potentially_unwanted", false);
+   // pref("browser.safebrowsing.downloads.remote.block_uncommon", false);
+/* 0419: disable 'ignore this warning' on SB warnings
  * If clicked, it bypasses the block for that session. This is a means for admins to enforce SB
  * [TEST] see github wiki APPENDIX A: Test Sites: Section 5
  * [1] https://bugzilla.mozilla.org/1226490 ***/
@@ -459,11 +482,6 @@ pref("_user.js.parrot", "0800 syntax error: the parrot's ceased to be!");
 pref("browser.fixup.alternate.enabled", false);
 /* 0803: display all parts of the url in the location bar ***/
 pref("browser.urlbar.trimURLs", false);
-/* 0804: limit history leaks via enumeration (PER TAB: back/forward)
- * This is a PER TAB session history. You still have a full history stored under all history
- * default=50, minimum=1=currentpage, 2 is the recommended minimum as some pages
- * use it as a means of referral (e.g. hotlinking), 4 or 6 or 10 may be more practical ***/
-pref("browser.sessionhistory.max_entries", 10);
 /* 0805: disable coloring of visited links - CSS history leak
  * [NOTE] This has NEVER been fully "resolved": in Mozilla/docs it is stated it's
  * only in 'certain circumstances', also see latest comments in [2]
@@ -992,7 +1010,7 @@ pref("dom.serviceWorkers.enabled", false);
    // pref("dom.webnotifications.serviceworker.enabled", false); // [FF44+]
 /* 2305: disable Push Notifications [FF44+]
  * Push is an API that allows websites to send you (subscribed) messages even when the site
- * isn’t loaded, by pushing messages to your userAgentID through Mozilla's Push Server.
+ * isn't loaded, by pushing messages to your userAgentID through Mozilla's Push Server.
  * [NOTE] Push requires service workers (2302) to subscribe to and display, and is behind
  * a prompt (2306). Disabling service workers alone doesn't stop Firefox polling the
  * Mozilla Push Server. To remove all subscriptions, reset your userAgentID (in about:config
@@ -1399,7 +1417,7 @@ pref("privacy.firstparty.isolate.restrict_opener_access", true); // [DEFAULT: tr
  ** 1337161 - hide gamepads from content (see 4606) (FF56+)
  ** 1372072 - spoof network information API as "unknown" when dom.netinfo.enabled = true (see 4607) (FF56+)
  ** 1333641 - reduce fingerprinting in WebSpeech API (see 4608) (FF56+)
- ** 1372069 & 1403813 & 1441295 - block geolocation requests (same as denying a site permission) (see 0201, 0201b) (FF56-62)
+ ** 1372069 & 1403813 & 1441295 - block geolocation requests (same as denying a site permission) (see 0201, 0202) (FF56-62)
  ** 1369309 - spoof media statistics (see 4610) (FF57+)
  ** 1382499 - reduce screen co-ordinate fingerprinting in Touch API (see 4611) (FF57+)
  ** 1217290 & 1409677 - enable fingerprinting resistance for WebGL (see 2010-12) (FF57+)
@@ -1413,7 +1431,7 @@ pref("privacy.firstparty.isolate.restrict_opener_access", true); // [DEFAULT: tr
       Spoof: enumerate devices reports one "Internal Camera" and one "Internal Microphone" if
              media.navigator.enabled is true (see 2505 which we chose to keep disabled)
       Block: suppresses the ondevicechange event (see 4612)
- ** 1039069 - warn when language prefs are set to non en-US (see 0207, 0208) (FF59+)
+ ** 1039069 - warn when language prefs are set to non en-US (see 0210, 0211) (FF59+)
  ** 1222285 & 1433592 - spoof keyboard events and suppress keyboard modifier events (FF59+)
       Spoofing mimics the content language of the document. Currently it only supports en-US.
       Modifier events suppressed are SHIFT and both ALT keys. Chrome is not affected.
@@ -1659,7 +1677,7 @@ pref("network.jar.open-unsafe-types", false);
 pref("plugin.state.java", 0);
 // * * * /
 // FF63
-// 0202: disable GeoIP-based search results
+// 0205: disable GeoIP-based search results
    // [NOTE] May not be hidden if Firefox has changed your settings due to your locale
    // [-] https://bugzilla.mozilla.org/1462015
 pref("browser.search.countryCode", "US"); // [HIDDEN PREF]
@@ -1765,7 +1783,7 @@ pref("security.csp.experimentalEnabled", true);
 // 1802: enforce click-to-play for plugins
    // [-] https://bugzilla.mozilla.org/1519434
 pref("plugins.click_to_play", true); // [DEFAULT: true in FF25+]
-// 2033: disable autoplay for muted videos [FF63+] - replaced by `media.autoplay.default` options (2030)
+// 2033: disable autoplay for muted videos [FF63+] - replaced by 'media.autoplay.default' options (2030)
    // [-] https://bugzilla.mozilla.org/1562331
    // pref("media.autoplay.allow-muted", false);
 // * * * /
