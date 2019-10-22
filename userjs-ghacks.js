@@ -1,8 +1,8 @@
 /******
 * name: ghacks user.js
-* date: 4 September 2019
-* version 69-beta: Pants One More Time
-*   "When I'm not with pants I lose my mind. Give me a sign. Hit me, pants, one more time."
+* date: 20 October 2019
+* version 70-alpha: Pinpants Wizard
+*   "Ever since I was a young pants, I've played the silver ball"
 * authors: v52+ github | v51- www.ghacks.net
 * url: https://github.com/ghacksuserjs/ghacks-user.js
 * license: MIT: https://github.com/ghacksuserjs/ghacks-user.js/blob/master/LICENSE.txt
@@ -596,7 +596,7 @@ pref("_user.js.parrot", "1000 syntax error: the parrot's gone to meet 'is maker!
 /* 1003: disable memory cache
 /* capacity: -1=determine dynamically (default), 0=none, n=memory capacity in kilobytes ***/
    // pref("browser.cache.memory.enable", false);
-   // pref("browser.cache.memory.capacity", 0); // [HIDDEN PREF]
+   // pref("browser.cache.memory.capacity", 0);
 /* 1006: disable permissions manager from writing to disk [RESTART]
  * [NOTE] This means any permission changes are session only
  * [1] https://bugzilla.mozilla.org/967812 ***/
@@ -916,7 +916,6 @@ pref("media.peerconnection.ice.no_host", true); // [FF51+]
  * [1] https://www.contextis.com/resources/blog/webgl-new-dimension-browser-exploitation/
  * [2] https://security.stackexchange.com/questions/13799/is-webgl-a-security-concern ***/
 pref("webgl.disabled", true);
-pref("webgl.dxgl.enabled", false); // [WINDOWS]
 pref("webgl.enable-webgl2", false);
 /* 2012: limit WebGL ***/
 pref("webgl.min_capability_mode", true);
@@ -1647,7 +1646,7 @@ pref("network.manage-offline-status", false); // see bugzilla 620472 //BRACE-UNC
    // pref("xpinstall.signatures.required", false); // enforced extension signing (Nightly/ESR)
 
 /*** [SECTION 9999]: DEPRECATED / REMOVED / LEGACY / RENAMED
-     Documentation denoted as [-]. Items deprecated prior to FF61 have been archived at [1], which
+     Documentation denoted as [-]. Items deprecated prior to FF69 have been archived at [1], which
      also provides a link-clickable, viewer-friendly version of the deprecated bugzilla tickets
      [1] https://github.com/ghacksuserjs/ghacks-user.js/issues/123
 ***/

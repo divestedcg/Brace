@@ -1,6 +1,6 @@
 Name: brace
-Version: 20191014
-Release: 2
+Version: 20191022
+Release: 1
 Summary: Increases privacy/security through various configs.
 License: GPLv3+
 BuildArch: noarch
@@ -29,6 +29,7 @@ echo "Stealth IPv6 Fix: firewall-cmd --permanent --direct --add-rule ipv6 filter
 echo "Stricter Ciphers: update-crypto-policies --set NEXT";
 echo "Stricter Kernel: grubby --update-kernel=ALL --args=\"lockdown=1 pti=on vsyscall=none page_poison=1 slab_nomerge slub_debug=FZP page_alloc.shuffle=1\"";
 echo "Strict IOMMU: grubby --update-kernel=ALL --args=\"iommu=force intel_iommu=on amd_iommu=on\"";
+echo "Strict CPU Mitigations: grubby --update-kernel=ALL --args=\"mce=0 mds=full,nosmt l1tf=full,force nosmt=force\"";
 
 %postun
 if [ -f /usr/bin/dconf ]; then dconf update; fi;
