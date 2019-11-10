@@ -246,8 +246,7 @@ pref("datareporting.healthreport.uploadEnabled", false);
  * [1] https://bugzilla.mozilla.org/1195552 ***/
 pref("datareporting.policy.dataSubmissionEnabled", false);
 /* 0342: disable Studies (see 0503)
- * [NOTE] This pref has no effect when Health Reports (0340) are disabled
- * [SETTING] Privacy & Security>Firefox Data Collection & Use>...>Allow Firefox to install and run studies ***/
+ * [SETTING] Privacy & Security>Firefox Data Collection & Use>Allow Firefox to install and run studies ***/
 pref("app.shield.optoutstudies.enabled", false);
 /* 0343: disable personalized Extension Recommendations in about:addons and AMO [FF65+]
  * [NOTE] This pref has no effect when Health Reports (0340) are disabled
@@ -375,7 +374,7 @@ pref("network.prefetch-next", false);
  * [1] https://www.ghacks.net/2013/04/27/firefox-prefetching-what-you-need-to-know/
  * [2] https://developer.mozilla.org/docs/Web/HTTP/Headers/X-DNS-Prefetch-Control ***/
 pref("network.dns.disablePrefetch", true);
-pref("network.dns.disablePrefetchFromHTTPS", true); // [HIDDEN PREF]
+pref("network.dns.disablePrefetchFromHTTPS", true); // [HIDDEN PREF ESR] [DEFAULT: true FF70+]
 /* 0603: disable predictor / prefetching ***/
 pref("network.predictor.enabled", false);
 pref("network.predictor.enable-prefetch", false); // [FF48+]
@@ -428,16 +427,6 @@ pref("network.http.altsvc.oe", false);
  * as a remote Tor node will handle the DNS request
  * [1] https://trac.torproject.org/projects/tor/wiki/doc/TorifyHOWTO/WebBrowsers ***/
 pref("network.proxy.socks_remote_dns", true);
-/* 0707: disable (or setup) DNS-over-HTTPS (DoH) [FF60+]
- * TRR = Trusted Recursive Resolver
- * 0=off by default, 1=race (removed in FF69), 2=TRR first, 3=TRR only,
- * 4=race for stats but always use native result (removed in FF69), 5=explicitly off
- * [WARNING] DoH bypasses hosts and gives info to yet another party (e.g. Cloudflare)
- * [1] https://www.ghacks.net/2018/04/02/configure-dns-over-https-in-firefox/
- * [2] https://hacks.mozilla.org/2018/05/a-cartoon-intro-to-dns-over-https/ ***/
-   // pref("network.trr.mode", 0);
-   // pref("network.trr.bootstrapAddress", "");
-   // pref("network.trr.uri", "");
 /* 0708: disable FTP [FF60+]
  * [1] https://www.ghacks.net/2018/02/20/firefox-60-with-new-preference-to-disable-ftp/ ***/
    // pref("network.ftp.enabled", false);
@@ -596,7 +585,7 @@ pref("_user.js.parrot", "1000 syntax error: the parrot's gone to meet 'is maker!
 /* 1003: disable memory cache
 /* capacity: -1=determine dynamically (default), 0=none, n=memory capacity in kilobytes ***/
    // pref("browser.cache.memory.enable", false);
-   // pref("browser.cache.memory.capacity", 0);
+   // pref("browser.cache.memory.capacity", 0); // [HIDDEN PREF ESR]
 /* 1006: disable permissions manager from writing to disk [RESTART]
  * [NOTE] This means any permission changes are session only
  * [1] https://bugzilla.mozilla.org/967812 ***/
@@ -650,15 +639,14 @@ pref("alerts.showFavicons", false); // [DEFAULT: false]
 ***/
 pref("_user.js.parrot", "1200 syntax error: the parrot's a stiff!");
 /** SSL (Secure Sockets Layer) / TLS (Transport Layer Security) ***/
-/* 1201: disable old SSL/TLS "insecure" renegotiation (vulnerable to a MiTM attack)
- * [SETUP-WEB] <2% of secure sites do NOT support the newer "secure" renegotiation, see [2]
- * [1] https://wiki.mozilla.org/Security:Renegotiation
- * [2] https://www.ssllabs.com/ssl-pulse/ ***/
+/* 1201: disable old SSL/TLS "insecure" negotiation (vulnerable to a MiTM attack)
+ * [1] https://wiki.mozilla.org/Security:Renegotiation ***/
 pref("security.ssl.require_safe_negotiation", true);
 /* 1202: control TLS versions with min and max
  * 1=TLS 1.0, 2=TLS 1.1, 3=TLS 1.2, 4=TLS 1.3
  * [WARNING] Leave these at default, otherwise you alter your TLS fingerprint.
- * Firefox telemetry (April 2019) shows only 0.5% of TLS web traffic uses 1.0 or 1.1 ***/
+ * Firefox telemetry (April 2019) shows only 0.5% of TLS web traffic uses 1.0 or 1.1
+ * [1] https://www.ssllabs.com/ssl-pulse/ ***/
    // pref("security.tls.version.min", 3);
    // pref("security.tls.version.max", 4);
 /* 1203: disable SSL session tracking [FF36+]
@@ -771,10 +759,8 @@ pref("browser.ssl_override_behavior", 1);
  * [TEST] https://expired.badssl.com/ ***/
 pref("browser.xul.error_pages.expert_bad_cert", true);
 /* 1273: display "insecure" icon and "Not Secure" text on HTTP sites ***/
-pref("security.insecure_connection_icon.enabled", true); // [FF59+]
+pref("security.insecure_connection_icon.enabled", true); // [FF59+] [DEFAULT: true FF70+]
 pref("security.insecure_connection_text.enabled", true); // [FF60+]
-   // pref("security.insecure_connection_icon.pbmode.enabled", true); // [FF59+] private windows only
-   // pref("security.insecure_connection_text.pbmode.enabled", true); // [FF60+] private windows only
 
 /*** [SECTION 1400]: FONTS ***/
 pref("_user.js.parrot", "1400 syntax error: the parrot's bereft of life!");
@@ -869,8 +855,6 @@ pref("privacy.userContext.ui.enabled", true);
 /* 1702: enable Container Tabs [FF50+]
  * [SETTING] General>Tabs>Enable Container Tabs ***/
 pref("privacy.userContext.enabled", true);
-/* 1703: enable a private container for thumbnail loads [FF51+] ***/
-pref("privacy.usercontext.about_newtab_segregation.enabled", true); // [DEFAULT: true in FF61+]
 /* 1704: set behaviour on "+ Tab" button to display container menu [FF53+] [SETUP-CHROME]
  * 0=no menu (default), 1=show when clicked, 2=show on long press
  * [1] https://bugzilla.mozilla.org/1328756 ***/
@@ -1139,7 +1123,7 @@ pref("devtools.chrome.enabled", false);
 /* 2608: disable WebIDE to prevent remote debugging and ADB extension download
  * [1] https://trac.torproject.org/projects/tor/ticket/16222 ***/
 pref("devtools.debugger.remote-enabled", false);
-pref("devtools.webide.enabled", false);
+pref("devtools.webide.enabled", false); // [DEFAULT: false FF70+]
 pref("devtools.webide.autoinstallADBExtension", false); // [FF64+]
 /* 2609: disable MathML (Mathematical Markup Language) [FF51+] [SETUP-HARDEN]
  * [TEST] https://ghacksuserjs.github.io/TorZillaPrint/TorZillaPrint.html#misc
@@ -1246,7 +1230,7 @@ pref("security.dialog_enable_delay", 700);
 pref("_user.js.parrot", "2700 syntax error: the parrot's joined the bleedin' choir invisible!");
 /* 2701: disable 3rd-party cookies and site-data [SETUP-WEB]
  * 0=Accept cookies and site data, 1=(Block) All third-party cookies, 2=(Block) All cookies,
- * 3=(Block) Cookies from unvisited sites, 4=(Block) Third-party trackers (FF63+) (default FF69+)
+ * 3=(Block) Cookies from unvisited websites, 4=(Block) Cross-site and social media trackers (FF63+) (default FF69+)
  * [NOTE] You can set exceptions under site permissions or use an extension
  * [SETTING] Privacy & Security>Content Blocking>Custom>Choose what to block>Cookies ***/
 pref("network.cookie.cookieBehavior", 1);
@@ -1366,6 +1350,7 @@ pref("privacy.sanitize.timeSpan", 0);
  ** 1542309 - isolate top-level domain URLs when host is in the public suffix list (FF68+)
  ** 1506693 - isolate pdfjs range-based requests (FF68+)
  ** 1330467 - isolate site permissions (FF69+)
+ ** 1534339 - isolate IPv6 (FF72+)
 ***/
 pref("_user.js.parrot", "4000 syntax error: the parrot's pegged out");
 /* 4001: enable First Party Isolation [FF51+]
@@ -1381,7 +1366,7 @@ pref("privacy.firstparty.isolate", true);
  * [2] https://bugzilla.mozilla.org/1492607
  * [3] https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage ***/
 pref("privacy.firstparty.isolate.restrict_opener_access", true); // [DEFAULT: true]
-   // pref("privacy.firstparty.isolate.block_post_message", true); // [HIDDEN PREF]
+   // pref("privacy.firstparty.isolate.block_post_message", true); // [HIDDEN PREF ESR]
 
 /*** [SECTION 4500]: RFP (RESIST FINGERPRINTING)
    This master switch will be used for a wide range of items, many of which will
@@ -1633,20 +1618,22 @@ pref("clipboard.autocopy", false); // disable autocopy default [LINUX] //BRACE-U
    // pref("general.autoScroll", false); // middle-click enabling auto-scrolling [WINDOWS] [MAC]
    // pref("ui.key.menuAccessKey", 0); // disable alt key toggling the menu bar [RESTART]
    // pref("view_source.tab", false); // view "page/selection source" in a new window [FF68+, FF59 and under]
+/* UX: FEATURES: disable and hide the icons and menus ***/
+   // pref("browser.messaging-system.whatsNewPanel.enabled", false); // What's New [FF70+]
+pref("extensions.pocket.enabled", false); // Pocket Account [FF46+] //BRACE-UNCOMMENTED
+pref("identity.fxaccounts.enabled", false); // Firefox Accounts & Sync [FF60+] [RESTART] //BRACE-UNCOMMENTED
+   // pref("reader.parse-on-load.enabled", false); // Reader View
 /* OTHER ***/
 pref("browser.bookmarks.max_backups", 2); //BRACE-UNCOMMENTED
 pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons", false); // disable CFR [FF64+] //BRACE-UNCOMMENTED
       // [SETTING] General>Browsing>Recommend extensions as you browse
 pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features", false); // disable CFR [FF67+] //BRACE-UNCOMMENTED
       // [SETTING] General>Browsing>Recommend features as you browse
-pref("extensions.pocket.enabled", false); // disable and hide Pocket [FF46+] //BRACE-UNCOMMENTED
-pref("identity.fxaccounts.enabled", false); // disable and hide Firefox Accounts and Sync [FF60+] [RESTART] //BRACE-UNCOMMENTED
 pref("network.manage-offline-status", false); // see bugzilla 620472 //BRACE-UNCOMMENTED
-   // pref("reader.parse-on-load.enabled", false); // "Reader View"
    // pref("xpinstall.signatures.required", false); // enforced extension signing (Nightly/ESR)
 
 /*** [SECTION 9999]: DEPRECATED / REMOVED / LEGACY / RENAMED
-     Documentation denoted as [-]. Items deprecated prior to FF69 have been archived at [1], which
+     Documentation denoted as [-]. Items deprecated prior to FF61 have been archived at [1], which
      also provides a link-clickable, viewer-friendly version of the deprecated bugzilla tickets
      [1] https://github.com/ghacksuserjs/ghacks-user.js/issues/123
 ***/
@@ -1781,7 +1768,7 @@ pref("security.csp.experimentalEnabled", true);
    // pref("gfx.downloadable_fonts.woff2.enabled", false);
 // 1802: enforce click-to-play for plugins
    // [-] https://bugzilla.mozilla.org/1519434
-pref("plugins.click_to_play", true); // [DEFAULT: true in FF25+]
+pref("plugins.click_to_play", true); // [DEFAULT: true FF25+]
 // 2033: disable autoplay for muted videos [FF63+] - replaced by 'media.autoplay.default' options (2030)
    // [-] https://bugzilla.mozilla.org/1562331
    // pref("media.autoplay.allow-muted", false);
