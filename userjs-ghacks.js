@@ -1,7 +1,7 @@
 /******
 * name: ghacks user.js
-* date: 20 October 2019
-* version 70-alpha: Pinpants Wizard
+* date: 24 November 2019
+* version 70-beta: Pinpants Wizard
 *   "Ever since I was a young pants, I've played the silver ball"
 * authors: v52+ github | v51- www.ghacks.net
 * url: https://github.com/ghacksuserjs/ghacks-user.js
@@ -626,15 +626,8 @@ pref("browser.shell.shortcutFavicons", false);
 pref("alerts.showFavicons", false); // [DEFAULT: false]
 
 /*** [SECTION 1200]: HTTPS (SSL/TLS / OCSP / CERTS / HPKP / CIPHERS)
-   Note that your cipher and other settings can be used server side as a fingerprint attack
-   vector, see [1] (It's quite technical but the first part is easy to understand
-   and you can stop reading when you reach the second section titled "Enter Bro")
-
-   Option 1: Use defaults for ciphers (1260's). There is nothing *weak* about these, but
-             due to breakage, browsers can't deprecate them until the web stops using them
-   Option 2: Disable the ciphers in 1261, 1262 and 1263. These shouldn't break anything.
-             Optionally, disable the ciphers in 1264.
-
+   Your cipher and other settings can be used in server side fingerprinting
+   [TEST] https://www.ssllabs.com/ssltest/viewMyClient.html
    [1] https://www.securityartwork.es/2017/02/02/tls-client-fingerprinting-with-bro/
 ***/
 pref("_user.js.parrot", "1200 syntax error: the parrot's a stiff!");
@@ -728,7 +721,7 @@ pref("security.mixed_content.block_display_content", true);
  * [1] https://bugzilla.mozilla.org/1190623 ***/
 pref("security.mixed_content.block_object_subrequest", true);
 
-/** CIPHERS [see the section 1200 intro] ***/
+/** CIPHERS [WARNING: do not meddle with your cipher suite: see the section 1200 intro] ***/
 /* 1261: disable 3DES (effective key size < 128)
  * [1] https://en.wikipedia.org/wiki/3des#Security
  * [2] https://en.wikipedia.org/wiki/Meet-in-the-middle_attack
@@ -813,7 +806,7 @@ pref("_user.js.parrot", "1600 syntax error: the parrot rests in peace!");
    // pref("network.http.referer.trimmingPolicy", 0); // [DEFAULT: 0]
 /* 1603: CROSS ORIGIN: control when to send a referer
  * 0=always (default), 1=only if base domains match, 2=only if hosts match
- * [SETUP-WEB] Known to cause issues with older modems/routers and some sites e.g vimeo ***/
+ * [SETUP-WEB] Known to cause issues with older modems/routers and some sites e.g vimeo, icloud ***/
 pref("network.http.referer.XOriginPolicy", 1);
 /* 1604: CROSS ORIGIN: control the amount of information to send [FF52+]
  * 0=send full URI (default), 1=scheme+host+port+path, 2=scheme+host+port ***/
@@ -889,11 +882,14 @@ pref("_user.js.parrot", "2000 syntax error: the parrot's snuffed it!");
  * [1] https://www.privacytools.io/#webrtc ***/
 pref("media.peerconnection.enabled", false);
 /* 2002: limit WebRTC IP leaks if using WebRTC
+ * In FF70+ these settings match Mode 4 (Mode 3 in older versions) (see [3])
  * [TEST] https://browserleaks.com/webrtc
- * [1] https://bugzilla.mozilla.org/buglist.cgi?bug_id=1189041,1297416
- * [2] https://wiki.mozilla.org/Media/WebRTC/Privacy ***/
+ * [1] https://bugzilla.mozilla.org/buglist.cgi?bug_id=1189041,1297416,1452713
+ * [2] https://wiki.mozilla.org/Media/WebRTC/Privacy
+ * [3] https://tools.ietf.org/html/draft-ietf-rtcweb-ip-handling-12#section-5.2 ***/
 pref("media.peerconnection.ice.default_address_only", true);
 pref("media.peerconnection.ice.no_host", true); // [FF51+]
+pref("media.peerconnection.ice.proxy_only_if_behind_proxy", true); // [FF70+]
 /* 2010: disable WebGL (Web Graphics Library)
  * [SETUP-WEB] When disabled, may break some websites. When enabled, provides high entropy,
  * especially with readPixels(). Some of the other entropy is lessened with RFP (see 4501)
@@ -1049,6 +1045,7 @@ pref("javascript.options.asmjs", false);
    // pref("javascript.options.ion", false);
    // pref("javascript.options.baselinejit", false);
 /* 2422: disable WebAssembly [FF52+] [SETUP-PERF]
+ * [NOTE] In FF71+ this no longer affects extensions (1576254)
  * [1] https://developer.mozilla.org/docs/WebAssembly ***/
 pref("javascript.options.wasm", false);
 /* 2426: disable Intersection Observer API [FF55+]
@@ -1130,6 +1127,7 @@ pref("devtools.webide.autoinstallADBExtension", false); // [FF64+]
  * [1] https://bugzilla.mozilla.org/1173199 ***/
 pref("mathml.disabled", true); //BRACE-UNCOMMENTED
 /* 2610: disable in-content SVG (Scalable Vector Graphics) [FF53+]
+ * [NOTE] In FF70+ and ESR68.1.0+ this no longer affects extensions (1564208)
  * [WARNING] Expect breakage incl. youtube player controls. Best left for a "hardened" profile.
  * [1] https://bugzilla.mozilla.org/1216893 ***/
    // pref("svg.disabled", true);
@@ -1158,7 +1156,7 @@ pref("webchannel.allowObject.urlWhitelist", "");
  * [3] CVE-2017-5383: https://www.mozilla.org/security/advisories/mfsa2017-02/
  * [4] https://www.xudongz.com/blog/2017/idn-phishing/ ***/
 pref("network.IDN_show_punycode", true);
-/* 2620: enable Firefox's built-in PDF reader [SETUP-CHROME]
+/* 2620: enforce Firefox's built-in PDF reader [SETUP-CHROME]
  * This setting controls if the option "Display in Firefox" is available in the setting below
  *   and by effect controls whether PDFs are handled in-browser or externally ("Ask" or "Open With")
  * PROS: pdfjs is lightweight, open source, and as secure/vetted as any pdf reader out there (more than most)
@@ -1206,7 +1204,8 @@ pref("browser.download.forbid_open_with", true); //BRACE-UNCOMMENTED
    // pref("extensions.webextensions.restrictedDomains", "");
 
 /** SECURITY ***/
-/* 2680: enable CSP (Content Security Policy)
+/* 2680: enforce CSP (Content Security Policy)
+ * [WARNING] CSP is a very important and widespread security feature. Don't disable it!
  * [1] https://developer.mozilla.org/docs/Web/HTTP/CSP ***/
 pref("security.csp.enable", true); // [DEFAULT: true]
 /* 2684: enforce a security delay on some confirmation dialogs such as install, open/save
@@ -1321,6 +1320,7 @@ pref("privacy.cpd.sessions", true); // Active Logins
 pref("privacy.cpd.siteSettings", false); // Site Preferences
 /* 2805: clear Session Restore data when sanitizing on shutdown or manually [FF34+]
  * [NOTE] Not needed if Session Restore is not used (see 0102) or is already cleared with history (see 2803)
+ * [NOTE] privacy.clearOnShutdown.openWindows prevents resuming from crashes (see 1022)
  * [NOTE] privacy.cpd.openWindows has a bug that causes an additional window to open ***/
    // pref("privacy.clearOnShutdown.openWindows", true);
    // pref("privacy.cpd.openWindows", true);
@@ -1350,7 +1350,7 @@ pref("privacy.sanitize.timeSpan", 0);
  ** 1542309 - isolate top-level domain URLs when host is in the public suffix list (FF68+)
  ** 1506693 - isolate pdfjs range-based requests (FF68+)
  ** 1330467 - isolate site permissions (FF69+)
- ** 1534339 - isolate IPv6 (FF72+)
+ ** 1534339 - isolate IPv6 (coming soon)
 ***/
 pref("_user.js.parrot", "4000 syntax error: the parrot's pegged out");
 /* 4001: enable First Party Isolation [FF51+]
@@ -1430,6 +1430,7 @@ pref("privacy.firstparty.isolate.restrict_opener_access", true); // [DEFAULT: tr
  ** 1540726 - return "light" with prefers-color-scheme (FF67+)
       [1] https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme
  ** 1564422 - spoof audioContext outputLatency (FF70+)
+ ** 1595823 - spoof audioContext sampleRate (FF72+)
 ***/
 pref("_user.js.parrot", "4500 syntax error: the parrot's popped 'is clogs");
 /* 4501: enable privacy.resistFingerprinting [FF41+]
@@ -1619,7 +1620,7 @@ pref("clipboard.autocopy", false); // disable autocopy default [LINUX] //BRACE-U
    // pref("ui.key.menuAccessKey", 0); // disable alt key toggling the menu bar [RESTART]
    // pref("view_source.tab", false); // view "page/selection source" in a new window [FF68+, FF59 and under]
 /* UX: FEATURES: disable and hide the icons and menus ***/
-   // pref("browser.messaging-system.whatsNewPanel.enabled", false); // What's New [FF70+]
+   // pref("browser.messaging-system.whatsNewPanel.enabled", false); // What's New [FF69+]
 pref("extensions.pocket.enabled", false); // Pocket Account [FF46+] //BRACE-UNCOMMENTED
 pref("identity.fxaccounts.enabled", false); // Firefox Accounts & Sync [FF60+] [RESTART] //BRACE-UNCOMMENTED
    // pref("reader.parse-on-load.enabled", false); // Reader View
