@@ -1,8 +1,8 @@
 /******
 * name: ghacks user.js
-* date: 24 November 2019
-* version 70-beta: Pinpants Wizard
-*   "Ever since I was a young pants, I've played the silver ball"
+* date: 03 December 2019
+* version 71-alpha: Dancing Pants
+*   "Ooh-ooh, see that girl, watch that scene, dig in the dancing pants"
 * authors: v52+ github | v51- www.ghacks.net
 * url: https://github.com/ghacksuserjs/ghacks-user.js
 * license: MIT: https://github.com/ghacksuserjs/ghacks-user.js/blob/master/LICENSE.txt
@@ -82,6 +82,11 @@
  * after startup for any warnings/error messages related to non-applied prefs
  * [1] https://blog.mozilla.org/nnethercote/2018/03/09/a-new-preferences-parser-for-firefox/ ***/
 pref("_user.js.parrot", "START: Oh yes, the Norwegian Blue... what's wrong with it?");
+
+/* 0000: disable about:config warning
+ * The XUL version can still be accessed in FF71+ @ chrome://global/content/config.xul ***/
+pref("general.warnOnAboutConfig", false); // for the XUL version
+pref("browser.aboutConfig.showWarning", false); // for the new HTML version [FF71+]
 
 /*** [SECTION 0100]: STARTUP ***/
 pref("_user.js.parrot", "0100 syntax error: the parrot's dead!");
@@ -619,11 +624,14 @@ pref("toolkit.winRegisterApplicationRestart", false);
  * profile/shortcutCache directory. The .ico remains after the shortcut is deleted.
  * If set to false then the shortcuts use a generic Firefox icon ***/
 pref("browser.shell.shortcutFavicons", false);
-/* 1031: disable favicons in tabs and new bookmarks
- * bookmark favicons are stored as data blobs in favicons.sqlite ***/
+/* 1031: disable favicons in history and bookmarks
+ * Stored as data blobs in favicons.sqlite, these don't reveal anything that your
+ * actual history (and bookmarks) already do. Your history is more detailed, so
+ * control that instead; e.g. disable history, clear history on close, use PB mode
+ * [NOTE] favicons.sqlite is sanitized on Firefox close, not in-session ***/
    // pref("browser.chrome.site_icons", false);
 /* 1032: disable favicons in web notifications ***/
-pref("alerts.showFavicons", false); // [DEFAULT: false]
+   // pref("alerts.showFavicons", false); // [DEFAULT: false]
 
 /*** [SECTION 1200]: HTTPS (SSL/TLS / OCSP / CERTS / HPKP / CIPHERS)
    Your cipher and other settings can be used in server side fingerprinting
@@ -1117,11 +1125,9 @@ pref("browser.uitour.url", "");
  * [SETTING] Devtools>Advanced Settings>Enable browser chrome and add-on debugging toolboxes
  * [1] https://github.com/pyllyukko/user.js/issues/179#issuecomment-246468676 ***/
 pref("devtools.chrome.enabled", false);
-/* 2608: disable WebIDE to prevent remote debugging and ADB extension download
+/* 2608: disable remote debugging
  * [1] https://trac.torproject.org/projects/tor/ticket/16222 ***/
 pref("devtools.debugger.remote-enabled", false);
-pref("devtools.webide.enabled", false); // [DEFAULT: false FF70+]
-pref("devtools.webide.autoinstallADBExtension", false); // [FF64+]
 /* 2609: disable MathML (Mathematical Markup Language) [FF51+] [SETUP-HARDEN]
  * [TEST] https://ghacksuserjs.github.io/TorZillaPrint/TorZillaPrint.html#misc
  * [1] https://bugzilla.mozilla.org/1173199 ***/
@@ -1259,10 +1265,6 @@ pref("network.cookie.thirdparty.nonsecureSessionOnly", true); // [FF58+]
 pref("dom.indexedDB.enabled", true); // [DEFAULT: true]
 /* 2730: disable offline cache ***/
    // pref("browser.cache.offline.enable", false); //BRACE-COMMENTED
-/* 2731: enforce websites to ask to store data for offline use
- * [1] https://support.mozilla.org/questions/1098540
- * [2] https://bugzilla.mozilla.org/959985 ***/
-pref("offline-apps.allow_by_default", false);
 /* 2740: disable service worker cache and cache storage
  * [NOTE] We clear service worker cache on exiting Firefox (see 2803)
  * [1] https://w3c.github.io/ServiceWorker/#privacy ***/
@@ -1601,8 +1603,6 @@ pref("_user.js.parrot", "5000 syntax error: this is an ex-parrot!");
    // pref("browser.tabs.warnOnOpen", false);
    // pref("full-screen-api.warning.delay", 0);
    // pref("full-screen-api.warning.timeout", 0);
-   // pref("general.warnOnAboutConfig", false);
-   // pref("browser.aboutConfig.showWarning", false); // [FF67+]
 /* APPEARANCE ***/
    // pref("browser.download.autohideButton", false); // [FF57+]
    // pref("toolkit.cosmeticAnimations.enabled", false); // [FF55+]
@@ -1619,7 +1619,7 @@ pref("clipboard.autocopy", false); // disable autocopy default [LINUX] //BRACE-U
    // pref("general.autoScroll", false); // middle-click enabling auto-scrolling [WINDOWS] [MAC]
    // pref("ui.key.menuAccessKey", 0); // disable alt key toggling the menu bar [RESTART]
    // pref("view_source.tab", false); // view "page/selection source" in a new window [FF68+, FF59 and under]
-/* UX: FEATURES: disable and hide the icons and menus ***/
+/* UX FEATURES: disable and hide the icons and menus ***/
    // pref("browser.messaging-system.whatsNewPanel.enabled", false); // What's New [FF69+]
 pref("extensions.pocket.enabled", false); // Pocket Account [FF46+] //BRACE-UNCOMMENTED
 pref("identity.fxaccounts.enabled", false); // Firefox Accounts & Sync [FF60+] [RESTART] //BRACE-UNCOMMENTED
@@ -1773,6 +1773,18 @@ pref("plugins.click_to_play", true); // [DEFAULT: true FF25+]
 // 2033: disable autoplay for muted videos [FF63+] - replaced by 'media.autoplay.default' options (2030)
    // [-] https://bugzilla.mozilla.org/1562331
    // pref("media.autoplay.allow-muted", false);
+// * * * /
+// FF71
+// 2608: disable WebIDE and ADB extension download
+   // [1] https://trac.torproject.org/projects/tor/ticket/16222
+   // [-] https://bugzilla.mozilla.org/1539462
+pref("devtools.webide.enabled", false); // [DEFAULT: false FF70+]
+pref("devtools.webide.autoinstallADBExtension", false); // [FF64+]
+// 2731: enforce websites to ask to store data for offline use
+   // [1] https://support.mozilla.org/questions/1098540
+   // [2] https://bugzilla.mozilla.org/959985
+   // [-] https://bugzilla.mozilla.org/1574480
+pref("offline-apps.allow_by_default", false);
 // * * * /
 // ***/
 
