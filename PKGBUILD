@@ -1,6 +1,6 @@
 # Maintainer: Tad <tad@spotco.us>
 pkgname=brace
-pkgver=20191204
+pkgver=20191206
 pkgrel=1
 pkgdesc="Increases privacy/security through various configs."
 arch=('any')
@@ -31,7 +31,7 @@ source=('00-brace-gnome'
 	'userjs-brace-perf.js'
 	'userjs-ghacks.js'
 	'userjs-pyllyukko.js')
-sha512sums=('26df32a0d80df8117c67a518177679ad0484652871a10bbb0c1a2bff2ebaf15da8f34dad39c1e236ba7141d0dcba5d97617a8107ba36c5a8825e5bd950bf10ef'
+sha512sums=('a37b39f61660a8f64c0ea7dd9fa5ba231353f3e00924a44938f7ae2dbec56f8b835e18d903c42ab0711ed763617859587c56f06e002e2641bdb3101d770a62a9'
             'e84bb6b553fee8a48e11768f7ff9db5d4dcf8485d40ce9da206c4154bf8daafe035ffae5438591da206a1e483f8030671d91d65c6fbb471f8de005d1b817301e'
             '7704320c2887b33e7ca02832c6d137aa610921281ed915c23c3ef4999ef35b96840733290b393a017066c3e610e6439bc88da8b1d2d82a945dbe0da3f1b06f31'
             'ecf9a3951359519f157e1bf2a433b4753e2cbb8b2dc921bd0349903ba09360b5938a017cc4dbd859040ae851c6be6ed12903eca2aaee3c7367e47dac6da30e2d'
