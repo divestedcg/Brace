@@ -1,10 +1,11 @@
 Name: brace
-Version: 20191206
+Version: 20191230
 Release: 1
 Summary: Increases privacy/security through various configs.
 License: GPLv3+
 BuildArch: noarch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
+%define _binary_payload w3T.xzdio
 
 %description
 - Adds many helper scripts: brace-installer, brace-remover, brace-supplemental-changes

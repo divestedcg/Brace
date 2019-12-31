@@ -21,7 +21,6 @@ pref("extensions.enigmail.autoWkdLookup", 0);
 
 //Tracking Protection
 pref("browser.contentblocking.ui.enabled", true);
-pref("browser.contentblocking.category", "strict");
 pref("privacy.trackingprotection.enabled", true);
 pref("privacy.trackingprotection.fingerprinting.enabled", true);
 pref("privacy.trackingprotection.cryptomining.enabled", true);
