@@ -1,5 +1,5 @@
 Name: brace
-Version: 20191230
+Version: 20200120
 Release: 1
 Summary: Increases privacy/security through various configs.
 License: GPLv3+
@@ -28,9 +28,10 @@ echo "Pepper your /etc/fstab with nodev,nosuid,noexec";
 echo "Stealth Mode: firewall-cmd --set-default-zone=drop";
 echo "Stealth IPv6 Fix: firewall-cmd --permanent --direct --add-rule ipv6 filter INPUT 0 -p icmpv6 -j ACCEPT";
 echo "Stricter Ciphers: update-crypto-policies --set NEXT";
-echo "Stricter Kernel: grubby --update-kernel=ALL --args=\"lockdown=confidentiality pti=on vsyscall=none page_poison=1 slab_nomerge slub_debug=FZP page_alloc.shuffle=1 init_on_alloc=1 init_on_free=1\"";
-echo "Strict IOMMU: grubby --update-kernel=ALL --args=\"iommu=force intel_iommu=on amd_iommu=on\"";
-echo "Strict CPU Mitigations: grubby --update-kernel=ALL --args=\"mce=0 mds=full,nosmt l1tf=full,force nosmt=force\"";
+echo "Stricter Kernel: grubby --update-kernel=ALL --args=\"lockdown=confidentiality pti=on vsyscall=none page_poison=1 slab_nomerge slub_debug=FZP page_alloc.shuffle=1 init_on_alloc=1 init_on_free=1 mce=0\"";
+echo "Strict IOMMU: grubby --update-kernel=ALL --args=\"iommu=force intel_iommu=on,strict amd_iommu=fullflush\"";
+echo "Strict CPU Mitigations: grubby --update-kernel=ALL --args=\"mds=full,nosmt l1tf=full,force nosmt=force spectre_v2=on\"";
+echo "Always fsck: grubby --update-kernel=ALL --args=\"fsck.mode=force\"";
 
 %postun
 if [ -f /usr/bin/dconf ]; then dconf update; fi;

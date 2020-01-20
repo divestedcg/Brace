@@ -1,7 +1,7 @@
 /******
 * name: ghacks user.js
-* date: 19 December 2019
-* version 72-alpha
+* date: 20 January 2020
+* version 72-beta
 * authors: v52+ github | v51- www.ghacks.net
 * url: https://github.com/ghacksuserjs/ghacks-user.js
 * license: MIT: https://github.com/ghacksuserjs/ghacks-user.js/blob/master/LICENSE.txt
@@ -113,7 +113,6 @@ pref("browser.newtab.preload", false);
 /* 0105a: disable Activity Stream telemetry ***/
 pref("browser.newtabpage.activity-stream.feeds.telemetry", false);
 pref("browser.newtabpage.activity-stream.telemetry", false);
-pref("browser.newtabpage.activity-stream.telemetry.ping.endpoint", "");
 /* 0105b: disable Activity Stream Snippets
  * Runs code received from a server (aka Remote Code Execution) and sends information back to a metrics server
  * [1] https://abouthome-snippets-service.readthedocs.io/ ***/
@@ -238,7 +237,6 @@ pref("toolkit.telemetry.shutdownPingSender.enabled", false); // [FF55+]
 pref("toolkit.telemetry.updatePing.enabled", false); // [FF56+]
 pref("toolkit.telemetry.bhrPing.enabled", false); // [FF57+] Background Hang Reporter
 pref("toolkit.telemetry.firstShutdownPing.enabled", false); // [FF57+]
-pref("toolkit.telemetry.hybridContent.enabled", false); // [FF59+]
 /* 0331: disable Telemetry Coverage
  * [1] https://blog.mozilla.org/data/2018/08/20/effectively-measuring-search-in-firefox/ ***/
 pref("toolkit.telemetry.coverage.opt-out", true); // [HIDDEN PREF]
@@ -1265,14 +1263,6 @@ pref("network.cookie.thirdparty.nonsecureSessionOnly", true); // [FF58+]
  * [WARNING] This will break a LOT of sites' functionality AND extensions!
  * You are better off using an extension for more granular control ***/
    // pref("dom.storage.enabled", false);
-/* 2720: enforce IndexedDB (IDB) as enabled
- * IDB is required for extensions and Firefox internals (even before FF63 in [1])
- * To control *website* IDB data, control allowing cookies and service workers, or use
- * Temporary Containers. To mitigate *website* IDB, FPI helps (4001), and/or sanitize
- * on close (Offline Website Data, see 2800) or on-demand (Ctrl-Shift-Del), or automatically
- * via an extension. Note that IDB currently cannot be sanitized by host.
- * [1] https://blog.mozilla.org/addons/2018/08/03/new-backend-for-storage-local-api/ ***/
-pref("dom.indexedDB.enabled", true); // [DEFAULT: true]
 /* 2730: disable offline cache ***/
    // pref("browser.cache.offline.enable", false); //BRACE-COMMENTED
 /* 2740: disable service worker cache and cache storage
@@ -1647,8 +1637,8 @@ pref("network.manage-offline-status", false); // see bugzilla 620472 //BRACE-UNC
    // pref("xpinstall.signatures.required", false); // enforced extension signing (Nightly/ESR)
 
 /*** [SECTION 9999]: DEPRECATED / REMOVED / LEGACY / RENAMED
-     Documentation denoted as [-]. Items deprecated prior to FF68 have been archived at [1], which
-     also provides a link-clickable, viewer-friendly version of the deprecated bugzilla tickets
+     Documentation denoted as [-]. Items deprecated in FF68 or earlier have been archived at [1],
+     which also provides a link-clickable, viewer-friendly version of the deprecated bugzilla tickets
      [1] https://github.com/ghacksuserjs/ghacks-user.js/issues/123
 ***/
 pref("_user.js.parrot", "9999 syntax error: the parrot's deprecated!");
@@ -1676,6 +1666,23 @@ pref("devtools.webide.autoinstallADBExtension", false); // [FF64+]
    // [2] https://bugzilla.mozilla.org/959985
    // [-] https://bugzilla.mozilla.org/1574480
 pref("offline-apps.allow_by_default", false);
+// * * * /
+// FF72
+// 0105a: disable Activity Stream telemetry
+   // [-] https://bugzilla.mozilla.org/1597697
+pref("browser.newtabpage.activity-stream.telemetry.ping.endpoint", "");
+// 0330: disable Hybdrid Content telemetry
+   // [-] https://bugzilla.mozilla.org/1520491
+pref("toolkit.telemetry.hybridContent.enabled", false); // [FF59+]
+// 2720: enforce IndexedDB (IDB) as enabled
+   // IDB is required for extensions and Firefox internals (even before FF63 in [1])
+   // To control *website* IDB data, control allowing cookies and service workers, or use
+   // Temporary Containers. To mitigate *website* IDB, FPI helps (4001), and/or sanitize
+   // on close (Offline Website Data, see 2800) or on-demand (Ctrl-Shift-Del), or automatically
+   // via an extension. Note that IDB currently cannot be sanitized by host.
+   // [1] https://blog.mozilla.org/addons/2018/08/03/new-backend-for-storage-local-api/
+   // [-] https://bugzilla.mozilla.org/1488583
+pref("dom.indexedDB.enabled", true); // [DEFAULT: true]
 // * * * /
 // ***/
 
