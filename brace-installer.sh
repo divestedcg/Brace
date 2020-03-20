@@ -207,9 +207,9 @@ category='OpenCL';
 	handleOperation;
 category='VA-API';
 	baseIncluded=true;
-	packagesArch='libva-mesa-driver libva-intel-driver intel-media-driver'; #gstreamer-vaapi
-	packagesDebian='mesa-va-drivers vainfo i965-va-driver intel-media-va-driver'; #gstreamer1-vaapi
-	packagesFedora='mesa-dri-drivers libva-utils libva-intel-driver libva-intel-hybrid-driver'; #gstreamer1-vaapi
+	packagesArch='libva-mesa-driver libva-intel-driver intel-media-driver gstreamer-vaapi';
+	packagesDebian='mesa-va-drivers vainfo i965-va-driver intel-media-va-driver gstreamer1-vaapi';
+	packagesFedora='mesa-dri-drivers libva-utils libva-intel-driver libva-intel-hybrid-driver gstreamer1-vaapi';
 	packagesSuse=''; #TODO
 	handleOperation;
 category='VDPAU';
@@ -305,17 +305,17 @@ category='Disks - Management';
 	handleOperation;
 category='Disks - File Systems';
 	baseIncluded=true;
-	packagesArch='btrfs-progs dosfstools exfat-utils f2fs-tools mtools ntfs-3g udftools xfsprogs';
-	packagesDebian='btrfs-progs dosfstools exfat-utils f2fs-tools mtools ntfs-3g udftools xfsprogs';
-	packagesFedora='btrfs-progs dosfstools exfat-utils f2fs-tools mtools ntfs-3g ntfsprogs udftools xfsprogs';
-	packagesSuse='btrfsprogs dosfstools exfat-utils f2fs-tools mtools ntfs-3g ntfsprogs udftools xfsprogs';
+	packagesArch='btrfs-progs compsize dosfstools exfat-utils f2fs-tools mtools ntfs-3g udftools xfsprogs duperemove';
+	packagesDebian='btrfs-progs btrfs-compsize dosfstools exfat-utils f2fs-tools mtools ntfs-3g udftools xfsprogs duperemove';
+	packagesFedora='btrfs-progs compsize dosfstools exfat-utils f2fs-tools mtools ntfs-3g ntfsprogs udftools xfsprogs';
+	packagesSuse='btrfsprogs compsize dosfstools exfat-utils f2fs-tools mtools ntfs-3g ntfsprogs udftools xfsprogs duperemove';
 	handleOperation;
 category='Files - Backup';
 	baseIncluded=true;
-	packagesArch=''; packagesAUR='backintime';
-	packagesDebian='backintime-qt4';
-	packagesFedora='backintime-qt4';
-	packagesSuse='backintime-qt';
+	packagesArch='restic'; packagesAUR='backintime';
+	packagesDebian='backintime-qt4 restic';
+	packagesFedora='backintime-qt4 restic';
+	packagesSuse='backintime-qt restic';
 	handleOperation;
 category='Files - Encryption';
 	baseIncluded=true;
