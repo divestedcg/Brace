@@ -1,6 +1,6 @@
 # Maintainer: Tad <tad@spotco.us>
 pkgname=brace
-pkgver=20200320
+pkgver=20200322
 pkgrel=1
 pkgdesc="Increases privacy/security through various configs."
 arch=('any')
@@ -26,6 +26,7 @@ source=('00-brace-gnome'
 	'brace-installer.sh'
 	'wireless-perf.conf'
 	'chromium-brace.json'
+	'brace-env-overrides.sh'
 	'brace-helpers.sh'
 	'userjs-brace.js'
 	'userjs-brace-perf.js'
@@ -42,10 +43,11 @@ sha512sums=('192168de8f5e54ddfae3d08e6d26f15f43d050b547c53dabac7a557812968b5b630
             'ba57603a85b3e25f8146269cadbb4953b6b3d66a25e251b1478fc85704c884eb56ef8b1cd17a547631d5778ffab37fd212c9cf0eb0525e4c46b9c7418836146a'
             '7f7d833f4b1437a99e0f30e6dd3b474ac75a52f830864f88b2d1337845daa59e46b4558437568067a7040c7d6bb72bdecc5490fedb71ac8049dccafb334bdda1'
             '2eb73e0cfaa7fc9d3aac66dfe5f231cda7cf7555bb3788a1a4e6483a3912ae6f5d11000422fa6d27d97e8d9f45bb1faba5ec000a99e20746b3ccbbe9e7fe6a02'
-            'fde3b50bdf5120733dc8c78cd2e91649eaf07304899ee521143433d7d2806ca6cf81d34583ae58517e13bff854f6ce652d93131cca6926ee0276beb07ebe126c'
+            '552accd9caee44896e74cd4a12a3ab83f07a4ee20946406bbb9fc181ad66b86db3ee691b4a992f922b6e924f51655139cdae03163248ed24bb06a4ebd541d2f8'
             'd60121d7746936387e058287008ba720c7b389c25cb9654527ccc81a2ce2523ce343fc89f61005a6376e814319c959a794ada076addbe2639971ff0bbee001c5'
             '8112ae304bdafe1f6fa611a001e6e5674001a62abf45e8ab947474536c0e90e28ada821003208ecd91555a94c4d60d1a96cac02cb0a534bfc95a1fddac33f29f'
-            '5e3d5c1ca14935f4846fae0e38109921bdb721e135b8118f40fc50912ca7b9f6d3974b1d55c5a004312e10f6bc4c55dd06bc32905471360829f18d6fdd6c9480'
+            'fa8115b89061da8df059be02aa0ddff6cfdb9c476dff59600d5534d38ed92ff1f1878c93e00a5b89012dbf9466b4fa8a5f5d7f13a02e786de9f49a854a8c6e73'
+            '961d95e76f3dc095586c6a5d59195d70dd971b602743d640810f1ee282c0f15a97b61eb76970caf98665cfc62b95917e38eff5ae4c425b4801a2ec940c54b47c'
             '3d0d8322fb45c58259e9680ee10155f2f89de8db75d7caf8ba09c563f581b0fc9f271b7847dfae2920168475a454dd9689f0eef4a2638bf0905ec2175453b465'
             'a0999164d4031a04ce10db848ea944b2db734f08dcf3554bfb6d651305cde95f852b46e3aea2cc4f1468a0a6c07c06623f0e925d025fdee848f122f412ee951a'
             'fa500b9fbcaa8d75e516e8af89e67c46ad7b16e8024a7dcad82064f6ee5857424c7de892048ceec8de8abf997c5291e47a1eb5976d0530663cd0a3eb821536ba'
@@ -60,6 +62,7 @@ package() {
   install -Dm644 00-brace-pantheon "$pkgdir"/etc/dconf/db/local.d/00-brace-pantheon
   install -Dm644 00-brace-extra "$pkgdir"/etc/dconf/db/local.d/00-brace-extra
   install -Dm644 dconf-profile-user "$pkgdir"/etc/dconf/profile/user
+  install -Dm755 brace-env-overrides.sh "$pkgdir"/etc/profile.d/brace-env-overrides.sh
   install -Dm755 brace-helpers.sh "$pkgdir"/etc/profile.d/brace-helpers.sh
   install -Dm755 brace-supplemental-changes.sh "$pkgdir"/usr/bin/brace-supplemental-changes
   install -Dm755 brace-installer.sh "$pkgdir"/usr/bin/brace-installer

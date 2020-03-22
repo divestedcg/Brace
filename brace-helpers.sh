@@ -79,6 +79,11 @@ clearMemory() {
 	free -m;
 }
 
+optimizeImages() {
+        find "$1" -type f -name "*.jp*g" -print0 | xargs -0 -n1 -P 16 jpegoptim --strip-all;
+        find "$1" -type f -name "*.png" -print0 | xargs -0 -n1 -P 16 optipng -strip all;
+}
+
 # malware scanning
 alias malwaretest='wget http://eicar.org/download/eicar.com.txt && cat eicar.com.txt';
 alias rootkitscan='sudo rkhunter --update && sudo rkhunter -c --enable all --disable none --rwo';

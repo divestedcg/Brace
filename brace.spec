@@ -1,5 +1,5 @@
 Name: brace
-Version: 20200320
+Version: 20200322
 Release: 1
 Summary: Increases privacy/security through various configs.
 License: GPLv3+
@@ -43,6 +43,7 @@ install -Dm644 00-brace-cinnamon %{buildroot}/etc/dconf/db/local.d/00-brace-cinn
 install -Dm644 00-brace-pantheon %{buildroot}/etc/dconf/db/local.d/00-brace-pantheon
 install -Dm644 00-brace-extra %{buildroot}/etc/dconf/db/local.d/00-brace-extra
 install -Dm644 dconf-profile-user %{buildroot}/etc/dconf/profile/user
+install -Dm755 brace-env-overrides.sh %{buildroot}/etc/profile.d/brace-env-overrides.sh
 install -Dm755 brace-helpers.sh %{buildroot}/etc/profile.d/brace-helpers.sh
 install -Dm755 brace-supplemental-changes.sh %{buildroot}/usr/bin/brace-supplemental-changes
 install -Dm755 brace-fedora-enable-auto-updates.sh %{buildroot}/usr/bin/brace-enable-auto-updates
@@ -71,6 +72,7 @@ install -Dm644 userjs-*.js %{buildroot}/usr/lib64/thunderbird/defaults/pref/;
 /etc/dconf/db/local.d/00-brace-pantheon
 /etc/dconf/db/local.d/00-brace-extra
 /etc/dconf/profile/user
+/etc/profile.d/brace-env-overrides.sh
 /etc/profile.d/brace-helpers.sh
 /usr/bin/brace-supplemental-changes
 /usr/bin/brace-enable-auto-updates
