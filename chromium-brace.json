@@ -107,5 +107,5 @@
 	"TranslateEnabled": false,
 	"UrlKeyedAnonymizedDataCollectionEnabled": false,
 	"VideoCaptureAllowed": true,
-	"WebRtcEventLogCollectionAllowed": false,
+	"WebRtcEventLogCollectionAllowed": false
 }

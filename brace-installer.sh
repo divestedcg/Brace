@@ -179,7 +179,7 @@ done;
 #
 category='Core';
 	baseIncluded=true;
-	packagesArch='rng-tools irqbalance openssh nano htop wget screen zip p7zip pixz pigz lm_sensors ripgrep dialog crda lostfiles'; packagesAUR='downgrade';
+	packagesArch='rng-tools irqbalance openssh nano htop wget screen zip p7zip pixz pigz lm_sensors ripgrep dialog crda pacman-contrib lostfiles'; packagesAUR='downgrade';
 	packagesDebian='rng-tools irqbalance ssh nano htop wget screen p7zip pixz lm-sensors ripgrep';
 	packagesFedora='rng-tools irqbalance openssh nano htop wget screen p7zip pixz lm_sensors ripgrep zram grubby';
 	packagesSuse='rng-tools irqbalance openssh nano htop wget screen p7zip pixz sensors ripgrep grubby';
@@ -249,7 +249,7 @@ category='Audit';
 	handleOperation;
 category='Chat';
 	baseIncluded=false;
-	packagesArch='hexchat gajim mumble'; packagesAUR='gajim-plugin-omemo';
+	packagesArch='hexchat dino mumble';
 	packagesDebian='hexchat dino-im mumble';
 	packagesFedora='hexchat dino mumble';
 	packagesSuse='hexchat gajim gajim-plugin-omemo mumble';
@@ -375,7 +375,7 @@ category='Internet';
 	handleOperation;
 category='Media - Consumption';
 	baseIncluded=true;
-	packagesArch='vlc lollypop youtube-dl';  packagesAUR='foliate'; #TODO: codecs
+	packagesArch='vlc lollypop youtube-dl'; packagesAUR='foliate'; #TODO: codecs
 	packagesDebian='vlc pragha youtube-dl'; #TODO: codecs
 	packagesFedora='@multimedia gstreamer1-plugin-openh264 vlc lollypop youtube-dl foliate';
 	packagesSuse='vlc lollypop youtube-dl foliate'; #TODO: codecs
@@ -445,7 +445,7 @@ category='Security - System';
 	handleOperation;
 category='Tor';
 	baseIncluded=true;
-	packagesArch='tor torsocks'; packagesAUR='onionshare';
+	packagesArch='tor torsocks onionshare torbrowser-launcher';
 	packagesDebian='tor torsocks obfs4proxy onionshare'; #torbrowser-launcher
 	packagesFedora='tor torsocks obfs4 onionshare torbrowser-launcher';
 	packagesSuse='tor torsocks python3-onionshare torbrowser-launcher'; #torbrowser-apparmor-profile

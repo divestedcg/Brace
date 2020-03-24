@@ -1,0 +1,9 @@
+{
+	"3rdparty": {
+		"extensions": {
+			"cjpalhdlnbpafiamejdnhcphjbkeiagm": {
+				"adminSettings": "{\"userSettings\":{\"externalLists\":\"https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/experimental.txt\\nhttps://spotco.us/hosts\\nhttps://spotco.us/blocklists/Analytics.ubl\\nhttps://spotco.us/blocklists/Fingerprinting.ubl\"},\"selectedFilterLists\":[\"user-filters\",\"ublock-filters\",\"ublock-badware\",\"ublock-privacy\",\"ublock-abuse\",\"ublock-unbreak\",\"awrl-0\",\"adguard-generic\",\"adguard-mobile\",\"easylist\",\"adguard-spyware\",\"easyprivacy\",\"fanboy-enhanced\",\"disconnect-malvertising\",\"malware-0\",\"malware-1\",\"adguard-annoyance\",\"adguard-social\",\"fanboy-thirdparty_social\",\"fanboy-cookiemonster\",\"fanboy-annoyance\",\"fanboy-social\",\"ublock-annoyances\",\"dpollock-0\",\"hphosts\",\"plowe-0\",\"https://spotco.us/blocklists/Analytics.ubl\",\"https://spotco.us/blocklists/Fingerprinting.ubl\",\"https://spotco.us/hosts\",\"https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/experimental.txt\"]}"
+			}
+		}
+	}
+}

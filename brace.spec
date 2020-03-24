@@ -1,5 +1,5 @@
 Name: brace
-Version: 20200322
+Version: 20200324
 Release: 1
 Summary: Increases privacy/security through various configs.
 License: GPLv3+
@@ -24,7 +24,7 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 %post
 if [ -f /usr/bin/dconf ]; then dconf update; fi;
 echo "For additional hardening try the following:";
-echo "Pepper your /etc/fstab with nodev,nosuid,noexec";
+echo "Pepper your /etc/fstab with discard,noatime,nodev,nosuid,noexec";
 echo "Stealth Mode: firewall-cmd --set-default-zone=drop";
 echo "Stealth IPv6 Fix: firewall-cmd --permanent --direct --add-rule ipv6 filter INPUT 0 -p icmpv6 -j ACCEPT";
 echo "Stricter Ciphers: update-crypto-policies --set NEXT";
@@ -59,6 +59,7 @@ install -Dm644 30-nm-privacy.conf %{buildroot}/usr/lib/NetworkManager/conf.d/30-
 install -Dm644 60-restrict.conf %{buildroot}/usr/lib/sysctl.d/60-restrict.conf
 mkdir -p %{buildroot}/etc/chromium/policies/managed/;
 install -Dm644 chromium-brace.json %{buildroot}/etc/chromium/policies/managed/brace.json
+install -Dm644 firefox-brace.json %{buildroot}/usr/lib64/firefox/distribution/policies.json
 mkdir -p %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/;
 install -Dm644 userjs-*.js %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/;
 mkdir -p %{buildroot}/usr/lib64/thunderbird/defaults/pref/;
@@ -86,5 +87,6 @@ install -Dm644 userjs-*.js %{buildroot}/usr/lib64/thunderbird/defaults/pref/;
 /usr/lib/modprobe.d/wireless-perf.conf
 /usr/lib/NetworkManager/conf.d/30-nm-privacy.conf
 /usr/lib/sysctl.d/60-restrict.conf
+/usr/lib64/firefox/distribution/policies.json
 /usr/lib64/firefox/browser/defaults/preferences/userjs-*.js
 /usr/lib64/thunderbird/defaults/pref/userjs-*.js

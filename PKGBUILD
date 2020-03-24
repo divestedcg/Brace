@@ -1,6 +1,6 @@
 # Maintainer: Tad <tad@spotco.us>
 pkgname=brace
-pkgver=20200322
+pkgver=20200324
 pkgrel=1
 pkgdesc="Increases privacy/security through various configs."
 arch=('any')
@@ -26,6 +26,7 @@ source=('00-brace-gnome'
 	'brace-installer.sh'
 	'wireless-perf.conf'
 	'chromium-brace.json'
+	'firefox-brace.json'
 	'brace-env-overrides.sh'
 	'brace-helpers.sh'
 	'userjs-brace.js'
@@ -43,9 +44,10 @@ sha512sums=('192168de8f5e54ddfae3d08e6d26f15f43d050b547c53dabac7a557812968b5b630
             'ba57603a85b3e25f8146269cadbb4953b6b3d66a25e251b1478fc85704c884eb56ef8b1cd17a547631d5778ffab37fd212c9cf0eb0525e4c46b9c7418836146a'
             '7f7d833f4b1437a99e0f30e6dd3b474ac75a52f830864f88b2d1337845daa59e46b4558437568067a7040c7d6bb72bdecc5490fedb71ac8049dccafb334bdda1'
             '2eb73e0cfaa7fc9d3aac66dfe5f231cda7cf7555bb3788a1a4e6483a3912ae6f5d11000422fa6d27d97e8d9f45bb1faba5ec000a99e20746b3ccbbe9e7fe6a02'
-            '552accd9caee44896e74cd4a12a3ab83f07a4ee20946406bbb9fc181ad66b86db3ee691b4a992f922b6e924f51655139cdae03163248ed24bb06a4ebd541d2f8'
+            'c7eb3bce87f472adab837407151a7f8c77a2d96935e7944a5bb2540c0815028c722549d5229be1bb3bd2d6cd8a3e6afcc91a7b9e45586310768944976572ec1a'
             'd60121d7746936387e058287008ba720c7b389c25cb9654527ccc81a2ce2523ce343fc89f61005a6376e814319c959a794ada076addbe2639971ff0bbee001c5'
-            '8112ae304bdafe1f6fa611a001e6e5674001a62abf45e8ab947474536c0e90e28ada821003208ecd91555a94c4d60d1a96cac02cb0a534bfc95a1fddac33f29f'
+            '021e8fff41950f65266d08052d3d59da1b9be7d6cda973d1f6e6fd9b44d3a945f1bd496aeca014319d6463292f2fd36052597b980fced9a231c444854da8a349'
+            '90ff0d018430463e880f5a7c73ca32e77722196f43d8f7a6cd78fcd377f7cfd9471fc41a5196c04c1a83f3fd55aade92a6eab3f43bcfe5478a4285dc648e143e'
             'fa8115b89061da8df059be02aa0ddff6cfdb9c476dff59600d5534d38ed92ff1f1878c93e00a5b89012dbf9466b4fa8a5f5d7f13a02e786de9f49a854a8c6e73'
             '961d95e76f3dc095586c6a5d59195d70dd971b602743d640810f1ee282c0f15a97b61eb76970caf98665cfc62b95917e38eff5ae4c425b4801a2ec940c54b47c'
             '3d0d8322fb45c58259e9680ee10155f2f89de8db75d7caf8ba09c563f581b0fc9f271b7847dfae2920168475a454dd9689f0eef4a2638bf0905ec2175453b465'
@@ -73,6 +75,7 @@ package() {
   install -Dm644 60-restrict.conf "$pkgdir"/usr/lib/sysctl.d/60-restrict.conf
   mkdir -p "$pkgdir"/etc/chromium/policies/managed/
   install -Dm644 chromium-brace.json "$pkgdir"/etc/chromium/policies/managed/brace.json
+  install -Dm644 firefox-brace.json "$pkgdir"/usr/lib/firefox/distribution/policies.json
   mkdir -p "$pkgdir"/usr/lib/firefox/browser/defaults/preferences/
   install -Dm644 userjs-*.js "$pkgdir"/usr/lib/firefox/browser/defaults/preferences/
   mkdir -p "$pkgdir"/usr/lib/thunderbird/defaults/preferences/
