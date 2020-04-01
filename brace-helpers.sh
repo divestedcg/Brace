@@ -91,3 +91,4 @@ alias rootkitscanalt='sudo unhide reverse procall sys';
 
 # misc
 alias dconf-reset-brace='cat /etc/dconf/db/local.d/00-brace* | dconf load /';
+alias ssh-tor='torsocks ssh';
