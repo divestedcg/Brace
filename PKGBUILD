@@ -1,7 +1,7 @@
 # Maintainer: Tad <tad@spotco.us>
 pkgname=brace
 pkgver=20200426
-pkgrel=1
+pkgrel=2
 pkgdesc="Increases privacy/security through various configs."
 arch=('any')
 license=('GPLv3')
@@ -48,7 +48,7 @@ sha512sums=('192168de8f5e54ddfae3d08e6d26f15f43d050b547c53dabac7a557812968b5b630
             'd60121d7746936387e058287008ba720c7b389c25cb9654527ccc81a2ce2523ce343fc89f61005a6376e814319c959a794ada076addbe2639971ff0bbee001c5'
             'e1b671756c86f6b436cc714126636481641e23b39e63a079f1bc80e61061f32ea44bb33482c7f88d97f102eb47b06d053ea4a1d5777a77f56e46a6a23502f345'
             '90ff0d018430463e880f5a7c73ca32e77722196f43d8f7a6cd78fcd377f7cfd9471fc41a5196c04c1a83f3fd55aade92a6eab3f43bcfe5478a4285dc648e143e'
-            'fa8115b89061da8df059be02aa0ddff6cfdb9c476dff59600d5534d38ed92ff1f1878c93e00a5b89012dbf9466b4fa8a5f5d7f13a02e786de9f49a854a8c6e73'
+            '7d1186ef82b8ef78ca04ec90ef816dbb9ae1bcf915fd055c4d32bdfac10993193ac5f3e45e914757f9da3a3e427006527a23bb31b8d9cc4a634c9c5d9ac32c17'
             'fbe25dad82cce4711c273805339410c666d3f782ad0ceaa2545090f912d3b0ee8337de91c8772bb5feae63131ee8f732c8c12d351c515e39baa61af399b449c5'
             '3d0d8322fb45c58259e9680ee10155f2f89de8db75d7caf8ba09c563f581b0fc9f271b7847dfae2920168475a454dd9689f0eef4a2638bf0905ec2175453b465'
             'a9912a9b420168fbcf350108c316632091ee0cc108ed5a84ba2aad09dadc887ed1b48079815202dd6ff5775b4229f7909b6adc39b7f58a2171ea0d9492943a25'
@@ -75,6 +75,8 @@ package() {
   install -Dm644 60-restrict.conf "$pkgdir"/usr/lib/sysctl.d/60-restrict.conf
   mkdir -p "$pkgdir"/etc/chromium/policies/managed/
   install -Dm644 chromium-brace.json "$pkgdir"/etc/chromium/policies/managed/brace.json
+  mkdir -p "$pkgdir"/etc/opt/chrome/policies/managed/
+  install -Dm644 chromium-brace.json "$pkgdir"/etc/opt/chrome/policies/managed/brace.json
   install -Dm644 firefox-brace.json "$pkgdir"/usr/lib/firefox/distribution/policies.json
   mkdir -p "$pkgdir"/usr/lib/firefox/browser/defaults/preferences/
   install -Dm644 userjs-*.js "$pkgdir"/usr/lib/firefox/browser/defaults/preferences/

@@ -5,3 +5,6 @@ export CRYFS_NO_UPDATE_CHECK=true;
 export R600_DEBUG=zerovram;
 export AMD_DEBUG=zerovram;
 export RADV_DEBUG=zerovram;
+
+# enable gstreamer va-api plugin on unsupported drivers
+export GST_VAAPI_ALL_DRIVERS=1;

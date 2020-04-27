@@ -1,6 +1,6 @@
 Name: brace
-Version: 20200426
-Release: 1
+Version: 20200427
+Release: 2
 Summary: Increases privacy/security through various configs.
 License: GPLv3+
 BuildArch: noarch
@@ -59,6 +59,8 @@ install -Dm644 30-nm-privacy.conf %{buildroot}/usr/lib/NetworkManager/conf.d/30-
 install -Dm644 60-restrict.conf %{buildroot}/usr/lib/sysctl.d/60-restrict.conf
 mkdir -p %{buildroot}/etc/chromium/policies/managed/;
 install -Dm644 chromium-brace.json %{buildroot}/etc/chromium/policies/managed/brace.json
+mkdir -p %{buildroot}/etc/opt/chrome/policies/managed/;
+install -Dm644 chromium-brace.json %{buildroot}/etc/opt/chrome/policies/managed/brace.json
 install -Dm644 firefox-brace.json %{buildroot}/usr/lib64/firefox/distribution/policies.json
 mkdir -p %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/;
 install -Dm644 userjs-*.js %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/;
@@ -67,6 +69,7 @@ install -Dm644 userjs-*.js %{buildroot}/usr/lib64/thunderbird/defaults/pref/;
 
 %files
 /etc/chromium/policies/managed/brace.json
+/etc/opt/chrome/policies/managed/brace.json
 /etc/dconf/db/local.d/00-brace-gnome
 /etc/dconf/db/local.d/00-brace-mate
 /etc/dconf/db/local.d/00-brace-cinnamon
