@@ -1,13 +1,13 @@
 /******
 * name: ghacks user.js
-* date: 07 April 2020
-* version 75-alpha
+* date: 30 April 2020
+* version 76-alpha
 * authors: v52+ github | v51- www.ghacks.net
 * url: https://github.com/ghacksuserjs/ghacks-user.js
 * license: MIT: https://github.com/ghacksuserjs/ghacks-user.js/blob/master/LICENSE.txt
 
 * releases: These are end-of-stable-life-cycle legacy archives.
-            *Always* use the master branch user.js for a current up-to-date version.
+            *Always* use the master branch user.js for a current up-to-date version
        url: https://github.com/ghacksuserjs/ghacks-user.js/releases
 
 * README:
@@ -158,12 +158,6 @@ pref("geo.provider.network.url", "https://location.services.mozilla.com/v1/geolo
 pref("geo.provider.ms-windows-location", false); // [WINDOWS]
 pref("geo.provider.use_corelocation", false); // [MAC]
 pref("geo.provider.use_gpsd", false); // [LINUX]
-/* 0205: disable GeoIP-based search results
- * [NOTE] May not be hidden if Firefox has changed your settings due to your locale
- * [1] https://trac.torproject.org/projects/tor/ticket/16254
- * [2] https://support.mozilla.org/en-US/kb/how-stop-firefox-making-automatic-connections#w_geolocation-for-default-search-engine ***/
-pref("browser.search.region", "US"); // [HIDDEN PREF]
-pref("browser.search.geoip.url", "");
 /* 0206: disable geographically specific results/search engines e.g. "browser.search.*.US"
  * i.e. ignore all of Mozilla's various search engines in multiple locales ***/
 pref("browser.search.geoSpecificDefaults", false);
@@ -174,7 +168,9 @@ pref("browser.search.geoSpecificDefaults.url", "");
  * [TEST] https://addons.mozilla.org/about ***/
 pref("intl.accept_languages", "data:text/plain,intl.accept_languages=en-US, en"); //BRACE-MODIFIED
 /* 0211: enforce US English locale regardless of the system locale
- * [1] https://bugzilla.mozilla.org/867501 ***/
+ * [SETUP-WEB] May break some input methods e.g xim/ibus for CJK languages, see [2]
+ * [1] https://bugzilla.mozilla.org/867501
+ * [2] https://bugzilla.mozilla.org/1629630 ***/
 pref("javascript.use_us_english_locale", true); // [HIDDEN PREF]
 /* 0212: enforce fallback text encoding to match en-US
  * When the content or server doesn't declare a charset the browser will
@@ -276,12 +272,10 @@ pref("network.connectivity-service.enabled", false);
 /*** [SECTION 0400]: BLOCKLISTS / SAFE BROWSING (SB) ***/
 pref("_user.js.parrot", "0400 syntax error: the parrot's passed on!");
 /** BLOCKLISTS ***/
-/* 0401: enforce Firefox blocklist, but sanitize blocklist url
+/* 0401: enforce Firefox blocklist
  * [NOTE] It includes updates for "revoked certificates"
- * [1] https://blog.mozilla.org/security/2015/03/03/revoking-intermediate-certificates-introducing-onecrl/
- * [2] https://trac.torproject.org/projects/tor/ticket/16931 ***/
+ * [1] https://blog.mozilla.org/security/2015/03/03/revoking-intermediate-certificates-introducing-onecrl/ ***/
 pref("extensions.blocklist.enabled", true); // [DEFAULT: true]
-pref("extensions.blocklist.url", "https://blocklists.settings.services.mozilla.com/v1/blocklist/3/%APP_ID%/%APP_VERSION%/");
 
 /** SAFE BROWSING (SB)
     Safe Browsing has taken many steps to preserve privacy. *IF* required, a full url is never
@@ -396,7 +390,7 @@ pref("_user.js.parrot", "0700 syntax error: the parrot's given up the ghost!");
 /* 0701: disable IPv6
  * IPv6 can be abused, especially regarding MAC addresses. They also do not play nice
  * with VPNs. That's even assuming your ISP and/or router and/or website can handle it.
- * Firefox telemetry (April 2019) shows only 5% of all connections are IPv6.
+ * Firefox telemetry (April 2019) shows only 5% of all connections are IPv6
  * [NOTE] This is just an application level fallback. Disabling IPv6 is best done at an
  * OS/network level, and/or configured properly in VPN setups. If you are not masking your IP,
  * then this won't make much difference. If you are masking your IP, then it can only help.
@@ -596,6 +590,10 @@ pref("_user.js.parrot", "1000 syntax error: the parrot's gone to meet 'is maker!
  * [NOTE] This means any permission changes are session only
  * [1] https://bugzilla.mozilla.org/967812 ***/
    // pref("permissions.memory_only", true); // [HIDDEN PREF]
+/* 1007: disable media cache from writing to disk in Private Browsing
+ * [NOTE] MSE (Media Source Extensions) are already stored in-memory in PB */
+pref("browser.privatebrowsing.forceMediaMemoryCache", true); // [FF75+]
+pref("media.memory_cache_max_size", 16384);
 
 /** SESSIONS & SESSION RESTORE ***/
 /* 1020: exclude "Undo Closed Tabs" in Session Restore ***/
@@ -654,7 +652,7 @@ pref("security.ssl.require_safe_negotiation", true);
 /* 1202: control TLS versions with min and max
  * 1=TLS 1.0, 2=TLS 1.1, 3=TLS 1.2, 4=TLS 1.3
  * [WARNING] Leave these at default, otherwise you alter your TLS fingerprint.
- * Firefox telemetry (April 2019) shows only 0.5% of TLS web traffic uses 1.0 or 1.1
+ * Firefox telemetry (April 2020) shows only 0.25% of TLS web traffic uses 1.0 or 1.1
  * [1] https://www.ssllabs.com/ssl-pulse/ ***/
    // pref("security.tls.version.min", 3);
    // pref("security.tls.version.max", 4);
@@ -738,6 +736,10 @@ pref("security.mixed_content.block_display_content", true);
 /* 1243: block unencrypted requests from Flash on encrypted pages to mitigate MitM attacks [FF59+]
  * [1] https://bugzilla.mozilla.org/1190623 ***/
 pref("security.mixed_content.block_object_subrequest", true);
+/* 1244: enable https-only-mode [FF76+]
+ * [NOTE] This is experimental
+ * [1] https://bugzilla.mozilla.org/1613063 */
+   // pref("dom.security.https_only_mode", true);
 
 /** CIPHERS [WARNING: do not meddle with your cipher suite: see the section 1200 intro] ***/
 /* 1261: disable 3DES (effective key size < 128)
@@ -779,7 +781,7 @@ pref("security.insecure_connection_text.enabled", true); // [FF60+]
 pref("_user.js.parrot", "1400 syntax error: the parrot's bereft of life!");
 /* 1401: disable websites choosing fonts (0=block, 1=allow)
  * This can limit most (but not all) JS font enumeration which is a high entropy fingerprinting vector
- * [SETUP-WEB] Disabling fonts can uglify the web a fair bit.
+ * [SETUP-WEB] Can break some PDFs (missing text). Limiting to default fonts can "uglify" the web
  * [SETTING] General>Language and Appearance>Fonts & Colors>Advanced>Allow pages to choose... ***/
 pref("browser.display.use_document_fonts", 0);
 /* 1403: disable icon fonts (glyphs) and local fallback rendering
@@ -1027,14 +1029,14 @@ pref("_user.js.parrot", "2400 syntax error: the parrot's kicked the bucket!");
 /* 2401: disable website control over browser right-click context menu
  * [NOTE] Shift-Right-Click will always bring up the browser right-click context menu ***/
    // pref("dom.event.contextmenu.enabled", false);
-/* 2402: disable website access to clipboard events/content
- * [SETUP-WEB] This will break some sites functionality such as pasting into facebook, wordpress
+/* 2402: disable website access to clipboard events/content [SETUP-HARDEN]
+ * [NOTE] This will break some sites' functionality e.g. Outlook, Twitter, Facebook, Wordpress
  * This applies to onCut/onCopy/onPaste events - i.e. it requires interaction with the website
  * [WARNING] If both 'middlemouse.paste' and 'general.autoScroll' are true (at least one
  * is default false) then enabling this pref can leak clipboard content, see [2]
  * [1] https://www.ghacks.net/2014/01/08/block-websites-reading-modifying-clipboard-contents-firefox/
  * [2] https://bugzilla.mozilla.org/1528289 */
-pref("dom.event.clipboardevents.enabled", false);
+pref("dom.event.clipboardevents.enabled", false); //BRACE-UNCOMMENTED
 /* 2404: disable clipboard commands (cut/copy) from "non-privileged" content [FF41+]
  * this disables document.execCommand("cut"/"copy") to protect your clipboard
  * [1] https://bugzilla.mozilla.org/1170911 ***/
@@ -1055,7 +1057,7 @@ pref("dom.vibrator.enabled", false);
  * [6] https://rh0dev.github.io/blog/2017/the-return-of-the-jit/ ***/
 pref("javascript.options.asmjs", false);
 /* 2421: disable Ion and baseline JIT to harden against JS exploits [SETUP-HARDEN]
- * [NOTE] In FF75+, when **both** Ion and JIT are disabled, **and** the new pref
+ * [NOTE] In FF75+, when **both** Ion and JIT are disabled, **and** the new
  * hidden pref is enabled, then Ion can still be used by extensions (1599226)
  * [WARNING] Disabling Ion/JIT can cause some site issues and performance loss
  * [1] https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-0817 ***/
@@ -1132,7 +1134,7 @@ pref("browser.pagethumbnails.capturing_disabled", true); // [HIDDEN PREF]
 /* 2605: block web content in file processes [FF55+]
  * [SETUP-WEB] You may want to disable this for corporate or developer environments
  * [1] https://bugzilla.mozilla.org/1343184 ***/
-pref("browser.tabs.remote.allowLinkedWebInFileUriProcess", false);
+pref("browser.tabs.remote.allowLinkedWebInFileUriProcess", false); // [DEFAULT: false FF76+]
 /* 2606: disable UITour backend so there is no chance that a remote page can use it ***/
 pref("browser.uitour.enabled", false);
 pref("browser.uitour.url", "");
@@ -1415,7 +1417,8 @@ pref("privacy.firstparty.isolate", true);
       FF57: The version number will match current ESR (1393283, 1418672, 1418162, 1511763)
       FF59: The OS will be reported as Windows, OSX, Android, or Linux (to reduce breakage) (1404608)
       FF66: The OS in HTTP Headers will be reduced to Windows or Android (1509829)
-      FF68: Reported OS versions updated to Windows 10, OS 10.14, and Adnroid 8.1 (1511434)
+      FF68: Reported OS versions updated to Windows 10, OS 10.14, and Android 8.1 (1511434)
+      FF78: Reported OS versions updated to OS 10.15 and Android 9.0 (1635011)
  ** 1369319 - disable device sensor API (see 4604) (FF56+)
  ** 1369357 - disable site specific zoom (see 4605) (FF56+)
  ** 1337161 - hide gamepads from content (see 4606) (FF56+)
@@ -1717,6 +1720,12 @@ pref("privacy.userContext.longPressBehavior", 2);
 // 2012: limit WebGL
    // [-] https://bugzilla.mozilla.org/1477756
 pref("webgl.disable-extensions", true);
+// * * * /
+// FF76
+// 0401: sanitize blocklist url
+   // [2] https://trac.torproject.org/projects/tor/ticket/16931
+   // [-] https://bugzilla.mozilla.org/1618188
+pref("extensions.blocklist.url", "https://blocklists.settings.services.mozilla.com/v1/blocklist/3/%APP_ID%/%APP_VERSION%/");
 // * * * /
 // ***/
 

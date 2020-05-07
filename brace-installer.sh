@@ -361,10 +361,10 @@ category='Games - Arena';
 	handleOperation;
 category='Image Manipulation';
 	baseIncluded=true;
-	packagesArch='gimp inkscape darktable pitivi jpegoptim optipng';
-	packagesDebian='gimp inkscape darktable pitivi jpegoptim optipng';
-	packagesFedora='gimp gimpfx-foundry inkscape darktable pitivi jpegoptim optipng';
-	packagesSuse='gimp inkscape darktable pitivi jpegoptim optipng';
+	packagesArch='gimp inkscape darktable pitivi imagemagick jpegoptim optipng';
+	packagesDebian='gimp inkscape darktable pitivi imagemagick jpegoptim optipng';
+	packagesFedora='gimp gimpfx-foundry inkscape darktable pitivi ImageMagick jpegoptim optipng';
+	packagesSuse='gimp inkscape darktable pitivi ImageMagick jpegoptim optipng';
 	handleOperation;
 category='Internet';
 	baseIncluded=true;
@@ -375,10 +375,10 @@ category='Internet';
 	handleOperation;
 category='Media - Consumption';
 	baseIncluded=true;
-	packagesArch='vlc lollypop youtube-dl'; packagesAUR='foliate'; #TODO: codecs
-	packagesDebian='vlc pragha youtube-dl'; #TODO: codecs
-	packagesFedora='@multimedia gstreamer1-plugin-openh264 vlc lollypop youtube-dl foliate';
-	packagesSuse='vlc lollypop youtube-dl foliate'; #TODO: codecs
+	packagesArch='ffmpeg vlc lollypop youtube-dl'; packagesAUR='foliate'; #TODO: codecs
+	packagesDebian='ffmpeg vlc pragha youtube-dl'; #TODO: codecs
+	packagesFedora='@multimedia ffmpeg gstreamer1-plugin-openh264 vlc lollypop youtube-dl foliate';
+	packagesSuse='ffmpeg vlc lollypop youtube-dl foliate'; #TODO: codecs
 	handleOperation;
 category='Media - HTPC';
 	baseIncluded=false;
