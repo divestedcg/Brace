@@ -1,5 +1,5 @@
 Name: brace
-Version: 20200507
+Version: 20200512
 Release: 1
 Summary: Increases privacy/security through various configs.
 License: GPLv3+
@@ -26,12 +26,13 @@ if [ -f /usr/bin/dconf ]; then dconf update; fi;
 echo "For additional hardening try the following:";
 echo "Pepper your /etc/fstab with discard,noatime,nodev,nosuid,noexec";
 echo "Stealth Mode: firewall-cmd --set-default-zone=drop";
-echo "Stealth IPv6 Fix: firewall-cmd --permanent --direct --add-rule ipv6 filter INPUT 0 -p icmpv6 -j ACCEPT";
+echo "Stealth IPv6 Fix: firewall-cmd --add-protocol=ipv6-icmp --permanent; firewall-cmd --add-service=dhcpv6-client --permanent;";
 echo "Stricter Ciphers: update-crypto-policies --set NEXT";
 echo "Stricter Kernel: grubby --update-kernel=ALL --args=\"lockdown=confidentiality pti=on vsyscall=none page_poison=1 slab_nomerge slub_debug=FZP page_alloc.shuffle=1 init_on_alloc=1 init_on_free=1 mce=0\"";
 echo "Strict IOMMU: grubby --update-kernel=ALL --args=\"iommu=force intel_iommu=on,strict amd_iommu=fullflush efi=disable_early_pci_dma\"";
 echo "Strict CPU Mitigations: grubby --update-kernel=ALL --args=\"mds=full,nosmt l1tf=full,force nosmt=force spectre_v2=on\"";
 echo "Always fsck: grubby --update-kernel=ALL --args=\"fsck.mode=force\"";
+echo "Encrypted GPU Memory: grubby --update-kernel=ALL --args=\"amdgpu.tmz=1\"";
 
 %postun
 if [ -f /usr/bin/dconf ]; then dconf update; fi;
