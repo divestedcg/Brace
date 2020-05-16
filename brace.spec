@@ -1,5 +1,5 @@
 Name: brace
-Version: 20200512
+Version: 20200518
 Release: 1
 Summary: Increases privacy/security through various configs.
 License: GPLv3+
@@ -58,6 +58,8 @@ install -Dm644 blacklist-usbnet.conf %{buildroot}/usr/lib/modprobe.d/blacklist-u
 install -Dm644 wireless-perf.conf %{buildroot}/usr/lib/modprobe.d/wireless-perf.conf
 install -Dm644 30-nm-privacy.conf %{buildroot}/usr/lib/NetworkManager/conf.d/30-nm-privacy.conf
 install -Dm644 60-restrict.conf %{buildroot}/usr/lib/sysctl.d/60-restrict.conf
+install -Dm644 restic-backup@.service %{buildroot}/usr/lib/systemd/user/restic-backup@.service
+install -Dm644 restic-backup@.timer %{buildroot}/usr/lib/systemd/user/restic-backup@.timer
 mkdir -p %{buildroot}/etc/chromium/policies/managed/;
 install -Dm644 chromium-brace.json %{buildroot}/etc/chromium/policies/managed/brace.json
 mkdir -p %{buildroot}/etc/opt/chrome/policies/managed/;
@@ -91,6 +93,8 @@ install -Dm644 userjs-*.js %{buildroot}/usr/lib64/thunderbird/defaults/pref/;
 /usr/lib/modprobe.d/wireless-perf.conf
 /usr/lib/NetworkManager/conf.d/30-nm-privacy.conf
 /usr/lib/sysctl.d/60-restrict.conf
+/usr/lib/systemd/user/restic-backup@.service
+/usr/lib/systemd/user/restic-backup@.timer
 /usr/lib64/firefox/distribution/policies.json
 /usr/lib64/firefox/browser/defaults/preferences/userjs-*.js
 /usr/lib64/thunderbird/defaults/pref/userjs-*.js

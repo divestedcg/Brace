@@ -1,6 +1,6 @@
 # Maintainer: Tad <tad@spotco.us>
 pkgname=brace
-pkgver=20200512
+pkgver=20200518
 pkgrel=1
 pkgdesc="Increases privacy/security through various configs."
 arch=('any')
@@ -20,6 +20,8 @@ source=('00-brace-gnome'
 	'dconf-profile-user'
 	'30-nm-privacy.conf'
 	'60-restrict.conf'
+	'restic-backup@.service'
+	'restic-backup@.timer'
 	'blacklist-dma.conf'
 	'blacklist-usbnet.conf'
 	'brace-supplemental-changes.sh'
@@ -40,7 +42,9 @@ sha512sums=('192168de8f5e54ddfae3d08e6d26f15f43d050b547c53dabac7a557812968b5b630
             '3625e53fee7a1bf755a9de3b5f702e75ba67bb4160c6fd8b36f6cf28a9e939e8db982151c507f76b7955391c5bb93654695a2da39724e88309fe350242689d90'
             '1314c63c629f5970820718aacab764457fbd51dd3dafa091b437bb5cf0ebde8448668dfe2ff7f7d659bd1b005cbb41cd0b65e978e48915b04ea43ae772364633'
             '6e585be661b1494f285356b56eafe9a501674e5d8502f8562d2ee7e33715c50a67c5eca178bef69d602d407cdd309a5ef7bbddc6e0a33002ebb7ca6598b79528'
-            '811c879d41a713b68b9dee01324f0ae01f776d493eb0d1fe009e2db0b0d8c43f45e6dfa68f87310c92603422e32f267fa8ac05cb26e1b6f221c13d88278f7609'
+            '95956862013e563e8916b87020b7c60d175fa262d69da423f2e6e35883371dc408f0dd0298bc33eb2d34fc7ba7b56de1c81ad577110bcfd8ff92ca2c68072688'
+            'b6bf26fe2bab314685cbb1d0568675d57bd1ef7dcec09b9d824400d6e83bee28bbf3b9247ce797a2fff6a2a021d40e3fe25b91b52db54bf482d49575f3daa37f'
+            'dc447b539ea4ab47d12ce989ae717091282fd92839d795707934f9cbd87540f32cff29b47ffea9643d5ad2aac36adccc4d01daea135215d3286ee4df77f9bdfc'
             'ba57603a85b3e25f8146269cadbb4953b6b3d66a25e251b1478fc85704c884eb56ef8b1cd17a547631d5778ffab37fd212c9cf0eb0525e4c46b9c7418836146a'
             '7f7d833f4b1437a99e0f30e6dd3b474ac75a52f830864f88b2d1337845daa59e46b4558437568067a7040c7d6bb72bdecc5490fedb71ac8049dccafb334bdda1'
             '2eb73e0cfaa7fc9d3aac66dfe5f231cda7cf7555bb3788a1a4e6483a3912ae6f5d11000422fa6d27d97e8d9f45bb1faba5ec000a99e20746b3ccbbe9e7fe6a02'
@@ -73,6 +77,8 @@ package() {
   install -Dm644 wireless-perf.conf "$pkgdir"/usr/lib/modprobe.d/wireless-perf.conf
   install -Dm644 30-nm-privacy.conf "$pkgdir"/usr/lib/NetworkManager/conf.d/30-nm-privacy.conf
   install -Dm644 60-restrict.conf "$pkgdir"/usr/lib/sysctl.d/60-restrict.conf
+  install -Dm644 restic-backup@.service "$pkgdir"/usr/lib/systemd/user/restic-backup@.service
+  install -Dm644 restic-backup@.timer "$pkgdir"/usr/lib/systemd/user/restic-backup@.timer
   mkdir -p "$pkgdir"/etc/chromium/policies/managed/
   install -Dm644 chromium-brace.json "$pkgdir"/etc/chromium/policies/managed/brace.json
   mkdir -p "$pkgdir"/etc/opt/chrome/policies/managed/

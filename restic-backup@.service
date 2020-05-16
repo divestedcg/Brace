@@ -1,0 +1,8 @@
+[Unit]
+Description=restic backup service using config %i
+After=network.target
+
+[Service]
+Type=oneshot
+EnvironmentFile=%h/.config/restic-automatic-%i.conf
+ExecStart=restic backup --verbose --one-file-system --tag systemd.timer --exclude-caches $BACKUP_EXCLUDES $BACKUP_INCLUDES
