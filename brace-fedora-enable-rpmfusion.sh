@@ -11,4 +11,7 @@ else
 	yum install epel-release;
 	yum localinstall --nogpgcheck https://download1.rpmfusion.org/free/el/rpmfusion-free-release-7.noarch.rpm;
 fi;
-echo "Please verify the RPM Fusion signing keys from here https://rpmfusion.org/keys";
+echo "Please verify the RPM Fusion signing keys from here: https://rpmfusion.org/keys";
+echo "F32: 7BDA98EF593050A34B1697ABA0EE9D83100BCD92";
+echo "EL8: 837935CD19E123AA7F8A8E69979F0C69158B3811";
+echo "EL7: DB9A9A57CAFD23DA3A88792F758B3D18F5CF6C1E";

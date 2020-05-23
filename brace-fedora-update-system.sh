@@ -3,6 +3,7 @@
 #License: GPLv3
 
 if [[ $EUID -ne 0 ]]; then echo 'This script needs to be run as root!'; exit 1; fi;
+
 if [ -f /etc/fedora-release ]; then
 	if [ -z $1 ]; then echo 'You must provide a version to upgrade to'; exit 1; fi;
 
