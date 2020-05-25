@@ -15,7 +15,7 @@ pref("plugin.expose_full_path", false);
 pref("browser.link.open_newwindow_restriction", true);
 pref("network.negotiate-auth.trusted-uris", "");
 pref("network.security.esni.enabled", true);
-pref("network.trr.custom_uri", "https://doh.appliedprivacy.net/query");
+pref("network.trr.custom_uri", "https://security.cloudflare-dns.com/dns-query");
 pref("messenger.status.reportIdle", false);
 pref("extensions.enigmail.autoWkdLookup", 0);
 
