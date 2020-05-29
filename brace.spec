@@ -1,6 +1,6 @@
 Name: brace
-Version: 20200525
-Release: 1
+Version: 20200529
+Release: 2
 Summary: Increases privacy/security through various configs.
 License: GPLv3+
 BuildArch: noarch
@@ -28,8 +28,11 @@ echo "Pepper your /etc/fstab with discard,noatime,nodev,nosuid,noexec";
 echo "Stealth Mode: firewall-cmd --set-default-zone=drop";
 echo "Stealth IPv6 Fix: firewall-cmd --add-protocol=ipv6-icmp --permanent; firewall-cmd --add-service=dhcpv6-client --permanent;";
 echo "Stricter Ciphers: update-crypto-policies --set NEXT";
-echo "Stricter Kernel: grubby --update-kernel=ALL --args=\"lockdown=confidentiality pti=on kpti=on vsyscall=none page_poison=1 slab_nomerge slub_debug=FZP page_alloc.shuffle=1 init_on_alloc=1 init_on_free=1 mce=0\"";
+echo "Stricter Kernel: grubby --update-kernel=ALL --args=\"lockdown=confidentiality pti=on vsyscall=none page_poison=1 slab_nomerge slub_debug=FZP page_alloc.shuffle=1 init_on_alloc=1 init_on_free=1 mce=0\"";
 echo "Strict IOMMU: grubby --update-kernel=ALL --args=\"iommu=force iommu.passthrough=0 intel_iommu=on,strict amd_iommu=fullflush efi=disable_early_pci_dma\"";
+echo "Strict CPU mitigations: grubby --update-kernel=ALL --args=\"spectre_v2=on spec_store_bypass_disable=on tsx=off\"";
+echo "Paranoid CPU mitigations: grubby --update-kernel=ALL --args=\"mitigations=auto,nosmt\"";
+echo "ARM64 CPU mitigations: grubby --update-kernel=ALL --args=\"kpti=on ssbd=force-on\"";
 echo "Always fsck: grubby --update-kernel=ALL --args=\"fsck.mode=force\"";
 echo "Encrypted GPU Memory: grubby --update-kernel=ALL --args=\"amdgpu.tmz=1\"";
 
