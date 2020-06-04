@@ -209,7 +209,7 @@ category='VA-API';
 	baseIncluded=true;
 	packagesArch='libva-mesa-driver libva-intel-driver intel-media-driver gstreamer-vaapi';
 	packagesDebian='mesa-va-drivers vainfo i965-va-driver intel-media-va-driver gstreamer1-vaapi';
-	packagesFedora='mesa-dri-drivers libva-utils libva-intel-driver libva-intel-hybrid-driver gstreamer1-vaapi';
+	packagesFedora='mesa-dri-drivers libva libva-utils libva-intel-driver libva-intel-hybrid-driver gstreamer1-vaapi';
 	packagesSuse=''; #TODO
 	handleOperation;
 category='VDPAU';

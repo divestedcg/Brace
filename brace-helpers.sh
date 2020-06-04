@@ -1,3 +1,4 @@
+# cleaning
 alias bleachLast='bleachbit --preset --clean';
 alias clearTracker='/usr/bin/tracker reset --hard';
 alias clearDriveFreeSpace='scrub --no-hwrand -p random -X cfs-$RANDOM';
@@ -83,6 +84,15 @@ optimizeImages() {
         find "$1" -type f -name "*.jp*g" -print0 | xargs -0 -n1 -P 16 jpegoptim --strip-all;
         find "$1" -type f -name "*.png" -print0 | xargs -0 -n1 -P 16 optipng -strip all;
 }
+
+strictPermsRecursive() {
+	echo "Recursively setting restrictive permissions in $PWD";
+	echo "You've 5 seconds to Ctrl+C";
+	sleep 5;
+	find . -type d -print0 | xargs -0 chmod -v 0700;
+	find . -type f -print0 | xargs -0 chmod -v 0600;
+}
+
 
 # malware scanning
 alias malwaretest='wget http://eicar.org/download/eicar.com.txt && cat eicar.com.txt';

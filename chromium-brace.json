@@ -91,7 +91,7 @@
 	"HardwareAccelerationModeEnabled": true,
 	"HideWebStoreIcon": true,
 	"IncognitoModeAvailability": 0,
-	"InstantTehteringAllowed": false,
+	"InstantTetheringAllowed": false,
 	"MetricsReportingEnabled": false,
 	"NTPContentSuggestionsEnabled": false,
 	"NetworkPredictionOptions": 2,

@@ -1,3 +1,4 @@
+#misc
 export CRYFS_NO_UPDATE_CHECK=true;
 
 # zero video RAM to prevent leakage
@@ -8,3 +9,8 @@ export RADV_DEBUG=zerovram;
 
 # enable gstreamer va-api plugin on unsupported drivers
 export GST_VAAPI_ALL_DRIVERS=1;
+
+# set restrictive umask
+if [ $UID -ge 1000 ] && [ "`/usr/bin/id -gn`" = "`/usr/bin/id -un`" ]; then
+    umask 0077;
+fi;
