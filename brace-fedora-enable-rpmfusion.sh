@@ -9,7 +9,7 @@ if [ -f /etc/fedora-release ]; then
 	dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm;
 else
 	yum install epel-release;
-	yum localinstall --nogpgcheck https://download1.rpmfusion.org/free/el/rpmfusion-free-release-7.noarch.rpm;
+	yum localinstall --nogpgcheck https://download1.rpmfusion.org/free/el/rpmfusion-free-release-$(rpm -E %centos).noarch.rpm;
 fi;
 echo "Please verify the RPM Fusion signing keys from here: https://rpmfusion.org/keys";
 echo "F32: 7BDA98EF593050A34B1697ABA0EE9D83100BCD92";

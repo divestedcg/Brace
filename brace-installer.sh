@@ -44,6 +44,9 @@ whichPackageManager() {
 	if type "apt" &> /dev/null; then
 		echo "apt" && return 0;
 	fi;
+	#if type "flatpak" &> /dev/null; then
+	#	echo "flatpak" && return 0;
+	#fi;
 }
 
 handleInstall() {
@@ -53,6 +56,9 @@ handleInstall() {
 	fi;
 	if [ "$packageManager" == "dnf" ] || [ "$packageManager" == "yum" ]; then
 		$packageManager install --skip-broken $packagesFedora $packagesBaseFedora;
+	fi;
+	if [ "$packageManager" == "flatpak" ]; then
+		$packageManager install $packagesFlathub $packagesBaseFlathub;
 	fi;
 	if [ "$packageManager" == "pacman" ]; then
 		#TODO: handle AUR?
@@ -70,6 +76,9 @@ handleRemove() {
 	if [ "$packageManager" == "dnf" ] || [ "$packageManager" == "yum" ]; then
 		$packageManager remove --skip-broken $packagesFedora;
 	fi;
+	if [ "$packageManager" == "flatpak" ]; then
+		$packageManager remove $packagesFlathub;
+	fi;
 	if [ "$packageManager" == "pacman" ]; then
 		#$packageManager -Rsc $packagesArch;
 		for package in $packagesArch; do
@@ -82,7 +91,7 @@ handleRemove() {
 }
 
 cleanupOperation() {
-	unset category baseIncluded packagesArch packagesDebian packagesFedora packagesSuse;
+	unset category baseIncluded packagesArch packagesDebian packagesFedora packagesFlathub packagesSuse;
 }
 
 handleOperation() {
@@ -94,6 +103,9 @@ handleOperation() {
 			fi;
 			if [ "$packageManager" == "dnf" ] || [ "$packageManager" == "yum" ]; then
 				packagesBaseFedora="$packagesBaseFedora $packagesFedora";
+			fi;
+			if [ "$packageManager" == "flatpak" ]; then
+				packagesBaseFlathub="$packagesBaseFlathub $packagesFlathub";
 			fi;
 			if [ "$packageManager" == "pacman" ]; then
 				packagesBaseArch="$packagesBaseArch $packagesArch";
@@ -129,6 +141,9 @@ handleCleanup() {
 	fi;
 	if [ "$packageManager" == "dnf" ] || [ "$packageManager" == "yum" ]; then
 		$packageManager autoremove;
+	fi;
+	if [ "$packageManager" == "flatpak" ]; then
+		$packageManager remove --unused;
 	fi;
 	if [ "$packageManager" == "pacman" ]; then
 		$packageManager -Rns $(pacman -Qttdq);
@@ -196,6 +211,7 @@ category='GNOME Extras';
 	packagesArch='nautilus-terminal gnome-tweak-tool seahorse';
 	packagesDebian='nautilus-extension-gnome-terminal gnome-tweak-tool seahorse';
 	packagesFedora='gnome-terminal-nautilus gnome-tweak-tool seahorse';
+	packagesFlathub='org.gnome.seahorse.Application';
 	packagesSuse='nautilus-terminal gnome-tweaks seahorse';
 	handleOperation;
 category='OpenCL';
@@ -238,6 +254,7 @@ category='Audio Manipulation';
 	packagesArch='audacity';
 	packagesDebian='audacity';
 	packagesFedora='audacity';
+	packagesFlathub='org.audacityteam.Audacity';
 	packagesSuse='audacity';
 	handleOperation;
 category='Audit';
@@ -252,6 +269,7 @@ category='Chat';
 	packagesArch='hexchat dino mumble';
 	packagesDebian='hexchat dino-im mumble';
 	packagesFedora='hexchat dino mumble';
+	packagesFlathub='io.github.Hexchat info.mumble.Mumble';
 	packagesSuse='hexchat gajim gajim-plugin-omemo mumble';
 	handleOperation;
 category='Communication';
@@ -259,6 +277,7 @@ category='Communication';
 	packagesArch='evolution';
 	packagesDebian='evolution';
 	packagesFedora='evolution';
+	packagesFlathub='org.gnome.Evolution';
 	packagesSuse='evolution';
 	handleOperation;
 category='Cryptocurrency';
@@ -266,6 +285,7 @@ category='Cryptocurrency';
 	packagesArch='electrum';
 	packagesDebian=''; #electrum
 	packagesFedora='electrum';
+	packagesFlathub='org.electrum.electrum';
 	packagesSuse=''; #unavailable
 	handleOperation;
 category='Development';
@@ -273,6 +293,7 @@ category='Development';
 	packagesArch='git gitg ghex sqlitebrowser gcc';
 	packagesDebian='git gitg ghex sqlitebrowser build-essential';
 	packagesFedora='git gitg ghex sqlitebrowser @development-tools';
+	packagesFlathub='org.gnome.gitg org.gnome.GHex';
 	packagesSuse='git gitg ghex sqlitebrowser'; #devel_basis
 	handleOperation;
 category='Development - Android';
@@ -298,10 +319,10 @@ category='Development - Distro Specific Packaging';
 	handleOperation;
 category='Disks - Management';
 	baseIncluded=true;
-	packagesArch='testdisk smartmontools parted gnome-multi-writer';
-	packagesDebian='testdisk smartmontools parted gnome-multi-writer';
-	packagesFedora='testdisk smartmontools parted gnome-multi-writer mediawriter';
-	packagesSuse='testdisk smartmontools parted gnome-multi-writer';
+	packagesArch='testdisk smartmontools gsmartcontrol parted gnome-multi-writer';
+	packagesDebian='testdisk smartmontools gsmartcontrol parted gnome-multi-writer';
+	packagesFedora='testdisk smartmontools gsmartcontrol parted gnome-multi-writer mediawriter';
+	packagesSuse='testdisk smartmontools gsmartcontrol parted gnome-multi-writer';
 	handleOperation;
 category='Disks - File Systems';
 	baseIncluded=true;
@@ -329,6 +350,7 @@ category='Files - Sharing';
 	packagesArch='transmission-gtk'; packagesAUR='magic-wormhole';
 	packagesDebian='transmission-gtk'; #magic-wormhole
 	packagesFedora='transmission'; #magic-wormhole
+	packagesFlathub='com.transmissionbt.Transmission';
 	packagesSuse='transmission-gtk';
 	handleOperation;
 category='Files - Syncing';
@@ -398,7 +420,7 @@ category='Office';
 	baseIncluded=true;
 	packagesArch='libreoffice-fresh meld scribus gnucash dia aspell aspell-en hyphen hyphen-en libmythes mythes-en'; packagesAUR='cherrytree';
 	packagesDebian='libreoffice meld scribus gnucash dia aspell aspell-en';
-	packagesFedora='libreoffice meld scribus gnucash dia cherrytree aspell aspell-en';
+	packagesFedora='libreoffice libreoffice-writer libreoffice-calc libreoffice-impress libreoffice-draw libreoffice-base meld scribus gnucash dia cherrytree aspell aspell-en';
 	packagesSuse='libreoffice meld scribus gnucash dia cherrytree aspell';
 	handleOperation;
 category='Passwords';
@@ -452,10 +474,10 @@ category='Tor';
 	handleOperation;
 category='Utility';
 	baseIncluded=true;
-	packagesArch='dconf-editor qalculate-gtk whois mtr stress iotop wavemon pv tree iperf3 bmon powertop ncdu';
-	packagesDebian='dconf-editor whois mtr stress iotop wavemon pv tree iperf3 bmon powertop ncdu vrms';
-	packagesFedora='dconf-editor qalculate-gtk whois mtr stress iotop wavemon pv tree iperf3 bmon powertop ncdu vrms-rpm';
-	packagesSuse='dconf-editor whois mtr stress-ng iotop wavemon pv tree iperf bmon powertop ncdu';
+	packagesArch='dconf-editor qalculate-gtk whois mtr stress iotop wavemon pv tree iperf3 bmon powertop ncdu intel-gpu-tools'; packagesAUR='radeontop';
+	packagesDebian='dconf-editor whois mtr stress iotop wavemon pv tree iperf3 bmon powertop ncdu vrms intel-gpu-tools radeontop';
+	packagesFedora='dconf-editor qalculate-gtk whois mtr stress iotop wavemon pv tree iperf3 bmon powertop ncdu vrms-rpm intel-gpu-tools radeontop';
+	packagesSuse='dconf-editor whois mtr stress-ng iotop wavemon pv tree iperf bmon powertop ncdu intel-gpu-tools radeontop';
 	handleOperation;
 category='Virtualization';
 	baseIncluded=false;
