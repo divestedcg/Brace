@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # cleaning
 alias bleachLast='bleachbit --preset --clean';
 alias clearTracker='/usr/bin/tracker reset --hard';

@@ -2,7 +2,7 @@
 #Copyright (c) 2018 Divested Computing Group
 #License: GPLv3
 
-if [[ $EUID -ne 0 ]]; then echo 'This script needs to be run as root!'; exit 1; fi;
+if [[ "$EUID" -ne "0" ]]; then echo 'This script needs to be run as root!'; exit 1; fi;
 
 echo "Enabling RPM Fusion Free";
 if [ -f /etc/fedora-release ]; then

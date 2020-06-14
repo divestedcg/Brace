@@ -25,6 +25,8 @@ red='\e[0;31m';
 white='\e[0;37m';
 yellow='\e[0;33m';
 
+if [[ "$EUID" -ne "0" ]]; then echo -e "${red}ERROR: This script needs to be run as root!${coloroff}"; exit 1; fi;
+
 #
 #Start functions
 #
@@ -161,7 +163,6 @@ handleCleanup() {
 #
 #Start glue
 #
-if [[ $EUID -ne 0 ]]; then echo -e "${red}ERROR: This script needs to be run as root!${coloroff}"; exit 1; fi;
 echo -e "${cyan}INFO: This script is intended for use on desktop machines, not servers!${coloroff}";
 echo -e "${cyan}INFO: This script is geared towards personal use and some packages may not be appropiate for business systems!${coloroff}";
 if [ -f /etc/centos-release ]; then yum install epel-release; fi;

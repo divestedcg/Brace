@@ -1,5 +1,6 @@
 post_install() {
   if [ -f /usr/bin/dconf ]; then dconf update; fi;
+  echo "Please pepper your /etc/fstab with discard,noatime,nodev,nosuid,noexec";
 }
 
 post_remove() {
