@@ -90,5 +90,13 @@ user='anonymous'
 max-accuracy-level='city'
 enabled=false
 
+[org/virt-manager/virt-manager]
+xmleditor-enabled=true
+
+[org/virt-manager/virt-manager/console]
+auto-redirect=false
+resize-guest=1
+scaling=2
+
 [system/proxy]
 mode='none'

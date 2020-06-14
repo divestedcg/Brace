@@ -11,6 +11,6 @@ export RADV_DEBUG=zerovram;
 export GST_VAAPI_ALL_DRIVERS=1;
 
 # set restrictive umask
-if [ $UID -ge 1000 ] && [ "`/usr/bin/id -gn`" = "`/usr/bin/id -un`" ]; then
+if [ "`/usr/bin/id -ru`" -ge 1000 ] && [ "`/usr/bin/id -u`" -ge 1000 ] && [ "`/usr/bin/id -gn`" = "`/usr/bin/id -un`" ]; then
     umask 0077;
 fi;

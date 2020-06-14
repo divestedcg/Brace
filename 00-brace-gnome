@@ -40,6 +40,8 @@ show-full-name-in-top-bar=false
 send-software-usage-stats=false
 disable-camera=true
 disable-microphone=true
+usb-protection=true
+usb-protection-level='lockscreen'
 
 [org/gnome/desktop/remote-access]
 require-encryption=true
