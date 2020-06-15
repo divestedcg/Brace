@@ -21,9 +21,9 @@ Installed
 	brace-helpers.sh			= profile: adds helper aliases
 	brace-installer.sh			= unified package installer
 	brace-fedora-enable-auto-updates.sh	= Fedora: enables DNF automatic updates
-	brace-fedora-remover.sh			= Fedora: package remover
+	brace-fedora-remover.sh		= Fedora: package remover
 	brace-fedora-update-system.sh		= Fedora: update system using dnf-plugin-system-upgrade
-	brace-supplemental-changes.sh		= GNOME: change extra default settings
+	brace-supplemental-changes.sh		= change extra default settings
 	wireless-perf.conf			= kernel: increases wi-fi performance for b43 and iwlwifi
 	userjs-*.js				= Firefox: change default settings
 Package Creation
