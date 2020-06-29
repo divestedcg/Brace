@@ -25,10 +25,22 @@
 	"DeviceAutoUpdateP2PEnabled": false,
 	"DeviceUpdateHttpDownloadsEnabled": false,
 	"RebootAfterUpdate": true,
+	"ExtensionInstallBlacklist": [ "*" ],
+	"ExtensionInstallWhitelist": [
+					"cjpalhdlnbpafiamejdnhcphjbkeiagm",
+					"pgdnlhfefecpicbbihgmbmffkjpaplco",
+					"ogfcmafjalglgifnmanfmnieipoejdcf",
+					"gcbommkclmclpchllfjekcdonpmejbdp",
+					"omkfmpieigblcllmkgbflkikinpkodlk",
+					"ldpochfccmkkmhdbclfhpagapcfdljkj",
+					"eimadpbcbfnmbkopoojfekhnkhdbieeh",
+					"gphhapmejobijbbhgpjhcjognlahblep",
+					"jlhmfgmfgeifomenelglieieghnjghma"
+					],
 	"ExtensionInstallForcelist": [
 					"cjpalhdlnbpafiamejdnhcphjbkeiagm;https://clients2.google.com/service/update2/crx",
-					"gcbommkclmclpchllfjekcdonpmejbdp;https://clients2.google.com/service/update2/crx",
-					"pgdnlhfefecpicbbihgmbmffkjpaplco;https://clients2.google.com/service/update2/crx"
+					"pgdnlhfefecpicbbihgmbmffkjpaplco;https://clients2.google.com/service/update2/crx",
+					"gcbommkclmclpchllfjekcdonpmejbdp;https://clients2.google.com/service/update2/crx"
 					],
 	"ExtensionAllowInsecureUpdates": false,
 	"VoiceInteractionContextEnabled": false,
