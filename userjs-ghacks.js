@@ -177,7 +177,7 @@ pref("javascript.use_us_english_locale", true); // [HIDDEN PREF]
  * fallback to the "Current locale" based on your application language
  * [SETTING] General>Language and Appearance>Fonts and Colors>Advanced>Text Encoding for Legacy Content
  * [TEST] https://hsivonen.com/test/moz/check-charset.htm
- * [1] https://trac.torproject.org/projects/tor/ticket/20025 ***/
+ * [1] https://gitlab.torproject.org/tpo/applications/tor-browser/-/issues/20025 ***/
 pref("intl.charset.fallback.override", "windows-1252");
 
 /*** [SECTION 0300]: QUIET FOX
@@ -390,7 +390,7 @@ pref("_user.js.parrot", "0700 syntax error: the parrot's given up the ghost!");
 /* 0701: disable IPv6
  * IPv6 can be abused, especially regarding MAC addresses. They also do not play nice
  * with VPNs. That's even assuming your ISP and/or router and/or website can handle it.
- * Firefox telemetry (April 2019) shows only 5% of all connections are IPv6
+ * [STATS] Firefox telemetry (June 2020) shows only 5% of all connections are IPv6
  * [NOTE] This is just an application level fallback. Disabling IPv6 is best done at an
  * OS/network level, and/or configured properly in VPN setups. If you are not masking your IP,
  * then this won't make much difference. If you are masking your IP, then it can only help.
@@ -430,13 +430,13 @@ pref("network.proxy.socks_remote_dns", true);
    // pref("network.ftp.enabled", false);
 /* 0709: disable using UNC (Uniform Naming Convention) paths [FF61+]
  * [SETUP-CHROME] Can break extensions for profiles on network shares
- * [1] https://trac.torproject.org/projects/tor/ticket/26424 ***/
+ * [1] https://gitlab.torproject.org/tpo/applications/tor-browser/-/issues/26424 ***/
 pref("network.file.disable_unc_paths", true); // [HIDDEN PREF]
 /* 0710: disable GIO as a potential proxy bypass vector
  * Gvfs/GIO has a set of supported protocols like obex, network, archive, computer, dav, cdda,
  * gphoto2, trash, etc. By default only smb and sftp protocols are accepted so far (as of FF64)
  * [1] https://bugzilla.mozilla.org/1433507
- * [2] https://trac.torproject.org/23044
+ * [2] https://gitlab.torproject.org/tpo/applications/tor-browser/-/issues/23044
  * [3] https://en.wikipedia.org/wiki/GVfs
  * [4] https://en.wikipedia.org/wiki/GIO_(software) ***/
 pref("network.gio.supported-protocols", ""); // [HIDDEN PREF]
@@ -495,11 +495,11 @@ pref("browser.urlbar.usepreloadedtopurls.enabled", false);
  * [1] https://bugzilla.mozilla.org/1348275 ***/
 pref("browser.urlbar.speculativeConnect.enabled", false);
 /* 0850a: disable location bar suggestion types
- * If all three suggestion types are false, search engine keywords are disabled
  * [SETTING] Privacy & Security>Address Bar>When using the address bar, suggest ***/
    // pref("browser.urlbar.suggest.history", false);
    // pref("browser.urlbar.suggest.bookmark", false);
    // pref("browser.urlbar.suggest.openpage", false);
+   // pref("browser.urlbar.suggest.topsites", false); // [FF78+]
 /* 0850c: disable location bar dropdown
  * This value controls the total number of entries to appear in the location bar dropdown
  * [NOTE] Items (bookmarks/history/openpages) with a high "frecency"/"bonus" will always
@@ -637,6 +637,8 @@ pref("browser.shell.shortcutFavicons", false);
 /*** [SECTION 1200]: HTTPS (SSL/TLS / OCSP / CERTS / HPKP / CIPHERS)
    Your cipher and other settings can be used in server side fingerprinting
    [TEST] https://www.ssllabs.com/ssltest/viewMyClient.html
+   [TEST] https://browserleaks.com/ssl
+   [TEST] https://ja3er.com/
    [1] https://www.securityartwork.es/2017/02/02/tls-client-fingerprinting-with-bro/
 ***/
 pref("_user.js.parrot", "1200 syntax error: the parrot's a stiff!");
@@ -653,10 +655,10 @@ pref("_user.js.parrot", "1200 syntax error: the parrot's a stiff!");
 pref("security.ssl.require_safe_negotiation", true);
 /* 1202: control TLS versions with min and max
  * 1=TLS 1.0, 2=TLS 1.1, 3=TLS 1.2, 4=TLS 1.3
+ * [STATS] Firefox telemetry (June 2020) shows only 0.16% of SSL handshakes use 1.0 or 1.1
  * [WARNING] Leave these at default, otherwise you alter your TLS fingerprint.
- * Firefox telemetry (April 2020) shows only 0.25% of TLS web traffic uses 1.0 or 1.1
  * [1] https://www.ssllabs.com/ssl-pulse/ ***/
-   // pref("security.tls.version.min", 3);
+   // pref("security.tls.version.min", 3); // [DEFAULT: 3 FF78+]
    // pref("security.tls.version.max", 4);
 /* 1203: enforce TLS 1.0 and 1.1 downgrades as session only */
 pref("security.tls.version.enable-deprecated", false);
@@ -715,7 +717,7 @@ pref("security.pki.sha1_enforcement_level", 1);
  * 0=disable detecting Family Safety mode and importing the root
  * 1=only attempt to detect Family Safety mode (don't import the root)
  * 2=detect Family Safety mode and import the root
- * [1] https://trac.torproject.org/projects/tor/ticket/21686 ***/
+ * [1] https://gitlab.torproject.org/tpo/applications/tor-browser/-/issues/21686 ***/
 pref("security.family_safety.mode", 0);
 /* 1222: disable intermediate certificate caching (fingerprinting attack vector) [FF41+] [RESTART]
  * [NOTE] This affects login/cert/key dbs. The effect is all credentials are session-only.
@@ -726,12 +728,12 @@ pref("security.family_safety.mode", 0);
  * PKP (Public Key Pinning) 0=disabled 1=allow user MiTM (such as your antivirus), 2=strict
  * [SETUP-WEB] If you rely on an AV (antivirus) to protect your web browsing
  * by inspecting ALL your web traffic, then leave at current default=1
- * [1] https://trac.torproject.org/projects/tor/ticket/16206 ***/
+ * [1] https://gitlab.torproject.org/tpo/applications/tor-browser/-/issues/16206 ***/
 pref("security.cert_pinning.enforcement_level", 2);
 
 /** MIXED CONTENT ***/
 /* 1240: disable insecure active content on https pages
- * [1] https://trac.torproject.org/projects/tor/ticket/21323 ***/
+ * [1] https://gitlab.torproject.org/tpo/applications/tor-browser/-/issues/21323 ***/
 pref("security.mixed_content.block_active_content", true); // [DEFAULT: true]
 /* 1241: disable insecure passive content (such as images) on https pages [SETUP-WEB] ***/
 pref("security.mixed_content.block_display_content", true);
@@ -744,28 +746,37 @@ pref("security.mixed_content.block_object_subrequest", true);
    // pref("dom.security.https_only_mode", true); // [FF76+]
    // pref("dom.security.https_only_mode.upgrade_local", true); // [FF77+]
 
-/** CIPHERS [WARNING: do not meddle with your cipher suite: see the section 1200 intro] ***/
-/* 1261: disable 3DES (effective key size < 128)
+/** CIPHERS [WARNING: do not meddle with your cipher suite: see the section 1200 intro]
+ * These are all the ciphers still using SHA-1 and CBC which are weaker than the available alternatives. (see "Cipher Suites" in [1])
+ * Additionally some have other weaknesses like key sizes of 128 (or lower) [2] and/or no Perfect Forward Secrecy [3].
+ * [1] https://browserleaks.com/ssl
+ * [2] https://en.wikipedia.org/wiki/Key_size
+ * [3] https://en.wikipedia.org/wiki/Forward_secrecy
+ ***/
+/* 1261: disable 3DES (effective key size < 128 and no PFS)
  * [1] https://en.wikipedia.org/wiki/3des#Security
  * [2] https://en.wikipedia.org/wiki/Meet-in-the-middle_attack
  * [3] https://www-archive.mozilla.org/projects/security/pki/nss/ssl/fips-ssl-ciphersuites.html ***/
    // pref("security.ssl3.rsa_des_ede3_sha", false);
-/* 1262: disable 128 bits ***/
-   // pref("security.ssl3.ecdhe_ecdsa_aes_128_sha", false);
-   // pref("security.ssl3.ecdhe_rsa_aes_128_sha", false);
 /* 1263: disable DHE (Diffie-Hellman Key Exchange)
  * [1] https://www.eff.org/deeplinks/2015/10/how-to-protect-yourself-from-nsa-attacks-1024-bit-DH ***/
-   // pref("security.ssl3.dhe_rsa_aes_128_sha", false); // [DEFAULT: false FF79+]
-   // pref("security.ssl3.dhe_rsa_aes_256_sha", false); // [DEFAULT: false FF79+]
-/* 1264: disable the remaining non-modern cipher suites as of FF52 ***/
-   // pref("security.ssl3.rsa_aes_128_sha", false);
-   // pref("security.ssl3.rsa_aes_256_sha", false);
+   // pref("security.ssl3.dhe_rsa_aes_128_sha", false); // [DEFAULT: false FF78+]
+   // pref("security.ssl3.dhe_rsa_aes_256_sha", false); // [DEFAULT: false FF78+]
+/* 1264: disable the remaining non-modern cipher suites as of FF78 (in order of preferred by FF) ***/
+   // pref("security.ssl3.ecdhe_ecdsa_aes_256_sha", false);
+   // pref("security.ssl3.ecdhe_ecdsa_aes_128_sha", false);
+   // pref("security.ssl3.ecdhe_rsa_aes_128_sha", false);
+   // pref("security.ssl3.ecdhe_rsa_aes_256_sha", false);
+   // pref("security.ssl3.rsa_aes_128_sha", false); // no PFS
+   // pref("security.ssl3.rsa_aes_256_sha", false); // no PFS
 
 /** UI (User Interface) ***/
 /* 1270: display warning on the padlock for "broken security" (if 1201 is false)
  * Bug: warning padlock not indicated for subresources on a secure page! [2]
+ * [STATS] SSL Labs (June 2020) reports 98.8% of sites have secure renegotiation [3]
  * [1] https://wiki.mozilla.org/Security:Renegotiation
- * [2] https://bugzilla.mozilla.org/1353705 ***/
+ * [2] https://bugzilla.mozilla.org/1353705
+ * [3] https://www.ssllabs.com/ssl-pulse/ ***/
 pref("security.ssl.treat_unsafe_negotiation_as_broken", true);
 /* 1271: control "Add Security Exception" dialog on SSL warnings
  * 0=do neither 1=pre-populate url 2=pre-populate url + pre-fetch cert (default)
@@ -789,7 +800,7 @@ pref("_user.js.parrot", "1400 syntax error: the parrot's bereft of life!");
 pref("browser.display.use_document_fonts", 0);
 /* 1403: disable icon fonts (glyphs) and local fallback rendering
  * [1] https://bugzilla.mozilla.org/789788
- * [2] https://trac.torproject.org/projects/tor/ticket/8455 ***/
+ * [2] https://gitlab.torproject.org/legacy/trac/-/issues/8455 ***/
    // pref("gfx.downloadable_fonts.enabled", false); // [FF41+]
    // pref("gfx.downloadable_fonts.fallback_delay", -1);
 /* 1404: disable rendering of SVG OpenType fonts
@@ -941,8 +952,10 @@ pref("media.getusermedia.audiocapture.enabled", false);
  * [NOTE] You can set exceptions under site permissions
  * [SETTING] Privacy & Security>Permissions>Autoplay>Settings>Default for all websites ***/
    // pref("media.autoplay.default", 5);
-/* 2031: disable autoplay of HTML5 media if you interacted with the site [FF66+] ***/
-pref("media.autoplay.enabled.user-gestures-needed", false);
+/* 2031: disable autoplay of HTML5 media if you interacted with the site [FF78+]
+ * 0=sticky (default), 1=transient, 2=user
+ * [1] https://html.spec.whatwg.org/multipage/interaction.html#sticky-activation ***/
+pref("media.autoplay.blocking_policy", 2);
 
 /*** [SECTION 2200]: WINDOW MEDDLING & LEAKS / POPUPS ***/
 pref("_user.js.parrot", "2200 syntax error: the parrot's 'istory!");
@@ -962,7 +975,7 @@ pref("dom.disable_window_move_resize", true);
  * This stops malicious window sizes and some screen resolution leaks.
  * You can still right-click a link and open in a new window.
  * [TEST] https://ghacksuserjs.github.io/TorZillaPrint/TorZillaPrint.html#screen
- * [1] https://trac.torproject.org/projects/tor/ticket/9881 ***/
+ * [1] https://gitlab.torproject.org/tpo/applications/tor-browser/-/issues/9881 ***/
 pref("browser.link.open_newwindow", 3);
 pref("browser.link.open_newwindow.restriction", 0);
 /* 2204: disable Fullscreen API (requires user interaction) to prevent screen-resolution leaks
@@ -1142,7 +1155,7 @@ pref("browser.uitour.url", "");
  * [1] https://github.com/pyllyukko/user.js/issues/179#issuecomment-246468676 ***/
 pref("devtools.chrome.enabled", false);
 /* 2608: disable remote debugging
- * [1] https://trac.torproject.org/projects/tor/ticket/16222 ***/
+ * [1] https://gitlab.torproject.org/tpo/applications/tor-browser/-/issues/16222 ***/
 pref("devtools.debugger.remote-enabled", false); // [DEFAULT: false]
 /* 2609: disable MathML (Mathematical Markup Language) [FF51+] [SETUP-HARDEN]
  * [TEST] https://ghacksuserjs.github.io/TorZillaPrint/TorZillaPrint.html#misc
@@ -1154,7 +1167,7 @@ pref("mathml.disabled", true); //BRACE-UNCOMMENTED
  * [1] https://bugzilla.mozilla.org/1216893 ***/
    // pref("svg.disabled", true);
 /* 2611: disable middle mouse click opening links from clipboard
- * [1] https://trac.torproject.org/projects/tor/ticket/10089 ***/
+ * [1] https://gitlab.torproject.org/tpo/applications/tor-browser/-/issues/10089 ***/
 pref("middlemouse.contentLoadURL", false);
 /* 2614: limit HTTP redirects (this does not control redirects with HTML meta tags or JS)
  * [NOTE] A low setting of 5 or under will probably break some sites (e.g. gmail logins)
@@ -1507,8 +1520,8 @@ pref("_user.js.parrot", "4600 syntax error: the parrot's crossed the Jordan");
 // 4601: [2514] spoof (or limit?) number of CPU cores [FF48+]
    // [NOTE] *may* affect core chrome/Firefox performance, will affect content.
    // [1] https://bugzilla.mozilla.org/1008453
-   // [2] https://trac.torproject.org/projects/tor/ticket/21675
-   // [3] https://trac.torproject.org/projects/tor/ticket/22127
+   // [2] https://gitlab.torproject.org/tpo/applications/tor-browser/-/issues/21675
+   // [3] https://gitlab.torproject.org/tpo/applications/tor-browser/-/issues/22127
    // [4] https://html.spec.whatwg.org/multipage/workers.html#navigator.hardwareconcurrency
    // pref("dom.maxHardwareConcurrency", 2);
 // * * * /
@@ -1520,7 +1533,7 @@ pref("dom.enable_resource_timing", false);
 pref("dom.enable_performance", false);
 // 4604: [2512] disable device sensor API
    // Optional protection depending on your device
-   // [1] https://trac.torproject.org/projects/tor/ticket/15758
+   // [1] https://gitlab.torproject.org/tpo/applications/tor-browser/-/issues/15758
    // [2] https://blog.lukaszolejnik.com/stealing-sensitive-browser-data-with-the-w3c-ambient-light-sensor-api/
    // [3] https://bugzilla.mozilla.org/buglist.cgi?bug_id=1357733,1292751
    // pref("device.sensors.enabled", false);
@@ -1531,7 +1544,7 @@ pref("dom.enable_performance", false);
 pref("browser.zoom.siteSpecific", false);
 // 4606: [2501] disable gamepad API - USB device ID enumeration
    // Optional protection depending on your connected devices
-   // [1] https://trac.torproject.org/projects/tor/ticket/13023
+   // [1] https://gitlab.torproject.org/tpo/applications/tor-browser/-/issues/13023
    // pref("dom.gamepad.enabled", false);
 // 4607: [2503] disable giving away network info [FF31+]
    // e.g. bluetooth, cellular, ethernet, wifi, wimax, other, mixed, unknown, none
@@ -1547,7 +1560,7 @@ pref("media.webspeech.synth.enabled", false);
 // * * * /
 // FF57+
 // 4610: [2506] disable video statistics - JS performance fingerprinting [FF25+]
-   // [1] https://trac.torproject.org/projects/tor/ticket/15757
+   // [1] https://gitlab.torproject.org/tpo/applications/tor-browser/-/issues/15757
    // [2] https://bugzilla.mozilla.org/654550
 pref("media.video_stats.enabled", false);
 // 4611: [2509] disable touch events
@@ -1555,7 +1568,7 @@ pref("media.video_stats.enabled", false);
    // 0=disabled, 1=enabled, 2=autodetect
    // Optional protection depending on your device
    // [1] https://developer.mozilla.org/docs/Web/API/Touch_events
-   // [2] https://trac.torproject.org/projects/tor/ticket/10286
+   // [2] https://gitlab.torproject.org/tpo/applications/tor-browser/-/issues/10286
    // pref("dom.w3c_touch_events.enabled", 0);
 // * * * /
 // FF59+
@@ -1584,7 +1597,7 @@ pref("ui.use_standins_for_native_colors", true);
 // 4616: enforce prefers-color-scheme as light [FF67+]
    // 0=light, 1=dark : This overrides your OS value
 pref("ui.systemUsesDarkTheme", 0); // [HIDDEN PREF]
-// 4617: enforce prefers-reduced-motion as no-preference [FF63+]
+// 4617: enforce prefers-reduced-motion as no-preference [FF63+] [RESTART]
    // 0=no-preference, 1=reduce
 pref("ui.prefersReducedMotion", 0); // [HIDDEN PREF]
 // * * * /
@@ -1633,7 +1646,6 @@ pref("_user.js.parrot", "5000 syntax error: this is an ex-parrot!");
    // pref("full-screen-api.warning.timeout", 0);
 /* APPEARANCE ***/
    // pref("browser.download.autohideButton", false); // [FF57+]
-   // pref("toolkit.cosmeticAnimations.enabled", false); // [FF55+]
    // pref("toolkit.legacyUserProfileCustomizations.stylesheets", true); // [FF68+] allow userChrome/userContent
 /* CONTENT BEHAVIOR ***/
    // pref("accessibility.typeaheadfind", true); // enable "Find As You Type"
@@ -1740,6 +1752,14 @@ pref("extensions.blocklist.url", "https://blocklists.settings.services.mozilla.c
    // [1] https://bugzilla.mozilla.org/1343184
    // [-] https://bugzilla.mozilla.org/1603007
 pref("browser.tabs.remote.allowLinkedWebInFileUriProcess", false);
+// * * * /
+// FF78
+// 2031: disable autoplay of HTML5 media if you interacted with the site [FF66+] - replaced by 'media.autoplay.blocking_policy'
+   // [-] https://bugzilla.mozilla.org/1509933
+pref("media.autoplay.enabled.user-gestures-needed", false);
+// 5000's: disable chrome animations - replaced FF77+ by 'ui.prefersReducedMotion' (4617)
+   // [-] https://bugzilla.mozilla.org/1640501
+   // pref("toolkit.cosmeticAnimations.enabled", false); // [FF55+]
 // * * * /
 // ***/
 
