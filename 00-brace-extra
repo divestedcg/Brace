@@ -96,7 +96,7 @@ xmleditor-enabled=true
 [org/virt-manager/virt-manager/console]
 auto-redirect=false
 resize-guest=1
-scaling=2
+scaling=1
 
 [system/proxy]
 mode='none'

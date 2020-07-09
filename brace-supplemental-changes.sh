@@ -71,9 +71,9 @@ if [[ "$EUID" -eq "0" ]]; then
 		select ys in "Yes" "Skip"; do
 			case $ys in
 				Yes )
-					local randhost=$(head /dev/urandom | tr -dc a-z | head -c8);
+					randhost=$(head /dev/urandom | tr -dc a-z | head -c8);
 					if [ -x /usr/bin/pwgen ]; then
-						local randhost=$(pwgen -A0 8 1);
+						randhost=$(pwgen -A0 8 1);
 					fi;
 					hostnamectl set-hostname $randhost;
 					break;;

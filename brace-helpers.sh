@@ -98,6 +98,7 @@ strictPermsRecursive() {
 
 # malware scanning
 alias malwaretest='wget http://eicar.org/download/eicar.com.txt && cat eicar.com.txt';
+alias clamscanhere='clamscan --recursive --detect-pua=yes --infected --allmatch --cross-fs=no --follow-dir-symlinks=0 --follow-file-symlinks=0 .';
 alias rootkitscan='sudo rkhunter --update && sudo rkhunter -c --enable all --disable none --rwo';
 alias rootkitscanalt='sudo unhide reverse procall sys';
 
