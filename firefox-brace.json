@@ -44,10 +44,6 @@
 				"installation_mode": "allowed",
 				"install_url": "https://addons.mozilla.org/firefox/downloads/latest/enhanced-h264ify/latest.xpi"
 			},
-			"jid1-BoFifL9Vbdl2zQ@jetpack": {
-				"installation_mode": "allowed",
-				"install_url": "https://addons.mozilla.org/firefox/downloads/latest/decentraleyes/latest.xpi"
-			},
 			"addon@darkreader.org": {
 				"installation_mode": "allowed",
 				"install_url": "https://addons.mozilla.org/firefox/downloads/latest/darkreader/latest.xpi"

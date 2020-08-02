@@ -1,7 +1,7 @@
 /******
 * name: ghacks user.js
-* date: 14 Jun 2020
-* version 78-alpha
+* date: 22 Jul 2020
+* version 79-alpha
 * authors: v52+ github | v51- www.ghacks.net
 * url: https://github.com/ghacksuserjs/ghacks-user.js
 * license: MIT: https://github.com/ghacksuserjs/ghacks-user.js/blob/master/LICENSE.txt
@@ -125,6 +125,9 @@ pref("browser.newtabpage.activity-stream.showSponsored", false);
 pref("browser.newtabpage.activity-stream.feeds.discoverystreamfeed", false); // [FF66+]
 /* 0105d: disable Activity Stream recent Highlights in the Library [FF57+] ***/
    // pref("browser.library.activity-stream.enabled", false);
+/* 0105e: clear default topsites
+ * [NOTE] This does not block you from adding your own ***/
+pref("browser.newtabpage.activity-stream.default.sites", "");
 /* 0110: start Firefox in PB (Private Browsing) mode
  * [NOTE] In this mode *all* windows are "private windows" and the PB mode icon is not displayed
  * [WARNING] The P in PB mode is misleading: it means no "persistent" disk storage such as history,
@@ -172,13 +175,6 @@ pref("intl.accept_languages", "data:text/plain,intl.accept_languages=en-US, en")
  * [1] https://bugzilla.mozilla.org/867501
  * [2] https://bugzilla.mozilla.org/1629630 ***/
 pref("javascript.use_us_english_locale", true); // [HIDDEN PREF]
-/* 0212: enforce fallback text encoding to match en-US
- * When the content or server doesn't declare a charset the browser will
- * fallback to the "Current locale" based on your application language
- * [SETTING] General>Language and Appearance>Fonts and Colors>Advanced>Text Encoding for Legacy Content
- * [TEST] https://hsivonen.com/test/moz/check-charset.htm
- * [1] https://gitlab.torproject.org/tpo/applications/tor-browser/-/issues/20025 ***/
-pref("intl.charset.fallback.override", "windows-1252");
 
 /*** [SECTION 0300]: QUIET FOX
      Starting in user.js v67, we only disable the auto-INSTALL of Firefox. You still get prompts
@@ -205,7 +201,7 @@ pref("app.update.auto", false);
    // pref("extensions.getAddons.cache.enabled", false);
 /* 0308: disable search engine updates (e.g. OpenSearch)
  * [NOTE] This does not affect Mozilla's built-in or Web Extension search engines
- * [SETTING] General>Firefox Updates>Automatically update search engines ***/
+ * [SETTING] General>Firefox Updates>Automatically update search engines (FF72-) ***/
 pref("browser.search.update", false);
 /* 0309: disable sending Flash crash reports ***/
 pref("dom.ipc.plugins.flash.subprocess.crashreporter.enabled", false);
@@ -441,11 +437,6 @@ pref("network.file.disable_unc_paths", true); // [HIDDEN PREF]
  * [4] https://en.wikipedia.org/wiki/GIO_(software) ***/
 pref("network.gio.supported-protocols", ""); // [HIDDEN PREF]
 
-/*** [SECTION 0709]: HOTFIX for FF77, FIXED in FF78 ***/
-/* 0709: disabling UNC can cause extension storage to fail
- * [1] https://github.com/ghacksuserjs/ghacks-user.js/issues/923 ***/
-pref("network.file.disable_unc_paths", false); // [HIDDEN PREF]
-
 /*** [SECTION 0800]: LOCATION BAR / SEARCH BAR / SUGGESTIONS / HISTORY / FORMS
      Change items 0850 and above to suit for privacy vs convenience and functionality. Consider
      your environment (no unwanted eyeballs), your device (restricted access), your device's
@@ -458,9 +449,8 @@ pref("_user.js.parrot", "0800 syntax error: the parrot's ceased to be!");
 /* 0801: disable location bar using search
  * Don't leak URL typos to a search engine, give an error message instead.
  * Examples: "secretplace,com", "secretplace/com", "secretplace com", "secret place.com"
- * [NOTE] Search buttons in the dropdown work, but hitting 'enter' in the location bar will fail
- * [TIP] You can add keywords to search engines in options (e.g. 'd' for DuckDuckGo) and
- * the dropdown will now auto-select it and you can then hit 'enter' and it will work
+ * [NOTE] This does **not** affect explicit user action such as using search buttons in the
+ * dropdown, or using keyword search shortcuts you configure in options (e.g. 'd' for DuckDuckGo)
  * [SETUP-CHROME] If you don't, or rarely, type URLs, or you use a default search
  * engine that respects privacy, then you probably don't need this ***/
    // pref("keyword.enabled", false); //BRACE-COMMENTED
@@ -488,12 +478,14 @@ pref("layout.css.visited_links_enabled", false);
  * [SETTING] Search>Provide search suggestions | Show search suggestions in address bar results ***/
 pref("browser.search.suggest.enabled", false);
 pref("browser.urlbar.suggest.searches", false);
-/* 0809: disable location bar suggesting "preloaded" top websites [FF54+]
- * [1] https://bugzilla.mozilla.org/1211726 ***/
-pref("browser.urlbar.usepreloadedtopurls.enabled", false);
 /* 0810: disable location bar making speculative connections [FF56+]
  * [1] https://bugzilla.mozilla.org/1348275 ***/
 pref("browser.urlbar.speculativeConnect.enabled", false);
+/* 0811: disable location bar leaking single words to a DNS provider **after searching** [FF78+]
+ * 0=never resolve single words, 1=heuristic (default), 2=always resolve
+ * [NOTE] For FF78 value 1 and 2 are the same and always resolve but that will change in future versions
+ * [1] https://bugzilla.mozilla.org/1642623 ***/
+pref("browser.urlbar.dnsResolveSingleWordsAfterSearch", 0);
 /* 0850a: disable location bar suggestion types
  * [SETTING] Privacy & Security>Address Bar>When using the address bar, suggest ***/
    // pref("browser.urlbar.suggest.history", false);
@@ -742,6 +734,7 @@ pref("security.mixed_content.block_display_content", true);
 pref("security.mixed_content.block_object_subrequest", true);
 /* 1244: enable https-only-mode [FF76+]
  * [NOTE] This is experimental
+ * [SETTING] Privacy & Security>HTTPS-Only Mode (FF81+)
  * [1] https://bugzilla.mozilla.org/1613063 */
    // pref("dom.security.https_only_mode", true); // [FF76+]
    // pref("dom.security.https_only_mode.upgrade_local", true); // [FF77+]
@@ -812,7 +805,8 @@ pref("gfx.font_rendering.opentype_svg.enabled", false);
  * [2] https://en.wikipedia.org/wiki/Graphite_(SIL) ***/
 pref("gfx.font_rendering.graphite.enabled", false);
 /* 1409: limit system font exposure to a whitelist [FF52+] [RESTART]
- * If the whitelist is empty, then whitelisting is considered disabled and all fonts are allowed.
+ * If the whitelist is empty, then whitelisting is considered disabled and all fonts are allowed
+ * [NOTE] RFP in FF80+ restricts the whitelist to bundled and "Base Fonts" (see 4618)
  * [WARNING] Creating your own probably highly-unique whitelist will raise your entropy.
  * Eventually privacy.resistFingerprinting (see 4500) will cover this
  * [1] https://bugzilla.mozilla.org/1121643 ***/
@@ -919,7 +913,7 @@ pref("_user.js.parrot", "2000 syntax error: the parrot's snuffed it!");
  * [1] https://www.privacytools.io/#webrtc ***/
 pref("media.peerconnection.enabled", false);
 /* 2002: limit WebRTC IP leaks if using WebRTC
- * In FF70+ these settings match Mode 4 (Mode 3 in older versions) (see [3])
+ * In FF70+ these settings match Mode 4 (Mode 3 in older versions), see [3]
  * [TEST] https://browserleaks.com/webrtc
  * [1] https://bugzilla.mozilla.org/buglist.cgi?bug_id=1189041,1297416,1452713
  * [2] https://wiki.mozilla.org/Media/WebRTC/Privacy
@@ -954,6 +948,7 @@ pref("media.getusermedia.audiocapture.enabled", false);
    // pref("media.autoplay.default", 5);
 /* 2031: disable autoplay of HTML5 media if you interacted with the site [FF78+]
  * 0=sticky (default), 1=transient, 2=user
+ * [NOTE] If you have trouble with some video sites, then add an exception (see 2030)
  * [1] https://html.spec.whatwg.org/multipage/interaction.html#sticky-activation ***/
 pref("media.autoplay.blocking_policy", 2);
 
@@ -1091,7 +1086,7 @@ pref("javascript.options.wasm", false);
 pref("dom.IntersectionObserver.enabled", false); //BRACE-UNCOMMENTED
 /* 2429: enable (limited but sufficient) window.opener protection [FF65+]
  * Makes rel=noopener implicit for target=_blank in anchor and area elements when no rel attribute is set ***/
-pref("dom.targetBlankNoOpener.enabled", true); // [DEFAULT: true FF78+]
+pref("dom.targetBlankNoOpener.enabled", true); // [DEFAULT: true FF79+]
 
 /*** [SECTION 2500]: HARDWARE FINGERPRINTING ***/
 pref("_user.js.parrot", "2500 syntax error: the parrot's shuffled off 'is mortal coil!");
@@ -1099,7 +1094,7 @@ pref("_user.js.parrot", "2500 syntax error: the parrot's shuffled off 'is mortal
  * Initially a Linux issue (high precision readout) that was fixed.
  * However, it is still another metric for fingerprinting, used to raise entropy.
  * e.g. do you have a battery or not, current charging status, charge level, times remaining etc
- * [NOTE] From FF52+ Battery Status API is only available in chrome/privileged code. see [1]
+ * [NOTE] From FF52+ Battery Status API is only available in chrome/privileged code, see [1]
  * [1] https://bugzilla.mozilla.org/1313580 ***/
 pref("dom.battery.enabled", false); //BRACE-UNCOMMENTED
 /* 2505: disable media device enumeration [FF29+]
@@ -1367,6 +1362,7 @@ pref("privacy.cpd.siteSettings", false); // Site Preferences
 pref("privacy.sanitize.timeSpan", 0);
 
 /*** [SECTION 4000]: FPI (FIRST PARTY ISOLATION)
+ 4001: FPI
  ** 1278037 - isolate indexedDB (FF51+)
  ** 1277803 - isolate favicons (FF52+)
  ** 1264562 - isolate OCSP cache (FF52+)
@@ -1385,22 +1381,29 @@ pref("privacy.sanitize.timeSpan", 0);
  ** 1506693 - isolate pdfjs range-based requests (FF68+)
  ** 1330467 - isolate site permissions (FF69+)
  ** 1534339 - isolate IPv6 (FF73+)
+ 4003: NETWORK PARTITON
+ ** 1647732 - isolate font cache (FF80+)
+ ** 1649673 - isolate speculative connections (FF80+)
 ***/
 pref("_user.js.parrot", "4000 syntax error: the parrot's pegged out");
 /* 4001: enable First Party Isolation [FF51+]
  * [SETUP-WEB] May break cross-domain logins and site functionality until perfected
- * [1] https://bugzilla.mozilla.org/1260931 ***/
+ * [1] https://bugzilla.mozilla.org/1260931
+ * [2] https://bugzilla.mozilla.org/1299996 [META] ***/
 pref("privacy.firstparty.isolate", true);
 /* 4002: enforce FPI restriction for window.opener [FF54+]
  * [NOTE] Setting this to false may reduce the breakage in 4001
  * FF65+ blocks postMessage with targetOrigin "*" if originAttributes don't match. But
- * to reduce breakage it ignores the 1st-party domain (FPD) originAttribute. (see [2],[3])
+ * to reduce breakage it ignores the 1st-party domain (FPD) originAttribute, see [2],[3]
  * The 2nd pref removes that limitation and will only allow communication if FPDs also match.
  * [1] https://bugzilla.mozilla.org/1319773#c22
  * [2] https://bugzilla.mozilla.org/1492607
  * [3] https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage ***/
    // pref("privacy.firstparty.isolate.restrict_opener_access", true); // [DEFAULT: true]
    // pref("privacy.firstparty.isolate.block_post_message", true); // [HIDDEN PREF ESR]
+/* 4003: enable site partitioning (FF78+)
+ * [1] https://bugzilla.mozilla.org/1590107 [META] */
+pref("privacy.partition.network_state", true);
 
 /*** [SECTION 4500]: RFP (RESIST FINGERPRINTING)
    This master switch will be used for a wide range of items, many of which will
@@ -1468,6 +1471,7 @@ pref("privacy.firstparty.isolate", true);
  ** 1595823 - spoof audioContext sampleRate (FF72+)
  ** 1607316 - spoof pointer as coarse and hover as none (ANDROID) (FF74+)
  ** 1621433 - randomize canvas (previously FF58+ returned an all-white canvas) (FF78+)
+ ** 1653987 - limit font visibility to bundled and "Base Fonts" (see 4618) (non-ANDROID) (FF80+)
 ***/
 pref("_user.js.parrot", "4500 syntax error: the parrot's popped 'is clogs");
 /* 4501: enable privacy.resistFingerprinting [FF41+]
@@ -1502,6 +1506,9 @@ pref("privacy.resistFingerprinting.letterboxing", true); // [HIDDEN PREF]
  * When default true (FF62+) this no longer masks the RFP chrome resizing activity
  * [1] https://bugzilla.mozilla.org/1448423 ***/
 pref("browser.startup.blankWindow", false);
+/* 4520: disable chrome animations [FF77+] [RESTART]
+ * [NOTE] pref added in FF63, but applied to chrome in FF77. RFP spoofs this for web content ***/
+pref("ui.prefersReducedMotion", 1); // [HIDDEN PREF]
 
 /*** [SECTION 4600]: RFP ALTERNATIVES
    * non-RFP users:
@@ -1600,6 +1607,12 @@ pref("ui.systemUsesDarkTheme", 0); // [HIDDEN PREF]
 // 4617: enforce prefers-reduced-motion as no-preference [FF63+] [RESTART]
    // 0=no-preference, 1=reduce
 pref("ui.prefersReducedMotion", 0); // [HIDDEN PREF]
+// 4618: limit font visbility (non-ANDROID) [FF79+]
+   // Uses hardcoded lists with two parts: kBaseFonts + kLangPackFonts, see [1]
+   // 1=only base system fonts, 2=also fonts from optional language packs, 3=also user-installed fonts
+   // [NOTE] Bundled fonts are auto-allowed
+   // [1] https://searchfox.org/mozilla-central/search?path=StandardFonts*.inc
+pref("layout.css.font-visibility.level", 1);
 // * * * /
 // ***/
 
@@ -1679,6 +1692,20 @@ pref("network.manage-offline-status", false); // see bugzilla 620472 //BRACE-UNC
      [1] https://github.com/ghacksuserjs/ghacks-user.js/issues/123
 ***/
 pref("_user.js.parrot", "9999 syntax error: the parrot's deprecated!");
+// ESR78.x still uses all the following prefs
+// [NOTE] replace the * with a slash in the line above to re-enable them
+// FF79
+// 0212: enforce fallback text encoding to match en-US
+   // When the content or server doesn't declare a charset the browser will
+   // fallback to the "Current locale" based on your application language
+   // [SETTING] General>Language and Appearance>Fonts and Colors>Advanced>Text Encoding for Legacy Content (FF72-)
+   // [TEST] https://hsivonen.com/test/moz/check-charset.htm
+   // [1] https://gitlab.torproject.org/tpo/applications/tor-browser/-/issues/20025
+   // [-] https://bugzilla.mozilla.org/1603712
+pref("intl.charset.fallback.override", "windows-1252");
+// * * * /
+// ***/
+
 // ESR68.x still uses all the following prefs
 // [NOTE] replace the * with a slash in the line above to re-enable them
 // FF69
@@ -1757,7 +1784,7 @@ pref("browser.tabs.remote.allowLinkedWebInFileUriProcess", false);
 // 2031: disable autoplay of HTML5 media if you interacted with the site [FF66+] - replaced by 'media.autoplay.blocking_policy'
    // [-] https://bugzilla.mozilla.org/1509933
 pref("media.autoplay.enabled.user-gestures-needed", false);
-// 5000's: disable chrome animations - replaced FF77+ by 'ui.prefersReducedMotion' (4617)
+// 5000's: disable chrome animations - replaced FF77+ by 'ui.prefersReducedMotion' (4520)
    // [-] https://bugzilla.mozilla.org/1640501
    // pref("toolkit.cosmeticAnimations.enabled", false); // [FF55+]
 // * * * /
