@@ -1,6 +1,6 @@
 [brace]
 name=brace RPMs for Fedora
-baseurl=https://divestos.org/rpm/fedora/
+baseurl=https://spotco.us/rpm/fedora/
 enabled=1
 metadata_expire=7d
 repo_gpgcheck=1
