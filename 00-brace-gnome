@@ -178,6 +178,7 @@ default='b1dcc9dd-5262-4d8d-a863-c897e6d979b9'
 foreground-color='#c5c8c6'
 palette=['#1d1f21', '#cc342b', '#198844', '#fba922', '#3971ed', '#a36ac7', '#3971ed', '#c5c8c6', '#969896', '#cc342b', '#198844', '#fba922', '#3971ed', '#a36ac7', '#3971ed', '#ffffff']
 cursor-shape='underline'
+use-system-font=true
 use-theme-colors=true
 use-transparent-background=true
 background-transparency-percent=10

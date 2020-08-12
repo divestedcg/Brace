@@ -75,7 +75,7 @@ if [[ "$EUID" -eq "0" ]]; then
 					if [ -x /usr/bin/pwgen ]; then
 						randhost=$(pwgen -A0 8 1);
 					fi;
-					hostnamectl set-hostname $randhost;
+					hostnamectl set-hostname "$randhost";
 					break;;
 				Skip )
 					break;;
@@ -88,6 +88,22 @@ else
 		gsettings set org.gnome.builder.editor font-name 'Source Code Pro 10';
 		gsettings set org.gnome.desktop.interface monospace-font-name 'Source Code Pro 10';
 		gsettings set org.mate.desktop.interface monospace-font-name 'Source Code Pro 10';
+	fi;
+	if [ -f "/usr/share/fonts/mozilla-fira/FiraSans-Regular.otf" ] || [ -f "/usr/share/fonts/TTF/FiraSans-Regular.ttf" ]; then
+		gsettings set org.gnome.desktop.interface font-name 'Fira Sans 10';
+		gsettings set org.gnome.desktop.wm.preferences titlebar-font 'Fira Sans Bold 11';
+		gsettings set org.cinnamon.desktop.interface font-name 'Fira Sans 10';
+		#TODO cinnamon legacy title font
+		gsettings set org.mate.caja.desktop font 'Fira Sans 10';
+		gsettings set org.mate.desktop.interface font-name 'Fira Sans 10';
+		gsettings set org.mate.marco.general titlebar-font 'Fira Sans Bold 11';
+	fi;
+	if [ -f "/usr/share/fonts/mozilla-fira/FiraMono-Regular.otf" ] || [ -f "/usr/share/fonts/TTF/FiraMono-Regular.ttf" ]; then
+		gsettings set org.gnome.builder.editor font-name 'Fira Mono 10';
+		gsettings set org.gnome.desktop.interface monospace-font-name 'Fira Mono 10';
+		gsettings set org.gnome.gedit.preferences.editor editor-font 'Fira Mono 10';
+		gsettings set org.cinnamon.desktop.interface monospace-font-name 'Fira Mono 10';
+		gsettings set org.mate.desktop.interface monospace-font-name 'Fira Mono 10';
 	fi;
 	if [ -d "/usr/share/icons/Numix-Circle" ]; then
 		gsettings set org.gnome.desktop.interface icon-theme 'Numix-Circle';

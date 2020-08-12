@@ -26,6 +26,7 @@ pref("privacy.trackingprotection.fingerprinting.enabled", true);
 pref("privacy.trackingprotection.cryptomining.enabled", true);
 
 //Security
+//pref("dom.security.https_only_mode", true);
 pref("security.webauth.u2f", true);
 pref("mailnews.message_display.disable_remote_image", true);
 pref("mail.phishing.detection.enabled", true);
