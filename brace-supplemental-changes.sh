@@ -40,6 +40,7 @@ if [[ "$EUID" -eq "0" ]]; then
 					grubby --update-kernel=ALL --args="iommu=force iommu.passthrough=0 intel_iommu=on,strict amd_iommu=fullflush"; #efi=disable_early_pci_dma (often breaks boot)
 					grubby --update-kernel=ALL --args="spectre_v2=on spec_store_bypass_disable=on tsx=off";
 					#grubby --update-kernel=ALL --args="mitigations=auto,nosmt";
+					grubby --update-kernel=ALL --args="module.sig_enforce=1";
 					grubby --update-kernel=ALL --args="fsck.mode=force";
 					if [ "$(/usr/bin/uname -m)" = "aarch64" ]; then grubby --update-kernel=ALL --args="kpti=on ssbd=force-on"; fi;
 					#grubby --update-kernel=ALL --args="amdgpu.tmz=1"; #Encrypted GPU memory (Linux 5.8)
