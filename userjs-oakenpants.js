@@ -1,8 +1,7 @@
 /******
 * name: ghacks user.js
-* date: 22 Jul 2020
-* version 79-alpha
-* authors: v52+ github | v51- www.ghacks.net
+* date: 13 Aug 2020
+* version 80-alpha
 * url: https://github.com/ghacksuserjs/ghacks-user.js
 * license: MIT: https://github.com/ghacksuserjs/ghacks-user.js/blob/master/LICENSE.txt
 
@@ -117,7 +116,7 @@ pref("browser.newtabpage.activity-stream.telemetry", false);
  * Runs code received from a server (aka Remote Code Execution) and sends information back to a metrics server
  * [1] https://abouthome-snippets-service.readthedocs.io/ ***/
 pref("browser.newtabpage.activity-stream.feeds.snippets", false);
-pref("browser.newtabpage.activity-stream.asrouter.providers.snippets", "");
+pref("browser.newtabpage.activity-stream.asrouter.providers.snippets", "{}");
 /* 0105c: disable Activity Stream Top Stories, Pocket-based and/or sponsored content ***/
 pref("browser.newtabpage.activity-stream.feeds.section.topstories", false);
 pref("browser.newtabpage.activity-stream.section.highlights.includePocket", false);
@@ -165,6 +164,13 @@ pref("geo.provider.use_gpsd", false); // [LINUX]
  * i.e. ignore all of Mozilla's various search engines in multiple locales ***/
 pref("browser.search.geoSpecificDefaults", false);
 pref("browser.search.geoSpecificDefaults.url", "");
+/* 0207: disable region updates
+ * [1] https://firefox-source-docs.mozilla.org/toolkit/modules/toolkit_modules/Region.html ***/
+pref("browser.region.network.url", ""); // [FF78+]
+pref("browser.region.update.enabled", false); // [[FF79+]
+/* 0208: set search region
+ * [NOTE] May not be hidden if Firefox has changed your settings due to your region (see 0207) ***/
+   // pref("browser.search.region", "US"); // [HIDDEN PREF]
 
 /** LANGUAGE / LOCALE ***/
 /* 0210: set preferred language for displaying web pages
@@ -340,17 +346,14 @@ pref("extensions.systemAddon.update.url", ""); // [FF44+]
  * Currently blocked by 'datareporting.healthreport.uploadEnabled' (see 0340) ***/
 pref("browser.ping-centre.telemetry", false);
 /* 0515: disable Screenshots
- * alternatively in FF60+, disable uploading to the Screenshots server
- * [1] https://github.com/mozilla-services/screenshots
- * [2] https://www.ghacks.net/2017/05/28/firefox-screenshots-integrated-in-firefox-nightly/ ***/
+ * alternatively in FF60+, disable uploading to the Screenshots server ***/
 pref("extensions.screenshots.disabled", true); // [FF55+] //BRACE-UNCOMMENTED
 pref("extensions.screenshots.upload-disabled", true); // [FF60+] //BRACE-UNCOMMENTED
 /* 0517: disable Form Autofill
  * [NOTE] Stored data is NOT secure (uses a JSON file)
  * [NOTE] Heuristics controls Form Autofill on forms without @autocomplete attributes
  * [SETTING] Privacy & Security>Forms and Autofill>Autofill addresses (FF74+)
- * [1] https://wiki.mozilla.org/Firefox/Features/Form_Autofill
- * [2] https://www.ghacks.net/2017/05/24/firefoxs-new-form-autofill-is-awesome/ ***/
+ * [1] https://wiki.mozilla.org/Firefox/Features/Form_Autofill ***/
 pref("extensions.formautofill.addresses.enabled", false); // [FF55+]
 pref("extensions.formautofill.available", "off"); // [FF56+]
 pref("extensions.formautofill.creditCards.enabled", false); // [FF56+]
@@ -365,16 +368,14 @@ pref("_user.js.parrot", "0600 syntax error: the parrot's no more!");
  * [1] https://developer.mozilla.org/docs/Web/HTTP/Link_prefetching_FAQ ***/
 pref("network.prefetch-next", false);
 /* 0602: disable DNS prefetching
- * [1] https://www.ghacks.net/2013/04/27/firefox-prefetching-what-you-need-to-know/
- * [2] https://developer.mozilla.org/docs/Web/HTTP/Headers/X-DNS-Prefetch-Control ***/
+ * [1] https://developer.mozilla.org/docs/Web/HTTP/Headers/X-DNS-Prefetch-Control ***/
 pref("network.dns.disablePrefetch", true);
-pref("network.dns.disablePrefetchFromHTTPS", true); // [HIDDEN PREF ESR] [DEFAULT: true FF70+]
+pref("network.dns.disablePrefetchFromHTTPS", true); // [HIDDEN PREF ESR68 or lower] [DEFAULT: true FF70+]
 /* 0603: disable predictor / prefetching ***/
 pref("network.predictor.enabled", false);
 pref("network.predictor.enable-prefetch", false); // [FF48+]
 /* 0605: disable link-mouseover opening connection to linked server
- * [1] https://news.slashdot.org/story/15/08/14/2321202/how-to-quash-firefoxs-silent-requests
- * [2] https://www.ghacks.net/2015/08/16/block-firefox-from-connecting-to-sites-when-you-hover-over-links/ ***/
+ * [1] https://news.slashdot.org/story/15/08/14/2321202/how-to-quash-firefoxs-silent-requests ***/
 pref("network.http.speculative-parallel-limit", 0);
 /* 0606: disable "Hyperlink Auditing" (click tracking) and enforce same host in case
  * [1] https://www.bleepingcomputer.com/news/software/major-browsers-to-prevent-disabling-of-click-tracking-privacy-risk/ ***/
@@ -422,7 +423,7 @@ pref("network.http.altsvc.oe", false);
  * [1] https://trac.torproject.org/projects/tor/wiki/doc/TorifyHOWTO/WebBrowsers ***/
 pref("network.proxy.socks_remote_dns", true);
 /* 0708: disable FTP [FF60+]
- * [1] https://www.ghacks.net/2018/02/20/firefox-60-with-new-preference-to-disable-ftp/ ***/
+ * [1] https://www.fxsitecompat.dev/en-CA/docs/2020/ftp-support-will-be-removed/ ***/
    // pref("network.ftp.enabled", false);
 /* 0709: disable using UNC (Uniform Naming Convention) paths [FF61+]
  * [SETUP-CHROME] Can break extensions for profiles on network shares
@@ -528,20 +529,21 @@ pref("_user.js.parrot", "0900 syntax error: the parrot's expired!");
  * [NOTE] This does not clear any passwords already saved
  * [SETTING] Privacy & Security>Logins and Passwords>Ask to save logins and passwords for websites ***/
    // pref("signon.rememberSignons", false);
-/* 0902: use a master password
+/* 0902: use a primary password
  * There are no preferences for this. It is all handled internally.
- * [SETTING] Privacy & Security>Logins and Passwords>Use a master password
- * [1] https://support.mozilla.org/kb/use-master-password-protect-stored-logins ***/
-/* 0903: set how often Firefox should ask for the master password
+ * [SETTING] Privacy & Security>Logins and Passwords>Use a Primary Password
+ * [1] https://support.mozilla.org/kb/use-primary-password-protect-stored-logins-and-pas ***/
+/* 0903: set how often Firefox should ask for the primary password
  * 0=the first time (default), 1=every time it's needed, 2=every n minutes (see 0904) ***/
 pref("security.ask_for_password", 2);
-/* 0904: set how often in minutes Firefox should ask for the master password (see 0903)
+/* 0904: set how often in minutes Firefox should ask for the primary password (see 0903)
  * in minutes, default is 30 ***/
 pref("security.password_lifetime", 5);
 /* 0905: disable auto-filling username & password form fields
  * can leak in cross-site forms *and* be spoofed
  * [NOTE] Username & password is still available when you enter the field
- * [SETTING] Privacy & Security>Logins and Passwords>Autofill logins and passwords ***/
+ * [SETTING] Privacy & Security>Logins and Passwords>Autofill logins and passwords
+ * [1] https://freedom-to-tinker.com/2017/12/27/no-boundaries-for-user-identities-web-trackers-exploit-browser-login-managers/ ***/
 pref("signon.autofillForms", false);
 /* 0909: disable formless login capture for Password Manager [FF51+] ***/
 pref("signon.formlessCapture.enabled", false);
@@ -732,8 +734,9 @@ pref("security.mixed_content.block_display_content", true);
 /* 1243: block unencrypted requests from Flash on encrypted pages to mitigate MitM attacks [FF59+]
  * [1] https://bugzilla.mozilla.org/1190623 ***/
 pref("security.mixed_content.block_object_subrequest", true);
-/* 1244: enable https-only-mode [FF76+]
+/* 1244: enable HTTPS-Only mode [FF76+]
  * [NOTE] This is experimental
+ * [SETTING] to add site exceptions: Page Info>Permissions>Use insecure HTTP (FF80+)
  * [SETTING] Privacy & Security>HTTPS-Only Mode (FF81+)
  * [1] https://bugzilla.mozilla.org/1613063 */
    // pref("dom.security.https_only_mode", true); // [FF76+]
@@ -889,8 +892,7 @@ pref("_user.js.parrot", "1800 syntax error: the parrot's pushing up daisies!");
 /* 1803: disable Flash plugin
  * 0=deactivated, 1=ask, 2=enabled
  * ESR52.x is the last branch to *fully* support NPAPI, FF52+ stable only supports Flash
- * [NOTE] You can still override individual sites via site permissions
- * [1] https://www.ghacks.net/2013/07/09/how-to-make-sure-that-a-firefox-plugin-never-activates-again/ ***/
+ * [NOTE] You can still override individual sites via site permissions ***/
 pref("plugin.state.flash", 0);
 /* 1820: disable GMP (Gecko Media Plugins)
  * [1] https://wiki.mozilla.org/GeckoMediaPlugins ***/
@@ -1044,9 +1046,8 @@ pref("_user.js.parrot", "2400 syntax error: the parrot's kicked the bucket!");
  * [NOTE] This will break some sites' functionality e.g. Outlook, Twitter, Facebook, Wordpress
  * This applies to onCut/onCopy/onPaste events - i.e. it requires interaction with the website
  * [WARNING] If both 'middlemouse.paste' and 'general.autoScroll' are true (at least one
- * is default false) then enabling this pref can leak clipboard content, see [2]
- * [1] https://www.ghacks.net/2014/01/08/block-websites-reading-modifying-clipboard-contents-firefox/
- * [2] https://bugzilla.mozilla.org/1528289 */
+ * is default false) then enabling this pref can leak clipboard content, see [1]
+ * [1] https://bugzilla.mozilla.org/1528289 */
 pref("dom.event.clipboardevents.enabled", false); //BRACE-UNCOMMENTED
 /* 2404: disable clipboard commands (cut/copy) from "non-privileged" content [FF41+]
  * this disables document.execCommand("cut"/"copy") to protect your clipboard
@@ -1197,8 +1198,7 @@ pref("network.IDN_show_punycode", true);
  * CAVEAT: JS can still force a pdf to open in-browser by bundling its own code (rare)
  * [SETTING] General>Applications>Portable Document Format (PDF) ***/
 pref("pdfjs.disabled", false); // [DEFAULT: false]
-/* 2621: disable links launching Windows Store on Windows 8/8.1/10 [WINDOWS]
- * [1] https://www.ghacks.net/2016/03/25/block-firefox-chrome-windows-store/ ***/
+/* 2621: disable links launching Windows Store on Windows 8/8.1/10 [WINDOWS] ***/
 pref("network.protocol-handler.external.ms-windows-store", false);
 /* 2622: enforce no system colors; they can be fingerprinted
  * [SETTING] General>Language and Appearance>Fonts and Colors>Colors>Use system colors ***/
@@ -1773,7 +1773,6 @@ pref("extensions.blocklist.url", "https://blocklists.settings.services.mozilla.c
 // * * * /
 // FF77
 // 0850e: disable location bar one-off searches [FF51+]
-   // [1] https://www.ghacks.net/2016/08/09/firefox-one-off-searches-address-bar/
    // [-] https://bugzilla.mozilla.org/1628926
    // pref("browser.urlbar.oneOffSearches", false);
 // 2605: block web content in file processes [FF55+]
