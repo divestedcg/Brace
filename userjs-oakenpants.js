@@ -735,11 +735,12 @@ pref("security.mixed_content.block_display_content", true);
  * [1] https://bugzilla.mozilla.org/1190623 ***/
 pref("security.mixed_content.block_object_subrequest", true);
 /* 1244: enable HTTPS-Only mode [FF76+]
- * [NOTE] This is experimental
+ * When "https_only_mode" (all windows) is true, "https_only_mode_pbm" (private windows only) is ignored
  * [SETTING] to add site exceptions: Page Info>Permissions>Use insecure HTTP (FF80+)
- * [SETTING] Privacy & Security>HTTPS-Only Mode (FF81+)
- * [1] https://bugzilla.mozilla.org/1613063 */
+ * [SETTING] Privacy & Security>HTTPS-Only Mode (FF80+ with browser.preferences.exposeHTTPSOnly = true)
+ * [1] https://bugzilla.mozilla.org/1613063 ***/
    // pref("dom.security.https_only_mode", true); // [FF76+]
+   // pref("dom.security.https_only_mode_pbm", true); // [FF80+]
    // pref("dom.security.https_only_mode.upgrade_local", true); // [FF77+]
 
 /** CIPHERS [WARNING: do not meddle with your cipher suite: see the section 1200 intro]
@@ -809,7 +810,8 @@ pref("gfx.font_rendering.opentype_svg.enabled", false);
 pref("gfx.font_rendering.graphite.enabled", false);
 /* 1409: limit system font exposure to a whitelist [FF52+] [RESTART]
  * If the whitelist is empty, then whitelisting is considered disabled and all fonts are allowed
- * [NOTE] RFP in FF80+ restricts the whitelist to bundled and "Base Fonts" (see 4618)
+ * [NOTE] in FF80 RFP restricts the whitelist to bundled and "Base Fonts"
+ * ...and in FF81+ the whitelist **overrides** RFP's font visibility (see 4618)
  * [WARNING] Creating your own probably highly-unique whitelist will raise your entropy.
  * Eventually privacy.resistFingerprinting (see 4500) will cover this
  * [1] https://bugzilla.mozilla.org/1121643 ***/
@@ -956,16 +958,6 @@ pref("media.autoplay.blocking_policy", 2);
 
 /*** [SECTION 2200]: WINDOW MEDDLING & LEAKS / POPUPS ***/
 pref("_user.js.parrot", "2200 syntax error: the parrot's 'istory!");
-/* 2201: prevent websites from disabling new window features ***/
-pref("dom.disable_window_open_feature.close", true);
-pref("dom.disable_window_open_feature.location", true); // [DEFAULT: true]
-pref("dom.disable_window_open_feature.menubar", true);
-pref("dom.disable_window_open_feature.minimizable", true);
-pref("dom.disable_window_open_feature.personalbar", true); // bookmarks toolbar
-pref("dom.disable_window_open_feature.resizable", true); // [DEFAULT: true]
-pref("dom.disable_window_open_feature.status", true); // [DEFAULT: true]
-pref("dom.disable_window_open_feature.titlebar", true);
-pref("dom.disable_window_open_feature.toolbar", true);
 /* 2202: prevent scripts from moving and resizing open windows ***/
 pref("dom.disable_window_move_resize", true);
 /* 2203: open links targeting new windows in a new tab instead
@@ -1770,6 +1762,17 @@ pref("webgl.disable-extensions", true);
    // [2] https://trac.torproject.org/projects/tor/ticket/16931
    // [-] https://bugzilla.mozilla.org/1618188
 pref("extensions.blocklist.url", "https://blocklists.settings.services.mozilla.com/v1/blocklist/3/%APP_ID%/%APP_VERSION%/");
+// 2201: prevent websites from disabling new window features
+   // [-] https://bugzilla.mozilla.org/buglist.cgi?bug_id=1507375,1660524
+pref("dom.disable_window_open_feature.close", true);
+pref("dom.disable_window_open_feature.location", true); // [DEFAULT: true]
+pref("dom.disable_window_open_feature.menubar", true);
+pref("dom.disable_window_open_feature.minimizable", true);
+pref("dom.disable_window_open_feature.personalbar", true); // bookmarks toolbar
+pref("dom.disable_window_open_feature.resizable", true); // [DEFAULT: true]
+pref("dom.disable_window_open_feature.status", true); // [DEFAULT: true]
+pref("dom.disable_window_open_feature.titlebar", true);
+pref("dom.disable_window_open_feature.toolbar", true);
 // * * * /
 // FF77
 // 0850e: disable location bar one-off searches [FF51+]
