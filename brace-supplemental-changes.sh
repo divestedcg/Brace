@@ -43,7 +43,7 @@ if [[ "$EUID" -eq "0" ]]; then
 					grubby --update-kernel=ALL --args="module.sig_enforce=1";
 					grubby --update-kernel=ALL --args="fsck.mode=force";
 					if [ "$(/usr/bin/uname -m)" = "aarch64" ]; then grubby --update-kernel=ALL --args="kpti=on ssbd=force-on"; fi;
-					grubby --update-kernel=ALL --args="amdgpu.tmz=1"; #Encrypted GPU memory (Linux 5.8/Mesa 20.2)
+					#grubby --update-kernel=ALL --args="amdgpu.tmz=1"; #Encrypted GPU memory (Linux 5.8/Mesa 20.2)
 					break;;
 				Skip )
 					break;;
