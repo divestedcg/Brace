@@ -1,0 +1,20 @@
+Deprecations:
+ExtensionInstallBlacklist -> ExtensionInstallBlocklist
+ExtensionInstallWhitelist -> ExtensionInstallAllowlist
+
+Available:
+DefaultPopupsSetting
+ProxyMode
+AdvancedProtectionAllowed
+AllowPopupsDuringPageUnload
+PrivacyScreenEnabled
+BuiltInDnsClientEnabled
+DnsOverHttpsMode
+HideWebStoreIcon
+IntensiveWakeUpThrottlingEnabled
+IsolateOrigins
+PromptForDownloadLocation
+QuicAllowed
+
+Research:
+AmbientAuthenticationInPrivateModesEnabled
