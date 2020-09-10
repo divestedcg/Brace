@@ -13,6 +13,7 @@ always-use-location-entry=true
 show-advanced-permissions=true
 
 [org/mate/desktop/background]
+background-fade=false
 show-desktop-icons=false
 
 [org/mate/desktop/font-rendering]

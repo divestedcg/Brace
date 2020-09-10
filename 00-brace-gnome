@@ -105,6 +105,18 @@ display-line-numbers=true
 background-pattern='grid'
 use-default-font=true
 
+[org/gnome/gnome-flashback/desktop]
+show-icons=false
+
+[org/gnome/gnome-flashback/desktop/background]
+fade=false
+
+[org/gnome/gnome-panel/general]
+prefer-symbolic-icons=true
+
+[org/gnome/gnome-panel/run-dialog]
+show-program-list=true
+
 [org/gnome/gnome-screenshot]
 include-icc-profile=false
 

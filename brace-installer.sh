@@ -209,9 +209,9 @@ category='Frameworks';
 	handleOperation;
 category='GNOME Extras';
 	baseIncluded=false;
-	packagesArch='nautilus-terminal gnome-tweak-tool seahorse';
-	packagesDebian='nautilus-extension-gnome-terminal gnome-tweak-tool seahorse';
-	packagesFedora='gnome-terminal-nautilus gnome-tweak-tool seahorse';
+	packagesArch='nautilus-terminal gnome-tweak-tool seahorse'; #gnome-flashback
+	packagesDebian='nautilus-extension-gnome-terminal gnome-tweak-tool seahorse'; #gnome-flashback
+	packagesFedora='gnome-terminal-nautilus gnome-tweak-tool seahorse'; #gnome-flashback
 	packagesFlathub='org.gnome.seahorse.Application';
 	packagesSuse='nautilus-terminal gnome-tweaks seahorse';
 	handleOperation;
