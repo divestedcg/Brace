@@ -1,6 +1,6 @@
 Name: brace
 Version: 20200920
-Release: 1
+Release: 2
 Summary: Increases privacy/security through various configs.
 License: GPLv3+
 BuildArch: noarch
@@ -10,7 +10,7 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 %description
 - Adds many helper scripts: brace-installer, brace-remover, brace-supplemental-changes
 - GNOME/Cinnamon/MATE: change default settings
-- Firefox: change default settings, credit @thorin-oakenpants + @pyllyukko, license MIT
+- Firefox: change default settings, credit @arkenfox + @pyllyukko, license MIT
 - Chromium: change default settings
 - NetworkManager: disable connectivity checking
 - Networkmanager: enable MAC address randomization

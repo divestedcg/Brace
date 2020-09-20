@@ -1,7 +1,7 @@
 # Maintainer: Tad <tad@spotco.us>
 pkgname=brace
 pkgver=20200920
-pkgrel=1
+pkgrel=2
 pkgdesc="Increases privacy/security through various configs."
 arch=('any')
 license=('GPLv3')
@@ -33,7 +33,7 @@ source=('00-brace-gnome'
 	'brace-helpers.sh'
 	'userjs-brace.js'
 	'userjs-brace-perf.js'
-	'userjs-oakenpants.js'
+	'userjs-arkenfox.js'
 	'userjs-pyllyukko.js')
 sha512sums=('1f56a15df0002d0f55c5847249e2be287e465cc707d596a0a81fdc34aa07569a3f39b3a24826fa0c5ff2a61b73919de1898f1f39cbfc9fc5ce3afe2d20bcf1dd'
             '01c27019944d377ab8dc4e39986ffff1e03f49ed3e1958902836c81aa6e117ac1b30da8edaaa6397f7a24f3fb83b6f1a69641b89a33861739fb99885da032981'
@@ -56,7 +56,7 @@ sha512sums=('1f56a15df0002d0f55c5847249e2be287e465cc707d596a0a81fdc34aa07569a3f3
             'f0e76695a172adcbcfa0093308894165e45d4ce8834115c3727d5bcddcd3304572a7a208317add97a703fdb4aac7aaefd2444baf5e4cc0cda49fec2d6608cb71'
             '96e29d5d1c75b54d05525f4da996320261b4f444dab60a9ed5c307d04c60a4736be70903f55c8b0849fada43a19256f13cec9fae8b7002f49b9796067948eb84'
             'df5f83c87ab6b8d504fc723745cfbdd466eef73588a336aa36ea2138a8774bda6f4e5d5962d29be8f7c49cda338077c77f9cd0f4ad9d229a708e299d20bc0bce'
-            'a95ee5b6b4144e1bafb6bf504aa55c00932b663f0e355d911ce4c9b9e5e129c4a6d35cd89d03eb84fdfc041a68ee7c5450f8ff36626e50544c010913db91b2c6'
+            '2b3a4322747933d391feabb5791f847cd1075cc43f2d3d989204c669798ee20227ebc56ca8a7bf5c0b64e8aa7ebf8df327f2189a6811a72e12830d07fc3b5fd4'
             'b168818030095032e1d7c417c1bd1dcce494751df2f78ed5193c07ad120bac8de4aac876d01446642295c6ef4603ac5cf97c53ca17a95cc6e971ec554f6610c1')
 install=brace.install
 
