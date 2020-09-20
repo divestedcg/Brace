@@ -1076,7 +1076,7 @@ pref("javascript.options.wasm", false);
  * [1] https://developer.mozilla.org/docs/Web/API/Intersection_Observer_API
  * [2] https://w3c.github.io/IntersectionObserver/
  * [3] https://bugzilla.mozilla.org/1243846 ***/
-pref("dom.IntersectionObserver.enabled", false); //BRACE-UNCOMMENTED
+   // pref("dom.IntersectionObserver.enabled", false);
 /* 2429: enable (limited but sufficient) window.opener protection [FF65+]
  * Makes rel=noopener implicit for target=_blank in anchor and area elements when no rel attribute is set ***/
 pref("dom.targetBlankNoOpener.enabled", true); // [DEFAULT: true FF79+]
