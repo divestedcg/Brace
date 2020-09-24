@@ -1,5 +1,6 @@
 //Look
 pref("browser.ctrlTab.recentlyUsedOrder", false);
+pref("browser.privatebrowsing.vpnpromourl", "");
 pref("browser.tabs.drawInTitlebar", true);
 pref("general.smoothScroll", false);
 pref("widget.allow-client-side-decoration", true);
