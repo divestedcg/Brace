@@ -1,7 +1,7 @@
 /******
 * name: arkenfox user.js
-* date: 23 Sep 2020
-* version 81-beta
+* date: 13 Oct 2020
+* version 82-alpha
 * url: https://github.com/arkenfox/user.js
 * license: MIT: https://github.com/arkenfox/user.js/blob/master/LICENSE.txt
 
@@ -160,10 +160,6 @@ pref("geo.provider.network.url", "https://location.services.mozilla.com/v1/geolo
 pref("geo.provider.ms-windows-location", false); // [WINDOWS]
 pref("geo.provider.use_corelocation", false); // [MAC]
 pref("geo.provider.use_gpsd", false); // [LINUX]
-/* 0206: disable geographically specific results/search engines e.g. "browser.search.*.US"
- * i.e. ignore all of Mozilla's various search engines in multiple locales ***/
-pref("browser.search.geoSpecificDefaults", false);
-pref("browser.search.geoSpecificDefaults.url", "");
 /* 0207: disable region updates
  * [1] https://firefox-source-docs.mozilla.org/toolkit/modules/toolkit_modules/Region.html ***/
 pref("browser.region.network.url", ""); // [FF78+]
@@ -736,7 +732,7 @@ pref("security.mixed_content.block_display_content", true);
 pref("security.mixed_content.block_object_subrequest", true);
 /* 1244: enable HTTPS-Only mode [FF76+]
  * When "https_only_mode" (all windows) is true, "https_only_mode_pbm" (private windows only) is ignored
- * [WARNING] This is experimental, see [1] and you can't set exceptions if FPI is enabled, see [2]
+ * [WARNING] This is experimental [1] and you can't set exceptions if FPI is enabled [2] (fixed in FF83)
  * [SETTING] to add site exceptions: Page Info>Permissions>Use insecure HTTP (FF80+)
  * [SETTING] Privacy & Security>HTTPS-Only Mode (FF80+ with browser.preferences.exposeHTTPSOnly = true)
  * [1] https://bugzilla.mozilla.org/1613063 [META]
@@ -794,9 +790,9 @@ pref("security.insecure_connection_text.enabled", true); // [FF60+]
 pref("_user.js.parrot", "1400 syntax error: the parrot's bereft of life!");
 /* 1401: disable websites choosing fonts (0=block, 1=allow)
  * This can limit most (but not all) JS font enumeration which is a high entropy fingerprinting vector
- * [SETUP-WEB] Can break some PDFs (missing text). Limiting to default fonts can "uglify" the web
+ * [WARNING] **DO NOT USE**: in FF80+ RFP covers this, and non-RFP users should use font vis (4618)
  * [SETTING] General>Language and Appearance>Fonts & Colors>Advanced>Allow pages to choose... ***/
-pref("browser.display.use_document_fonts", 0);
+   // pref("browser.display.use_document_fonts", 0);
 /* 1403: disable icon fonts (glyphs) and local fallback rendering
  * [1] https://bugzilla.mozilla.org/789788
  * [2] https://gitlab.torproject.org/legacy/trac/-/issues/8455 ***/
@@ -812,9 +808,8 @@ pref("gfx.font_rendering.opentype_svg.enabled", false);
 pref("gfx.font_rendering.graphite.enabled", false);
 /* 1409: limit system font exposure to a whitelist [FF52+] [RESTART]
  * If the whitelist is empty, then whitelisting is considered disabled and all fonts are allowed
- * [NOTE] in FF80 RFP restricts the whitelist to bundled and "Base Fonts"
- * ...and in FF81+ the whitelist **overrides** RFP's font visibility (see 4618)
- * [WARNING] Creating your own probably highly-unique whitelist will raise your entropy.
+ * [WARNING] **DO NOT USE**: in FF80+ RFP covers this, and non-RFP users should use font vis (4618)
+ * [NOTE] In FF81+ the whitelist **overrides** RFP's font visibility (see 4618)
  * [1] https://bugzilla.mozilla.org/1121643 ***/
    // pref("font.system.whitelist", ""); // [HIDDEN PREF]
 
@@ -1073,11 +1068,6 @@ pref("javascript.options.asmjs", false);
  * [NOTE] In FF71+ this no longer affects extensions (1576254)
  * [1] https://developer.mozilla.org/docs/WebAssembly ***/
 pref("javascript.options.wasm", false);
-/* 2426: disable Intersection Observer API [FF55+]
- * [1] https://developer.mozilla.org/docs/Web/API/Intersection_Observer_API
- * [2] https://w3c.github.io/IntersectionObserver/
- * [3] https://bugzilla.mozilla.org/1243846 ***/
-   // pref("dom.IntersectionObserver.enabled", false);
 /* 2429: enable (limited but sufficient) window.opener protection [FF65+]
  * Makes rel=noopener implicit for target=_blank in anchor and area elements when no rel attribute is set ***/
 pref("dom.targetBlankNoOpener.enabled", true); // [DEFAULT: true FF79+]
@@ -1124,7 +1114,7 @@ pref("dom.vr.enabled", false); //BRACE-UNCOMMENTED
 /*** [SECTION 2600]: MISCELLANEOUS ***/
 pref("_user.js.parrot", "2600 syntax error: the parrot's run down the curtain!");
 /* 2601: prevent accessibility services from accessing your browser [RESTART]
- * [SETTING] Privacy & Security>Permissions>Prevent accessibility services from accessing your browser
+ * [SETTING] Privacy & Security>Permissions>Prevent accessibility services from accessing your browser (FF80 or lower)
  * [1] https://support.mozilla.org/kb/accessibility-services ***/
 pref("accessibility.force_disabled", 1);
 /* 2602: disable sending additional analytics to web servers
@@ -1697,6 +1687,12 @@ pref("_user.js.parrot", "9999 syntax error: the parrot's deprecated!");
    // [-] https://bugzilla.mozilla.org/1603712
 pref("intl.charset.fallback.override", "windows-1252");
 // * * * /
+// FF82
+// 0206: disable geographically specific results/search engines e.g. "browser.search.*.US"
+   // i.e. ignore all of Mozilla's various search engines in multiple locales
+   // [-] https://bugzilla.mozilla.org/1619926
+pref("browser.search.geoSpecificDefaults", false);
+pref("browser.search.geoSpecificDefaults.url", "");
 // ***/
 
 // ESR68.x still uses all the following prefs

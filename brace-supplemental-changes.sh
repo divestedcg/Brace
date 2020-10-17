@@ -32,15 +32,17 @@ if [[ "$EUID" -eq "0" ]]; then
 
 	#Kernel Command Line
 	if [ -x /usr/sbin/grubby ]; then
-		echo "Do you a stricter kernel (via boot command-line arguments)?";
+		echo "Do you want a stricter kernel (via boot command-line arguments)?";
 		select ys in "Yes" "Skip"; do
 			case $ys in
 				Yes )
 					grubby --update-kernel=ALL --args="lockdown=confidentiality pti=on vsyscall=none page_poison=1 slab_nomerge slub_debug=FZP page_alloc.shuffle=1 init_on_alloc=1 init_on_free=1 mce=0";
 					grubby --update-kernel=ALL --args="iommu=force iommu.passthrough=0 intel_iommu=on,strict amd_iommu=fullflush"; #efi=disable_early_pci_dma (often breaks boot)
+					#spectre_v2 default only protects kernel, not user space processes
+					#spec_store_bypass_disable default only protects seccomp enabled processes
 					grubby --update-kernel=ALL --args="spectre_v2=on spec_store_bypass_disable=on tsx=off";
 					#grubby --update-kernel=ALL --args="mitigations=auto,nosmt";
-					grubby --update-kernel=ALL --args="module.sig_enforce=1";
+					grubby --update-kernel=ALL --args="module.sig_enforce=1"; #for kernels without lockdown
 					grubby --update-kernel=ALL --args="fsck.mode=force";
 					if [ "$(/usr/bin/uname -m)" = "aarch64" ]; then grubby --update-kernel=ALL --args="kpti=on ssbd=force-on"; fi;
 					#grubby --update-kernel=ALL --args="amdgpu.tmz=1"; #Encrypted GPU memory (Linux 5.8/Mesa 20.2)
