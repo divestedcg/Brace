@@ -329,7 +329,7 @@ category='Disks - File Systems';
 	baseIncluded=true;
 	packagesArch='btrfs-progs compsize dosfstools exfat-utils f2fs-tools mtools ntfs-3g udftools xfsprogs duperemove';
 	packagesDebian='btrfs-progs btrfs-compsize dosfstools exfat-utils f2fs-tools mtools ntfs-3g udftools xfsprogs duperemove';
-	packagesFedora='btrfs-progs compsize dosfstools exfat-utils f2fs-tools mtools ntfs-3g ntfsprogs udftools xfsprogs';
+	packagesFedora='btrfs-progs compsize dosfstools exfat-utils f2fs-tools mtools ntfs-3g ntfsprogs udftools xfsprogs duperemove';
 	packagesSuse='btrfsprogs compsize dosfstools exfat-utils f2fs-tools mtools ntfs-3g ntfsprogs udftools xfsprogs duperemove';
 	handleOperation;
 category='Files - Backup';

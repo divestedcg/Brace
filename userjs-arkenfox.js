@@ -5,40 +5,34 @@
 * url: https://github.com/arkenfox/user.js
 * license: MIT: https://github.com/arkenfox/user.js/blob/master/LICENSE.txt
 
-* releases: These are end-of-stable-life-cycle legacy archives.
-            *Always* use the master branch user.js for a current up-to-date version
-       url: https://github.com/arkenfox/user.js/releases
-
 * README:
 
-  0. Consider using Tor Browser if it meets your needs or fits your threat model better
-     * https://www.torproject.org/about/torusers.html.en
-  1. READ the full README
-     * https://github.com/arkenfox/user.js/blob/master/README.md
-  2. READ this
-     * https://github.com/arkenfox/user.js/wiki/1.3-Implementation
-  3. If you skipped steps 1 and 2 above (shame on you), then here is the absolute minimum
-     * Real time binary checks with Google services are disabled (0412)
-     * You will still get prompts to update Firefox, but auto-installing them is disabled (0302a)
-     * Some user data is erased on close (section 2800). Change this to suit your needs
-     * EACH RELEASE check:
-         - 4600s: reset prefs made redundant due to privacy.resistFingerprinting (RPF)
-                  or enable them as an alternative to RFP (or some of them for ESR users)
-         - 9999s: reset deprecated prefs in about:config or enable the relevant section for ESR
-     * Site breakage WILL happen
-         - There are often trade-offs and conflicts between Security vs Privacy vs Anti-Fingerprinting
-           and these need to be balanced against Functionality & Convenience & Breakage
-     * You will need to make changes, and to troubleshoot at times (choose wisely, there is always a trade-off).
-       While not 100% definitive, search for "[SETUP". If required, add each pref to your overrides section at
-       default values (or comment them out and reset them in about:config). Here are the main ones:
+  1. Consider using Tor Browser if it meets your needs or fits your threat model better
+       * https://www.torproject.org/about/torusers.html.en
+  2. Required reading: Overview, Backing Up, Implementing, and Maintenance entries
+       * https://github.com/arkenfox/user.js/wiki
+  3. If you skipped step 2, return to step 2
+  4. Make changes
+       * There are often trade-offs and conflicts between security vs privacy vs anti-fingerprinting
+         and these need to be balanced against functionality & convenience & breakage
+       * Some site breakage and unintended consequences will happen. Everyone's experience will differ
+         e.g. some user data is erased on close (section 2800), change this to suit your needs
+       * While not 100% definitive, search for "[SETUP" tags
+       * Take the wiki link in step 2 and read the Troubleshooting entry
+  5. Some tag info
        [SETUP-SECURITY] it's one item, read it
             [SETUP-WEB] can cause some websites to break
-         [SETUP-CHROME] changes how Firefox itself behaves (i.e. NOT directly website related)
+         [SETUP-CHROME] changes how Firefox itself behaves (i.e. not directly website related)
            [SETUP-PERF] may impact performance
-         [SETUP-HARDEN] maybe you should consider using the Tor Browser
-     * [WARNING] tags are extra special and used sparingly, so heed them
-  4. BACKUP your profile folder before implementing (and/or test in a new/cloned profile)
-  5. KEEP UP TO DATE: https://github.com/arkenfox/user.js/wiki#small_orange_diamond-maintenance
+              [WARNING] used sparingly, heed them
+
+* RELEASES
+
+  * Archive: https://github.com/arkenfox/user.js/releases
+  * Use the correct release that matches your Firefox version
+  * Each release
+    - run the prefsCleaner or reset deprecated prefs (9999s) and prefs made redundant by RFP (4600s)
+    - re-enable section 4600 if you don't use RFP
 
 * INDEX:
 
@@ -68,7 +62,7 @@
   4000: FPI (FIRST PARTY ISOLATION)
   4500: RFP (RESIST FINGERPRINTING)
   4600: RFP ALTERNATIVES
-  4700: RFP ALTERNATIVES (NAVIGATOR / USER AGENT (UA) SPOOFING)
+  4700: RFP ALTERNATIVES (USER AGENT SPOOFING)
   5000: PERSONAL
   9999: DEPRECATED / REMOVED / LEGACY / RENAMED
 
@@ -340,8 +334,7 @@ pref("extensions.systemAddon.update.url", ""); // [FF44+]
 /* 0506: disable PingCentre telemetry (used in several System Add-ons) [FF57+]
  * Currently blocked by 'datareporting.healthreport.uploadEnabled' (see 0340) ***/
 pref("browser.ping-centre.telemetry", false);
-/* 0515: disable Screenshots
- * alternatively in FF60+, disable uploading to the Screenshots server ***/
+/* 0515: disable Screenshots ***/
 pref("extensions.screenshots.disabled", true); // [FF55+] //BRACE-UNCOMMENTED
 pref("extensions.screenshots.upload-disabled", true); // [FF60+] //BRACE-UNCOMMENTED
 /* 0517: disable Form Autofill
@@ -365,7 +358,7 @@ pref("network.prefetch-next", false);
 /* 0602: disable DNS prefetching
  * [1] https://developer.mozilla.org/docs/Web/HTTP/Headers/X-DNS-Prefetch-Control ***/
 pref("network.dns.disablePrefetch", true);
-pref("network.dns.disablePrefetchFromHTTPS", true); // [DEFAULT: true FF70+]
+pref("network.dns.disablePrefetchFromHTTPS", true); // [DEFAULT: true]
 /* 0603: disable predictor / prefetching ***/
 pref("network.predictor.enabled", false);
 pref("network.predictor.enable-prefetch", false); // [FF48+]
@@ -386,6 +379,7 @@ pref("_user.js.parrot", "0700 syntax error: the parrot's given up the ghost!");
  * [NOTE] This is just an application level fallback. Disabling IPv6 is best done at an
  * OS/network level, and/or configured properly in VPN setups. If you are not masking your IP,
  * then this won't make much difference. If you are masking your IP, then it can only help.
+ * [NOTE] PHP defaults to IPv6 with "localhost". Use "php -S 127.0.0.1:PORT"
  * [TEST] https://ipleak.org/
  * [1] https://github.com/arkenfox/user.js/issues/437#issuecomment-403740626
  * [2] https://www.internetsociety.org/tag/ipv6-security/ (see Myths 2,4,5,6) ***/
@@ -417,8 +411,7 @@ pref("network.http.altsvc.oe", false);
  * as a remote Tor node will handle the DNS request
  * [1] https://trac.torproject.org/projects/tor/wiki/doc/TorifyHOWTO/WebBrowsers ***/
 pref("network.proxy.socks_remote_dns", true);
-/* 0708: disable FTP [FF60+]
- * [1] https://www.fxsitecompat.dev/en-CA/docs/2020/ftp-support-will-be-removed/ ***/
+/* 0708: disable FTP [FF60+] ***/
    // pref("network.ftp.enabled", false);
 /* 0709: disable using UNC (Uniform Naming Convention) paths [FF61+]
  * [SETUP-CHROME] Can break extensions for profiles on network shares
@@ -546,8 +539,7 @@ pref("signon.formlessCapture.enabled", false);
  * hardens against potential credentials phishing
  * 0=don't allow sub-resources to open HTTP authentication credentials dialogs
  * 1=don't allow cross-origin sub-resources to open HTTP authentication credentials dialogs
- * 2=allow sub-resources to open HTTP authentication credentials dialogs (default)
- * [1] https://www.fxsitecompat.com/en-CA/docs/2015/http-auth-dialog-can-no-longer-be-triggered-by-cross-origin-resources/ ***/
+ * 2=allow sub-resources to open HTTP authentication credentials dialogs (default) ***/
 pref("network.auth.subresource-http-auth-allow", 1);
 
 /*** [SECTION 1000]: CACHE / SESSION (RE)STORE / FAVICONS
@@ -648,7 +640,7 @@ pref("security.ssl.require_safe_negotiation", true);
  * [STATS] Firefox telemetry (June 2020) shows only 0.16% of SSL handshakes use 1.0 or 1.1
  * [WARNING] Leave these at default, otherwise you alter your TLS fingerprint.
  * [1] https://www.ssllabs.com/ssl-pulse/ ***/
-   // pref("security.tls.version.min", 3); // [DEFAULT: 3 FF78+]
+   // pref("security.tls.version.min", 3); // [DEFAULT: 3]
    // pref("security.tls.version.max", 4);
 /* 1203: enforce TLS 1.0 and 1.1 downgrades as session only */
 pref("security.tls.version.enable-deprecated", false);
@@ -753,10 +745,6 @@ pref("security.mixed_content.block_object_subrequest", true);
  * [2] https://en.wikipedia.org/wiki/Meet-in-the-middle_attack
  * [3] https://www-archive.mozilla.org/projects/security/pki/nss/ssl/fips-ssl-ciphersuites.html ***/
    // pref("security.ssl3.rsa_des_ede3_sha", false);
-/* 1263: disable DHE (Diffie-Hellman Key Exchange)
- * [1] https://www.eff.org/deeplinks/2015/10/how-to-protect-yourself-from-nsa-attacks-1024-bit-DH ***/
-   // pref("security.ssl3.dhe_rsa_aes_128_sha", false); // [DEFAULT: false FF78+]
-   // pref("security.ssl3.dhe_rsa_aes_256_sha", false); // [DEFAULT: false FF78+]
 /* 1264: disable the remaining non-modern cipher suites as of FF78 (in order of preferred by FF) ***/
    // pref("security.ssl3.ecdhe_ecdsa_aes_256_sha", false);
    // pref("security.ssl3.ecdhe_ecdsa_aes_128_sha", false);
@@ -783,7 +771,7 @@ pref("browser.ssl_override_behavior", 1);
  * [TEST] https://expired.badssl.com/ ***/
 pref("browser.xul.error_pages.expert_bad_cert", true);
 /* 1273: display "insecure" icon and "Not Secure" text on HTTP sites ***/
-   // pref("security.insecure_connection_icon.enabled", true); // [FF59+] [DEFAULT: true FF70+]
+   // pref("security.insecure_connection_icon.enabled", true); // [FF59+] [DEFAULT: true]
 pref("security.insecure_connection_text.enabled", true); // [FF60+]
 
 /*** [SECTION 1400]: FONTS ***/
@@ -819,9 +807,7 @@ pref("gfx.font_rendering.graphite.enabled", false);
             harden it a bit: set XOriginPolicy (1603) to 1 (as per the settings below)
        harden it a bit more: set XOriginPolicy (1603) to 2 (and optionally 1604 to 1 or 2), expect breakage
      ---
-     If you want any REAL control over referers and breakage, then use an extension. Either:
-              uMatrix: limited by scope, all requests are spoofed or not-spoofed
-       Smart Referrer: granular with source<->destination, whitelists
+     If you want any REAL control over referers and breakage, then use an extension
      ---
                     full URI: https://example.com:8888/foo/bar.html?id=1234
        scheme+host+port+path: https://example.com:8888/foo/bar.html
@@ -948,8 +934,9 @@ pref("media.getusermedia.audiocapture.enabled", false);
    // pref("media.autoplay.default", 5);
 /* 2031: disable autoplay of HTML5 media if you interacted with the site [FF78+]
  * 0=sticky (default), 1=transient, 2=user
+ * Firefox's Autoplay Policy Documentation [PDF] is linked below via SUMO
  * [NOTE] If you have trouble with some video sites, then add an exception (see 2030)
- * [1] https://html.spec.whatwg.org/multipage/interaction.html#sticky-activation ***/
+ * [1] https://support.mozilla.org/questions/1293231 ***/
 pref("media.autoplay.blocking_policy", 2);
 
 /*** [SECTION 2200]: WINDOW MEDDLING & LEAKS / POPUPS ***/
@@ -980,9 +967,6 @@ pref("dom.popup_allowed_events", "click dblclick");
      the current window. Workers can spawn new workers (must be the same origin & scheme),
      including service and shared workers. Shared workers can be utilized by multiple scripts and
      communicate between browsing contexts (windows/tabs/iframes) and can even control your cache.
-
-     [NOTE] uMatrix 1.2.0+ allows a per-scope control for workers (2301-deprecated) and service workers (2302)
-              #Required reading [#] https://github.com/gorhill/uMatrix/releases/tag/1.2.0
 
      [1]    Web Workers: https://developer.mozilla.org/docs/Web/API/Web_Workers_API
      [2]         Worker: https://developer.mozilla.org/docs/Web/API/Worker
@@ -1064,9 +1048,14 @@ pref("javascript.options.asmjs", false);
    // pref("javascript.options.ion", false);
    // pref("javascript.options.baselinejit", false);
    // pref("javascript.options.jit_trustedprincipals", true); // [FF75+] [HIDDEN PREF]
-/* 2422: disable WebAssembly [FF52+] [SETUP-PERF]
- * [NOTE] In FF71+ this no longer affects extensions (1576254)
- * [1] https://developer.mozilla.org/docs/WebAssembly ***/
+/* 2422: disable WebAssembly [FF52+]
+ * Vulnerabilities have increasingly been found, including those known and fixed
+ * in native programs years ago [2]. WASM has powerful low-level access, making
+ * certain attacks (brute-force) and vulnerabilities more possible
+ * [STATS] ~0.2% of websites, about half of which are for crytopmining / malvertising [2][3]
+ * [1] https://developer.mozilla.org/docs/WebAssembly
+ * [2] https://spectrum.ieee.org/tech-talk/telecom/security/more-worries-over-the-security-of-web-assembly
+ * [3] https://www.zdnet.com/article/half-of-the-websites-using-webassembly-use-it-for-malicious-purposes ***/
 pref("javascript.options.wasm", false);
 /* 2429: enable (limited but sufficient) window.opener protection [FF65+]
  * Makes rel=noopener implicit for target=_blank in anchor and area elements when no rel attribute is set ***/
@@ -1250,14 +1239,13 @@ pref("security.dialog_enable_delay", 700);
 pref("_user.js.parrot", "2700 syntax error: the parrot's joined the bleedin' choir invisible!");
 /* 2701: disable 3rd-party cookies and site-data [SETUP-WEB]
  * 0=Accept cookies and site data, 1=(Block) All third-party cookies, 2=(Block) All cookies,
- * 3=(Block) Cookies from unvisited websites, 4=(Block) Cross-site and social media trackers (FF63+) (default FF69+)
+ * 3=(Block) Cookies from unvisited websites, 4=(Block) Cross-site and social media trackers (default)
  * [NOTE] You can set exceptions under site permissions or use an extension
  * [NOTE] Enforcing category to custom ensures ETP related prefs are always honored
  * [SETTING] Privacy & Security>Enhanced Tracking Protection>Custom>Cookies ***/
 pref("network.cookie.cookieBehavior", 1);
 pref("browser.contentblocking.category", "custom");
-/* 2702: set third-party cookies (i.e ALL) (if enabled, see 2701) to session-only
-   and (FF58+) set third-party non-secure (i.e HTTP) cookies to session-only
+/* 2702: set third-party cookies (if enabled, see 2701) to session-only
    [NOTE] .sessionOnly overrides .nonsecureSessionOnly except when .sessionOnly=false and
    .nonsecureSessionOnly=true. This allows you to keep HTTPS cookies, but session-only HTTP ones
  * [1] https://feeding.cloud.geek.nz/posts/tweaking-cookies-for-privacy-in-firefox/ ***/
@@ -1388,72 +1376,67 @@ pref("privacy.firstparty.isolate", true);
 pref("privacy.partition.network_state", true);
 
 /*** [SECTION 4500]: RFP (RESIST FINGERPRINTING)
-   This master switch will be used for a wide range of items, many of which will
-   **override** existing prefs from FF55+, often providing a **better** solution
+   RFP covers a wide range of ongoing fingerprinting solutions.
+   It is an all-or-nothing buy in: you cannot pick and choose what parts you want
 
-   IMPORTANT: As existing prefs become redundant, and some of them WILL interfere
-   with how RFP works, they will be moved to section 4600 and made inactive
+   [WARNING] Do NOT use extensions to alter RFP protected metrics
+   [WARNING] Do NOT use prefs in section 4600 with RFP as they can interfere
 
- ** 418986 - limit window.screen & CSS media queries leaking identifiable info (FF41+)
-      [NOTE] Info only: To set a size, open a XUL (chrome) page (such as about:config) which is at
-      100% zoom, hit Shift+F4 to open the scratchpad, type window.resizeTo(1366,768), hit Ctrl+R to run.
-      Test your window size, do some math, resize to allow for all the non inner window elements
+ FF41+
+    418986 - limit window.screen & CSS media queries leaking identifiable info
       [TEST] https://arkenfox.github.io/TZP/tzp.html#screen
- ** 1281949 - spoof screen orientation (FF50+)
- ** 1281963 - hide the contents of navigator.plugins and navigator.mimeTypes (FF50+)
-      FF53: Fixes GetSupportedNames in nsMimeTypeArray and nsPluginArray (1324044)
- ** 1330890 - spoof timezone as UTC 0 (FF55+)
-      FF58: Date.toLocaleFormat deprecated (818634)
-      FF60: Date.toLocaleDateString and Intl.DateTimeFormat fixed (1409973)
- ** 1360039 - spoof navigator.hardwareConcurrency as 2 (see 4601) (FF55+)
-      This spoof *shouldn't* affect core chrome/Firefox performance
- ** 1217238 - reduce precision of time exposed by javascript (FF55+)
- ** 1369303 - spoof/disable performance API (see 2410-deprecated, 4602, 4603) (FF56+)
- ** 1333651 & 1383495 & 1396468 - spoof User Agent & Navigator API (see section 4700) (FF56+)
-      FF56: Version: rounded down to the nearest multiple of 10
-      FF57: Version: match current ESR (1393283, 1418672, 1418162, 1511763)
-      FF59: OS: Windows, OSX, Android, or Linux (to reduce breakage) (1404608)
-      FF66: OS: HTTP Headers reduced to Windows or Android (1509829)
-      FF68: OS: updated to Windows 10, OS 10.14, and Android 8.1 (1511434)
-      FF78: OS: updated to OS 10.15 and Android 9.0 (1635011)
- ** 1369319 - disable device sensor API (see 4604) (FF56+)
- ** 1369357 - disable site specific zoom (see 4605) (FF56+)
- ** 1337161 - hide gamepads from content (see 4606) (FF56+)
- ** 1372072 - spoof network information API as "unknown" when dom.netinfo.enabled = true (see 4607) (FF56+)
- ** 1333641 - reduce fingerprinting in WebSpeech API (see 4608) (FF56+)
- ** 1372069 & 1403813 & 1441295 - block geolocation requests (same as denying a site permission) (see 0201, 0202) (FF56-62)
- ** 1369309 - spoof media statistics (see 4610) (FF57+)
- ** 1382499 - reduce screen co-ordinate fingerprinting in Touch API (see 4611) (FF57+)
- ** 1217290 & 1409677 - enable fingerprinting resistance for WebGL (see 2010-12) (FF57+)
- ** 1382545 - reduce fingerprinting in Animation API (FF57+)
- ** 1354633 - limit MediaError.message to a whitelist (FF57+)
- ** 1382533 - enable fingerprinting resistance for Presentation API (FF57+)
+ FF50+
+   1281949 - spoof screen orientation
+   1281963 - hide the contents of navigator.plugins and navigator.mimeTypes (FF50+)
+ FF55+
+   1330890 - spoof timezone as UTC 0
+   1360039 - spoof navigator.hardwareConcurrency as 2 (see 4601)
+   1217238 - reduce precision of time exposed by javascript
+ FF56+
+   1369303 - spoof/disable performance API (see 4602, 4603)
+   1333651 - spoof User Agent & Navigator API (see section 4700)
+      JS: FF78+ the version is spoofed as 78, and the OS as Windows 10, OS 10.15, Android 9, or Linux
+      HTTP Headers: spoofed as Windows or Android
+   1369319 - disable device sensor API (see 4604)
+   1369357 - disable site specific zoom (see 4605)
+   1337161 - hide gamepads from content (see 4606)
+   1372072 - spoof network information API as "unknown" when dom.netinfo.enabled = true (see 4607)
+   1333641 - reduce fingerprinting in WebSpeech API (see 4608)
+ FF57+
+   1369309 - spoof media statistics (see 4610)
+   1382499 - reduce screen co-ordinate fingerprinting in Touch API (see 4611)
+   1217290 & 1409677 - enable fingerprinting resistance for WebGL (see 2010-12)
+   1382545 - reduce fingerprinting in Animation API
+   1354633 - limit MediaError.message to a whitelist
+   1382533 - enable fingerprinting resistance for Presentation API
       This blocks exposure of local IP Addresses via mDNS (Multicast DNS)
- **  967895 - spoof canvas and enable site permission prompt before allowing canvas data extraction (FF58+)
-      FF59: Added to site permissions panel (1413780) Only prompt when triggered by user input (1376865)
- ** 1372073 - spoof/block fingerprinting in MediaDevices API (FF59+)
+ FF58+
+    967895 - spoof canvas and enable site permission prompt before allowing canvas data extraction
+ FF59+
+   1372073 - spoof/block fingerprinting in MediaDevices API
       Spoof: enumerate devices reports one "Internal Camera" and one "Internal Microphone" if
              media.navigator.enabled is true (see 2505 which we chose to keep disabled)
       Block: suppresses the ondevicechange event (see 4612)
- ** 1039069 - warn when language prefs are set to non en-US (see 0210, 0211) (FF59+)
- ** 1222285 & 1433592 - spoof keyboard events and suppress keyboard modifier events (FF59+)
+   1039069 - warn when language prefs are set to non en-US (see 0210, 0211)
+   1222285 & 1433592 - spoof keyboard events and suppress keyboard modifier events
       Spoofing mimics the content language of the document. Currently it only supports en-US.
       Modifier events suppressed are SHIFT and both ALT keys. Chrome is not affected.
-      FF60: Fix keydown/keyup events (1438795)
- ** 1337157 - disable WebGL debug renderer info (see 4613) (FF60+)
- ** 1459089 - disable OS locale in HTTP Accept-Language headers (ANDROID) (FF62+)
- ** 1479239 - return "no-preference" with prefers-reduced-motion (see 4614) (FF63+)
- ** 1363508 - spoof/suppress Pointer Events (see 4615) (FF64+)
+ FF60-67
+   1337157 - disable WebGL debug renderer info (see 4613) (FF60+)
+   1459089 - disable OS locale in HTTP Accept-Language headers (ANDROID) (FF62+)
+   1479239 - return "no-preference" with prefers-reduced-motion (see 4614) (FF63+)
+   1363508 - spoof/suppress Pointer Events (see 4615) (FF64+)
       FF65: pointerEvent.pointerid (1492766)
- ** 1485266 - disable exposure of system colors to CSS or canvas (see 4616) (FF67+)
- ** 1407366 - enable inner window letterboxing (see 4504) (FF67+)
- ** 1494034 - return "light" with prefers-color-scheme (see 4617) (FF67+)
-      [1] https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme
- ** 1564422 - spoof audioContext outputLatency (FF70+)
- ** 1595823 - spoof audioContext sampleRate (FF72+)
- ** 1607316 - spoof pointer as coarse and hover as none (ANDROID) (FF74+)
- ** 1621433 - randomize canvas (previously FF58+ returned an all-white canvas) (FF78+)
- ** 1653987 - limit font visibility to bundled and "Base Fonts" (see 4618) (non-ANDROID) (FF80+)
+   1485266 - disable exposure of system colors to CSS or canvas (see 4616) (FF67+)
+   1407366 - enable inner window letterboxing (see 4504) (FF67+)
+   1494034 - return "light" with prefers-color-scheme (see 4617) (FF67+)
+ FF68-77
+   1564422 - spoof audioContext outputLatency (FF70+)
+   1595823 - spoof audioContext sampleRate (FF72+)
+   1607316 - spoof pointer as coarse and hover as none (ANDROID) (FF74+)
+ FF78+
+   1621433 - randomize canvas (previously FF58+ returned an all-white canvas) (FF78+)
+   1653987 - limit font visibility to bundled and "Base Fonts" (see 4618) (non-ANDROID) (FF80+)
 ***/
 pref("_user.js.parrot", "4500 syntax error: the parrot's popped 'is clogs");
 /* 4501: enable privacy.resistFingerprinting [FF41+]
@@ -1470,22 +1453,22 @@ pref("privacy.resistFingerprinting", true);
    // pref("privacy.window.maxInnerWidth", 1000);
    // pref("privacy.window.maxInnerHeight", 1000);
 /* 4503: disable mozAddonManager Web API [FF57+]
- * [NOTE] As a side-effect in FF57-59 this allowed extensions to work on AMO. In FF60+ you also need
- * to sanitize or clear extensions.webextensions.restrictedDomains (see 2662) to keep that side-effect
+ * [NOTE] To allow extensions to work on AMO, you also need 2662
  * [1] https://bugzilla.mozilla.org/buglist.cgi?bug_id=1384330,1406795,1415644,1453988 ***/
 pref("privacy.resistFingerprinting.block_mozAddonManager", true); // [HIDDEN PREF]
 /* 4504: enable RFP letterboxing [FF67+]
- * Dynamically resizes the inner window (FF67; 200w x100h: FF68+; stepped ranges) by applying letterboxing,
- * using dimensions which waste the least content area, If you use the dimension pref, then it will only apply
- * those resolutions. The format is "width1xheight1, width2xheight2, ..." (e.g. "800x600, 1000x1000, 1600x900")
- * [SETUP-WEB] This does NOT require RFP (see 4501) **for now**, so if you're not using 4501, or you are but you're
- * not taking anti-fingerprinting seriously and a little visual change upsets you, then feel free to flip this pref
+ * Dynamically resizes the inner window by applying margins in stepped ranges, see [2]
+ * If you use the dimension pref, then it will only apply those resolutions. The format is
+ * "width1xheight1, width2xheight2, ..." (e.g. "800x600, 1000x1000, 1600x900")
+ * [SETUP-WEB] This does NOT require RFP (see 4501) **for now**, so if you're not using 4501, or you are but
+ * dislike margins being applied, then flip this pref, keeping in mind that it is effectively fingerprintable
  * [WARNING] The dimension pref is only meant for testing, and we recommend you DO NOT USE it
- * [1] https://bugzilla.mozilla.org/1407366 ***/
+ * [1] https://bugzilla.mozilla.org/1407366
+ * [2] https://hg.mozilla.org/mozilla-central/rev/6d2d7856e468#l2.32 ***/
 pref("privacy.resistFingerprinting.letterboxing", true); // [HIDDEN PREF]
    // pref("privacy.resistFingerprinting.letterboxing.dimensions", ""); // [HIDDEN PREF]
 /* 4510: disable showing about:blank as soon as possible during startup [FF60+]
- * When default true (FF62+) this no longer masks the RFP chrome resizing activity
+ * When default true this no longer masks the RFP chrome resizing activity
  * [1] https://bugzilla.mozilla.org/1448423 ***/
 pref("browser.startup.blankWindow", false);
 /* 4520: disable chrome animations [FF77+] [RESTART]
@@ -1493,15 +1476,7 @@ pref("browser.startup.blankWindow", false);
 pref("ui.prefersReducedMotion", 1); // [HIDDEN PREF]
 
 /*** [SECTION 4600]: RFP ALTERNATIVES
-   * non-RFP users:
-       Enable the whole section (see the SETUP tag below)
-   * RFP users:
-       Make sure these are reset in about:config. They are redundant. In fact, some
-       even cause RFP to not behave as you would expect and alter your fingerprint
-   * ESR RFP users:
-       Reset those *up to and including* your version. Add those *after* your version
-       as active prefs in your overrides. This is assuming that the patch wasn't also
-       backported to Firefox ESR. Backporting RFP patches to ESR is rare.
+     [WARNING] Do NOT use prefs in this section with RFP as they can interfere
 ***/
 pref("_user.js.parrot", "4600 syntax error: the parrot's crossed the Jordan");
 /* [SETUP-non-RFP] Non-RFP users replace the * with a slash on this line to enable these
@@ -1600,32 +1575,22 @@ pref("layout.css.font-visibility.level", 1);
 // * * * /
 // ***/
 
-/*** [SECTION 4700]: RFP ALTERNATIVES (NAVIGATOR / USER AGENT (UA) SPOOFING)
-     This is FYI ONLY. These prefs are INSUFFICIENT(a) on their own, you need
-     to use RFP (4500) or an extension, in which case they become POINTLESS.
-     (a) Many of the components that make up your UA can be derived by other means.
-         And when those values differ, you provide more bits and raise entropy.
-         Examples of leaks include workers, navigator objects, date locale/formats,
-         iframes, headers, tcp/ip attributes, feature detection, and **many** more.
-     ALL values below intentionally left blank - use RFP, or get a vetted, tested
-         extension and mimic RFP values to *lower* entropy, or randomize to *raise* it
+/*** [SECTION 4700]: RFP ALTERNATIVES (USER AGENT SPOOFING)
+     These prefs are insufficient and leak. Use RFP and **nothing else**
+     - Many of the user agent components can be derived by other means. When those
+       values differ, you provide more bits and raise entropy. Examples include
+       workers, iframes, headers, tcp/ip attributes, feature detection, and many more
+     - Web extensions also lack APIs to fully protect spoofing
 ***/
 pref("_user.js.parrot", "4700 syntax error: the parrot's taken 'is last bow");
-/* 4701: navigator.userAgent ***/
-   // pref("general.useragent.override", ""); // [HIDDEN PREF]
-/* 4702: navigator.buildID
- * Revealed build time down to the second. In FF64+ it now returns a fixed timestamp
- * [1] https://bugzilla.mozilla.org/583181
- * [2] https://www.fxsitecompat.com/en-CA/docs/2018/navigator-buildid-now-returns-a-fixed-timestamp/ ***/
-   // pref("general.buildID.override", ""); // [HIDDEN PREF]
-/* 4703: navigator.appName ***/
+/* 4701: navigator DOM object overrides
+ * [WARNING] DO NOT USE ***/
    // pref("general.appname.override", ""); // [HIDDEN PREF]
-/* 4704: navigator.appVersion ***/
    // pref("general.appversion.override", ""); // [HIDDEN PREF]
-/* 4705: navigator.platform ***/
-   // pref("general.platform.override", ""); // [HIDDEN PREF]
-/* 4706: navigator.oscpu ***/
+   // pref("general.buildID.override", ""); // [HIDDEN PREF]
    // pref("general.oscpu.override", ""); // [HIDDEN PREF]
+   // pref("general.platform.override", ""); // [HIDDEN PREF]
+   // pref("general.useragent.override", ""); // [HIDDEN PREF]
 
 /*** [SECTION 5000]: PERSONAL
      Non-project related but useful. If any of these interest you, add them to your overrides ***/
