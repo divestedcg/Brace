@@ -1,7 +1,7 @@
 /******
 * name: arkenfox user.js
-* date: 13 Oct 2020
-* version 82-alpha
+* date: 11 Nov 2020
+* version 82-beta
 * url: https://github.com/arkenfox/user.js
 * license: MIT: https://github.com/arkenfox/user.js/blob/master/LICENSE.txt
 
@@ -26,13 +26,17 @@
            [SETUP-PERF] may impact performance
               [WARNING] used sparingly, heed them
 
-* RELEASES
+* RELEASES: https://github.com/arkenfox/user.js/releases
 
-  * Archive: https://github.com/arkenfox/user.js/releases
-  * Use the correct release that matches your Firefox version
-  * Each release
-    - run the prefsCleaner or reset deprecated prefs (9999s) and prefs made redundant by RFP (4600s)
+  * It is best to use the arkenfox release that is optimized for and matches your Firefox version
+  * EVERYONE: each release
+    - run prefsCleaner or reset deprecated prefs (9999s) and prefs made redundant by RPF (4600s)
     - re-enable section 4600 if you don't use RFP
+    ESR78
+    - If you are not using arkenfox v78... (not a definitive list)
+      - 1401: document fonts is inactive as it is now covered by RFP in FF80+
+      - 4600: some prefs may apply even if you use RFP (currently none apply as of FF84)
+      - 9999: switch the appropriate deprecated section(s) back on
 
 * INDEX:
 
@@ -344,6 +348,7 @@ pref("extensions.screenshots.upload-disabled", true); // [FF60+] //BRACE-UNCOMME
  * [1] https://wiki.mozilla.org/Firefox/Features/Form_Autofill ***/
 pref("extensions.formautofill.addresses.enabled", false); // [FF55+]
 pref("extensions.formautofill.available", "off"); // [FF56+]
+pref("extensions.formautofill.creditCards.available", false); // [FF57+]
 pref("extensions.formautofill.creditCards.enabled", false); // [FF56+]
 pref("extensions.formautofill.heuristics.enabled", false); // [FF55+]
 /* 0518: disable Web Compatibility Reporter [FF56+]
@@ -1180,6 +1185,10 @@ pref("browser.display.use_system_colors", false); // [DEFAULT: false]
  * for these will show/use their correct 3rd party origin
  * [1] https://groups.google.com/forum/#!topic/mozilla.dev.platform/BdFOMAuCGW8/discussion */
 pref("permissions.delegation.enabled", false);
+/* 2624: enable "window.name" protection [FF82+]
+ * If a new page from another domain is loaded into a tab, then window.name is set to an empty string. The original
+ * string is restored if the tab reverts back to the original page. This change prevents some cross-site attacks ***/
+pref("privacy.window.name.update.enabled", true);
 
 /** DOWNLOADS ***/
 /* 2650: discourage downloading to desktop
@@ -1332,28 +1341,24 @@ pref("privacy.cpd.siteSettings", false); // Site Preferences
 pref("privacy.sanitize.timeSpan", 0);
 
 /*** [SECTION 4000]: FPI (FIRST PARTY ISOLATION)
- 4001: FPI
- ** 1278037 - isolate indexedDB (FF51+)
- ** 1277803 - isolate favicons (FF52+)
- ** 1264562 - isolate OCSP cache (FF52+)
- ** 1268726 - isolate Shared Workers (FF52+)
- ** 1316283 - isolate SSL session cache (FF52+)
- ** 1317927 - isolate media cache (FF53+)
- ** 1323644 - isolate HSTS and HPKP (FF54+)
- ** 1334690 - isolate HTTP Alternative Services (FF54+)
- ** 1334693 - isolate SPDY/HTTP2 (FF55+)
- ** 1337893 - isolate DNS cache (FF55+)
- ** 1344170 - isolate blob: URI (FF55+)
- ** 1300671 - isolate data:, about: URLs (FF55+)
- ** 1473247 - isolate IP addresses (FF63+)
- ** 1492607 - isolate postMessage with targetOrigin "*" (requires 4002) (FF65+)
- ** 1542309 - isolate top-level domain URLs when host is in the public suffix list (FF68+)
- ** 1506693 - isolate pdfjs range-based requests (FF68+)
- ** 1330467 - isolate site permissions (FF69+)
- ** 1534339 - isolate IPv6 (FF73+)
- 4003: NETWORK PARTITON
- ** 1647732 - isolate font cache (FF80+)
- ** 1649673 - isolate speculative connections (FF80+)
+   1278037 - indexedDB (FF51+)
+   1277803 - favicons (FF52+)
+   1264562 - OCSP cache (FF52+)
+   1268726 - Shared Workers (FF52+)
+   1316283 - SSL session cache (FF52+)
+   1317927 - media cache (FF53+)
+   1323644 - HSTS and HPKP (FF54+)
+   1334690 - HTTP Alternative Services (FF54+)
+   1334693 - SPDY/HTTP2 (FF55+)
+   1337893 - DNS cache (FF55+)
+   1344170 - blob: URI (FF55+)
+   1300671 - data:, about: URLs (FF55+)
+   1473247 - IP addresses (FF63+)
+   1492607 - postMessage with targetOrigin "*" (requires 4002) (FF65+)
+   1542309 - top-level domain URLs when host is in the public suffix list (FF68+)
+   1506693 - pdfjs range-based requests (FF68+)
+   1330467 - site permissions (FF69+)
+   1534339 - IPv6 (FF73+)
 ***/
 pref("_user.js.parrot", "4000 syntax error: the parrot's pegged out");
 /* 4001: enable First Party Isolation [FF51+]
@@ -1371,9 +1376,6 @@ pref("privacy.firstparty.isolate", true);
  * [3] https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage ***/
    // pref("privacy.firstparty.isolate.restrict_opener_access", true); // [DEFAULT: true]
    // pref("privacy.firstparty.isolate.block_post_message", true);
-/* 4003: enable site partitioning (FF78+)
- * [1] https://bugzilla.mozilla.org/1590107 [META] */
-pref("privacy.partition.network_state", true);
 
 /*** [SECTION 4500]: RFP (RESIST FINGERPRINTING)
    RFP covers a wide range of ongoing fingerprinting solutions.
@@ -1437,6 +1439,7 @@ pref("privacy.partition.network_state", true);
  FF78+
    1621433 - randomize canvas (previously FF58+ returned an all-white canvas) (FF78+)
    1653987 - limit font visibility to bundled and "Base Fonts" (see 4618) (non-ANDROID) (FF80+)
+   1461454 - spoof smooth=true and powerEfficient=false for supported media in MediaCapabilities (FF82+)
 ***/
 pref("_user.js.parrot", "4500 syntax error: the parrot's popped 'is clogs");
 /* 4501: enable privacy.resistFingerprinting [FF41+]

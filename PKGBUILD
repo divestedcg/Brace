@@ -1,7 +1,7 @@
 # Maintainer: Tad <tad@spotco.us>
 pkgname=brace
-pkgver=20201030
-pkgrel=2
+pkgver=20201111
+pkgrel=1
 pkgdesc="Increases privacy/security through various configs."
 arch=('any')
 license=('GPLv3')
@@ -56,7 +56,7 @@ sha512sums=('1f56a15df0002d0f55c5847249e2be287e465cc707d596a0a81fdc34aa07569a3f3
             'f0e76695a172adcbcfa0093308894165e45d4ce8834115c3727d5bcddcd3304572a7a208317add97a703fdb4aac7aaefd2444baf5e4cc0cda49fec2d6608cb71'
             '6a2e9b714cdc5207d81779dce622ce1ca9a7335e7194b7fb4d70187fcdcf195e21a8e0e549ba00fabc14da7c83f9f8826860afa7c00dd3381a07bef6eb941ef4'
             'df5f83c87ab6b8d504fc723745cfbdd466eef73588a336aa36ea2138a8774bda6f4e5d5962d29be8f7c49cda338077c77f9cd0f4ad9d229a708e299d20bc0bce'
-            'c16c382baa61067cb94f56cf2561f4b23c99c83154a817814deb162ac94a8cb6fdd6af83bd42396487a97a056150dcab9c023befa52fd35b9667764292fde4ca'
+            'ec966ed74d67a342236963e92c79f6156e0609eec5b9d838238a12b1843f7246fc499186f54f7b5b8064fe0b2f6b01a7a782f34eaefe5c31d7c3ae64cf58eb9a'
             'b168818030095032e1d7c417c1bd1dcce494751df2f78ed5193c07ad120bac8de4aac876d01446642295c6ef4603ac5cf97c53ca17a95cc6e971ec554f6610c1')
 install=brace.install
 
