@@ -2,6 +2,8 @@
 pref("browser.ctrlTab.recentlyUsedOrder", false);
 pref("browser.privatebrowsing.vpnpromourl", "");
 pref("browser.tabs.drawInTitlebar", true);
+pref("devtools.netmonitor.persistlog", true);
+pref("devtools.webconsole.persistlog", true);
 pref("general.smoothScroll", false);
 pref("widget.allow-client-side-decoration", true);
 pref("mailnews.start_page.enabled", false);

@@ -1,4 +1,6 @@
 #!/bin/bash
+#Copyright (c) 2020 Divested Computing Group
+#License: GPLv3
 
 #misc
 export CRYFS_NO_UPDATE_CHECK=true;
