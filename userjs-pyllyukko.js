@@ -2,6 +2,7 @@
 /******************************************************************************
  * user.js                                                                    *
  * https://github.com/pyllyukko/user.js                                       *
+ * license: MIT: https://github.com/pyllyukko/user.js/blob/master/LICENSE     *
  ******************************************************************************/
 
 // PREF: Disable WebRTC getUserMedia, screen sharing, audio capture, video capture
