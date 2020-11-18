@@ -30,7 +30,7 @@ pref("privacy.trackingprotection.fingerprinting.enabled", true);
 
 //Security
 pref("browser.preferences.exposeHTTPSOnly", true);
-//pref("dom.security.https_only_mode", true);
+pref("dom.security.https_only_mode", true);
 pref("security.webauth.u2f", true);
 pref("mail.phishing.detection.enabled", true);
 pref("mailnews.message_display.disable_remote_image", true);

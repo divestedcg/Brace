@@ -37,7 +37,7 @@
 				"install_url": "https://addons.mozilla.org/firefox/downloads/latest/noscript/latest.xpi"
 			},
 			"https-everywhere@eff.org": {
-				"installation_mode": "force_installed",
+				"installation_mode": "allowed",
 				"install_url": "https://addons.mozilla.org/firefox/downloads/latest/https-everywhere/latest.xpi"
 			},
 			"{9a41dee2-b924-4161-a971-7fb35c053a4a}": {
