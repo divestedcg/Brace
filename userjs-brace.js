@@ -29,6 +29,7 @@ pref("privacy.trackingprotection.cryptomining.enabled", true);
 pref("privacy.trackingprotection.fingerprinting.enabled", true);
 
 //Security
+pref("browser.gnome-search-provider.enabled", false);
 pref("browser.preferences.exposeHTTPSOnly", true);
 pref("dom.security.https_only_mode", true);
 pref("security.webauth.u2f", true);
