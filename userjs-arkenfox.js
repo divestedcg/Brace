@@ -1,7 +1,7 @@
 /******
 * name: arkenfox user.js
-* date: 12 Nov 2020
-* version 83-alpha
+* date: 22 Nov 2020
+* version 84-alpha
 * url: https://github.com/arkenfox/user.js
 * license: MIT: https://github.com/arkenfox/user.js/blob/master/LICENSE.txt
 
@@ -34,6 +34,7 @@
     - re-enable section 4600 if you don't use RFP
     ESR78
     - If you are not using arkenfox v78... (not a definitive list)
+      - 1244: HTTPS-Only mode is enabled
       - 1401: document fonts is inactive as it is now covered by RFP in FF80+
       - 4600: some prefs may apply even if you use RFP (currently none apply as of FF84)
       - 9999: switch the appropriate deprecated section(s) back on
@@ -717,6 +718,15 @@ pref("security.family_safety.mode", 0);
  * by inspecting ALL your web traffic, then leave at current default=1
  * [1] https://gitlab.torproject.org/tpo/applications/tor-browser/-/issues/16206 ***/
 pref("security.cert_pinning.enforcement_level", 2);
+/* 1224: enforce CRLite [FF73+]
+ * In FF84+ it covers valid certs and in mode 2 doesn't fall back to OCSP, see [2]
+ * [1] https://bugzilla.mozilla.org/1429800 [META]
+ * [2] https://bugzilla.mozilla.org/1670985
+ * [3] https://blog.mozilla.org/security/2020/01/09/crlite-part-1-all-web-pki-revocations-compressed/
+ * [4] https://blog.mozilla.org/security/2020/01/09/crlite-part-2-end-to-end-design/
+ * [5] https://blog.mozilla.org/security/2020/01/21/crlite-part-3-speeding-up-secure-browsing/ ***/
+pref("security.remote_settings.crlite_filters.enabled", true);
+pref("security.pki.crlite_mode", 2);
 
 /** MIXED CONTENT ***/
 /* 1240: enforce no insecure active content on https pages
@@ -729,14 +739,22 @@ pref("security.mixed_content.block_display_content", true);
 pref("security.mixed_content.block_object_subrequest", true);
 /* 1244: enable HTTPS-Only mode [FF76+]
  * When "https_only_mode" (all windows) is true, "https_only_mode_pbm" (private windows only) is ignored
- * [WARNING] This is experimental [1] and you can't set exceptions if FPI is enabled [2] (fixed in FF83)
- * [SETTING] to add site exceptions: Page Info>Permissions>Use insecure HTTP (FF80+)
+ * [SETTING] to add site exceptions: Page Info>HTTPS-Only mode>On/Off/Off temporarily
  * [SETTING] Privacy & Security>HTTPS-Only Mode
+ * [TEST] http://example.com [upgrade]
+ * [TEST] http://neverssl.org/ [no upgrade]
  * [1] https://bugzilla.mozilla.org/1613063 [META]
  * [2] https://bugzilla.mozilla.org/1647829 ***/
-   // pref("dom.security.https_only_mode", true); // [FF76+]
+pref("dom.security.https_only_mode", true); // [FF76+]
    // pref("dom.security.https_only_mode_pbm", true); // [FF80+]
-   // pref("dom.security.https_only_mode.upgrade_local", true); // [FF77+]
+/* 1245: enable HTTPS-Only mode for local resources [FF77+] ***/
+   // pref("dom.security.https_only_mode.upgrade_local", true);
+/* 1246: disable HTTP background requests [FF82+]
+ * When attempting to upgrade, if the server doesn't respond within 3 seconds, firefox
+ * sends HTTP requests in order to check if the server supports HTTPS or not.
+ * This is done to avoid waiting for a timeout which takes 90 seconds
+ * [1] https://bugzilla.mozilla.org/buglist.cgi?bug_id=1642387,1660945 ***/
+pref("dom.security.https_only_mode_send_http_background_request", false);
 
 /** CIPHERS [WARNING: do not meddle with your cipher suite: see the section 1200 intro]
  * These are all the ciphers still using SHA-1 and CBC which are weaker than the available alternatives. (see "Cipher Suites" in [1])
@@ -801,8 +819,8 @@ pref("gfx.font_rendering.opentype_svg.enabled", false);
 pref("gfx.font_rendering.graphite.enabled", false);
 /* 1409: limit system font exposure to a whitelist [FF52+] [RESTART]
  * If the whitelist is empty, then whitelisting is considered disabled and all fonts are allowed
- * [WARNING] **DO NOT USE**: in FF80+ RFP covers this, and non-RFP users should use font vis (4618)
  * [NOTE] In FF81+ the whitelist **overrides** RFP's font visibility (see 4618)
+ * [WARNING] **DO NOT USE**: in FF80+ RFP covers this, and non-RFP users should use font vis (4618)
  * [1] https://bugzilla.mozilla.org/1121643 ***/
    // pref("font.system.whitelist", ""); // [HIDDEN PREF]
 
@@ -1269,8 +1287,10 @@ pref("network.cookie.thirdparty.nonsecureSessionOnly", true); // [FF58+]
  * [WARNING] This will break a LOT of sites' functionality AND extensions!
  * You are better off using an extension for more granular control ***/
    // pref("dom.storage.enabled", false);
-/* 2730: disable offline cache ***/
+/* 2730: enforce no offline cache storage (appCache)
+ * The API is easily fingerprinted, use the "storage" pref instead ***/
    // pref("browser.cache.offline.enable", false); //BRACE-COMMENTED
+   // pref("browser.cache.offline.storage.enable", false); // [FF71+] [DEFAULT: false FF84+] //BRACE-COMMENTED
 /* 2740: disable service worker cache and cache storage
  * [NOTE] We clear service worker cache on exiting Firefox (see 2803)
  * [1] https://w3c.github.io/ServiceWorker/#privacy ***/
@@ -1376,6 +1396,10 @@ pref("privacy.firstparty.isolate", true);
  * [3] https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage ***/
    // pref("privacy.firstparty.isolate.restrict_opener_access", true); // [DEFAULT: true]
    // pref("privacy.firstparty.isolate.block_post_message", true);
+/* 4003: enable scheme with FPI [FF78+]
+ * [NOTE] Experimental: existing data and site permissions are incompatible
+ * and some site exceptions may not work e.g. HTTPS-only mode (see 1244) ***/
+   // pref("privacy.firstparty.isolate.use_site", true);
 
 /*** [SECTION 4500]: RFP (RESIST FINGERPRINTING)
    RFP covers a wide range of ongoing fingerprinting solutions.
