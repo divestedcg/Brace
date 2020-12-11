@@ -1,0 +1,8 @@
+Package: brace
+Version: 20201211-5
+Section: custom
+Priority: optional
+Architecture: all
+Essential: no
+Maintainer: Tad <tad@spotco.us>
+Description: Increases privacy/security through various configs.

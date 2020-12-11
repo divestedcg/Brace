@@ -1,0 +1,1 @@
+/usr/lib/firefox/browser/defaults/preferences/userjs-arkenfox.js
