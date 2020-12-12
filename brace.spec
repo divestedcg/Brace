@@ -1,6 +1,6 @@
 Name: brace
 Version: 20201211
-Release: 5
+Release: 6
 Summary: Increases privacy/security through various configs.
 License: GPLv3+
 BuildArch: noarch
@@ -37,14 +37,11 @@ install -Dm644 brace/etc/dconf/db/local.d/00-brace-pantheon %{buildroot}/etc/dco
 install -Dm644 brace/etc/dconf/profile/user-full %{buildroot}/etc/dconf/profile/user;
 install -Dm755 brace/etc/profile.d/brace-env-overrides.sh %{buildroot}/etc/profile.d/brace-env-overrides.sh;
 install -Dm755 brace/etc/profile.d/brace-helpers.sh %{buildroot}/etc/profile.d/brace-helpers.sh;
-mkdir -p %{buildroot}/usr/lib/firefox/browser/defaults/preferences;
-install -Dm644 brace/usr/lib/firefox/browser/defaults/preferences/userjs-*.js %{buildroot}/usr/lib/firefox/browser/defaults/preferences/;
-install -Dm644 brace/usr/lib/firefox/distribution/policies.json %{buildroot}/usr/lib/firefox/distribution/policies.json;
 mkdir -p %{buildroot}/usr/lib64/firefox/browser/defaults/preferences;
 install -Dm644 brace/usr/lib/firefox/browser/defaults/preferences/userjs-*.js %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/;
 install -Dm644 brace/usr/lib/firefox/distribution/policies.json %{buildroot}/usr/lib64/firefox/distribution/policies.json;
-mkdir -p %{buildroot}/usr/lib/thunderbird/defaults/pref;
-install -Dm644 brace/usr/lib/firefox/browser/defaults/preferences/userjs-*.js %{buildroot}/usr/lib/thunderbird/defaults/pref/;
+mkdir -p %{buildroot}/usr/lib64/thunderbird/defaults/pref;
+install -Dm644 brace/usr/lib/firefox/browser/defaults/preferences/userjs-*.js %{buildroot}/usr/lib64/thunderbird/defaults/pref/;
 install -Dm644 brace/etc/chromium/policies/managed/brace.json %{buildroot}/etc/chromium/policies/managed/brace.json;
 install -Dm644 brace/etc/chromium/policies/managed/brace.json %{buildroot}/etc/opt/chrome/policies/managed/brace.json;
 install -Dm644 brace/usr/lib/modprobe.d/blacklist-dma.conf %{buildroot}/usr/lib/modprobe.d/blacklist-dma.conf;

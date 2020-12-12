@@ -306,7 +306,7 @@ category='Development - Android';
 category='Development - Java';
 	baseIncluded=false;
 	packagesArch='jdk8-openjdk eclipse-java'; packagesAUR='proguard jd-gui launch4j';
-	packagesDebian='default-jdk proguard'; #eclipse-jdt
+	packagesDebian='default-jdk proguard';
 	packagesFedora='java-1.8.0-openjdk-devel eclipse-jdt proguard';
 	packagesSuse=''; #unavailable
 	handleOperation;
@@ -391,7 +391,7 @@ category='Image Manipulation';
 category='Internet';
 	baseIncluded=true;
 	packagesArch='firefox firefox-ublock-origin chromium liferea';
-	packagesDebian='firefox-esr webext-ublock-origin chromium chromium-sandbox liferea';
+	packagesDebian='firefox-esr chromium chromium-sandbox liferea';
 	packagesFedora='firefox mozilla-ublock-origin chromium liferea';
 	packagesSuse='MozillaFirefox chromium liferea';
 	handleOperation;
@@ -468,14 +468,14 @@ category='Security - System';
 category='Tor';
 	baseIncluded=true;
 	packagesArch='tor torsocks onionshare torbrowser-launcher';
-	packagesDebian='tor torsocks obfs4proxy onionshare'; #torbrowser-launcher
+	packagesDebian='tor torsocks obfs4proxy onionshare'; #torbrowser-launcher (contrib)
 	packagesFedora='tor torsocks obfs4 onionshare torbrowser-launcher';
 	packagesSuse='tor torsocks python3-onionshare torbrowser-launcher'; #torbrowser-apparmor-profile
 	handleOperation;
 category='Utility';
 	baseIncluded=true;
 	packagesArch='dconf-editor qalculate-gtk whois mtr stress iotop wavemon pv tree iperf3 bmon powertop ncdu intel-gpu-tools'; packagesAUR='radeontop';
-	packagesDebian='dconf-editor whois mtr stress iotop wavemon pv tree iperf3 bmon powertop ncdu vrms intel-gpu-tools radeontop';
+	packagesDebian='dconf-editor qalculate-gtk whois mtr stress iotop wavemon pv tree iperf3 bmon powertop ncdu vrms intel-gpu-tools radeontop';
 	packagesFedora='dconf-editor qalculate-gtk whois mtr stress iotop wavemon pv tree iperf3 bmon powertop ncdu vrms-rpm intel-gpu-tools radeontop';
 	packagesSuse='dconf-editor whois mtr stress-ng iotop wavemon pv tree iperf bmon powertop ncdu intel-gpu-tools radeontop';
 	handleOperation;
@@ -489,7 +489,7 @@ category='Virtualization';
 category='Wine';
 	baseIncluded=false;
 	packagesArch='wine-staging winetricks';
-	packagesDebian='wine'; #winetricks
+	packagesDebian='wine winetricks';
 	packagesFedora='wine winetricks';
 	packagesSuse='wine-staging winetricks';
 	handleOperation;

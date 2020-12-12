@@ -1,7 +1,7 @@
 # Maintainer: Tad <tad@spotco.us>
 pkgname=brace
 pkgver=20201211
-pkgrel=5
+pkgrel=6
 pkgdesc="Increases privacy/security through various configs."
 arch=('any')
 license=('GPL3')

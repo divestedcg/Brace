@@ -3,19 +3,25 @@ brace
 
 Compatibility
 -------------
-- Fedora Latest (preferred)
 - Arch Linux
 - CentOS 7/8/Stream
-- openSUSE Tumbleweed
 - Debian 10
+- Fedora Latest (preferred)
+- openSUSE Tumbleweed
 
-LICENSE
+License
 -------
 GPLv3 where applicable
 
+Building
+--------
+- git clone [THIS REPO]
+- Arch Linux: makepkg
+- Debian: dpkg-deb --build brace
+- Fedora: fedpkg local
+
 Contents
 --------
-Installed
 	00-brace*				= GNOME/Cinnamon/MATE: change default settings
 	30-nm-privacy.conf			= NetworkManager: enable MAC address randomization, disable connectivity checking, enable IPv6 privacy extensions
 	60-restrict.conf			= kernel: restrict dmesg and ptrace
@@ -24,18 +30,11 @@ Installed
 	brace-helpers.sh			= profile: adds helper aliases
 	brace-installer.sh			= unified package installer
 	brace-fedora-enable-auto-updates.sh	= Fedora: enables DNF automatic updates
-	brace-fedora-remover.sh		= Fedora: package remover
+	brace-fedora-remover.sh			= Fedora: package remover
 	brace-fedora-update-system.sh		= Fedora: update system using dnf-plugin-system-upgrade
 	brace-supplemental-changes.sh		= change extra default settings
 	wireless-perf.conf			= kernel: increases wi-fi performance for b43 and iwlwifi
 	userjs-*.js				= Firefox: change default settings
-Package Creation
-	brace.spec				= RPM specfile
-	PKGBUILD				= pacman PKGBUILD
-	brace.install				= pacman helper script
-Repository Necessaries
-	LICENSE
-	README
 
 Credits
 -------
