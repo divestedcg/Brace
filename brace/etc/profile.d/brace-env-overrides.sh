@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 #Copyright (c) 2020 Divested Computing Group
 #License: GPLv3
 

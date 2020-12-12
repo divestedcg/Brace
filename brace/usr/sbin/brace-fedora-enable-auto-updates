@@ -1,11 +1,11 @@
-#!/bin/bash
+#!/bin/sh
 #Copyright (c) 2018-2020 Divested Computing Group
 #License: GPLv3
 
-if [[ "$EUID" -ne "0" ]]; then echo 'This script needs to be run as root!'; exit 1; fi;
+if [ "$(/usr/bin/id -u)" -ne "0" ]; then echo 'This script needs to be run as root!'; exit 1; fi;
 
-echo "Enabling automatic update download/install";
 if [ -f /etc/fedora-release ]; then
+	echo "Enabling automatic update download/install";
 	dnf install dnf-automatic;
 	systemctl enable dnf-automatic-install.timer --now;
 else

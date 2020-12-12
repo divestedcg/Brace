@@ -2,7 +2,7 @@
 #Copyright (c) 2017-2020 Divested Computing Group
 #License: GPLv3
 
-if [[ "$EUID" -eq "0" ]]; then
+if [ "$(/usr/bin/id -u)" -eq "0" ]; then
 	if [ -f "/usr/lib/systemd/system/zram-swap.service" ]; then
 		echo "Enabling zram-swap";
 		systemctl enable zram-swap.service --now;

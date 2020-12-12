@@ -1,15 +1,15 @@
-#!/bin/bash
+#!/bin/sh
 #Copyright (c) 2018-2020 Divested Computing Group
 #License: GPLv3
 
-if [[ "$EUID" -ne "0" ]]; then echo 'This script needs to be run as root!'; exit 1; fi;
+if [ "$(/usr/bin/id -u)" -ne "0" ]; then echo 'This script needs to be run as root!'; exit 1; fi;
 
 echo "Enabling RPM Fusion Free";
 if [ -f /etc/fedora-release ]; then
-	dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm;
+	dnf install "https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm";
 else
 	yum install epel-release;
-	yum localinstall --nogpgcheck https://download1.rpmfusion.org/free/el/rpmfusion-free-release-$(rpm -E %centos).noarch.rpm;
+	yum localinstall --nogpgcheck "https://download1.rpmfusion.org/free/el/rpmfusion-free-release-$(rpm -E %centos).noarch.rpm";
 fi;
 echo "Please verify the RPM Fusion signing keys from here: https://rpmfusion.org/keys";
 echo "F33: E9A4 91A3 DE24 7814 E7E0  67EA E06F 8ECD D651 FF2E";

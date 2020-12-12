@@ -1,14 +1,14 @@
-#!/bin/bash
+#!/bin/sh
 #Copyright (c) 2018-2020 Divested Computing Group
 #License: GPLv3
 
-if [[ "$EUID" -ne "0" ]]; then echo 'This script needs to be run as root!'; exit 1; fi;
+if [ "$(/usr/bin/id -u)" -ne "0" ]; then echo 'This script needs to be run as root!'; exit 1; fi;
 
 whichPackageManager() {
-	if type "dnf" &> /dev/null; then
+	if type "dnf" > /dev/null 2>&1; then
 		echo "dnf" && return 0;
 	fi;
-	if type "yum" &> /dev/null; then
+	if type "yum" > /dev/null 2>&1; then
 		echo "yum" && return 0;
 	fi;
 }

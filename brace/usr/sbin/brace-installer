@@ -24,28 +24,28 @@ red='\e[0;31m';
 white='\e[0;37m';
 yellow='\e[0;33m';
 
-if [[ "$EUID" -ne "0" ]]; then echo -e "${red}ERROR: This script needs to be run as root!${coloroff}"; exit 1; fi;
+if [ "$(/usr/bin/id -u)" -ne "0" ]; then echo -e "${red}ERROR: This script needs to be run as root!${coloroff}"; exit 1; fi;
 
 #
 #Start functions
 #
 whichPackageManager() {
-	if type "zypper" &> /dev/null; then
+	if type "zypper" > /dev/null 2>&1; then
 		echo "zypper" && return 0;
 	fi;
-	if type "dnf" &> /dev/null; then
+	if type "dnf" > /dev/null 2>&1; then
 		echo "dnf" && return 0;
 	fi;
-	if type "yum" &> /dev/null; then
+	if type "yum" > /dev/null 2>&1; then
 		echo "yum" && return 0;
 	fi;
-	if type "pacman" &> /dev/null; then
+	if type "pacman" > /dev/null 2>&1; then
 		echo "pacman" && return 0;
 	fi;
-	if type "apt" &> /dev/null; then
+	if type "apt" > /dev/null 2>&1; then
 		echo "apt" && return 0;
 	fi;
-	#if type "flatpak" &> /dev/null; then
+	#if type "flatpak" > /dev/null 2>&1; then
 	#	echo "flatpak" && return 0;
 	#fi;
 }
@@ -475,7 +475,7 @@ category='Tor';
 category='Utility';
 	baseIncluded=true;
 	packagesArch='dconf-editor qalculate-gtk whois mtr stress iotop wavemon pv tree iperf3 bmon powertop ncdu intel-gpu-tools'; packagesAUR='radeontop';
-	packagesDebian='dconf-editor qalculate-gtk whois mtr stress iotop wavemon pv tree iperf3 bmon powertop ncdu vrms intel-gpu-tools radeontop';
+	packagesDebian='dconf-cli dconf-editor qalculate-gtk whois mtr stress iotop wavemon pv tree iperf3 bmon powertop ncdu vrms intel-gpu-tools radeontop';
 	packagesFedora='dconf-editor qalculate-gtk whois mtr stress iotop wavemon pv tree iperf3 bmon powertop ncdu vrms-rpm intel-gpu-tools radeontop';
 	packagesSuse='dconf-editor whois mtr stress-ng iotop wavemon pv tree iperf bmon powertop ncdu intel-gpu-tools radeontop';
 	handleOperation;

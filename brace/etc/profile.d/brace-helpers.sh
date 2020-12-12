@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 #Copyright (c) 2018-2020 Divested Computing Group
 #
 #This program is free software: you can redistribute it and/or modify
