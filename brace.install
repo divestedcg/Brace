@@ -6,4 +6,3 @@ post_install() {
 post_remove() {
   if [ -f /usr/bin/dconf ]; then dconf update; fi;
 }
-

@@ -1,7 +1,7 @@
 # Maintainer: Tad <tad@spotco.us>
 pkgname=brace
 pkgver=20201212
-pkgrel=1
+pkgrel=2
 pkgdesc="Increases privacy/security through various configs."
 arch=('any')
 license=('GPL3')
@@ -12,7 +12,6 @@ build() {
 }
 
 package() {
-	cd "$srcdir";
 	install -Dm644 brace/etc/dconf/db/local.d/00-brace-cinnamon "$pkgdir"/etc/dconf/db/local.d/00-brace-cinnamon;
 	install -Dm644 brace/etc/dconf/db/local.d/00-brace-extra "$pkgdir"/etc/dconf/db/local.d/00-brace-extra;
 	install -Dm644 brace/etc/dconf/db/local.d/00-brace-gnome "$pkgdir"/etc/dconf/db/local.d/00-brace-gnome;

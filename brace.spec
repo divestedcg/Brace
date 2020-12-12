@@ -1,6 +1,6 @@
 Name: brace
 Version: 20201212
-Release: 1
+Release: 2
 Summary: Increases privacy/security through various configs.
 License: GPLv3+
 BuildArch: noarch
@@ -60,5 +60,30 @@ install -Dm755 %{_sourcedir}/brace/usr/sbin/brace-installer %{buildroot}/usr/sbi
 install -Dm755 %{_sourcedir}/brace/usr/sbin/brace-rpm-verify %{buildroot}/usr/sbin/brace-rpm-verify;
 
 %files
-/etc
-/usr
+/etc/dconf/db/local.d/00-brace-cinnamon
+/etc/dconf/db/local.d/00-brace-extra
+/etc/dconf/db/local.d/00-brace-gnome
+/etc/dconf/db/local.d/00-brace-mate
+/etc/dconf/db/local.d/00-brace-pantheon
+/etc/dconf/profile/user
+/etc/profile.d/brace-env-overrides.sh
+/etc/profile.d/brace-helpers.sh
+/usr/lib64/firefox/browser/defaults/preferences/userjs-*.js
+/usr/lib64/firefox/distribution/policies.json
+/usr/lib64/thunderbird/defaults/pref/userjs-*.js
+/etc/chromium/policies/managed/brace.json
+/etc/opt/chrome/policies/managed/brace.json
+/usr/lib/modprobe.d/blacklist-dma.conf
+/usr/lib/modprobe.d/blacklist-usbnet.conf
+/usr/lib/modprobe.d/wireless-perf.conf
+/usr/lib/NetworkManager/conf.d/30-nm-privacy.conf
+/usr/lib/sysctl.d/60-restrict.conf
+/usr/lib/systemd/user/restic-backup@.service
+/usr/lib/systemd/user/restic-backup@.timer
+/usr/bin/brace-supplemental-changes
+/usr/sbin/brace-enable-auto-updates
+/usr/sbin/brace-enable-rpmfusion
+/usr/sbin/brace-remover
+/usr/sbin/brace-update-system
+/usr/sbin/brace-installer
+/usr/sbin/brace-rpm-verify
