@@ -17,6 +17,7 @@ Building
 --------
 - git clone [THIS REPO]
 - Arch Linux: makepkg
+- CentOS: rpmbuild -ba brace.spec --define "_sourcedir $PWD"
 - Debian: dpkg-deb --build brace
 - Fedora: fedpkg local
 
