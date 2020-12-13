@@ -8,7 +8,7 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 %define _binary_payload w3T.xzdio
 
 %description
-- Adds many helper scripts: brace-installer, brace-remover, brace-supplemental-changes
+- Adds many helper scripts: brace-installer, brace-supplemental-changes
 - GNOME/Cinnamon/MATE: change default settings
 - Firefox: change default settings, credit @arkenfox + @pyllyukko, license MIT
 - Chromium: change default settings
@@ -82,7 +82,6 @@ install -Dm755 %{_sourcedir}/brace/usr/sbin/brace-rpm-verify %{buildroot}/usr/sb
 /usr/bin/brace-supplemental-changes
 /usr/sbin/brace-enable-auto-updates
 /usr/sbin/brace-enable-rpmfusion
-/usr/sbin/brace-remover
 /usr/sbin/brace-update-system
 /usr/sbin/brace-installer
 /usr/sbin/brace-rpm-verify
