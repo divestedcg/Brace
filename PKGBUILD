@@ -1,7 +1,7 @@
 # Maintainer: Tad <tad@spotco.us>
 pkgname=brace
 pkgver=20201212
-pkgrel=3
+pkgrel=6
 pkgdesc="Increases privacy/security through various configs."
 arch=('any')
 license=('GPL3')
@@ -18,8 +18,9 @@ package() {
 	install -Dm644 brace/etc/dconf/db/local.d/00-brace-mate "$pkgdir"/etc/dconf/db/local.d/00-brace-mate;
 	install -Dm644 brace/etc/dconf/db/local.d/00-brace-pantheon "$pkgdir"/etc/dconf/db/local.d/00-brace-pantheon;
 	install -Dm644 brace/etc/dconf/profile/user-full "$pkgdir"/etc/dconf/profile/user;
-	install -Dm755 brace/etc/profile.d/brace-env-overrides.sh "$pkgdir"/etc/profile.d/brace-env-overrides.sh;
-	install -Dm755 brace/etc/profile.d/brace-helpers.sh "$pkgdir"/etc/profile.d/brace-helpers.sh;
+	install -Dm755 brace/etc/default/grub.d/brace.cfg "$pkgdir"/etc/default/grub.d/brace.cfg;
+	install -Dm644 brace/etc/profile.d/brace-env-overrides.sh "$pkgdir"/etc/profile.d/brace-env-overrides.sh;
+	install -Dm644 brace/etc/profile.d/brace-helpers.sh "$pkgdir"/etc/profile.d/brace-helpers.sh;
 	mkdir -p "$pkgdir"/usr/lib/firefox/browser/defaults/preferences;
 	install -Dm644 brace/usr/lib/firefox/browser/defaults/preferences/userjs-*.js "$pkgdir"/usr/lib/firefox/browser/defaults/preferences/;
 	install -Dm644 brace/usr/lib/firefox/distribution/policies.json "$pkgdir"/usr/lib/firefox/distribution/policies.json;

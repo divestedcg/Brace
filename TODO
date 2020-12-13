@@ -1,0 +1,10 @@
+packages:
+	gnome-software -> gnome-packagekit (deprecated but lightweight)
+	gnucash -> homebank (easier to use)
+	gnome-photos/shotwell -> gthumb
+	xournalpp
+	remove gnome-software/packagekit?
+
+bugs:
+	fix profile.d files on Debian
+	fix brace-helpers.sh on openSUSE
