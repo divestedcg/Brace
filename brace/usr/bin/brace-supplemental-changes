@@ -79,6 +79,7 @@ if [ "$(/usr/bin/id -u)" -eq "0" ]; then
 						randhost=$(pwgen -A0 8 1);
 					fi;
 					hostnamectl set-hostname "$randhost";
+					#echo "127.0.0.1 $randhost" >> /etc/hosts;
 					break;;
 				Skip )
 					break;;
