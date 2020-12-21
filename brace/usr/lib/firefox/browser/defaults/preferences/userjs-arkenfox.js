@@ -746,7 +746,7 @@ pref("dom.security.https_only_mode", true); // [FF76+]
  * sends HTTP requests in order to check if the server supports HTTPS or not.
  * This is done to avoid waiting for a timeout which takes 90 seconds
  * [1] https://bugzilla.mozilla.org/buglist.cgi?bug_id=1642387,1660945 ***/
-pref("dom.security.https_only_mode_send_http_background_request", false);
+   // pref("dom.security.https_only_mode_send_http_background_request", false); //BRACE-COMMENTED
 
 /** CIPHERS [WARNING: do not meddle with your cipher suite: see the section 1200 intro]
  * These are all the ciphers still using SHA-1 and CBC which are weaker than the available alternatives. (see "Cipher Suites" in [1])
