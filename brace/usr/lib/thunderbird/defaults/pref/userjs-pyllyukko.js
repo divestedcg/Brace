@@ -1,1 +1,0 @@
-/usr/lib/firefox/browser/defaults/preferences/userjs-pyllyukko.js
