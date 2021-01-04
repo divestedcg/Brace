@@ -8,3 +8,6 @@ packages:
 bugs:
 	fix profile.d files on Debian
 	fix brace-helpers.sh on openSUSE
+
+improvements:
+	properly verify rpmfusion .rpm

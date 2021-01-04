@@ -5,7 +5,7 @@
 if [ "$(/usr/bin/id -u)" -ne "0" ]; then echo 'This script needs to be run as root!'; exit 1; fi;
 
 if [ -f /etc/fedora-release ]; then
-	echo "Enabling automatic update download/install";
+	echo "Enabling DNF automatic update download/install";
 	dnf install dnf-automatic;
 	systemctl enable dnf-automatic-install.timer --now;
 else

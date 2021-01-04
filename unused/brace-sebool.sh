@@ -2,10 +2,10 @@
 #Copyright (c) 2017-2019 Divested Computing, Inc.
 #License: GPLv3
 
-if [[ $EUID -ne 0 ]]; then echo 'This script needs to be run as root!'; exit 1; fi;
+if [ "$(/usr/bin/id -u)" -ne "0" ]; then echo 'This script needs to be run as root!'; exit 1; fi;
 
-echo "Setting hardened booleans for SELinux policy";
 if [ -f /etc/fedora-release ] || [ -f /etc/centos-release ]; then
+	echo "Setting hardened booleans for SELinux policy";
 	setsebool -P deny_ptrace on;
 	#setsebool -P deny_execmem on;
 	setsebool -P selinuxuser_execheap off;
