@@ -1,7 +1,7 @@
 /******
 * name: arkenfox user.js
-* date: 22 Nov 2020
-* version 84-alpha
+* date: 17 Jan 2021
+* version 85-alpha
 * url: https://github.com/arkenfox/user.js
 * license: MIT: https://github.com/arkenfox/user.js/blob/master/LICENSE.txt
 
@@ -25,6 +25,7 @@
          [SETUP-CHROME] changes how Firefox itself behaves (i.e. not directly website related)
            [SETUP-PERF] may impact performance
               [WARNING] used sparingly, heed them
+  6. Override Recipes: https://github.com/arkenfox/user.js/issues/1080
 
 * RELEASES: https://github.com/arkenfox/user.js/releases
 
@@ -115,7 +116,7 @@ pref("browser.newtabpage.activity-stream.telemetry", false);
  * Runs code received from a server (aka Remote Code Execution) and sends information back to a metrics server
  * [1] https://abouthome-snippets-service.readthedocs.io/ ***/
 pref("browser.newtabpage.activity-stream.feeds.snippets", false);
-pref("browser.newtabpage.activity-stream.asrouter.providers.snippets", "{}");
+pref("browser.newtabpage.activity-stream.asrouter.providers.snippets", "{}"); //BRACE-KEEP_FOR_NOW
 /* 0105c: disable Activity Stream Top Stories, Pocket-based and/or sponsored content ***/
 pref("browser.newtabpage.activity-stream.feeds.section.topstories", false);
 pref("browser.newtabpage.activity-stream.section.highlights.includePocket", false);
@@ -339,7 +340,7 @@ pref("extensions.systemAddon.update.url", ""); // [FF44+]
 pref("browser.ping-centre.telemetry", false);
 /* 0515: disable Screenshots ***/
 pref("extensions.screenshots.disabled", true); // [FF55+] //BRACE-UNCOMMENTED
-pref("extensions.screenshots.upload-disabled", true); // [FF60+] //BRACE-UNCOMMENTED
+pref("extensions.screenshots.upload-disabled", true); // [FF60+] //BRACE-KEEP_FOR_NOW
 /* 0517: disable Form Autofill
  * [NOTE] Stored data is NOT secure (uses a JSON file)
  * [NOTE] Heuristics controls Form Autofill on forms without @autocomplete attributes
@@ -463,7 +464,7 @@ pref("browser.urlbar.trimURLs", false);
  * [1] https://dbaron.org/mozilla/visited-privacy
  * [2] https://bugzilla.mozilla.org/147777
  * [3] https://developer.mozilla.org/docs/Web/CSS/Privacy_and_the_:visited_selector ***/
-pref("layout.css.visited_links_enabled", false);
+pref("layout.css.visited_links_enabled", false); //BRACE-KEEP_FOR_NOW
 /* 0807: disable live search suggestions
 /* [NOTE] Both must be true for the location bar to work
  * [SETUP-CHROME] Change these if you trust and use a privacy respecting search engine
@@ -484,6 +485,10 @@ pref("browser.urlbar.dnsResolveSingleWordsAfterSearch", 0);
    // pref("browser.urlbar.suggest.bookmark", false);
    // pref("browser.urlbar.suggest.openpage", false);
    // pref("browser.urlbar.suggest.topsites", false); // [FF78+]
+/* 0850b: disable tab-to-search [FF85+]
+ * Alternatively, you can exclude on a per-engine basis by unchecking them in Options>Search
+ * [SETTING] Privacy & Security>Address Bar>When using the address bar, suggest>Search engines ***/
+   // pref("browser.urlbar.suggest.engines", false);
 /* 0850c: disable location bar dropdown
  * This value controls the total number of entries to appear in the location bar dropdown
  * [NOTE] Items (bookmarks/history/openpages) with a high "frecency"/"bonus" will always
@@ -819,10 +824,7 @@ pref("gfx.font_rendering.graphite.enabled", false);
 /*** [SECTION 1600]: HEADERS / REFERERS
      Only *cross domain* referers need controlling: leave 1601, 1602, 1605 and 1606 alone
      ---
-            harden it a bit: set XOriginPolicy (1603) to 1 (as per the settings below)
-       harden it a bit more: set XOriginPolicy (1603) to 2 (and optionally 1604 to 1 or 2), expect breakage
-     ---
-     If you want any REAL control over referers and breakage, then use an extension
+     Expect some breakage: Use an extension if you need precise control
      ---
                     full URI: https://example.com:8888/foo/bar.html?id=1234
        scheme+host+port+path: https://example.com:8888/foo/bar.html
@@ -833,17 +835,17 @@ pref("gfx.font_rendering.graphite.enabled", false);
 pref("_user.js.parrot", "1600 syntax error: the parrot rests in peace!");
 /* 1601: ALL: control when images/links send a referer
  * 0=never, 1=send only when links are clicked, 2=for links and images (default) ***/
-   // pref("network.http.sendRefererHeader", 2); // [DEFAULT: 2]
+   // pref("network.http.sendRefererHeader", 2);
 /* 1602: ALL: control the amount of information to send
  * 0=send full URI (default), 1=scheme+host+port+path, 2=scheme+host+port ***/
-   // pref("network.http.referer.trimmingPolicy", 0); // [DEFAULT: 0]
+   // pref("network.http.referer.trimmingPolicy", 0);
 /* 1603: CROSS ORIGIN: control when to send a referer
  * 0=always (default), 1=only if base domains match, 2=only if hosts match
  * [SETUP-WEB] Known to cause issues with older modems/routers and some sites e.g vimeo, icloud ***/
-pref("network.http.referer.XOriginPolicy", 1);
+pref("network.http.referer.XOriginPolicy", 2);
 /* 1604: CROSS ORIGIN: control the amount of information to send [FF52+]
  * 0=send full URI (default), 1=scheme+host+port+path, 2=scheme+host+port ***/
-pref("network.http.referer.XOriginTrimmingPolicy", 0); // [DEFAULT: 0]
+pref("network.http.referer.XOriginTrimmingPolicy", 2);
 /* 1605: ALL: disable spoofing a referer
  * [WARNING] Do not set this to true, as spoofing effectively disables the anti-CSRF
  * (Cross-Site Request Forgery) protections that some sites may rely on ***/
@@ -1199,6 +1201,9 @@ pref("permissions.delegation.enabled", false);
  * If a new page from another domain is loaded into a tab, then window.name is set to an empty string. The original
  * string is restored if the tab reverts back to the original page. This change prevents some cross-site attacks ***/
 pref("privacy.window.name.update.enabled", true);
+/* 2625: disable bypassing 3rd party extension install prompts [FF82+]
+ * [1] https://bugzilla.mozilla.org/buglist.cgi?bug_id=1659530,1681331 ***/
+pref("extensions.postDownloadThirdPartyPrompt", false);
 
 /** DOWNLOADS ***/
 /* 2650: discourage downloading to desktop
@@ -1298,6 +1303,8 @@ pref("network.cookie.thirdparty.nonsecureSessionOnly", true); // [FF58+]
 /* 2755: disable Storage Access API [FF65+]
  * [1] https://developer.mozilla.org/en-US/docs/Web/API/Storage_Access_API ***/
    // pref("dom.storage_access.enabled", false);
+/* 2760: enable Local Storage Next Generation (LSNG) [FF65+] ***/
+   // pref("dom.storage.next_gen", true); //BRACE-COMMENTED
 
 /*** [SECTION 2800]: SHUTDOWN
      You should set the values to what suits you best.
