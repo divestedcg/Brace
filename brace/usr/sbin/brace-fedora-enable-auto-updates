@@ -6,7 +6,7 @@ if [ "$(/usr/bin/id -u)" -ne "0" ]; then echo 'This script needs to be run as ro
 
 if [ -f /etc/fedora-release ]; then
 	echo "Enabling DNF automatic update download/install";
-	dnf install dnf-automatic;
+	dnf install dnf-automatic rpm-plugin-systemd-inhibit;
 	systemctl enable dnf-automatic-install.timer --now;
 else
 	echo "Currently only Fedora is supported";

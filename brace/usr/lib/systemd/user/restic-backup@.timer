@@ -3,7 +3,7 @@ Description=backup with restic daily
 
 [Timer]
 OnCalendar=daily
-RandomizedDelaySec=600
+RandomizedDelaySec=60m
 Persistent=true
 
 [Install]
