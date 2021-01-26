@@ -639,9 +639,11 @@ pref("_user.js.parrot", "1200 syntax error: the parrot's a stiff!");
  * if it disables renegotiations but the problem is that the browser can't know that.
  * Setting this pref to true is the only way for the browser to ensure there will be
  * no unsafe renegotiations on the channel between the browser and the server.
+ * [STATS] SSL Labs (Dec 2020) reports 99.0% of sites have secure renegotiation [4]
  * [1] https://wiki.mozilla.org/Security:Renegotiation
  * [2] https://tools.ietf.org/html/rfc5746
- * [3] https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-3555 ***/
+ * [3] https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-3555
+ * [4] https://www.ssllabs.com/ssl-pulse/ ***/
 pref("security.ssl.require_safe_negotiation", true);
 /* 1202: control TLS versions with min and max
  * 1=TLS 1.0, 2=TLS 1.1, 3=TLS 1.2, 4=TLS 1.3
@@ -776,10 +778,8 @@ pref("dom.security.https_only_mode", true); // [FF76+]
 /** UI (User Interface) ***/
 /* 1270: display warning on the padlock for "broken security" (if 1201 is false)
  * Bug: warning padlock not indicated for subresources on a secure page! [2]
- * [STATS] SSL Labs (Dec 2020) reports 99.0% of sites have secure renegotiation [3]
  * [1] https://wiki.mozilla.org/Security:Renegotiation
- * [2] https://bugzilla.mozilla.org/1353705
- * [3] https://www.ssllabs.com/ssl-pulse/ ***/
+ * [2] https://bugzilla.mozilla.org/1353705 ***/
 pref("security.ssl.treat_unsafe_negotiation_as_broken", true);
 /* 1271: control "Add Security Exception" dialog on SSL warnings
  * 0=do neither 1=pre-populate url 2=pre-populate url + pre-fetch cert (default)
@@ -1200,7 +1200,7 @@ pref("permissions.delegation.enabled", false);
 /* 2624: enable "window.name" protection [FF82+]
  * If a new page from another domain is loaded into a tab, then window.name is set to an empty string. The original
  * string is restored if the tab reverts back to the original page. This change prevents some cross-site attacks ***/
-pref("privacy.window.name.update.enabled", true);
+pref("privacy.window.name.update.enabled", true); // [DEFAULT: true FF86+]
 /* 2625: disable bypassing 3rd party extension install prompts [FF82+]
  * [1] https://bugzilla.mozilla.org/buglist.cgi?bug_id=1659530,1681331 ***/
 pref("extensions.postDownloadThirdPartyPrompt", false);
