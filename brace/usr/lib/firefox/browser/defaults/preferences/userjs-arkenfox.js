@@ -1,7 +1,7 @@
 /******
 * name: arkenfox user.js
-* date: 17 Jan 2021
-* version 85-alpha
+* date: 01 Feb 2021
+* version 86-alpha
 * url: https://github.com/arkenfox/user.js
 * license: MIT: https://github.com/arkenfox/user.js/blob/master/LICENSE.txt
 
@@ -18,6 +18,7 @@
        * Some site breakage and unintended consequences will happen. Everyone's experience will differ
          e.g. some user data is erased on close (section 2800), change this to suit your needs
        * While not 100% definitive, search for "[SETUP" tags
+         e.g. third party images/videos not loading on some sites? check 1603
        * Take the wiki link in step 2 and read the Troubleshooting entry
   5. Some tag info
        [SETUP-SECURITY] it's one item, read it
@@ -82,8 +83,8 @@
 pref("_user.js.parrot", "START: Oh yes, the Norwegian Blue... what's wrong with it?");
 
 /* 0000: disable about:config warning
- * FF71-72: chrome://global/content/config.xul
- * FF73+: chrome://global/content/config.xhtml ***/
+ * FF72 or lower: chrome://global/content/config.xul
+ * FF73-86: chrome://global/content/config.xhtml ***/
 pref("general.warnOnAboutConfig", false); // XUL/XHTML version
 pref("browser.aboutConfig.showWarning", false); // HTML version [FF71+]
 
@@ -366,7 +367,7 @@ pref("network.dns.disablePrefetch", true);
 pref("network.dns.disablePrefetchFromHTTPS", true); // [DEFAULT: true]
 /* 0603: disable predictor / prefetching ***/
 pref("network.predictor.enabled", false);
-pref("network.predictor.enable-prefetch", false); // [FF48+]
+pref("network.predictor.enable-prefetch", false); // [FF48+] [DEFAULT: false]
 /* 0605: disable link-mouseover opening connection to linked server
  * [1] https://news.slashdot.org/story/15/08/14/2321202/how-to-quash-firefoxs-silent-requests ***/
 pref("network.http.speculative-parallel-limit", 0);
@@ -634,10 +635,10 @@ pref("browser.shell.shortcutFavicons", false);
 pref("_user.js.parrot", "1200 syntax error: the parrot's a stiff!");
 /** SSL (Secure Sockets Layer) / TLS (Transport Layer Security) ***/
 /* 1201: require safe negotiation
- * Blocks connections to servers that don't support RFC 5746 [2] as they're potentially
- * vulnerable to a MiTM attack [3]. A server *without* RFC 5746 can be safe from the attack
- * if it disables renegotiations but the problem is that the browser can't know that.
- * Setting this pref to true is the only way for the browser to ensure there will be
+ * Blocks connections (SSL_ERROR_UNSAFE_NEGOTIATION) to servers that don't support RFC 5746 [2]
+ * as they're potentially vulnerable to a MiTM attack [3]. A server without RFC 5746 can be
+ * safe from the attack if it disables renegotiations but the problem is that the browser can't
+ * know that. Setting this pref to true is the only way for the browser to ensure there will be
  * no unsafe renegotiations on the channel between the browser and the server.
  * [STATS] SSL Labs (Dec 2020) reports 99.0% of sites have secure renegotiation [4]
  * [1] https://wiki.mozilla.org/Security:Renegotiation
@@ -900,7 +901,7 @@ pref("plugin.state.flash", 0);
    // pref("media.gmp-provider.enabled", false);
 /* 1825: disable widevine CDM (Content Decryption Module)
  * [SETUP-WEB] if you *need* CDM, e.g. Netflix, Amazon Prime, Hulu, whatever ***/
-pref("media.gmp-widevinecdm.visible", false);
+pref("media.gmp-widevinecdm.visible", false); //BRACE-KEEP_FOR_NOW
 pref("media.gmp-widevinecdm.enabled", false);
 /* 1830: disable all DRM content (EME: Encryption Media Extension)
  * [SETUP-WEB] if you *need* EME, e.g. Netflix, Amazon Prime, Hulu, whatever
@@ -1153,10 +1154,6 @@ pref("mathml.disabled", true); //BRACE-UNCOMMENTED
 /* 2611: disable middle mouse click opening links from clipboard
  * [1] https://gitlab.torproject.org/tpo/applications/tor-browser/-/issues/10089 ***/
 pref("middlemouse.contentLoadURL", false);
-/* 2614: limit HTTP redirects (this does not control redirects with HTML meta tags or JS)
- * [NOTE] A low setting of 5 or under will probably break some sites (e.g. gmail logins)
- * To control HTML Meta tag and JS redirects, use an extension. Default is 20 ***/
-pref("network.http.redirection-limit", 10);
 /* 2615: disable websites overriding Firefox's keyboard shortcuts [FF58+]
  * 0 (default) or 1=allow, 2=block
  * [SETTING] to add site exceptions: Page Info>Permissions>Override Keyboard Shortcuts ***/
@@ -1199,7 +1196,8 @@ pref("browser.display.use_system_colors", false); // [DEFAULT: false]
 pref("permissions.delegation.enabled", false);
 /* 2624: enable "window.name" protection [FF82+]
  * If a new page from another domain is loaded into a tab, then window.name is set to an empty string. The original
- * string is restored if the tab reverts back to the original page. This change prevents some cross-site attacks ***/
+ * string is restored if the tab reverts back to the original page. This change prevents some cross-site attacks
+ * [TEST] https://arkenfox.github.io/TZP/tests/windownamea.html ***/
 pref("privacy.window.name.update.enabled", true); // [DEFAULT: true FF86+]
 /* 2625: disable bypassing 3rd party extension install prompts [FF82+]
  * [1] https://bugzilla.mozilla.org/buglist.cgi?bug_id=1659530,1681331 ***/
@@ -1590,7 +1588,7 @@ pref("ui.use_standins_for_native_colors", true);
    // 0=light, 1=dark : This overrides your OS value
 pref("ui.systemUsesDarkTheme", 0); // [HIDDEN PREF]
 // FF80+
-// 4618: limit font visbility (non-ANDROID) [FF79+]
+// 4618: limit font visibility (non-ANDROID) [FF79+]
    // Uses hardcoded lists with two parts: kBaseFonts + kLangPackFonts [1]
    // 1=only base system fonts, 2=also fonts from optional language packs, 3=also user-installed fonts
    // [NOTE] Bundled fonts are auto-allowed
