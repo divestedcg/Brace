@@ -417,7 +417,7 @@ pref("network.http.altsvc.oe", false);
  * [1] https://trac.torproject.org/projects/tor/wiki/doc/TorifyHOWTO/WebBrowsers ***/
 pref("network.proxy.socks_remote_dns", true);
 /* 0708: disable FTP [FF60+] ***/
-   // pref("network.ftp.enabled", false);
+   // pref("network.ftp.enabled", false); // [DEFAULT: false FF88+]
 /* 0709: disable using UNC (Uniform Naming Convention) paths [FF61+]
  * [SETUP-CHROME] Can break extensions for profiles on network shares
  * [1] https://gitlab.torproject.org/tpo/applications/tor-browser/-/issues/26424 ***/
@@ -655,19 +655,15 @@ pref("security.ssl.require_safe_negotiation", true);
 /* 1203: enforce TLS 1.0 and 1.1 downgrades as session only */
 pref("security.tls.version.enable-deprecated", false);
 /* 1204: disable SSL session tracking [FF36+]
- * SSL Session IDs are unique, last up to 24hrs in Firefox, and can be used for tracking
- * [SETUP-PERF] Relax this if you have FPI enabled (see 4000) *AND* you understand the
- * consequences. FPI isolates these, but it was designed with the Tor protocol in mind,
- * and the Tor Browser has extra protection, including enhanced sanitizing per Identity.
+ * SSL Session IDs are unique and last up to 24hrs in Firefox (or longer with prolongation attacks)
+ * [NOTE] These are not used in PB mode. In normal windows they are isolated when using FPI (4001)
+ * and/or containers. In FF85+ they are isolated by default (privacy.partition.network_state)
+ * [WARNING] There are perf and passive fingerprinting costs, for little to no gain. Preventing
+ * tracking via this method does not address IPs, nor handle any sanitizing of current identifiers
  * [1] https://tools.ietf.org/html/rfc5077
  * [2] https://bugzilla.mozilla.org/967977
  * [3] https://arxiv.org/abs/1810.07304 ***/
-pref("security.ssl.disable_session_identifiers", true); // [HIDDEN PREF]
-/* 1205: disable SSL Error Reporting
- * [1] https://firefox-source-docs.mozilla.org/browser/base/sslerrorreport/preferences.html ***/
-pref("security.ssl.errorReporting.automatic", false);
-pref("security.ssl.errorReporting.enabled", false);
-pref("security.ssl.errorReporting.url", "");
+   // pref("security.ssl.disable_session_identifiers", true); // [HIDDEN PREF]
 /* 1206: disable TLS1.3 0-RTT (round-trip time) [FF51+]
  * [1] https://github.com/tlswg/tls13-spec/issues/1001
  * [2] https://blog.cloudflare.com/tls-1-3-overview-and-q-and-a/ ***/
@@ -934,7 +930,7 @@ pref("webgl.disabled", true);
 pref("webgl.enable-webgl2", false);
 /* 2012: limit WebGL ***/
 pref("webgl.min_capability_mode", true);
-pref("webgl.disable-fail-if-major-performance-caveat", true);
+pref("webgl.disable-fail-if-major-performance-caveat", true); // [DEFAULT: true FF86+]
 /* 2022: disable screensharing ***/
 pref("media.getusermedia.screensharing.enabled", false);
 pref("media.getusermedia.browser.enabled", false);
@@ -977,8 +973,8 @@ pref("browser.link.open_newwindow.restriction", 0);
  * [SETTING] Privacy & Security>Permissions>Block pop-up windows ***/
 pref("dom.disable_open_during_load", true);
 /* 2212: limit events that can cause a popup [SETUP-WEB]
- * default is "change click dblclick auxclick mouseup pointerup notificationclick reset submit touchend contextmenu" ***/
-pref("dom.popup_allowed_events", "click dblclick");
+ * default FF86+: "change click dblclick auxclick mousedown mouseup pointerdown pointerup notificationclick reset submit touchend contextmenu ***/
+pref("dom.popup_allowed_events", "click dblclick mousedown pointerdown");
 
 /*** [SECTION 2300]: WEB WORKERS
      A worker is a JS "background task" running in a global context, i.e. it is different from
@@ -1130,8 +1126,7 @@ pref("beacon.enabled", false);
 /* 2603: remove temp files opened with an external application
  * [1] https://bugzilla.mozilla.org/302433 ***/
 pref("browser.helperApps.deleteTempFileOnExit", true);
-/* 2604: disable page thumbnail collection
- * look in profile/thumbnails directory - you may want to clean that out ***/
+/* 2604: disable page thumbnail collection ***/
 pref("browser.pagethumbnails.capturing_disabled", true); // [HIDDEN PREF]
 /* 2606: disable UITour backend so there is no chance that a remote page can use it ***/
 pref("browser.uitour.enabled", false);
@@ -1214,8 +1209,6 @@ pref("extensions.postDownloadThirdPartyPrompt", false);
 pref("browser.download.useDownloadDir", false);
 /* 2652: disable adding downloads to the system's "recent documents" list ***/
 pref("browser.download.manager.addToRecentDocs", false);
-/* 2653: disable hiding mime types (Options>General>Applications) not associated with a plugin ***/
-pref("browser.download.hide_plugins_without_extensions", false);
 /* 2654: disable "open with" in download dialog [FF50+] [SETUP-HARDEN]
  * This is very useful to enable when the browser is sandboxed (e.g. via AppArmor)
  * in such a way that it is forbidden to run external applications.
@@ -1673,107 +1666,22 @@ pref("_user.js.parrot", "9999 syntax error: the parrot's deprecated!");
    // [1] https://gitlab.torproject.org/tpo/applications/tor-browser/-/issues/20025
    // [-] https://bugzilla.mozilla.org/1603712
 pref("intl.charset.fallback.override", "windows-1252");
-// * * * /
 // FF82
 // 0206: disable geographically specific results/search engines e.g. "browser.search.*.US"
    // i.e. ignore all of Mozilla's various search engines in multiple locales
    // [-] https://bugzilla.mozilla.org/1619926
 pref("browser.search.geoSpecificDefaults", false);
 pref("browser.search.geoSpecificDefaults.url", "");
-// ***/
-
-// ESR68.x still uses all the following prefs
-// [NOTE] replace the * with a slash in the line above to re-enable them
-// FF69
-// 1405: disable WOFF2 (Web Open Font Format) [FF35+]
-   // [-] https://bugzilla.mozilla.org/1556991
-   // pref("gfx.downloadable_fonts.woff2.enabled", false);
-// 1802: enforce click-to-play for plugins
-   // [-] https://bugzilla.mozilla.org/1519434
-pref("plugins.click_to_play", true); // [DEFAULT: true FF25+]
-// 2033: disable autoplay for muted videos [FF63+] - replaced by 'media.autoplay.default' options (2030)
-   // [-] https://bugzilla.mozilla.org/1562331
-   // pref("media.autoplay.allow-muted", false);
-// * * * /
-// FF71
-// 2608: disable WebIDE and ADB extension download
-   // [1] https://trac.torproject.org/projects/tor/ticket/16222
-   // [-] https://bugzilla.mozilla.org/1539462
-pref("devtools.webide.enabled", false); // [DEFAULT: false FF70+]
-pref("devtools.webide.autoinstallADBExtension", false); // [FF64+]
-// 2731: enforce websites to ask to store data for offline use
-   // [1] https://support.mozilla.org/questions/1098540
-   // [2] https://bugzilla.mozilla.org/959985
-   // [-] https://bugzilla.mozilla.org/1574480
-pref("offline-apps.allow_by_default", false);
-// * * * /
-// FF72
-// 0105a: disable Activity Stream telemetry
-   // [-] https://bugzilla.mozilla.org/1597697
-pref("browser.newtabpage.activity-stream.telemetry.ping.endpoint", "");
-// 0330: disable Hybdrid Content telemetry
-   // [-] https://bugzilla.mozilla.org/1520491
-pref("toolkit.telemetry.hybridContent.enabled", false); // [FF59+]
-// 2720: enforce IndexedDB (IDB) as enabled
-   // IDB is required for extensions and Firefox internals (even before FF63 in [1])
-   // To control *website* IDB data, control allowing cookies and service workers, or use
-   // Temporary Containers. To mitigate *website* IDB, FPI helps (4001), and/or sanitize
-   // on close (Offline Website Data, see 2800) or on-demand (Ctrl-Shift-Del), or automatically
-   // via an extension. Note that IDB currently cannot be sanitized by host.
-   // [1] https://blog.mozilla.org/addons/2018/08/03/new-backend-for-storage-local-api/
-   // [-] https://bugzilla.mozilla.org/1488583
-pref("dom.indexedDB.enabled", true); // [DEFAULT: true]
-// * * * /
-// FF74
-// 0203: use Mozilla geolocation service instead of Google when geolocation is enabled
-   // Optionally enable logging to the console (defaults to false)
-   // [-] https://bugzilla.mozilla.org/1613627
-pref("geo.wifi.uri", "https://location.services.mozilla.com/v1/geolocate?key=%MOZILLA_API_KEY%");
-   // pref("geo.wifi.logging.enabled", true); // [HIDDEN PREF]
-// 1704: set behaviour on "+ Tab" button to display container menu [FF53+] [SETUP-CHROME]
-   // 0=no menu (default), 1=show when clicked, 2=show on long press
-   // [1] https://bugzilla.mozilla.org/1328756
-   // [-] https://bugzilla.mozilla.org/1606265
-pref("privacy.userContext.longPressBehavior", 2);
-// 2012: limit WebGL
-   // [-] https://bugzilla.mozilla.org/1477756
-pref("webgl.disable-extensions", true);
-// * * * /
-// FF76
-// 0401: sanitize blocklist url
-   // [2] https://trac.torproject.org/projects/tor/ticket/16931
-   // [-] https://bugzilla.mozilla.org/1618188
-pref("extensions.blocklist.url", "https://blocklists.settings.services.mozilla.com/v1/blocklist/3/%APP_ID%/%APP_VERSION%/");
-// 2201: prevent websites from disabling new window features
-   // [-] https://bugzilla.mozilla.org/buglist.cgi?bug_id=1507375,1660524
-pref("dom.disable_window_open_feature.close", true);
-pref("dom.disable_window_open_feature.location", true); // [DEFAULT: true]
-pref("dom.disable_window_open_feature.menubar", true);
-pref("dom.disable_window_open_feature.minimizable", true);
-pref("dom.disable_window_open_feature.personalbar", true); // bookmarks toolbar
-pref("dom.disable_window_open_feature.resizable", true); // [DEFAULT: true]
-pref("dom.disable_window_open_feature.status", true); // [DEFAULT: true]
-pref("dom.disable_window_open_feature.titlebar", true);
-pref("dom.disable_window_open_feature.toolbar", true);
-// * * * /
-// FF77
-// 0850e: disable location bar one-off searches [FF51+]
-   // [-] https://bugzilla.mozilla.org/1628926
-   // pref("browser.urlbar.oneOffSearches", false);
-// 2605: block web content in file processes [FF55+]
-   // [SETUP-WEB] You may want to disable this for corporate or developer environments
-   // [1] https://bugzilla.mozilla.org/1343184
-   // [-] https://bugzilla.mozilla.org/1603007
-pref("browser.tabs.remote.allowLinkedWebInFileUriProcess", false);
-// * * * /
-// FF78
-// 2031: disable autoplay of HTML5 media if you interacted with the site [FF66+] - replaced by 'media.autoplay.blocking_policy'
-   // [-] https://bugzilla.mozilla.org/1509933
-pref("media.autoplay.enabled.user-gestures-needed", false);
-// 5000's: disable chrome animations - replaced FF77+ by 'ui.prefersReducedMotion' (4520)
-   // [-] https://bugzilla.mozilla.org/1640501
-   // pref("toolkit.cosmeticAnimations.enabled", false); // [FF55+]
-// * * * /
+// FF86
+// 1205: disable SSL Error Reporting
+   // [1] https://firefox-source-docs.mozilla.org/browser/base/sslerrorreport/preferences.html
+   // [-] https://bugzilla.mozilla.org/1681839
+pref("security.ssl.errorReporting.automatic", false);
+pref("security.ssl.errorReporting.enabled", false);
+pref("security.ssl.errorReporting.url", "");
+// 2653: disable hiding mime types (Options>General>Applications) not associated with a plugin
+   // [-] https://bugzilla.mozilla.org/1581678
+pref("browser.download.hide_plugins_without_extensions", false);
 // ***/
 
 /* END: internal custom pref to test for syntax errors ***/
