@@ -1,7 +1,7 @@
 # Maintainer: Tad <tad@spotco.us>
 pkgname=brace
-pkgver=20210226
-pkgrel=1
+pkgver=20210228
+pkgrel=2
 pkgdesc="Increases privacy/security through various configs."
 arch=('any')
 license=('GPL3')
@@ -34,10 +34,12 @@ package() {
 	install -Dm644 brace/usr/lib/NetworkManager/conf.d/30-nm-privacy.conf "$pkgdir"/usr/lib/NetworkManager/conf.d/30-nm-privacy.conf;
 	install -Dm644 brace/usr/lib/sysctl.d/60-restrict.conf "$pkgdir"/usr/lib/sysctl.d/60-restrict.conf;
 	install -Dm644 brace/usr/lib/systemd/system/ejabberd.service.d/99-brace.conf "$pkgdir"/usr/lib/systemd/system/ejabberd.service.d/99-brace.conf
+	install -Dm644 brace/usr/lib/systemd/system/httpd.service.d/99-brace.conf "$pkgdir"/usr/lib/systemd/system/httpd.service.d/99-brace.conf
 	install -Dm644 brace/usr/lib/systemd/system/irqbalance.service.d/99-brace.conf "$pkgdir"/usr/lib/systemd/system/irqbalance.service.d/99-brace.conf
 	install -Dm644 brace/usr/lib/systemd/system/minetest@.service.d/99-brace.conf "$pkgdir"/usr/lib/systemd/system/minetest@.service.d/99-brace.conf
 	install -Dm644 brace/usr/lib/systemd/system/murmur.service.d/90-quickstart.conf "$pkgdir"/usr/lib/systemd/system/murmur.service.d/90-quickstart.conf
 	install -Dm644 brace/usr/lib/systemd/system/murmur.service.d/99-brace.conf "$pkgdir"/usr/lib/systemd/system/murmur.service.d/99-brace.conf
+	install -Dm644 brace/usr/lib/systemd/system/php-fpm.service.d/99-brace.conf "$pkgdir"/usr/lib/systemd/system/php-fpm.service.d/99-brace.conf
 	install -Dm644 brace/usr/lib/systemd/system/radiusd.service.d/99-brace.conf "$pkgdir"/usr/lib/systemd/system/radiusd.service.d/99-brace.conf
 	install -Dm644 brace/usr/lib/systemd/system/tor.service.d/99-brace.conf "$pkgdir"/usr/lib/systemd/system/tor.service.d/99-brace.conf
 	install -Dm644 brace/usr/lib/systemd/user/restic-backup@.service "$pkgdir"/usr/lib/systemd/user/restic-backup@.service;

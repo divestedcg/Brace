@@ -1,6 +1,6 @@
 Name: brace
-Version: 20210226
-Release: 1
+Version: 20210228
+Release: 2
 Summary: Increases privacy/security through various configs.
 License: GPLv3+
 BuildArch: noarch
@@ -51,9 +51,11 @@ install -Dm644 %{_sourcedir}/brace/usr/lib/NetworkManager/conf.d/30-nm-privacy.c
 install -Dm644 %{_sourcedir}/brace/usr/lib/sysctl.d/60-restrict.conf %{buildroot}/usr/lib/sysctl.d/60-restrict.conf;
 install -Dm644 %{_sourcedir}/brace/usr/lib/systemd/system/ejabberd.service.d/99-brace.conf %{buildroot}/usr/lib/systemd/system/ejabberd.service.d/99-brace.conf;
 install -Dm644 %{_sourcedir}/brace/usr/lib/systemd/system/irqbalance.service.d/99-brace.conf %{buildroot}/usr/lib/systemd/system/irqbalance.service.d/99-brace.conf;
+install -Dm644 %{_sourcedir}/brace/usr/lib/systemd/system/httpd.service.d/99-brace.conf %{buildroot}/usr/lib/systemd/system/httpd.service.d/99-brace.conf;
 install -Dm644 %{_sourcedir}/brace/usr/lib/systemd/system/minetest@.service.d/99-brace.conf %{buildroot}/usr/lib/systemd/system/minetest@.service.d/99-brace.conf;
 install -Dm644 %{_sourcedir}/brace/usr/lib/systemd/system/murmur.service.d/90-quickstart.conf %{buildroot}/usr/lib/systemd/system/murmur.service.d/90-quickstart.conf;
 install -Dm644 %{_sourcedir}/brace/usr/lib/systemd/system/murmur.service.d/99-brace.conf %{buildroot}/usr/lib/systemd/system/murmur.service.d/99-brace.conf;
+install -Dm644 %{_sourcedir}/brace/usr/lib/systemd/system/php-fpm.service.d/99-brace.conf %{buildroot}/usr/lib/systemd/system/php-fpm.service.d/99-brace.conf;
 install -Dm644 %{_sourcedir}/brace/usr/lib/systemd/system/radiusd.service.d/99-brace.conf %{buildroot}/usr/lib/systemd/system/radiusd.service.d/99-brace.conf;
 install -Dm644 %{_sourcedir}/brace/usr/lib/systemd/system/tor.service.d/99-brace.conf %{buildroot}/usr/lib/systemd/system/tor.service.d/99-brace.conf;
 install -Dm644 %{_sourcedir}/brace/usr/lib/systemd/user/restic-backup@.service %{buildroot}/usr/lib/systemd/user/restic-backup@.service;
@@ -86,9 +88,11 @@ install -Dm755 %{_sourcedir}/brace/usr/sbin/brace-rpm-verify %{buildroot}/usr/sb
 /usr/lib/sysctl.d/60-restrict.conf
 /usr/lib/systemd/system/ejabberd.service.d/99-brace.conf
 /usr/lib/systemd/system/irqbalance.service.d/99-brace.conf
+/usr/lib/systemd/system/httpd.service.d/99-brace.conf
 /usr/lib/systemd/system/minetest@.service.d/99-brace.conf
 /usr/lib/systemd/system/murmur.service.d/90-quickstart.conf
 /usr/lib/systemd/system/murmur.service.d/99-brace.conf
+/usr/lib/systemd/system/php-fpm.service.d/99-brace.conf
 /usr/lib/systemd/system/radiusd.service.d/99-brace.conf
 /usr/lib/systemd/system/tor.service.d/99-brace.conf
 /usr/lib/systemd/user/restic-backup@.service
