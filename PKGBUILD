@@ -1,7 +1,7 @@
 # Maintainer: Tad <tad@spotco.us>
 pkgname=brace
 pkgver=20210302
-pkgrel=2
+pkgrel=3
 pkgdesc="Increases privacy/security through various configs."
 arch=('any')
 license=('GPL3')
@@ -51,5 +51,5 @@ package() {
 	install -Dm755 brace/usr/sbin/brace-installer "$pkgdir"/usr/sbin/brace-installer;
 	install -Dm755 brace/usr/sbin/brace-rpm-verify "$pkgdir"/usr/sbin/brace-rpm-verify;
 	mkdir -p "$pkgdir"/usr/share/doc/brace;
-	install -Dm644 README "$pkgdir"/usr/share/doc/brace/README
+	install -Dm644 README.md "$pkgdir"/usr/share/doc/brace/README.md;
 }

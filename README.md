@@ -1,6 +1,10 @@
 brace
 =====
 
+Overview
+--------
+Brace is a toolkit compatible with multiple existing Linux distributions that allows for a rapid installation of handpicked applications, along with corresponding configurations that have been fine-tuned for reasonable privacy and security.
+
 Compatibility
 -------------
 - Arch Linux
@@ -28,10 +32,10 @@ Contents
 - /etc/profile.d/brace-env-overrides.sh				= profile: sets some environment overrides (eg. umask)
 - /etc/profile.d/brace-helpers.sh				= profile: adds helper aliases (eg. cleaning functions)
 - /usr/lib64/firefox/browser/defaults/preferences/userjs-*.js	= Firefox: change default settings
-- /usr/lib64/firefox/distribution/policies.json
-- /usr/lib64/thunderbird/defaults/pref/userjs-*.js
+	- /usr/lib64/firefox/distribution/policies.json
+	- /usr/lib64/thunderbird/defaults/pref/userjs-*.js
 - /etc/chromium/policies/managed/brace.json			= Chromium: change default settings
-- /etc/opt/chrome/policies/managed/brace.json
+	- /etc/opt/chrome/policies/managed/brace.json
 - /usr/lib/modprobe.d/blacklist-dma.conf			= kernel: disable modules that allow direct memory access externally
 - /usr/lib/modprobe.d/blacklist-usbnet.conf			= kernel: disable modules that allow for USB networking
 - /usr/lib/modprobe.d/wireless-perf.conf			= kernel: increase Wi-Fi performance for b43 and iwlwifi
@@ -48,25 +52,30 @@ Contents
 - /usr/sbin/brace-installer					= unified recommended package installer
 - /usr/sbin/brace-rpm-verify					= RPM: verifies installed packages for corruption
 
+Known Issues
+------------
+- A reboot is required on openSUSE after install for dconf changes to take effect.
+- Compatibility is best with Fedora, and that is the primary test-bed.
+
 Credits
 -------
-userjs-arkenfox.js
+- userjs-arkenfox.js
 	- @thorin-oakenpants + @earthlng + @claustromaniac
 	- MIT: https://github.com/arkenfox/user.js/blob/af516315971b7c94075db1e317bee5b12dc3b781/LICENSE.txt
 	- https://github.com/arkenfox/user.js
-99-brace-proc.conf and 99-brace-sys.conf
+- 99-brace-proc.conf and 99-brace-sys.conf
 	- Topi Miettinen (@topimiettinen)
 	- GPL-2.0+: https://salsa.debian.org/corsac/hardening-runtime/-/blob/1a315536726cf41b64af6dc65c7cf9b250b5dda1/debian/copyright
 	- https://salsa.debian.org/corsac/hardening-runtime/-/commit/1a315536726cf41b64af6dc65c7cf9b250b5dda1
-brace-rpm-verify
+- brace-rpm-verify
 	- @doktor5000
 	- CC BY-SA 3.0: https://stackoverflow.com/help/licensing
 	- https://unix.stackexchange.com/a/217024
-firewalld IPv6 drop zone fix
+- firewalld IPv6 drop zone fix
 	- Mark
 	- CC BY-SA 3.0: https://stackoverflow.com/help/licensing
 	- https://serverfault.com/a/775153
-restic-backup.service
+- restic-backup.service
 	- Link Dupont
 	- CC BY-SA 3.0: https://fedoramagazine.org/terms-and-conditions/
 	- https://fedoramagazine.org/automate-backups-with-restic-and-systemd/

@@ -1,6 +1,6 @@
 Name: brace
 Version: 20210302
-Release: 2
+Release: 3
 Summary: Increases privacy/security through various configs.
 License: GPLv3+
 BuildArch: noarch
@@ -58,7 +58,7 @@ install -Dm755 %{_sourcedir}/brace/usr/sbin/brace-fedora-update-system %{buildro
 install -Dm755 %{_sourcedir}/brace/usr/sbin/brace-installer %{buildroot}/usr/sbin/brace-installer;
 install -Dm755 %{_sourcedir}/brace/usr/sbin/brace-rpm-verify %{buildroot}/usr/sbin/brace-rpm-verify;
 mkdir -p %{buildroot}/usr/share/doc/brace;
-install -Dm644 %{_sourcedir}/README %{buildroot}/usr/share/doc/brace/README
+install -Dm644 %{_sourcedir}/README.md %{buildroot}/usr/share/doc/brace/README.md;
 
 %files
 /etc/dconf/db/local.d/00-brace-cinnamon
@@ -98,4 +98,4 @@ install -Dm644 %{_sourcedir}/README %{buildroot}/usr/share/doc/brace/README
 /usr/sbin/brace-update-system
 /usr/sbin/brace-installer
 /usr/sbin/brace-rpm-verify
-/usr/share/doc/brace/README
+/usr/share/doc/brace/README.md
