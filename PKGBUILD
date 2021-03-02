@@ -1,6 +1,6 @@
 # Maintainer: Tad <tad@spotco.us>
 pkgname=brace
-pkgver=20210228
+pkgver=20210301
 pkgrel=2
 pkgdesc="Increases privacy/security through various configs."
 arch=('any')
@@ -9,6 +9,7 @@ install=brace.install
 
 build() {
 	cp -r ../brace/ "$srcdir"/;
+	cp ../README "$srcdir"/;
 }
 
 package() {
@@ -47,4 +48,6 @@ package() {
 	install -Dm755 brace/usr/bin/brace-supplemental-changes "$pkgdir"/usr/bin/brace-supplemental-changes;
 	install -Dm755 brace/usr/sbin/brace-installer "$pkgdir"/usr/sbin/brace-installer;
 	install -Dm755 brace/usr/sbin/brace-rpm-verify "$pkgdir"/usr/sbin/brace-rpm-verify;
+	mkdir -p "$pkgdir"/usr/share/doc/brace;
+	install -Dm644 README "$pkgdir"/usr/share/doc/brace/README
 }

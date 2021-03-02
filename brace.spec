@@ -1,5 +1,5 @@
 Name: brace
-Version: 20210228
+Version: 20210301
 Release: 2
 Summary: Increases privacy/security through various configs.
 License: GPLv3+
@@ -8,18 +8,7 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 %define _binary_payload w3T.xzdio
 
 %description
-- Adds many helper scripts: brace-installer, brace-supplemental-changes
-- GNOME/Cinnamon/MATE: change default settings
-- Firefox: change default settings, credit @arkenfox, license MIT
-- Chromium: change default settings
-- NetworkManager: disable connectivity checking
-- Networkmanager: enable MAC address randomization
-- NetworkManager: enable IPv6 privacy extensions
-- kernel: restrict dmesg and ptrace
-- kernel: blacklist modules that provide direct memory access externally
-- kernel: blacklist modules that allow for USB networking
-- profile: adds helper aliases
-- kernel: increases wi-fi performance for b43 and iwlwifi
+Please see the included README
 
 %post
 if [ -f /usr/bin/dconf ]; then dconf update; fi;
@@ -66,6 +55,8 @@ install -Dm755 %{_sourcedir}/brace/usr/sbin/brace-fedora-enable-rpmfusion %{buil
 install -Dm755 %{_sourcedir}/brace/usr/sbin/brace-fedora-update-system %{buildroot}/usr/sbin/brace-update-system;
 install -Dm755 %{_sourcedir}/brace/usr/sbin/brace-installer %{buildroot}/usr/sbin/brace-installer;
 install -Dm755 %{_sourcedir}/brace/usr/sbin/brace-rpm-verify %{buildroot}/usr/sbin/brace-rpm-verify;
+mkdir -p %{buildroot}/usr/share/doc/brace;
+install -Dm644 %{_sourcedir}/README %{buildroot}/usr/share/doc/brace/README
 
 %files
 /etc/dconf/db/local.d/00-brace-cinnamon
@@ -103,3 +94,4 @@ install -Dm755 %{_sourcedir}/brace/usr/sbin/brace-rpm-verify %{buildroot}/usr/sb
 /usr/sbin/brace-update-system
 /usr/sbin/brace-installer
 /usr/sbin/brace-rpm-verify
+/usr/share/doc/brace/README
