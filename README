@@ -39,6 +39,8 @@ Contents
 - /usr/lib/sysctl.d/60-restrict.conf				= sysctl: set more restrictive defaults (dmesg, ptrace)
 - /usr/lib/systemd/system/*.service.d/99-brace.conf		= systemd service unit sandboxing
 - /usr/lib/systemd/user/restic-backup@.*			= systemd unit for user restic backups
+- /usr/lib/tmpfiles.d/99-brace-proc.conf			= /proc: harden permissions
+- /usr/lib/tmpfiles.d/99-brace-sys.conf				= /sys: harden permissions
 - /usr/bin/brace-supplemental-changes				= change extra default settings
 - /usr/sbin/brace-enable-auto-updates				= Fedora: automatic system updates using dnf-plugin-system-upgrade
 - /usr/sbin/brace-enable-rpmfusion				= Fedora: enable RPM Fusion 'free' repos
@@ -52,6 +54,10 @@ userjs-arkenfox.js
 	- @thorin-oakenpants + @earthlng + @claustromaniac
 	- MIT: https://github.com/arkenfox/user.js/blob/af516315971b7c94075db1e317bee5b12dc3b781/LICENSE.txt
 	- https://github.com/arkenfox/user.js
+99-brace-proc.conf and 99-brace-sys.conf
+	- Topi Miettinen (@topimiettinen)
+	- GPL-2.0+: https://salsa.debian.org/corsac/hardening-runtime/-/blob/1a315536726cf41b64af6dc65c7cf9b250b5dda1/debian/copyright
+	- https://salsa.debian.org/corsac/hardening-runtime/-/commit/1a315536726cf41b64af6dc65c7cf9b250b5dda1
 brace-rpm-verify
 	- @doktor5000
 	- CC BY-SA 3.0: https://stackoverflow.com/help/licensing

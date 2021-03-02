@@ -1,6 +1,6 @@
 # Maintainer: Tad <tad@spotco.us>
 pkgname=brace
-pkgver=20210301
+pkgver=20210302
 pkgrel=2
 pkgdesc="Increases privacy/security through various configs."
 arch=('any')
@@ -43,6 +43,8 @@ package() {
 	install -Dm644 brace/usr/lib/systemd/system/php-fpm.service.d/99-brace.conf "$pkgdir"/usr/lib/systemd/system/php-fpm.service.d/99-brace.conf
 	install -Dm644 brace/usr/lib/systemd/system/radiusd.service.d/99-brace.conf "$pkgdir"/usr/lib/systemd/system/radiusd.service.d/99-brace.conf
 	install -Dm644 brace/usr/lib/systemd/system/tor.service.d/99-brace.conf "$pkgdir"/usr/lib/systemd/system/tor.service.d/99-brace.conf
+	install -Dm644 brace/usr/lib/tmpfiles.d/99-brace-proc.conf "$pkgdir"/usr/lib/tmpfiles.d/99-brace-proc.conf
+	install -Dm644 brace/usr/lib/tmpfiles.d/99-brace-sys.conf "$pkgdir"/usr/lib/tmpfiles.d/99-brace-sys.conf
 	install -Dm644 brace/usr/lib/systemd/user/restic-backup@.service "$pkgdir"/usr/lib/systemd/user/restic-backup@.service;
 	install -Dm644 brace/usr/lib/systemd/user/restic-backup@.timer "$pkgdir"/usr/lib/systemd/user/restic-backup@.timer;
 	install -Dm755 brace/usr/bin/brace-supplemental-changes "$pkgdir"/usr/bin/brace-supplemental-changes;
