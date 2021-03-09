@@ -1,17 +1,15 @@
 [Service]
 # Hardening
-CapabilityBoundingSet=""
 LockPersonality=true
 MemoryDenyWriteExecute=true
-NoNewPrivileges=true
 PrivateDevices=true
+#ProtectProc=invisible
 PrivateTmp=yes
 ProtectClock=true
 ProtectControlGroups=true
 ProtectHome=true
 ProtectHostname=true
 ProtectKernelLogs=true
-ProtectKernelModules=true
 ProtectSystem=strict
 ReadOnlyPaths=/etc/sysconfig/firewalld
 ReadOnlyPaths=/etc/firewalld
@@ -20,7 +18,6 @@ ReadWritePaths=/var/run/firewalld
 ReadWritePaths=/var/log/firewalld
 RestrictAddressFamilies=~AF_INET
 RestrictAddressFamilies=~AF_INET6
-RestrictAddressFamilies=~AF_NETLINK
 RestrictAddressFamilies=~AF_PACKET
 RestrictNamespaces=true
 RestrictRealtime=true
