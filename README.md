@@ -27,6 +27,7 @@ Building
 
 Contents
 --------
+- /etc/apt/apt.conf.d/90-brace					= apt: enable seccomp filter during package install
 - /etc/dconf/db/local.d/00-brace-*				= GNOME/Cinnamon/MATE: change default settings
 - /etc/dconf/profile/user					= Fixup dconf overrides on select distros
 - /etc/profile.d/brace-env-overrides.sh				= profile: sets some environment overrides (eg. umask)
@@ -42,7 +43,7 @@ Contents
 - /usr/lib/NetworkManager/conf.d/30-nm-privacy.conf		= NetworkManager: enables MAC randomization and IPv6 privacy extensions and disables connectivity checks
 - /usr/lib/sysctl.d/60-restrict.conf				= sysctl: set more restrictive defaults (dmesg, ptrace)
 - /usr/lib/systemd/system/*.service.d/99-brace.conf		= systemd service unit sandboxing
-- /usr/lib/systemd/user/restic-backup@.*			= systemd unit for user restic backups
+- /usr/lib/systemd/user/restic-backup@.*			= systemd user unit for restic backups
 - /usr/lib/tmpfiles.d/99-brace-proc.conf			= /proc: harden permissions
 - /usr/lib/tmpfiles.d/99-brace-sys.conf				= /sys: harden permissions
 - /usr/bin/brace-supplemental-changes				= change extra default settings

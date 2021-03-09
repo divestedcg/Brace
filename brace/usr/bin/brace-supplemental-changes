@@ -44,6 +44,8 @@ if [ "$(/usr/bin/id -u)" -eq "0" ]; then
 					#grubby --update-kernel=ALL --args="mitigations=auto,nosmt";
 					grubby --update-kernel=ALL --args="module.sig_enforce=1"; #for kernels without lockdown
 					grubby --update-kernel=ALL --args="fsck.mode=force";
+					#grubby --update-kernel=ALL --args="debugfs=off";
+					#grubby --update-kernel=ALL --args="oops=panic";
 					if [ "$(/usr/bin/uname -m)" = "aarch64" ]; then grubby --update-kernel=ALL --args="kpti=on ssbd=force-on"; fi;
 					#grubby --update-kernel=ALL --args="amdgpu.tmz=1"; #Encrypted GPU memory (Linux 5.8/Mesa 20.2)
 					break;;
@@ -86,6 +88,36 @@ if [ "$(/usr/bin/id -u)" -eq "0" ]; then
 			esac
 		done
 	fi;
+
+	#Services
+	#if [ -x /usr/bin/systemctl ]; then
+	#	echo "Do you want to disable many unnecessary services?";
+	#	select ys in "Yes" "Skip"; do
+	#		case $ys in
+	#			Yes )
+	#				systemctl disable abrtd.service --now; #ABRT
+	#				systemctl disable abrt-journal-core.service --now;
+	#				systemctl disable abrt-oops.service --now;
+	#				systemctl disable abrt-vmcore.service --now;
+	#				systemctl disable abrt-xorg.service --now;
+	#				systemctl disable atd.service --now; #AT
+	#				systemctl disable avahi-daemon.service --now; #Avahi
+	#				systemctl disable avahi-daemon.socket --now;
+	#				systemctl disable iscsid.socket --now; #iSCSI
+	#				systemctl disable iscsi.service --now;
+	#				systemctl disable iscsiuio.socket --now;
+	#				systemctl disable livesys-late.service --now; #Anaconda leftovers
+	#				systemctl disable livesys.service --now;
+	#				systemctl disable multipathd.service --now; #Multipath
+	#				systemctl disable multipathd.socket --now;
+	#				#systemctl disable vboxservice.service --now; #VirtualBox
+	#				#systemctl disable vmtoolsd.service --now; #VMWare
+	#				break;;
+	#			Skip )
+	#				break;;
+	#		esac
+	#	done
+	#fi;
 else
 	#Looks
 	if [ -d "/usr/share/fonts/adobe-source-code-pro" ]; then
