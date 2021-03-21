@@ -8,6 +8,8 @@ packages:
 bugs:
 	fix profile.d files on Debian
 	fix brace-helpers.sh on openSUSE
+	CentOS 7: chmod(/proc/mtrr) failed: Permission denied
+	CentOS 7: chmod(/sys/fs/bpf) failed: Operation not permitted
 
 improvements:
 	properly verify rpmfusion .rpm
