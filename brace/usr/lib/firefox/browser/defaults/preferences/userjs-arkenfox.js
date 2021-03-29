@@ -1,7 +1,7 @@
 /******
 * name: arkenfox user.js
-* date: 01 Feb 2021
-* version 86-alpha
+* date: 02 March 2021
+* version 87-alpha
 * url: https://github.com/arkenfox/user.js
 * license: MIT: https://github.com/arkenfox/user.js/blob/master/LICENSE.txt
 
@@ -38,7 +38,7 @@
     - If you are not using arkenfox v78... (not a definitive list)
       - 1244: HTTPS-Only mode is enabled
       - 1401: document fonts is inactive as it is now covered by RFP in FF80+
-      - 4600: some prefs may apply even if you use RFP (currently none apply as of FF84)
+      - 4600: some prefs may apply even if you use RFP
       - 9999: switch the appropriate deprecated section(s) back on
 
 * INDEX:
@@ -83,9 +83,8 @@
 pref("_user.js.parrot", "START: Oh yes, the Norwegian Blue... what's wrong with it?");
 
 /* 0000: disable about:config warning
- * FF72 or lower: chrome://global/content/config.xul
  * FF73-86: chrome://global/content/config.xhtml ***/
-pref("general.warnOnAboutConfig", false); // XUL/XHTML version
+pref("general.warnOnAboutConfig", false); // XHTML version
 pref("browser.aboutConfig.showWarning", false); // HTML version [FF71+]
 
 /*** [SECTION 0100]: STARTUP ***/
@@ -123,8 +122,6 @@ pref("browser.newtabpage.activity-stream.feeds.section.topstories", false);
 pref("browser.newtabpage.activity-stream.section.highlights.includePocket", false);
 pref("browser.newtabpage.activity-stream.showSponsored", false);
 pref("browser.newtabpage.activity-stream.feeds.discoverystreamfeed", false); // [FF66+]
-/* 0105d: disable Activity Stream recent Highlights in the Library [FF57+] ***/
-   // pref("browser.library.activity-stream.enabled", false);
 /* 0105e: clear default topsites
  * [NOTE] This does not block you from adding your own ***/
 pref("browser.newtabpage.activity-stream.default.sites", "");
@@ -144,13 +141,13 @@ pref("browser.newtabpage.activity-stream.default.sites", "");
 pref("_user.js.parrot", "0200 syntax error: the parrot's definitely deceased!");
 /** GEOLOCATION ***/
 /* 0201: disable Location-Aware Browsing
- * [NOTE] Best left at default "true", fingerprintable, is already behind a prompt (see 0202)
+ * [NOTE] Best left at default "true", fingerprintable, already behind a prompt (see 0202)
  * [1] https://www.mozilla.org/firefox/geolocation/ ***/
 pref("geo.enabled", false); //BRACE-UNCOMMENTED
 /* 0202: set a default permission for Location (see 0201) [FF58+]
  * 0=always ask (default), 1=allow, 2=block
  * [NOTE] Best left at default "always ask", fingerprintable via Permissions API
- * [SETTING] to add site exceptions: Page Info>Permissions>Access Your Location
+ * [SETTING] to add site exceptions: Ctrl+I>Permissions>Access Your Location
  * [SETTING] to manage site exceptions: Options>Privacy & Security>Permissions>Location>Settings ***/
    // pref("permissions.default.geo", 2);
 /* 0203: use Mozilla geolocation service instead of Google when geolocation is enabled [FF74+]
@@ -252,10 +249,10 @@ pref("browser.discovery.enabled", false);
 /* 0350: disable Crash Reports ***/
 pref("breakpad.reportURL", "");
 pref("browser.tabs.crashReporting.sendReport", false); // [FF44+]
-pref("browser.crashReports.unsubmittedCheck.enabled", false); // [FF51+]
-/* 0351: disable backlogged Crash Reports
+   // pref("browser.crashReports.unsubmittedCheck.enabled", false); // [FF51+] [DEFAULT: false]
+/* 0351: enforce no submission of backlogged Crash Reports [FF58+]
  * [SETTING] Privacy & Security>Firefox Data Collection & Use>Allow Firefox to send backlogged crash reports  ***/
-pref("browser.crashReports.unsubmittedCheck.autoSubmit2", false); // [FF58+]
+pref("browser.crashReports.unsubmittedCheck.autoSubmit2", false); // [DEFAULT: false]
 /* 0390: disable Captive Portal detection
  * [1] https://www.eff.org/deeplinks/2017/08/how-captive-portals-interfere-wireless-security-and-privacy
  * [2] https://wiki.mozilla.org/Necko/CaptivePortal ***/
@@ -341,7 +338,6 @@ pref("extensions.systemAddon.update.url", ""); // [FF44+]
 pref("browser.ping-centre.telemetry", false);
 /* 0515: disable Screenshots ***/
 pref("extensions.screenshots.disabled", true); // [FF55+] //BRACE-UNCOMMENTED
-pref("extensions.screenshots.upload-disabled", true); // [FF60+] //BRACE-KEEP_FOR_NOW
 /* 0517: disable Form Autofill
  * [NOTE] Stored data is NOT secure (uses a JSON file)
  * [NOTE] Heuristics controls Form Autofill on forms without @autocomplete attributes
@@ -352,9 +348,9 @@ pref("extensions.formautofill.available", "off"); // [FF56+]
 pref("extensions.formautofill.creditCards.available", false); // [FF57+]
 pref("extensions.formautofill.creditCards.enabled", false); // [FF56+]
 pref("extensions.formautofill.heuristics.enabled", false); // [FF55+]
-/* 0518: disable Web Compatibility Reporter [FF56+]
+/* 0518: enforce disabling of Web Compatibility Reporter [FF56+]
  * Web Compatibility Reporter adds a "Report Site Issue" button to send data to Mozilla ***/
-pref("extensions.webcompat-reporter.enabled", false);
+pref("extensions.webcompat-reporter.enabled", false); // [DEFAULT: false]
 
 /*** [SECTION 0600]: BLOCK IMPLICIT OUTBOUND [not explicitly asked for - e.g. clicked on] ***/
 pref("_user.js.parrot", "0600 syntax error: the parrot's no more!");
@@ -459,13 +455,16 @@ pref("browser.fixup.alternate.enabled", false);
 /* 0803: display all parts of the url in the location bar ***/
 pref("browser.urlbar.trimURLs", false);
 /* 0805: disable coloring of visited links - CSS history leak
- * [NOTE] This has NEVER been fully "resolved": in Mozilla/docs it is stated it's
- * only in 'certain circumstances', also see latest comments in [2]
- * [TEST] https://earthlng.github.io/testpages/visited_links.html (see github wiki APPENDIX A on how to use)
- * [1] https://dbaron.org/mozilla/visited-privacy
- * [2] https://bugzilla.mozilla.org/147777
- * [3] https://developer.mozilla.org/docs/Web/CSS/Privacy_and_the_:visited_selector ***/
-pref("layout.css.visited_links_enabled", false); //BRACE-KEEP_FOR_NOW
+ * [SETUP-HARDEN] Bulk rapid history sniffing was mitigated in 2010 [1][2]. Slower and more expensive
+ * redraw timing attacks were largely mitigated in FF77+ [3]. Using RFP (4501) further hampers timing
+ * attacks. Don't forget clearing history on close (2803). However, social engineering [2#limits][4][5]
+ * and advanced targeted timing attacks could still produce usable results
+ * [1] https://developer.mozilla.org/docs/Web/CSS/Privacy_and_the_:visited_selector
+ * [2] https://dbaron.org/mozilla/visited-privacy
+ * [3] https://bugzilla.mozilla.org/1632765
+ * [4] https://earthlng.github.io/testpages/visited_links.html (see github wiki APPENDIX A on how to use)
+ * [5] https://lcamtuf.blogspot.com/2016/08/css-mix-blend-mode-is-bad-for-keeping.html ***/
+pref("layout.css.visited_links_enabled", false); //BRACE-ENABLED
 /* 0807: disable live search suggestions
 /* [NOTE] Both must be true for the location bar to work
  * [SETUP-CHROME] Change these if you trust and use a privacy respecting search engine
@@ -491,12 +490,7 @@ pref("browser.urlbar.dnsResolveSingleWordsAfterSearch", 0);
  * [SETTING] Privacy & Security>Address Bar>When using the address bar, suggest>Search engines ***/
    // pref("browser.urlbar.suggest.engines", false);
 /* 0850c: disable location bar dropdown
- * This value controls the total number of entries to appear in the location bar dropdown
- * [NOTE] Items (bookmarks/history/openpages) with a high "frecency"/"bonus" will always
- * be displayed (no we do not know how these are calculated or what the threshold is),
- * and this does not affect the search by search engine suggestion (see 0807)
- * [NOTE] This setting is only useful if you want to enable search engine keywords
- * (i.e. at least one of 0850a suggestion types must be true) but you want to *limit* suggestions shown ***/
+ * This value controls the total number of entries to appear in the location bar dropdown ***/
    // pref("browser.urlbar.maxRichResults", 0);
 /* 0850d: disable location bar autofill
  * [1] https://support.mozilla.org/en-US/kb/address-bar-autocomplete-firefox#w_url-autocomplete ***/
@@ -518,7 +512,7 @@ pref("browser.taskbar.lists.frequent.enabled", false);
 pref("browser.taskbar.lists.recent.enabled", false);
 pref("browser.taskbar.lists.tasks.enabled", false);
 /* 0871: disable Windows taskbar preview [WINDOWS] ***/
-pref("browser.taskbar.previews.enable", false);
+   // pref("browser.taskbar.previews.enable", false); // [DEFAULT: false]
 
 /*** [SECTION 0900]: PASSWORDS ***/
 pref("_user.js.parrot", "0900 syntax error: the parrot's expired!");
@@ -652,7 +646,7 @@ pref("security.ssl.require_safe_negotiation", true);
  * [1] https://www.ssllabs.com/ssl-pulse/ ***/
    // pref("security.tls.version.min", 3); // [DEFAULT: 3]
    // pref("security.tls.version.max", 4);
-/* 1203: enforce TLS 1.0 and 1.1 downgrades as session only */
+/* 1203: enforce TLS 1.0 and 1.1 downgrades as session only ***/
 pref("security.tls.version.enable-deprecated", false);
 /* 1204: disable SSL session tracking [FF36+]
  * SSL Session IDs are unique and last up to 24hrs in Firefox (or longer with prolongation attacks)
@@ -736,7 +730,7 @@ pref("security.mixed_content.block_display_content", true);
 pref("security.mixed_content.block_object_subrequest", true);
 /* 1244: enable HTTPS-Only mode [FF76+]
  * When "https_only_mode" (all windows) is true, "https_only_mode_pbm" (private windows only) is ignored
- * [SETTING] to add site exceptions: Page Info>HTTPS-Only mode>On/Off/Off temporarily
+ * [SETTING] to add site exceptions: Padlock>HTTPS-Only mode>On/Off/Off temporarily
  * [SETTING] Privacy & Security>HTTPS-Only Mode
  * [TEST] http://example.com [upgrade]
  * [TEST] http://neverssl.org/ [no upgrade]
@@ -852,14 +846,15 @@ pref("network.http.referer.XOriginTrimmingPolicy", 2);
  * [NOTE] This is only a default, it can be overridden by a site-controlled Referrer Policy
  * [1] https://www.w3.org/TR/referrer-policy/
  * [2] https://developer.mozilla.org/docs/Web/HTTP/Headers/Referrer-Policy
- * [3] https://blog.mozilla.org/security/2018/01/31/preventing-data-leaks-by-stripping-path-information-in-http-referrers/ ***/
-   // pref("network.http.referer.defaultPolicy", 3); // [DEFAULT: 3]
+ * [3] https://blog.mozilla.org/security/2018/01/31/preventing-data-leaks-by-stripping-path-information-in-http-referrers/
+ * [4] https://blog.mozilla.org/security/2021/03/22/firefox-87-trims-http-referrers-by-default-to-protect-user-privacy/ ***/
+   // pref("network.http.referer.defaultPolicy", 2); // [DEFAULT: 2 FF87+]
    // pref("network.http.referer.defaultPolicy.pbmode", 2); // [DEFAULT: 2]
 /* 1607: TOR: hide (not spoof) referrer when leaving a .onion domain [FF54+]
  * [NOTE] Firefox cannot access .onion sites by default. We recommend you use
  * the Tor Browser which is specifically designed for hidden services
  * [1] https://bugzilla.mozilla.org/1305144 ***/
-pref("network.http.referer.hideOnionSource", true);
+pref("network.http.referer.hideOnionSource", true); //BRACE-UNCOMMENTED
 /* 1610: ALL: enable the DNT (Do Not Track) HTTP header
  * [NOTE] DNT is enforced with Enhanced Tracking Protection regardless of this pref
  * [SETTING] Privacy & Security>Enhanced Tracking Protection>Send websites a "Do Not Track" signal... ***/
@@ -896,11 +891,11 @@ pref("plugin.state.flash", 0);
  * [1] https://wiki.mozilla.org/GeckoMediaPlugins ***/
    // pref("media.gmp-provider.enabled", false);
 /* 1825: disable widevine CDM (Content Decryption Module)
- * [SETUP-WEB] if you *need* CDM, e.g. Netflix, Amazon Prime, Hulu, whatever ***/
+ * [NOTE] This is covered by the EME master switch (1830) ***/
 pref("media.gmp-widevinecdm.visible", false); //BRACE-KEEP_FOR_NOW
 pref("media.gmp-widevinecdm.enabled", false);
 /* 1830: disable all DRM content (EME: Encryption Media Extension)
- * [SETUP-WEB] if you *need* EME, e.g. Netflix, Amazon Prime, Hulu, whatever
+ * [SETUP-WEB] e.g. Netflix, Amazon Prime, Hulu, HBO, Disney+, Showtime, Starz, DirectTV
  * [SETTING] General>DRM Content>Play DRM-controlled content
  * [1] https://www.eff.org/deeplinks/2017/10/drms-dead-canary-how-we-just-lost-web-what-we-learned-it-and-what-we-need-do-next ***/
 pref("media.eme.enabled", false);
@@ -929,7 +924,7 @@ pref("media.peerconnection.ice.proxy_only_if_behind_proxy", true); // [FF70+]
 pref("webgl.disabled", true);
 pref("webgl.enable-webgl2", false);
 /* 2012: limit WebGL ***/
-pref("webgl.min_capability_mode", true);
+   // pref("webgl.min_capability_mode", true);
 pref("webgl.disable-fail-if-major-performance-caveat", true); // [DEFAULT: true FF86+]
 /* 2022: disable screensharing ***/
 pref("media.getusermedia.screensharing.enabled", false);
@@ -937,7 +932,7 @@ pref("media.getusermedia.browser.enabled", false);
 pref("media.getusermedia.audiocapture.enabled", false);
 /* 2024: set a default permission for Camera/Microphone [FF58+]
  * 0=always ask (default), 1=allow, 2=block
- * [SETTING] to add site exceptions: Page Info>Permissions>Use the Camera/Microphone
+ * [SETTING] to add site exceptions: Ctrl+I>Permissions>Use the Camera/Microphone
  * [SETTING] to manage site exceptions: Options>Privacy & Security>Permissions>Camera/Microphone>Settings ***/
    // pref("permissions.default.camera", 2);
    // pref("permissions.default.microphone", 2);
@@ -1019,7 +1014,7 @@ pref("dom.push.enabled", false);
 /* 2306: set a default permission for Notifications (both 2304 and 2305) [FF58+]
  * 0=always ask (default), 1=allow, 2=block
  * [NOTE] Best left at default "always ask", fingerprintable via Permissions API
- * [SETTING] to add site exceptions: Page Info>Permissions>Receive Notifications
+ * [SETTING] to add site exceptions: Ctrl+I>Permissions>Receive Notifications
  * [SETTING] to manage site exceptions: Options>Privacy & Security>Permissions>Notifications>Settings ***/
    // pref("permissions.default.desktop-notification", 2);
 
@@ -1033,7 +1028,7 @@ pref("_user.js.parrot", "2400 syntax error: the parrot's kicked the bucket!");
  * This applies to onCut/onCopy/onPaste events - i.e. it requires interaction with the website
  * [WARNING] If both 'middlemouse.paste' and 'general.autoScroll' are true (at least one
  * is default false) then enabling this pref can leak clipboard content [1]
- * [1] https://bugzilla.mozilla.org/1528289 */
+ * [1] https://bugzilla.mozilla.org/1528289 ***/
 pref("dom.event.clipboardevents.enabled", false); //BRACE-UNCOMMENTED
 /* 2404: disable clipboard commands (cut/copy) from "non-privileged" content [FF41+]
  * this disables document.execCommand("cut"/"copy") to protect your clipboard
@@ -1110,9 +1105,9 @@ pref("dom.webaudio.enabled", false);
 pref("dom.vr.enabled", false); //BRACE-UNCOMMENTED
 /* 2521: set a default permission for Virtual Reality (see 2520) [FF73+]
  * 0=always ask (default), 1=allow, 2=block
- * [SETTING] to add site exceptions: Page Info>Permissions>Access Virtual Reality Devices
+ * [SETTING] to add site exceptions: Ctrl+I>Permissions>Access Virtual Reality Devices
  * [SETTING] to manage site exceptions: Options>Privacy & Security>Permissions>Virtual Reality>Settings ***/
-   // pref("permissions.default.xr", 0);
+   // pref("permissions.default.xr", 2);
 
 /*** [SECTION 2600]: MISCELLANEOUS ***/
 pref("_user.js.parrot", "2600 syntax error: the parrot's run down the curtain!");
@@ -1151,7 +1146,7 @@ pref("mathml.disabled", true); //BRACE-UNCOMMENTED
 pref("middlemouse.contentLoadURL", false);
 /* 2615: disable websites overriding Firefox's keyboard shortcuts [FF58+]
  * 0 (default) or 1=allow, 2=block
- * [SETTING] to add site exceptions: Page Info>Permissions>Override Keyboard Shortcuts ***/
+ * [SETTING] to add site exceptions: Ctrl+I>Permissions>Override Keyboard Shortcuts ***/
    // pref("permissions.default.shortcuts", 2);
 /* 2616: remove special permissions for certain mozilla domains [FF35+]
  * [1] resource://app/defaults/permissions ***/
@@ -1187,7 +1182,7 @@ pref("browser.display.use_system_colors", false); // [DEFAULT: false]
  * Currently applies to cross-origin geolocation, camera, mic and screen-sharing
  * permissions, and fullscreen requests. Disabling delegation means any prompts
  * for these will show/use their correct 3rd party origin
- * [1] https://groups.google.com/forum/#!topic/mozilla.dev.platform/BdFOMAuCGW8/discussion */
+ * [1] https://groups.google.com/forum/#!topic/mozilla.dev.platform/BdFOMAuCGW8/discussion ***/
 pref("permissions.delegation.enabled", false);
 /* 2624: enable "window.name" protection [FF82+]
  * If a new page from another domain is loaded into a tab, then window.name is set to an empty string. The original
@@ -1567,8 +1562,9 @@ pref("webgl.enable-debug-renderer-info", false);
    // 0=no-preference, 1=reduce
 pref("ui.prefersReducedMotion", 0); // [HIDDEN PREF]
 // FF64+
-// 4615: [2516] disable PointerEvents
+// 4615: [2516] disable PointerEvents [FF86 or lower]
    // [1] https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent
+   // [-] https://bugzilla.mozilla.org/1688105
 pref("dom.w3c_pointer_events.enabled", false);
 // * * * /
 // FF67+
@@ -1630,6 +1626,7 @@ pref("clipboard.autocopy", false); // disable autocopy default [LINUX] //BRACE-U
    // pref("layout.spellcheckDefault", 2); // 0=none, 1-multi-line, 2=multi-line & single-line
 /* UX BEHAVIOR ***/
    // pref("browser.backspace_action", 2); // 0=previous page, 1=scroll up, 2=do nothing
+   // pref("browser.quitShortcut.disabled", true); // disable Ctrl-Q quit shortcut [LINUX] [MAC] [FF87+]
    // pref("browser.tabs.closeWindowWithLastTab", false);
    // pref("browser.tabs.loadBookmarksInTabs", true); // open bookmarks in a new tab [FF57+]
    // pref("browser.urlbar.decodeURLsOnCopy", true); // see bugzilla 1320061 [FF53+]
@@ -1643,7 +1640,7 @@ pref("identity.fxaccounts.enabled", false); // Firefox Accounts & Sync [FF60+] [
    // pref("reader.parse-on-load.enabled", false); // Reader View
 /* OTHER ***/
 pref("browser.bookmarks.max_backups", 2); //BRACE-UNCOMMENTED
-pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons", false); // disable CFR [FF64+] //BRACE-UNCOMMENTED
+pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons", false); // disable CFR [FF67+] //BRACE-UNCOMMENTED
       // [SETTING] General>Browsing>Recommend extensions as you browse
 pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features", false); // disable CFR [FF67+] //BRACE-UNCOMMENTED
       // [SETTING] General>Browsing>Recommend features as you browse
@@ -1682,6 +1679,10 @@ pref("security.ssl.errorReporting.url", "");
 // 2653: disable hiding mime types (Options>General>Applications) not associated with a plugin
    // [-] https://bugzilla.mozilla.org/1581678
 pref("browser.download.hide_plugins_without_extensions", false);
+// FF87
+// 0105d: disable Activity Stream recent Highlights in the Library [FF57+]
+   // [-] https://bugzilla.mozilla.org/1689405
+pref("browser.library.activity-stream.enabled", false); //BRACE-UNCOMMENTED
 // ***/
 
 /* END: internal custom pref to test for syntax errors ***/
