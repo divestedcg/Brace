@@ -1,6 +1,6 @@
 # Maintainer: Tad <tad@spotco.us>
 pkgname=brace
-pkgver=20210420
+pkgver=20210520
 pkgrel=1
 pkgdesc="Increases privacy/security through various configs."
 arch=('any')
@@ -9,7 +9,7 @@ install=brace.install
 
 build() {
 	cp -r ../brace/ "$srcdir"/;
-	cp ../README "$srcdir"/;
+	cp ../README.md "$srcdir"/;
 }
 
 package() {

@@ -167,6 +167,7 @@ antialiasing='grayscale'
 hinting='slight'
 
 [org/gnome/shell]
+app-picker-layout=[]
 favorite-apps=['org.gnome.Nautilus.desktop', 'firefox.desktop', 'firefox-esr.desktop', 'evolution.desktop', 'org.gnome.Evolution.desktop', 'libreoffice-startcenter.desktop', 'yelp.desktop']
 disable-user-extensions=true
 
