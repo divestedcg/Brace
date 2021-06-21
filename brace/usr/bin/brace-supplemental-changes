@@ -36,7 +36,7 @@ if [ "$(/usr/bin/id -u)" -eq "0" ]; then
 		select ys in "Yes" "Skip"; do
 			case $ys in
 				Yes )
-					grubby --update-kernel=ALL --args="lockdown=confidentiality pti=on vsyscall=none page_poison=1 slab_nomerge slub_debug=FZP page_alloc.shuffle=1 init_on_alloc=1 init_on_free=1 mce=0";
+					grubby --update-kernel=ALL --args="lockdown=confidentiality pti=on vsyscall=none slab_nomerge slub_debug=FZ page_alloc.shuffle=1 init_on_alloc=1 init_on_free=1 mce=0";
 					grubby --update-kernel=ALL --args="iommu=force iommu.passthrough=0 intel_iommu=on,strict amd_iommu=fullflush"; #efi=disable_early_pci_dma (often breaks boot)
 					#spectre_v2 default only protects kernel, not user space processes
 					#spec_store_bypass_disable default only protects seccomp enabled processes
