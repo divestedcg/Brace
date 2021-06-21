@@ -1,7 +1,7 @@
 /******
 * name: arkenfox user.js
-* date: 25 April 2021
-* version 89-alpha
+* date: 16 June 2021
+* version 90-alpha
 * url: https://github.com/arkenfox/user.js
 * license: MIT: https://github.com/arkenfox/user.js/blob/master/LICENSE.txt
 
@@ -38,6 +38,7 @@
     - If you are not using arkenfox v78... (not a definitive list)
       - 1244: HTTPS-Only mode is enabled
       - 1401: document fonts is inactive as it is now covered by RFP in FF80+
+      - 2626: non-native widget theme is enforced
       - 4600: some prefs may apply even if you use RFP
       - 9999: switch the appropriate deprecated section(s) back on
 
@@ -116,7 +117,7 @@ pref("browser.newtabpage.activity-stream.telemetry", false);
 /* 0105b: disable Activity Stream Snippets
  * Runs code received from a server (aka Remote Code Execution) and sends information back to a metrics server
  * [1] https://abouthome-snippets-service.readthedocs.io/ ***/
-pref("browser.newtabpage.activity-stream.feeds.snippets", false);
+pref("browser.newtabpage.activity-stream.feeds.snippets", false); // [DEFAULT: false FF89+]
 pref("browser.newtabpage.activity-stream.asrouter.providers.snippets", "{}"); //BRACE-KEEP_FOR_NOW
 /* 0105c: disable Activity Stream Top Stories, Pocket-based and/or sponsored content ***/
 pref("browser.newtabpage.activity-stream.feeds.section.topstories", false);
@@ -274,9 +275,9 @@ pref("extensions.blocklist.enabled", true); // [DEFAULT: true]
     Firefox also takes measures such as striping out identifying parameters and since SBv4 (FF57+)
     doesn't even use cookies. (#Turn on browser.safebrowsing.debug to monitor this activity)
 
-    #Required reading [#] https://feeding.cloud.geek.nz/posts/how-safe-browsing-works-in-firefox/
-    [1] https://wiki.mozilla.org/Security/Safe_Browsing
-    [2] https://support.mozilla.org/en-US/kb/how-does-phishing-and-malware-protection-work
+    [1] https://feeding.cloud.geek.nz/posts/how-safe-browsing-works-in-firefox/
+    [2] https://wiki.mozilla.org/Security/Safe_Browsing
+    [3] https://support.mozilla.org/en-US/kb/how-does-phishing-and-malware-protection-work
 ***/
 /* 0410: disable SB (Safe Browsing)
  * [WARNING] Do this at your own risk! These are the master switches.
@@ -426,8 +427,7 @@ pref("network.gio.supported-protocols", ""); // [HIDDEN PREF]
      your environment (no unwanted eyeballs), your device (restricted access), your device's
      unattended state (locked, encrypted, forensic hardened). Likewise, you may want to check
      the items cleared on shutdown in section 2800.
-     [NOTE] The urlbar is also commonly referred to as the location bar and address bar
-     #Required reading [#] https://xkcd.com/538/
+     [1] https://xkcd.com/538/
 ***/
 pref("_user.js.parrot", "0800 syntax error: the parrot's ceased to be!");
 /* 0801: disable location bar using search
@@ -658,10 +658,9 @@ pref("security.tls.version.enable-deprecated", false);
 pref("security.tls.enable_0rtt_data", false);
 
 /** OCSP (Online Certificate Status Protocol)
-    #Required reading [#] https://scotthelme.co.uk/revocation-is-broken/ ***/
-/* 1210: enable OCSP Stapling
- * [1] https://blog.mozilla.org/security/2013/07/29/ocsp-stapling-in-firefox/ ***/
-pref("security.ssl.enable_ocsp_stapling", true);
+    [1] https://scotthelme.co.uk/revocation-is-broken/
+    [2] https://blog.mozilla.org/security/2013/07/29/ocsp-stapling-in-firefox/
+***/
 /* 1211: control when to use OCSP fetching (to confirm current validity of certificates)
  * 0=disabled, 1=enabled (default), 2=enabled for EV certificates only
  * OCSP (non-stapled) leaks information about the sites you visit to the CA (cert authority)
@@ -719,9 +718,6 @@ pref("security.pki.crlite_mode", 2);
 pref("security.mixed_content.block_active_content", true); // [DEFAULT: true]
 /* 1241: disable insecure passive content (such as images) on https pages [SETUP-WEB] ***/
 pref("security.mixed_content.block_display_content", true);
-/* 1243: block unencrypted requests from Flash on encrypted pages to mitigate MitM attacks [FF59+]
- * [1] https://bugzilla.mozilla.org/1190623 ***/
-pref("security.mixed_content.block_object_subrequest", true);
 /* 1244: enable HTTPS-Only mode [FF76+]
  * When "https_only_mode" (all windows) is true, "https_only_mode_pbm" (private windows only) is ignored
  * [SETTING] to add site exceptions: Padlock>HTTPS-Only mode>On/Off/Off temporarily
@@ -787,7 +783,7 @@ pref("security.insecure_connection_text.enabled", true); // [FF60+]
 pref("_user.js.parrot", "1400 syntax error: the parrot's bereft of life!");
 /* 1401: disable websites choosing fonts (0=block, 1=allow)
  * This can limit most (but not all) JS font enumeration which is a high entropy fingerprinting vector
- * [WARNING] **DO NOT USE**: in FF80+ RFP covers this, and non-RFP users should use font vis (4618)
+ * [WARNING] **DO NOT USE**: in FF80+ RFP covers this, and non-RFP users should use font vis (4620)
  * [SETTING] General>Language and Appearance>Fonts & Colors>Advanced>Allow pages to choose... ***/
    // pref("browser.display.use_document_fonts", 0);
 /* 1403: disable icon fonts (glyphs) and local fallback rendering
@@ -805,8 +801,8 @@ pref("gfx.font_rendering.opentype_svg.enabled", false);
 pref("gfx.font_rendering.graphite.enabled", false);
 /* 1409: limit system font exposure to a whitelist [FF52+] [RESTART]
  * If the whitelist is empty, then whitelisting is considered disabled and all fonts are allowed
- * [NOTE] In FF81+ the whitelist **overrides** RFP's font visibility (see 4618)
- * [WARNING] **DO NOT USE**: in FF80+ RFP covers this, and non-RFP users should use font vis (4618)
+ * [NOTE] In FF81+ the whitelist **overrides** RFP's font visibility (see 4620)
+ * [WARNING] **DO NOT USE**: in FF80+ RFP covers this, and non-RFP users should use font vis (4620)
  * [1] https://bugzilla.mozilla.org/1121643 ***/
    // pref("font.system.whitelist", ""); // [HIDDEN PREF]
 
@@ -819,7 +815,7 @@ pref("gfx.font_rendering.graphite.enabled", false);
        scheme+host+port+path: https://example.com:8888/foo/bar.html
             scheme+host+port: https://example.com:8888
      ---
-     #Required reading [#] https://feeding.cloud.geek.nz/posts/tweaking-referrer-for-privacy-in-firefox/
+     [1] https://feeding.cloud.geek.nz/posts/tweaking-referrer-for-privacy-in-firefox/
 ***/
 pref("_user.js.parrot", "1600 syntax error: the parrot rests in peace!");
 /* 1601: ALL: control when images/links send a referer
@@ -830,7 +826,7 @@ pref("_user.js.parrot", "1600 syntax error: the parrot rests in peace!");
    // pref("network.http.referer.trimmingPolicy", 0);
 /* 1603: CROSS ORIGIN: control when to send a referer
  * 0=always (default), 1=only if base domains match, 2=only if hosts match
- * [SETUP-WEB] Known to cause issues with older modems/routers and some sites e.g vimeo, icloud ***/
+ * [SETUP-WEB] Known to cause issues with older modems/routers and some sites e.g vimeo, icloud, instagram ***/
 pref("network.http.referer.XOriginPolicy", 2);
 /* 1604: CROSS ORIGIN: control the amount of information to send [FF52+]
  * 0=send full URI (default), 1=scheme+host+port+path, 2=scheme+host+port ***/
@@ -1071,11 +1067,6 @@ pref("_user.js.parrot", "2500 syntax error: the parrot's shuffled off 'is mortal
  * [NOTE] From FF52+ Battery Status API is only available in chrome/privileged code [1]
  * [1] https://bugzilla.mozilla.org/1313580 ***/
 pref("dom.battery.enabled", false); //BRACE-UNCOMMENTED
-/* 2505: disable media device enumeration [FF29+]
- * [NOTE] media.peerconnection.enabled should also be set to false (see 2001)
- * [1] https://wiki.mozilla.org/Media/getUserMedia
- * [2] https://developer.mozilla.org/docs/Web/API/MediaDevices/enumerateDevices ***/
-pref("media.navigator.enabled", false);
 /* 2508: disable hardware acceleration to reduce graphics fingerprinting [SETUP-HARDEN]
  * [WARNING] Affects text rendering (fonts will look different), impacts video performance,
  * and parts of Quantum that utilize the GPU will also be affected as they are rolled out
@@ -1083,9 +1074,6 @@ pref("media.navigator.enabled", false);
  * [1] https://wiki.mozilla.org/Platform/GFX/HardwareAcceleration ***/
    // pref("gfx.direct2d.disabled", true); // [WINDOWS]
    // pref("layers.acceleration.disabled", true);
-/* 2510: disable Web Audio API [FF51+]
- * [1] https://bugzilla.mozilla.org/1288359 ***/
-pref("dom.webaudio.enabled", false);
 /* 2517: disable Media Capabilities API [FF63+]
  * [WARNING] This *may* affect media performance if disabled, no one is sure
  * [1] https://github.com/WICG/media-capabilities
@@ -1185,6 +1173,12 @@ pref("privacy.window.name.update.enabled", true); // [DEFAULT: true FF86+]
 /* 2625: disable bypassing 3rd party extension install prompts [FF82+]
  * [1] https://bugzilla.mozilla.org/buglist.cgi?bug_id=1659530,1681331 ***/
 pref("extensions.postDownloadThirdPartyPrompt", false);
+/* 2626: enforce non-native widget theme
+ * Security: removes/reduces system API calls, e.g. win32k API [1]
+ * Fingerprinting: provides a uniform look and feel across platforms [2]
+ * [1] https://bugzilla.mozilla.org/1381938
+ * [2] https://bugzilla.mozilla.org/1411425 ***/
+pref("widget.non-native-theme.enabled", true); // [DEFAULT: true FF89+]
 
 /** DOWNLOADS ***/
 /* 2650: discourage downloading to desktop
@@ -1255,8 +1249,8 @@ pref("_user.js.parrot", "2700 syntax error: the parrot's joined the bleedin' cho
 pref("network.cookie.cookieBehavior", 1);
 pref("browser.contentblocking.category", "custom");
 /* 2702: set third-party cookies (if enabled, see 2701) to session-only
-   [NOTE] .sessionOnly overrides .nonsecureSessionOnly except when .sessionOnly=false and
-   .nonsecureSessionOnly=true. This allows you to keep HTTPS cookies, but session-only HTTP ones
+ * [NOTE] .sessionOnly overrides .nonsecureSessionOnly except when .sessionOnly=false and
+ * .nonsecureSessionOnly=true. This allows you to keep HTTPS cookies, but session-only HTTP ones
  * [1] https://feeding.cloud.geek.nz/posts/tweaking-cookies-for-privacy-in-firefox/ ***/
 pref("network.cookie.thirdparty.sessionOnly", true);
 pref("network.cookie.thirdparty.nonsecureSessionOnly", true); // [FF58+]
@@ -1413,7 +1407,7 @@ pref("privacy.firstparty.isolate", true);
  FF56+
    1369303 - spoof/disable performance API (see 4602, 4603)
    1333651 - spoof User Agent & Navigator API (see section 4700)
-      JS: FF78+ the version is spoofed as 78, and the OS as Windows 10, OS 10.15, Android 9, or Linux
+      JS: FF78+ the version is spoofed as ESR, and the OS as Windows 10, OS 10.15, Android 9 (FF91+ as 10), or Linux
       HTTP Headers: spoofed as Windows or Android
    1369319 - disable device sensor API (see 4604)
    1369357 - disable site specific zoom (see 4605)
@@ -1433,33 +1427,32 @@ pref("privacy.firstparty.isolate", true);
  FF59+
    1372073 - spoof/block fingerprinting in MediaDevices API
       Spoof: enumerate devices reports one "Internal Camera" and one "Internal Microphone" if
-             media.navigator.enabled is true (see 2505 which we chose to keep disabled)
-      Block: suppresses the ondevicechange event (see 4612)
+             media.navigator.enabled is true (see 4612 which we chose to keep disabled)
+      Block: suppresses the ondevicechange event (see 4613)
    1039069 - warn when language prefs are set to non en-US (see 0210, 0211)
    1222285 & 1433592 - spoof keyboard events and suppress keyboard modifier events
       Spoofing mimics the content language of the document. Currently it only supports en-US.
       Modifier events suppressed are SHIFT and both ALT keys. Chrome is not affected.
  FF60-67
-   1337157 - disable WebGL debug renderer info (see 4613) (FF60+)
+   1337157 - disable WebGL debug renderer info (see 4614) (FF60+)
    1459089 - disable OS locale in HTTP Accept-Language headers (ANDROID) (FF62+)
-   1479239 - return "no-preference" with prefers-reduced-motion (see 4614) (FF63+)
-   1363508 - spoof/suppress Pointer Events (see 4615) (FF64+)
+   1479239 - return "no-preference" with prefers-reduced-motion (see 4615) (FF63+)
+   1363508 - spoof/suppress Pointer Events (see 4616) (FF64+)
       FF65: pointerEvent.pointerid (1492766)
-   1485266 - disable exposure of system colors to CSS or canvas (see 4616) (FF67+)
+   1485266 - disable exposure of system colors to CSS or canvas (see 4617) (FF67+)
    1407366 - enable inner window letterboxing (see 4504) (FF67+)
-   1494034 - return "light" with prefers-color-scheme (see 4617) (FF67+)
+   1494034 - return "light" with prefers-color-scheme (see 4618) (FF67+)
  FF68-77
-   1564422 - spoof audioContext outputLatency (FF70+)
-   1595823 - spoof audioContext sampleRate (FF72+)
+   1564422 - spoof audioContext outputLatency (see 4619) (FF70+)
+   1595823 - return audioContext sampleRate as 44100 (see 4619) (FF72+)
    1607316 - spoof pointer as coarse and hover as none (ANDROID) (FF74+)
  FF78+
    1621433 - randomize canvas (previously FF58+ returned an all-white canvas) (FF78+)
-   1653987 - limit font visibility to bundled and "Base Fonts" (see 4618) (non-ANDROID) (FF80+)
+   1653987 - limit font visibility to bundled and "Base Fonts" (see 4620) (Windows, Mac, some Linux) (FF80+)
    1461454 - spoof smooth=true and powerEfficient=false for supported media in MediaCapabilities (FF82+)
 ***/
 pref("_user.js.parrot", "4500 syntax error: the parrot's popped 'is clogs");
 /* 4501: enable privacy.resistFingerprinting [FF41+]
- * This pref is the master switch for all other privacy.resist* prefs unless stated
  * [SETUP-WEB] RFP can cause the odd website to break in strange ways, and has a few side affects,
  * but is largely robust nowadays. Give it a try. Your choice. Also see 4504 (letterboxing).
  * [1] https://bugzilla.mozilla.org/418986 ***/
@@ -1550,35 +1543,44 @@ pref("media.video_stats.enabled", false);
    // [2] https://gitlab.torproject.org/tpo/applications/tor-browser/-/issues/10286
    // pref("dom.w3c_touch_events.enabled", 0);
 // FF59+
-// 4612: [2511] disable MediaDevices change detection [FF51+]
+// 4612: [2505] disable media device enumeration [FF29+]
+   // [NOTE] media.peerconnection.enabled should also be set to false (see 2001)
+   // [1] https://wiki.mozilla.org/Media/getUserMedia
+   // [2] https://developer.mozilla.org/docs/Web/API/MediaDevices/enumerateDevices
+pref("media.navigator.enabled", false);
+// 4613: [2511] disable MediaDevices change detection [FF51+]
    // [1] https://developer.mozilla.org/docs/Web/Events/devicechange
    // [2] https://developer.mozilla.org/docs/Web/API/MediaDevices/ondevicechange
 pref("media.ondevicechange.enabled", false);
 // FF60+
-// 4613: [2011] disable WebGL debug info being available to websites
+// 4614: [2011] disable WebGL debug info being available to websites
    // [1] https://bugzilla.mozilla.org/1171228
    // [2] https://developer.mozilla.org/docs/Web/API/WEBGL_debug_renderer_info
 pref("webgl.enable-debug-renderer-info", false);
 // FF63+
-// 4614: enforce prefers-reduced-motion as no-preference [FF63+] [RESTART]
+// 4615: enforce prefers-reduced-motion as no-preference [FF63+] [RESTART]
    // 0=no-preference, 1=reduce
 pref("ui.prefersReducedMotion", 0); // [HIDDEN PREF]
 // FF64+
-// 4615: [2516] disable PointerEvents [FF86 or lower]
+// 4616: [2516] disable PointerEvents [FF86 or lower]
    // [1] https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent
    // [-] https://bugzilla.mozilla.org/1688105
 pref("dom.w3c_pointer_events.enabled", false);
 // FF67+
-// 4616: [2618] disable exposure of system colors to CSS or canvas [FF44+]
+// 4617: [2618] disable exposure of system colors to CSS or canvas [FF44+]
    // [NOTE] See second listed bug: may cause black on black for elements with undefined colors
    // [SETUP-CHROME] Might affect CSS in themes and extensions
    // [1] https://bugzilla.mozilla.org/buglist.cgi?bug_id=232227,1330876
 pref("ui.use_standins_for_native_colors", true);
-// 4617: enforce prefers-color-scheme as light [FF67+]
+// 4618: enforce prefers-color-scheme as light [FF67+]
    // 0=light, 1=dark : This overrides your OS value
 pref("ui.systemUsesDarkTheme", 0); // [HIDDEN PREF]
+// FF72+
+// 4619: [2510] disable Web Audio API [FF51+]
+   // [1] https://bugzilla.mozilla.org/1288359
+   // pref("dom.webaudio.enabled", false);
 // FF80+
-// 4618: limit font visibility (non-ANDROID) [FF79+]
+// 4620: limit font visibility (non-ANDROID) [FF79+]
    // Uses hardcoded lists with two parts: kBaseFonts + kLangPackFonts [1]
    // 1=only base system fonts, 2=also fonts from optional language packs, 3=also user-installed fonts
    // [NOTE] Bundled fonts are auto-allowed
@@ -1691,6 +1693,10 @@ pref("dom.ipc.plugins.flash.subprocess.crashreporter.enabled", false);
 // 0310: disable sending the URL of the website where a plugin crashed
    // [-] https://bugzilla.mozilla.org/1682030 [underlying NPAPI code removed]
 pref("dom.ipc.plugins.reportCrashURL", false);
+// 1243: block unencrypted requests from Flash on encrypted pages to mitigate MitM attacks [FF59+]
+   // [1] https://bugzilla.mozilla.org/1190623
+   // [-] https://bugzilla.mozilla.org/1682030 [underlying NPAPI code removed]
+pref("security.mixed_content.block_object_subrequest", true);
 // 1803: disable Flash plugin
   // 0=deactivated, 1=ask, 2=enabled
   // ESR52.x is the last branch to *fully* support NPAPI, FF52+ stable only supports Flash
