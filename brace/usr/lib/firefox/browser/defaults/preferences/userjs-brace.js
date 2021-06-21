@@ -32,6 +32,7 @@ pref("privacy.trackingprotection.fingerprinting.enabled", true);
 pref("browser.gnome-search-provider.enabled", false);
 pref("browser.preferences.exposeHTTPSOnly", true);
 pref("dom.security.https_only_mode", true);
+pref("fission.autostart", true);
 pref("security.webauth.u2f", true);
 pref("mail.phishing.detection.enabled", true);
 pref("mailnews.message_display.disable_remote_image", true);
