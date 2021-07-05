@@ -1,5 +1,6 @@
 before_script:
   - umask 0022
+  - setfacl --restore=permissions.facl
 
 build:
   image: fedora:latest
