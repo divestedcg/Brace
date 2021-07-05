@@ -1,12 +1,10 @@
-before_script:
-  - umask 0022
-  - setfacl --restore=permissions.facl
-
 build:
   image: fedora:latest
   script:
     - dnf update -y
     - dnf install -y acl rpm-build dpkg pacman
+    - umask 0022
+    - setfacl --restore=permissions.facl
     - rpmbuild -ba brace.spec
     - dpkg-deb --build brace
     - makepkg
