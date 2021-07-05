@@ -17,14 +17,13 @@ build_rpm:
 build_deb:
   stage: build
   script:
-    - dpkg-deb --build brace
+    - dpkg-deb --build brace && dpkg-name brace.deb
   artifacts:
     paths:
-        - brace.deb
+        - brace*.deb
 
 build_arch:
   stage: build
-  allow_failure: true
   script:
     - awk -i inplace '!/exit \$E_ROOT/' $(which makepkg)
     - makepkg
