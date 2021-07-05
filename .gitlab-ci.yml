@@ -2,7 +2,7 @@ image: fedora:latest
 
 before_script:
   - dnf update -y
-  - dnf install -y acl gawk which fakeroot rpm-build dpkg pacman
+  - dnf install -y acl gawk which fakeroot rpm-build dpkg dpkg-dev pacman
   - umask 0022
   - setfacl --restore=permissions.facl
 
