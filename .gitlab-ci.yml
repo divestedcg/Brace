@@ -1,13 +1,13 @@
-build_package:
-	image: fedora:latest
-	script:
-		- dnf update -y
-		- dnf install -y rpm-build dpkg pacman
-		- rpmbuild -ba brace.spec
-		- dpkg-deb --build brace
-		- makepkg
-	artifacts:
-		paths:
-			- build/noarch/brace*.rpm
-			- brace.deb
-			- brace*.pkg.tar.*
+build:
+  image: fedora:latest
+  script:
+    - dnf update -y
+    - dnf install -y rpm-build dpkg pacman
+    - rpmbuild -ba brace.spec
+    - dpkg-deb --build brace
+    - makepkg
+  artifacts:
+    paths:
+        - build/noarch/brace*.rpm
+        - brace.deb
+        - brace*.pkg.tar.*
