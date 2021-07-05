@@ -6,7 +6,7 @@ build:
   image: fedora:latest
   script:
     - dnf update -y
-    - dnf install -y rpm-build dpkg pacman
+    - dnf install -y acl rpm-build dpkg pacman
     - rpmbuild -ba brace.spec
     - dpkg-deb --build brace
     - makepkg
