@@ -3,3 +3,5 @@ src
 *.pkg.tar.xz
 noarch
 *.rpm
+build
+.build*
