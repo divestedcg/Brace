@@ -2,7 +2,7 @@ build:
   image: fedora:latest
   script:
     - dnf update -y
-    - dnf install -y acl rpm-build dpkg pacman
+    - dnf install -y acl gawk which rpm-build dpkg pacman
     - umask 0022
     - setfacl --restore=permissions.facl
     - rpmbuild -ba brace.spec
