@@ -1,16 +1,17 @@
 build:
   image: fedora:latest
+  stage: build
   script:
     - dnf update -y
-    - dnf install -y acl gawk which rpm-build dpkg pacman
+    - dnf install -y acl gawk which fakeroot rpm-build dpkg pacman
     - umask 0022
     - setfacl --restore=permissions.facl
     - rpmbuild -ba brace.spec
     - dpkg-deb --build brace
-    - awk -i inplace '!/exit \$E_ROOT/' $(which makepkg)
-    - makepkg
+#    - awk -i inplace '!/exit \$E_ROOT/' $(which makepkg)
+#    - makepkg
   artifacts:
     paths:
         - build/noarch/brace*.rpm
         - brace.deb
-        - brace*.pkg.tar.*
+#        - brace*.pkg.tar.*
