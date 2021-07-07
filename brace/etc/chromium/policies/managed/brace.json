@@ -27,8 +27,8 @@
 	"DeviceAutoUpdateP2PEnabled": false,
 	"DeviceUpdateHttpDownloadsEnabled": false,
 	"RebootAfterUpdate": true,
-	"ExtensionInstallBlacklist": [ "*" ],
-	"ExtensionInstallWhitelist": [
+	"ExtensionInstallBlocklist": [ "*" ],
+	"ExtensionInstallAllowlist": [
 					"cjpalhdlnbpafiamejdnhcphjbkeiagm",
 					"pgdnlhfefecpicbbihgmbmffkjpaplco",
 					"ogfcmafjalglgifnmanfmnieipoejdcf",

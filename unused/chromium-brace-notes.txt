@@ -1,7 +1,3 @@
-Deprecations:
-ExtensionInstallBlacklist -> ExtensionInstallBlocklist
-ExtensionInstallWhitelist -> ExtensionInstallAllowlist
-
 Available:
 DefaultPopupsSetting
 ProxyMode
