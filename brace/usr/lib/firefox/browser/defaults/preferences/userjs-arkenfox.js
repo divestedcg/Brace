@@ -124,6 +124,7 @@ pref("browser.newtabpage.activity-stream.feeds.section.topstories", false);
 pref("browser.newtabpage.activity-stream.section.highlights.includePocket", false);
 pref("browser.newtabpage.activity-stream.showSponsored", false);
 pref("browser.newtabpage.activity-stream.feeds.discoverystreamfeed", false); // [FF66+]
+pref("browser.newtabpage.activity-stream.showSponsoredTopSites", false); // [FF83+]
 /* 0105e: clear default topsites
  * [NOTE] This does not block you from adding your own ***/
 pref("browser.newtabpage.activity-stream.default.sites", "");
@@ -407,8 +408,6 @@ pref("network.http.altsvc.oe", false);
  * as a remote Tor node will handle the DNS request
  * [1] https://trac.torproject.org/projects/tor/wiki/doc/TorifyHOWTO/WebBrowsers ***/
 pref("network.proxy.socks_remote_dns", true);
-/* 0708: disable FTP [FF60+] ***/
-   // pref("network.ftp.enabled", false); // [DEFAULT: false FF88+]
 /* 0709: disable using UNC (Uniform Naming Convention) paths [FF61+]
  * [SETUP-CHROME] Can break extensions for profiles on network shares
  * [1] https://gitlab.torproject.org/tpo/applications/tor-browser/-/issues/26424 ***/
@@ -741,8 +740,8 @@ pref("dom.security.https_only_mode", true); // [FF76+]
    // pref("dom.securecontext.whitelist_onions", true);
 
 /** CIPHERS [WARNING: do not meddle with your cipher suite: see the section 1200 intro]
- * These are all the ciphers still using SHA-1 and CBC which are weaker than the available alternatives. (see "Cipher Suites" in [1])
- * Additionally some have other weaknesses like key sizes of 128 (or lower) [2] and/or no Perfect Forward Secrecy [3].
+ * These are the ciphers listed under "Cipher Suites" [1] that are either still using SHA-1 and CBC,
+ * and/or are missing Perfect Forward Secrecy [3] and/or have other weaknesses like key sizes of 128
  * [1] https://browserleaks.com/ssl
  * [2] https://en.wikipedia.org/wiki/Key_size
  * [3] https://en.wikipedia.org/wiki/Forward_secrecy
@@ -757,6 +756,8 @@ pref("dom.security.https_only_mode", true); // [FF76+]
    // pref("security.ssl3.ecdhe_ecdsa_aes_128_sha", false);
    // pref("security.ssl3.ecdhe_rsa_aes_128_sha", false);
    // pref("security.ssl3.ecdhe_rsa_aes_256_sha", false);
+   // pref("security.ssl3.rsa_aes_128_gcm_sha256", false); // no PFS
+   // pref("security.ssl3.rsa_aes_256_gcm_sha384", false); // no PFS
    // pref("security.ssl3.rsa_aes_128_sha", false); // no PFS
    // pref("security.ssl3.rsa_aes_256_sha", false); // no PFS
 
@@ -1272,10 +1273,10 @@ pref("privacy.trackingprotection.socialtracking.enabled", true);
  * [WARNING] This will break a LOT of sites' functionality AND extensions!
  * You are better off using an extension for more granular control ***/
    // pref("dom.storage.enabled", false);
-/* 2730: enforce no offline cache storage (appCache)
- * The API is easily fingerprinted, use the "storage" pref instead ***/
+/* 2730: disable offline cache (appCache)
+ * [NOTE] In FF90+ the storage (not the API) is disabled. For FF78-89 see the 2730 deprecated pref
+ * [WARNING] The API is easily fingerprinted, do not disable ***/
    // pref("browser.cache.offline.enable", false);
-   // pref("browser.cache.offline.storage.enable", false); // [FF71+] [DEFAULT: false FF84+] //BRACE-COMMENTED
 /* 2740: disable service worker cache and cache storage
  * [NOTE] We clear service worker cache on exiting Firefox (see 2803)
  * [1] https://w3c.github.io/ServiceWorker/#privacy ***/
@@ -1698,11 +1699,18 @@ pref("dom.ipc.plugins.reportCrashURL", false);
    // [-] https://bugzilla.mozilla.org/1682030 [underlying NPAPI code removed]
 pref("security.mixed_content.block_object_subrequest", true);
 // 1803: disable Flash plugin
-  // 0=deactivated, 1=ask, 2=enabled
-  // ESR52.x is the last branch to *fully* support NPAPI, FF52+ stable only supports Flash
-  // [NOTE] You can still override individual sites via site permissions
-  // [-] https://bugzilla.mozilla.org/1682030 [underlying NPAPI code removed]
+   // 0=deactivated, 1=ask, 2=enabled
+   // ESR52.x is the last branch to *fully* support NPAPI, FF52+ stable only supports Flash
+   // [NOTE] You can still override individual sites via site permissions
+   // [-] https://bugzilla.mozilla.org/1682030 [underlying NPAPI code removed]
 pref("plugin.state.flash", 0); // [DEFAULT: 1]
+// FF90
+// 0708: disable FTP [FF60+]
+   // [-] https://bugzilla.mozilla.org/1574475
+   // pref("network.ftp.enabled", false); // [DEFAULT: false FF88+]
+// 2730: enforce no offline cache storage (appCache) [FF71+]
+   // [-] https://bugzilla.mozilla.org/1694662
+pref("browser.cache.offline.storage.enable", false); // [DEFAULT: false FF84+]
 // ***/
 
 /* END: internal custom pref to test for syntax errors ***/
