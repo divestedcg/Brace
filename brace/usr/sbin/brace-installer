@@ -52,8 +52,17 @@ whichPackageManager() {
 
 handleInstall() {
 	if [ "$packageManager" == "apt" ]; then
-		#TODO: skip if unavailable doesn't exist, handle?
-		$packageManager install --no-install-recommends $packagesDebian $packagesBaseDebian;
+		packagesCombined="$packagesDebian $packagesBaseDebian";
+		#Credit (CC BY-SA 4.0): https://superuser.com/a/1623381
+		for packageToCheck in $packagesCombined
+		do
+			if [ -z "$(apt-cache madison $packageToCheck 2>/dev/null)" ]; then
+				echo -e "${yellow}Warning: Skipping missing package: $packageToCheck ${coloroff}";
+			else
+				packagesToInstallReal="$packagesToInstallReal $packageToCheck";
+			fi;
+		done
+		$packageManager install --no-install-recommends $packagesToInstallReal;
 	fi;
 	if [ "$packageManager" == "dnf" ] || [ "$packageManager" == "yum" ]; then
 		$packageManager install --skip-broken $packagesFedora $packagesBaseFedora;
