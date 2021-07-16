@@ -1,7 +1,7 @@
 # Maintainer: Tad <tad@spotco.us>
 pkgname=brace
 pkgver=20210716
-pkgrel=2
+pkgrel=3
 pkgdesc="Increases privacy/security through various configs."
 arch=('any')
 license=('GPL3')
@@ -52,8 +52,8 @@ package() {
 	install -Dm644 brace/usr/lib/systemd/user/restic-backup@.service "$pkgdir"/usr/lib/systemd/user/restic-backup@.service;
 	install -Dm644 brace/usr/lib/systemd/user/restic-backup@.timer "$pkgdir"/usr/lib/systemd/user/restic-backup@.timer;
 	install -Dm755 brace/usr/bin/brace-supplemental-changes "$pkgdir"/usr/bin/brace-supplemental-changes;
-	install -Dm755 brace/usr/sbin/brace-installer "$pkgdir"/usr/sbin/brace-installer;
-	install -Dm755 brace/usr/sbin/brace-rpm-verify "$pkgdir"/usr/sbin/brace-rpm-verify;
+	install -Dm755 brace/usr/sbin/brace-installer "$pkgdir"/usr/bin/brace-installer;
+	install -Dm755 brace/usr/sbin/brace-rpm-verify "$pkgdir"/usr/bin/brace-rpm-verify;
 	mkdir -p "$pkgdir"/usr/share/doc/brace;
 	install -Dm644 README.md "$pkgdir"/usr/share/doc/brace/README.md;
 }
