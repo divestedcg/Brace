@@ -1,2 +1,3 @@
 #https://www.debian.org/releases/buster/amd64/release-notes/ch-whats-new.en.html#apt-sandboxing
-APT::Sandbox::Seccomp "true";
+#Likely non-functional?
+#APT::Sandbox::Seccomp "true";

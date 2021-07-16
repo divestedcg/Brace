@@ -17,7 +17,7 @@ build_rpm:
 build_deb:
   stage: build
   script:
-    - dpkg-deb --build brace && dpkg-name brace.deb
+    - dpkg-deb --root-owner-group --build brace && dpkg-name brace.deb
   artifacts:
     paths:
         - brace*.deb

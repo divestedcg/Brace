@@ -3,6 +3,7 @@ exec='gnome-terminal'
 
 [org/gnome/desktop/background]
 show-desktop-icons=false
+primary-color='#1b5e20'
 
 [org/gnome/desktop/interface]
 show-battery-percentage=true

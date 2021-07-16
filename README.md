@@ -10,8 +10,8 @@ Compatibility
 - Arch Linux
 - CentOS 7/8/Stream
 - Debian 10
-- Fedora 32/33 (preferred)
-- openSUSE 15.2/Tumbleweed
+- Fedora 34 (preferred)
+- openSUSE 15.3/Tumbleweed
 
 License
 -------
@@ -22,7 +22,7 @@ Building
 - git clone [THIS REPO]
 - Arch Linux: makepkg
 - CentOS: rpmbuild -ba brace.spec
-- Debian: dpkg-deb --build brace
+- Debian: dpkg-deb --root-owner-group --build brace
 - Fedora: rpmbuild -ba brace.spec
 
 Contents
