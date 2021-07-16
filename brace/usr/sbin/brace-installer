@@ -101,7 +101,7 @@ handleRemove() {
 }
 
 cleanupOperation() {
-	unset category baseIncluded packagesArch packagesDebian packagesFedora packagesFlathub packagesSuse;
+	unset category baseIncluded packagesArch packagesDebian packagesFedora packagesFlathub packagesSuse packagesCombined packageToCheck packagesToInstallReal;
 }
 
 handleOperation() {

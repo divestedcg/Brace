@@ -15,6 +15,7 @@ show-advanced-permissions=true
 [org/mate/desktop/background]
 background-fade=false
 show-desktop-icons=false
+primary-color='rgb(27,94,32)'
 
 [org/mate/desktop/font-rendering]
 antialiasing='grayscale'
