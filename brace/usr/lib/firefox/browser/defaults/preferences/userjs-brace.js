@@ -27,8 +27,8 @@ pref("messenger.status.reportIdle", false);
 //Security
 pref("browser.gnome-search-provider.enabled", false);
 pref("browser.preferences.exposeHTTPSOnly", true);
-pref("dom.security.https_only_mode", true);
-pref("fission.autostart", true);
+pref("dom.security.https_only_mode", true); //MULL-COMMENT_ME
+pref("fission.autostart", true); //MULL-COMMENT_ME
 pref("security.webauth.u2f", true);
 pref("mail.phishing.detection.enabled", true);
 pref("mailnews.message_display.disable_remote_image", true);
