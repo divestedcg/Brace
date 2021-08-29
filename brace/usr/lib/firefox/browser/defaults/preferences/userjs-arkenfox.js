@@ -112,7 +112,7 @@ pref("browser.newtabpage.activity-stream.section.highlights.includePocket", fals
 pref("browser.newtabpage.activity-stream.showSponsored", false);
 pref("browser.newtabpage.activity-stream.feeds.discoverystreamfeed", false); // [FF66+]
 pref("browser.newtabpage.activity-stream.showSponsoredTopSites", false); // [FF83+]
-pref("browser.newtabpage.activity-stream.asrouter.providers.snippets", "{}"); //BRACE-KEEP_FOR_NOW
+pref("browser.newtabpage.activity-stream.asrouter.providers.snippets", "{}"); //BRACE-KEEP_FOR_NOW: to support old versions
 /* 0106: clear default topsites
  * [NOTE] This does not block you from adding your own ***/
 pref("browser.newtabpage.activity-stream.default.sites", "");
@@ -147,7 +147,7 @@ pref("_user.js.parrot", "0300 syntax error: the parrot's not pinin' for the fjor
 /* 0301: disable auto-INSTALLING Firefox updates [NON-WINDOWS]
  * [NOTE] You will still get prompts to update, and should do so in a timely manner
  * [SETTING] General>Firefox Updates>Check for updates but let you choose to install them ***/
-   // pref("app.update.auto", false); //BRACE-COMMENTED
+   // pref("app.update.auto", false); //BRACE-COMMENTED: updates are important
 /* 0302: disable auto-INSTALLING Firefox updates via a background service [FF90+] [WINDOWS]
  * [SETTING] General>Firefox Updates>Automatically install updates>When Firefox is not running
  * [1] https://support.mozilla.org/kb/enable-background-updates-firefox-windows ***/
@@ -285,7 +285,7 @@ pref("extensions.systemAddon.update.url", ""); // [FF44+]
  * Defense-in-depth: currently covered by 0340 ***/
 pref("browser.ping-centre.telemetry", false);
 /* 0515: disable Screenshots ***/
-pref("extensions.screenshots.disabled", true); // [FF55+] //BRACE-UNCOMMENTED
+pref("extensions.screenshots.disabled", true); // [FF55+] //BRACE-UNCOMMENTED: a browser shouldn't do this
 /* 0517: disable Form Autofill
  * [NOTE] Stored data is NOT secure (uses a JSON file)
  * [NOTE] Heuristics controls Form Autofill on forms without @autocomplete attributes
@@ -331,7 +331,7 @@ pref("_user.js.parrot", "0700 syntax error: the parrot's given up the ghost!");
  * [NOTE] PHP defaults to IPv6 with "localhost". Use "php -S 127.0.0.1:PORT"
  * [TEST] https://ipleak.org/
  * [1] https://www.internetsociety.org/tag/ipv6-security/ (Myths 2,4,5,6) ***/
-   // pref("network.dns.disableIPv6", true); //BRACE-COMMENTED
+   // pref("network.dns.disableIPv6", true); //BRACE-COMMENTED: IPv6 is important, Brace and DivestOS both enable IPv6 privacy extensions too
 /* 0702: set the proxy server to do any DNS lookups when using SOCKS
  * e.g. in Tor, this stops your local DNS server from knowing your Tor destination
  * as a remote Tor node will handle the DNS request
@@ -359,7 +359,7 @@ pref("_user.js.parrot", "0800 syntax error: the parrot's ceased to be!");
  * dropdown, or using keyword search shortcuts you configure in options (e.g. "d" for DuckDuckGo)
  * [SETUP-CHROME] If you don't, or rarely, type URLs, or you use a default search
  * engine that respects privacy, then you probably don't need this ***/
-   // pref("keyword.enabled", false); //BRACE-COMMENTED
+   // pref("keyword.enabled", false); //BRACE-COMMENTED: usability, second dedicated keyword search bar isn't enabled by default
 /* 0802: disable location bar domain guessing
  * domain guessing intercepts DNS "hostname not found errors" and resends a
  * request (e.g. by adding www or .com). This is inconsistent use (e.g. FQDNs), does not work
@@ -405,7 +405,7 @@ pref("browser.formfill.enable", false);
  * [3] https://bugzilla.mozilla.org/1632765
  * [4] https://earthlng.github.io/testpages/visited_links.html (see github wiki APPENDIX A on how to use)
  * [5] https://lcamtuf.blogspot.com/2016/08/css-mix-blend-mode-is-bad-for-keeping.html ***/
-pref("layout.css.visited_links_enabled", false); //BRACE-UNCOMMENTED
+pref("layout.css.visited_links_enabled", false); //BRACE-UNCOMMENTED: nice to have disabled
 
 /*** [SECTION 0900]: PASSWORDS
    [1] https://support.mozilla.org/kb/use-primary-password-protect-stored-logins-and-pas
@@ -442,7 +442,7 @@ pref("_user.js.parrot", "1000 syntax error: the parrot's gone to meet 'is maker!
 /* 1001: disable disk cache
  * [SETUP-CHROME] If you think disk cache helps perf, then feel free to override this
  * [NOTE] We also clear cache on exit (2803) ***/
-   // pref("browser.cache.disk.enable", false); //BRACE-COMMENTED
+   // pref("browser.cache.disk.enable", false); //BRACE-COMMENTED: caches are important, bandwidth available can be limited (data plans or slow network)
 /* 1002: disable media cache from writing to disk in Private Browsing
  * [NOTE] MSE (Media Source Extensions) are already stored in-memory in PB
  * [SETUP-WEB] ESR78: playback might break on subsequent loading (1650281) ***/
@@ -552,7 +552,7 @@ pref("security.mixed_content.block_display_content", true);
  * [SETTING] Privacy & Security>HTTPS-Only Mode (and manage exceptions)
  * [TEST] http://example.com [upgrade]
  * [TEST] http://neverssl.com/ [no upgrade] ***/
-pref("dom.security.https_only_mode", true); // [FF76+] //MULL-COMMENT_ME
+pref("dom.security.https_only_mode", true); // [FF76+] //MULL-COMMENT_ME: fenix does not expose the correct user interface yet
    // pref("dom.security.https_only_mode_pbm", true); // [FF80+]
 /* 1245: enable HTTPS-Only mode for local resources [FF77+] ***/
    // pref("dom.security.https_only_mode.upgrade_local", true);
@@ -561,7 +561,7 @@ pref("dom.security.https_only_mode", true); // [FF76+] //MULL-COMMENT_ME
  * Firefox sends HTTP requests in order to check if the server supports HTTPS or not
  * This is done to avoid waiting for a timeout which takes 90 seconds
  * [1] https://bugzilla.mozilla.org/buglist.cgi?bug_id=1642387,1660945 ***/
-   // pref("dom.security.https_only_mode_send_http_background_request", false); //BRACE-COMMENTED
+   // pref("dom.security.https_only_mode_send_http_background_request", false); //BRACE-COMMENTED: usability, not all sites have HTTPS
 
 /** UI (User Interface) ***/
 /* 1270: display warning on the padlock for "broken security" (if 1201 is false)
@@ -655,8 +655,8 @@ pref("media.getusermedia.audiocapture.enabled", false);
    // pref("media.gmp-provider.enabled", false);
 /* 2021: disable widevine CDM (Content Decryption Module)
  * [NOTE] This is covered by the EME master switch (2022) ***/
-pref("media.gmp-widevinecdm.enabled", false); //BRACE-UNCOMMENTED
-pref("media.gmp-widevinecdm.visible", false); //BRACE-KEEP_FOR_NOW
+pref("media.gmp-widevinecdm.enabled", false); //BRACE-UNCOMMENTED: proprietary
+pref("media.gmp-widevinecdm.visible", false); //BRACE-KEEP_FOR_NOW: proprietary
 /* 2022: disable all DRM content (EME: Encryption Media Extension)
  * [SETUP-WEB] e.g. Netflix, Amazon Prime, Hulu, HBO, Disney+, Showtime, Starz, DirectTV
  * [SETTING] General>DRM Content>Play DRM-controlled content
@@ -731,7 +731,7 @@ pref("dom.popup_allowed_events", "click dblclick mousedown pointerdown");
 /* 2405: disable website access to clipboard events/content
  * Requires user interaction. Applies to onCut/onCopy/onPaste events
  * [SETUP-HARDEN] Will break some sites' functionality e.g. Outlook, Twitter, Facebook, Wordpress ***/
-pref("dom.event.clipboardevents.enabled", false); //BRACE-UNCOMMENTED
+pref("dom.event.clipboardevents.enabled", false); //BRACE-UNCOMMENTED: privacy/security, websites shouldn't be able to muck with clipboard
 /* 2406: disable clipboard commands (cut/copy) from "non-privileged" content [FF41+]
  * this disables document.execCommand("cut"/"copy") to protect your clipboard
  * [1] https://bugzilla.mozilla.org/1170911 ***/
@@ -833,7 +833,7 @@ pref("extensions.postDownloadThirdPartyPrompt", false);
 /* 2651: enable user interaction for security by always asking where to download
  * [SETUP-CHROME] On Android this blocks longtapping and saving images
  * [SETTING] General>Downloads>Always ask you where to save files ***/
-pref("browser.download.useDownloadDir", false); //MULL-COMMENT_ME
+pref("browser.download.useDownloadDir", false); //MULL-COMMENT_ME: breakage, see note above
 /* 2652: disable adding downloads to the system's "recent documents" list ***/
 pref("browser.download.manager.addToRecentDocs", false);
 
@@ -843,7 +843,7 @@ pref("browser.download.manager.addToRecentDocs", false);
  * XPI files which are installed outside of profile and application directories
  * [1] https://mike.kaply.com/2012/02/21/understanding-add-on-scopes/
  * [1] archived: https://archive.is/DYjAM ***/
-   // pref("extensions.enabledScopes", 5); // [HIDDEN PREF] //BRACE-COMMENTED
+   // pref("extensions.enabledScopes", 5); // [HIDDEN PREF] //BRACE-COMMENTED: brace-installer-base adds system packages for add-ons (uBlock Origin)
    // pref("extensions.autoDisableScopes", 15); // [DEFAULT: 15] //BRACE-COMMENTED
 /* 2662: disable webextension restrictions on certain mozilla domains (you also need 4503) [FF60+]
  * [1] https://bugzilla.mozilla.org/buglist.cgi?bug_id=1384330,1406795,1415644,1453988 ***/
@@ -895,7 +895,7 @@ pref("network.cookie.thirdparty.nonsecureSessionOnly", true); // [FF58+]
 pref("privacy.trackingprotection.enabled", true);
 /* 2711: enable various ETP lists ***/
 pref("privacy.trackingprotection.socialtracking.enabled", true);
-pref("privacy.trackingprotection.cryptomining.enabled", true); // [DEFAULT: true] //BRACE-UNCOMMENTED
+pref("privacy.trackingprotection.cryptomining.enabled", true); // [DEFAULT: true] //BRACE-UNCOMMENTED: extra sure for transitioning
 pref("privacy.trackingprotection.fingerprinting.enabled", true); // [DEFAULT: true] //BRACE-UNCOMMENTED
 /* 2740: disable service worker cache and cache storage
  * [NOTE] We clear service worker cache on exit (2803)
@@ -913,7 +913,7 @@ pref("privacy.trackingprotection.fingerprinting.enabled", true); // [DEFAULT: tr
  * [1] https://developer.mozilla.org/docs/Web/API/Storage_Access_API ***/
    // pref("dom.storage_access.enabled", false);
 /* 2760: enable Local Storage Next Generation (LSNG) [FF65+] ***/
-   // pref("dom.storage.next_gen", true); // [DEFAULT: true FF92+] //BRACE-COMMENTED
+pref("dom.storage.next_gen", true); // [DEFAULT: true FF92+] //MULL-COMMENT_ME: untested in Fenix
 
 /*** [SECTION 2800]: SHUTDOWN
    * Sanitizing on shutdown is all or nothing. It does not use Managed Exceptions under
@@ -925,7 +925,7 @@ pref("privacy.trackingprotection.fingerprinting.enabled", true); // [DEFAULT: tr
 pref("_user.js.parrot", "2800 syntax error: the parrot's bleedin' demised!");
 /* 2802: enable Firefox to clear items on shutdown (2803)
  * [SETTING] Privacy & Security>History>Custom Settings>Clear history when Firefox closes ***/
-pref("privacy.sanitize.sanitizeOnShutdown", false); //BRACE-DISABLED
+pref("privacy.sanitize.sanitizeOnShutdown", false); //BRACE-DISABLED: usability, this ain't Tor Browser
 /* 2803: set what items to clear on shutdown (if 2802 is true) [SETUP-CHROME]
  * [NOTE] If "history" is true, downloads will also be cleared
  * [NOTE] Active Logins: does not refer to logins via cookies, but rather HTTP Basic Authentication [1]
@@ -1151,7 +1151,7 @@ pref("_user.js.parrot", "5000 syntax error: the parrot's taken 'is last bow");
 /* 5009: disable "open with" in download dialog [FF50+]
  * Application data isolation [1]
  * [1] https://bugzilla.mozilla.org/1281959 ***/
-pref("browser.download.forbid_open_with", true); //BRACE-UNCOMMENTED
+pref("browser.download.forbid_open_with", true); //BRACE-UNCOMMENTED: brace-installer-base installs firejail, without this would cause confusion
 /* 5010: disable location bar suggestion types
  * [SETTING] Privacy & Security>Address Bar>When using the address bar, suggest ***/
    // pref("browser.urlbar.suggest.history", false);
@@ -1187,24 +1187,24 @@ pref("browser.download.forbid_open_with", true); //BRACE-UNCOMMENTED
 pref("_user.js.parrot", "5500 syntax error: this is an ex-parrot!");
 /* 5501: disable MathML (Mathematical Markup Language) [FF51+]
  * [1] https://cve.mitre.org/cgi-bin/cvekey.cgi?keyword=mathml ***/
-pref("mathml.disabled", true); // 1173199 //BRACE-UNCOMMENTED
+pref("mathml.disabled", true); // 1173199 //BRACE-UNCOMMENTED: attack surface reduction
 /* 5502: disable in-content SVG (Scalable Vector Graphics) [FF53+]
  * [1] https://cve.mitre.org/cgi-bin/cvekey.cgi?keyword=firefox+svg ***/
    // pref("svg.disabled", true); // 1216893
 /* 5503: disable graphite
  * [1] https://cve.mitre.org/cgi-bin/cvekey.cgi?keyword=firefox+graphite
  * [2] https://en.wikipedia.org/wiki/Graphite_(SIL) ***/
-pref("gfx.font_rendering.graphite.enabled", false); //BRACE-UNCOMMENTED
+pref("gfx.font_rendering.graphite.enabled", false); //BRACE-UNCOMMENTED: attack surface reduction
 /* 5504: disable asm.js [FF22+]
  * [1] http://asmjs.org/
  * [2] https://cve.mitre.org/cgi-bin/cvekey.cgi?keyword=asm.js
  * [3] https://rh0dev.github.io/blog/2017/the-return-of-the-jit/ ***/
-pref("javascript.options.asmjs", false); //BRACE-UNCOMMENTED
+pref("javascript.options.asmjs", false); //BRACE-UNCOMMENTED: attack surface reduction
 /* 5505: disable Ion and baseline JIT to harden against JS exploits
  * [NOTE] In FF75+, when **both** Ion and JIT are disabled, **and** the new
  * hidden pref is enabled, then Ion can still be used by extensions (1599226)
  * [1] https://cve.mitre.org/cgi-bin/cvekey.cgi?keyword=firefox+jit ***/
-pref("javascript.options.ion", false); //BRACE-UNCOMMENTED //MULL-COMMENT_ME
+pref("javascript.options.ion", false); //BRACE-UNCOMMENTED: attack surface reduction //MULL-COMMENT_ME: too slow on mobile processors
 pref("javascript.options.baselinejit", false); //BRACE-UNCOMMENTED //MULL-COMMENT_ME
 pref("javascript.options.jit_trustedprincipals", true); // [FF75+] [HIDDEN PREF] //BRACE-UNCOMMENTED //MULL-COMMENT_ME
 /* 5506: disable WebAssembly [FF52+]
@@ -1215,7 +1215,7 @@ pref("javascript.options.jit_trustedprincipals", true); // [FF75+] [HIDDEN PREF]
  * [1] https://cve.mitre.org/cgi-bin/cvekey.cgi?keyword=wasm
  * [2] https://spectrum.ieee.org/tech-talk/telecom/security/more-worries-over-the-security-of-web-assembly
  * [3] https://www.zdnet.com/article/half-of-the-websites-using-webassembly-use-it-for-malicious-purposes ***/
-pref("javascript.options.wasm", false); //BRACE-UNCOMMENTED
+pref("javascript.options.wasm", false); //BRACE-UNCOMMENTED: attack surface reduction
 
 /*** [SECTION 6000]: DON'T TOUCH ***/
 pref("_user.js.parrot", "6000 syntax error: the parrot's 'istory!");
@@ -1375,7 +1375,7 @@ pref("browser.startup.homepage_override.mstone", "ignore"); // master switch
       // 0=no-preference, 1=reduce: with RFP this only affects chrome
 /* CONTENT BEHAVIOR ***/
    // pref("accessibility.typeaheadfind", true); // enable "Find As You Type"
-user_pref("clipboard.autocopy", false); // disable autocopy default [LINUX] //BRACE-UNCOMMENTED
+user_pref("clipboard.autocopy", false); // disable autocopy default [LINUX] //BRACE-UNCOMMENTED: unwanted
    // pref("layout.spellcheckDefault", 2); // 0=none, 1-multi-line, 2=multi-line & single-line
 /* UX BEHAVIOR ***/
    // pref("browser.backspace_action", 2); // 0=previous page, 1=scroll up, 2=do nothing
@@ -1388,8 +1388,8 @@ user_pref("clipboard.autocopy", false); // disable autocopy default [LINUX] //BR
    // pref("view_source.tab", false); // view "page/selection source" in a new window [FF68+, FF59 and under]
 /* UX FEATURES: disable and hide the icons and menus ***/
 pref("browser.messaging-system.whatsNewPanel.enabled", false); // What's New toolbar icon [FF69+]
-pref("extensions.pocket.enabled", false); // Pocket Account [FF46+] //BRACE-UNCOMMENTED
-pref("identity.fxaccounts.enabled", false); // Firefox Accounts & Sync [FF60+] [RESTART] //BRACE-UNCOMMENTED
+pref("extensions.pocket.enabled", false); // Pocket Account [FF46+] //BRACE-UNCOMMENTED: unwanted
+pref("identity.fxaccounts.enabled", false); // Firefox Accounts & Sync [FF60+] [RESTART] //BRACE-UNCOMMENTED: unwanted
    // pref("reader.parse-on-load.enabled", false); // Reader View
 /* OTHER ***/
    // pref("browser.bookmarks.max_backups", 2);
@@ -1397,7 +1397,7 @@ pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons", false);
       // [SETTING] General>Browsing>Recommend extensions as you browse
 pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features", false); // disable CFR [FF67+]
       // [SETTING] General>Browsing>Recommend features as you browse
-pref("network.manage-offline-status", false); // see bugzilla 620472 //BRACE-UNCOMMENTED
+pref("network.manage-offline-status", false); // see bugzilla 620472 //BRACE-UNCOMMENTED: unnecessary
    // pref("xpinstall.signatures.required", false); // enforced extension signing (Nightly/ESR)
 
 /*** [SECTION 9999]: DEPRECATED / REMOVED / LEGACY / RENAMED
@@ -1434,7 +1434,7 @@ pref("browser.download.hide_plugins_without_extensions", false);
 // FF87
 // 0105d: disable Activity Stream recent Highlights in the Library [FF57+]
    // [-] https://bugzilla.mozilla.org/1689405
-pref("browser.library.activity-stream.enabled", false); //BRACE-UNCOMMENTED
+pref("browser.library.activity-stream.enabled", false); //BRACE-UNCOMMENTED: unwanted
 // 8002: disable PointerEvents
    // [1] https://developer.mozilla.org/docs/Web/API/PointerEvent
    // [-] https://bugzilla.mozilla.org/1688105
