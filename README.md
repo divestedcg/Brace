@@ -15,7 +15,7 @@ Compatibility
 
 License
 -------
-GPLv3 where applicable
+GPL-3.0 where applicable
 
 Building
 --------
