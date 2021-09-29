@@ -34,7 +34,7 @@
     ESR78
     - If you are not using arkenfox v78... (not a definitive list)
       - 1244: HTTPS-Only mode is enabled
-      - 2502: non-native widget theme is enforced
+      - 4511: non-native widget theme is enforced
       - 9999: switch the appropriate deprecated section(s) back on
 
 * INDEX:
@@ -55,7 +55,6 @@
   2000: PLUGINS / MEDIA / WEBRTC
   2300: WEB WORKERS
   2400: DOM (DOCUMENT OBJECT MODEL)
-  2500: FINGERPRINTING
   2600: MISCELLANEOUS
   2700: PERSISTENT STORAGE
   2800: SHUTDOWN
@@ -338,8 +337,10 @@ pref("network.gio.supported-protocols", ""); // [HIDDEN PREF]
  * [3] https://blog.mozilla.org/mozilla/news/firefox-by-default-dns-over-https-rollout-in-canada/
  * [4] https://www.eff.org/deeplinks/2020/12/dns-doh-and-odoh-oh-my-year-review-2020 ***/
    // pref("network.trr.mode", 5);
-/* 0706: disable proxy direct failover for system requests [FF91+] ***/
-pref("network.proxy.failover_direct", false);
+/* 0706: disable proxy direct failover for system requests [FF91+]
+ * [WARNING] Default true is a security feature against malicious extensions
+ * [SETUP-CHROME] If you use a proxy and you trust your extensions ***/
+   // pref("network.proxy.failover_direct", false);
 
 /*** [SECTION 0800]: LOCATION BAR / SEARCH BAR / SUGGESTIONS / HISTORY / FORMS ***/
 pref("_user.js.parrot", "0800 syntax error: the parrot's ceased to be!");
@@ -720,28 +721,6 @@ pref("dom.disable_open_during_load", true);
 /* 2404: limit events that can cause a popup [SETUP-WEB] ***/
 pref("dom.popup_allowed_events", "click dblclick mousedown pointerdown");
 
-/*** [SECTION 2500]: FINGERPRINTING ***/
-pref("_user.js.parrot", "2500 syntax error: the parrot's shuffled off 'is mortal coil!");
-/* 2501: enforce no system colors
- * [SETTING] General>Language and Appearance>Fonts and Colors>Colors>Use system colors ***/
-pref("browser.display.use_system_colors", false); // [DEFAULT: false]
-/* 2502: enforce non-native widget theme
- * Security: removes/reduces system API calls, e.g. win32k API [1]
- * Fingerprinting: provides a uniform look and feel across platforms [2]
- * [1] https://bugzilla.mozilla.org/1381938
- * [2] https://bugzilla.mozilla.org/1411425 ***/
-pref("widget.non-native-theme.enabled", true); // [DEFAULT: true FF89+]
-/* 2503: open links targeting new windows in a new tab instead
- * Stops malicious window sizes and some screen resolution leaks.
- * You can still right-click a link and open in a new window
- * [TEST] https://arkenfox.github.io/TZP/tzp.html#screen
- * [1] https://gitlab.torproject.org/tpo/applications/tor-browser/-/issues/9881 ***/
-pref("browser.link.open_newwindow", 3); // 1=most recent window or tab 2=new window, 3=new tab
-pref("browser.link.open_newwindow.restriction", 0);
-/* 2504: disable WebGL (Web Graphics Library)
- * [SETUP-WEB] If you need it then enable it. RFP still randomizes canvas for naive scripts ***/
-pref("webgl.disabled", true);
-
 /*** [SECTION 2600]: MISCELLANEOUS ***/
 pref("_user.js.parrot", "2600 syntax error: the parrot's run down the curtain!");
 /* 2601: prevent accessibility services from accessing your browser [RESTART]
@@ -1076,10 +1055,29 @@ pref("privacy.resistFingerprinting.letterboxing", true); // [HIDDEN PREF]
  * [1] https://bugzilla.mozilla.org/1635603 ***/
    // pref("privacy.resistFingerprinting.exemptedDomains", "*.example.invalid");
    // pref("privacy.resistFingerprinting.testGranularityMask", 0);
-/* 4510: disable showing about:blank as soon as possible during startup [FF60+]
+/* 4506: disable showing about:blank as soon as possible during startup [FF60+]
  * When default true this no longer masks the RFP chrome resizing activity
  * [1] https://bugzilla.mozilla.org/1448423 ***/
 pref("browser.startup.blankWindow", false);
+/* 4510: enforce no system colors
+ * [SETTING] General>Language and Appearance>Fonts and Colors>Colors>Use system colors ***/
+pref("browser.display.use_system_colors", false); // [DEFAULT: false]
+/* 4511: enforce non-native widget theme
+ * Security: removes/reduces system API calls, e.g. win32k API [1]
+ * Fingerprinting: provides a uniform look and feel across platforms [2]
+ * [1] https://bugzilla.mozilla.org/1381938
+ * [2] https://bugzilla.mozilla.org/1411425 ***/
+pref("widget.non-native-theme.enabled", true); // [DEFAULT: true FF89+]
+/* 4512: open links targeting new windows in a new tab instead
+ * Stops malicious window sizes and some screen resolution leaks.
+ * You can still right-click a link and open in a new window
+ * [TEST] https://arkenfox.github.io/TZP/tzp.html#screen
+ * [1] https://gitlab.torproject.org/tpo/applications/tor-browser/-/issues/9881 ***/
+pref("browser.link.open_newwindow", 3); // 1=most recent window or tab 2=new window, 3=new tab
+pref("browser.link.open_newwindow.restriction", 0);
+/* 4513: disable WebGL (Web Graphics Library)
+ * [SETUP-WEB] If you need it then enable it. RFP still randomizes canvas for naive scripts ***/
+pref("webgl.disabled", true);
 
 /*** [SECTION 5000]: OPTIONAL OPSEC
    Disk avoidance, application data isolation, eyeballs...
@@ -1383,6 +1381,7 @@ user_pref("clipboard.autocopy", false); // disable autocopy default [LINUX] //BR
 /* UX FEATURES ***/
 pref("browser.messaging-system.whatsNewPanel.enabled", false); // What's New toolbar icon [FF69+]
 pref("extensions.pocket.enabled", false); // Pocket Account [FF46+] //BRACE-UNCOMMENTED: unwanted
+pref("extensions.screenshots.disabled", true); // [FF55+] //BRACE-UNCOMMENTED: unwanted
 pref("identity.fxaccounts.enabled", false); // Firefox Accounts & Sync [FF60+] [RESTART] //BRACE-UNCOMMENTED: unwanted
    // pref("reader.parse-on-load.enabled", false); // Reader View
 /* OTHER ***/
@@ -1398,7 +1397,7 @@ pref("network.manage-offline-status", false); // see bugzilla 620472 //BRACE-UNC
    Documentation denoted as [-]. Items deprecated in FF78 or earlier have been archived at [1]
    [1] https://github.com/arkenfox/user.js/issues/123
 ***/
-pref("_user.js.parrot", "9999 syntax error: the parrot's deprecated!");
+pref("_user.js.parrot", "9999 syntax error: the parrot's shuffled off 'is mortal coil!");
 // ESR78.x still uses all the following prefs
 // [NOTE] replace the * with a slash in the line above to re-enable them
 // FF79
