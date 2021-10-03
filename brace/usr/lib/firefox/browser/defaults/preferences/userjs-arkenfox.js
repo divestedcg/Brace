@@ -1176,9 +1176,9 @@ pref("javascript.options.asmjs", false); //BRACE-UNCOMMENTED: attack surface red
  * [NOTE] In FF75+, when **both** Ion and JIT are disabled, **and** the new
  * hidden pref is enabled, then Ion can still be used by extensions (1599226)
  * [1] https://cve.mitre.org/cgi-bin/cvekey.cgi?keyword=firefox+jit ***/
-pref("javascript.options.ion", false); //BRACE-UNCOMMENTED: attack surface reduction //MULL-COMMENT_ME: too slow on mobile processors
-pref("javascript.options.baselinejit", false); //BRACE-UNCOMMENTED //MULL-COMMENT_ME
-pref("javascript.options.jit_trustedprincipals", true); // [FF75+] [HIDDEN PREF] //BRACE-UNCOMMENTED //MULL-COMMENT_ME
+   // pref("javascript.options.ion", false);
+   // pref("javascript.options.baselinejit", false);
+   // pref("javascript.options.jit_trustedprincipals", true); // [FF75+] [HIDDEN PREF]
 /* 5506: disable WebAssembly [FF52+]
  * Vulnerabilities [1] have increasingly been found, including those known and fixed
  * in native programs years ago [2]. WASM has powerful low-level access, making

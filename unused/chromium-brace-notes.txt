@@ -11,6 +11,7 @@ IntensiveWakeUpThrottlingEnabled
 IsolateOrigins
 PromptForDownloadLocation
 QuicAllowed
+	"DefaultJavaScriptJitSetting": 2,
 
 Research:
 AmbientAuthenticationInPrivateModesEnabled
