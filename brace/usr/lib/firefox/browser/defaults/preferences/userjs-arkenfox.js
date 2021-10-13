@@ -1,7 +1,7 @@
 /******
 * name: arkenfox user.js
-* date: 10 September 2021
-* version 92-alpha
+* date: 12 October 2021
+* version 93
 * url: https://github.com/arkenfox/user.js
 * license: MIT: https://github.com/arkenfox/user.js/blob/master/LICENSE.txt
 
@@ -132,7 +132,8 @@ pref("browser.region.update.enabled", false); // [[FF79+]
 /* 0204: set search region
  * [NOTE] May not be hidden if Firefox has changed your settings due to your region (0203) ***/
    // pref("browser.search.region", "US"); // [HIDDEN PREF]
-/* 0210: set preferred language for displaying web pages
+/* 0210: set preferred language for displaying pages
+ * [SETTING] General>Language and Appearance>Language>Choose your preferred language...
  * [TEST] https://addons.mozilla.org/about ***/
 pref("intl.accept_languages", "en-US, en");
 /* 0211: use US English locale regardless of the system locale
@@ -375,18 +376,23 @@ pref("browser.urlbar.speculativeConnect.enabled", false);
  * 0=never resolve single words, 1=heuristic (default), 2=always resolve
  * [1] https://bugzilla.mozilla.org/1642623 ***/
 pref("browser.urlbar.dnsResolveSingleWordsAfterSearch", 0);
-/* 0807: disable tab-to-search [FF85+]
+/* 0807: disable location bar contextual suggestions [FF92+]
+ * [SETTING] Privacy & Security>Address Bar>Contextual Suggestions
+ * [1] https://blog.mozilla.org/data/2021/09/15/data-and-firefox-suggest/ ***/
+pref("browser.urlbar.suggest.quicksuggest", false);
+pref("browser.urlbar.suggest.quicksuggest.sponsored", false);
+/* 0808: disable tab-to-search [FF85+]
  * Alternatively, you can exclude on a per-engine basis by unchecking them in Options>Search
  * [SETTING] Privacy & Security>Address Bar>When using the address bar, suggest>Search engines ***/
    // pref("browser.urlbar.suggest.engines", false);
-/* 0808: disable search and form history
+/* 0810: disable search and form history
  * [SETUP-WEB] Be aware that autocomplete form data can be read by third parties [1][2]
  * [NOTE] We also clear formdata on exit (2803)
  * [SETTING] Privacy & Security>History>Custom Settings>Remember search and form history
  * [1] https://blog.mindedsecurity.com/2011/10/autocompleteagain.html
  * [2] https://bugzilla.mozilla.org/381681 ***/
 pref("browser.formfill.enable", false);
-/* 0809: disable Form Autofill
+/* 0811: disable Form Autofill
  * [NOTE] Stored data is NOT secure (uses a JSON file)
  * [NOTE] Heuristics controls Form Autofill on forms without @autocomplete attributes
  * [SETTING] Privacy & Security>Forms and Autofill>Autofill addresses
@@ -396,7 +402,7 @@ pref("extensions.formautofill.available", "off"); // [FF56+]
 pref("extensions.formautofill.creditCards.available", false); // [FF57+]
 pref("extensions.formautofill.creditCards.enabled", false); // [FF56+]
 pref("extensions.formautofill.heuristics.enabled", false); // [FF55+]
-/* 0810: disable coloring of visited links
+/* 0820: disable coloring of visited links
  * [SETUP-HARDEN] Bulk rapid history sniffing was mitigated in 2010 [1][2]. Slower and more expensive
  * redraw timing attacks were largely mitigated in FF77+ [3]. Using RFP (4501) further hampers timing
  * attacks. Don't forget clearing history on close (2803). However, social engineering [2#limits][4][5]
@@ -496,13 +502,14 @@ pref("security.tls.enable_0rtt_data", false);
    [1] https://scotthelme.co.uk/revocation-is-broken/
    [2] https://blog.mozilla.org/security/2013/07/29/ocsp-stapling-in-firefox/
 ***/
-/* 1211: control when to use OCSP fetching (to confirm current validity of certificates)
+/* 1211: enforce OCSP fetching to confirm current validity of certificates
  * 0=disabled, 1=enabled (default), 2=enabled for EV certificates only
  * OCSP (non-stapled) leaks information about the sites you visit to the CA (cert authority)
  * It's a trade-off between security (checking) and privacy (leaking info to the CA)
  * [NOTE] This pref only controls OCSP fetching and does not affect OCSP stapling
+ * [SETTING] Privacy & Security>Security>Certificates>Query OCSP responder servers...
  * [1] https://en.wikipedia.org/wiki/Ocsp ***/
-pref("security.OCSP.enabled", 1);
+pref("security.OCSP.enabled", 1); // [DEFAULT: 1]
 /* 1212: set OCSP fetch failures (non-stapled, see 1211) to hard-fail [SETUP-WEB]
  * When a CA cannot be reached to validate a cert, Firefox just continues the connection (=soft-fail)
  * Setting this pref to true tells Firefox to instead terminate the connection (=hard-fail)
@@ -528,7 +535,7 @@ pref("security.pki.sha1_enforcement_level", 1);
  * [1] https://gitlab.torproject.org/tpo/applications/tor-browser/-/issues/21686 ***/
 pref("security.family_safety.mode", 0);
 /* 1223: enable strict pinning
- * PKP (Public Key Pinning) 0=disabled 1=allow user MiTM (such as your antivirus), 2=strict
+ * PKP (Public Key Pinning) 0=disabled, 1=allow user MiTM (such as your antivirus), 2=strict
  * [SETUP-WEB] If you rely on an AV (antivirus) to protect your web browsing
  * by inspecting ALL your web traffic, then leave at current default=1
  * [1] https://gitlab.torproject.org/tpo/applications/tor-browser/-/issues/16206 ***/
@@ -567,7 +574,7 @@ pref("dom.security.https_only_mode", true); // [FF76+] //MULL-COMMENT_ME: fenix 
  * [2] https://bugzilla.mozilla.org/1353705 ***/
 pref("security.ssl.treat_unsafe_negotiation_as_broken", true);
 /* 1271: control "Add Security Exception" dialog on SSL warnings
- * 0=do neither 1=pre-populate url 2=pre-populate url + pre-fetch cert (default)
+ * 0=do neither, 1=pre-populate url, 2=pre-populate url + pre-fetch cert (default)
  * [1] https://github.com/pyllyukko/user.js/issues/210 ***/
 pref("browser.ssl_override_behavior", 1);
 /* 1272: display advanced information on Insecure Connection warning pages
@@ -1068,14 +1075,18 @@ pref("browser.display.use_system_colors", false); // [DEFAULT: false]
  * [1] https://bugzilla.mozilla.org/1381938
  * [2] https://bugzilla.mozilla.org/1411425 ***/
 pref("widget.non-native-theme.enabled", true); // [DEFAULT: true FF89+]
-/* 4512: open links targeting new windows in a new tab instead
+/* 4512: enforce links targeting new windows to open in a new tab instead
+ * 1=most recent window or tab, 2=new window, 3=new tab
  * Stops malicious window sizes and some screen resolution leaks.
  * You can still right-click a link and open in a new window
+ * [SETTING] General>Tabs>Open links in tabs instead of new windows
  * [TEST] https://arkenfox.github.io/TZP/tzp.html#screen
  * [1] https://gitlab.torproject.org/tpo/applications/tor-browser/-/issues/9881 ***/
-pref("browser.link.open_newwindow", 3); // 1=most recent window or tab 2=new window, 3=new tab
+pref("browser.link.open_newwindow", 3); // [DEFAULT: 3]
+/* 4513: set all open window methods to abide by "browser.link.open_newwindow" (4512)
+ * [1] https://searchfox.org/mozilla-central/source/dom/tests/browser/browser_test_new_window_from_content.js ***/
 pref("browser.link.open_newwindow.restriction", 0);
-/* 4513: disable WebGL (Web Graphics Library)
+/* 4520: disable WebGL (Web Graphics Library)
  * [SETUP-WEB] If you need it then enable it. RFP still randomizes canvas for naive scripts ***/
 pref("webgl.disabled", true);
 
@@ -1263,7 +1274,6 @@ pref("_user.js.parrot", "7000 syntax error: the parrot's pushing up daisies!");
    // pref("security.ssl3.rsa_aes_256_gcm_sha384", false); // no PFS
    // pref("security.ssl3.rsa_aes_128_sha", false); // no PFS
    // pref("security.ssl3.rsa_aes_256_sha", false); // no PFS
-   // pref("security.ssl3.rsa_des_ede3_sha", false); // 3DES
 /* 7004: control TLS versions
  * [WHY] Passive fingerprinting. Downgrades are still possible: behind user interaction ***/
    // pref("security.tls.version.min", 3); // [DEFAULT: 3]
@@ -1398,7 +1408,15 @@ pref("network.manage-offline-status", false); // see bugzilla 620472 //BRACE-UNC
    [1] https://github.com/arkenfox/user.js/issues/123
 ***/
 pref("_user.js.parrot", "9999 syntax error: the parrot's shuffled off 'is mortal coil!");
-// ESR78.x still uses all the following prefs
+// ESR91.x still uses all the following prefs
+// [NOTE] replace the * with a slash in the line above to re-enable them
+// FF93
+// 7003: disable non-modern cipher suites
+   // [-] https://bugzilla.mozilla.org/1724072
+   // pref("security.ssl3.rsa_des_ede3_sha", false); // 3DES
+// ***/
+
+/* ESR78.x still uses all the following prefs
 // [NOTE] replace the * with a slash in the line above to re-enable them
 // FF79
 // 0212: enforce fallback text encoding to match en-US
