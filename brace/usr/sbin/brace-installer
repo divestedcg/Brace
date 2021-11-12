@@ -203,9 +203,9 @@ done;
 #
 category='Recommended for Removal';
 	baseIncluded=false;
-	packagesArch='gnome-documents gnome-weather gnome-music';
-	packagesDebian='gnome-documents gnome-weather gnome-music gnome-games rhythmbox';
-	packagesFedora='abiword adapta-gtk-theme akregator amarok asunder calligra* clipit clipman compiz emerald empathy exaile falkon filezilla geany gnomebaker gnome-documents gnome-weather gnote gnumeric hexchat juk k3b kget kmahjongg kmines konqueror konversation kpatience ktnef ktorrent lxmusic midori osmo paper-icon-theme pidgin *powerline pragha qlipper quassel qupzilla rhythmbox xawtv xfburn xfdashboard xpad yarock';
+	packagesArch='gnome-documents gnome-weather gnome-music gnome-software packagekit';
+	packagesDebian='gnome-documents gnome-weather gnome-music gnome-games rhythmbox gnome-software packagekit';
+	packagesFedora='abiword adapta-gtk-theme akregator amarok asunder calligra* clipit clipman compiz emerald empathy exaile falkon filezilla geany gnomebaker gnome-documents gnome-weather gnote gnumeric hexchat juk k3b kget kmahjongg kmines konqueror konversation kpatience ktnef ktorrent lxmusic midori osmo paper-icon-theme pidgin *powerline pragha qlipper quassel qupzilla rhythmbox xawtv xfburn xfdashboard xpad yarock gnome-software PackageKit';
 	packagesSuse='gnome-documents gnome-weather gnome-music brasero iagno lightsoff gnome-mahjongg pidgin polari tigervnc swell-foop xterm';
 	handleOperation;
 category='Core';
@@ -224,9 +224,9 @@ category='Frameworks';
 	handleOperation;
 category='GNOME Extras';
 	baseIncluded=false;
-	packagesArch='nautilus-terminal gnome-tweak-tool seahorse'; #gnome-flashback
-	packagesDebian='nautilus-extension-gnome-terminal gnome-tweak-tool seahorse'; #gnome-flashback
-	packagesFedora='gnome-terminal-nautilus gnome-tweak-tool seahorse'; #gnome-flashback
+	packagesArch='nautilus-terminal gnome-tweak-tool seahorse';
+	packagesDebian='nautilus-extension-gnome-terminal gnome-tweak-tool seahorse';
+	packagesFedora='gnome-terminal-nautilus gnome-tweak-tool seahorse';
 	packagesFlathub='org.gnome.seahorse.Application';
 	packagesSuse='nautilus-terminal gnome-tweaks seahorse';
 	handleOperation;
@@ -253,10 +253,10 @@ category='VDPAU';
 	handleOperation;
 category='Theming';
 	baseIncluded=false;
-	packagesArch='arc-gtk-theme'; packagesAUR='numix-circle-icon-theme-git';
-	packagesDebian='numix-icon-theme-circle arc-theme';
-	packagesFedora='numix-icon-theme-circle numix-icon-theme-square arc-theme';
-	packagesSuse='gtk3-metatheme-arc gtk2-metatheme-arc';
+	packagesArch=''; packagesAUR='numix-circle-icon-theme-git';
+	packagesDebian='numix-icon-theme-circle';
+	packagesFedora='numix-icon-theme-circle numix-icon-theme-square';
+	packagesSuse='';
 	handleOperation;
 category='Fonts';
 	baseIncluded=true;
@@ -342,30 +342,30 @@ category='Disks - Management';
 	handleOperation;
 category='Disks - File Systems';
 	baseIncluded=true;
-	packagesArch='btrfs-progs compsize dosfstools exfat-utils f2fs-tools mtools ntfs-3g udftools xfsprogs duperemove';
-	packagesDebian='btrfs-progs btrfs-compsize dosfstools exfat-utils f2fs-tools mtools ntfs-3g udftools xfsprogs duperemove';
-	packagesFedora='btrfs-progs compsize dosfstools exfat-utils f2fs-tools mtools ntfs-3g ntfsprogs udftools xfsprogs duperemove';
-	packagesSuse='btrfsprogs compsize dosfstools exfat-utils f2fs-tools mtools ntfs-3g ntfsprogs udftools xfsprogs duperemove';
+	packagesArch='btrfs-progs compsize dosfstools exfat-utils f2fs-tools mtools ntfs-3g udftools xfsprogs duperemove sshfs';
+	packagesDebian='btrfs-progs btrfs-compsize dosfstools exfat-utils f2fs-tools mtools ntfs-3g udftools xfsprogs duperemove sshfs';
+	packagesFedora='btrfs-progs compsize dosfstools exfat-utils f2fs-tools mtools ntfs-3g ntfsprogs udftools xfsprogs duperemove fuse-sshfs';
+	packagesSuse='btrfsprogs compsize dosfstools exfat-utils f2fs-tools mtools ntfs-3g ntfsprogs udftools xfsprogs duperemove sshfs';
 	handleOperation;
 category='Files - Backup';
 	baseIncluded=true;
-	packagesArch='restic'; packagesAUR='backintime';
-	packagesDebian='backintime-qt4 restic';
-	packagesFedora='backintime-qt4 restic';
-	packagesSuse='backintime-qt restic';
+	packagesArch='restic';
+	packagesDebian='restic';
+	packagesFedora='restic';
+	packagesSuse='restic';
 	handleOperation;
 category='Files - Encryption';
 	baseIncluded=true;
-	packagesArch='ecryptfs-utils encfs cryfs gocryptfs'; packagesAUR='sirikali';
-	packagesDebian='encfs cryfs gocryptfs'; #ecryptfs-utils sirikali
-	packagesFedora='ecryptfs-utils encfs gocryptfs cryptsetup-reencrypt'; #sirikali
+	packagesArch='ecryptfs-utils encfs cryfs gocryptfs';
+	packagesDebian='encfs cryfs gocryptfs'; #ecryptfs-utils
+	packagesFedora='ecryptfs-utils encfs gocryptfs cryptsetup-reencrypt';
 	packagesSuse='ecryptfs-utils encfs cryfs';
 	handleOperation;
 category='Files - Sharing';
 	baseIncluded=true;
-	packagesArch='transmission-gtk'; packagesAUR='magic-wormhole';
-	packagesDebian='transmission-gtk'; #magic-wormhole
-	packagesFedora='transmission'; #magic-wormhole
+	packagesArch='transmission-gtk';
+	packagesDebian='transmission-gtk';
+	packagesFedora='transmission';
 	packagesFlathub='com.transmissionbt.Transmission';
 	packagesSuse='transmission-gtk';
 	handleOperation;
@@ -413,8 +413,8 @@ category='Internet';
 	handleOperation;
 category='Media - Consumption';
 	baseIncluded=true;
-	packagesArch='ffmpeg vlc lollypop youtube-dl'; packagesAUR='foliate'; #TODO: codecs
-	packagesDebian='ffmpeg vlc pragha youtube-dl'; #TODO: codecs
+	packagesArch='ffmpeg vlc lollypop youtube-dl foliate'; #TODO: codecs
+	packagesDebian='ffmpeg vlc lollypop youtube-dl'; #TODO: codecs
 	packagesFedora='@multimedia ffmpeg gstreamer1-plugin-openh264 vlc lollypop youtube-dl foliate';
 	packagesSuse='ffmpeg vlc lollypop youtube-dl foliate'; #TODO: codecs
 	handleOperation;
@@ -498,7 +498,7 @@ category='Utility';
 category='Utility - Graphical';
 	baseIncluded=true;
 	packagesArch='dconf-editor qalculate-gtk gnome-firmware';
-	packagesDebian='dconf-editor qalculate-gtk software-properties-gtk';
+	packagesDebian='dconf-editor qalculate-gtk gnome-firmware software-properties-gtk';
 	packagesFedora='dconf-editor qalculate-gtk gnome-firmware';
 	packagesSuse='dconf-editor';
 	handleOperation;
