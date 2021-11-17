@@ -243,7 +243,6 @@ pref("extensions.webcompat-reporter.enabled", false); // [DEFAULT: false]
    to Google, only a part-hash of the prefix, hidden with noise of other real part-hashes.
    Firefox takes measures such as stripping out identifying parameters and since SBv4 (FF57+)
    doesn't even use cookies. (#Turn on browser.safebrowsing.debug to monitor this activity)
-   FWIW, Google also swear it is anonymized and only used to flag malicious sites.
 
    [1] https://feeding.cloud.geek.nz/posts/how-safe-browsing-works-in-firefox/
    [2] https://wiki.mozilla.org/Security/Safe_Browsing
@@ -584,12 +583,15 @@ pref("security.insecure_connection_text.enabled", true); // [FF60+]
 pref("_user.js.parrot", "1400 syntax error: the parrot's bereft of life!");
 /* 1401: disable rendering of SVG OpenType fonts ***/
 pref("gfx.font_rendering.opentype_svg.enabled", false);
-/* 1402: limit font visibility (Windows, Mac, some Linux) [FF79+]
- * [NOTE] In FF80+ RFP ignores the pref and uses value 1
+/* 1402: limit font visibility (Windows, Mac, some Linux) [FF94+]
  * Uses hardcoded lists with two parts: kBaseFonts + kLangPackFonts [1], bundled fonts are auto-allowed
+ * In normal windows: uses the first applicable: RFP (4506) over TP over Standard
+ * In Private Browsing windows: uses the most restrictive between normal and private
  * 1=only base system fonts, 2=also fonts from optional language packs, 3=also user-installed fonts
  * [1] https://searchfox.org/mozilla-central/search?path=StandardFonts*.inc ***/
-   // pref("layout.css.font-visibility.level", 1);
+   // pref("layout.css.font-visibility.private", 1);
+   // pref("layout.css.font-visibility.standard", 1);
+   // pref("layout.css.font-visibility.trackingprotection", 1);
 
 /*** [SECTION 1600]: HEADERS / REFERERS
    Expect some breakage e.g. banks: use an extension if you need precise control
@@ -900,7 +902,7 @@ pref("privacy.clearOnShutdown.formdata", true); // Form & Search History
 pref("privacy.clearOnShutdown.history", true); // Browsing & Download History
 pref("privacy.clearOnShutdown.offlineApps", true); // Offline Website Data
 pref("privacy.clearOnShutdown.sessions", true); // Active Logins
-pref("privacy.clearOnShutdown.siteSettings", false); // Site Preferences
+   // pref("privacy.clearOnShutdown.siteSettings", false); // [DEFAULT: false] Site Preferences
 /* 2804: reset default items to clear with Ctrl-Shift-Del (to match 2803) [SETUP-CHROME]
  * This dialog can also be accessed from the menu History>Clear Recent History
  * Firefox remembers your last choices. This will reset them when you start Firefox
@@ -912,9 +914,9 @@ pref("privacy.cpd.cookies", true);
 pref("privacy.cpd.formdata", true); // Form & Search History
 pref("privacy.cpd.history", true); // Browsing & Download History
 pref("privacy.cpd.offlineApps", true); // Offline Website Data
-pref("privacy.cpd.passwords", false); // this is not listed
+   // pref("privacy.cpd.passwords", false); // [DEFAULT: false] this is not listed
 pref("privacy.cpd.sessions", true); // Active Logins
-pref("privacy.cpd.siteSettings", false); // Site Preferences
+   // pref("privacy.cpd.siteSettings", false); // [DEFAULT: false] Site Preferences
 /* 2805: clear Session Restore data when sanitizing on shutdown or manually [FF34+]
  * [NOTE] Not needed if Session Restore is not used (0102) or is already cleared with history (2803)
  * [NOTE] privacy.clearOnShutdown.openWindows prevents resuming from crashes (also see 5008)
@@ -1053,13 +1055,15 @@ pref("privacy.resistFingerprinting.letterboxing", true); // [HIDDEN PREF]
  * [1] https://bugzilla.mozilla.org/1635603 ***/
    // pref("privacy.resistFingerprinting.exemptedDomains", "*.example.invalid");
    // pref("privacy.resistFingerprinting.testGranularityMask", 0);
-/* 4506: disable showing about:blank as soon as possible during startup [FF60+]
+/* 4506: set RFP's font visibility level (1402) [FF94+] ***/
+   // pref("layout.css.font-visibility.resistFingerprinting", 1);
+/* 4507: disable showing about:blank as soon as possible during startup [FF60+]
  * When default true this no longer masks the RFP chrome resizing activity
  * [1] https://bugzilla.mozilla.org/1448423 ***/
 pref("browser.startup.blankWindow", false);
-/* 4510: enforce no system colors
+/* 4510: disable using system colors
  * [SETTING] General>Language and Appearance>Fonts and Colors>Colors>Use system colors ***/
-pref("browser.display.use_system_colors", false); // [DEFAULT: false]
+pref("browser.display.use_system_colors", false); // [DEFAULT false NON-WINDOWS]
 /* 4511: enforce non-native widget theme
  * Security: removes/reduces system API calls, e.g. win32k API [1]
  * Fingerprinting: provides a uniform look and feel across platforms [2]
@@ -1296,7 +1300,7 @@ pref("_user.js.parrot", "7000 syntax error: the parrot's pushing up daisies!");
 /* 7010: disable HTTP Alternative Services [FF37+]
  * [WHY] Already isolated by network partitioning (FF85+) or FPI ***/
    // pref("network.http.altsvc.enabled", false);
-   // pref("network.http.altsvc.oe", false);
+   // pref("network.http.altsvc.oe", false); // [DEFAULT: false FF94+]
 /* 7011: disable website control over browser right-click context menu
  * [WHY] Just use Shift-Right-Click ***/
    // pref("dom.event.contextmenu.enabled", false);
@@ -1358,7 +1362,7 @@ pref("browser.startup.homepage_override.mstone", "ignore"); // master switch
    // pref("startup.homepage_welcome_url.additional", "");
    // pref("startup.homepage_override_url", ""); // What's New page after updates
 /* WARNINGS ***/
-   // pref("browser.tabs.warnOnClose", false);
+   // pref("browser.tabs.warnOnClose", false); // [DEFAULT false FF94+]
    // pref("browser.tabs.warnOnCloseOtherTabs", false);
    // pref("browser.tabs.warnOnOpen", false);
    // pref("full-screen-api.warning.delay", 0);
@@ -1409,6 +1413,10 @@ pref("_user.js.parrot", "9999 syntax error: the parrot's shuffled off 'is mortal
 // 7003: disable non-modern cipher suites
    // [-] https://bugzilla.mozilla.org/1724072
    // pref("security.ssl3.rsa_des_ede3_sha", false); // 3DES
+// FF94
+// 1402: limit font visibility (Windows, Mac, some Linux) [FF79+] - replaced by new 1402
+   // [-] https://bugzilla.mozilla.org/1715507
+   // pref("layout.css.font-visibility.level", 1);
 // ***/
 
 /* ESR78.x still uses all the following prefs
