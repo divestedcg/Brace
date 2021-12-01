@@ -876,7 +876,7 @@ pref("_user.js.parrot", "2800 syntax error: the parrot's bleedin' demised!");
  * [SETTING] to add site exceptions: Ctrl+I>Permissions>Cookies>Allow
  *   If using FPI the syntax must be https://example.com/^firstPartyDomain=example.com
  * [SETTING] to manage site exceptions: Options>Privacy & Security>Permissions>Settings ***/
-pref("network.cookie.lifetimePolicy", 2);
+   // pref("network.cookie.lifetimePolicy", 2); //BRACE-COMMENTED: no thanks
 /* 2802: delete cache on exit [FF96+]
  * [NOTE] We already disable disk cache (1001) and clear on exit (2811) which is more robust
  * [1] https://bugzilla.mozilla.org/1671182 ***/
