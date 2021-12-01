@@ -3,67 +3,27 @@ user::rwx
 group::r-x
 other::r-x
 
-# file: unused
-user::rwx
-group::r-x
-other::r-x
-
-# file: unused/powersave.conf
-user::rw-
-group::r--
-other::r--
-
-# file: unused/zram-generator.conf
-user::rw-
-group::r--
-other::r--
-
-# file: unused/tmp.mount.conf
-user::rw-
-group::r--
-other::r--
-
-# file: unused/chromium-brace-3p.json
-user::rw-
-group::r--
-other::r--
-
-# file: unused/uBlock0@raymondhill.net.json
-user::rw-
-group::r--
-other::r--
-
-# file: unused/chromium-brace-notes.txt
-user::rw-
-group::r--
-other::r--
-
-# file: unused/debian-firmware.sh
-user::rw-
-group::r--
-other::r--
-
-# file: unused/brace-sebool.sh
-user::rwx
-group::r-x
-other::r-x
-
-# file: unused/99-brace.conf.template
-user::rw-
-group::r--
-other::r--
-
-# file: .gitignore
-user::rw-
-group::r--
-other::r--
-
-# file: LICENSE
-user::rw-
-group::r--
-other::r--
-
 # file: brace
+user::rwx
+group::r-x
+other::r-x
+
+# file: brace/DEBIAN
+user::rwx
+group::r-x
+other::r-x
+
+# file: brace/DEBIAN/control
+user::rw-
+group::r--
+other::r--
+
+# file: brace/DEBIAN/postinst
+user::rwx
+group::r-x
+other::r-x
+
+# file: brace/DEBIAN/postrm
 user::rwx
 group::r-x
 other::r-x
@@ -72,6 +32,41 @@ other::r-x
 user::rwx
 group::r-x
 other::r-x
+
+# file: brace/etc/apt
+user::rwx
+group::r-x
+other::r-x
+
+# file: brace/etc/apt/apt.conf.d
+user::rwx
+group::r-x
+other::r-x
+
+# file: brace/etc/apt/apt.conf.d/90-brace
+user::rw-
+group::r--
+other::r--
+
+# file: brace/etc/chromium
+user::rwx
+group::r-x
+other::r-x
+
+# file: brace/etc/chromium/policies
+user::rwx
+group::r-x
+other::r-x
+
+# file: brace/etc/chromium/policies/managed
+user::rwx
+group::r-x
+other::r-x
+
+# file: brace/etc/chromium/policies/managed/brace.json
+user::rw-
+group::r--
+other::r--
 
 # file: brace/etc/dconf
 user::rwx
@@ -98,6 +93,11 @@ user::rw-
 group::r--
 other::r--
 
+# file: brace/etc/dconf/db/local.d/00-brace-gnome
+user::rw-
+group::r--
+other::r--
+
 # file: brace/etc/dconf/db/local.d/00-brace-mate
 user::rw-
 group::r--
@@ -108,57 +108,32 @@ user::rw-
 group::r--
 other::r--
 
-# file: brace/etc/dconf/db/local.d/00-brace-gnome
-user::rw-
-group::r--
-other::r--
-
 # file: brace/etc/dconf/profile
 user::rwx
 group::r-x
 other::r-x
-
-# file: brace/etc/dconf/profile/user-full
-user::rw-
-group::r--
-other::r--
 
 # file: brace/etc/dconf/profile/user
 user::rw-
 group::r--
 other::r--
 
-# file: brace/etc/profile.d
-user::rwx
-group::r-x
-other::r-x
-
-# file: brace/etc/profile.d/brace-env-overrides.sh
+# file: brace/etc/dconf/profile/user-full
 user::rw-
 group::r--
 other::r--
 
-# file: brace/etc/profile.d/brace-helpers.sh
-user::rw-
-group::r--
-other::r--
-
-# file: brace/etc/chromium
+# file: brace/etc/default
 user::rwx
 group::r-x
 other::r-x
 
-# file: brace/etc/chromium/policies
+# file: brace/etc/default/grub.d
 user::rwx
 group::r-x
 other::r-x
 
-# file: brace/etc/chromium/policies/managed
-user::rwx
-group::r-x
-other::r-x
-
-# file: brace/etc/chromium/policies/managed/brace.json
+# file: brace/etc/default/grub.d/brace.cfg
 user::rw-
 group::r--
 other::r--
@@ -183,35 +158,35 @@ user::rwx
 group::r-x
 other::r-x
 
-# file: brace/etc/default
-user::rwx
-group::r-x
-other::r-x
-
-# file: brace/etc/default/grub.d
-user::rwx
-group::r-x
-other::r-x
-
-# file: brace/etc/default/grub.d/brace.cfg
+# file: brace/etc/opt/chrome/policies/managed/brace.json
 user::rw-
 group::r--
 other::r--
 
-# file: brace/etc/apt
+# file: brace/etc/profile.d
 user::rwx
 group::r-x
 other::r-x
 
-# file: brace/etc/apt/apt.conf.d
-user::rwx
-group::r-x
-other::r-x
-
-# file: brace/etc/apt/apt.conf.d/90-brace
+# file: brace/etc/profile.d/brace-env-overrides.sh
 user::rw-
 group::r--
 other::r--
+
+# file: brace/etc/profile.d/brace-helpers.sh
+user::rw-
+group::r--
+other::r--
+
+# file: brace.install
+user::rw-
+group::r-x
+other::r-x
+
+# file: brace.spec
+user::rw-
+group::---
+other::---
 
 # file: brace/usr
 user::rwx
@@ -229,6 +204,76 @@ group::r-x
 other::r-x
 
 # file: brace/usr/lib
+user::rwx
+group::r-x
+other::r-x
+
+# file: brace/usr/lib/firefox
+user::rwx
+group::r-x
+other::r-x
+
+# file: brace/usr/lib/firefox/browser
+user::rwx
+group::r-x
+other::r-x
+
+# file: brace/usr/lib/firefox/browser/defaults
+user::rwx
+group::r-x
+other::r-x
+
+# file: brace/usr/lib/firefox/browser/defaults/preferences
+user::rwx
+group::r-x
+other::r-x
+
+# file: brace/usr/lib/firefox/browser/defaults/preferences/userjs-arkenfox.js
+user::rw-
+group::r--
+other::r--
+
+# file: brace/usr/lib/firefox/browser/defaults/preferences/userjs-brace.js
+user::rw-
+group::r--
+other::r--
+
+# file: brace/usr/lib/firefox/browser/defaults/preferences/userjs-brace-perf.js
+user::rw-
+group::r--
+other::r--
+
+# file: brace/usr/lib/firefox/distribution
+user::rwx
+group::r-x
+other::r-x
+
+# file: brace/usr/lib/firefox/distribution/policies.json
+user::rw-
+group::r--
+other::r--
+
+# file: brace/usr/lib/firefox-esr
+user::rwx
+group::r-x
+other::r-x
+
+# file: brace/usr/lib/firefox-esr/browser
+user::rwx
+group::r-x
+other::r-x
+
+# file: brace/usr/lib/firefox-esr/browser/defaults
+user::rwx
+group::r-x
+other::r-x
+
+# file: brace/usr/lib/firefox-esr/browser/defaults/preferences
+user::rwx
+group::r-x
+other::r-x
+
+# file: brace/usr/lib/firefox-esr/distribution
 user::rwx
 group::r-x
 other::r-x
@@ -283,25 +328,85 @@ user::rwx
 group::r-x
 other::r-x
 
-# file: brace/usr/lib/systemd/user
-user::rwx
-group::r-x
-other::r-x
-
-# file: brace/usr/lib/systemd/user/restic-backup@.service
-user::rw-
-group::r--
-other::r--
-
-# file: brace/usr/lib/systemd/user/restic-backup@.timer
-user::rw-
-group::r--
-other::r--
-
 # file: brace/usr/lib/systemd/system
 user::rwx
 group::r-x
 other::r-x
+
+# file: brace/usr/lib/systemd/system/biboumi.service.d
+user::rwx
+group::r-x
+other::r-x
+
+# file: brace/usr/lib/systemd/system/biboumi.service.d/98-user.conf
+user::rw-
+group::r--
+other::r--
+
+# file: brace/usr/lib/systemd/system/biboumi.service.d/99-brace.conf
+user::rw-
+group::r--
+other::r--
+
+# file: brace/usr/lib/systemd/system/ejabberd.service.d
+user::rwx
+group::r-x
+other::r-x
+
+# file: brace/usr/lib/systemd/system/ejabberd.service.d/99-brace.conf
+user::rw-
+group::r--
+other::r--
+
+# file: brace/usr/lib/systemd/system/firewalld.service.d
+user::rwx
+group::r-x
+other::r-x
+
+# file: brace/usr/lib/systemd/system/firewalld.service.d/99-brace.conf.disabled
+user::rw-
+group::r--
+other::r--
+
+# file: brace/usr/lib/systemd/system/httpd.service.d
+user::rwx
+group::r-x
+other::r-x
+
+# file: brace/usr/lib/systemd/system/httpd.service.d/99-brace.conf
+user::rw-
+group::r--
+other::r--
+
+# file: brace/usr/lib/systemd/system/irqbalance.service.d
+user::rwx
+group::r-x
+other::r-x
+
+# file: brace/usr/lib/systemd/system/irqbalance.service.d/99-brace.conf
+user::rw-
+group::r--
+other::r--
+
+# file: brace/usr/lib/systemd/system/minetest@.service.d
+user::rwx
+group::r-x
+other::r-x
+
+# file: brace/usr/lib/systemd/system/minetest@.service.d/99-brace.conf
+user::rw-
+group::r--
+other::r--
+
+# file: brace/usr/lib/systemd/system/ModemManager.service.d
+user::rwx
+group::r-x
+other::r-x
+
+# file: brace/usr/lib/systemd/system/ModemManager.service.d/99-brace.conf
+user::rw-
+group::r--
+other::r--
 
 # file: brace/usr/lib/systemd/system/murmur.service.d
 user::rwx
@@ -318,62 +423,12 @@ user::rw-
 group::r--
 other::r--
 
-# file: brace/usr/lib/systemd/system/ejabberd.service.d
+# file: brace/usr/lib/systemd/system/NetworkManager.service.d
 user::rwx
 group::r-x
 other::r-x
 
-# file: brace/usr/lib/systemd/system/ejabberd.service.d/99-brace.conf
-user::rw-
-group::r--
-other::r--
-
-# file: brace/usr/lib/systemd/system/minetest@.service.d
-user::rwx
-group::r-x
-other::r-x
-
-# file: brace/usr/lib/systemd/system/minetest@.service.d/99-brace.conf
-user::rw-
-group::r--
-other::r--
-
-# file: brace/usr/lib/systemd/system/radiusd.service.d
-user::rwx
-group::r-x
-other::r-x
-
-# file: brace/usr/lib/systemd/system/radiusd.service.d/99-brace.conf
-user::rw-
-group::r--
-other::r--
-
-# file: brace/usr/lib/systemd/system/tor.service.d
-user::rwx
-group::r-x
-other::r-x
-
-# file: brace/usr/lib/systemd/system/tor.service.d/99-brace.conf
-user::rw-
-group::r--
-other::r--
-
-# file: brace/usr/lib/systemd/system/irqbalance.service.d
-user::rwx
-group::r-x
-other::r-x
-
-# file: brace/usr/lib/systemd/system/irqbalance.service.d/99-brace.conf
-user::rw-
-group::r--
-other::r--
-
-# file: brace/usr/lib/systemd/system/httpd.service.d
-user::rwx
-group::r-x
-other::r-x
-
-# file: brace/usr/lib/systemd/system/httpd.service.d/99-brace.conf
+# file: brace/usr/lib/systemd/system/NetworkManager.service.d/99-brace.conf
 user::rw-
 group::r--
 other::r--
@@ -388,32 +443,12 @@ user::rw-
 group::r--
 other::r--
 
-# file: brace/usr/lib/systemd/system/NetworkManager.service.d
+# file: brace/usr/lib/systemd/system/radiusd.service.d
 user::rwx
 group::r-x
 other::r-x
 
-# file: brace/usr/lib/systemd/system/NetworkManager.service.d/99-brace.conf
-user::rw-
-group::r--
-other::r--
-
-# file: brace/usr/lib/systemd/system/ModemManager.service.d
-user::rwx
-group::r-x
-other::r-x
-
-# file: brace/usr/lib/systemd/system/ModemManager.service.d/99-brace.conf
-user::rw-
-group::r--
-other::r--
-
-# file: brace/usr/lib/systemd/system/firewalld.service.d
-user::rwx
-group::r-x
-other::r-x
-
-# file: brace/usr/lib/systemd/system/firewalld.service.d/99-brace.conf.disabled
+# file: brace/usr/lib/systemd/system/radiusd.service.d/99-brace.conf
 user::rw-
 group::r--
 other::r--
@@ -438,6 +473,16 @@ user::rw-
 group::r--
 other::r--
 
+# file: brace/usr/lib/systemd/system/tor.service.d
+user::rwx
+group::r-x
+other::r-x
+
+# file: brace/usr/lib/systemd/system/tor.service.d/99-brace.conf
+user::rw-
+group::r--
+other::r--
+
 # file: brace/usr/lib/systemd/system/wpa_supplicant.service.d
 user::rwx
 group::r-x
@@ -448,47 +493,17 @@ user::rw-
 group::r--
 other::r--
 
-# file: brace/usr/lib/firefox
+# file: brace/usr/lib/systemd/user
 user::rwx
 group::r-x
 other::r-x
 
-# file: brace/usr/lib/firefox/distribution
-user::rwx
-group::r-x
-other::r-x
-
-# file: brace/usr/lib/firefox/distribution/policies.json
+# file: brace/usr/lib/systemd/user/restic-backup@.service
 user::rw-
 group::r--
 other::r--
 
-# file: brace/usr/lib/firefox/browser
-user::rwx
-group::r-x
-other::r-x
-
-# file: brace/usr/lib/firefox/browser/defaults
-user::rwx
-group::r-x
-other::r-x
-
-# file: brace/usr/lib/firefox/browser/defaults/preferences
-user::rwx
-group::r-x
-other::r-x
-
-# file: brace/usr/lib/firefox/browser/defaults/preferences/userjs-brace-perf.js
-user::rw-
-group::r--
-other::r--
-
-# file: brace/usr/lib/firefox/browser/defaults/preferences/userjs-arkenfox.js
-user::rw-
-group::r--
-other::r--
-
-# file: brace/usr/lib/firefox/browser/defaults/preferences/userjs-brace.js
+# file: brace/usr/lib/systemd/user/restic-backup@.timer
 user::rw-
 group::r--
 other::r--
@@ -508,47 +523,32 @@ user::rwx
 group::r-x
 other::r-x
 
-# file: brace/usr/lib/firefox-esr
-user::rwx
-group::r-x
-other::r-x
-
-# file: brace/usr/lib/firefox-esr/distribution
-user::rwx
-group::r-x
-other::r-x
-
-# file: brace/usr/lib/firefox-esr/browser
-user::rwx
-group::r-x
-other::r-x
-
-# file: brace/usr/lib/firefox-esr/browser/defaults
-user::rwx
-group::r-x
-other::r-x
-
-# file: brace/usr/lib/firefox-esr/browser/defaults/preferences
-user::rwx
-group::r-x
-other::r-x
-
 # file: brace/usr/lib/tmpfiles.d
 user::rwx
-group::---
-other::---
-
-# file: brace/usr/lib/tmpfiles.d/99-brace-sys.conf
-user::rw-
-group::---
-other::---
+group::r-x
+other::r-x
 
 # file: brace/usr/lib/tmpfiles.d/99-brace-proc.conf
 user::rw-
-group::---
-other::---
+group::r--
+other::r--
+
+# file: brace/usr/lib/tmpfiles.d/99-brace-sys.conf
+user::rw-
+group::r--
+other::r--
 
 # file: brace/usr/sbin
+user::rwx
+group::r-x
+other::r-x
+
+# file: brace/usr/sbin/brace-fedora-enable-auto-updates
+user::rwx
+group::r-x
+other::r-x
+
+# file: brace/usr/sbin/brace-fedora-enable-rpmfusion
 user::rwx
 group::r-x
 other::r-x
@@ -563,67 +563,92 @@ user::rwx
 group::r-x
 other::r-x
 
-# file: brace/usr/sbin/brace-fedora-enable-rpmfusion
-user::rwx
-group::r-x
-other::r-x
-
-# file: brace/usr/sbin/brace-fedora-enable-auto-updates
-user::rwx
-group::r-x
-other::r-x
-
 # file: brace/usr/sbin/brace-rpm-verify
 user::rwx
 group::r-x
 other::r-x
 
-# file: brace/DEBIAN
-user::rwx
-group::r-x
-other::r-x
-
-# file: brace/DEBIAN/postinst
-user::rwx
-group::r-x
-other::r-x
-
-# file: brace/DEBIAN/postrm
-user::rwx
-group::r-x
-other::r-x
-
-# file: brace/DEBIAN/control
+# file: LICENSE
 user::rw-
 group::r--
 other::r--
 
-# file: brace.install
+# file: permissions.facl
 user::rw-
-group::r--
-other::r--
-
-# file: TODO
-user::rw-
-group::r--
-other::r--
+group::---
+other::---
 
 # file: PKGBUILD
 user::rw-
 group::---
 other::---
 
-# file: brace.spec
+# file: README.md
+user::rw-
+group::r--
+other::r--
+
+# file: TODO
 user::rw-
 group::---
 other::---
 
-# file: README.md
+# file: unused
+user::rwx
+group::r-x
+other::r-x
+
+# file: unused/99-brace.conf.template
+user::rw-
+group::r--
+other::r--
+
+# file: unused/brace-sebool.sh
+user::rwx
+group::r-x
+other::r-x
+
+# file: unused/chromium-brace-3p.json
+user::rw-
+group::r--
+other::r--
+
+# file: unused/chromium-brace-notes.txt
 user::rw-
 group::---
 other::---
+
+# file: unused/debian-firmware.sh
+user::rw-
+group::r-x
+other::r-x
+
+# file: unused/powersave.conf
+user::rw-
+group::r--
+other::r--
+
+# file: unused/tmp.mount.conf
+user::rw-
+group::r--
+other::r--
+
+# file: unused/uBlock0@raymondhill.net.json
+user::rw-
+group::r--
+other::r--
+
+# file: unused/zram-generator.conf
+user::rw-
+group::r--
+other::r--
 
 # file: .gitlab-ci.yml
 user::rw-
-group::---
-other::---
+group::r--
+other::r--
+
+# file: .gitignore
+user::rw-
+group::r--
+other::r--
