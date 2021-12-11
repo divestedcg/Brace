@@ -1,10 +1,20 @@
 {
 	"policies": {
 		"CaptivePortal": false,
+		"Cookies": {
+			"Behavior": "reject-tracker-and-partition-foreign",
+			"BehaviorPrivateBrowsing": "reject-tracker-and-partition-foreign"
+		},
 		"DisableFirefoxAccounts": true,
 		"DisableFirefoxStudies": true,
 		"DisablePocket": true,
 		"DisableTelemetry": true,
+		"EnableTrackingProtection": {
+			"Value": true,
+			"Locked": false,
+			"Cryptomining": true,
+			"Fingerprinting": true
+		},
 		"Extensions": {
 			"Install": [
 				"https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi"
