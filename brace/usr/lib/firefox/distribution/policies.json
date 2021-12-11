@@ -5,12 +5,6 @@
 		"DisableFirefoxStudies": true,
 		"DisablePocket": true,
 		"DisableTelemetry": true,
-		"EnableTrackingProtection": {
-			"Value": true,
-			"Locked": false,
-			"Cryptomining": true,
-			"Fingerprinting": true
-		},
 		"Extensions": {
 			"Install": [
 				"https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi"

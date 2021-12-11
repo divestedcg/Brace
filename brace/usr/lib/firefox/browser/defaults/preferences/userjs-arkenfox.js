@@ -1215,12 +1215,12 @@ pref("dom.allow_cut_copy", false); //BRACE-KEEP_FOR_NOW
    // pref("privacy.donottrackheader.enabled", true);
 /* 7016: customize ETP settings
  * [WHY] Arkenfox only supports strict which sets these at runtime (2701) ***/
-   // pref("network.cookie.cookieBehavior", 5);
-   // pref("privacy.partition.network_state.ocsp_cache", true);
-   // pref("privacy.trackingprotection.enabled", true);
-   // pref("privacy.trackingprotection.socialtracking.enabled", true);
-   // pref("privacy.trackingprotection.cryptomining.enabled", true); // [DEFAULT: true]
-   // pref("privacy.trackingprotection.fingerprinting.enabled", true); // [DEFAULT: true]
+pref("network.cookie.cookieBehavior", 5); //BRACE-UNCOMMENTED: set strict anyway because weirdness
+pref("privacy.partition.network_state.ocsp_cache", true);
+pref("privacy.trackingprotection.enabled", true);
+pref("privacy.trackingprotection.socialtracking.enabled", true);
+pref("privacy.trackingprotection.cryptomining.enabled", true); // [DEFAULT: true]
+pref("privacy.trackingprotection.fingerprinting.enabled", true); // [DEFAULT: true]
 /* 7017: disable service workers [FF32, FF44-compat]
  * [WHY] Already isolated (FF96+) with TCP (2701) behind a pref (2702)
  * or blocked with TCP in 3rd parties (FF95 or lower) ***/
