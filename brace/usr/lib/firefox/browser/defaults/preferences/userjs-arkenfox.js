@@ -1123,7 +1123,7 @@ pref("dom.storage.next_gen", true); // [DEFAULT: true FF92+]
 /* 6008: enforce no First Party Isolation [FF51+]
  * [WARNING] Replaced with network partitioning (FF85+) and TCP (2701),
  * and enabling FPI disables those. FPI is no longer maintained ***/
-pref("privacy.firstparty.isolate", false); // [DEFAULT: false]
+pref("privacy.firstparty.isolate", false); // [DEFAULT: false] //MULL-ENABLE_ME: dFPI doesn't seem to be implemented the same in Fenix?
 /* 6050: prefsCleaner: reset previously active items removed from arkenfox FF92+ ***/
    // placeholder
 
