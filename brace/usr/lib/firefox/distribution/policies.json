@@ -55,12 +55,20 @@
 		"FirefoxHome": {
 			"Search": true,
 			"TopSites": false,
+			"SponsoredTopSites": false,
 			"Highlights": false,
 			"Pocket": false,
+			"SponsoredPocket": false,
 			"Snippets": false,
 			"Locked": false
 		},
 		"NetworkPrediction": false,
-		"OverrideFirstRunPage": "about:home"
+		"OverrideFirstRunPage": "about:home",
+		"UserMessaging": {
+			"WhatsNew": false,
+			"ExtensionRecommendations": false,
+			"FeatureRecommendations": false,
+			"SkipOnboarding": false
+		}
 	}
 }
