@@ -7,6 +7,7 @@
 
 * README:
 
+  0. Changes made for Brace and Mull are noted with //BRACE and //MULL respectively
   1. Consider using Tor Browser if it meets your needs or fits your threat model
        * https://2019.www.torproject.org/about/torusers.html
   2. Required reading: Overview, Backing Up, Implementing, and Maintenance entries
@@ -313,9 +314,9 @@ pref("network.proxy.socks_remote_dns", true);
  * [SETUP-CHROME] Can break extensions for profiles on network shares
  * [1] https://gitlab.torproject.org/tpo/applications/tor-browser/-/issues/26424 ***/
 pref("network.file.disable_unc_paths", true); // [HIDDEN PREF]
-/* 0704: disable GIO as a potential proxy bypass vector [FF60+]
- * Gvfs/GIO has a set of supported protocols like obex, network, archive, computer, dav, cdda,
- * gphoto2, trash, etc. By default only smb and sftp protocols are accepted so far (as of FF64)
+/* 0704: disable GIO as a potential proxy bypass vector
+ * Gvfs/GIO has a set of supported protocols like obex, network, archive, computer,
+ * dav, cdda, gphoto2, trash, etc. By default only sftp is accepted (FF87+)
  * [1] https://bugzilla.mozilla.org/1433507
  * [2] https://en.wikipedia.org/wiki/GVfs
  * [3] https://en.wikipedia.org/wiki/GIO_(software) ***/
@@ -481,7 +482,7 @@ pref("_user.js.parrot", "1200 syntax error: the parrot's a stiff!");
  * safe from the attack if it disables renegotiations but the problem is that the browser can't
  * know that. Setting this pref to true is the only way for the browser to ensure there will be
  * no unsafe renegotiations on the channel between the browser and the server.
- * [STATS] SSL Labs (July 2021) reports over 99% of sites have secure renegotiation [4]
+ * [STATS] SSL Labs (July 2021) reports over 99% of top sites have secure renegotiation [4]
  * [1] https://wiki.mozilla.org/Security:Renegotiation
  * [2] https://datatracker.ietf.org/doc/html/rfc5746
  * [3] https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-3555
@@ -490,8 +491,11 @@ pref("security.ssl.require_safe_negotiation", true);
 /* 1203: reset TLS 1.0 and 1.1 downgrades i.e. session only ***/
 pref("security.tls.version.enable-deprecated", false); // [DEFAULT: false]
 /* 1206: disable TLS1.3 0-RTT (round-trip time) [FF51+]
+ * This data is not forward secret, as it is encrypted solely under keys derived using
+ * the offered PSK. There are no guarantees of non-replay between connections
  * [1] https://github.com/tlswg/tls13-spec/issues/1001
- * [2] https://blog.cloudflare.com/tls-1-3-overview-and-q-and-a/ ***/
+ * [2] https://www.rfc-editor.org/rfc/rfc9001.html#name-replay-attacks-with-0-rtt
+ * [3] https://blog.cloudflare.com/tls-1-3-overview-and-q-and-a/ ***/
 pref("security.tls.enable_0rtt_data", false);
 
 /** OCSP (Online Certificate Status Protocol)
@@ -687,19 +691,6 @@ pref("dom.disable_window_move_resize", true);
 pref("dom.disable_open_during_load", true);
 /* 2404: limit events that can cause a popup [SETUP-WEB] ***/
 pref("dom.popup_allowed_events", "click dblclick mousedown pointerdown");
-/* 2410: disable Web Notifications
- * [NOTE] Web Notifications are behind a prompt (7002) ***/
-   // pref("dom.webnotifications.enabled", false); // [FF22+]
-   // pref("dom.webnotifications.serviceworker.enabled", false); // [FF44+]
-/* 2411: disable Push Notifications [FF44+]
- * Push allows websites to send you subscribed messages through Mozilla's Push Server,
- * and requires service workers to subscribe to and display, and is behind a prompt (7002)
- * [NOTE] Disabling service workers alone doesn't stop Firefox polling the Mozilla Push Server
- * [NOTE] To remove all subscriptions, reset your userAgentID
- * [1] https://support.mozilla.org/kb/push-notifications-firefox
- * [2] https://developer.mozilla.org/docs/Web/API/Push_API ***/
-pref("dom.push.enabled", false);
-   // pref("dom.push.userAgentID", "");
 
 /*** [SECTION 2600]: MISCELLANEOUS ***/
 pref("_user.js.parrot", "2600 syntax error: the parrot's run down the curtain!");
@@ -792,13 +783,13 @@ pref("extensions.postDownloadThirdPartyPrompt", false);
 
 /*** [SECTION 2700]: ETP (ENHANCED TRACKING PROTECTION) ***/
 pref("_user.js.parrot", "2700 syntax error: the parrot's joined the bleedin' choir invisible!");
-/* 2701: enable Enhanced Tracking Protection's (ETP) Strict Mode [FF86+]
+/* 2701: enable ETP Strict Mode [FF86+]
  * [NOTE] ETP Strict Mode enables Total Cookie Protection (TCP)
  * [1] https://blog.mozilla.org/security/2021/02/23/total-cookie-protection/
  * [SETTING] to add site exceptions: Urlbar>ETP Shield
  * [SETTING] to manage site exceptions: Options>Privacy & Security>Enhanced Tracking Protection>Manage Exceptions ***/
 pref("browser.contentblocking.category", "strict");
-/* 2702: enable state partitioning of service workers [FF96+] ***/
+/* 2710: enable state partitioning of service workers [FF96+] ***/
 pref("privacy.partition.serviceWorkers", true);
 
 /*** [SECTION 2800]: SHUTDOWN & SANITIZING ***/
@@ -807,7 +798,7 @@ pref("_user.js.parrot", "2800 syntax error: the parrot's bleedin' demised!");
 /* 2801: delete cookies and site data on exit
  * 0=keep until they expire (default), 2=keep until you close Firefox
  * [NOTE] A "cookie" block permission also controls localStorage/sessionStorage, indexedDB,
- * sharedWorkers and serviceWorkers. serviceWorkers require an `Allow` permission
+ * sharedWorkers and serviceWorkers. serviceWorkers require an "Allow" permission
  * [SETTING] Privacy & Security>Cookies and Site Data>Delete cookies and site data when Firefox is closed
  * [SETTING] to add site exceptions: Ctrl+I>Permissions>Cookies>Allow
  *   If using FPI the syntax must be https://example.com/^firstPartyDomain=example.com
@@ -1124,8 +1115,17 @@ pref("dom.storage.next_gen", true); // [DEFAULT: true FF92+]
  * [WARNING] Replaced with network partitioning (FF85+) and TCP (2701),
  * and enabling FPI disables those. FPI is no longer maintained ***/
 pref("privacy.firstparty.isolate", false); // [DEFAULT: false] //MULL-ENABLE_ME: dFPI doesn't seem to be implemented the same in Fenix?
-/* 6050: prefsCleaner: reset previously active items removed from arkenfox FF92+ ***/
-   // placeholder
+/* 6009: enforce SmartBlock shims [FF81+]
+ * In FF96+ these are listed in about:compat
+ * [1] https://blog.mozilla.org/security/2021/03/23/introducing-smartblock/ ***/
+pref("extensions.webcompat.enable_shims", true); // [DEFAULT: true]
+/* 6050: prefsCleaner: reset items removed from arkenfox FF92+ ***/
+   // pref("dom.caches.enabled", "");
+   // pref("dom.storageManager.enabled", "");
+   // pref("dom.storage_access.enabled", "");
+   // pref("privacy.firstparty.isolate.block_post_message", "");
+   // pref("privacy.firstparty.isolate.restrict_opener_access", "");
+   // pref("privacy.firstparty.isolate.use_site", "");
 
 /*** [SECTION 7000]: DON'T BOTHER ***/
 pref("_user.js.parrot", "7000 syntax error: the parrot's pushing up daisies!");
@@ -1171,6 +1171,7 @@ pref("_user.js.parrot", "7000 syntax error: the parrot's pushing up daisies!");
 /* 7006: onions
  * [WHY] Firefox doesn't support hidden services. Use Tor Browser ***/
    // pref("dom.securecontext.whitelist_onions", true); // 1382359
+   // pref("dom.securecontext.allowlist_onions", true); // [FF97+] 1382359/1744006
    // pref("network.http.referer.hideOnionSource", true); // 1305144
 /* 7007: referers
  * [WHY] Only cross-origin referers (1600s) need control ***/
@@ -1214,17 +1215,28 @@ pref("dom.allow_cut_copy", false); //BRACE-KEEP_FOR_NOW
  * [WHY] DNT is enforced with Tracking Protection which is used in ETP Strict (2701) ***/
    // pref("privacy.donottrackheader.enabled", true);
 /* 7016: customize ETP settings
- * [WHY] Arkenfox only supports strict which sets these at runtime (2701) ***/
+ * [WHY] Arkenfox only supports strict (2701) which sets these at runtime ***/
 pref("network.cookie.cookieBehavior", 5); //BRACE-UNCOMMENTED: strict cannot be set on first launch, use custom + enterprise policy instead //MULL-MODIFY_ME: set to 1 for FPI
+pref("network.http.referer.disallowCrossSiteRelaxingDefault", true);
 pref("privacy.partition.network_state.ocsp_cache", true);
 pref("privacy.trackingprotection.enabled", true);
 pref("privacy.trackingprotection.socialtracking.enabled", true);
 pref("privacy.trackingprotection.cryptomining.enabled", true); // [DEFAULT: true]
 pref("privacy.trackingprotection.fingerprinting.enabled", true); // [DEFAULT: true]
 /* 7017: disable service workers [FF32, FF44-compat]
- * [WHY] Already isolated (FF96+) with TCP (2701) behind a pref (2702)
+ * [WHY] Already isolated (FF96+) with TCP (2701) behind a pref (2710)
  * or blocked with TCP in 3rd parties (FF95 or lower) ***/
    // pref("dom.serviceWorkers.enabled", false); //MULL-UNCOMMENT_ME: disable for FPI
+/* 7018: disable Web Notifications
+ * [WHY] Web Notifications are behind a prompt (7002)
+ * [1] https://blog.mozilla.org/en/products/firefox/block-notification-requests/ ***/
+   // pref("dom.webnotifications.enabled", false); // [FF22+]
+   // pref("dom.webnotifications.serviceworker.enabled", false); // [FF44+]
+/* 7019: disable Push Notifications [FF44+]
+ * [WHY] Push requires subscription
+ * [NOTE] To remove all subscriptions, reset "dom.push.userAgentID"
+ * [1] https://support.mozilla.org/kb/push-notifications-firefox ***/
+pref("dom.push.enabled", false); //BRACE-UNCOMMENTED: unwanted, also broken on Mull due to proprietary GMS dependency
 
 /*** [SECTION 8000]: DON'T BOTHER: FINGERPRINTING
    [WHY] They are insufficient to help anti-fingerprinting and do more harm than good
