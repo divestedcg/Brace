@@ -8,6 +8,8 @@
 * README:
 
   0. Changes made for Brace and Mull are noted with //BRACE and //MULL respectively
+       * sed -i 's/pref(/pref(/' userjs-arkenfox.js
+       * sed -i 's/pref(/pref(/' userjs-arkenfox.js
   1. Consider using Tor Browser if it meets your needs or fits your threat model
        * https://2019.www.torproject.org/about/torusers.html
   2. Required reading: Overview, Backing Up, Implementing, and Maintenance entries
@@ -132,31 +134,19 @@ pref("browser.region.update.enabled", false); // [FF79+]
  * [SETTING] General>Language and Appearance>Language>Choose your preferred language...
  * [TEST] https://addons.mozilla.org/about ***/
 pref("intl.accept_languages", "en-US, en");
-/* 0211: use US English locale regardless of the system locale
+/* 0211: use en-US locale regardless of the system or region locale
  * [SETUP-WEB] May break some input methods e.g xim/ibus for CJK languages [1]
+ * [TEST] https://arkenfox.github.io/TZP/tests/formatting.html
  * [1] https://bugzilla.mozilla.org/buglist.cgi?bug_id=867501,1629630 ***/
 pref("javascript.use_us_english_locale", true); // [HIDDEN PREF]
 
 /*** [SECTION 0300]: QUIETER FOX ***/
 pref("_user.js.parrot", "0300 syntax error: the parrot's not pinin' for the fjords!");
 /** UPDATES ***/
-/* 0301: disable auto-INSTALLING Firefox updates [NON-WINDOWS]
- * [NOTE] You will still get prompts to update, and should do so in a timely manner
- * [SETTING] General>Firefox Updates>Check for updates but let you choose to install them ***/
-   // pref("app.update.auto", false); //BRACE-COMMENTED: updates are important
 /* 0302: disable auto-INSTALLING Firefox updates via a background service [FF90+] [WINDOWS]
  * [SETTING] General>Firefox Updates>Automatically install updates>When Firefox is not running
  * [1] https://support.mozilla.org/kb/enable-background-updates-firefox-windows ***/
 pref("app.update.background.scheduling.enabled", false);
-/* 0303: disable auto-CHECKING for extension and theme updates ***/
-   // pref("extensions.update.enabled", false);
-/* 0304: disable auto-INSTALLING extension and theme updates (after the check in 0303)
- * [SETTING] about:addons>Extensions>[cog-wheel-icon]>Update Add-ons Automatically (toggle) ***/
-   // pref("extensions.update.autoUpdateDefault", false);
-/* 0305: disable extension metadata
- * used when installing/updating an extension, and in daily background update checks:
- * when false, extension detail tabs will have no description ***/
-   // pref("extensions.getAddons.cache.enabled", false);
 /* 0306: disable search engine updates (e.g. OpenSearch)
  * [NOTE] This does not affect Mozilla's built-in or Web Extension search engines ***/
 pref("browser.search.update", false);
@@ -661,11 +651,13 @@ pref("media.peerconnection.ice.default_address_only", true);
  * [NOTE] This is covered by the EME master switch (2022) ***/
 pref("media.gmp-widevinecdm.enabled", false); //BRACE-UNCOMMENTED: proprietary
 /* 2022: disable all DRM content (EME: Encryption Media Extension)
+ * Optionally hide the setting which also disables the DRM prompt
  * [SETUP-WEB] e.g. Netflix, Amazon Prime, Hulu, HBO, Disney+, Showtime, Starz, DirectTV
  * [SETTING] General>DRM Content>Play DRM-controlled content
  * [TEST] https://bitmovin.com/demos/drm
  * [1] https://www.eff.org/deeplinks/2017/10/drms-dead-canary-how-we-just-lost-web-what-we-learned-it-and-what-we-need-do-next ***/
 pref("media.eme.enabled", false);
+pref("browser.eme.ui.enabled", false); //BRACE-UNCOMMENTED: proprietary
 /* 2030: disable autoplay of HTML5 media [FF63+]
  * 0=Allow all, 1=Block non-muted media (default), 5=Block all
  * [NOTE] You can set exceptions under site permissions
@@ -946,7 +938,7 @@ pref("privacy.resistFingerprinting.letterboxing", true); // [HIDDEN PREF]
    // pref("privacy.resistFingerprinting.exemptedDomains", "*.example.invalid");
    // pref("privacy.resistFingerprinting.testGranularityMask", 0);
 /* 4506: set RFP's font visibility level (1402) [FF94+] ***/
-   // pref("layout.css.font-visibility.resistFingerprinting", 1);
+   // pref("layout.css.font-visibility.resistFingerprinting", 1); // [DEFAULT: 1]
 /* 4507: disable showing about:blank as soon as possible during startup [FF60+]
  * When default true this no longer masks the RFP chrome resizing activity
  * [1] https://bugzilla.mozilla.org/1448423 ***/
@@ -1286,6 +1278,14 @@ pref("browser.startup.homepage_override.mstone", "ignore"); // master switch
    // pref("browser.warnOnQuitShortcut", false); // [FF94+]
    // pref("full-screen-api.warning.delay", 0);
    // pref("full-screen-api.warning.timeout", 0);
+/* UPDATES ***/
+   // pref("app.update.auto", false); // [NON-WINDOWS] disable auto app updates
+     // [NOTE] You will still get prompts to update, and should do so in a timely manner
+     // [SETTING] General>Firefox Updates>Check for updates but let you choose to install them
+   // pref("extensions.update.enabled", false); // disable extension and theme update checks
+   // pref("extensions.update.autoUpdateDefault", false); // disable installing extension and theme updates
+      // [SETTING] about:addons>Extensions>[cog-wheel-icon]>Update Add-ons Automatically (toggle)
+   // pref("extensions.getAddons.cache.enabled", false); // disable extension metadata (extension detail tab)
 /* APPEARANCE ***/
    // pref("browser.download.autohideButton", false); // [FF57+]
    // pref("toolkit.legacyUserProfileCustomizations.stylesheets", true); // [FF68+] allow userChrome/userContent
