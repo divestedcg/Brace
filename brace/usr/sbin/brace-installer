@@ -65,7 +65,7 @@ handleInstall() {
 		$packageManager install --no-install-recommends $packagesToInstallReal;
 	fi;
 	if [ "$packageManager" == "dnf" ] || [ "$packageManager" == "yum" ]; then
-		$packageManager install --skip-broken $packagesFedora $packagesBaseFedora;
+		$packageManager install --skip-broken $packagesFedora $packagesBaseFedora && $packageManager mark install --skip-broken $packagesFedora $packagesBaseFedora;
 	fi;
 	if [ "$packageManager" == "flatpak" ]; then
 		$packageManager install $packagesFlathub $packagesBaseFlathub;
@@ -212,7 +212,7 @@ category='Core';
 	baseIncluded=true;
 	packagesArch='rng-tools irqbalance openssh nano htop wget screen zip p7zip pixz pigz lm_sensors ripgrep dialog crda pacman-contrib lostfiles'; packagesAUR='downgrade';
 	packagesDebian='rng-tools irqbalance ssh nano htop wget screen p7zip pixz lm-sensors ripgrep unattended-upgrades';
-	packagesFedora='rng-tools irqbalance openssh nano htop wget screen p7zip pixz lm_sensors ripgrep zram grubby';
+	packagesFedora='rng-tools irqbalance openssh nano htop wget screen p7zip pixz lm_sensors ripgrep grubby';
 	packagesSuse='rng-tools irqbalance openssh nano htop wget screen p7zip pixz sensors ripgrep grubby';
 	handleOperation;
 category='Frameworks';
@@ -273,13 +273,6 @@ category='Audio Manipulation';
 	packagesFlathub='org.audacityteam.Audacity';
 	packagesSuse='audacity';
 	handleOperation;
-category='Audit';
-	baseIncluded=false;
-	packagesArch='lynis checksec arch-audit'; packagesAUR='spectre-meltdown-checker';
-	packagesDebian='lynis checksec spectre-meltdown-checker';
-	packagesFedora='lynis checksec spectre-meltdown-checker';
-	packagesSuse='lynis spectre-meltdown-checker';
-	handleOperation;
 category='Chat';
 	baseIncluded=false;
 	packagesArch='hexchat dino mumble';
@@ -295,14 +288,6 @@ category='Communication';
 	packagesFedora='evolution';
 	packagesFlathub='org.gnome.Evolution';
 	packagesSuse='evolution';
-	handleOperation;
-category='Cryptocurrency';
-	baseIncluded=false;
-	packagesArch='electrum';
-	packagesDebian=''; #electrum
-	packagesFedora='electrum';
-	packagesFlathub='org.electrum.electrum';
-	packagesSuse=''; #unavailable
 	handleOperation;
 category='Development';
 	baseIncluded=false;
@@ -335,10 +320,10 @@ category='Development - Distro Specific Packaging';
 	handleOperation;
 category='Disks - Management';
 	baseIncluded=true;
-	packagesArch='testdisk smartmontools gsmartcontrol parted gnome-multi-writer';
-	packagesDebian='testdisk smartmontools gsmartcontrol parted gnome-multi-writer';
-	packagesFedora='testdisk smartmontools gsmartcontrol parted gnome-multi-writer mediawriter';
-	packagesSuse='testdisk smartmontools gsmartcontrol parted gnome-multi-writer';
+	packagesArch='testdisk smartmontools gsmartcontrol parted';
+	packagesDebian='testdisk smartmontools gsmartcontrol parted';
+	packagesFedora='testdisk smartmontools gsmartcontrol parted';
+	packagesSuse='testdisk smartmontools gsmartcontrol parted';
 	handleOperation;
 category='Disks - File Systems';
 	baseIncluded=true;
@@ -356,10 +341,10 @@ category='Files - Backup';
 	handleOperation;
 category='Files - Encryption';
 	baseIncluded=true;
-	packagesArch='ecryptfs-utils encfs cryfs gocryptfs';
-	packagesDebian='encfs cryfs gocryptfs'; #ecryptfs-utils
-	packagesFedora='ecryptfs-utils encfs gocryptfs cryptsetup-reencrypt';
-	packagesSuse='ecryptfs-utils encfs cryfs';
+	packagesArch='gocryptfs';
+	packagesDebian='gocryptfs';
+	packagesFedora='gocryptfs cryptsetup-reencrypt';
+	packagesSuse=''; #unavailable
 	handleOperation;
 category='Files - Sharing';
 	baseIncluded=true;
@@ -413,10 +398,17 @@ category='Internet';
 	handleOperation;
 category='Media - Consumption';
 	baseIncluded=true;
-	packagesArch='ffmpeg vlc lollypop youtube-dl foliate'; #TODO: codecs
+	packagesArch='ffmpeg vlc lollypop yt-dlp'; #TODO: codecs
 	packagesDebian='ffmpeg vlc lollypop youtube-dl'; #TODO: codecs
-	packagesFedora='@multimedia ffmpeg gstreamer1-plugin-openh264 vlc lollypop youtube-dl foliate';
-	packagesSuse='ffmpeg vlc lollypop youtube-dl foliate'; #TODO: codecs
+	packagesFedora='@multimedia ffmpeg gstreamer1-plugin-openh264 vlc lollypop yt-dlp';
+	packagesSuse='ffmpeg vlc lollypop yt-dlp'; #TODO: codecs
+	handleOperation;
+category='Media - Books';
+	baseIncluded=false;
+	packagesArch='foliate';
+	packagesDebian=''; #unavailable
+	packagesFedora='foliate';
+	packagesSuse='foliate';
 	handleOperation;
 category='Media - HTPC';
 	baseIncluded=false;
@@ -434,10 +426,10 @@ category='Media - Music Management';
 	handleOperation;
 category='Office';
 	baseIncluded=true;
-	packagesArch='libreoffice-fresh meld scribus gnucash dia aspell aspell-en hyphen hyphen-en libmythes mythes-en'; packagesAUR='cherrytree';
+	packagesArch='libreoffice-fresh meld scribus gnucash dia aspell aspell-en hyphen hyphen-en libmythes mythes-en';
 	packagesDebian='libreoffice meld scribus gnucash dia aspell aspell-en';
-	packagesFedora='libreoffice libreoffice-writer libreoffice-calc libreoffice-impress libreoffice-draw libreoffice-base meld scribus gnucash dia cherrytree aspell aspell-en';
-	packagesSuse='libreoffice meld scribus gnucash dia cherrytree aspell';
+	packagesFedora='libreoffice libreoffice-writer libreoffice-calc libreoffice-impress libreoffice-draw libreoffice-base meld scribus gnucash dia aspell aspell-en';
+	packagesSuse='libreoffice meld scribus gnucash dia aspell';
 	handleOperation;
 category='Passwords';
 	baseIncluded=true;
@@ -455,7 +447,7 @@ category='Privacy';
 	handleOperation;
 category='Reference';
 	baseIncluded=false;
-	packagesArch=''; packagesAUR='kiwix-desktop';
+	packagesArch='kiwix-desktop';
 	packagesDebian=''; #unavailable
 	packagesFedora='kiwix-desktop';
 	packagesSuse=''; #unavailable
@@ -467,30 +459,30 @@ category='Screencast';
 	packagesFedora='obs-studio';
 	packagesSuse=''; #unavailable
 	handleOperation;
-category='Security - Malware';
-	baseIncluded=true;
-	packagesArch='clamav clamtk rkhunter unhide';
-	packagesDebian='clamav clamtk chkrootkit unhide';
-	packagesFedora='clamav clamav-data-empty clamav-update clamtk chkrootkit unhide'; #rkhunter
+category='Security - Malware Scanner';
+	baseIncluded=false;
+	packagesArch='clamav clamtk';
+	packagesDebian='clamav clamtk';
+	packagesFedora='clamav clamav-data-empty clamav-update clamtk';
 	packagesSuse='clamav clamtk';
 	handleOperation;
 category='Security - System';
 	baseIncluded=true;
 	packagesArch='firewalld firejail apparmor linux-hardened';
 	packagesDebian='firewalld firewall-config firejail firejail-profiles apparmor apparmor-profiles apparmor-profiles-extra apparmor-utils';
-	packagesFedora='firewalld firewall-config firejail setroubleshoot';
+	packagesFedora='firewalld firewall-config firejail';
 	packagesSuse='firewalld firewall-config firejail apparmor-profiles';
 	handleOperation;
 category='Tor';
 	baseIncluded=true;
 	packagesArch='tor torsocks onionshare torbrowser-launcher';
-	packagesDebian='tor torsocks obfs4proxy onionshare'; #torbrowser-launcher (contrib)
-	packagesFedora='tor torsocks obfs4 onionshare torbrowser-launcher';
+	packagesDebian='tor torsocks onionshare'; #torbrowser-launcher (contrib)
+	packagesFedora='tor torsocks onionshare torbrowser-launcher';
 	packagesSuse='tor torsocks python3-onionshare torbrowser-launcher'; #torbrowser-apparmor-profile
 	handleOperation;
 category='Utility';
 	baseIncluded=true;
-	packagesArch='whois mtr stress iotop wavemon pv tree iperf3 bmon powertop ncdu intel-gpu-tools fwupd'; packagesAUR='radeontop';
+	packagesArch='whois mtr stress iotop wavemon pv tree iperf3 bmon powertop ncdu intel-gpu-tools radeontop fwupd';
 	packagesDebian='dconf-cli whois mtr stress iotop wavemon pv tree iperf3 bmon powertop ncdu vrms intel-gpu-tools radeontop fwupd';
 	packagesFedora='whois mtr stress iotop wavemon pv tree iperf3 bmon powertop ncdu vrms-rpm intel-gpu-tools radeontop fwupd';
 	packagesSuse='whois mtr stress-ng iotop wavemon pv tree iperf bmon powertop ncdu intel-gpu-tools radeontop';
