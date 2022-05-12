@@ -1,7 +1,7 @@
 /******
 *    name: arkenfox user.js
-*    date: 9 April 2022
-* version: 99
+*    date: 9 May 2022
+* version: 100
 *     url: https://github.com/arkenfox/user.js
 * license: MIT: https://github.com/arkenfox/user.js/blob/master/LICENSE.txt
 
@@ -744,6 +744,9 @@ pref("browser.download.useDownloadDir", false); //MULL-COMMENT_ME: breakage, see
 pref("browser.download.alwaysOpenPanel", false);
 /* 2653: disable adding downloads to the system's "recent documents" list ***/
 pref("browser.download.manager.addToRecentDocs", false);
+/* 2654: enable user interaction for security by always asking how to handle new mimetypes [FF101+]
+ * [SETTING] General>Files and Applications>What should Firefox do with other files ***/
+pref("browser.download.always_ask_before_handling_new_types", true);
 
 /** EXTENSIONS ***/
 /* 2660: lock down allowed extension directories
@@ -1177,13 +1180,6 @@ pref("_user.js.parrot", "7000 syntax error: the parrot's pushing up daisies!");
  * [WHY] Defaults are fine. They can be overridden by a site-controlled Referrer Policy ***/
    // pref("network.http.referer.defaultPolicy", 2); // [DEFAULT: 2]
    // pref("network.http.referer.defaultPolicy.pbmode", 2); // [DEFAULT: 2]
-/* 7009: disable HTTP2
- * [WHY] Passive fingerprinting. ~50% of sites use HTTP2 [1]
- * [1] https://w3techs.com/technologies/details/ce-http2/all/all ***/
-   // pref("network.http.spdy.enabled", false);
-   // pref("network.http.spdy.enabled.deps", false);
-   // pref("network.http.spdy.enabled.http2", false);
-   // pref("network.http.spdy.websockets", false); // [FF65+]
 /* 7010: disable HTTP Alternative Services [FF37+]
  * [WHY] Already isolated with network partitioning (FF85+) ***/
    // pref("network.http.altsvc.enabled", false);
@@ -1212,6 +1208,7 @@ pref("_user.js.parrot", "7000 syntax error: the parrot's pushing up daisies!");
  * [WHY] Arkenfox only supports strict (2701) which sets these at runtime ***/
 pref("network.cookie.cookieBehavior", 5); //BRACE-UNCOMMENTED: strict cannot be set on first launch, use custom + enterprise policy instead //MULL-MODIFY_ME: set to 1 for FPI
 pref("network.http.referer.disallowCrossSiteRelaxingDefault", true);
+pref("network.http.referer.disallowCrossSiteRelaxingDefault.top_navigation", true); // [FF100+]
 pref("privacy.partition.network_state.ocsp_cache", true);
 pref("privacy.trackingprotection.enabled", true);
 pref("privacy.trackingprotection.socialtracking.enabled", true);
@@ -1359,6 +1356,15 @@ pref("app.update.background.scheduling.enabled", false);
    // [1] https://developer.mozilla.org/docs/Web/HTTP/CSP
    // [-] https://bugzilla.mozilla.org/1754301
 pref("security.csp.enable", true); // [DEFAULT: true]
+// FF100
+// 7009: disable HTTP2 - replaced by network.http.http2* prefs
+   // [WHY] Passive fingerprinting. ~50% of sites use HTTP2 [1]
+   // [1] https://w3techs.com/technologies/details/ce-http2/all/all
+   // [-] https://bugzilla.mozilla.org/1752621
+   // pref("network.http.spdy.enabled", false);
+   // pref("network.http.spdy.enabled.deps", false);
+   // pref("network.http.spdy.enabled.http2", false);
+   // pref("network.http.spdy.websockets", false); // [FF65+]
 // ***/
 
 /* END: internal custom pref to test for syntax errors ***/
