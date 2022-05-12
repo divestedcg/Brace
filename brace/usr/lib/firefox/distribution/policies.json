@@ -31,10 +31,6 @@
 				"installation_mode": "force_installed",
 				"install_url": "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi"
 			},
-			"uMatrix@raymondhill.net": {
-				"installation_mode": "allowed",
-				"install_url": "https://addons.mozilla.org/firefox/downloads/latest/umatrix/latest.xpi"
-			},
 			"{73a6fe31-595d-460b-a920-fcc0f8843232}": {
 				"installation_mode": "allowed",
 				"install_url": "https://addons.mozilla.org/firefox/downloads/latest/noscript/latest.xpi"
@@ -42,14 +38,6 @@
 			"{9a41dee2-b924-4161-a971-7fb35c053a4a}": {
 				"installation_mode": "allowed",
 				"install_url": "https://addons.mozilla.org/firefox/downloads/latest/enhanced-h264ify/latest.xpi"
-			},
-			"addon@darkreader.org": {
-				"installation_mode": "allowed",
-				"install_url": "https://addons.mozilla.org/firefox/downloads/latest/darkreader/latest.xpi"
-			},
-			"chrome-gnome-shell@gnome.org": {
-				"installation_mode": "allowed",
-				"install_url": "https://addons.mozilla.org/firefox/downloads/latest/gnome-shell-integration/latest.xpi"
 			}
 		},
 		"FirefoxHome": {
