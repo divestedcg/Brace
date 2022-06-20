@@ -9,6 +9,7 @@
 	"DefaultFileSystemWriteGuardSetting": 2,
 	"DefaultImagesSetting": 1,
 	"DefaultInsecureContentSetting": 3,
+	"DefaultJavaScriptJitSetting": 2,
 	"DefaultJavaScriptSetting": 1,
 	"DefaultPluginsSetting": 3,
 	"DefaultNotificationsSetting": 3,
