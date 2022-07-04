@@ -12,7 +12,6 @@ pref("browser.newtabpage.activity-stream.asrouter.providers.snippets", "{}"); //
 pref("browser.library.activity-stream.enabled", false); //BRACE-UNCOMMENTED
 
 //Privacy
-pref("browser.link.open_newwindow_restriction", true);
 pref("browser.snippets.enabled", false);
 pref("browser.snippets.firstrunHomepage.enabled", false);
 pref("browser.snippets.syncPromo.enabled", false);

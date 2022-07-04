@@ -1,7 +1,7 @@
 /******
 *    name: arkenfox user.js
-*    date: 12 June 2022
-* version: 101
+*    date: 1 July 2022
+* version: 102
 *     url: https://github.com/arkenfox/user.js
 * license: MIT: https://github.com/arkenfox/user.js/blob/master/LICENSE.txt
 
@@ -85,7 +85,7 @@ pref("_user.js.parrot", "0100 syntax error: the parrot's dead!");
 pref("browser.shell.checkDefaultBrowser", false);
 /* 0102: set startup page [SETUP-CHROME]
  * 0=blank, 1=home, 2=last visited page, 3=resume previous session
- * [NOTE] Session Restore is cleared with history (2811, 2812), and not used in Private Browsing mode
+ * [NOTE] Session Restore is cleared with history (2811, 2820), and not used in Private Browsing mode
  * [SETTING] General>Startup>Restore previous session ***/
 pref("browser.startup.page", 0);
 /* 0103: set HOME+NEWWINDOW page
@@ -392,11 +392,6 @@ pref("layout.css.visited_links_enabled", false); //BRACE-UNCOMMENTED: nice to ha
    [1] https://support.mozilla.org/kb/use-primary-password-protect-stored-logins-and-pas
 ***/
 pref("_user.js.parrot", "0900 syntax error: the parrot's expired!");
-/* 0901: set when Firefox should prompt for the primary password
- * 0=once per session (default), 1=every time it's needed, 2=after n minutes (0902) ***/
-pref("security.ask_for_password", 2);
-/* 0902: set how long in minutes Firefox should remember the primary password (0901) ***/
-pref("security.password_lifetime", 5); // [DEFAULT: 30]
 /* 0903: disable auto-filling username & password form fields
  * can leak in cross-site forms *and* be spoofed
  * [NOTE] Username & password is still available when you enter the field
@@ -525,7 +520,7 @@ pref("security.mixed_content.block_display_content", true);
  * [SETTING] to add site exceptions: Padlock>HTTPS-Only mode>On (after "Continue to HTTP Site")
  * [SETTING] Privacy & Security>HTTPS-Only Mode (and manage exceptions)
  * [TEST] http://example.com [upgrade]
- * [TEST] http://neverssl.com/ [no upgrade] ***/
+ * [TEST] http://httpforever.com/ [no upgrade] ***/
 pref("dom.security.https_only_mode", true); // [FF76+]
    // pref("dom.security.https_only_mode_pbm", true); // [FF80+]
 /* 1245: enable HTTPS-Only mode for local resources [FF77+] ***/
@@ -761,7 +756,7 @@ pref("_user.js.parrot", "2700 syntax error: the parrot's joined the bleedin' cho
 pref("browser.contentblocking.category", "strict");
 /* 2702: disable ETP web compat features [FF93+]
  * [SETUP-HARDEN] Includes skip lists, heuristics (SmartBlock) and automatic grants
- * Opener Heuristics are granted for 30 days and Redirect Heuristics for 15 minutes, see [3]
+ * Opener and redirect heuristics are granted for 30 days, see [3]
  * [1] https://blog.mozilla.org/security/2021/07/13/smartblock-v2/
  * [2] https://hg.mozilla.org/mozilla-central/rev/e5483fd469ab#l4.12
  * [3] https://developer.mozilla.org/en-US/docs/Web/Privacy/State_Partitioning#storage_access_heuristics ***/
@@ -771,26 +766,17 @@ pref("privacy.partition.serviceWorkers", true);
 
 /*** [SECTION 2800]: SHUTDOWN & SANITIZING ***/
 pref("_user.js.parrot", "2800 syntax error: the parrot's bleedin' demised!");
-/** COOKIES + SITE DATA : ALLOWS EXCEPTIONS ***/
-/* 2801: delete cookies and site data on exit
- * 0=keep until they expire (default), 2=keep until you close Firefox
- * [NOTE] A "cookie" block permission also controls localStorage/sessionStorage, indexedDB,
- * sharedWorkers and serviceWorkers. serviceWorkers require an "Allow" permission
- * [SETTING] Privacy & Security>Cookies and Site Data>Delete cookies and site data when Firefox is closed
- * [SETTING] to add site exceptions: Ctrl+I>Permissions>Cookies>Allow
- * [SETTING] to manage site exceptions: Options>Privacy & Security>Permissions>Settings ***/
-   // pref("network.cookie.lifetimePolicy", 2); //BRACE-COMMENTED: usability, no thanks
-/* 2802: delete cache on exit [FF96+]
- * [NOTE] We already disable disk cache (1001) and clear on exit (2811) which is more robust
- * [1] https://bugzilla.mozilla.org/1671182 ***/
-   // pref("privacy.clearsitedata.cache.enabled", true);
-
-/** SANITIZE ON SHUTDOWN : ALL OR NOTHING ***/
+/** SANITIZE ON SHUTDOWN: ALLOWS COOKIES + SITE DATA EXCEPTIONS FF102+ ***/
 /* 2810: enable Firefox to clear items on shutdown (2811)
- * [SETTING] Privacy & Security>History>Custom Settings>Clear history when Firefox closes ***/
+ * [NOTE] Exceptions: A "cookie" block permission also controls "offlineApps" (see note in 2811).
+ * serviceWorkers require an "Allow" permission. For cross-domain logins, add exceptions for
+ * both sites e.g. https://www.youtube.com (site) + https://accounts.google.com (single sign on)
+ * [WARNING] Be selective with what cookies you keep, as they also disable partitioning (1767271)
+ * [SETTING] Privacy & Security>History>Custom Settings>Clear history when Firefox closes
+ * [SETTING] to add site exceptions: Ctrl+I>Permissions>Cookies>Allow (when on the website in question)
+ * [SETTING] to manage site exceptions: Options>Privacy & Security>Permissions>Settings ***/
 pref("privacy.sanitize.sanitizeOnShutdown", false); //BRACE-DISABLED: usability, this ain't Tor Browser
 /* 2811: set/enforce what items to clear on shutdown (if 2810 is true) [SETUP-CHROME]
- * These items do not use exceptions, it is all or nothing (1681701)
  * [NOTE] If "history" is true, downloads will also be cleared
  * [NOTE] "sessions": Active Logins: refers to HTTP Basic Authentication [1], not logins via cookies
  * [NOTE] "offlineApps": Offline Website Data: localStorage, service worker cache, QuotaManager (IndexedDB, asm-cache)
@@ -801,10 +787,16 @@ pref("privacy.clearOnShutdown.downloads", true); // [DEFAULT: true]
 pref("privacy.clearOnShutdown.formdata", true);  // [DEFAULT: true]
 pref("privacy.clearOnShutdown.history", true);   // [DEFAULT: true]
 pref("privacy.clearOnShutdown.sessions", true);  // [DEFAULT: true]
-pref("privacy.clearOnShutdown.offlineApps", false); // [DEFAULT: false]
-pref("privacy.clearOnShutdown.cookies", false);
+pref("privacy.clearOnShutdown.offlineApps", true);
+pref("privacy.clearOnShutdown.cookies", true);
    // pref("privacy.clearOnShutdown.siteSettings", false); // [DEFAULT: false]
-/* 2812: reset default items to clear with Ctrl-Shift-Del (to match 2811) [SETUP-CHROME]
+/* 2812: delete cache on exit [FF96+]
+ * [NOTE] We already disable disk cache (1001) and clear on exit (2811) which is more robust
+ * [1] https://bugzilla.mozilla.org/1671182 ***/
+   // pref("privacy.clearsitedata.cache.enabled", true);
+
+/** SANITIZE MANUAL: ALL OR NOTHING ***/
+/* 2820: reset default items to clear with Ctrl-Shift-Del [SETUP-CHROME]
  * This dialog can also be accessed from the menu History>Clear Recent History
  * Firefox remembers your last choices. This will reset them when you start Firefox
  * [NOTE] Regardless of what you set "downloads" to, as soon as the dialog
@@ -818,13 +810,13 @@ pref("privacy.cpd.cookies", false);
    // pref("privacy.cpd.downloads", true); // not used, see note above
    // pref("privacy.cpd.passwords", false); // [DEFAULT: false] not listed
    // pref("privacy.cpd.siteSettings", false); // [DEFAULT: false]
-/* 2813: clear Session Restore data when sanitizing on shutdown or manually [FF34+]
+/* 2821: clear Session Restore data when sanitizing on shutdown or manually [FF34+]
  * [NOTE] Not needed if Session Restore is not used (0102) or it is already cleared with history (2811)
  * [NOTE] privacy.clearOnShutdown.openWindows prevents resuming from crashes (also see 5008)
  * [NOTE] privacy.cpd.openWindows has a bug that causes an additional window to open ***/
    // pref("privacy.clearOnShutdown.openWindows", true);
    // pref("privacy.cpd.openWindows", true);
-/* 2814: reset default "Time range to clear" for "Clear Recent History" (2812)
+/* 2822: reset default "Time range to clear" for "Clear Recent History" (2820)
  * Firefox remembers your last choice. This will reset the value when you start Firefox
  * 0=everything, 1=last hour, 2=last two hours, 3=last four hours, 4=today
  * [NOTE] Values 5 (last 5 minutes) and 6 (last 24 hours) are not listed in the dropdown,
@@ -844,7 +836,6 @@ pref("privacy.sanitize.timeSpan", 0);
       FF53: fixes GetSupportedNames in nsMimeTypeArray and nsPluginArray (1324044)
    1330890 - spoof timezone as UTC0 (FF55)
    1360039 - spoof navigator.hardwareConcurrency as 2 (FF55)
-   1217238 - reduce precision of time exposed by javascript (FF55)
  FF56
    1369303 - spoof/disable performance API
    1333651 - spoof User Agent & Navigator API
@@ -886,6 +877,7 @@ pref("privacy.sanitize.timeSpan", 0);
  FF91+
     531915 - use fdlibm's sin, cos and tan in jsmath (FF93, ESR91.1)
    1756280 - enforce navigator.pdfViewerEnabled as true and plugins/mimeTypes as hard-coded values (FF100)
+   1692609 - reduce JS timing precision to 16.67ms (previously FF55+ was capped at 100ms) (FF102)
 ***/
 pref("_user.js.parrot", "4500 syntax error: the parrot's popped 'is clogs");
 /* 4501: enable privacy.resistFingerprinting [FF41+]
@@ -978,7 +970,7 @@ pref("_user.js.parrot", "5000 syntax error: the parrot's taken 'is last bow");
 /* 5005: disable intermediate certificate caching [FF41+] [RESTART]
  * [NOTE] This affects login/cert/key dbs. The effect is all credentials are session-only.
  * Saved logins and passwords are not available. Reset the pref and restart to return them ***/
-   // pref("security.nocertdb", true); // [HIDDEN PREF]
+   // pref("security.nocertdb", true); // [HIDDEN PREF in FF101 or lower]
 /* 5006: disable favicons in history and bookmarks
  * [NOTE] Stored as data blobs in favicons.sqlite, these don't reveal anything that your
  * actual history (and bookmarks) already do. Your history is more detailed, so
@@ -1071,8 +1063,6 @@ pref("network.http.referer.spoofSource", false); // [DEFAULT: false]
 /* 6004: enforce a security delay on some confirmation dialogs such as install, open/save
  * [1] https://www.squarefree.com/2004/07/01/race-conditions-in-security-dialogs/ ***/
 pref("security.dialog_enable_delay", 1000); // [DEFAULT: 1000]
-/* 6007: enforce Local Storage Next Generation (LSNG) [FF65+] ***/
-pref("dom.storage.next_gen", true); // [DEFAULT: true FF92+]
 /* 6008: enforce no First Party Isolation [FF51+]
  * [WARNING] Replaced with network partitioning (FF85+) and TCP (2701),
  * and enabling FPI disables those. FPI is no longer maintained ***/
@@ -1145,7 +1135,7 @@ pref("_user.js.parrot", "7000 syntax error: the parrot's pushing up daisies!");
 /* 7005: disable SSL session IDs [FF36+]
  * [WHY] Passive fingerprinting and perf costs. These are session-only
  * and isolated with network partitioning (FF85+) and/or containers ***/
-   // pref("security.ssl.disable_session_identifiers", true); // [HIDDEN PREF]
+   // pref("security.ssl.disable_session_identifiers", true); // [HIDDEN PREF in FF101 or lower]
 /* 7006: onions
  * [WHY] Firefox doesn't support hidden services. Use Tor Browser ***/
    // pref("dom.securecontext.allowlist_onions", true); // [FF97+] 1382359/1744006
@@ -1345,6 +1335,22 @@ pref("security.csp.enable", true); // [DEFAULT: true]
    // pref("network.http.spdy.enabled.deps", false);
    // pref("network.http.spdy.enabled.http2", false);
    // pref("network.http.spdy.websockets", false); // [FF65+]
+// FF102
+   // 0901: set when Firefox should prompt for the primary password
+   // 0=once per session (default), 1=every time it's needed, 2=after n minutes (0902)
+   // [-] https://bugzilla.mozilla.org/1767099
+pref("security.ask_for_password", 2);
+   // 0902: set how long in minutes Firefox should remember the primary password (0901)
+   // [-] https://bugzilla.mozilla.org/1767099
+pref("security.password_lifetime", 5); // [DEFAULT: 30]
+   // 2801: delete cookies and site data on exit - replaced by sanitizeOnShutdown* (2810)
+   // 0=keep until they expire (default), 2=keep until you close Firefox
+   // [SETTING] Privacy & Security>Cookies and Site Data>Delete cookies and site data when Firefox is closed
+   // [-] https://bugzilla.mozilla.org/buglist.cgi?bug_id=1681493,1681495,1681498,1759665
+   // pref("network.cookie.lifetimePolicy", 2); //BRACE-COMMENTED: usability, no thanks
+   // 6007: enforce Local Storage Next Generation (LSNG) [FF65+]
+   // [-] https://bugzilla.mozilla.org/1764696
+pref("dom.storage.next_gen", true); // [DEFAULT: true FF92+]
 // ***/
 
 /* END: internal custom pref to test for syntax errors ***/
