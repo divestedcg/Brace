@@ -1,6 +1,6 @@
 Name: brace
-Version: 20220704
-Release: 1
+Version: 20220720
+Release: 2
 Summary: Increases privacy/security through various configs.
 License: GPLv3+
 BuildArch: noarch
@@ -28,6 +28,7 @@ install -Dm644 %{_sourcedir}/brace/etc/dconf/db/local.d/00-brace-pantheon %{buil
 install -Dm644 %{_sourcedir}/brace/etc/dconf/profile/user-full %{buildroot}/etc/dconf/profile/user;
 install -Dm644 %{_sourcedir}/brace/etc/profile.d/brace-env-overrides.sh %{buildroot}/etc/profile.d/brace-env-overrides.sh;
 install -Dm644 %{_sourcedir}/brace/etc/profile.d/brace-helpers.sh %{buildroot}/etc/profile.d/brace-helpers.sh;
+install -Dm644 %{_sourcedir}/brace/etc/tlp.d/00-brace.conf %{buildroot}/etc/tlp.d/00-brace.conf;
 mkdir -p %{buildroot}/usr/lib64/firefox/browser/defaults/preferences;
 install -Dm644 %{_sourcedir}/brace/usr/lib/firefox/browser/defaults/preferences/userjs-*.js %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/;
 install -Dm644 %{_sourcedir}/brace/usr/lib/firefox/distribution/policies.json %{buildroot}/usr/lib64/firefox/distribution/policies.json;
@@ -75,6 +76,7 @@ install -Dm644 %{_sourcedir}/README.md %{buildroot}/usr/share/doc/brace/README.m
 /etc/dconf/profile/user
 /etc/profile.d/brace-env-overrides.sh
 /etc/profile.d/brace-helpers.sh
+/etc/tlp.d/00-brace.conf
 /usr/lib64/firefox/browser/defaults/preferences/userjs-*.js
 /usr/lib64/firefox/distribution/policies.json
 /usr/lib64/thunderbird/defaults/pref/userjs-*.js

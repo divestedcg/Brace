@@ -20,6 +20,7 @@ if [ "$(/usr/bin/id -u)" -eq "0" ]; then
 			case $ys in
 				Yes )
 					firewall-cmd --set-default-zone=drop;
+					#firewall-cmd --add-protocol=icmp --permanent;
 					firewall-cmd --add-protocol=ipv6-icmp --permanent;
 					firewall-cmd --add-service=dhcpv6-client --permanent;
 					break;;
@@ -37,15 +38,14 @@ if [ "$(/usr/bin/id -u)" -eq "0" ]; then
 			case $ys in
 				Yes )
 					grubby --update-kernel=ALL --args="lockdown=confidentiality pti=on vsyscall=none slab_nomerge page_alloc.shuffle=1 init_on_alloc=1 init_on_free=1 mce=0 randomize_kstack_offset=1";
-					#grubby --update-kernel=ALL --args="slub_debug=FZ"; #has extreme peformace impact, limited benefit, and causes unhashed addresses to be shown on newer kernels
-					grubby --update-kernel=ALL --args="iommu=force iommu.passthrough=0 iommu.strict=1 intel_iommu=on,strict amd_iommu=fullflush";
-					#grubby --update-kernel=ALL --args="efi=disable_early_pci_dma"; #often breaks boot
+					#grubby --update-kernel=ALL --args="slub_debug=FZ"; #has extreme performance impact, limited benefit, and causes unhashed memory addresses to be shown on newer kernels
+					grubby --update-kernel=ALL --args="iommu=force iommu.passthrough=0 iommu.strict=1 intel_iommu=on,strict amd_iommu=fullflush"; #last two args are deprecated
+					#grubby --update-kernel=ALL --args="efi=disable_early_pci_dma"; #breaks boot on some systems
 					#spectre_v2 default only protects kernel, not user space processes
 					#spec_store_bypass_disable default only protects seccomp enabled processes
 					grubby --update-kernel=ALL --args="spectre_v2=on spec_store_bypass_disable=on tsx=off";
-					#grubby --update-kernel=ALL --args="mitigations=auto,nosmt";
 					grubby --update-kernel=ALL --args="module.sig_enforce=1"; #for kernels without lockdown
-					grubby --update-kernel=ALL --args="fsck.mode=force";
+					grubby --update-kernel=ALL --args="fsck.mode=force"; #nice to have, especially with xfs, systemd default is once per 30 boots
 					#grubby --update-kernel=ALL --args="debugfs=off";
 					#grubby --update-kernel=ALL --args="oops=panic";
 					if [ "$(/usr/bin/uname -m)" = "aarch64" ]; then grubby --update-kernel=ALL --args="kpti=on ssbd=force-on"; fi;

@@ -173,6 +173,16 @@ user::rw-
 group::r--
 other::r--
 
+# file: brace/etc/tlp.d
+user::rwx
+group::r-x
+other::r-x
+
+# file: brace/etc/tlp.d/00-brace.conf
+user::rw-
+group::r--
+other::r--
+
 # file: brace.install
 user::rw-
 group::r-x
