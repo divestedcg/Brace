@@ -8,9 +8,9 @@ Brace is a toolkit compatible with multiple existing Linux distributions that al
 Compatibility
 -------------
 - Arch Linux
-- CentOS 7/8/Stream
+- CentOS 7/Stream
 - Debian 10
-- Fedora 35 (preferred)
+- Fedora 36 (preferred)
 - openSUSE 15.3/Tumbleweed
 
 License
@@ -32,6 +32,7 @@ Contents
 - /etc/dconf/profile/user					= Fixup dconf overrides on select distros
 - /etc/profile.d/brace-env-overrides.sh				= profile: sets some environment overrides (eg. umask)
 - /etc/profile.d/brace-helpers.sh				= profile: adds helper aliases (eg. cleaning functions)
+- /etc/tlp.d/00-brace.conf					= TLP: allow for better power savings on AC too
 - /usr/lib64/firefox/browser/defaults/preferences/userjs-*.js	= Firefox: change default settings
 	- /usr/lib64/firefox/distribution/policies.json
 	- /usr/lib64/thunderbird/defaults/pref/userjs-*.js
