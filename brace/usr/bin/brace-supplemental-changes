@@ -1,11 +1,23 @@
 #!/bin/bash
-#Copyright (c) 2017-2020 Divested Computing Group
-#License: GPLv3
+#Copyright (c) 2017-2022 Divested Computing Group
+#
+#This program is free software: you can redistribute it and/or modify
+#it under the terms of the GNU General Public License as published by
+#the Free Software Foundation, either version 3 of the License, or
+#(at your option) any later version.
+#
+#This program is distributed in the hope that it will be useful,
+#but WITHOUT ANY WARRANTY; without even the implied warranty of
+#MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#GNU General Public License for more details.
+#
+#You should have received a copy of the GNU General Public License
+#along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 if [ "$(/usr/bin/id -u)" -eq "0" ]; then
 	if [ -f "/usr/lib/systemd/system/zram-swap.service" ]; then
 		echo "Enabling zram-swap";
-		systemctl enable zram-swap.service --now;
+		systemctl enable zram-swap.service --now; #XXX: replaced by systemd-zram-generator
 	fi;
 
 	if [ -f "/usr/lib/systemd/system/fstrim.timer" ]; then
@@ -37,19 +49,40 @@ if [ "$(/usr/bin/id -u)" -eq "0" ]; then
 		select ys in "Yes" "Skip"; do
 			case $ys in
 				Yes )
-					grubby --update-kernel=ALL --args="lockdown=confidentiality pti=on vsyscall=none slab_nomerge page_alloc.shuffle=1 init_on_alloc=1 init_on_free=1 mce=0 randomize_kstack_offset=1";
-					#grubby --update-kernel=ALL --args="slub_debug=FZ"; #has extreme performance impact, limited benefit, and causes unhashed memory addresses to be shown on newer kernels
-					grubby --update-kernel=ALL --args="iommu=force iommu.passthrough=0 iommu.strict=1 intel_iommu=on,strict amd_iommu=fullflush"; #last two args are deprecated
-					#grubby --update-kernel=ALL --args="efi=disable_early_pci_dma"; #breaks boot on some systems
-					#spectre_v2 default only protects kernel, not user space processes
-					#spec_store_bypass_disable default only protects seccomp enabled processes
-					grubby --update-kernel=ALL --args="spectre_v2=on spec_store_bypass_disable=on tsx=off";
-					grubby --update-kernel=ALL --args="module.sig_enforce=1"; #for kernels without lockdown
-					grubby --update-kernel=ALL --args="fsck.mode=force"; #nice to have, especially with xfs, systemd default is once per 30 boots
-					#grubby --update-kernel=ALL --args="debugfs=off";
-					#grubby --update-kernel=ALL --args="oops=panic";
-					if [ "$(/usr/bin/uname -m)" = "aarch64" ]; then grubby --update-kernel=ALL --args="kpti=on ssbd=force-on"; fi;
-					#grubby --update-kernel=ALL --args="amdgpu.tmz=1"; #Encrypted GPU memory (Linux 5.8/Mesa 20.2)
+					#Keep this in sync with grub defaults
+
+					#Memory Hardening
+					#grubby --update-kernel=ALL --args="efi=disable_early_pci_dma"; #Prevents DMA during early bringup #XXX: can break boot
+					grubby --update-kernel=ALL --args="init_on_alloc=1"; #Zero pages on allocation
+					grubby --update-kernel=ALL --args="init_on_free=1"; #Zero pages on free
+					grubby --update-kernel=ALL --args="page_alloc.shuffle=1"; #Randomize free lists
+					grubby --update-kernel=ALL --args="pti=on kpti=on"; #Enable page table isolation
+					grubby --update-kernel=ALL --args="randomize_kstack_offset=1"; #Randomize kernel stacks
+					grubby --update-kernel=ALL --args="slab_nomerge"; #Don't merge same-size slabs
+					#grubby --update-kernel=ALL --args="slub_debug=FZ"; #Enables SLUB sanity checks and red-zoning, #XXX: extreme performance impact and enables unhashed memory addresses
+
+					#IOMMU Enablement
+					grubby --update-kernel=ALL --args="intel_iommu=on,strict amd_iommu=fullflush"; #Ensure the IOMMU driver is enabled
+					grubby --update-kernel=ALL --args="iommu=force"; #???
+					grubby --update-kernel=ALL --args="iommu.passthrough=0"; #Always use the IOMMU for DMA
+					grubby --update-kernel=ALL --args="iommu.strict=1"; #Do not defer invalidation of hardware TLBs
+
+					#CPU Flaw Mitigations
+					grubby --update-kernel=ALL --args="spec_store_bypass_disable=on ssbd=force-on"; #Enables SSB mitigations, including all userspace processes
+					grubby --update-kernel=ALL --args="spectre_v2=on"; #Enable spectre_v2 mitigations, including all userspace processes
+					grubby --update-kernel=ALL --args="tsx=off"; #Disable TSX
+
+					#Misc Hardening
+					#grubby --update-kernel=ALL --args="debugfs=off"; #Disable debugfs entirely #XXX: may be of use
+					grubby --update-kernel=ALL --args="lockdown=confidentiality"; #Restrict userspace access to certain kernel features/attributes
+					grubby --update-kernel=ALL --args="mce=0"; #Panic on uncorrectable errors #XXX: deprecated
+					grubby --update-kernel=ALL --args="module.sig_enforce=1"; #Block modules with invalid signatures #XXX: superceded by lockdown
+					#grubby --update-kernel=ALL --args="oops=panic"; #Panic system on oops #XXX: can turn minor issues into annoyances
+					grubby --update-kernel=ALL --args="vsyscall=none"; #Disable unnecessary legacy functionality
+
+					#Nice to haves
+					grubby --update-kernel=ALL --args="fsck.mode=force"; #FSCK mounts every boot, systemd default is once per 30 boots
+					grubby --update-kernel=ALL --args="i8042.reset=1"; #Workaround buggy laptop keyboard/touchpads
 					break;;
 				Skip )
 					break;;
