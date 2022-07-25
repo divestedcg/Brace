@@ -62,7 +62,7 @@ if [ "$(/usr/bin/id -u)" -eq "0" ]; then
 					#grubby --update-kernel=ALL --args="slub_debug=FZ"; #Enables SLUB sanity checks and red-zoning, #XXX: extreme performance impact and enables unhashed memory addresses
 
 					#IOMMU Enablement
-					grubby --update-kernel=ALL --args="intel_iommu=on,strict amd_iommu=fullflush"; #Ensure the IOMMU driver is enabled
+					grubby --update-kernel=ALL --args="intel_iommu=on,strict amd_iommu=fullflush"; #Ensure the IOMMU driver is enabled #XXX strict and fullflush are replaced by iommu.strict
 					grubby --update-kernel=ALL --args="iommu=force"; #???
 					grubby --update-kernel=ALL --args="iommu.passthrough=0"; #Always use the IOMMU for DMA
 					grubby --update-kernel=ALL --args="iommu.strict=1"; #Do not defer invalidation of hardware TLBs
@@ -75,7 +75,7 @@ if [ "$(/usr/bin/id -u)" -eq "0" ]; then
 					#Misc Hardening
 					#grubby --update-kernel=ALL --args="debugfs=off"; #Disable debugfs entirely #XXX: may be of use
 					grubby --update-kernel=ALL --args="lockdown=confidentiality"; #Restrict userspace access to certain kernel features/attributes
-					grubby --update-kernel=ALL --args="mce=0"; #Panic on uncorrectable errors #XXX: deprecated
+					grubby --update-kernel=ALL --args="mce=0"; #Panic on uncorrectable errors #XXX: deprecated in 5.18
 					grubby --update-kernel=ALL --args="module.sig_enforce=1"; #Block modules with invalid signatures #XXX: superceded by lockdown
 					#grubby --update-kernel=ALL --args="oops=panic"; #Panic system on oops #XXX: can turn minor issues into annoyances
 					grubby --update-kernel=ALL --args="vsyscall=none"; #Disable unnecessary legacy functionality
