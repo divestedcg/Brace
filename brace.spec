@@ -1,6 +1,6 @@
 Name: brace
 Version: 20220725
-Release: 1
+Release: 2
 Summary: Increases privacy/security through various configs.
 License: GPLv3+
 BuildArch: noarch
@@ -58,6 +58,7 @@ install -Dm644 %{_sourcedir}/brace/usr/lib/systemd/user/restic-backup@.service %
 install -Dm644 %{_sourcedir}/brace/usr/lib/systemd/user/restic-backup@.timer %{buildroot}/usr/lib/systemd/user/restic-backup@.timer;
 install -Dm644 %{_sourcedir}/brace/usr/lib/tmpfiles.d/99-brace-proc.conf %{buildroot}/usr/lib/tmpfiles.d/99-brace-proc.conf;
 install -Dm644 %{_sourcedir}/brace/usr/lib/tmpfiles.d/99-brace-sys.conf %{buildroot}/usr/lib/tmpfiles.d/99-brace-sys.conf;
+install -Dm644 %{_sourcedir}/brace/usr/lib/udev/rules.d/50-usb-realtek-net-exceprt.rules %{buildroot}/usr/lib/udev/rules.d/50-usb-realtek-net-exceprt.rules;
 install -Dm755 %{_sourcedir}/brace/usr/bin/brace-supplemental-changes %{buildroot}/usr/bin/brace-supplemental-changes;
 install -Dm755 %{_sourcedir}/brace/usr/sbin/brace-fedora-enable-auto-updates %{buildroot}/usr/sbin/brace-enable-auto-updates;
 install -Dm755 %{_sourcedir}/brace/usr/sbin/brace-fedora-enable-rpmfusion %{buildroot}/usr/sbin/brace-enable-rpmfusion;
@@ -104,6 +105,7 @@ install -Dm644 %{_sourcedir}/README.md %{buildroot}/usr/share/doc/brace/README.m
 /usr/lib/systemd/user/restic-backup@.timer
 /usr/lib/tmpfiles.d/99-brace-proc.conf
 /usr/lib/tmpfiles.d/99-brace-sys.conf
+/usr/lib/udev/rules.d/50-usb-realtek-net-exceprt.rules
 /usr/bin/brace-supplemental-changes
 /usr/sbin/brace-enable-auto-updates
 /usr/sbin/brace-enable-rpmfusion

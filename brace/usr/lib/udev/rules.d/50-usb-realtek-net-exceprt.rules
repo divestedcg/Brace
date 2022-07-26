@@ -1,0 +1,10 @@
+# Excerpt from (GPL-2.0-only): r8152-2.16.1.tar.bz2
+
+ACTION!="add", GOTO="usb_realtek_net_excerpt_end"
+SUBSYSTEM!="usb", GOTO="usb_realtek_net_excerpt_end"
+ENV{DEVTYPE}!="usb_device", GOTO="usb_realtek_net_excerpt_end"
+
+# Switch into vendor mode
+ATTR{idVendor}=="0bda", ATTR{idProduct}=="815[2,3,5,6]", ATTR{bConfigurationValue}!="1", ATTR{bConfigurationValue}="1"
+
+LABEL="usb_realtek_net_excerpt_end"

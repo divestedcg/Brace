@@ -543,6 +543,21 @@ user::rw-
 group::r--
 other::r--
 
+# file: brace/usr/lib/udev
+user::rwx
+group::r-x
+other::r-x
+
+# file: brace/usr/lib/udev/rules.d
+user::rwx
+group::r-x
+other::r-x
+
+# file: brace/usr/lib/udev/rules.d/50-usb-realtek-net-exceprt.rules
+user::rw-
+group::r--
+other::r--
+
 # file: brace/usr/sbin
 user::rwx
 group::r-x

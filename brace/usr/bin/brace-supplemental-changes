@@ -62,10 +62,10 @@ if [ "$(/usr/bin/id -u)" -eq "0" ]; then
 					#grubby --update-kernel=ALL --args="slub_debug=FZ"; #Enables SLUB sanity checks and red-zoning, #XXX: extreme performance impact and enables unhashed memory addresses
 
 					#IOMMU Enablement
-					grubby --update-kernel=ALL --args="intel_iommu=on,strict amd_iommu=fullflush"; #Ensure the IOMMU driver is enabled #XXX strict and fullflush are replaced by iommu.strict
 					grubby --update-kernel=ALL --args="iommu=force"; #???
 					grubby --update-kernel=ALL --args="iommu.passthrough=0"; #Always use the IOMMU for DMA
 					grubby --update-kernel=ALL --args="iommu.strict=1"; #Do not defer invalidation of hardware TLBs
+					grubby --update-kernel=ALL --args="intel_iommu=on,strict amd_iommu=fullflush"; #Ensure the IOMMU driver is enabled #XXX strict and fullflush are replaced by iommu.strict
 
 					#CPU Flaw Mitigations
 					grubby --update-kernel=ALL --args="spec_store_bypass_disable=on ssbd=force-on"; #Enables SSB mitigations, including all userspace processes
@@ -126,27 +126,23 @@ if [ "$(/usr/bin/id -u)" -eq "0" ]; then
 
 	#Services
 	#if [ -x /usr/bin/systemctl ]; then
-	#	echo "Do you want to disable many unnecessary services?";
+	#	echo "Do you want to disable many unnecessary services? (NOT recommended)";
 	#	select ys in "Yes" "Skip"; do
 	#		case $ys in
 	#			Yes )
-	#				systemctl disable abrtd.service --now; #ABRT
-	#				systemctl disable abrt-journal-core.service --now;
-	#				systemctl disable abrt-oops.service --now;
-	#				systemctl disable abrt-vmcore.service --now;
-	#				systemctl disable abrt-xorg.service --now;
-	#				systemctl disable atd.service --now; #AT
-	#				systemctl disable avahi-daemon.service --now; #Avahi
-	#				systemctl disable avahi-daemon.socket --now;
-	#				systemctl disable iscsid.socket --now; #iSCSI
-	#				systemctl disable iscsi.service --now;
-	#				systemctl disable iscsiuio.socket --now;
-	#				systemctl disable livesys-late.service --now; #Anaconda leftovers
-	#				systemctl disable livesys.service --now;
-	#				systemctl disable multipathd.service --now; #Multipath
-	#				systemctl disable multipathd.socket --now;
-	#				#systemctl disable vboxservice.service --now; #VirtualBox
-	#				#systemctl disable vmtoolsd.service --now; #VMWare
+	#				systemctl disable gssproxy.service --now; #Auth
+	#				systemctl disable pcscd.service pcscd.socket --now;
+	#				systemctl disable abrtd.service abrt-journal-core.service abrt-oops.service abrt-pstoreoops.service abrt-vmcore.service abrt-xorg.service --now; #ABRT
+	#				systemctl disable atd.service --now; #At/Batch
+	#				systemctl disable mcelog.service --now; #mcelog
+	#				systemctl disable avahi-daemon.service avahi-daemon.socket --now; #Avahi
+	#				systemctl disable ModemManager.service --now; #ModemManager
+	#				systemctl disable iscsid.service iscsid.socket iscsi-init.service iscsi.service iscsiuio.service iscsiuio.socket --now; #iSCSI
+	#				systemctl disable livesys.service livesys-late.service --now; #Anaconda leftovers
+	#				systemctl disable multipathd.service multipathd.socket --now; #Multipath
+	#				systemctl disable smartd.service --now; #smartd
+	#				systemctl disable vboxservice.service --now; #VirtualBox
+	#				systemctl disable vmtoolsd.service --now; #VMWare
 	#				break;;
 	#			Skip )
 	#				break;;
