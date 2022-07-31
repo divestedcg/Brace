@@ -17,6 +17,13 @@ License
 -------
 GPL-3.0 where applicable
 
+Prebuilts
+---------
+- Fedora via Divested-RPM: https://divested.dev/index.php?page=software#divested-release
+- Fedora via CI: https://gitlab.com/divested/brace/-/jobs/artifacts/master/browse?job=build_rpm
+- Arch via CI: https://gitlab.com/divested/brace/-/jobs/artifacts/master/browse?job=build_arch
+- Debian via CI: https://gitlab.com/divested/brace/-/jobs/artifacts/master/browse?job=build_deb
+
 Building
 --------
 - git clone [THIS REPO]
