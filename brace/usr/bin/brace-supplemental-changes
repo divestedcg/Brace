@@ -255,6 +255,7 @@ else
 	select yn in "Yes" "No"; do
 		case $yn in
 			Yes )
+				gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark';
 				gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark';
 				gsettings set org.cinnamon.theme name 'Mint-Y-Dark';
 				gsettings set org.cinnamon.desktop.interface gtk-theme 'Mint-Y-Dark';
@@ -263,12 +264,45 @@ else
 				gsettings set org.mate.marco.general theme 'BlackMATE';
 				break;;
 			No )
+				gsettings set org.gnome.desktop.interface color-scheme 'default';
 				gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita';
 				gsettings set org.cinnamon.theme name 'Mint-Y';
 				gsettings set org.cinnamon.desktop.interface gtk-theme 'Mint-Y';
 				gsettings set org.cinnamon.desktop.wm.preferences theme 'Mint-Y';
 				gsettings set org.mate.desktop.interface gtk-theme 'BlueMenta';
 				gsettings set org.mate.marco.general theme 'BlueMenta';
+				break;;
+		esac
+	done
+
+	#Wallpaper
+	echo "Would you like a solid color wallpaper?";
+	select bgyrns in "Black" "Green" "Yellow" "Red" "No" "Skip"; do
+		case $bgyrns in
+			Black )
+				gsettings set org.gnome.desktop.background primary-color '#000000';
+				gsettings set org.cinnamon.desktop.background primary-color '#000000';
+				gsettings set org.gnome.desktop.background picture-options 'none';
+				break;;
+			Green )
+				gsettings set org.gnome.desktop.background primary-color '#1B5E20';
+				gsettings set org.cinnamon.desktop.background primary-color '#1B5E20';
+				gsettings set org.gnome.desktop.background picture-options 'none';
+				break;;
+			Yellow )
+				gsettings set org.gnome.desktop.background primary-color '#FCBD02';
+				gsettings set org.cinnamon.desktop.background primary-color '#FCBD02';
+				gsettings set org.gnome.desktop.background picture-options 'none';
+				break;;
+			Red )
+				gsettings set org.gnome.desktop.background primary-color '#880505';
+				gsettings set org.cinnamon.desktop.background primary-color '#880505';
+				gsettings set org.gnome.desktop.background picture-options 'none';
+				break;;
+			No )
+				gsettings set org.gnome.desktop.background picture-options 'zoom';
+				break;;
+			Skip )
 				break;;
 		esac
 	done
