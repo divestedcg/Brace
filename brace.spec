@@ -1,5 +1,5 @@
 Name: brace
-Version: 20220818
+Version: 20220924
 Release: 1
 Summary: Increases privacy/security through various configs.
 License: GPLv3+
