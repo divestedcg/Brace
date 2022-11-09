@@ -224,11 +224,11 @@ category='Frameworks';
 	handleOperation;
 category='GNOME Extras';
 	baseIncluded=false;
-	packagesArch='nautilus-terminal gnome-tweak-tool seahorse';
-	packagesDebian='nautilus-extension-gnome-terminal gnome-tweak-tool seahorse';
-	packagesFedora='gnome-terminal-nautilus gnome-tweak-tool seahorse';
+	packagesArch='nautilus-terminal gnome-tweak-tool seahorse file-roller';
+	packagesDebian='nautilus-extension-gnome-terminal gnome-tweak-tool seahorse file-roller';
+	packagesFedora='gnome-terminal-nautilus gnome-tweak-tool seahorse file-roller';
 	packagesFlathub='org.gnome.seahorse.Application';
-	packagesSuse='nautilus-terminal gnome-tweaks seahorse';
+	packagesSuse='nautilus-terminal gnome-tweaks seahorse file-roller';
 	handleOperation;
 category='OpenCL';
 	baseIncluded=false;
@@ -241,7 +241,7 @@ category='VA-API';
 	baseIncluded=true;
 	packagesArch='libva-mesa-driver libva-intel-driver intel-media-driver gstreamer-vaapi';
 	packagesDebian='mesa-va-drivers vainfo i965-va-driver intel-media-va-driver gstreamer1.0-vaapi';
-	packagesFedora='mesa-dri-drivers libva libva-utils libva-intel-driver libva-intel-hybrid-driver'; #gstreamer1-vaapi (https://bugzilla.redhat.com/show_bug.cgi?id=2129000)
+	packagesFedora='mesa-dri-drivers mesa-va-drivers libva libva-utils libva-intel-driver libva-intel-hybrid-driver'; #gstreamer1-vaapi (https://bugzilla.redhat.com/show_bug.cgi?id=2129000)
 	packagesSuse=''; #TODO
 	handleOperation;
 category='VDPAU';
