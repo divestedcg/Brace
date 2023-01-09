@@ -29,7 +29,7 @@ pref("network.manage-offline-status", false);
 //Security
 pref("browser.gnome-search-provider.enabled", false);
 pref("fission.autostart", true); //MULL-COMMENT_ME
-pref("security.webauth.u2f", true);
+pref("security.webauth.u2f", true); //MULL-COMMENT_ME
 pref("mail.phishing.detection.enabled", true);
 pref("mailnews.message_display.disable_remote_image", true);
 

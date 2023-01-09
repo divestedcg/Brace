@@ -4,6 +4,9 @@ packages:
 	gnome-photos/shotwell -> gthumb
 	xournalpp
 	remove gnome-software/packagekit?
+	f37 hardware decode rpmfusion
+		dnf swap mesa-va-drivers mesa-va-drivers-freeworld --allowerasing
+		dnf swap mesa-vdpau-drivers mesa-vdpau-drivers-freeworld --allowerasing
 
 bugs:
 	fix profile.d files on Debian

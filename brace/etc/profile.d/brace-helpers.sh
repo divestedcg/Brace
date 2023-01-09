@@ -27,6 +27,7 @@ clearUserMisc() {
 	rm -fv ~/.lesshst;
 
 	rm -fv ~/.android/adbkey*;
+	rm -rfv ~/.cache/libvirt/qemu/log;
 	rm -rfv ~/.cache/thumbnails;
 	rm -fv ~/.clamtk/history/*.log;
 	rm -fv ~/.config/inkscape/extension-errors.log;
