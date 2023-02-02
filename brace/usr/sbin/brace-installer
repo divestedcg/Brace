@@ -203,7 +203,7 @@ done;
 #
 category='Recommended for Removal';
 	baseIncluded=false;
-	packagesArch='gnome-documents gnome-weather gnome-music gnome-software packagekit';
+	packagesArch='gnome-documents gnome-weather gnome-music gnome-software packagekit epiphany';
 	packagesDebian='gnome-documents gnome-weather gnome-music gnome-games rhythmbox gnome-software packagekit';
 	packagesFedora='abiword adapta-gtk-theme akregator amarok asunder calligra* clipit clipman compiz emerald empathy exaile falkon filezilla geany gnomebaker gnome-documents gnome-weather gnote gnumeric hexchat juk k3b kget kmahjongg kmines konqueror konversation kpatience ktnef ktorrent lxmusic midori osmo paper-icon-theme pidgin *powerline pragha qlipper quassel qupzilla rhythmbox xawtv xfburn xfdashboard xpad yarock gnome-software PackageKit dnfdragora*';
 	packagesSuse='gnome-documents gnome-weather gnome-music brasero iagno lightsoff gnome-mahjongg pidgin polari tigervnc swell-foop xterm';
@@ -224,7 +224,7 @@ category='Frameworks';
 	handleOperation;
 category='GNOME Extras';
 	baseIncluded=false;
-	packagesArch='nautilus-terminal gnome-tweak-tool file-roller gedit';
+	packagesArch='gnome-tweak-tool file-roller gedit';
 	packagesDebian='nautilus-extension-gnome-terminal gnome-tweak-tool file-roller gedit';
 	packagesFedora='gnome-terminal-nautilus gnome-tweak-tool file-roller gedit';
 	packagesSuse='nautilus-terminal gnome-tweaks file-roller gedit';
