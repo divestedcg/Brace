@@ -1,7 +1,7 @@
 /******
 *    name: arkenfox user.js
-*    date: 9 January 2023
-* version: 108
+*    date: 7 February 2023
+* version: 109
 *     url: https://github.com/arkenfox/user.js
 * license: MIT: https://github.com/arkenfox/user.js/blob/master/LICENSE.txt
 
@@ -474,8 +474,7 @@ pref("security.OCSP.require", true);
 pref("security.family_safety.mode", 0);
 /* 1223: enable strict PKP (Public Key Pinning)
  * 0=disabled, 1=allow user MiTM (default; such as your antivirus), 2=strict
- * [SETUP-WEB] MOZILLA_PKIX_ERROR_KEY_PINNING_FAILURE
- * your web browsing by inspecting ALL your web traffic, then override to current default ***/
+ * [SETUP-WEB] MOZILLA_PKIX_ERROR_KEY_PINNING_FAILURE ***/
 pref("security.cert_pinning.enforcement_level", 2);
 /* 1224: enable CRLite [FF73+]
  * 0 = disabled
@@ -598,8 +597,6 @@ pref("browser.eme.ui.enabled", false); //BRACE-UNCOMMENTED: proprietary
 pref("_user.js.parrot", "2400 syntax error: the parrot's kicked the bucket!");
 /* 2402: prevent scripts from moving and resizing open windows ***/
 pref("dom.disable_window_move_resize", true);
-/* 2404: limit events that can cause a pop-up [SETUP-WEB] ***/
-pref("dom.popup_allowed_events", "click dblclick mousedown pointerdown");
 
 /*** [SECTION 2600]: MISCELLANEOUS ***/
 pref("_user.js.parrot", "2600 syntax error: the parrot's run down the curtain!");
@@ -609,8 +606,6 @@ pref("accessibility.force_disabled", 1); //MULL-COMMENT_ME
 /* 2603: remove temp files opened with an external application
  * [1] https://bugzilla.mozilla.org/302433 ***/
 pref("browser.helperApps.deleteTempFileOnExit", true);
-/* 2604: disable page thumbnail collection ***/
-pref("browser.pagethumbnails.capturing_disabled", true); // [HIDDEN PREF]
 /* 2606: disable UITour backend so there is no chance that a remote page can use it ***/
 pref("browser.uitour.enabled", false);
    // pref("browser.uitour.url", ""); // Defense-in-depth
@@ -856,10 +851,6 @@ pref("privacy.resistFingerprinting.letterboxing", true); // [HIDDEN PREF]
    // pref("privacy.resistFingerprinting.testGranularityMask", 0);
 /* 4506: set RFP's font visibility level (1402) [FF94+] ***/
    // pref("layout.css.font-visibility.resistFingerprinting", 1); // [DEFAULT: 1]
-/* 4507: disable showing about:blank as soon as possible during startup [FF60+]
- * When default true this no longer masks the RFP chrome resizing activity
- * [1] https://bugzilla.mozilla.org/1448423 ***/
-pref("browser.startup.blankWindow", false);
 /* 4510: disable using system colors
  * [SETTING] General>Language and Appearance>Fonts and Colors>Colors>Use system colors ***/
 pref("browser.display.use_system_colors", false); // [DEFAULT: false NON-WINDOWS]
@@ -966,6 +957,10 @@ pref("browser.download.forbid_open_with", true); //BRACE-UNCOMMENTED: brace-inst
    // pref("extensions.formautofill.addresses.enabled", false); // [FF55+]
    // pref("extensions.formautofill.creditCards.enabled", false); // [FF56+]
    // pref("extensions.formautofill.heuristics.enabled", false); // [FF55+]
+/* 5017: limit events that can cause a pop-up ***/
+   // pref("dom.popup_allowed_events", "click dblclick mousedown pointerdown");
+/* 5018: disable page thumbnail collection ***/
+   // pref("browser.pagethumbnails.capturing_disabled", true); // [HIDDEN PREF]
 
 /*** [SECTION 5500]: OPTIONAL HARDENING
    Not recommended. Overriding these can cause breakage and performance issues,
@@ -994,7 +989,7 @@ pref("javascript.options.asmjs", false); //BRACE-UNCOMMENTED: attack surface red
  * [2] https://microsoftedge.github.io/edgevr/posts/Super-Duper-Secure-Mode/ ***/
    // pref("javascript.options.ion", false);
    // pref("javascript.options.baselinejit", false);
-   // pref("javascript.options.jit_trustedprincipals", true);
+   // pref("javascript.options.jit_trustedprincipals", true); // [FF75+] [HIDDEN PREF]
 /* 5506: disable WebAssembly [FF52+]
  * Vulnerabilities [1] have increasingly been found, including those known and fixed
  * in native programs years ago [2]. WASM has powerful low-level access, making
@@ -1036,6 +1031,7 @@ pref("security.tls.version.enable-deprecated", false); // [DEFAULT: false]
 pref("extensions.webcompat-reporter.enabled", false); // [DEFAULT: false]
 /* 6050: prefsCleaner: reset previously active items removed from arkenfox FF102+ ***/
    // pref("beacon.enabled", "");
+   // pref("browser.startup.blankWindow", "");
    // pref("browser.newtab.preload", "");
    // pref("browser.newtabpage.activity-stream.feeds.discoverystreamfeed", "");
    // pref("browser.newtabpage.activity-stream.feeds.snippets", "");
@@ -1189,8 +1185,8 @@ pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons", false);
 pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features", false);
 /* 9003: disable What's New toolbar icon [FF69+] ***/
 pref("browser.messaging-system.whatsNewPanel.enabled", false);
-/* 9004: disable seach terms [FF110+]
- * [SETTING] Search > SearchBar > Use the address bar for search and navigation > Show search terms instead of URL... ***/
+/* 9004: disable search terms [FF110+]
+ * [SETTING] Search>Search Bar>Use the address bar for search and navigation>Show search terms instead of URL... ***/
 pref("browser.urlbar.showSearchTerms.enabled", false);
 
 /*** [SECTION 9999]: DEPRECATED / REMOVED / LEGACY / RENAMED
