@@ -986,7 +986,7 @@ pref("gfx.font_rendering.graphite.enabled", false); //BRACE-UNCOMMENTED: attack 
  * [1] http://asmjs.org/
  * [2] https://cve.mitre.org/cgi-bin/cvekey.cgi?keyword=asm.js
  * [3] https://rh0dev.github.io/blog/2017/the-return-of-the-jit/ ***/
-   // pref("javascript.options.asmjs", false);
+pref("javascript.options.asmjs", false); //BRACE-UNCOMMENTED: attack surface reduction
 /* 5505: disable Ion and baseline JIT to harden against JS exploits
  * [NOTE] When both Ion and JIT are disabled, and trustedprincipals
  * is enabled, then Ion can still be used by extensions (1599226)
@@ -1003,7 +1003,7 @@ pref("gfx.font_rendering.graphite.enabled", false); //BRACE-UNCOMMENTED: attack 
  * [1] https://cve.mitre.org/cgi-bin/cvekey.cgi?keyword=wasm
  * [2] https://spectrum.ieee.org/tech-talk/telecom/security/more-worries-over-the-security-of-web-assembly
  * [3] https://www.zdnet.com/article/half-of-the-websites-using-webassembly-use-it-for-malicious-purposes ***/
-   // pref("javascript.options.wasm", false);
+pref("javascript.options.wasm", false); //BRACE-UNCOMMENTED: attack surface reduction
 /* 5507: disable rendering of SVG OpenType fonts ***/
    // pref("gfx.font_rendering.opentype_svg.enabled", false);
 
