@@ -333,6 +333,16 @@ user::rwx
 group::r-x
 other::r-x
 
+# file: brace/usr/lib/systemd/resolved.conf.d
+user::rwx
+group::r-x
+other::r-x
+
+# file: brace/usr/lib/systemd/resolved.conf.d/brace.conf
+user::rw-
+group::r--
+other::r--
+
 # file: brace/usr/lib/systemd/system
 user::rwx
 group::r-x
