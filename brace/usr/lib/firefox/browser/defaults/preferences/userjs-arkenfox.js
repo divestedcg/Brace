@@ -946,9 +946,9 @@ pref("javascript.options.asmjs", false); //BRACE-UNCOMMENTED: attack surface red
  * is enabled, then Ion can still be used by extensions (1599226)
  * [1] https://cve.mitre.org/cgi-bin/cvekey.cgi?keyword=firefox+jit
  * [2] https://microsoftedge.github.io/edgevr/posts/Super-Duper-Secure-Mode/ ***/
-   // pref("javascript.options.ion", false);
-   // pref("javascript.options.baselinejit", false);
-   // pref("javascript.options.jit_trustedprincipals", true); // [FF75+] [HIDDEN PREF]
+pref("javascript.options.ion", false); //BRACE-UNCOMMENTED: attack surface reduction //MULL-COMMENT_ME
+pref("javascript.options.baselinejit", false); //BRACE-UNCOMMENTED: attack surface reduction //MULL-COMMENT_ME
+pref("javascript.options.jit_trustedprincipals", true); // [FF75+] [HIDDEN PREF]//BRACE-UNCOMMENTED: attack surface reduction //MULL-COMMENT_ME
 /* 5506: disable WebAssembly [FF52+]
  * Vulnerabilities [1] have increasingly been found, including those known and fixed
  * in native programs years ago [2]. WASM has powerful low-level access, making
@@ -959,7 +959,7 @@ pref("javascript.options.asmjs", false); //BRACE-UNCOMMENTED: attack surface red
  * [3] https://www.zdnet.com/article/half-of-the-websites-using-webassembly-use-it-for-malicious-purposes ***/
 pref("javascript.options.wasm", false); //BRACE-UNCOMMENTED: attack surface reduction
 /* 5507: disable rendering of SVG OpenType fonts ***/
-   // pref("gfx.font_rendering.opentype_svg.enabled", false);
+pref("gfx.font_rendering.opentype_svg.enabled", false); //BRACE-UNCOMMENTED: attack surface reduction
 /* 5508: disable all DRM content (EME: Encryption Media Extension)
  * Optionally hide the UI setting which also disables the DRM prompt
  * [SETTING] General>DRM Content>Play DRM-controlled content
