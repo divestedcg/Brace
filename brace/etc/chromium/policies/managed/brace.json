@@ -101,7 +101,6 @@
 	"AllowScreenLock": true,
 	"AudioCaptureAllowed": true,
 	"AudioOutputAllowed": true,
-	"AudioSandboxEnabled": true,
 	"AutofillAddressEnabled": false,
 	"AutofillCreditCardEnabled": false,
 	"AutoplayAllowed": false,

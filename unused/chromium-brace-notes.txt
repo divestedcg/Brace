@@ -18,3 +18,4 @@ AmbientAuthenticationInPrivateModesEnabled
 
 Breaks things:
 DefaultMediaStreamSetting:3
+AudioSandboxEnabled:true
