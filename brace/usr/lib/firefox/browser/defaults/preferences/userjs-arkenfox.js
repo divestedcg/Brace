@@ -1,7 +1,7 @@
 /******
 *    name: arkenfox user.js
-*    date: 7 February 2023
-* version: 109
+*    date: 12 March 2023
+* version: 110
 *     url: https://github.com/arkenfox/user.js
 * license: MIT: https://github.com/arkenfox/user.js/blob/master/LICENSE.txt
 
@@ -560,13 +560,6 @@ pref("privacy.userContext.ui.enabled", true);
 
 /*** [SECTION 2000]: PLUGINS / MEDIA / WEBRTC ***/
 pref("_user.js.parrot", "2000 syntax error: the parrot's snuffed it!");
-/* 2001: disable WebRTC (Web Real-Time Communication)
- * Firefox desktop uses mDNS hostname obfuscation and the private IP is never exposed until
- * required in TRUSTED scenarios; i.e. after you grant device (microphone or camera) access
- * [TEST] https://browserleaks.com/webrtc
- * [1] https://groups.google.com/g/discuss-webrtc/c/6stQXi72BEU/m/2FwZd24UAQAJ
- * [2] https://datatracker.ietf.org/doc/html/draft-ietf-mmusic-mdns-ice-candidates#section-3.1.1 ***/
-   // pref("media.peerconnection.enabled", false); //MULL-UNCOMMENT_ME: Fenix doesn't protect local IP addreses like desktop does
 /* 2002: force WebRTC inside the proxy [FF70+] ***/
 pref("media.peerconnection.ice.proxy_only_if_behind_proxy", true);
 /* 2003: force a single network interface for ICE candidates generation [FF42+]
@@ -957,9 +950,9 @@ pref("browser.download.forbid_open_with", true); //BRACE-UNCOMMENTED: brace-inst
    // pref("extensions.formautofill.addresses.enabled", false); // [FF55+]
    // pref("extensions.formautofill.creditCards.enabled", false); // [FF56+]
    // pref("extensions.formautofill.heuristics.enabled", false); // [FF55+]
-/* 5017: limit events that can cause a pop-up ***/
+/* 5018: limit events that can cause a pop-up ***/
    // pref("dom.popup_allowed_events", "click dblclick mousedown pointerdown");
-/* 5018: disable page thumbnail collection ***/
+/* 5019: disable page thumbnail collection ***/
    // pref("browser.pagethumbnails.capturing_disabled", true); // [HIDDEN PREF]
 
 /*** [SECTION 5500]: OPTIONAL HARDENING
@@ -1146,6 +1139,13 @@ pref("privacy.trackingprotection.fingerprinting.enabled", true); // [DEFAULT: tr
  * [NOTE] To remove all subscriptions, reset "dom.push.userAgentID"
  * [1] https://support.mozilla.org/kb/push-notifications-firefox ***/
 pref("dom.push.enabled", false); //BRACE-UNCOMMENTED: unwanted, also broken on Mull due to proprietary GMS dependency
+/* 7020: disable WebRTC (Web Real-Time Communication)
+ * [WHY] Firefox desktop uses mDNS hostname obfuscation and the private IP is never exposed until
+ * required in TRUSTED scenarios; i.e. after you grant device (microphone or camera) access
+ * [TEST] https://browserleaks.com/webrtc
+ * [1] https://groups.google.com/g/discuss-webrtc/c/6stQXi72BEU/m/2FwZd24UAQAJ
+ * [2] https://datatracker.ietf.org/doc/html/draft-ietf-mmusic-mdns-ice-candidates#section-3.1.1 ***/
+   // pref("media.peerconnection.enabled", false); //MULL-UNCOMMENT_ME: Fenix doesn't protect local IP addreses like desktop does
 
 /*** [SECTION 8000]: DON'T BOTHER: FINGERPRINTING
    [WHY] They are insufficient to help anti-fingerprinting and do more harm than good
