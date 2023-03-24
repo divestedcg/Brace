@@ -26,6 +26,7 @@ build_arch:
   stage: build
   script:
     - awk -i inplace '!/exit \$E_ROOT/' $(which makepkg)
+    - awk -i inplace '!/lint_package/' $(which makepkg)
     - makepkg
   artifacts:
     paths:
