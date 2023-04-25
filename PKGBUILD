@@ -1,6 +1,6 @@
 # Maintainer: Tad <tad@spotco.us>
 pkgname=brace
-pkgver=20230404
+pkgver=20230424
 pkgrel=1
 pkgdesc="Increases privacy/security through various configs."
 arch=('any')
@@ -41,7 +41,6 @@ package() {
 	install -Dm644 brace/usr/lib/systemd/system/irqbalance.service.d/99-brace.conf "$pkgdir"/usr/lib/systemd/system/irqbalance.service.d/99-brace.conf;
 	install -Dm644 brace/usr/lib/systemd/system/minetest@.service.d/99-brace.conf "$pkgdir"/usr/lib/systemd/system/minetest@.service.d/99-brace.conf;
 	install -Dm644 brace/usr/lib/systemd/system/ModemManager.service.d/99-brace.conf "$pkgdir"/usr/lib/systemd/system/ModemManager.service.d/99-brace.conf;
-	install -Dm644 brace/usr/lib/systemd/system/murmur.service.d/90-quickstart.conf "$pkgdir"/usr/lib/systemd/system/murmur.service.d/90-quickstart.conf;
 	install -Dm644 brace/usr/lib/systemd/system/murmur.service.d/99-brace.conf "$pkgdir"/usr/lib/systemd/system/murmur.service.d/99-brace.conf;
 	install -Dm644 brace/usr/lib/systemd/system/NetworkManager.service.d/99-brace.conf "$pkgdir"/usr/lib/systemd/system/NetworkManager.service.d/99-brace.conf;
 	install -Dm644 brace/usr/lib/systemd/system/php-fpm.service.d/99-brace.conf "$pkgdir"/usr/lib/systemd/system/php-fpm.service.d/99-brace.conf;

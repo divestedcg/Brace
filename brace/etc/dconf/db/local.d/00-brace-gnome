@@ -86,6 +86,10 @@ statusbar=false
 sidebar=false
 image-gallery=false
 
+[org/gnome/eog/view]
+extrapolate=false
+interpolate=false
+
 [org/gnome/evince]
 override-restrictions=true
 

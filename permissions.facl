@@ -428,11 +428,6 @@ user::rwx
 group::r-x
 other::r-x
 
-# file: brace/usr/lib/systemd/system/murmur.service.d/90-quickstart.conf
-user::rw-
-group::r--
-other::r--
-
 # file: brace/usr/lib/systemd/system/murmur.service.d/99-brace.conf
 user::rw-
 group::r--

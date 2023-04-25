@@ -1,5 +1,5 @@
 Name: brace
-Version: 20230404
+Version: 20230424
 Release: 1
 Summary: Increases privacy/security through various configs.
 License: GPLv3+
@@ -47,7 +47,6 @@ install -Dm644 %{_sourcedir}/brace/usr/lib/systemd/system/httpd.service.d/99-bra
 install -Dm644 %{_sourcedir}/brace/usr/lib/systemd/system/irqbalance.service.d/99-brace.conf %{buildroot}/usr/lib/systemd/system/irqbalance.service.d/99-brace.conf;
 install -Dm644 %{_sourcedir}/brace/usr/lib/systemd/system/minetest@.service.d/99-brace.conf %{buildroot}/usr/lib/systemd/system/minetest@.service.d/99-brace.conf;
 install -Dm644 %{_sourcedir}/brace/usr/lib/systemd/system/ModemManager.service.d/99-brace.conf %{buildroot}/usr/lib/systemd/system/ModemManager.service.d/99-brace.conf;
-install -Dm644 %{_sourcedir}/brace/usr/lib/systemd/system/murmur.service.d/90-quickstart.conf %{buildroot}/usr/lib/systemd/system/murmur.service.d/90-quickstart.conf;
 install -Dm644 %{_sourcedir}/brace/usr/lib/systemd/system/murmur.service.d/99-brace.conf %{buildroot}/usr/lib/systemd/system/murmur.service.d/99-brace.conf;
 install -Dm644 %{_sourcedir}/brace/usr/lib/systemd/system/NetworkManager.service.d/99-brace.conf %{buildroot}/usr/lib/systemd/system/NetworkManager.service.d/99-brace.conf;
 install -Dm644 %{_sourcedir}/brace/usr/lib/systemd/system/php-fpm.service.d/99-brace.conf %{buildroot}/usr/lib/systemd/system/php-fpm.service.d/99-brace.conf;
@@ -95,7 +94,6 @@ install -Dm644 %{_sourcedir}/README.md %{buildroot}/usr/share/doc/brace/README.m
 /usr/lib/systemd/system/irqbalance.service.d/99-brace.conf
 /usr/lib/systemd/system/minetest@.service.d/99-brace.conf
 /usr/lib/systemd/system/ModemManager.service.d/99-brace.conf
-/usr/lib/systemd/system/murmur.service.d/90-quickstart.conf
 /usr/lib/systemd/system/murmur.service.d/99-brace.conf
 /usr/lib/systemd/system/NetworkManager.service.d/99-brace.conf
 /usr/lib/systemd/system/php-fpm.service.d/99-brace.conf
