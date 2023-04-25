@@ -1,6 +1,6 @@
 # Maintainer: Tad <tad@spotco.us>
 pkgname=brace
-pkgver=20230424
+pkgver=20230425
 pkgrel=1
 pkgdesc="Increases privacy/security through various configs."
 arch=('any')
@@ -13,6 +13,7 @@ build() {
 }
 
 package() {
+	install -Dm644 brace/etc/chrony.brace.conf "$pkgdir"/etc/chrony.brace.conf;
 	install -Dm644 brace/etc/dconf/db/local.d/00-brace-cinnamon "$pkgdir"/etc/dconf/db/local.d/00-brace-cinnamon;
 	install -Dm644 brace/etc/dconf/db/local.d/00-brace-extra "$pkgdir"/etc/dconf/db/local.d/00-brace-extra;
 	install -Dm644 brace/etc/dconf/db/local.d/00-brace-gnome "$pkgdir"/etc/dconf/db/local.d/00-brace-gnome;
@@ -36,6 +37,7 @@ package() {
 	install -Dm644 brace/usr/lib/NetworkManager/conf.d/30-nm-privacy.conf "$pkgdir"/usr/lib/NetworkManager/conf.d/30-nm-privacy.conf;
 	install -Dm644 brace/usr/lib/sysctl.d/60-restrict.conf "$pkgdir"/usr/lib/sysctl.d/60-restrict.conf;
 	install -Dm644 brace/usr/lib/systemd/resolved.conf.d/brace.conf "$pkgdir"/usr/lib/systemd/resolved.conf.d/brace.conf;
+	install -Dm644 brace/usr/lib/systemd/system/chronyd.service.d/99-brace.conf "$pkgdir"/usr/lib/systemd/system/chronyd.service.d/99-brace.conf;
 	install -Dm644 brace/usr/lib/systemd/system/ejabberd.service.d/99-brace.conf "$pkgdir"/usr/lib/systemd/system/ejabberd.service.d/99-brace.conf;
 	install -Dm644 brace/usr/lib/systemd/system/httpd.service.d/99-brace.conf "$pkgdir"/usr/lib/systemd/system/httpd.service.d/99-brace.conf;
 	install -Dm644 brace/usr/lib/systemd/system/irqbalance.service.d/99-brace.conf "$pkgdir"/usr/lib/systemd/system/irqbalance.service.d/99-brace.conf;

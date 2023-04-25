@@ -1,5 +1,5 @@
 Name: brace
-Version: 20230424
+Version: 20230425
 Release: 1
 Summary: Increases privacy/security through various configs.
 License: GPLv3+
@@ -20,6 +20,7 @@ echo "Please pepper your /etc/fstab with discard,noatime,nodev,nosuid,noexec";
 if [ -f /usr/bin/dconf ]; then dconf update; fi;
 
 %install
+install -Dm644 %{_sourcedir}/brace/etc/chrony.brace.conf %{buildroot}/etc/chrony.brace.conf;
 install -Dm644 %{_sourcedir}/brace/etc/dconf/db/local.d/00-brace-cinnamon %{buildroot}/etc/dconf/db/local.d/00-brace-cinnamon;
 install -Dm644 %{_sourcedir}/brace/etc/dconf/db/local.d/00-brace-extra %{buildroot}/etc/dconf/db/local.d/00-brace-extra;
 install -Dm644 %{_sourcedir}/brace/etc/dconf/db/local.d/00-brace-gnome %{buildroot}/etc/dconf/db/local.d/00-brace-gnome;
@@ -42,6 +43,7 @@ install -Dm644 %{_sourcedir}/brace/usr/lib/modprobe.d/wireless-perf.conf %{build
 install -Dm644 %{_sourcedir}/brace/usr/lib/NetworkManager/conf.d/30-nm-privacy.conf %{buildroot}/usr/lib/NetworkManager/conf.d/30-nm-privacy.conf;
 install -Dm644 %{_sourcedir}/brace/usr/lib/sysctl.d/60-restrict.conf %{buildroot}/usr/lib/sysctl.d/60-restrict.conf;
 install -Dm644 %{_sourcedir}/brace/usr/lib/systemd/resolved.conf.d/brace.conf %{buildroot}/usr/lib/systemd/resolved.conf.d/brace.conf;
+install -Dm644 %{_sourcedir}/brace/usr/lib/systemd/system/chronyd.service.d/99-brace.conf %{buildroot}/usr/lib/systemd/system/chronyd.service.d/99-brace.conf;
 install -Dm644 %{_sourcedir}/brace/usr/lib/systemd/system/ejabberd.service.d/99-brace.conf %{buildroot}/usr/lib/systemd/system/ejabberd.service.d/99-brace.conf;
 install -Dm644 %{_sourcedir}/brace/usr/lib/systemd/system/httpd.service.d/99-brace.conf %{buildroot}/usr/lib/systemd/system/httpd.service.d/99-brace.conf;
 install -Dm644 %{_sourcedir}/brace/usr/lib/systemd/system/irqbalance.service.d/99-brace.conf %{buildroot}/usr/lib/systemd/system/irqbalance.service.d/99-brace.conf;
@@ -69,6 +71,7 @@ mkdir -p %{buildroot}/usr/share/doc/brace;
 install -Dm644 %{_sourcedir}/README.md %{buildroot}/usr/share/doc/brace/README.md;
 
 %files
+/etc/chrony.brace.conf
 /etc/dconf/db/local.d/00-brace-cinnamon
 /etc/dconf/db/local.d/00-brace-extra
 /etc/dconf/db/local.d/00-brace-gnome
@@ -89,6 +92,7 @@ install -Dm644 %{_sourcedir}/README.md %{buildroot}/usr/share/doc/brace/README.m
 /usr/lib/NetworkManager/conf.d/30-nm-privacy.conf
 /usr/lib/sysctl.d/60-restrict.conf
 /usr/lib/systemd/resolved.conf.d/brace.conf
+/usr/lib/systemd/system/chronyd.service.d/99-brace.conf
 /usr/lib/systemd/system/ejabberd.service.d/99-brace.conf
 /usr/lib/systemd/system/httpd.service.d/99-brace.conf
 /usr/lib/systemd/system/irqbalance.service.d/99-brace.conf

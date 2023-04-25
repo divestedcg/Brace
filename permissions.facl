@@ -68,6 +68,11 @@ user::rw-
 group::r--
 other::r--
 
+# file: brace/etc/chrony.brace.conf
+user::rw-
+group::r--
+other::r--
+
 # file: brace/etc/dconf
 user::rwx
 group::r-x
@@ -359,6 +364,16 @@ group::r--
 other::r--
 
 # file: brace/usr/lib/systemd/system/biboumi.service.d/99-brace.conf
+user::rw-
+group::r--
+other::r--
+
+# file: brace/usr/lib/systemd/system/chronyd.service.d
+user::rwx
+group::r-x
+other::r-x
+
+# file: brace/usr/lib/systemd/system/chronyd.service.d/99-brace.conf
 user::rw-
 group::r--
 other::r--
