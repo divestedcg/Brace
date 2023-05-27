@@ -1,6 +1,7 @@
 //Look
 pref("browser.ctrlTab.recentlyUsedOrder", false);
 pref("browser.privatebrowsing.vpnpromourl", "");
+pref("browser.vpn_promo.enabled", false);
 pref("browser.tabs.drawInTitlebar", true);
 pref("devtools.netmonitor.persistlog", true);
 pref("devtools.webconsole.persistlog", true);

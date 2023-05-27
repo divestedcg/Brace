@@ -1,5 +1,5 @@
 Name: brace
-Version: 20230519
+Version: 20230526
 Release: 1
 Summary: Increases privacy/security through various configs.
 License: GPLv3+
@@ -14,7 +14,11 @@ Please see the included README
 
 %post
 if [ -f /usr/bin/dconf ]; then dconf update; fi;
-echo "Please pepper your /etc/fstab with discard,noatime,nodev,nosuid,noexec";
+echo "Please pepper your /etc/fstab like so:";
+echo "- / can have discard,noatime";
+echo "- /boot can have discard,noatime,nodev,nosuid,noexec";
+echo "- /boot/efi can have discard,noatime,nodev,nosuid,noexec";
+echo "- /home can have discard,noatime,nodev,nosuid";
 
 %postun
 if [ -f /usr/bin/dconf ]; then dconf update; fi;

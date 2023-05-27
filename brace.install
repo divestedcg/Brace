@@ -1,6 +1,10 @@
 post_install() {
   if [ -f /usr/bin/dconf ]; then dconf update; fi;
-  echo "Please pepper your /etc/fstab with discard,noatime,nodev,nosuid,noexec";
+  echo "Please pepper your /etc/fstab like so:";
+  echo "- / can have discard,noatime";
+  echo "- /boot can have discard,noatime,nodev,nosuid,noexec";
+  echo "- /boot/efi can have discard,noatime,nodev,nosuid,noexec";
+  echo "- /home can have discard,noatime,nodev,nosuid";
 }
 
 post_remove() {
