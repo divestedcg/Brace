@@ -26,6 +26,9 @@ pref("extensions.enigmail.autoWkdLookup", 0);
 pref("messenger.status.reportIdle", false);
 pref("media.gmp-widevinecdm.visible", false); //BRACE-KEEP_FOR_NOW: proprietary
 pref("network.manage-offline-status", false);
+pref("browser.urlbar.suggest.quicksuggest.nonsponsored", false);
+pref("browser.urlbar.suggest.quicksuggest.sponsored", false);
+pref("browser.urlbar.quicksuggest.dataCollection.enabled", false);
 
 //Security
 pref("browser.gnome-search-provider.enabled", false);
