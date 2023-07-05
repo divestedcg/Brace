@@ -238,7 +238,7 @@ category='OpenCL';
 	handleOperation;
 category='VA-API';
 	baseIncluded=true;
-	packagesArch='libva-mesa-driver libva-intel-driver intel-media-driver gstreamer-vaapi';
+	packagesArch='libva-mesa-driver libva-utils libva-intel-driver intel-media-driver gstreamer-vaapi';
 	packagesDebian='mesa-va-drivers vainfo i965-va-driver intel-media-va-driver gstreamer1.0-vaapi';
 	packagesFedora='mesa-dri-drivers mesa-va-drivers libva libva-utils libva-intel-driver libva-intel-hybrid-driver'; #gstreamer1-vaapi (https://bugzilla.redhat.com/show_bug.cgi?id=2129000)
 	packagesSuse=''; #TODO

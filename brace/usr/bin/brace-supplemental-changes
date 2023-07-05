@@ -125,30 +125,30 @@ if [ "$(/usr/bin/id -u)" -eq "0" ]; then
 	fi;
 
 	#Services
-	#if [ -x /usr/bin/systemctl ]; then
-	#	echo "Do you want to disable many unnecessary services? (NOT recommended)";
-	#	select ys in "Yes" "Skip"; do
-	#		case $ys in
-	#			Yes )
-	#				systemctl disable gssproxy.service --now; #Auth
-	#				systemctl disable pcscd.service pcscd.socket --now;
-	#				systemctl disable abrtd.service abrt-journal-core.service abrt-oops.service abrt-pstoreoops.service abrt-vmcore.service abrt-xorg.service --now; #ABRT
-	#				systemctl disable atd.service --now; #At/Batch
-	#				systemctl disable mcelog.service --now; #mcelog
-	#				systemctl disable avahi-daemon.service avahi-daemon.socket --now; #Avahi
-	#				systemctl disable ModemManager.service --now; #ModemManager
-	#				systemctl disable iscsid.service iscsid.socket iscsi-init.service iscsi.service iscsiuio.service iscsiuio.socket --now; #iSCSI
-	#				systemctl disable livesys.service livesys-late.service --now; #Anaconda leftovers
-	#				systemctl disable multipathd.service multipathd.socket --now; #Multipath
-	#				systemctl disable smartd.service --now; #smartd
-	#				systemctl disable vboxservice.service --now; #VirtualBox
-	#				systemctl disable vmtoolsd.service --now; #VMWare
-	#				break;;
-	#			Skip )
-	#				break;;
-	#		esac
-	#	done
-	#fi;
+	if [ -x /usr/bin/systemctl ]; then
+		echo "Do you want to disable many unnecessary services? (helps on low perf systems)";
+		select ys in "Yes" "Skip"; do
+			case $ys in
+				Yes )
+					systemctl disable gssproxy.service --now; #Auth
+					systemctl disable pcscd.service pcscd.socket --now;
+					systemctl disable abrtd.service abrt-journal-core.service abrt-oops.service abrt-pstoreoops.service abrt-vmcore.service abrt-xorg.service --now; #ABRT
+					systemctl disable atd.service --now; #At/Batch
+					systemctl disable mcelog.service --now; #mcelog
+					systemctl disable avahi-daemon.service avahi-daemon.socket --now; #Avahi
+					systemctl disable ModemManager.service --now; #ModemManager
+					systemctl disable iscsid.service iscsid.socket iscsi-init.service iscsi.service iscsiuio.service iscsiuio.socket --now; #iSCSI
+					systemctl disable livesys.service livesys-late.service --now; #Anaconda leftovers
+					systemctl disable multipathd.service multipathd.socket --now; #Multipath
+					systemctl disable smartd.service --now; #smartd
+					systemctl disable vboxservice.service --now; #VirtualBox
+					systemctl disable vmtoolsd.service --now; #VMWare
+					break;;
+				Skip )
+					break;;
+			esac
+		done
+	fi;
 else
 	#Looks
 	if [ -d "/usr/share/fonts/adobe-source-code-pro" ]; then
@@ -225,7 +225,7 @@ else
 	done
 
 	#Search
-	echo "Do you want search enabled? (disable on low performance systems)";
+	echo "Do you want search enabled? (disable on low perf systems)";
 	select yn in "Yes" "No"; do
 		case $yn in
 			Yes )
@@ -236,7 +236,7 @@ else
 				break;;
 		esac
 	done
-	echo "Do you want Tracker enabled?";
+	echo "Do you want Tracker enabled? (disable on low perf systems)";
 	select yn in "Yes" "No"; do
 		case $yn in
 			Yes )
