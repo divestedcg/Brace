@@ -65,6 +65,7 @@ Known Issues
 ------------
 - A reboot is required on openSUSE after install for dconf changes to take effect.
 - Compatibility is best with Fedora, and that is the primary test-bed.
+- Restrictions on /sys/bus/scsi in 99-brace-sys.conf can break disc drive access by some programs.
 
 Credits
 -------
