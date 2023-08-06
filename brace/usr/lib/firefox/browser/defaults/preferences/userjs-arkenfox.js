@@ -1127,6 +1127,7 @@ pref("privacy.trackingprotection.enabled", true);
 pref("privacy.trackingprotection.socialtracking.enabled", true);
 pref("privacy.trackingprotection.cryptomining.enabled", true); // [DEFAULT: true]
 pref("privacy.trackingprotection.fingerprinting.enabled", true); // [DEFAULT: true]
+pref("privacy.trackingprotection.emailtracking.enabled", true); //BRACE-ADDED
 /* 7017: disable service workers
  * [WHY] Already isolated with TCP (2701) behind a pref (2710) ***/
    // pref("dom.serviceWorkers.enabled", false);

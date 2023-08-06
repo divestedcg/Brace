@@ -13,7 +13,8 @@
 			"Value": true,
 			"Locked": false,
 			"Cryptomining": true,
-			"Fingerprinting": true
+			"Fingerprinting": true,
+			"EmailTracking": true
 		},
 		"Extensions": {
 			"Install": [
