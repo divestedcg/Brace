@@ -28,14 +28,6 @@
 	"DeviceAutoUpdateP2PEnabled": false,
 	"DeviceUpdateHttpDownloadsEnabled": false,
 	"RebootAfterUpdate": true,
-	"ExtensionInstallBlocklist": [ "*" ],
-	"ExtensionInstallAllowlist": [
-					"cjpalhdlnbpafiamejdnhcphjbkeiagm",
-					"pgdnlhfefecpicbbihgmbmffkjpaplco",
-					"gcbommkclmclpchllfjekcdonpmejbdp",
-					"omkfmpieigblcllmkgbflkikinpkodlk",
-					"jlhmfgmfgeifomenelglieieghnjghma"
-					],
 	"ExtensionInstallForcelist": [
 					"cjpalhdlnbpafiamejdnhcphjbkeiagm;https://clients2.google.com/service/update2/crx",
 					"gcbommkclmclpchllfjekcdonpmejbdp;https://clients2.google.com/service/update2/crx"
