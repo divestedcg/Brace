@@ -242,11 +242,13 @@ else
 			Yes )
 				gsettings set org.freedesktop.Tracker3.Miner.Files enable-monitors true;
 				gsettings set org.freedesktop.Tracker3.Miner.Files crawling-interval -1;
+				systemctl unmask --user --now tracker-miner-fs-3.service || true;
 				break;;
 			No )
 				gsettings set org.freedesktop.Tracker3.Miner.Files enable-monitors false;
 				gsettings set org.freedesktop.Tracker3.Miner.Files crawling-interval -2;
-				echo "Make sure you remove the database too: tracker3 reset -s";
+				systemctl mask --user --now tracker-miner-fs-3.service || true;
+				tracker3 reset -s || true;
 				break;;
 		esac
 	done

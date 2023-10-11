@@ -145,6 +145,7 @@ default-folder-viewer='icon-view'
 always-use-location-entry=true
 show-delete-permanently=true
 show-create-link=true
+fts-enabled=false
 
 [org/gnome/settings-daemon/peripherals/keyboard]
 numlock-state='on'
