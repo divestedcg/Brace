@@ -19,6 +19,8 @@ offtherecord=true
 [org/freedesktop/tracker/miner/files]
 index-removable-devices=false
 removable-days-threshold=2
+enable-monitors=false
+crawling-interval=-2
 
 [org/gnome/builder]
 night-mode=true

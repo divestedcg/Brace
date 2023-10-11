@@ -225,7 +225,7 @@ else
 	done
 
 	#Search
-	echo "Do you want search enabled? (disable on low perf systems)";
+	echo "Do you want search enabled? (brace default disabled)";
 	select yn in "Yes" "No"; do
 		case $yn in
 			Yes )
@@ -236,16 +236,17 @@ else
 				break;;
 		esac
 	done
-	echo "Do you want Tracker enabled? (disable on low perf systems)";
+	echo "Do you want Tracker enabled? (brace default disabled)";
 	select yn in "Yes" "No"; do
 		case $yn in
 			Yes )
-				gsettings set org.freedesktop.Tracker.Miner.Files enable-monitors true;
-				gsettings set org.freedesktop.Tracker.Miner.Files crawling-interval -1;
+				gsettings set org.freedesktop.Tracker3.Miner.Files enable-monitors true;
+				gsettings set org.freedesktop.Tracker3.Miner.Files crawling-interval -1;
 				break;;
 			No )
-				gsettings set org.freedesktop.Tracker.Miner.Files enable-monitors false;
-				gsettings set org.freedesktop.Tracker.Miner.Files crawling-interval -2;
+				gsettings set org.freedesktop.Tracker3.Miner.Files enable-monitors false;
+				gsettings set org.freedesktop.Tracker3.Miner.Files crawling-interval -2;
+				echo "Make sure you remove the database too: tracker3 reset -s";
 				break;;
 		esac
 	done
