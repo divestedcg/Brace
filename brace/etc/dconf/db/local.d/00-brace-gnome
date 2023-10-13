@@ -58,7 +58,7 @@ lock-enabled=true
 user-switch-enabled=true
 
 [org/gnome/desktop/search-providers]
-disable-external=false
+disable-external=true
 disabled=['gnome-calculator.desktop', 'org.gnome.Calculator.desktop', 'org.gnome.Software.desktop', 'org.gnome.Epiphany.desktop', 'org.gnome.Photos.desktop', 'org.gnome.Lollypop.desktop', 'firefox.desktop']
 
 [org/gnome/desktop/session]
