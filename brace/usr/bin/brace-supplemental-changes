@@ -52,6 +52,7 @@ if [ "$(/usr/bin/id -u)" -eq "0" ]; then
 					#Keep this in sync with grub defaults
 
 					#Memory Hardening
+					#grubby --update-kernel=ALL --args="mem_encrypt=on"; #Enables SME on supported AMD platforms #XXX: can break boot, usually doesn't work but TSME in UEFI may
 					#grubby --update-kernel=ALL --args="efi=disable_early_pci_dma"; #Prevents DMA during early bringup #XXX: can break boot
 					grubby --update-kernel=ALL --args="init_on_alloc=1"; #Zero pages on allocation
 					grubby --update-kernel=ALL --args="init_on_free=1"; #Zero pages on free
@@ -79,6 +80,7 @@ if [ "$(/usr/bin/id -u)" -eq "0" ]; then
 					grubby --update-kernel=ALL --args="module.sig_enforce=1"; #Block modules with invalid signatures #XXX: superceded by lockdown
 					#grubby --update-kernel=ALL --args="oops=panic"; #Panic system on oops #XXX: can turn minor issues into annoyances
 					grubby --update-kernel=ALL --args="vsyscall=none"; #Disable unnecessary legacy functionality
+					#grubby --update-kernel=ALL --args="ia32_emulation=false"; #Disable support for 32-bit execution
 
 					#Nice to haves
 					grubby --update-kernel=ALL --args="fsck.mode=force"; #FSCK mounts every boot, systemd default is once per 30 boots
