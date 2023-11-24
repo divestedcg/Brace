@@ -15,4 +15,4 @@ bugs:
 	CentOS 7: chmod(/sys/fs/bpf) failed: Operation not permitted
 
 improvements:
-	properly verify rpmfusion .rpm
+	automatically verify rpmfusion .rpm

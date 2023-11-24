@@ -8,10 +8,10 @@ Brace is a toolkit compatible with multiple existing Linux distributions that al
 Compatibility
 -------------
 - Arch Linux
-- CentOS 7/Stream
-- Debian 10
-- Fedora 36 (preferred)
-- openSUSE 15.3/Tumbleweed
+- CentOS 9/Stream
+- Debian 12
+- Fedora 38/39 (preferred)
+- openSUSE Tumbleweed
 
 License
 -------

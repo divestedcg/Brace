@@ -92,7 +92,7 @@ clearJournal() {
 
 clearMemory() {
 	free -m;
-	sudo sync;
+	sudo sync; #sudo isn't necessary for this, but ensures the next command is likely to run without delay
 	echo 3 | sudo tee /proc/sys/vm/drop_caches;
 	free -m;
 }
@@ -100,6 +100,14 @@ clearMemory() {
 optimizeImages() {
         find "$1" -type f -name "*.jp*g" -print0 | xargs -0 -n1 -P 16 jpegoptim --strip-all;
         find "$1" -type f -name "*.png" -print0 | xargs -0 -n1 -P 16 optipng -strip all;
+}
+
+loosePermsRecursive() {
+	echo "Recursively setting loose permissions in $PWD";
+	echo "You've 5 seconds to Ctrl+C";
+	sleep 5;
+	find . -type d -print0 | xargs -0 chmod -v 0755;
+	find . -type f -print0 | xargs -0 chmod -v 0644;
 }
 
 strictPermsRecursive() {
@@ -118,7 +126,7 @@ alias rootkitscan='sudo rkhunter --update && sudo rkhunter -c --enable all --dis
 alias rootkitscanalt='sudo unhide reverse procall sys';
 
 # misc
-alias dconf-reset-brace='cat /etc/dconf/db/local.d/00-brace* | dconf load /';
+alias dconf-reset-brace='cat /etc/dconf/db/local.d/00-brace* | dconf load /'; #This is not recommended to be used
 alias ssh-tor='torsocks --isolate ssh';
 alias dnf-update-security-testing="sudo dnf update --refresh --security --secseverity=Low --enablerepo=*updates-testing";
 alias dnf-update-kernel="sudo dnf update --enablerepo=*updates-testing kernel*"; #sometimes testing kernels aren't flagged as security updates

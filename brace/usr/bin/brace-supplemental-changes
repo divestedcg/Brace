@@ -110,8 +110,8 @@ if [ "$(/usr/bin/id -u)" -eq "0" ]; then
 	#Hostname
 	if [ -x /usr/bin/hostnamectl ]; then
 		echo "Do you want a random hostname?";
-		select ys in "Yes" "Skip"; do
-			case $ys in
+		select yls in "Yes" "localhost" "Skip"; do
+			case $yls in
 				Yes )
 					randhost=$(head /dev/urandom | tr -dc a-z | head -c8);
 					if [ -x /usr/bin/pwgen ]; then
@@ -119,6 +119,9 @@ if [ "$(/usr/bin/id -u)" -eq "0" ]; then
 					fi;
 					hostnamectl set-hostname "$randhost";
 					#echo "127.0.0.1 $randhost" >> /etc/hosts;
+					break;;
+				localhost )
+					hostnamectl set-hostname "localhost";
 					break;;
 				Skip )
 					break;;
@@ -133,7 +136,7 @@ if [ "$(/usr/bin/id -u)" -eq "0" ]; then
 			case $ys in
 				Yes )
 					systemctl disable gssproxy.service --now; #Auth
-					systemctl disable pcscd.service pcscd.socket --now;
+					systemctl disable pcscd.service pcscd.socket --now; #Smartcards
 					systemctl disable abrtd.service abrt-journal-core.service abrt-oops.service abrt-pstoreoops.service abrt-vmcore.service abrt-xorg.service --now; #ABRT
 					systemctl disable atd.service --now; #At/Batch
 					systemctl disable mcelog.service --now; #mcelog
@@ -185,7 +188,7 @@ else
 	select yn in "Yes" "No"; do
 		case $yn in
 			Yes )
-				#Only allow enabling thumbnailers where extra restrictions are in place
+				#Only allow enabling thumbnailers where extra restrictions (eg. seccomp) are in place
 				gsettings set org.gnome.desktop.thumbnailers disable-all false;
 				#gsettings set org.cinnamon.desktop.thumbnailers disable-all false;
 				#gsettings set org.mate.desktop.thumbnailers disable-all false;
