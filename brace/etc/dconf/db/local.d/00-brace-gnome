@@ -131,7 +131,7 @@ compositing-manager=false
 dynamic-workspaces=false
 workspaces-only-on-primary=false
 attach-modal-dialogs=false
-experimental-features=['rt-scheduler']
+experimental-features=@as []
 
 [org/gnome/nautilus/icon-view]
 default-zoom-level='standard'
