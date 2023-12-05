@@ -89,6 +89,10 @@ Credits
 	- Link Dupont
 	- CC BY-SA 3.0: https://fedoramagazine.org/terms-and-conditions/
 	- https://fedoramagazine.org/automate-backups-with-restic-and-systemd/
+- modprobe.d/brace.conf additional module blocking
+	- @madaidan
+	- List likely uncopyrightable
+	- https://madaidans-insecurities.github.io/guides/linux-hardening.html#kasr-kernel-modules
 
 Donate
 -------

@@ -1,5 +1,5 @@
 Name: brace
-Version: 20231127
+Version: 20231204
 Release: 1
 Summary: Increases privacy/security through various configs.
 License: GPLv3+
@@ -41,8 +41,7 @@ mkdir -p %{buildroot}/usr/lib64/thunderbird/defaults/pref;
 install -Dm644 %{_sourcedir}/brace/usr/lib/firefox/browser/defaults/preferences/userjs-*.js %{buildroot}/usr/lib64/thunderbird/defaults/pref/;
 install -Dm644 %{_sourcedir}/brace/etc/chromium/policies/managed/brace.json %{buildroot}/etc/chromium/policies/managed/brace.json;
 install -Dm644 %{_sourcedir}/brace/etc/chromium/policies/managed/brace.json %{buildroot}/etc/opt/chrome/policies/managed/brace.json;
-install -Dm644 %{_sourcedir}/brace/usr/lib/modprobe.d/blacklist-dma.conf %{buildroot}/usr/lib/modprobe.d/blacklist-dma.conf;
-install -Dm644 %{_sourcedir}/brace/usr/lib/modprobe.d/blacklist-usbnet.conf %{buildroot}/usr/lib/modprobe.d/blacklist-usbnet.conf;
+install -Dm644 %{_sourcedir}/brace/usr/lib/modprobe.d/brace.conf %{buildroot}/usr/lib/modprobe.d/brace.conf;
 install -Dm644 %{_sourcedir}/brace/usr/lib/modprobe.d/wireless-perf.conf %{buildroot}/usr/lib/modprobe.d/wireless-perf.conf;
 install -Dm644 %{_sourcedir}/brace/usr/lib/NetworkManager/conf.d/30-nm-privacy.conf %{buildroot}/usr/lib/NetworkManager/conf.d/30-nm-privacy.conf;
 install -Dm644 %{_sourcedir}/brace/usr/lib/sysctl.d/60-restrict.conf %{buildroot}/usr/lib/sysctl.d/60-restrict.conf;
@@ -90,8 +89,7 @@ install -Dm644 %{_sourcedir}/README.md %{buildroot}/usr/share/doc/brace/README.m
 /usr/lib64/thunderbird/defaults/pref/userjs-*.js
 /etc/chromium/policies/managed/brace.json
 /etc/opt/chrome/policies/managed/brace.json
-/usr/lib/modprobe.d/blacklist-dma.conf
-/usr/lib/modprobe.d/blacklist-usbnet.conf
+/usr/lib/modprobe.d/brace.conf
 /usr/lib/modprobe.d/wireless-perf.conf
 /usr/lib/NetworkManager/conf.d/30-nm-privacy.conf
 /usr/lib/sysctl.d/60-restrict.conf

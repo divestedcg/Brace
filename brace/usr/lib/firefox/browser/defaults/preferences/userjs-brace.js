@@ -28,6 +28,8 @@ pref("network.manage-offline-status", false);
 pref("browser.urlbar.suggest.quicksuggest.nonsponsored", false);
 pref("browser.urlbar.suggest.quicksuggest.sponsored", false);
 pref("browser.urlbar.quicksuggest.dataCollection.enabled", false);
+pref("mailnews.headers.sendUserAgent", false);
+pref("mail.sanitize_date_header", true);
 
 //Security
 pref("browser.gnome-search-provider.enabled", false);

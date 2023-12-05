@@ -16,3 +16,5 @@ bugs:
 
 improvements:
 	automatically verify rpmfusion .rpm
+	https://github.com/Kicksecure/security-misc/blob/dcaafa6c8bf380dd990942e9c10e280943b442a6/etc/bluetooth/30_security-misc.conf#L30
+	https://github.com/Kicksecure/security-misc/blob/dcaafa6c8bf380dd990942e9c10e280943b442a6/etc/dracut.conf.d/30-security-misc.conf#L1

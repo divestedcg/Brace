@@ -293,12 +293,7 @@ user::rwx
 group::r-x
 other::r-x
 
-# file: brace/usr/lib/modprobe.d/blacklist-dma.conf
-user::rw-
-group::r--
-other::r--
-
-# file: brace/usr/lib/modprobe.d/blacklist-usbnet.conf
+# file: brace/usr/lib/modprobe.d/brace.conf
 user::rw-
 group::r--
 other::r--

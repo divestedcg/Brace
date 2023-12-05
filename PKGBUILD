@@ -1,6 +1,6 @@
 # Maintainer: Tad <tad@spotco.us>
 pkgname=brace
-pkgver=20231127
+pkgver=20231204
 pkgrel=1
 pkgdesc="Increases privacy/security through various configs."
 arch=('any')
@@ -31,8 +31,7 @@ package() {
 	install -Dm644 brace/usr/lib/firefox/browser/defaults/preferences/userjs-*.js "$pkgdir"/usr/lib/thunderbird/defaults/pref/;
 	install -Dm644 brace/etc/chromium/policies/managed/brace.json "$pkgdir"/etc/chromium/policies/managed/brace.json;
 	install -Dm644 brace/etc/chromium/policies/managed/brace.json "$pkgdir"/etc/opt/chrome/policies/managed/brace.json;
-	install -Dm644 brace/usr/lib/modprobe.d/blacklist-dma.conf "$pkgdir"/usr/lib/modprobe.d/blacklist-dma.conf;
-	install -Dm644 brace/usr/lib/modprobe.d/blacklist-usbnet.conf "$pkgdir"/usr/lib/modprobe.d/blacklist-usbnet.conf;
+	install -Dm644 brace/usr/lib/modprobe.d/brace.conf "$pkgdir"/usr/lib/modprobe.d/brace.conf;
 	install -Dm644 brace/usr/lib/modprobe.d/wireless-perf.conf "$pkgdir"/usr/lib/modprobe.d/wireless-perf.conf;
 	install -Dm644 brace/usr/lib/NetworkManager/conf.d/30-nm-privacy.conf "$pkgdir"/usr/lib/NetworkManager/conf.d/30-nm-privacy.conf;
 	install -Dm644 brace/usr/lib/sysctl.d/60-restrict.conf "$pkgdir"/usr/lib/sysctl.d/60-restrict.conf;
