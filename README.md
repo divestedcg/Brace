@@ -45,8 +45,7 @@ Contents
 	- /usr/lib64/thunderbird/defaults/pref/userjs-*.js
 - /etc/chromium/policies/managed/brace.json			= Chromium: change default settings
 	- /etc/opt/chrome/policies/managed/brace.json
-- /usr/lib/modprobe.d/blacklist-dma.conf			= kernel: disable modules that allow direct memory access externally
-- /usr/lib/modprobe.d/blacklist-usbnet.conf			= kernel: disable modules that allow for USB networking
+- /usr/lib/modprobe.d/brace.conf				= kernel: disable/block unsafe modules
 - /usr/lib/modprobe.d/wireless-perf.conf			= kernel: increase Wi-Fi performance for b43 and iwlwifi
 - /usr/lib/NetworkManager/conf.d/30-nm-privacy.conf		= NetworkManager: enables MAC randomization and IPv6 privacy extensions and disables connectivity checks
 - /usr/lib/sysctl.d/60-restrict.conf				= sysctl: set more restrictive defaults (dmesg, ptrace)
@@ -89,6 +88,10 @@ Credits
 	- Link Dupont
 	- CC BY-SA 3.0: https://fedoramagazine.org/terms-and-conditions/
 	- https://fedoramagazine.org/automate-backups-with-restic-and-systemd/
+- chrony.brace.conf
+	- GrapheneOS
+	- MIT: https://github.com/GrapheneOS/infrastructure/blob/main/LICENSE
+	- https://github.com/GrapheneOS/infrastructure/blob/main/chrony.conf
 - modprobe.d/brace.conf additional module blocking
 	- @madaidan
 	- List likely uncopyrightable
