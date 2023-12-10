@@ -25,6 +25,22 @@ if [ "$(/usr/bin/id -u)" -eq "0" ]; then
 		systemctl enable fstrim.timer --now;
 	fi;
 
+	#Repository Changes
+	if [ -d "/etc/yum.repos.d" ]; then
+		echo "Set all DNF repositories to HTTPS and disable countme?";
+		select ys in "Yes" "Skip"; do
+			case $ys in
+				Yes )
+					sed -i 's/metalink?repo=/metalink\?protocol\=https\&repo\=/' /etc/yum.repos.d/*.repo;
+					sed -i 's/countme=1/countme=0/' /etc/yum.repos.d/*.repo;
+					echo "Remember: This will need to be done again if any of them are updated!"
+					break;;
+				Skip )
+					break;;
+			esac
+		done
+	fi
+
 	#Stealth Firewall
 	if [ -x /usr/bin/firewall-cmd ]; then
 		echo "Do you want a default drop firewall?";
