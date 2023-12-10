@@ -16,6 +16,11 @@
 			"Fingerprinting": true,
 			"EmailTracking": true
 		},
+		"DNSOverHTTPS": {
+			"Enabled": true,
+			"Locked": false,
+			"ProviderURL": "https://dns.quad9.net/dns-query"
+		},
 		"Extensions": {
 			"Install": [
 				"https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi"
