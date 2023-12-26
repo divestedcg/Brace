@@ -82,7 +82,7 @@ if [ "$(/usr/bin/id -u)" -eq "0" ]; then
 					grubby --update-kernel=ALL --args="iommu=force"; #???
 					grubby --update-kernel=ALL --args="iommu.passthrough=0"; #Always use the IOMMU for DMA
 					grubby --update-kernel=ALL --args="iommu.strict=1"; #Do not defer invalidation of hardware TLBs
-					grubby --update-kernel=ALL --args="intel_iommu=on,strict amd_iommu=fullflush"; #Ensure the IOMMU driver is enabled #XXX strict and fullflush are replaced by iommu.strict
+					grubby --update-kernel=ALL --args="intel_iommu=on amd_iommu=force_isolation"; #Ensure the IOMMU driver is enabled
 
 					#CPU Flaw Mitigations
 					grubby --update-kernel=ALL --args="spec_store_bypass_disable=on ssbd=force-on"; #Enables SSB mitigations, including all userspace processes
