@@ -758,7 +758,7 @@ pref("privacy.window.maxInnerHeight", 900);
 /* 4503: disable mozAddonManager Web API [FF57+]
  * [NOTE] To allow extensions to work on AMO, you also need 2662
  * [1] https://bugzilla.mozilla.org/buglist.cgi?bug_id=1384330,1406795,1415644,1453988 ***/
-pref("privacy.resistFingerprinting.block_mozAddonManager", true);
+pref("privacy.resistFingerprinting.block_mozAddonManager", true); //MULL-MODIFY_ME: set to false to unbreak AMO
 /* 4504: enable RFP letterboxing [FF67+]
  * Dynamically resizes the inner window by applying margins in stepped ranges [2]
  * If you use the dimension pref, then it will only apply those resolutions.
