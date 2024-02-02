@@ -26,6 +26,9 @@ export RADV_DEBUG=zerovram;
 # enable gstreamer va-api plugin on unsupported drivers
 export GST_VAAPI_ALL_DRIVERS=1;
 
+# disable thread local malloc cache
+GLIBC_TUNABLES='glibc.malloc.tcache_count=0'
+
 # set restrictive umask
 if [ "$(/usr/bin/id -ru)" -ge 1000 ] && [ "$(/usr/bin/id -u)" -ge 1000 ] && [ "$(/usr/bin/id -gn)" = "$(/usr/bin/id -un)" ]; then
     umask 0077;
