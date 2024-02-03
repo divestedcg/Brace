@@ -1,0 +1,38 @@
+#!/bin/sh
+#Copyright (c) 2018-2024 Divested Computing Group
+#
+#This program is free software: you can redistribute it and/or modify
+#it under the terms of the GNU General Public License as published by
+#the Free Software Foundation, either version 3 of the License, or
+#(at your option) any later version.
+#
+#This program is distributed in the hope that it will be useful,
+#but WITHOUT ANY WARRANTY; without even the implied warranty of
+#MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#GNU General Public License for more details.
+#
+#You should have received a copy of the GNU General Public License
+#along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+if [ "$(/usr/bin/id -u)" -ne "0" ]; then echo 'This script needs to be run as root!'; exit 1; fi;
+
+if [ -f /etc/fedora-release ]; then
+	echo "Installing fapolicyd";
+	dnf install fapolicyd;
+	echo "Do you want integrity verification? 3rd party packages are often incompatible.";
+	select yn in "Yes" "No"; do
+		case $yn in
+			Yes )
+				sed -i 's/integrity = none/integrity = sha256/g' /etc/fapolicyd/fapolicyd.conf;
+				break;;
+			No )
+				sed -i 's/integrity = none/integrity = size/g' /etc/fapolicyd/fapolicyd.conf;
+				break;;
+		esac
+	done
+	echo "Enabling fapolicyd";
+	systemctl enable fapolicyd --now;
+	systemctl status fapolicyd;
+else
+	echo "Currently only Fedora is supported";
+fi;
