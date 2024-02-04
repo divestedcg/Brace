@@ -1,6 +1,6 @@
 Name: brace
-Version: 20240201
-Release: 2
+Version: 20240204
+Release: 1
 Summary: Increases privacy/security through various configs.
 License: GPLv3+
 BuildArch: noarch
@@ -66,6 +66,7 @@ install -Dm644 %{_sourcedir}/brace/usr/lib/tmpfiles.d/99-brace-sys.conf %{buildr
 install -Dm644 %{_sourcedir}/brace/usr/lib/udev/rules.d/50-usb-realtek-net-exceprt.rules %{buildroot}/usr/lib/udev/rules.d/50-usb-realtek-net-exceprt.rules;
 install -Dm755 %{_sourcedir}/brace/usr/bin/brace-supplemental-changes %{buildroot}/usr/bin/brace-supplemental-changes;
 install -Dm755 %{_sourcedir}/brace/usr/sbin/brace-fedora-enable-auto-updates %{buildroot}/usr/sbin/brace-enable-auto-updates;
+install -Dm755 %{_sourcedir}/brace/usr/sbin/brace-fedora-enable-fapolicyd %{buildroot}/usr/sbin/brace-enable-fapolicyd;
 install -Dm755 %{_sourcedir}/brace/usr/sbin/brace-fedora-enable-rpmfusion %{buildroot}/usr/sbin/brace-enable-rpmfusion;
 install -Dm755 %{_sourcedir}/brace/usr/sbin/brace-fedora-update-system %{buildroot}/usr/sbin/brace-update-system;
 install -Dm755 %{_sourcedir}/brace/usr/sbin/brace-installer %{buildroot}/usr/sbin/brace-installer;
@@ -114,6 +115,7 @@ install -Dm644 %{_sourcedir}/README.md %{buildroot}/usr/share/doc/brace/README.m
 /usr/lib/udev/rules.d/50-usb-realtek-net-exceprt.rules
 /usr/bin/brace-supplemental-changes
 /usr/sbin/brace-enable-auto-updates
+/usr/sbin/brace-enable-fapolicyd
 /usr/sbin/brace-enable-rpmfusion
 /usr/sbin/brace-update-system
 /usr/sbin/brace-installer
