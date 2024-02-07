@@ -41,8 +41,8 @@ clearUserMisc() {
 	rm -fv ~/.local/share/recently-used.xbel;
 	rm -fv ~/.minetest/debug.txt;
 
-	rm -fv ~/.wget-hsts
-	rm -fv ~/.gnutls/known_hosts;
+	#rm -fv ~/.wget-hsts
+	#rm -fv ~/.gnutls/known_hosts;
 	#rm -fv ~/.ssh/known_hosts;
 }
 

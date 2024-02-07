@@ -30,6 +30,7 @@ if [ -f /etc/fedora-release ]; then
 				break;;
 		esac
 	done
+	sed -i 's/deny_audit/deny_log/' /etc/fapolicyd/rules.d/*.rules; #log to journald too
 	echo "Enabling fapolicyd";
 	systemctl enable fapolicyd --now;
 	systemctl status fapolicyd;
