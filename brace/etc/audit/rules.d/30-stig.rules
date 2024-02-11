@@ -1,0 +1,29 @@
+## Things that could affect time
+-a always,exit -F arch=b32 -S adjtimex,settimeofday,stime -F key=time-change
+-a always,exit -F arch=b64 -S adjtimex,settimeofday -F key=time-change
+-a always,exit -F arch=b32 -S clock_settime -F a0=0x0 -F key=time-change
+-a always,exit -F arch=b64 -S clock_settime -F a0=0x0 -F key=time-change
+# Introduced in 2.6.39, commented out because it can make false positives
+#-a always,exit -F arch=b32 -S clock_adjtime -F key=time-change
+#-a always,exit -F arch=b64 -S clock_adjtime -F key=time-change
+-w /etc/localtime -p wa -k time-change
+
+## Things that could affect system locale
+-a always,exit -F arch=b32 -S sethostname,setdomainname -F key=system-locale
+-a always,exit -F arch=b64 -S sethostname,setdomainname -F key=system-locale
+-w /etc/issue -p wa -k system-locale
+-w /etc/issue.net -p wa -k system-locale
+-w /etc/hosts -p wa -k system-locale
+-w /etc/hostname -p wa -k system-locale
+-a always,exit -F dir=/etc/NetworkManager/ -F perm=wa -F key=system-locale
+
+##- Export to media (successful)
+## You have to mount media before using it. You must disable all automounting
+## so that its done manually in order to get the correct user requesting the
+## export
+-a always,exit -F arch=b32 -S mount -F auid>=1000 -F auid!=unset -F key=export
+-a always,exit -F arch=b64 -S mount -F auid>=1000 -F auid!=unset -F key=export
+
+##- Files and programs deleted by the user (successful and unsuccessful)
+-a always,exit -F arch=b32 -S unlink,unlinkat,rename,renameat -F auid>=1000 -F auid!=unset -F key=delete
+-a always,exit -F arch=b64 -S unlink,unlinkat,rename,renameat -F auid>=1000 -F auid!=unset -F key=delete

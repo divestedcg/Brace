@@ -48,6 +48,151 @@ user::rw-
 group::r--
 other::r--
 
+# file: brace/etc/audit
+user::rwx
+group::r-x
+other::r-x
+
+# file: brace/etc/audit/rules.d
+user::rwx
+group::r-x
+other::r-x
+
+# file: brace/etc/audit/rules.d/10-base-config.rules
+user::rw-
+group::---
+other::---
+
+# file: brace/etc/audit/rules.d/11-loginuid.rules
+user::rw-
+group::---
+other::---
+
+# file: brace/etc/audit/rules.d/20-dont-audit.rules
+user::rw-
+group::---
+other::---
+
+# file: brace/etc/audit/rules.d/21-no32bit.rules
+user::rw-
+group::---
+other::---
+
+# file: brace/etc/audit/rules.d/22-ignore-chrony.rules
+user::rw-
+group::---
+other::---
+
+# file: brace/etc/audit/rules.d/30-ospp-v42-1-create-failed.rules
+user::rw-
+group::---
+other::---
+
+# file: brace/etc/audit/rules.d/30-ospp-v42-1-create-success.rules
+user::rw-
+group::---
+other::---
+
+# file: brace/etc/audit/rules.d/30-ospp-v42-2-modify-failed.rules
+user::rw-
+group::---
+other::---
+
+# file: brace/etc/audit/rules.d/30-ospp-v42-2-modify-success.rules
+user::rw-
+group::---
+other::---
+
+# file: brace/etc/audit/rules.d/30-ospp-v42-3-access-failed.rules
+user::rw-
+group::---
+other::---
+
+# file: brace/etc/audit/rules.d/30-ospp-v42-3-access-success.rules
+user::rw-
+group::---
+other::---
+
+# file: brace/etc/audit/rules.d/30-ospp-v42-4-delete-failed.rules
+user::rw-
+group::---
+other::---
+
+# file: brace/etc/audit/rules.d/30-ospp-v42-4-delete-success.rules
+user::rw-
+group::---
+other::---
+
+# file: brace/etc/audit/rules.d/30-ospp-v42-5-perm-change-failed.rules
+user::rw-
+group::---
+other::---
+
+# file: brace/etc/audit/rules.d/30-ospp-v42-5-perm-change-success.rules
+user::rw-
+group::---
+other::---
+
+# file: brace/etc/audit/rules.d/30-ospp-v42-6-owner-change-failed.rules
+user::rw-
+group::---
+other::---
+
+# file: brace/etc/audit/rules.d/30-ospp-v42-6-owner-change-success.rules
+user::rw-
+group::---
+other::---
+
+# file: brace/etc/audit/rules.d/30-ospp-v42.rules
+user::rw-
+group::---
+other::---
+
+# file: brace/etc/audit/rules.d/32-power-abuse.rules
+user::rw-
+group::---
+other::---
+
+# file: brace/etc/audit/rules.d/40-local.rules
+user::rw-
+group::---
+other::---
+
+# file: brace/etc/audit/rules.d/41-containers.rules
+user::rw-
+group::---
+other::---
+
+# file: brace/etc/audit/rules.d/42-injection.rules
+user::rw-
+group::---
+other::---
+
+# file: brace/etc/audit/rules.d/43-module-load.rules
+user::rw-
+group::---
+other::---
+
+# file: brace/etc/audit/rules.d/44-installers.rules
+user::rw-
+group::---
+other::---
+
+# file: brace/etc/audit/rules.d/70-einval.rules
+user::rw-
+group::---
+other::---
+
+# file: brace/etc/audit/rules.d/71-networking.rules
+user::rw-
+group::---
+other::---
+
+# file: brace/etc/audit/rules.d/99-finalize.rules
+user::rw-
+group::---
+other::---
+
 # file: brace/etc/chromium
 user::rwx
 group::r-x
