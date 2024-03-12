@@ -1,5 +1,5 @@
 Name: brace
-Version: 20240211
+Version: 20240207
 Release: 1
 Summary: Increases privacy/security through various configs.
 License: GPLv3+
@@ -24,7 +24,6 @@ echo "- /home can have discard,noatime,nodev,nosuid";
 if [ -f /usr/bin/dconf ]; then dconf update; fi;
 
 %install
-install -Dm600 %{_sourcedir}/brace/etc/audit/rules.d/*.rules %{buildroot}/etc/audit/rules.d/;
 install -Dm644 %{_sourcedir}/brace/etc/chrony.brace.conf %{buildroot}/etc/chrony.brace.conf;
 install -Dm644 %{_sourcedir}/brace/etc/dconf/db/local.d/00-brace-cinnamon %{buildroot}/etc/dconf/db/local.d/00-brace-cinnamon;
 install -Dm644 %{_sourcedir}/brace/etc/dconf/db/local.d/00-brace-extra %{buildroot}/etc/dconf/db/local.d/00-brace-extra;
@@ -76,7 +75,6 @@ mkdir -p %{buildroot}/usr/share/doc/brace;
 install -Dm644 %{_sourcedir}/README.md %{buildroot}/usr/share/doc/brace/README.md;
 
 %files
-/etc/audit/rules.d/*.rules
 /etc/chrony.brace.conf
 /etc/dconf/db/local.d/00-brace-cinnamon
 /etc/dconf/db/local.d/00-brace-extra
