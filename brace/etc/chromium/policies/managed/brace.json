@@ -54,6 +54,8 @@
 	"DeviceLoginScreenPrivacyScreenEnabled": true,
 	"SafeBrowsingEnabled": true,
 	"SafeBrowsingExtendedReportingEnabled": false,
+	"SafeBrowsingSurveysEnabled": false,
+	"SafeBrowsingProxiedRealTimeChecksAllowed": true,
 	"SafeBrowsingProtectionLevel": 1,
 	"DeviceGuestModeEnabled": true,
 	"ShowHomeButton": true,
