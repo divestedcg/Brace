@@ -8,6 +8,7 @@
 		"DisableFirefoxAccounts": true,
 		"DisableFirefoxStudies": true,
 		"DisablePocket": true,
+		"DisableSecurityBypass": false,
 		"DisableTelemetry": true,
 		"EnableTrackingProtection": {
 			"Value": true,
@@ -54,6 +55,12 @@
 			"Pocket": false,
 			"SponsoredPocket": false,
 			"Snippets": false,
+			"Locked": false
+		},
+		"FirefoxSuggest": {
+			"WebSuggestions": false,
+			"SponsoredSuggestions": false,
+			"ImproveSuggest": false,
 			"Locked": false
 		},
 		"NetworkPrediction": false,
