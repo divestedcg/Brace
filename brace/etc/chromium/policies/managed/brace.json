@@ -140,6 +140,7 @@
 	"HardwareAccelerationModeEnabled": true,
 	"HideWebStoreIcon": true,
 	"HttpsOnlyMode": "force_enabled",
+	"PostQuantumKeyAgreementEnabled": true,
 	"IncognitoModeAvailability": 0,
 	"InsecureFormsWarningsEnabled": true,
 	"InstantTetheringAllowed": false,
