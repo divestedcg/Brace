@@ -117,7 +117,7 @@ if [ "$(/usr/bin/id -u)" -eq "0" ]; then
 					update-crypto-policies --set NEXT;
 					break;;
 				No )
-					update-crypto-policies --set DEFAULT;
+					update-crypto-policies --set DEFAULT; #:TEST-PQ
 					break;;
 			esac
 		done
