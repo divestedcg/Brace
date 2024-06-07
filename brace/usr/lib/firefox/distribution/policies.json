@@ -20,6 +20,7 @@
 		"DNSOverHTTPS": {
 			"Enabled": true,
 			"Locked": false,
+			"Fallback": false,
 			"ProviderURL": "https://dns.quad9.net/dns-query"
 		},
 		"Extensions": {
