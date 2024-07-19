@@ -1,0 +1,214 @@
+#!/bin/bash
+#Copyright (c) 2024 Divested Computing Group
+#
+#This program is free software: you can redistribute it and/or modify
+#it under the terms of the GNU General Public License as published by
+#the Free Software Foundation, either version 3 of the License, or
+#(at your option) any later version.
+#
+#This program is distributed in the hope that it will be useful,
+#but WITHOUT ANY WARRANTY; without even the implied warranty of
+#MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#GNU General Public License for more details.
+#
+#You should have received a copy of the GNU General Public License
+#along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+coloroff='\e[0m';
+black='\e[0;30m';
+blue='\e[0;34m';
+cyan='\e[0;36m';
+green='\e[0;32m';
+purple='\e[0;35m';
+red='\e[0;31m';
+white='\e[0;37m';
+yellow='\e[0;33m';
+
+logYes() {
+	echo -e "${green}[..YES..] $1 $2${coloroff}";
+	return 0;
+}
+
+logPartial() {
+	echo -e "${yellow}[..YES..] $1 $2${coloroff}";
+	return 0;
+}
+
+logSkip() {
+	echo -e "${purple}[..SKIP.] $1 $2${coloroff}";
+	return 0;
+}
+
+logNo() {
+	echo -e "${red}[..NO...] $1 $2${coloroff}";
+	if [ -n "$3" ]; then
+		echo -e "${white}\t[SOLUTION] $3";
+	fi;
+	return 1;
+}
+
+logUnknown() {
+	echo -e "${purple}[..UNKN.] $1 $2${coloroff}";
+	if [ -n "$3" ]; then
+		echo -e "${white}\t[SOLUTION] $3";
+	fi;
+	return 1;
+}
+
+rpmPackageInstalled() {
+	if rpm -qi "$1" > /dev/null 2>&1; then
+		logYes "Install check:" "$1";
+	else
+		local resolver="$2";
+		if [ -z "$resolver" ]; then
+			local resolver="sudo dnf install $1";
+		fi;
+		logNo "Install check:" "$1" "$resolver";
+	fi;
+}
+
+systemdServiceRunning() {
+	if systemctl status "$1" > /dev/null 2>&1; then
+		logYes "systemd service running:" "$1";
+	else
+		logNo "systemd service running:" "$1";
+	fi;
+}
+
+firewalldCheckDefaultZone() {
+	if firewall-cmd --get-default-zone | grep -q "$1" > /dev/null 2>&1; then
+		logYes "firewalld default zone correct:" "$1";
+	else
+		logNo "firewalld default zone correct:" "$1" "$2";
+	fi;
+}
+
+firewalldCheckActiveZones() {
+	if firewall-cmd --get-active-zone | grep -q "$1" > /dev/null 2>&1; then
+		logYes "firewalld active zone enabled:" "$1";
+	else
+		logNo "firewalld active zone enabled:" "$1" "$2";
+	fi;
+}
+
+verifyFapolicydIntegrity() {
+	if [ -r /etc/fapolicyd/fapolicyd.conf ]; then
+		if grep -q "integrity = sha256" /etc/fapolicyd/fapolicyd.conf > /dev/null 2>&1; then
+			logYes "fapolicyd integrity mode:" "sha256";
+		elif grep -q "integrity = size" /etc/fapolicyd/fapolicyd.conf > /dev/null 2>&1; then
+			logPartial "fapolicyd integrity mode:" "size";
+		else
+			logNo "fapolicyd integrity mode:" "none";
+		fi;
+	else
+		logUnknown "fapolicyd integrity mode:" "unknown" "run: sudo brace-audit";
+	fi;
+}
+
+verifyHardenedMalloc() {
+	if grep -q "hardened_malloc" /proc/self/maps > /dev/null 2>&1; then
+		logYes "hardened_malloc preloaded";
+	else
+		logNo "hardened_malloc preloaded" "ensure ld.so.preload is correct";
+	fi;
+}
+
+verifyKernelCommandLine() {
+	if grep -q "init_on_alloc=1 init_on_free=1 page_alloc.shuffle=1 pti=on kpti=on randomize_kstack_offset=1 slab_nomerge iommu=force iommu.passthrough=0 iommu.strict=1 intel_iommu=on amd_iommu=force_isolation spec_store_bypass_disable=on ssbd=force-on spectre_v2=on spectre_bhi=on tsx=off lockdown=confidentiality mce=0 module.sig_enforce=1 vsyscall=none fsck.mode=force i8042.reset=1" /proc/cmdline > /dev/null 2>&1; then
+		logYes "kernel hardening via command line";
+	else
+		logNo "kernel hardening via command line" "run: sudo brace-supplemental-changes";
+	fi;
+}
+
+
+if [ -f /etc/fedora-release ] || [ -f /etc/centos-release ]; then
+	if grep -q hypervisor /proc/cpuinfo; then
+		isVirtualMachine="true";
+	else
+		isVirtualMachine="false";
+	fi;
+	echo -e "${cyan}[QUESTION] Is this a machine a desktop or a server?${coloroff}";
+	select ds in "Desktop" "Server"; do
+		case $ds in
+			Desktop )
+				isDesktop=true;
+				break;;
+			Server )
+				isDesktop=false;
+				echo -e "${cyan}[QUESTION] Is this server public facing?${coloroff}";
+				select yn in "Yes" "No"; do
+					case $yn in
+						Yes )
+							publicFacing=true;
+							break;;
+						No )
+							publicFacing=false;
+							break;;
+					esac
+				done
+				break;;
+		esac
+	done
+
+	echo "================================================================"
+	echo "START OF brace-audit"
+	echo "================================================================"
+
+	echo -e "\nChecking packages";
+	rpmPackageInstalled "divested-release";
+	rpmPackageInstalled "brace";
+	if [ "$isVirtualMachine" == "false" ]; then
+		rpmPackageInstalled "real-ucode";
+		rpmPackageInstalled "tlp";
+		rpmPackageInstalled "tlp-rdw";
+	else
+		logSkip "virtual machine detected, ignoring some packages";
+	fi;
+	if [ "$isDesktop" == "true" ]; then
+		rpmPackageInstalled "firejail";
+		rpmPackageInstalled "rpmfusion-free-release" "sudo brace-enable-rpmfusion";
+	fi;
+
+	echo -e "\nChecking fapolicyd";
+	if rpmPackageInstalled "fapolicyd" "sudo brace-enable-fapolicyd"; then
+		systemdServiceRunning "fapolicyd";
+		verifyFapolicydIntegrity;
+	fi;
+
+	echo -e "\nChecking firewalld";
+	if rpmPackageInstalled "firewalld"; then
+		systemdServiceRunning "firewalld" "sudo systemctl enable firewalld --now";
+		firewalldCheckDefaultZone "drop" "sudo brace-supplemental-changes";
+		firewalldCheckActiveZones "drop" "sudo brace-supplemental-changes";
+		if [ "$publicFacing" == "true" ]; then
+			firewalldCheckActiveZones "scfw" "see https://codeberg.org/divested/scfw3";
+			firewalldCheckActiveZones "trash" "see https://codeberg.org/divested/scfw3";
+		else
+			logSkip "ignoring scfw/trash checks, not public facing"
+		fi;
+	fi;
+
+	echo -e "\nChecking hardened_malloc";
+	if rpmPackageInstalled "hardened_malloc"; then
+		verifyHardenedMalloc;
+	fi;
+
+	echo -e "\nChecking DNF automatic updates";
+	if [ "$isDesktop" == "true" ]; then
+		logSkip "ignoring automatic updates, too unreliable on desktops"
+	else
+		if rpmPackageInstalled "dnf-automatic" "sudo brace-enable-auto-updates"; then
+			systemdServiceRunning "dnf-automatic-install.timer";
+		fi;
+	fi;
+
+	echo -e "\nChecking kernel";
+	verifyKernelCommandLine;
+
+	echo -e "\n================================================================"
+	echo "END OF brace-audit"
+	echo "================================================================"
+else
+	echo "Currently only Fedora and CentOS are supported";
+fi;
