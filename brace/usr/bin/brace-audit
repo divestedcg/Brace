@@ -101,7 +101,7 @@ verifyFapolicydIntegrity() {
 			logNo "fapolicyd integrity mode:" "none";
 		fi;
 	else
-		logUnknown "fapolicyd integrity mode:" "unknown" "run: sudo brace-audit";
+		logUnknown "fapolicyd integrity mode:" "unknown" "sudo brace-audit";
 	fi;
 }
 
@@ -117,10 +117,12 @@ verifyKernelCommandLine() {
 	if grep -q "init_on_alloc=1 init_on_free=1 page_alloc.shuffle=1 pti=on kpti=on randomize_kstack_offset=1 slab_nomerge iommu=force iommu.passthrough=0 iommu.strict=1 intel_iommu=on amd_iommu=force_isolation spec_store_bypass_disable=on ssbd=force-on spectre_v2=on spectre_bhi=on tsx=off lockdown=confidentiality mce=0 module.sig_enforce=1 vsyscall=none fsck.mode=force i8042.reset=1" /proc/cmdline > /dev/null 2>&1; then
 		logYes "kernel hardening via command line";
 	else
-		logNo "kernel hardening via command line" "run: sudo brace-supplemental-changes";
+		logNo "kernel hardening via command line" "sudo brace-supplemental-changes";
 	fi;
 }
 
+#verifyFST() { #TODO
+#}
 
 if [ -f /etc/fedora-release ] || [ -f /etc/centos-release ]; then
 	if grep -q hypervisor /proc/cpuinfo; then
@@ -168,6 +170,7 @@ if [ -f /etc/fedora-release ] || [ -f /etc/centos-release ]; then
 	if [ "$isDesktop" == "true" ]; then
 		rpmPackageInstalled "firejail";
 		rpmPackageInstalled "rpmfusion-free-release" "sudo brace-enable-rpmfusion";
+		rpmPackageInstalled "mesa-va-drivers-freeworld" "sudo dnf swap mesa-va-drivers mesa-va-drivers-freeworld --allowerasing";
 	fi;
 
 	echo -e "\nChecking fapolicyd";
@@ -205,6 +208,9 @@ if [ -f /etc/fedora-release ] || [ -f /etc/centos-release ]; then
 
 	echo -e "\nChecking kernel";
 	verifyKernelCommandLine;
+
+	#echo -e "\nChecking file system table";
+	#verifyFST;
 
 	echo -e "\n================================================================"
 	echo "END OF brace-audit"
