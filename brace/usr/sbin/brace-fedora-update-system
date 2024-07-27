@@ -12,7 +12,7 @@
 #GNU Affero General Public License for more details.
 #
 #You should have received a copy of the GNU Affero General Public License
-#along with this program.  If not, see <https:#www.gnu.org/licenses/>.
+#along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 if [ "$(/usr/bin/id -u)" -ne "0" ]; then echo 'This script needs to be run as root!'; exit 1; fi;
 
