@@ -10,12 +10,12 @@ Compatibility
 - Arch Linux
 - CentOS 9/Stream
 - Debian 12
-- Fedora 38/39 (preferred)
+- Fedora 39/40 (preferred)
 - openSUSE Tumbleweed
 
 License
 -------
-GPL-3.0 where applicable
+AGPL-3.0-or-later where applicable
 
 Prebuilts
 ---------

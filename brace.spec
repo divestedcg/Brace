@@ -2,7 +2,7 @@ Name: brace
 Version: 20240726
 Release: 1
 Summary: Increases privacy/security through various configs.
-License: GPLv3+
+License: AGPLv3+
 BuildArch: noarch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 %define _binary_payload w3T.xzdio
