@@ -14,6 +14,8 @@
 #You should have received a copy of the GNU General Public License
 #along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+if [ "$(/usr/bin/id -u)" -ne "0" ]; then echo 'This script needs to be run as root!'; exit 1; fi;
+
 coloroff='\e[0m';
 black='\e[0;30m';
 blue='\e[0;34m';
@@ -92,16 +94,12 @@ firewalldCheckActiveZones() {
 }
 
 verifyFapolicydIntegrity() {
-	if [ -r /etc/fapolicyd/fapolicyd.conf ]; then
-		if grep -q "integrity = sha256" /etc/fapolicyd/fapolicyd.conf > /dev/null 2>&1; then
-			logYes "fapolicyd integrity mode:" "sha256";
-		elif grep -q "integrity = size" /etc/fapolicyd/fapolicyd.conf > /dev/null 2>&1; then
-			logPartial "fapolicyd integrity mode:" "size";
-		else
-			logNo "fapolicyd integrity mode:" "none";
-		fi;
+	if grep -q "integrity = sha256" /etc/fapolicyd/fapolicyd.conf > /dev/null 2>&1; then
+		logYes "fapolicyd integrity mode:" "sha256";
+	elif grep -q "integrity = size" /etc/fapolicyd/fapolicyd.conf > /dev/null 2>&1; then
+		logPartial "fapolicyd integrity mode:" "size";
 	else
-		logUnknown "fapolicyd integrity mode:" "unknown" "sudo brace-audit";
+		logNo "fapolicyd integrity mode:" "none";
 	fi;
 }
 
@@ -118,6 +116,30 @@ verifyKernelCommandLine() {
 		logYes "kernel hardening via command line";
 	else
 		logNo "kernel hardening via command line" "sudo brace-supplemental-changes";
+	fi;
+}
+
+secureBootEnforcing() {
+	if mokutil --sb-state | grep -q "SecureBoot enabled" > /dev/null 2>&1; then
+		logYes "secure boot enabled";
+	else
+		logNo "secure boot enabled" "" "please enable via EFI settings";
+	fi;
+}
+
+secureBootTestKeys() {
+	if grep -q -i -e "DO NOT TRUST" -e "DO NOT SHIP" /sys/firmware/efi/efivars/PK* > /dev/null 2>&1; then
+		logNo "secure boot excludes test-keys" "check for vendor EFI update";
+	else
+		logYes "secure boot excludes test-keys";
+	fi;
+}
+
+fwupdmgrSecurity() {
+	if fwupdmgr security --force --json | jq '.SecurityAttributes.[] | select(.AppstreamId=="'"$2"'").HsiResult' | grep -q "$3" > /dev/null 2>&1; then
+		logYes "$1";
+	else
+		logNo "$1";
 	fi;
 }
 
@@ -208,6 +230,20 @@ if [ -f /etc/fedora-release ] || [ -f /etc/centos-release ]; then
 
 	echo -e "\nChecking kernel";
 	verifyKernelCommandLine;
+	if type "fwupdmgr" > /dev/null 2>&1; then
+		fwupdmgrSecurity "kernel lockdown" "org.fwupd.hsi.Kernel.Lockdown" "\"enabled\"";
+	fi;
+
+	echo -e "\nChecking firmware";
+	if secureBootEnforcing; then
+		secureBootTestKeys;
+	fi;
+	if type "fwupdmgr" > /dev/null 2>&1; then
+		if [ "$isVirtualMachine" == "false" ]; then
+			fwupdmgrSecurity "iommu" "org.fwupd.hsi.Iommu" "\"enabled\"";
+			fwupdmgrSecurity "system memory encryption" "org.fwupd.hsi.EncryptedRam" "\"encrypted\"";
+		fi;
+	fi;
 
 	#echo -e "\nChecking file system table";
 	#verifyFST;

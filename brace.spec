@@ -1,5 +1,5 @@
 Name: brace
-Version: 20240722
+Version: 20240726
 Release: 1
 Summary: Increases privacy/security through various configs.
 License: GPLv3+
@@ -64,8 +64,8 @@ install -Dm644 %{_sourcedir}/brace/usr/lib/systemd/user/restic-backup@.timer %{b
 install -Dm644 %{_sourcedir}/brace/usr/lib/tmpfiles.d/99-brace-proc.conf %{buildroot}/usr/lib/tmpfiles.d/99-brace-proc.conf;
 install -Dm644 %{_sourcedir}/brace/usr/lib/tmpfiles.d/99-brace-sys.conf %{buildroot}/usr/lib/tmpfiles.d/99-brace-sys.conf;
 install -Dm644 %{_sourcedir}/brace/usr/lib/udev/rules.d/50-usb-realtek-net-exceprt.rules %{buildroot}/usr/lib/udev/rules.d/50-usb-realtek-net-exceprt.rules;
-install -Dm755 %{_sourcedir}/brace/usr/bin/brace-audit %{buildroot}/usr/bin/brace-audit;
 install -Dm755 %{_sourcedir}/brace/usr/bin/brace-supplemental-changes %{buildroot}/usr/bin/brace-supplemental-changes;
+install -Dm755 %{_sourcedir}/brace/usr/sbin/brace-audit %{buildroot}/usr/bin/brace-audit;
 install -Dm755 %{_sourcedir}/brace/usr/sbin/brace-fedora-enable-auto-updates %{buildroot}/usr/sbin/brace-enable-auto-updates;
 install -Dm755 %{_sourcedir}/brace/usr/sbin/brace-fedora-enable-fapolicyd %{buildroot}/usr/sbin/brace-enable-fapolicyd;
 install -Dm755 %{_sourcedir}/brace/usr/sbin/brace-fedora-enable-rpmfusion %{buildroot}/usr/sbin/brace-enable-rpmfusion;
@@ -114,8 +114,8 @@ install -Dm644 %{_sourcedir}/README.md %{buildroot}/usr/share/doc/brace/README.m
 /usr/lib/tmpfiles.d/99-brace-proc.conf
 /usr/lib/tmpfiles.d/99-brace-sys.conf
 /usr/lib/udev/rules.d/50-usb-realtek-net-exceprt.rules
-/usr/bin/brace-audit
 /usr/bin/brace-supplemental-changes
+/usr/sbin/brace-audit
 /usr/sbin/brace-enable-auto-updates
 /usr/sbin/brace-enable-fapolicyd
 /usr/sbin/brace-enable-rpmfusion
