@@ -1,6 +1,6 @@
 # Maintainer: Tad <tad@spotco.us>
 pkgname=brace
-pkgver=20240726
+pkgver=20240812
 pkgrel=1
 pkgdesc="Increases privacy/security through various configs."
 arch=('any')

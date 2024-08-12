@@ -230,16 +230,18 @@ if [ -f /etc/fedora-release ] || [ -f /etc/centos-release ]; then
 
 	echo -e "\nChecking kernel";
 	verifyKernelCommandLine;
-	if type "fwupdmgr" > /dev/null 2>&1; then
-		fwupdmgrSecurity "kernel lockdown" "org.fwupd.hsi.Kernel.Lockdown" "\"enabled\"";
+	if [ "$isVirtualMachine" == "false" ]; then
+		if type "fwupdmgr" > /dev/null 2>&1; then
+			fwupdmgrSecurity "kernel lockdown" "org.fwupd.hsi.Kernel.Lockdown" "\"enabled\"";
+		fi;
 	fi;
 
 	echo -e "\nChecking firmware";
 	if secureBootEnforcing; then
 		secureBootTestKeys;
 	fi;
-	if type "fwupdmgr" > /dev/null 2>&1; then
-		if [ "$isVirtualMachine" == "false" ]; then
+	if [ "$isVirtualMachine" == "false" ]; then
+		if type "fwupdmgr" > /dev/null 2>&1; then
 			fwupdmgrSecurity "iommu" "org.fwupd.hsi.Iommu" "\"enabled\"";
 			fwupdmgrSecurity "system memory encryption" "org.fwupd.hsi.EncryptedRam" "\"encrypted\"";
 		fi;
