@@ -1,22 +1,11 @@
 {
 	"policies": {
 		"CaptivePortal": false,
-		"Cookies": {
-			"Behavior": "reject-tracker-and-partition-foreign",
-			"BehaviorPrivateBrowsing": "reject-tracker-and-partition-foreign"
-		},
 		"DisableFirefoxAccounts": true,
 		"DisableFirefoxStudies": true,
 		"DisablePocket": true,
 		"DisableSecurityBypass": false,
 		"DisableTelemetry": true,
-		"EnableTrackingProtection": {
-			"Value": true,
-			"Locked": false,
-			"Cryptomining": true,
-			"Fingerprinting": true,
-			"EmailTracking": true
-		},
 		"DNSOverHTTPS": {
 			"Enabled": true,
 			"Locked": false,
@@ -62,6 +51,12 @@
 		},
 		"NetworkPrediction": false,
 		"OverrideFirstRunPage": "about:home",
+		"Preferences": {
+			"browser.contentblocking.category": {
+				"Value": "strict",
+				"Status": "default"
+			}
+		},
 		"UserMessaging": {
 			"WhatsNew": false,
 			"ExtensionRecommendations": false,

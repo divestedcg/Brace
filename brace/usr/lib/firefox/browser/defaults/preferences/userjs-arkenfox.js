@@ -1142,19 +1142,19 @@ pref("_user.js.parrot", "7000 syntax error: the parrot's pushing up daisies!");
 /* 7016: customize ETP settings
  * [NOTE] FPP (fingerprintingProtection) is ignored when RFP (4501) is enabled
  * [WHY] Arkenfox only supports strict (2701) which sets these at runtime ***/
-pref("network.cookie.cookieBehavior", 5); // [DEFAULT: 5] //BRACE-UNCOMMENTED: strict cannot be set on first launch, use custom + enterprise policy instead //MULL-MODIFY_ME: set to 1 for FPI
-pref("network.cookie.cookieBehavior.optInPartitioning", true); // [ETP FF132+]
-pref("network.http.referer.disallowCrossSiteRelaxingDefault", true);
-pref("network.http.referer.disallowCrossSiteRelaxingDefault.top_navigation", true); // [FF100+]
-pref("privacy.bounceTrackingProtection.mode", 1); // [FF131+] [ETP FF133+]
-pref("privacy.fingerprintingProtection", true); // [FF114+] [ETP FF119+]
-pref("privacy.partition.network_state.ocsp_cache", true); // [DEFAULT: true]
-pref("privacy.query_stripping.enabled", true); // [FF101+]
-pref("privacy.trackingprotection.enabled", true);
-pref("privacy.trackingprotection.socialtracking.enabled", true);
-pref("privacy.trackingprotection.cryptomining.enabled", true); // [DEFAULT: true]
-pref("privacy.trackingprotection.fingerprinting.enabled", true); // [DEFAULT: true]
-pref("privacy.trackingprotection.emailtracking.enabled", true); //BRACE-ADDED
+   // pref("network.cookie.cookieBehavior", 5); // [DEFAULT: 5] //BRACE-UNCOMMENTED: strict cannot be set on first launch, use custom + enterprise policy instead //MULL-MODIFY_ME: set to 1 for FPI
+   // pref("network.cookie.cookieBehavior.optInPartitioning", true); // [ETP FF132+]
+   // pref("network.http.referer.disallowCrossSiteRelaxingDefault", true);
+   // pref("network.http.referer.disallowCrossSiteRelaxingDefault.top_navigation", true); // [FF100+]
+   // pref("privacy.bounceTrackingProtection.mode", 1); // [FF131+] [ETP FF133+]
+   // pref("privacy.fingerprintingProtection", true); // [FF114+] [ETP FF119+]
+   // pref("privacy.partition.network_state.ocsp_cache", true); // [DEFAULT: true]
+   // pref("privacy.query_stripping.enabled", true); // [FF101+]
+   // pref("privacy.trackingprotection.enabled", true);
+   // pref("privacy.trackingprotection.socialtracking.enabled", true);
+   // pref("privacy.trackingprotection.cryptomining.enabled", true); // [DEFAULT: true]
+   // pref("privacy.trackingprotection.fingerprinting.enabled", true); // [DEFAULT: true]
+   // pref("privacy.trackingprotection.emailtracking.enabled", true); //BRACE-ADDED
 /* 7017: disable service workers
  * [WHY] Already isolated with TCP (2701) behind a pref ***/
    // pref("dom.serviceWorkers.enabled", false);
