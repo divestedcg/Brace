@@ -101,6 +101,7 @@ if [ "$(/usr/bin/id -u)" -eq "0" ]; then
 					#Nice to haves
 					grubby --update-kernel=ALL --args="fsck.mode=force"; #FSCK mounts every boot, systemd default is once per 30 boots
 					grubby --update-kernel=ALL --args="i8042.reset=1"; #Workaround buggy laptop keyboard/touchpads
+					grubby --update-kernel=ALL --args="libata.allow_tpm=1"; #OPAL support
 					break;;
 				Skip )
 					break;;
