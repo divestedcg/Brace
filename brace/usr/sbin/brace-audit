@@ -224,7 +224,11 @@ if [ -f /etc/fedora-release ] || [ -f /etc/centos-release ]; then
 		logSkip "ignoring automatic updates, too unreliable on desktops"
 	else
 		if rpmPackageInstalled "dnf-automatic" "sudo brace-enable-auto-updates"; then
-			systemdServiceRunning "dnf-automatic-install.timer";
+			if type "dnf5" > /dev/null 2>&1; then
+				systemdServiceRunning "dnf5-automatic.timer";
+			else
+				systemdServiceRunning "dnf-automatic-install.timer";
+			fi;
 		fi;
 	fi;
 
