@@ -33,6 +33,9 @@ whichPackageManager() {
 	if type "zypper" > /dev/null 2>&1; then
 		echo "zypper" && return 0;
 	fi;
+	if type "dnf5" > /dev/null 2>&1; then
+		echo "dnf5" && return 0;
+	fi;
 	if type "dnf" > /dev/null 2>&1; then
 		echo "dnf" && return 0;
 	fi;
@@ -64,6 +67,9 @@ handleInstall() {
 		done
 		$packageManager install --no-install-recommends $packagesToInstallReal;
 	fi;
+	if [ "$packageManager" == "dnf5" ]; then
+		$packageManager install --skip-unavailable $packagesFedora $packagesBaseFedora && $packageManager mark install --skip-unavailable $packagesFedora $packagesBaseFedora;
+	fi;
 	if [ "$packageManager" == "dnf" ] || [ "$packageManager" == "yum" ]; then
 		$packageManager install --skip-broken $packagesFedora $packagesBaseFedora && $packageManager mark install --skip-broken $packagesFedora $packagesBaseFedora;
 	fi;
@@ -82,6 +88,9 @@ handleInstall() {
 handleRemove() {
 	if [ "$packageManager" == "apt" ]; then
 		$packageManager remove $packagesDebian;
+	fi;
+	if [ "$packageManager" == "dnf5" ]; then
+		$packageManager remove --skip-unavailable $packagesFedora;
 	fi;
 	if [ "$packageManager" == "dnf" ] || [ "$packageManager" == "yum" ]; then
 		$packageManager remove --skip-broken $packagesFedora;
@@ -111,7 +120,7 @@ handleOperation() {
 			if [ "$packageManager" == "apt" ]; then
 				packagesBaseDebian="$packagesBaseDebian $packagesDebian";
 			fi;
-			if [ "$packageManager" == "dnf" ] || [ "$packageManager" == "yum" ]; then
+			if [ "$packageManager" == "dnf5" ] ||  [ "$packageManager" == "dnf" ] || [ "$packageManager" == "yum" ]; then
 				packagesBaseFedora="$packagesBaseFedora $packagesFedora";
 			fi;
 			if [ "$packageManager" == "flatpak" ]; then
@@ -149,7 +158,7 @@ handleCleanup() {
 	if [ "$packageManager" == "apt" ]; then
 		$packageManager autoremove;
 	fi;
-	if [ "$packageManager" == "dnf" ] || [ "$packageManager" == "yum" ]; then
+	if [ "$packageManager" == "dnf5" ] || [ "$packageManager" == "dnf" ] || [ "$packageManager" == "yum" ]; then
 		$packageManager autoremove;
 	fi;
 	if [ "$packageManager" == "flatpak" ]; then
