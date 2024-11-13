@@ -184,8 +184,8 @@ if [ -f /etc/fedora-release ] || [ -f /etc/centos-release ]; then
 	rpmPackageInstalled "brace";
 	if [ "$isVirtualMachine" == "false" ]; then
 		rpmPackageInstalled "real-ucode";
-		rpmPackageInstalled "tlp";
-		rpmPackageInstalled "tlp-rdw";
+		#rpmPackageInstalled "tlp";
+		#rpmPackageInstalled "tlp-rdw";
 	else
 		logSkip "virtual machine detected, ignoring some packages";
 	fi;
@@ -223,10 +223,10 @@ if [ -f /etc/fedora-release ] || [ -f /etc/centos-release ]; then
 	if [ "$isDesktop" == "true" ]; then
 		logSkip "ignoring automatic updates, too unreliable on desktops"
 	else
-		if rpmPackageInstalled "dnf-automatic" "sudo brace-enable-auto-updates"; then
-			if type "dnf5" > /dev/null 2>&1; then
-				systemdServiceRunning "dnf5-automatic.timer";
-			else
+		if type "dnf5" > /dev/null 2>&1; then
+			systemdServiceRunning "dnf5-automatic.timer";
+		else
+			if rpmPackageInstalled "dnf-automatic" "sudo brace-enable-auto-updates"; then
 				systemdServiceRunning "dnf-automatic-install.timer";
 			fi;
 		fi;
