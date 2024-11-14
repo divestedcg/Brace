@@ -415,7 +415,7 @@ category='Media - Consumption';
 	baseIncluded=true;
 	packagesArch='ffmpeg vlc lollypop yt-dlp'; #TODO: codecs
 	packagesDebian='ffmpeg vlc lollypop youtube-dl'; #TODO: codecs
-	packagesFedora='@multimedia ffmpeg gstreamer1-plugin-openh264 vlc lollypop yt-dlp --allowerasing';
+	packagesFedora='@multimedia gstreamer1-plugin-openh264 vlc lollypop yt-dlp'; #ffmpeg
 	packagesSuse='ffmpeg vlc lollypop yt-dlp'; #TODO: codecs
 	handleOperation;
 category='Media - Books';
