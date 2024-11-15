@@ -37,8 +37,8 @@ ACTION=="add|change", ATTRS{idVendor}=="1b1c", ATTRS{idProduct}=="1a0e", SUBSYST
 #Lexar JumpDrive, tested not working
 #ACTION=="add|change", ATTRS{idVendor}=="05dc", ATTRS{idProduct}=="a838", SUBSYSTEM=="scsi_disk", ATTR{provisioning_mode}="unmap"
 
-#Samsung Fit Plus, tested working
-ACTION=="add|change", ATTRS{idVendor}=="090c", ATTRS{idProduct}=="1000", SUBSYSTEM=="scsi_disk", ATTR{provisioning_mode}="unmap"
+#Samsung Fit Plus, tested not working
+#ACTION=="add|change", ATTRS{idVendor}=="090c", ATTRS{idProduct}=="1000", SUBSYSTEM=="scsi_disk", ATTR{provisioning_mode}="unmap"
 
 #Samsung Portable SSD T5, reported working
 ACTION=="add|change", ATTRS{idVendor}=="04e8", ATTRS{idProduct}=="61f5", SUBSYSTEM=="scsi_disk", ATTR{provisioning_mode}="unmap"
