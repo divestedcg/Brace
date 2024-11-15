@@ -1,0 +1,47 @@
+#Enables TRIM for non-standard devices
+#https://www.jeffgeerling.com/blog/2020/enabling-trim-on-external-ssd-on-raspberry-pi
+#https://bbs.archlinux.org/viewtopic.php?id=236280
+
+#
+#NVMe Enclosures
+#
+
+#RTL9210A, tested working
+ACTION=="add|change", ATTRS{idVendor}=="0bda", ATTRS{idProduct}=="9210", SUBSYSTEM=="scsi_disk", ATTR{provisioning_mode}="unmap"
+
+
+#
+#SATA Enclosures
+#
+
+#ASMedia ASM1051E/ASM1053E/ASM1153/ASM1153E, tested not working
+#ACTION=="add|change", ATTRS{idVendor}=="174c", ATTRS{idProduct}=="55aa", SUBSYSTEM=="scsi_disk", ATTR{provisioning_mode}="unmap"
+
+#JMicron JMS578, tested working
+#ACTION=="add|change", ATTRS{idVendor}=="152d", ATTRS{idProduct}=="0578", SUBSYSTEM=="scsi_disk", ATTR{provisioning_mode}="unmap"
+
+#JMicron JMS583, reported working
+#ACTION=="add|change", ATTRS{idVendor}=="152d", ATTRS{idProduct}=="0580", SUBSYSTEM=="scsi_disk", ATTR{provisioning_mode}="unmap"
+
+#VIA VL716, reported working
+#ACTION=="add|change", ATTRS{idVendor}=="2109", ATTRS{idProduct}=="0715", SUBSYSTEM=="scsi_disk", ATTR{provisioning_mode}="unmap"
+
+
+#
+#Standalone Products
+#
+
+#Corsair Flash Voyager GTX, reported working
+ACTION=="add|change", ATTRS{idVendor}=="1b1c", ATTRS{idProduct}=="1a0e", SUBSYSTEM=="scsi_disk", ATTR{provisioning_mode}="unmap"
+
+#Lexar JumpDrive, tested not working
+#ACTION=="add|change", ATTRS{idVendor}=="05dc", ATTRS{idProduct}=="a838", SUBSYSTEM=="scsi_disk", ATTR{provisioning_mode}="unmap"
+
+#Samsung Fit Plus, tested working
+ACTION=="add|change", ATTRS{idVendor}=="090c", ATTRS{idProduct}=="1000", SUBSYSTEM=="scsi_disk", ATTR{provisioning_mode}="unmap"
+
+#Samsung Portable SSD T5, reported working
+ACTION=="add|change", ATTRS{idVendor}=="04e8", ATTRS{idProduct}=="61f5", SUBSYSTEM=="scsi_disk", ATTR{provisioning_mode}="unmap"
+
+#Generic, tested not working
+#ACTION=="add|change", ATTRS{idVendor}=="6557", ATTRS{idProduct}=="1631", SUBSYSTEM=="scsi_disk", ATTR{provisioning_mode}="unmap"

@@ -1,7 +1,7 @@
 # Maintainer: Tad <tad@spotco.us>
 pkgname=brace
-pkgver=20241113
-pkgrel=2
+pkgver=20241115
+pkgrel=1
 pkgdesc="Increases privacy/security through various configs."
 arch=('any')
 license=('GPL3')
@@ -51,6 +51,7 @@ package() {
 	install -Dm644 brace/usr/lib/systemd/system/wpa_supplicant.service.d/99-brace.conf "$pkgdir"/usr/lib/systemd/system/wpa_supplicant.service.d/99-brace.conf;
 	install -Dm644 brace/usr/lib/tmpfiles.d/99-brace-proc.conf "$pkgdir"/usr/lib/tmpfiles.d/99-brace-proc.conf;
 	install -Dm644 brace/usr/lib/tmpfiles.d/99-brace-sys.conf "$pkgdir"/usr/lib/tmpfiles.d/99-brace-sys.conf;
+	install -Dm644 brace/usr/lib/udev/rules.d/10-trim.rules "$pkgdir"/usr/lib/udev/rules.d/10-trim.rules;
 	install -Dm644 brace/usr/lib/udev/rules.d/50-usb-realtek-net-exceprt.rules "$pkgdir"/usr/lib/udev/rules.d/50-usb-realtek-net-exceprt.rules;
 	install -Dm644 brace/usr/lib/systemd/user/restic-backup@.service "$pkgdir"/usr/lib/systemd/user/restic-backup@.service;
 	install -Dm644 brace/usr/lib/systemd/user/restic-backup@.timer "$pkgdir"/usr/lib/systemd/user/restic-backup@.timer;
