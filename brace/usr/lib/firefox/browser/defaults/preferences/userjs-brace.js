@@ -52,4 +52,4 @@ pref("extensions.pocket.enabled", false);
 pref("identity.fxaccounts.enabled", false);
 
 //Fix IPv6 when using DoH
-pref("network.dns.preferIPv6", true); //MULL-KEEP_FOR_NOW
+pref("network.dns.preferIPv6", true); //BRACE-KEEP_FOR_NOW
