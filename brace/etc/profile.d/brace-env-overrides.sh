@@ -29,6 +29,13 @@ export GST_VAAPI_ALL_DRIVERS=1;
 # disable thread local malloc cache
 export GLIBC_TUNABLES='glibc.malloc.tcache_count=0'
 
+# disable JavaScript JIT
+# https://trac.webkit.org/wiki/EnvironmentVariables
+export JavaScriptCoreUseJIT=0;
+export JSC_useFTLJIT=0;
+# https://gitlab.gnome.org/GNOME/gjs/-/blob/master/doc/Environment.md
+export GJS_DISABLE_JIT=1;
+
 # set restrictive umask
 if [ "$(/usr/bin/id -ru)" -ge 1000 ] && [ "$(/usr/bin/id -u)" -ge 1000 ] && [ "$(/usr/bin/id -gn)" = "$(/usr/bin/id -un)" ]; then
     umask 0077;
