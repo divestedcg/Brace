@@ -107,7 +107,7 @@ verifyHardenedMalloc() {
 	if grep -q "hardened_malloc" /proc/self/maps > /dev/null 2>&1; then
 		logYes "hardened_malloc preloaded";
 	else
-		logNo "hardened_malloc preloaded" "ensure ld.so.preload is correct";
+		logNo "hardened_malloc preloaded" "ensure /etc/ld.so.preload is correct";
 	fi;
 }
 
@@ -115,7 +115,75 @@ verifyKernelCommandLine() {
 	if grep -q "init_on_alloc=1 init_on_free=1 page_alloc.shuffle=1 pti=on kpti=on randomize_kstack_offset=1 slab_nomerge iommu=force iommu.passthrough=0 iommu.strict=1 intel_iommu=on amd_iommu=force_isolation spec_store_bypass_disable=on ssbd=force-on spectre_v2=on spectre_bhi=on tsx=off lockdown=confidentiality mce=0 module.sig_enforce=1 vsyscall=none fsck.mode=force i8042.reset=1" /proc/cmdline > /dev/null 2>&1; then
 		logYes "kernel hardening via command line";
 	else
-		logNo "kernel hardening via command line" "sudo brace-supplemental-changes";
+		if ! grep -q "init_on_alloc=1" /proc/cmdline > /dev/null 2>&1; then
+			logNo "kernel hardening via command line" "missing init_on_alloc=1" "sudo brace-supplemental-changes";
+		fi;
+		if ! grep -q "init_on_free=1" /proc/cmdline > /dev/null 2>&1; then
+			logNo "kernel hardening via command line" "missing init_on_free=1" "sudo brace-supplemental-changes";
+		fi;
+		if ! grep -q "page_alloc.shuffle=1" /proc/cmdline > /dev/null 2>&1; then
+			logNo "kernel hardening via command line" "missing page_alloc.shuffle=1" "sudo brace-supplemental-changes";
+		fi;
+		if ! grep -q "pti=on" /proc/cmdline > /dev/null 2>&1; then
+			logNo "kernel hardening via command line" "missing pti=on" "sudo brace-supplemental-changes";
+		fi;
+		if ! grep -q "kpti=on" /proc/cmdline > /dev/null 2>&1; then
+			logNo "kernel hardening via command line" "missing kpti=on" "sudo brace-supplemental-changes";
+		fi;
+		if ! grep -q "randomize_kstack_offset=1" /proc/cmdline > /dev/null 2>&1; then
+			logNo "kernel hardening via command line" "missing randomize_kstack_offset=1" "sudo brace-supplemental-changes";
+		fi;
+		if ! grep -q "slab_nomerge" /proc/cmdline > /dev/null 2>&1; then
+			logNo "kernel hardening via command line" "missing slab_nomerge" "sudo brace-supplemental-changes";
+		fi;
+		if ! grep -q "iommu=force" /proc/cmdline > /dev/null 2>&1; then
+			logNo "kernel hardening via command line" "missing iommu=force" "sudo brace-supplemental-changes";
+		fi;
+		if ! grep -q "iommu.passthrough=0" /proc/cmdline > /dev/null 2>&1; then
+			logNo "kernel hardening via command line" "missing iommu.passthrough=0" "sudo brace-supplemental-changes";
+		fi;
+		if ! grep -q "iommu.strict=1" /proc/cmdline > /dev/null 2>&1; then
+			logNo "kernel hardening via command line" "missing iommu.strict=1" "sudo brace-supplemental-changes";
+		fi;
+		if ! grep -q "intel_iommu=on" /proc/cmdline > /dev/null 2>&1; then
+			logNo "kernel hardening via command line" "missing intel_iommu=on" "sudo brace-supplemental-changes";
+		fi;
+		if ! grep -q "amd_iommu=force_isolation" /proc/cmdline > /dev/null 2>&1; then
+			logNo "kernel hardening via command line" "missing amd_iommu=force_isolation" "sudo brace-supplemental-changes";
+		fi;
+		if ! grep -q "spec_store_bypass_disable=on" /proc/cmdline > /dev/null 2>&1; then
+			logNo "kernel hardening via command line" "missing spec_store_bypass_disable=on" "sudo brace-supplemental-changes";
+		fi;
+		if ! grep -q "ssbd=force-on" /proc/cmdline > /dev/null 2>&1; then
+			logNo "kernel hardening via command line" "missing ssbd=force-on" "sudo brace-supplemental-changes";
+		fi;
+		if ! grep -q "spectre_v2=on" /proc/cmdline > /dev/null 2>&1; then
+			logNo "kernel hardening via command line" "missing spectre_v2=on" "sudo brace-supplemental-changes";
+		fi;
+		if ! grep -q "spectre_bhi=on" /proc/cmdline > /dev/null 2>&1; then
+			logNo "kernel hardening via command line" "missing spectre_bhi=on" "sudo brace-supplemental-changes";
+		fi;
+		if ! grep -q "tsx=off" /proc/cmdline > /dev/null 2>&1; then
+			logNo "kernel hardening via command line" "missing tsx=off" "sudo brace-supplemental-changes";
+		fi;
+		if ! grep -q "lockdown=confidentiality" /proc/cmdline > /dev/null 2>&1; then
+			logNo "kernel hardening via command line" "missing lockdown=confidentiality" "sudo brace-supplemental-changes";
+		fi;
+		if ! grep -q "mce=0" /proc/cmdline > /dev/null 2>&1; then
+			logNo "kernel hardening via command line" "missing mce=0" "sudo brace-supplemental-changes";
+		fi;
+		if ! grep -q "module.sig_enforce=1" /proc/cmdline > /dev/null 2>&1; then
+			logNo "kernel hardening via command line" "missing module.sig_enforce=1" "sudo brace-supplemental-changes";
+		fi;
+		if ! grep -q "vsyscall=none" /proc/cmdline > /dev/null 2>&1; then
+			logNo "kernel hardening via command line" "missing vsyscall=none" "sudo brace-supplemental-changes";
+		fi;
+		if ! grep -q "fsck.mode=force" /proc/cmdline > /dev/null 2>&1; then
+			logNo "kernel hardening via command line" "missing fsck.mode=force" "sudo brace-supplemental-changes";
+		fi;
+		if ! grep -q "i8042.reset=1" /proc/cmdline > /dev/null 2>&1; then
+			logNo "kernel hardening via command line" "missing i8042.reset=1" "sudo brace-supplemental-changes";
+		fi;
 	fi;
 }
 
