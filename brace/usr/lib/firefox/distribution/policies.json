@@ -42,14 +42,6 @@
 			"{73a6fe31-595d-460b-a920-fcc0f8843232}": {
 				"installation_mode": "allowed",
 				"install_url": "https://addons.mozilla.org/firefox/downloads/latest/{73a6fe31-595d-460b-a920-fcc0f8843232}/latest.xpi"
-			},
-			"{9a41dee2-b924-4161-a971-7fb35c053a4a}": {
-				"installation_mode": "allowed",
-				"install_url": "https://addons.mozilla.org/firefox/downloads/latest/{9a41dee2-b924-4161-a971-7fb35c053a4a}/latest.xpi"
-			},
-			"{48748554-4c01-49e8-94af-79662bf34d50}": {
-				"installation_mode": "allowed",
-				"install_url": "https://addons.mozilla.org/firefox/downloads/latest/{48748554-4c01-49e8-94af-79662bf34d50}/latest.xpi"
 			}
 		},
 		"FirefoxHome": {

@@ -32,13 +32,10 @@
 	"ExtensionInstallBlocklist": [ "*" ],
 	"ExtensionInstallAllowlist": [
 					"cjpalhdlnbpafiamejdnhcphjbkeiagm",
-					"ddkjiahejlhfcafbddmgiahcphecmpfh",
-					"omkfmpieigblcllmkgbflkikinpkodlk",
-					"jlhmfgmfgeifomenelglieieghnjghma",
-					"ajhmfdgkijocedmfjonnpjfojldioehi"
+					"ddkjiahejlhfcafbddmgiahcphecmpfh"
 					],
 	"ExtensionInstallForcelist": [
-					"cjpalhdlnbpafiamejdnhcphjbkeiagm;https://clients2.google.com/service/update2/crx"
+					"ddkjiahejlhfcafbddmgiahcphecmpfh;https://clients2.google.com/service/update2/crx"
 					],
 	"ExtensionAllowInsecureUpdates": false,
 	"VoiceInteractionContextEnabled": false,
