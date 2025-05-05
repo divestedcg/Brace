@@ -33,6 +33,9 @@ highlight-matching-brackets=true
 style-scheme-name='solarized-dark'
 wrap-text=true
 
+[org/gnome/calculator]
+refresh-interval=0
+
 [org/gnome/evolution/mail]
 composer-request-receipt=true
 prompt-on-unwanted-html=true

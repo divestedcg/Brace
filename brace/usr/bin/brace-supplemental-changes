@@ -79,7 +79,7 @@ if [ "$(/usr/bin/id -u)" -eq "0" ]; then
 					#grubby --update-kernel=ALL --args="slub_debug=FZ"; #Enables SLUB sanity checks and red-zoning, #XXX: extreme performance impact and enables unhashed memory addresses
 
 					#IOMMU Enablement
-					grubby --update-kernel=ALL --args="iommu=force"; #???
+					grubby --update-kernel=ALL --args="iommu=force"; #Ensure it is enabled in more cases
 					grubby --update-kernel=ALL --args="iommu.passthrough=0"; #Always use the IOMMU for DMA
 					grubby --update-kernel=ALL --args="iommu.strict=1"; #Do not defer invalidation of hardware TLBs
 					grubby --update-kernel=ALL --args="intel_iommu=on"; #Ensure the IOMMU driver is enabled
