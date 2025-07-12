@@ -23,10 +23,10 @@ if [ -f /etc/fedora-release ]; then
 	select yn in "Yes" "No"; do
 		case $yn in
 			Yes )
-				sed -i 's/integrity = none/integrity = sha256/g' /etc/fapolicyd/fapolicyd.conf;
+				sed -i 's/integrity = .*/integrity = sha256/g' /etc/fapolicyd/fapolicyd.conf;
 				break;;
 			No )
-				sed -i 's/integrity = none/integrity = size/g' /etc/fapolicyd/fapolicyd.conf;
+				sed -i 's/integrity = .*/integrity = size/g' /etc/fapolicyd/fapolicyd.conf;
 				break;;
 		esac
 	done
