@@ -73,6 +73,7 @@ install -Dm755 %{_sourcedir}/brace/usr/sbin/brace-fedora-enable-rpmfusion %{buil
 install -Dm755 %{_sourcedir}/brace/usr/sbin/brace-fedora-update-system %{buildroot}/usr/sbin/brace-update-system;
 install -Dm755 %{_sourcedir}/brace/usr/sbin/brace-installer %{buildroot}/usr/sbin/brace-installer;
 install -Dm755 %{_sourcedir}/brace/usr/sbin/brace-rpm-verify %{buildroot}/usr/sbin/brace-rpm-verify;
+install -Dm644 %{_sourcedir}/brace/usr/share/polkit-1/rules.d/00-brace-packagekit.rules %{buildroot}/usr/share/polkit-1/rules.d/00-brace-packagekit.rules;
 mkdir -p %{buildroot}/usr/share/doc/brace;
 install -Dm644 %{_sourcedir}/README.md %{buildroot}/usr/share/doc/brace/README.md;
 
@@ -124,4 +125,5 @@ install -Dm644 %{_sourcedir}/README.md %{buildroot}/usr/share/doc/brace/README.m
 /usr/sbin/brace-update-system
 /usr/sbin/brace-installer
 /usr/sbin/brace-rpm-verify
+/usr/share/polkit-1/rules.d/00-brace-packagekit.rules
 /usr/share/doc/brace/README.md
