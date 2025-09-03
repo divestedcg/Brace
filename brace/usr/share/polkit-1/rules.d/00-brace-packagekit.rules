@@ -1,6 +1,7 @@
 polkit.addRule(function(action, subject) {
     if (action.id == "org.freedesktop.packagekit.package-install" ||
         action.id == "org.freedesktop.packagekit.package-remove") {
-        return polkit.Result.AUTH_ADMIN;
+            return polkit.Result.AUTH_ADMIN;
     }
+    return polkit.Result.NOT_HANDLED;
 });

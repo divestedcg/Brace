@@ -618,6 +618,26 @@ user::rwx
 group::r-x
 other::r-x
 
+# file: brace/usr/share
+user::rwx
+group::r-x
+other::r-x
+
+# file: brace/usr/share/polkit-1
+user::rwx
+group::r-x
+other::r-x
+
+# file: brace/usr/share/polkit-1/rules.d
+user::rwx
+group::r-x
+other::r-x
+
+# file: brace/usr/share/polkit-1/rules.d/00-brace-packagekit.rules
+user::rw-
+group::r--
+other::r--
+
 # file: LICENSE
 user::rw-
 group::r--
