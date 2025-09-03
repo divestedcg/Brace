@@ -1,6 +1,6 @@
 # Maintainer: Tad <tad@spotco.us>
 pkgname=brace
-pkgver=20250901
+pkgver=20250903
 pkgrel=1
 pkgdesc="Increases privacy/security through various configs."
 arch=('any')
@@ -58,6 +58,7 @@ package() {
 	install -Dm755 brace/usr/bin/brace-supplemental-changes "$pkgdir"/usr/bin/brace-supplemental-changes;
 	install -Dm755 brace/usr/sbin/brace-installer "$pkgdir"/usr/bin/brace-installer;
 	install -Dm755 brace/usr/sbin/brace-rpm-verify "$pkgdir"/usr/bin/brace-rpm-verify;
+	install -Dm644 brace/usr/share/polkit-1/rules.d/00-brace-packagekit.rules "$pkgdir"/usr/share/polkit-1/rules.d/00-brace-packagekit.rules;
 	mkdir -p "$pkgdir"/usr/share/doc/brace;
 	install -Dm644 README.md "$pkgdir"/usr/share/doc/brace/README.md;
 }
