@@ -98,6 +98,9 @@ if [ "$(/usr/bin/id -u)" -eq "0" ]; then
 					#grubby --update-kernel=ALL --args="oops=panic"; #Panic system on oops #XXX: can turn minor issues into annoyances
 					grubby --update-kernel=ALL --args="vsyscall=none"; #Disable unnecessary legacy functionality
 					#grubby --update-kernel=ALL --args="ia32_emulation=false"; #Disable support for 32-bit execution
+					#grubby --update-kernel=ALL --args="vdso32=0"; #Disable 32-bit VDSO
+					grubby --update-kernel=ALL --args="efi_pstore.pstore_disable=1"; #Disable use of UEFI pstore backend
+					grubby --update-kernel=ALL --args="erst_disable"; #Disable use of ACPI ERST pstore backend
 
 					#Nice to haves
 					grubby --update-kernel=ALL --args="fsck.mode=force"; #FSCK mounts every boot, systemd default is once per 30 boots

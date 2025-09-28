@@ -112,7 +112,7 @@ verifyHardenedMalloc() {
 }
 
 verifyKernelCommandLine() {
-	if grep -q "init_on_alloc=1 init_on_free=1 page_alloc.shuffle=1 pti=on kpti=on randomize_kstack_offset=1 slab_nomerge iommu=force iommu.passthrough=0 iommu.strict=1 intel_iommu=on amd_iommu=force_isolation spec_store_bypass_disable=on ssbd=force-on spectre_v2=on spectre_bhi=on tsx=off lockdown=confidentiality mce=0 module.sig_enforce=1 vsyscall=none fsck.mode=force i8042.reset=1" /proc/cmdline > /dev/null 2>&1; then
+	if grep -q "init_on_alloc=1 init_on_free=1 page_alloc.shuffle=1 pti=on kpti=on randomize_kstack_offset=1 slab_nomerge iommu=force iommu.passthrough=0 iommu.strict=1 intel_iommu=on amd_iommu=force_isolation spec_store_bypass_disable=on ssbd=force-on spectre_v2=on spectre_bhi=on tsx=off lockdown=confidentiality mce=0 module.sig_enforce=1 vsyscall=none efi_pstore.pstore_disable=1 erst_disable fsck.mode=force i8042.reset=1" /proc/cmdline > /dev/null 2>&1; then
 		logYes "kernel hardening via command line";
 	else
 		if ! grep -q "init_on_alloc=1" /proc/cmdline > /dev/null 2>&1; then
@@ -177,6 +177,15 @@ verifyKernelCommandLine() {
 		fi;
 		if ! grep -q "vsyscall=none" /proc/cmdline > /dev/null 2>&1; then
 			logNo "kernel hardening via command line" "missing vsyscall=none" "sudo brace-supplemental-changes";
+		fi;
+		#if ! grep -q "vdso32=0" /proc/cmdline > /dev/null 2>&1; then
+		#	logNo "kernel hardening via command line" "missing vdso32=0" "sudo brace-supplemental-changes";
+		#fi;
+		if ! grep -q "efi_pstore.pstore_disable=1" /proc/cmdline > /dev/null 2>&1; then
+			logNo "kernel hardening via command line" "missing efi_pstore.pstore_disable=1" "sudo brace-supplemental-changes";
+		fi;
+		if ! grep -q "erst_disable" /proc/cmdline > /dev/null 2>&1; then
+			logNo "kernel hardening via command line" "missing erst_disable" "sudo brace-supplemental-changes";
 		fi;
 		if ! grep -q "fsck.mode=force" /proc/cmdline > /dev/null 2>&1; then
 			logNo "kernel hardening via command line" "missing fsck.mode=force" "sudo brace-supplemental-changes";
