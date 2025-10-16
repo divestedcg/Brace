@@ -1,5 +1,5 @@
 [org/gnome/desktop/applications/terminal]
-exec='gnome-terminal'
+exec='ptyxis'
 
 [org/gnome/desktop/background]
 show-desktop-icons=false
@@ -108,6 +108,14 @@ scheme='solarized-dark'
 display-line-numbers=true
 background-pattern='grid'
 use-default-font=true
+auto-indent=false
+
+[org/gnome/TextEditor]
+auto-indent=false
+highlight-current-line=true
+show-line-numbers=true
+style-scheme='solarized-dark'
+restore-session=false
 
 [org/gnome/gnome-flashback/desktop]
 show-icons=false
@@ -159,7 +167,7 @@ home=['<Super>e']
 
 [org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0]
 binding='<Primary><Alt>t'
-command='gnome-terminal'
+command='ptyxis --new-window'
 name='Launch terminal'
 
 [org/gnome/settings-daemon/plugins/power]
@@ -203,3 +211,17 @@ bold-is-bright=true
 bold-color-same-as-fg=true
 bold-color='#c5c8c6'
 background-color='#1d1f21'
+
+[org/gnome/Ptyxis]
+default-profile-uuid='827304327b7d146873335ecb68f0f140'
+interface-style='dark'
+profile-uuids=['827304327b7d146873335ecb68f0f140']
+restore-session=false
+restore-window-size=false
+use-system-font=true
+window-size=(uint32 235, uint32 60)
+
+[org/gnome/Ptyxis/Profiles/827304327b7d146873335ecb68f0f140]
+bold-is-bright=true
+palette='Google'
+scrollback-lines=100000
