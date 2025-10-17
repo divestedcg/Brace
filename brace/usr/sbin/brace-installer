@@ -212,10 +212,10 @@ done;
 #
 category='Recommended for Removal';
 	baseIncluded=false;
-	packagesArch='gnome-documents gnome-weather gnome-music gnome-software packagekit epiphany sushi';
-	packagesDebian='gnome-documents gnome-weather gnome-music gnome-games rhythmbox gnome-software packagekit sushi';
-	packagesFedora='abiword adapta-gtk-theme akregator amarok asunder calligra* clipit clipman compiz emerald empathy exaile falkon filezilla geany gnomebaker gnome-documents gnome-weather gnote gnumeric hexchat juk k3b kget kmahjongg kmines konqueror konversation kpatience ktnef ktorrent lxmusic midori osmo paper-icon-theme pidgin *powerline pragha qlipper quassel qupzilla rhythmbox xawtv xfburn xfdashboard xpad yarock gnome-software PackageKit dnfdragora* sushi passim';
-	packagesSuse='gnome-documents gnome-weather gnome-music brasero iagno lightsoff gnome-mahjongg pidgin polari tigervnc swell-foop xterm sushi';
+	packagesArch='gnome-weather gnome-music gnome-software packagekit epiphany sushi';
+	packagesDebian='gnome-weather gnome-music rhythmbox gnome-software packagekit sushi';
+	packagesFedora='abiword adapta-gtk-theme akregator amarok asunder calligra* clipit clipman compiz emerald empathy exaile falkon filezilla geany gnomebaker gnome-weather gnote gnumeric hexchat juk k3b kget kmahjongg kmines konqueror konversation kpatience ktnef ktorrent lxmusic midori osmo paper-icon-theme pidgin *powerline pragha qlipper quassel qupzilla rhythmbox xawtv xfburn xfdashboard xpad yarock gnome-software PackageKit dnfdragora* sushi passim';
+	packagesSuse='gnome-weather gnome-music brasero iagno lightsoff gnome-mahjongg pidgin polari tigervnc swell-foop xterm sushi';
 	handleOperation;
 category='Core';
 	baseIncluded=true;
@@ -362,26 +362,12 @@ category='Internet';
 	packagesFedora='firefox mozilla-ublock-origin chromium liferea';
 	packagesSuse='MozillaFirefox chromium liferea';
 	handleOperation;
-category='Media - Consumption';
+category='Media';
 	baseIncluded=true;
-	packagesArch='ffmpeg vlc lollypop yt-dlp'; #TODO: codecs
+	packagesArch='ffmpeg vlc lollypop foliate yt-dlp'; #TODO: codecs
 	packagesDebian='ffmpeg vlc lollypop yt-dlp'; #TODO: codecs
-	packagesFedora='@multimedia gstreamer1-plugin-openh264 vlc lollypop yt-dlp'; #ffmpeg
-	packagesSuse='ffmpeg vlc lollypop yt-dlp'; #TODO: codecs
-	handleOperation;
-category='Media - Books';
-	baseIncluded=false;
-	packagesArch='foliate';
-	packagesDebian=''; #unavailable
-	packagesFedora='foliate';
-	packagesSuse='foliate';
-	handleOperation;
-category='Media - HTPC';
-	baseIncluded=false;
-	packagesArch='kodi';
-	packagesDebian='kodi';
-	packagesFedora='kodi';
-	packagesSuse=''; #unavailable
+	packagesFedora='@multimedia gstreamer1-plugin-openh264 vlc lollypop foliate yt-dlp'; #ffmpeg
+	packagesSuse='ffmpeg vlc lollypop foliate yt-dlp'; #TODO: codecs
 	handleOperation;
 category='Media - Music Management';
 	baseIncluded=false;
@@ -403,20 +389,6 @@ category='Passwords';
 	packagesDebian='keepassxc pwgen diceware ssss libu2f-udev';
 	packagesFedora='keepassxc pwgen diceware ssss u2f-hidraw-policy';
 	packagesSuse='keepassxc pwgen libu2f-host0';
-	handleOperation;
-category='Privacy';
-	baseIncluded=true;
-	packagesArch='bleachbit'; packagesAUR='scrub';
-	packagesDebian='bleachbit scrub';
-	packagesFedora='bleachbit srm scrub';
-	packagesSuse='bleachbit srm scrub';
-	handleOperation;
-category='Reference';
-	baseIncluded=false;
-	packagesArch='kiwix-desktop';
-	packagesDebian=''; #unavailable
-	packagesFedora='kiwix-desktop';
-	packagesSuse=''; #unavailable
 	handleOperation;
 category='Screencast';
 	baseIncluded=false;
@@ -441,17 +413,17 @@ category='Security - System';
 	handleOperation;
 category='Tor';
 	baseIncluded=true;
-	packagesArch='tor torsocks onionshare torbrowser-launcher';
-	packagesDebian='tor torsocks onionshare'; #torbrowser-launcher (contrib)
-	packagesFedora='tor torsocks onionshare torbrowser-launcher';
-	packagesSuse='tor torsocks python3-onionshare torbrowser-launcher'; #torbrowser-apparmor-profile
+	packagesArch='tor torsocks torbrowser-launcher';
+	packagesDebian='tor torsocks'; #torbrowser-launcher (contrib)
+	packagesFedora='tor torsocks torbrowser-launcher';
+	packagesSuse='tor torsocks torbrowser-launcher'; #torbrowser-apparmor-profile
 	handleOperation;
 category='Utility';
 	baseIncluded=true;
-	packagesArch='whois mtr stress iotop wavemon pv tree iperf3 bmon powertop ncdu intel-gpu-tools radeontop fwupd';
-	packagesDebian='dconf-cli whois mtr stress iotop wavemon pv tree iperf3 bmon powertop ncdu vrms intel-gpu-tools radeontop fwupd';
-	packagesFedora='whois mtr stress iotop wavemon pv tree iperf3 bmon powertop ncdu vrms-rpm intel-gpu-tools radeontop fwupd';
-	packagesSuse='whois mtr stress-ng iotop wavemon pv tree iperf bmon powertop ncdu intel-gpu-tools radeontop';
+	packagesArch='whois mtr stress iotop wavemon pv tree iperf3 bmon powertop ncdu intel-gpu-tools radeontop fwupd'; packagesAUR='scrub';
+	packagesDebian='dconf-cli whois mtr stress iotop wavemon pv tree iperf3 bmon powertop ncdu intel-gpu-tools radeontop fwupd scrub';
+	packagesFedora='whois mtr stress iotop wavemon pv tree iperf3 bmon powertop ncdu intel-gpu-tools radeontop fwupd srm scrub';
+	packagesSuse='whois mtr stress-ng iotop wavemon pv tree iperf bmon powertop ncdu intel-gpu-tools radeontop srm scrub';
 	handleOperation;
 category='Utility - Graphical';
 	baseIncluded=true;

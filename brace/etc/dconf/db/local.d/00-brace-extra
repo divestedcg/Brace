@@ -105,3 +105,6 @@ scaling=1
 
 [system/proxy]
 mode='none'
+
+[org/gtk/gtk4/settings/file-chooser]
+sort-directories-first=true
