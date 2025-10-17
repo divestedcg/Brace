@@ -224,13 +224,6 @@ category='Core';
 	packagesFedora='rng-tools irqbalance openssh nano htop wget screen p7zip pixz lm_sensors ripgrep grubby';
 	packagesSuse='rng-tools irqbalance openssh nano htop wget screen p7zip pixz sensors ripgrep grubby';
 	handleOperation;
-category='Frameworks';
-	baseIncluded=false;
-	packagesArch='jre8-openjdk python';
-	packagesDebian='default-jre';
-	packagesFedora='java-1.8.0-openjdk';
-	packagesSuse='java-1_8_0-openjdk';
-	handleOperation;
 category='GNOME Extras';
 	baseIncluded=false;
 	packagesArch='gnome-tweak-tool file-roller';
@@ -238,40 +231,12 @@ category='GNOME Extras';
 	packagesFedora='gnome-tweak-tool file-roller';
 	packagesSuse='gnome-tweaks file-roller';
 	handleOperation;
-category='OpenCL';
-	baseIncluded=false;
-	packagesArch='';
-	packagesDebian='clinfo mesa-opencl-icd pocl-opencl-icd';
-	packagesFedora='clinfo mesa-libOpenCL pocl';
-	packagesSuse='clinfo Mesa-libOpenCL pocl';
-	handleOperation;
 category='VA-API';
 	baseIncluded=true;
 	packagesArch='libva-mesa-driver libva-utils libva-intel-driver intel-media-driver gstreamer-vaapi';
 	packagesDebian='mesa-va-drivers vainfo i965-va-driver intel-media-va-driver gstreamer1.0-vaapi';
 	packagesFedora='mesa-dri-drivers libva libva-utils libva-intel-driver libva-intel-hybrid-driver'; #gstreamer1-vaapi (https://bugzilla.redhat.com/show_bug.cgi?id=2129000), mesa-va-drivers
 	packagesSuse=''; #TODO
-	handleOperation;
-category='VDPAU';
-	baseIncluded=false;
-	packagesArch='vdpauinfo libvdpau libvdpau-va-gl libva-vdpau-driver mesa-vdpau';
-	packagesDebian='vdpauinfo libvdpau-va-gl1 vdpau-va-driver';
-	packagesFedora='vdpauinfo libvdpau libvdpau-va-gl libva-vdpau-driver';
-	packagesSuse=''; #TODO
-	handleOperation;
-category='Theming';
-	baseIncluded=true;
-	packagesArch=''; packagesAUR='numix-circle-icon-theme-git';
-	packagesDebian='numix-icon-theme-circle';
-	packagesFedora='numix-icon-theme-circle';
-	packagesSuse='';
-	handleOperation;
-category='Fonts';
-	baseIncluded=true;
-	packagesArch='adobe-source-code-pro-fonts ttf-fira-mono ttf-fira-sans ttf-liberation cantarell-fonts gsfonts noto-fonts noto-fonts-emoji';
-	packagesDebian='';
-	packagesFedora='adobe-source-code-pro-fonts mozilla-fira-mono-fonts mozilla-fira-sans-fonts';
-	packagesSuse='adobe-sourcecodepro-fonts';
 	handleOperation;
 category='Audio Manipulation';
 	baseIncluded=true;
@@ -304,20 +269,6 @@ category='Development';
 	packagesFedora='git gitg ghex sqlitebrowser @development-tools';
 	packagesFlathub='org.gnome.gitg org.gnome.GHex';
 	packagesSuse='git gitg ghex sqlitebrowser'; #devel_basis
-	handleOperation;
-category='Development - Android';
-	baseIncluded=false;
-	packagesArch='android-udev android-tools enjarify'; packagesAUR='android-apktool sdat2img android-studio';
-	packagesDebian='adb fastboot enjarify';
-	packagesFedora='android-tools enjarify';
-	packagesSuse=''; #unavailable
-	handleOperation;
-category='Development - Java';
-	baseIncluded=false;
-	packagesArch='jdk8-openjdk'; packagesAUR='proguard jd-gui launch4j';
-	packagesDebian='default-jdk proguard';
-	packagesFedora='java-1.8.0-openjdk-devel eclipse-jdt proguard';
-	packagesSuse=''; #unavailable
 	handleOperation;
 category='Development - Distro Specific Packaging';
 	baseIncluded=false;
@@ -392,10 +343,10 @@ category='Games - Arena';
 	handleOperation;
 category='Image Manipulation - CLI';
 	baseIncluded=true;
-	packagesArch='imagemagick jpegoptim optipng';
-	packagesDebian='imagemagick jpegoptim optipng';
-	packagesFedora='ImageMagick jpegoptim optipng';
-	packagesSuse='ImageMagick jpegoptim optipng';
+	packagesArch='imagemagick jpegoptim optipng pngquant';
+	packagesDebian='imagemagick jpegoptim optipng pngquant';
+	packagesFedora='ImageMagick jpegoptim optipng pngquant';
+	packagesSuse='ImageMagick jpegoptim optipng pngquant';
 	handleOperation;
 category='Image Manipulation - Graphical';
 	baseIncluded=true;
@@ -414,7 +365,7 @@ category='Internet';
 category='Media - Consumption';
 	baseIncluded=true;
 	packagesArch='ffmpeg vlc lollypop yt-dlp'; #TODO: codecs
-	packagesDebian='ffmpeg vlc lollypop youtube-dl'; #TODO: codecs
+	packagesDebian='ffmpeg vlc lollypop yt-dlp'; #TODO: codecs
 	packagesFedora='@multimedia gstreamer1-plugin-openh264 vlc lollypop yt-dlp'; #ffmpeg
 	packagesSuse='ffmpeg vlc lollypop yt-dlp'; #TODO: codecs
 	handleOperation;
@@ -509,6 +460,13 @@ category='Utility - Graphical';
 	packagesFedora='dconf-editor gnome-firmware gsmartcontrol seahorse openssh-askpass';
 	packagesFlathub='org.gnome.seahorse.Application';
 	packagesSuse='dconf-editor gsmartcontrol seahorse';
+	handleOperation;
+category='Utility - Android';
+	baseIncluded=false;
+	packagesArch='android-udev android-tools';
+	packagesDebian='adb fastboot';
+	packagesFedora='android-tools';
+	packagesSuse=''; #unavailable
 	handleOperation;
 category='Virtualization';
 	baseIncluded=false;

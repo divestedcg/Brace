@@ -7,10 +7,11 @@ Brace is a toolkit compatible with multiple existing Linux distributions that al
 
 Compatibility
 -------------
+- Fedora 42/43 (preferred)
+- Other below distros are untested and supported only as a fallback if Fedora goes away
 - Arch Linux
-- CentOS 9/Stream
-- Debian 12
-- Fedora 39/40/41 (preferred)
+- CentOS Stream
+- Debian 13
 - openSUSE Tumbleweed
 
 License

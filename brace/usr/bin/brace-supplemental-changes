@@ -15,31 +15,10 @@
 #along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 if [ "$(/usr/bin/id -u)" -eq "0" ]; then
-	if [ -f "/usr/lib/systemd/system/zram-swap.service" ]; then
-		echo "Enabling zram-swap";
-		systemctl enable zram-swap.service --now; #XXX: replaced by systemd-zram-generator
-	fi;
-
 	if [ -f "/usr/lib/systemd/system/fstrim.timer" ]; then
 		echo "Enabling weekly fstrim";
 		systemctl enable fstrim.timer --now;
 	fi;
-
-	#Repository Changes
-	if [ -d "/etc/yum.repos.d" ]; then
-		echo "Set all DNF repositories to HTTPS and disable countme?";
-		select ys in "Yes" "Skip"; do
-			case $ys in
-				Yes )
-					sed -i 's/metalink?repo=/metalink\?protocol\=https\&repo\=/' /etc/yum.repos.d/*.repo;
-					sed -i 's/countme=1/countme=0/' /etc/yum.repos.d/*.repo;
-					echo "Remember: This will need to be done again if any of them are updated!"
-					break;;
-				Skip )
-					break;;
-			esac
-		done
-	fi
 
 	#Stealth Firewall
 	if [ -x /usr/bin/firewall-cmd ]; then
@@ -123,21 +102,6 @@ if [ "$(/usr/bin/id -u)" -eq "0" ]; then
 		done
 	fi;
 
-	#Stronger Crypto
-	if [ -x /usr/bin/update-crypto-policies ]; then
-		echo "Do you want stricter crypto policies?";
-		select yn in "Yes" "No"; do
-			case $yn in
-				Yes )
-					update-crypto-policies --set NEXT;
-					break;;
-				No )
-					update-crypto-policies --set DEFAULT; #:TEST-PQ
-					break;;
-			esac
-		done
-	fi;
-
 	#Hostname
 	if [ -x /usr/bin/hostnamectl ]; then
 		echo "Do you want a random hostname?";
@@ -159,62 +123,7 @@ if [ "$(/usr/bin/id -u)" -eq "0" ]; then
 			esac
 		done
 	fi;
-
-	#Services
-	if [ -x /usr/bin/systemctl ]; then
-		echo "Do you want to disable many unnecessary services? (helps on low perf systems)";
-		select ys in "Yes" "Skip"; do
-			case $ys in
-				Yes )
-					systemctl disable gssproxy.service --now; #Auth
-					systemctl disable pcscd.service pcscd.socket --now; #Smartcards
-					systemctl disable abrtd.service abrt-journal-core.service abrt-oops.service abrt-pstoreoops.service abrt-vmcore.service abrt-xorg.service --now; #ABRT
-					systemctl disable atd.service --now; #At/Batch
-					systemctl disable mcelog.service --now; #mcelog
-					systemctl disable avahi-daemon.service avahi-daemon.socket --now; #Avahi
-					systemctl disable ModemManager.service --now; #ModemManager
-					systemctl disable iscsid.service iscsid.socket iscsi-init.service iscsi.service iscsiuio.service iscsiuio.socket --now; #iSCSI
-					systemctl disable livesys.service livesys-late.service --now; #Anaconda leftovers
-					systemctl disable multipathd.service multipathd.socket --now; #Multipath
-					systemctl disable smartd.service --now; #smartd
-					systemctl disable vboxservice.service --now; #VirtualBox
-					systemctl disable vmtoolsd.service --now; #VMWare
-					systemctl disable passim.service --now; #LAN P2P file sharing used by fwupd
-					break;;
-				Skip )
-					break;;
-			esac
-		done
-	fi;
 else
-	#Looks
-	if [ -d "/usr/share/fonts/adobe-source-code-pro" ]; then
-		gsettings set org.gnome.builder.editor font-name 'Source Code Pro 10';
-		gsettings set org.gnome.desktop.interface monospace-font-name 'Source Code Pro 10';
-		gsettings set org.mate.desktop.interface monospace-font-name 'Source Code Pro 10';
-	fi;
-	if [ -f "/usr/share/fonts/mozilla-fira/FiraSans-Regular.otf" ] || [ -f "/usr/share/fonts/TTF/FiraSans-Regular.ttf" ]; then
-		gsettings set org.gnome.desktop.interface font-name 'Fira Sans 10';
-		gsettings set org.gnome.desktop.wm.preferences titlebar-font 'Fira Sans Bold 11';
-		gsettings set org.cinnamon.desktop.interface font-name 'Fira Sans 10';
-		#TODO cinnamon legacy title font
-		gsettings set org.mate.caja.desktop font 'Fira Sans 10';
-		gsettings set org.mate.desktop.interface font-name 'Fira Sans 10';
-		gsettings set org.mate.marco.general titlebar-font 'Fira Sans Bold 11';
-	fi;
-	if [ -f "/usr/share/fonts/mozilla-fira/FiraMono-Regular.otf" ] || [ -f "/usr/share/fonts/TTF/FiraMono-Regular.ttf" ]; then
-		gsettings set org.gnome.builder.editor font-name 'Fira Mono 10';
-		gsettings set org.gnome.desktop.interface monospace-font-name 'Fira Mono 10';
-		gsettings set org.gnome.gedit.preferences.editor editor-font 'Fira Mono 10';
-		gsettings set org.cinnamon.desktop.interface monospace-font-name 'Fira Mono 10';
-		gsettings set org.mate.desktop.interface monospace-font-name 'Fira Mono 10';
-	fi;
-	if [ -d "/usr/share/icons/Numix-Circle" ]; then
-		gsettings set org.gnome.desktop.interface icon-theme 'Numix-Circle';
-		gsettings set org.cinnamon.desktop.interface icon-theme 'Numix-Circle';
-		gsettings set org.mate.desktop.interface icon-theme 'Numix-Circle';
-	fi;
-
 	#Thumbnails
 	echo "Do you want thumbnails enabled? (brace default disabled)";
 	select yn in "Yes" "No"; do

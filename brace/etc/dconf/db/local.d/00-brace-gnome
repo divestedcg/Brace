@@ -161,6 +161,9 @@ numlock-state='on'
 [org/gnome/settings-daemon/plugins/color]
 night-light-schedule-automatic=false
 
+[org/gnome/settings-daemon/plugins/housekeeping]
+donation-reminder-enabled=false
+
 [org/gnome/settings-daemon/plugins/media-keys]
 custom-keybindings=['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']
 home=['<Super>e']
@@ -181,7 +184,7 @@ antialiasing='grayscale'
 hinting='slight'
 
 [org/gnome/shell]
-favorite-apps=['org.gnome.Nautilus.desktop', 'firefox.desktop', 'firefox-esr.desktop', 'evolution.desktop', 'org.gnome.Evolution.desktop', 'libreoffice-startcenter.desktop', 'yelp.desktop']
+favorite-apps=['org.gnome.Nautilus.desktop', 'org.mozilla.firefox.desktop', 'org.gnome.Evolution.desktop', 'org.gnome.Yelp.desktop']
 disable-user-extensions=true
 
 [org/gnome/shell/overrides]

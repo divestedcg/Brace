@@ -51,5 +51,15 @@ pref("extensions.pocket.enabled", false);
 //Disable Sync
 pref("identity.fxaccounts.enabled", false);
 
+//Disable AI junk
+pref("browser.ml.chat.enabled", false);
+pref("browser.ml.chat.menu", false);
+pref("browser.ml.chat.page", false);
+pref("browser.ml.enable", false);
+pref("browser.ml.linkPreview.enabled", false);
+pref("browser.ml.linkPreview.optin", false);
+pref("browser.ml.chat.sidebar", false);
+pref("browser.ml.chat.shortcuts", false);
+
 //Fix IPv6 when using DoH
 pref("network.dns.preferIPv6", true); //BRACE-KEEP_FOR_NOW

@@ -98,8 +98,8 @@ clearMemory() {
 }
 
 optimizeImages() {
-        find "$1" -type f -name "*.jp*g" -print0 | xargs -0 -n1 -P 16 jpegoptim --strip-all;
-        find "$1" -type f -name "*.png" -print0 | xargs -0 -n1 -P 16 optipng -strip all;
+        find "$1" -type f -name "*.jp*g" -print0 | xargs -0 -n1 -P $(nproc) jpegoptim --strip-all;
+        find "$1" -type f -name "*.png" -print0 | xargs -0 -n1 -P $(nproc) optipng -strip all;
 }
 
 loosePermsRecursive() {
@@ -118,15 +118,7 @@ strictPermsRecursive() {
 	find . -type f -print0 | xargs -0 chmod -v 0600;
 }
 
-
-# malware scanning
-alias malwaretest='wget https://eicar.org/download/eicar.com.txt && cat eicar.com.txt';
-alias clamscanhere='clamscan --recursive --detect-pua=yes --infected --allmatch --cross-fs=no --follow-dir-symlinks=0 --follow-file-symlinks=0 .';
-alias rootkitscan='sudo rkhunter --update && sudo rkhunter -c --enable all --disable none --rwo';
-alias rootkitscanalt='sudo unhide reverse procall sys';
-
 # misc
-alias dconf-reset-brace='cat /etc/dconf/db/local.d/00-brace* | dconf load /'; #This is not recommended to be used
-alias ssh-tor='torsocks --isolate ssh';
+alias clamscanhere='clamscan --recursive --detect-pua=yes --infected --allmatch --cross-fs=no --follow-dir-symlinks=0 --follow-file-symlinks=0 .';
 alias dnf-update-security-testing="sudo dnf update --refresh --security --enablerepo=*updates-testing";
 alias dnf-update-kernel="sudo dnf update --enablerepo=*updates-testing kernel*"; #sometimes testing kernels aren't flagged as security updates

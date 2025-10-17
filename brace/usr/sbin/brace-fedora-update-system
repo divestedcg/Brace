@@ -22,7 +22,7 @@ if [ -f /etc/fedora-release ]; then
 
 	dnf distro-sync --refresh;
 	dnf install dnf-plugin-system-upgrade;
-	dnf system-upgrade download --refresh --releasever="$1";
+	dnf system-upgrade download --refresh --releasever="$1" --best --allowerasing;
 else
 	echo "Currently only Fedora is supported";
 fi;
