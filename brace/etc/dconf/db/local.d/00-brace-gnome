@@ -116,6 +116,7 @@ highlight-current-line=true
 show-line-numbers=true
 style-scheme='solarized-dark'
 restore-session=false
+discover-settings=false
 
 [org/gnome/gnome-flashback/desktop]
 show-icons=false
