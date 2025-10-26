@@ -188,13 +188,16 @@ else
 			Yes )
 				gsettings set org.freedesktop.Tracker3.Miner.Files enable-monitors true;
 				gsettings set org.freedesktop.Tracker3.Miner.Files crawling-interval -1;
-				systemctl unmask --user --now tracker-miner-fs-3.service || true;
+				systemctl unmask --user tracker-miner-fs-3.service || true;
+				systemctl unmask --user localsearch-3.service || true;
 				break;;
 			No )
 				gsettings set org.freedesktop.Tracker3.Miner.Files enable-monitors false;
 				gsettings set org.freedesktop.Tracker3.Miner.Files crawling-interval -2;
-				systemctl mask --user --now tracker-miner-fs-3.service || true;
+				systemctl mask --user tracker-miner-fs-3.service || true;
+				systemctl mask --user localsearch-3.service || true;
 				tracker3 reset -s || true;
+				localsearch reset -s || true;
 				break;;
 		esac
 	done

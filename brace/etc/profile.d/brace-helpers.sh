@@ -17,6 +17,7 @@
 # cleaning
 alias bleachLast='bleachbit --preset --clean';
 alias clearTracker='/usr/bin/tracker reset --hard';
+alias clearLocalSearch='/usr/bin/localsearch reset --hard';
 alias clearDriveFreeSpace='scrub --no-hwrand -p random -X cfs-$RANDOM';
 alias clearDriveDiscard='sudo fstrim -av';
 alias clearall='clearUserMisc && clearLogins && clearVarLog && clearVarLogMisc && clearJournal && clearMemory && clearDriveDiscard';

@@ -60,6 +60,7 @@ pref("browser.ml.linkPreview.enabled", false);
 pref("browser.ml.linkPreview.optin", false);
 pref("browser.ml.chat.sidebar", false);
 pref("browser.ml.chat.shortcuts", false);
+pref("extensions.ml.enabled", false);
 
 //Fix IPv6 when using DoH
 pref("network.dns.preferIPv6", true); //BRACE-KEEP_FOR_NOW
