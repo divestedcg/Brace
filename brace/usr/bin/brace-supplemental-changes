@@ -110,7 +110,7 @@ if [ "$(/usr/bin/id -u)" -eq "0" ]; then
 					grubby --update-kernel=ALL --args="hash_pointers=always slub_debug=FZ"; #Enables SLUB sanity checks and red-zoning
 					break;;
 				No )
-					grubby --update-kernel=ALL --remove-args="hash_pointers=always slub_debug=FZ"; #Enables SLUB sanity checks and red-zoning
+					grubby --update-kernel=ALL --remove-args="hash_pointers=always slub_debug=FZ";
 					break;;
 				Skip )
 					break;;
@@ -126,7 +126,7 @@ if [ "$(/usr/bin/id -u)" -eq "0" ]; then
 					grubby --update-kernel=ALL --args="ia32_emulation=false"; #Disable support for 32-bit execution
 					break;;
 				No )
-					grubby --update-kernel=ALL --remove-args="ia32_emulation=false"; #Disable support for 32-bit execution
+					grubby --update-kernel=ALL --remove-args="ia32_emulation=false";
 					break;;
 				Skip )
 					break;;
