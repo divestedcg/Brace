@@ -1,5 +1,5 @@
 #!/bin/bash
-#Copyright (c) 2024 Divested Computing Group
+#Copyright (c) 2024-2025 Divested Computing Group
 #
 #This program is free software: you can redistribute it and/or modify
 #it under the terms of the GNU Affero General Public License as published by
@@ -112,16 +112,14 @@ verifyHardenedMalloc() {
 }
 
 verifyKernelCommandLine() {
-	if grep -q "init_on_alloc=1 init_on_free=1 page_alloc.shuffle=1 pti=on kpti=on randomize_kstack_offset=1 slab_nomerge iommu=force iommu.passthrough=0 iommu.strict=1 intel_iommu=on amd_iommu=force_isolation spec_store_bypass_disable=on ssbd=force-on spectre_v2=on spectre_bhi=on tsx=off lockdown=confidentiality mce=0 module.sig_enforce=1 vsyscall=none efi_pstore.pstore_disable=1 erst_disable fsck.mode=force i8042.reset=1" /proc/cmdline > /dev/null 2>&1; then
-		logYes "kernel hardening via command line";
-	else
-		declare -a optionsToCheck=("init_on_alloc=1" "init_on_free=1" "page_alloc.shuffle=1" "pti=on" "kpti=on" "randomize_kstack_offset=1" "slab_nomerge" "iommu=force" "iommu.passthrough=0" "iommu.strict=1" "intel_iommu=on" "amd_iommu=force_isolation" "spec_store_bypass_disable=on" "ssbd=force-on" "spectre_v2=on" "spectre_bhi=on" "tsx=off" "lockdown=confidentiality" "mce=0" "module.sig_enforce=1" "vsyscall=none" "efi_pstore.pstore_disable=1" "erst_disable" "fsck.mode=force" "i8042.reset=1");
-		for optionToCheck in "${optionsToCheck[@]}"; do
-			if ! grep -q "$optionToCheck" /proc/cmdline > /dev/null 2>&1; then
-				logNo "kernel hardening via command line" "missing $optionToCheck" "sudo brace-supplemental-changes";
-			fi;
-		done;
-	fi;
+	declare -a optionsToCheck=("init_on_alloc=1" "init_on_free=1" "page_alloc.shuffle=1" "pti=on" "kpti=on" "randomize_kstack_offset=1" "slab_nomerge" "proc_mem.force_override=never" "bdev_allow_write_mounted=0" "iommu=force" "iommu.passthrough=0" "iommu.strict=1" "intel_iommu=on" "amd_iommu=force_isolation" "spec_store_bypass_disable=on" "ssbd=force-on" "spectre_v2=on" "spectre_bhi=on" "tsx=off" "lockdown=confidentiality" "mce=0" "module.sig_enforce=1" "vsyscall=none" "vdso32=0" "efi_pstore.pstore_disable=1" "erst_disable" "fsck.mode=force" "i8042.reset=1" "hash_pointers=always" "slub_debug=FZ" "ia32_emulation=false");
+	for optionToCheck in "${optionsToCheck[@]}"; do
+		if grep -q "$optionToCheck" /proc/cmdline > /dev/null 2>&1; then
+			logYes "kernel hardening via command line:" "found $optionToCheck";
+		else
+			logNo "kernel hardening via command line:" "missing $optionToCheck" "sudo brace-supplemental-changes";
+		fi;
+	done;
 }
 
 secureBootEnforcing() {

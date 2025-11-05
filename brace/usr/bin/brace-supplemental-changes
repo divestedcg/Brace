@@ -1,5 +1,5 @@
 #!/bin/bash
-#Copyright (c) 2017-2022 Divested Computing Group
+#Copyright (c) 2017-2025 Divested Computing Group
 #
 #This program is free software: you can redistribute it and/or modify
 #it under the terms of the GNU Affero General Public License as published by
@@ -40,7 +40,7 @@ if [ "$(/usr/bin/id -u)" -eq "0" ]; then
 
 	#Kernel Command Line
 	if [ -x /usr/sbin/grubby ]; then
-		echo "Do you want a stricter kernel (via boot command-line arguments)?";
+		echo "Do you want a stricter kernel?";
 		select ys in "Yes" "Skip"; do
 			case $ys in
 				Yes )
@@ -55,7 +55,8 @@ if [ "$(/usr/bin/id -u)" -eq "0" ]; then
 					grubby --update-kernel=ALL --args="pti=on kpti=on"; #Enable page table isolation
 					grubby --update-kernel=ALL --args="randomize_kstack_offset=1"; #Randomize kernel stacks
 					grubby --update-kernel=ALL --args="slab_nomerge"; #Don't merge same-size slabs
-					#grubby --update-kernel=ALL --args="slub_debug=FZ"; #Enables SLUB sanity checks and red-zoning, #XXX: extreme performance impact and enables unhashed memory addresses
+					grubby --update-kernel=ALL --args="proc_mem.force_override=never"; #Prevent direct memory writes
+					grubby --update-kernel=ALL --args="bdev_allow_write_mounted=0"; #Prevent direct block device writes when mounted
 
 					#IOMMU Enablement
 					grubby --update-kernel=ALL --args="iommu=force"; #Ensure it is enabled in more cases
@@ -86,8 +87,7 @@ if [ "$(/usr/bin/id -u)" -eq "0" ]; then
 					grubby --update-kernel=ALL --args="module.sig_enforce=1"; #Block modules with invalid signatures #XXX: superceded by lockdown
 					#grubby --update-kernel=ALL --args="oops=panic"; #Panic system on oops #XXX: can turn minor issues into annoyances
 					grubby --update-kernel=ALL --args="vsyscall=none"; #Disable unnecessary legacy functionality
-					#grubby --update-kernel=ALL --args="ia32_emulation=false"; #Disable support for 32-bit execution
-					#grubby --update-kernel=ALL --args="vdso32=0"; #Disable 32-bit VDSO
+					grubby --update-kernel=ALL --args="vdso32=0"; #Disable legacy 32-bit vDSO
 					grubby --update-kernel=ALL --args="efi_pstore.pstore_disable=1"; #Disable use of UEFI pstore backend
 					grubby --update-kernel=ALL --args="erst_disable"; #Disable use of ACPI ERST pstore backend
 
@@ -95,6 +95,38 @@ if [ "$(/usr/bin/id -u)" -eq "0" ]; then
 					grubby --update-kernel=ALL --args="fsck.mode=force"; #FSCK mounts every boot, systemd default is once per 30 boots
 					grubby --update-kernel=ALL --args="i8042.reset=1"; #Workaround buggy laptop keyboard/touchpads
 					grubby --update-kernel=ALL --args="libata.allow_tpm=1"; #OPAL support
+					break;;
+				Skip )
+					break;;
+			esac
+		done
+	fi;
+
+	if [ -x /usr/sbin/grubby ]; then
+		echo "Do you want additional kernel memory checks at an extreme performance cost?";
+		select yns in "Yes" "No" "Skip"; do
+			case $yns in
+				Yes )
+					grubby --update-kernel=ALL --args="hash_pointers=always slub_debug=FZ"; #Enables SLUB sanity checks and red-zoning
+					break;;
+				No )
+					grubby --update-kernel=ALL --remove-args="hash_pointers=always slub_debug=FZ"; #Enables SLUB sanity checks and red-zoning
+					break;;
+				Skip )
+					break;;
+			esac
+		done
+	fi;
+
+	if [ -x /usr/sbin/grubby ]; then
+		echo "Do you want to disable 32-bit executable support?";
+		select yns in "Yes" "No" "Skip"; do
+			case $yns in
+				Yes )
+					grubby --update-kernel=ALL --args="ia32_emulation=false"; #Disable support for 32-bit execution
+					break;;
+				No )
+					grubby --update-kernel=ALL --remove-args="ia32_emulation=false"; #Disable support for 32-bit execution
 					break;;
 				Skip )
 					break;;
