@@ -55,11 +55,11 @@ Contents
 - /usr/lib/tmpfiles.d/99-brace-proc.conf			= /proc: harden permissions
 - /usr/lib/tmpfiles.d/99-brace-sys.conf				= /sys: harden permissions
 - /usr/bin/brace-supplemental-changes				= change extra default settings
-- /usr/sbin/brace-enable-auto-updates				= Fedora: automatic system updates using dnf-plugin-system-upgrade
-- /usr/sbin/brace-enable-rpmfusion				= Fedora: enable RPM Fusion 'free' repos
-- /usr/sbin/brace-update-system					= Fedora: helper to update to the next release
-- /usr/sbin/brace-installer					= unified recommended package installer
-- /usr/sbin/brace-rpm-verify					= RPM: verifies installed packages for corruption
+- /usr/bin/brace-enable-auto-updates				= Fedora: automatic system updates using dnf-plugin-system-upgrade
+- /usr/bin/brace-enable-rpmfusion				= Fedora: enable RPM Fusion 'free' repos
+- /usr/bin/brace-update-system					= Fedora: helper to update to the next release
+- /usr/bin/brace-installer					= unified recommended package installer
+- /usr/bin/brace-rpm-verify					= RPM: verifies installed packages for corruption
 
 Known Issues
 ------------

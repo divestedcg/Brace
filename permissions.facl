@@ -139,9 +139,9 @@ group::r-x
 other::r-x
 
 # file: brace/etc/default/grub.d/brace.cfg
-user::rw-
-group::r--
-other::r--
+user::rwx
+group::r-x
+other::r-x
 
 # file: brace/etc/opt
 user::rwx
@@ -208,10 +208,45 @@ user::rwx
 group::r-x
 other::r-x
 
-# file: brace/usr/bin/brace-supplemental-changes
+# file: brace/usr/bin/brace-audit
+user::rwx
+group::---
+other::---
+
+# file: brace/usr/bin/brace-fedora-enable-auto-updates
 user::rwx
 group::r-x
 other::r-x
+
+# file: brace/usr/bin/brace-fedora-enable-fapolicyd
+user::rwx
+group::r-x
+other::r-x
+
+# file: brace/usr/bin/brace-fedora-enable-rpmfusion
+user::rwx
+group::r-x
+other::r-x
+
+# file: brace/usr/bin/brace-fedora-update-system
+user::rwx
+group::r-x
+other::r-x
+
+# file: brace/usr/bin/brace-installer
+user::rwx
+group::r-x
+other::r-x
+
+# file: brace/usr/bin/brace-rpm-verify
+user::rwx
+group::r-x
+other::r-x
+
+# file: brace/usr/bin/brace-supplemental-changes
+user::rwx
+group::---
+other::---
 
 # file: brace/usr/lib
 user::rwx
@@ -578,46 +613,6 @@ user::rw-
 group::r--
 other::r--
 
-# file: brace/usr/sbin
-user::rwx
-group::r-x
-other::r-x
-
-# file: brace/usr/sbin/brace-audit
-user::rwx
-group::r-x
-other::r-x
-
-# file: brace/usr/sbin/brace-fedora-enable-auto-updates
-user::rwx
-group::r-x
-other::r-x
-
-# file: brace/usr/sbin/brace-fedora-enable-fapolicyd
-user::rwx
-group::r-x
-other::r-x
-
-# file: brace/usr/sbin/brace-fedora-enable-rpmfusion
-user::rwx
-group::r-x
-other::r-x
-
-# file: brace/usr/sbin/brace-fedora-update-system
-user::rwx
-group::r-x
-other::r-x
-
-# file: brace/usr/sbin/brace-installer
-user::rwx
-group::r-x
-other::r-x
-
-# file: brace/usr/sbin/brace-rpm-verify
-user::rwx
-group::r-x
-other::r-x
-
 # file: brace/usr/share
 user::rwx
 group::r-x
@@ -713,12 +708,3 @@ user::rw-
 group::r--
 other::r--
 
-# file: .gitlab-ci.yml
-user::rw-
-group::r--
-other::r--
-
-# file: .gitignore
-user::rw-
-group::r--
-other::r--

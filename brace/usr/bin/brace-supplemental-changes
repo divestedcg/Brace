@@ -39,7 +39,7 @@ if [ "$(/usr/bin/id -u)" -eq "0" ]; then
 	fi
 
 	#Kernel Command Line
-	if [ -x /usr/sbin/grubby ]; then
+	if [ -x /usr/bin/grubby ]; then
 		echo "Do you want a stricter kernel?";
 		select ys in "Yes" "Skip"; do
 			case $ys in
@@ -107,7 +107,7 @@ if [ "$(/usr/bin/id -u)" -eq "0" ]; then
 		done
 	fi;
 
-	if [ -x /usr/sbin/grubby ]; then
+	if [ -x /usr/bin/grubby ]; then
 		echo "Do you want additional kernel memory checks at an extreme performance cost?";
 		select yns in "Yes" "No" "Skip"; do
 			case $yns in
@@ -123,7 +123,7 @@ if [ "$(/usr/bin/id -u)" -eq "0" ]; then
 		done
 	fi;
 
-	if [ -x /usr/sbin/grubby ]; then
+	if [ -x /usr/bin/grubby ]; then
 		echo "Do you want to disable 32-bit executable support?";
 		select yns in "Yes" "No" "Skip"; do
 			case $yns in
