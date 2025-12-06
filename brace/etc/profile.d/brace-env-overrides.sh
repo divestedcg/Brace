@@ -36,6 +36,9 @@ export JSC_useFTLJIT=0;
 # https://gitlab.gnome.org/GNOME/gjs/-/blob/master/doc/Environment.md
 export GJS_DISABLE_JIT=1;
 
+# disable log uploading for Tailscale
+export TS_NO_LOGS_NO_SUPPORT=true;
+
 # set restrictive umask
 if [ "$(/usr/bin/id -ru)" -ge 1000 ] && [ "$(/usr/bin/id -u)" -ge 1000 ] && [ "$(/usr/bin/id -gn)" = "$(/usr/bin/id -un)" ]; then
     umask 0077;
