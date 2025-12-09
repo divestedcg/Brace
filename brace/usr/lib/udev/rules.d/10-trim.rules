@@ -9,6 +9,9 @@
 #RTL9210A, tested working
 ACTION=="add|change", ATTRS{idVendor}=="0bda", ATTRS{idProduct}=="9210", SUBSYSTEM=="scsi_disk", ATTR{provisioning_mode}="unmap"
 
+#JMicron JMS586, tested working
+ACTION=="add|change", ATTRS{idVendor}=="152d", ATTRS{idProduct}=="0586", SUBSYSTEM=="scsi_disk", ATTR{provisioning_mode}="unmap"
+
 
 #
 #SATA Enclosures
