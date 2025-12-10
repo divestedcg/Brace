@@ -253,6 +253,21 @@ user::rwx
 group::r-x
 other::r-x
 
+# file: brace/usr/lib/dracut
+user::rwx
+group::r-x
+other::r-x
+
+# file: brace/usr/lib/dracut/dracut.conf.d
+user::rwx
+group::r-x
+other::r-x
+
+# file: brace/usr/lib/dracut/dracut.conf.d/99-trim.conf
+user::rw-
+group::r--
+other::r--
+
 # file: brace/usr/lib/firefox
 user::rwx
 group::r-x

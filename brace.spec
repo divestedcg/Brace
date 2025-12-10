@@ -1,5 +1,5 @@
 Name: brace
-Version: 20251208
+Version: 20251209
 Release: 1
 Summary: Increases privacy/security through various configs.
 License: AGPLv3+
@@ -41,6 +41,7 @@ mkdir -p %{buildroot}/usr/lib64/thunderbird/defaults/pref;
 install -Dm644 %{_sourcedir}/brace/usr/lib/firefox/browser/defaults/preferences/userjs-*.js %{buildroot}/usr/lib64/thunderbird/defaults/pref/;
 install -Dm644 %{_sourcedir}/brace/etc/chromium/policies/managed/brace.json %{buildroot}/etc/chromium/policies/managed/brace.json;
 install -Dm644 %{_sourcedir}/brace/etc/chromium/policies/managed/brace.json %{buildroot}/etc/opt/chrome/policies/managed/brace.json;
+install -Dm644 %{_sourcedir}/brace/usr/lib/dracut/dracut.conf.d/99-trim.conf %{buildroot}/usr/lib/dracut/dracut.conf.d/99-trim.conf;
 install -Dm644 %{_sourcedir}/brace/usr/lib/modprobe.d/brace.conf %{buildroot}/usr/lib/modprobe.d/brace.conf;
 install -Dm644 %{_sourcedir}/brace/usr/lib/modprobe.d/wireless-perf.conf %{buildroot}/usr/lib/modprobe.d/wireless-perf.conf;
 install -Dm644 %{_sourcedir}/brace/usr/lib/NetworkManager/conf.d/30-nm-privacy.conf %{buildroot}/usr/lib/NetworkManager/conf.d/30-nm-privacy.conf;
@@ -93,6 +94,7 @@ install -Dm644 %{_sourcedir}/README.md %{buildroot}/usr/share/doc/brace/README.m
 /usr/lib64/thunderbird/defaults/pref/userjs-*.js
 /etc/chromium/policies/managed/brace.json
 /etc/opt/chrome/policies/managed/brace.json
+/usr/lib/dracut/dracut.conf.d/99-trim.conf
 /usr/lib/modprobe.d/brace.conf
 /usr/lib/modprobe.d/wireless-perf.conf
 /usr/lib/NetworkManager/conf.d/30-nm-privacy.conf
