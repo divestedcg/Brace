@@ -3,8 +3,6 @@
 		"CaptivePortal": false,
 		"DisableFirefoxAccounts": true,
 		"DisableFirefoxStudies": true,
-		"DisablePocket": true,
-		"DisableSecurityBypass": false,
 		"DisableTelemetry": true,
 		"DNSOverHTTPS": {
 			"Enabled": true,
@@ -26,11 +24,7 @@
 			},
 			"uBlock0@raymondhill.net": {
 				"installation_mode": "force_installed",
-				"install_url": "https://addons.mozilla.org/firefox/downloads/latest/uBlock0@raymondhill.net/latest.xpi"
-			},
-			"{73a6fe31-595d-460b-a920-fcc0f8843232}": {
-				"installation_mode": "allowed",
-				"install_url": "https://addons.mozilla.org/firefox/downloads/latest/{73a6fe31-595d-460b-a920-fcc0f8843232}/latest.xpi"
+				"install_url": "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi"
 			}
 		},
 		"FirefoxHome": {
@@ -40,6 +34,8 @@
 			"Highlights": false,
 			"Pocket": false,
 			"SponsoredPocket": false,
+			"Stories": false,
+			"SponsoredStories": false,
 			"Snippets": false,
 			"Locked": false
 		},
@@ -54,7 +50,7 @@
 		"Preferences": {
 			"browser.contentblocking.category": {
 				"Value": "strict",
-				"Status": "default"
+				"Status": "locked"
 			}
 		},
 		"UserMessaging": {
