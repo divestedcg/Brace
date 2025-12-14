@@ -1142,7 +1142,7 @@ pref("_user.js.parrot", "7000 syntax error: the parrot's pushing up daisies!");
 /* 7016: customize ETP settings
  * [NOTE] FPP (fingerprintingProtection) is ignored when RFP (4501) is enabled
  * [WHY] Arkenfox only supports strict (2701) which sets these at runtime ***/
-   // pref("network.cookie.cookieBehavior", 5); // [DEFAULT: 5] //BRACE-UNCOMMENTED: strict cannot be set on first launch, use custom + enterprise policy instead //MULL-MODIFY_ME: set to 1 for FPI
+   // pref("network.cookie.cookieBehavior", 5); // [DEFAULT: 5]
    // pref("network.cookie.cookieBehavior.optInPartitioning", true); // [ETP FF132+]
    // pref("network.http.referer.disallowCrossSiteRelaxingDefault", true);
    // pref("network.http.referer.disallowCrossSiteRelaxingDefault.top_navigation", true); // [FF100+]
