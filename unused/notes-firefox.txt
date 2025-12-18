@@ -1,0 +1,4 @@
+Reference:
+https://mozilla.github.io/policy-templates/
+https://github.com/gorhill/uBlock/wiki/Deploying-uBlock-Origin
+https://github.com/gorhill/uBlock/blob/master/assets/assets.json

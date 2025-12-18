@@ -1,0 +1,20 @@
+Available:
+DefaultPopupsSetting
+ProxyMode
+AdvancedProtectionAllowed
+AllowPopupsDuringPageUnload
+PrivacyScreenEnabled
+IntensiveWakeUpThrottlingEnabled
+PromptForDownloadLocation
+
+Research:
+AmbientAuthenticationInPrivateModesEnabled
+
+Breaks things maybe:
+AudioSandboxEnabled:true
+
+Reference:
+https://dl.google.com/dl/edgedl/chrome/policy/policy_templates.zip
+https://support.brave.app/hc/en-us/articles/360039248271-Group-Policy
+https://github.com/uBlockOrigin/uBOL-home/wiki/Managed-settings
+https://github.com/uBlockOrigin/uBOL-home/blob/main/chromium/rulesets/ruleset-details.json

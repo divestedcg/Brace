@@ -29,7 +29,7 @@ pref("fission.autostart", true); //MULL-COMMENT_ME
 pref("security.tls.enable_kyber", true);
 pref("network.http.http3.enable_kyber", true);
 pref("mail.phishing.detection.enabled", true);
-pref("mailnews.message_display.disable_remote_image", true)
+pref("mailnews.message_display.disable_remote_image", true);
 
 //Disable Sync
 pref("identity.fxaccounts.enabled", false);
