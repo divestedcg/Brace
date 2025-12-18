@@ -682,39 +682,3 @@ other::---
 user::rw-
 group::r--
 other::r--
-
-# file: TODO
-user::rw-
-group::---
-other::---
-
-# file: unused
-user::rwx
-group::r-x
-other::r-x
-
-# file: unused/99-brace.conf.template
-user::rw-
-group::r--
-other::r--
-
-# file: unused/chromium-brace-notes.txt
-user::rw-
-group::---
-other::---
-
-# file: unused/debian-firmware.sh
-user::rw-
-group::r-x
-other::r-x
-
-# file: unused/tmp.mount.conf
-user::rw-
-group::r--
-other::r--
-
-# file: unused/uBlock0@raymondhill.net.json
-user::rw-
-group::r--
-other::r--
-
