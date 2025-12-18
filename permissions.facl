@@ -48,6 +48,21 @@ user::rw-
 group::r--
 other::r--
 
+# file: brace/etc/brave
+user::rwx
+group::r-x
+other::r-x
+
+# file: brace/etc/brave/policies
+user::rwx
+group::r-x
+other::r-x
+
+# file: brace/etc/brave/policies/managed
+user::rwx
+group::r-x
+other::r-x
+
 # file: brace/etc/chromium
 user::rwx
 group::r-x
@@ -683,16 +698,6 @@ user::rw-
 group::r--
 other::r--
 
-# file: unused/brace-sebool.sh
-user::rwx
-group::r-x
-other::r-x
-
-# file: unused/chromium-brace-3p.json
-user::rw-
-group::r--
-other::r--
-
 # file: unused/chromium-brace-notes.txt
 user::rw-
 group::---
@@ -703,22 +708,12 @@ user::rw-
 group::r-x
 other::r-x
 
-# file: unused/powersave.conf
-user::rw-
-group::r--
-other::r--
-
 # file: unused/tmp.mount.conf
 user::rw-
 group::r--
 other::r--
 
 # file: unused/uBlock0@raymondhill.net.json
-user::rw-
-group::r--
-other::r--
-
-# file: unused/zram-generator.conf
 user::rw-
 group::r--
 other::r--

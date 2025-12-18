@@ -1,9 +1,0 @@
-{
-	"3rdparty": {
-		"extensions": {
-			"cjpalhdlnbpafiamejdnhcphjbkeiagm": {
-				"adminSettings": "{\"userSettings\":{\"externalLists\":\"https://divested.dev/hosts-domains-wildcards\\nhttps://divested.dev/blocklists/Fingerprinting.ubl\"},\"selectedFilterLists\":[\"user-filters\",\"ublock-filters\",\"ublock-badware\",\"ublock-privacy\",\"ublock-abuse\",\"ublock-unbreak\",\"awrl-0\",\"adguard-generic\",\"adguard-mobile\",\"easylist\",\"adguard-spyware\",\"easyprivacy\",\"fanboy-enhanced\",\"malware-0\",\"malware-1\",\"adguard-annoyance\",\"adguard-social\",\"fanboy-thirdparty_social\",\"fanboy-cookiemonster\",\"fanboy-annoyance\",\"fanboy-social\",\"ublock-annoyances\",\"plowe-0\",\"https://divested.dev/blocklists/Fingerprinting.ubl\",\"https://divested.dev/hosts-domains-wildcards\"]}"
-			}
-		}
-	}
-}

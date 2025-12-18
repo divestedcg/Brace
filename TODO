@@ -1,14 +1,12 @@
 packages:
-	gnome-software -> gnome-packagekit (deprecated but lightweight)
 	gnucash -> homebank (easier to use)
-	gnome-photos/shotwell -> gthumb
 	xournalpp
-	remove gnome-software/packagekit?
 	f37 hardware decode rpmfusion
 		dnf swap mesa-va-drivers mesa-va-drivers-freeworld --allowerasing
 		dnf swap mesa-vdpau-drivers mesa-vdpau-drivers-freeworld --allowerasing
 
 bugs:
+	fix Brave extension forcelist on Debian
 	fix profile.d files on Debian
 	fix brace-helpers.sh on openSUSE
 	CentOS 7: chmod(/proc/mtrr) failed: Permission denied

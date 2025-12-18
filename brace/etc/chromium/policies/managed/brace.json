@@ -28,7 +28,6 @@
 	"ExtensionInstallForcelist": [
 					"ddkjiahejlhfcafbddmgiahcphecmpfh;https://clients2.google.com/service/update2/crx"
 					],
-	"FirstPartySetsEnabled": false,
 	"AIModeSettings": 1,
 	"AutofillPredictionSettings": 2,
 	"CreateThemesSettings": 2,
@@ -230,5 +229,47 @@
 	"ReportDeviceVersionInfo": false,
 	"ReportDeviceVpdInfo": false,
 	"WebRtcIPHandling": "disable_non_proxied_udp",
-	"WebRtcPostQuantumKeyAgreement": true
+	"WebRtcPostQuantumKeyAgreement": true,
+	"TorDisabled": false,
+	"BraveRewardsDisabled": true,
+	"BraveWalletDisabled": true,
+	"BraveVPNDisabled": true,
+	"BraveAIChatEnabled": false,
+	"BraveNewsDisabled": true,
+	"BraveTalkDisabled": true,
+	"BraveP3AEnabled": false,
+	"BraveStatsPingEnabled": false,
+	"BraveWebDiscoveryEnabled": false,
+	"BravePlaylistEnabled": false,
+	"3rdparty": {
+		"extensions": {
+			"ddkjiahejlhfcafbddmgiahcphecmpfh": {
+				"defaultFiltering": "complete",
+				"showBlockedCount": true,
+				"strictBlockMode": true,
+				"rulesets": [
+					"-*",
+					"+default",
+					"+ublock-filters",
+					"+easylist",
+					"+easyprivacy",
+					"+pgl",
+					"+ublock-badware",
+					"+urlhaus-full",
+					"+adguard-mobile",
+					"+block-lan",
+					"+dpollock-0",
+					"+adguard-spyware-url",
+					"+annoyances-cookies",
+					"+annoyances-overlays",
+					"+annoyances-social",
+					"+annoyances-widgets",
+					"+annoyances-others",
+					"+annoyances-notifications",
+					"+ublock-experimental",
+					"+stevenblack-hosts"
+				]
+			}
+		}
+	}
 }

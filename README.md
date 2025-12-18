@@ -3,16 +3,19 @@ brace
 
 Overview
 --------
-Brace is a toolkit compatible with multiple existing Linux distributions that allows for a rapid installation of handpicked applications, along with corresponding configurations that have been fine-tuned for reasonable privacy and security.
+Brace offers a wide range of opinionated settings that prioritize privacy, security, and usability for a curated set of Linux programs.
 
 Compatibility
 -------------
-- Fedora 42/43 (preferred)
-- Other below distros are untested and supported only as a fallback if Fedora goes away
+- Fedora
+
+Fallback Compatibility
+----------------------
+- Below distros are **untested** and maintained only as a fallback if Fedora goes away
 - Arch Linux
-- CentOS Stream
-- Debian 13
-- openSUSE Tumbleweed
+- openSUSE
+- RHEL-like (CentOS, Rocky, Alma)
+- Debian
 
 License
 -------
@@ -28,38 +31,35 @@ Prebuilts
 Building
 --------
 - git clone [THIS REPO]
+- RPM: rpmbuild -ba brace.spec
 - Arch Linux: makepkg
-- CentOS: rpmbuild -ba brace.spec
 - Debian: dpkg-deb --root-owner-group --build brace
-- Fedora: rpmbuild -ba brace.spec
 
-Contents
---------
-- /etc/apt/apt.conf.d/90-brace					= apt: enable seccomp filter during package install
-- /etc/dconf/db/local.d/00-brace-*				= GNOME/Cinnamon/MATE: change default settings
-- /etc/dconf/profile/user					= Fixup dconf overrides on select distros
-- /etc/profile.d/brace-env-overrides.sh				= profile: sets some environment overrides (eg. umask)
-- /etc/profile.d/brace-helpers.sh				= profile: adds helper aliases (eg. cleaning functions)
-- /etc/tlp.d/00-brace.conf					= TLP: allow for better power savings on AC too
-- /usr/lib64/firefox/browser/defaults/preferences/userjs-*.js	= Firefox: change default settings
-	- /usr/lib64/firefox/distribution/policies.json
-	- /usr/lib64/thunderbird/defaults/pref/userjs-*.js
-- /etc/chromium/policies/managed/brace.json			= Chromium: change default settings
-	- /etc/opt/chrome/policies/managed/brace.json
-- /usr/lib/modprobe.d/brace.conf				= kernel: disable/block unsafe modules
-- /usr/lib/modprobe.d/wireless-perf.conf			= kernel: increase Wi-Fi performance for b43 and iwlwifi
-- /usr/lib/NetworkManager/conf.d/30-nm-privacy.conf		= NetworkManager: enables MAC randomization and IPv6 privacy extensions and disables connectivity checks
-- /usr/lib/sysctl.d/60-restrict.conf				= sysctl: set more restrictive defaults (dmesg, ptrace)
-- /usr/lib/systemd/system/*.service.d/99-brace.conf		= systemd service unit sandboxing
-- /usr/lib/systemd/user/restic-backup@.*			= systemd user unit for restic backups
-- /usr/lib/tmpfiles.d/99-brace-proc.conf			= /proc: harden permissions
-- /usr/lib/tmpfiles.d/99-brace-sys.conf				= /sys: harden permissions
-- /usr/bin/brace-supplemental-changes				= change extra default settings
-- /usr/bin/brace-enable-auto-updates				= Fedora: automatic system updates using dnf-plugin-system-upgrade
-- /usr/bin/brace-enable-rpmfusion				= Fedora: enable RPM Fusion 'free' repos
-- /usr/bin/brace-update-system					= Fedora: helper to update to the next release
-- /usr/bin/brace-installer					= unified recommended package installer
-- /usr/bin/brace-rpm-verify					= RPM: verifies installed packages for corruption
+Supported Configuration Targets
+-------------------------------
+- Chromium, Chrome, Brave
+- chrony
+- Firefox, Firefox ESR, Thunderbird
+- GNOME, MATE, Cinnamon
+- GRUB
+- Kernel
+- NetworkManager
+- polkit
+- systemd
+- TLP
+- udev
+
+Additional Inclusions
+---------------------
+- brace-audit			helper to verify settings are applied
+- brace-enable-auto-updates	helper to enable dnf automatic updates
+- brace-enable-fapolicyd	helper to enable fapolicyd for program allowlisting
+- brace-enable-rpmfusion	helper to enable rpmfusion-free repo for eg. codecs
+- brace-installer		helper with categories of packages to install
+- brace-rpm-verify		helper to verify integrity of installed packages
+- brace-supplemental-changes	helper to change additional global and per-user settings
+- brace-update-system		helper to update to next major version
+- restic-backup@.*		systemd units for daily backups
 
 Known Issues
 ------------
@@ -99,5 +99,5 @@ Credits
 	- https://madaidans-insecurities.github.io/guides/linux-hardening.html#kasr-kernel-modules
 
 Donate
--------
+------
 - https://divested.dev/donate
