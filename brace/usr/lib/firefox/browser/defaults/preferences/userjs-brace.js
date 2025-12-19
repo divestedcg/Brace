@@ -6,7 +6,6 @@ pref("general.smoothScroll", false);
 pref("mailnews.start_page.enabled", false);
 
 //Privacy
-pref("privacy.globalprivacycontrol.enabled", true);
 pref("network.negotiate-auth.trusted-uris", "");
 pref("network.dns.native_https_query", true);
 pref("network.trr.uri", "https://dns.quad9.net/dns-query");
@@ -46,4 +45,4 @@ pref("browser.ml.chat.shortcuts", false);
 pref("extensions.ml.enabled", false);
 
 //Fix IPv6 when using DoH
-pref("network.dns.preferIPv6", true); //BRACE-KEEP_FOR_NOW
+pref("network.dns.preferIPv6", true);

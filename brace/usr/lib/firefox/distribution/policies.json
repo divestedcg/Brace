@@ -95,7 +95,9 @@
 							"adguard-other-annoyances",
 							"adguard-popup-overlays",
 							"adguard-widgets",
-							"ublock-annoyances"
+							"ublock-annoyances",
+							"https://raw.githubusercontent.com/DandelionSprout/adfilt/master/LegitimateURLShortener.txt",
+							"https://divested.dev/hosts-domains-wildcards"
 						]
 					}
 				}
