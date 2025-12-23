@@ -241,6 +241,14 @@
 	"BraveStatsPingEnabled": false,
 	"BraveWebDiscoveryEnabled": false,
 	"BravePlaylistEnabled": false,
+	"BraveDeAmpEnabled": true,
+	"BraveDebouncingEnabled": true,
+	"BraveGlobalPrivacyControlEnabled": true,
+	"BraveReduceLanguageEnabled": true,
+	"BraveTrackingQueryParametersFilteringEnabled": true,
+	"DefaultBraveHttpsUpgradeSetting": 2,
+	"DefaultBraveReferrersSetting": 2,
+	"IPFSEnabled": false,
 	"3rdparty": {
 		"extensions": {
 			"ddkjiahejlhfcafbddmgiahcphecmpfh": {

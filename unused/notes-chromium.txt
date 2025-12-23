@@ -16,5 +16,6 @@ AudioSandboxEnabled:true
 Reference:
 https://dl.google.com/dl/edgedl/chrome/policy/policy_templates.zip
 https://support.brave.app/hc/en-us/articles/360039248271-Group-Policy
+https://github.com/brave/brave-core/tree/master/components/policy/resources/templates/policy_definitions/BraveSoftware
 https://github.com/uBlockOrigin/uBOL-home/wiki/Managed-settings
 https://github.com/uBlockOrigin/uBOL-home/blob/main/chromium/rulesets/ruleset-details.json
