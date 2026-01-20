@@ -185,13 +185,13 @@ if [ -f /etc/fedora-release ] || [ -f /etc/centos-release ]; then
 	echo -e "\nChecking packages";
 	rpmPackageInstalled "divested-release";
 	rpmPackageInstalled "brace";
-	if [ "$isVirtualMachine" == "false" ]; then
-		rpmPackageInstalled "real-ucode";
+	#if [ "$isVirtualMachine" == "false" ]; then
+		#rpmPackageInstalled "real-ucode";
 		#rpmPackageInstalled "tlp";
 		#rpmPackageInstalled "tlp-rdw";
-	else
-		logSkip "virtual machine detected, ignoring some packages";
-	fi;
+	#else
+	#	logSkip "virtual machine detected, ignoring some packages";
+	#fi;
 	if [ "$isDesktop" == "true" ]; then
 		rpmPackageInstalled "firejail";
 		rpmPackageInstalled "rpmfusion-free-release" "sudo brace-enable-rpmfusion";
