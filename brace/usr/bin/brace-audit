@@ -93,16 +93,6 @@ firewalldCheckActiveZones() {
 	fi;
 }
 
-verifyFapolicydIntegrity() {
-	if grep -q "integrity = sha256" /etc/fapolicyd/fapolicyd.conf > /dev/null 2>&1; then
-		logYes "fapolicyd integrity mode:" "sha256";
-	elif grep -q "integrity = size" /etc/fapolicyd/fapolicyd.conf > /dev/null 2>&1; then
-		logPartial "fapolicyd integrity mode:" "size";
-	else
-		logNo "fapolicyd integrity mode:" "none";
-	fi;
-}
-
 verifyHardenedMalloc() {
 	if grep -q "hardened_malloc" /proc/self/maps > /dev/null 2>&1; then
 		logYes "hardened_malloc preloaded";
@@ -190,15 +180,8 @@ if [ -f /etc/fedora-release ] || [ -f /etc/centos-release ]; then
 	#	logSkip "virtual machine detected, ignoring some packages";
 	#fi;
 	if [ "$isDesktop" == "true" ]; then
-		rpmPackageInstalled "firejail";
 		rpmPackageInstalled "rpmfusion-free-release" "sudo brace-enable-rpmfusion";
 		rpmPackageInstalled "mesa-va-drivers-freeworld" "sudo dnf swap mesa-va-drivers mesa-va-drivers-freeworld --allowerasing";
-	fi;
-
-	echo -e "\nChecking fapolicyd";
-	if rpmPackageInstalled "fapolicyd" "sudo brace-enable-fapolicyd"; then
-		systemdServiceRunning "fapolicyd";
-		verifyFapolicydIntegrity;
 	fi;
 
 	echo -e "\nChecking firewalld";

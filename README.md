@@ -53,7 +53,6 @@ Additional Inclusions
 ---------------------
 - brace-audit			helper to verify settings are applied
 - brace-enable-auto-updates	helper to enable dnf automatic updates
-- brace-enable-fapolicyd	helper to enable fapolicyd for program allowlisting
 - brace-enable-rpmfusion	helper to enable rpmfusion-free repo for eg. codecs
 - brace-installer		helper with categories of packages to install
 - brace-rpm-verify		helper to verify integrity of installed packages

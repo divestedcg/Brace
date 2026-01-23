@@ -1,5 +1,5 @@
 Name: brace
-Version: 20260122
+Version: 20260123
 Release: 1
 Summary: Increases privacy/security through various configs.
 License: AGPLv3+
@@ -71,7 +71,6 @@ install -Dm644 %{_sourcedir}/brace/usr/lib/udev/rules.d/50-usb-realtek-net-excep
 install -Dm755 %{_sourcedir}/brace/usr/bin/brace-supplemental-changes %{buildroot}/usr/bin/brace-supplemental-changes;
 install -Dm755 %{_sourcedir}/brace/usr/bin/brace-audit %{buildroot}/usr/bin/brace-audit;
 install -Dm755 %{_sourcedir}/brace/usr/bin/brace-fedora-enable-auto-updates %{buildroot}/usr/bin/brace-enable-auto-updates;
-install -Dm755 %{_sourcedir}/brace/usr/bin/brace-fedora-enable-fapolicyd %{buildroot}/usr/bin/brace-enable-fapolicyd;
 install -Dm755 %{_sourcedir}/brace/usr/bin/brace-fedora-enable-rpmfusion %{buildroot}/usr/bin/brace-enable-rpmfusion;
 install -Dm755 %{_sourcedir}/brace/usr/bin/brace-fedora-update-system %{buildroot}/usr/bin/brace-update-system;
 install -Dm755 %{_sourcedir}/brace/usr/bin/brace-installer %{buildroot}/usr/bin/brace-installer;
@@ -125,7 +124,6 @@ install -Dm644 %{_sourcedir}/README.md %{buildroot}/usr/share/doc/brace/README.m
 /usr/bin/brace-supplemental-changes
 /usr/bin/brace-audit
 /usr/bin/brace-enable-auto-updates
-/usr/bin/brace-enable-fapolicyd
 /usr/bin/brace-enable-rpmfusion
 /usr/bin/brace-update-system
 /usr/bin/brace-installer
