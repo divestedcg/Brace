@@ -139,7 +139,7 @@ secureBootTestKeys() {
 }
 
 fwupdmgrSecurity() {
-	if fwupdmgr security --force --json | jq '.SecurityAttributes.[] | select(.AppstreamId=="'"$2"'").HsiResult' | grep -q "$3" > /dev/null 2>&1; then
+	if fwupdmgr security --force --json | jq '.SecurityAttributes.[] | select(.AppstreamId=="'"$2"'").HsiResult' | grep -E -q "$3" > /dev/null 2>&1; then
 		logYes "$1";
 	else
 		logNo "$1";
@@ -186,9 +186,6 @@ if [ -f /etc/fedora-release ] || [ -f /etc/centos-release ]; then
 	rpmPackageInstalled "divested-release";
 	rpmPackageInstalled "brace";
 	#if [ "$isVirtualMachine" == "false" ]; then
-		#rpmPackageInstalled "real-ucode";
-		#rpmPackageInstalled "tlp";
-		#rpmPackageInstalled "tlp-rdw";
 	#else
 	#	logSkip "virtual machine detected, ignoring some packages";
 	#fi;
@@ -218,8 +215,12 @@ if [ -f /etc/fedora-release ] || [ -f /etc/centos-release ]; then
 	fi;
 
 	echo -e "\nChecking hardened_malloc";
-	if rpmPackageInstalled "hardened_malloc"; then
-		verifyHardenedMalloc;
+	if [ "$isDesktop" == "true" ]; then
+		logSkip "ignoring hm check, currently incompatible with GTK/glycin"
+	else
+		if rpmPackageInstalled "hardened_malloc"; then
+			verifyHardenedMalloc;
+		fi;
 	fi;
 
 	echo -e "\nChecking DNF automatic updates";
@@ -250,7 +251,7 @@ if [ -f /etc/fedora-release ] || [ -f /etc/centos-release ]; then
 	if [ "$isVirtualMachine" == "false" ]; then
 		if type "fwupdmgr" > /dev/null 2>&1; then
 			fwupdmgrSecurity "iommu" "org.fwupd.hsi.Iommu" "\"enabled\"";
-			fwupdmgrSecurity "system memory encryption" "org.fwupd.hsi.EncryptedRam" "\"encrypted\"";
+			fwupdmgrSecurity "system memory encryption" "org.fwupd.hsi.EncryptedRam" "\"enabled|encrypted\"";
 		fi;
 	fi;
 

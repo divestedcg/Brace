@@ -228,7 +228,7 @@ category='GNOME Extras';
 	baseIncluded=false;
 	packagesArch='gnome-tweak-tool file-roller';
 	packagesDebian='gnome-tweak-tool file-roller';
-	packagesFedora='gnome-tweak-tool file-roller';
+	packagesFedora='gnome-tweak-tool file-roller gnome-themes-extra';
 	packagesSuse='gnome-tweaks file-roller';
 	handleOperation;
 category='VA-API';

@@ -1,8 +1,8 @@
 Package: brace
-Version: 20260119-1
+Version: 20260122-1
 Section: custom
 Priority: optional
 Architecture: all
 Essential: no
-Maintainer: Tad <tad@spotco.us>
+Maintainer: Tavi <tavi@divested.dev>
 Description: Increases privacy/security through various configs.
