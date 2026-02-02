@@ -1,7 +1,7 @@
 # Maintainer: Tavi <tavi@divested.dev>
 pkgname=brace
 pkgver=20260202
-pkgrel=1
+pkgrel=2
 pkgdesc="Increases privacy/security through various configs."
 arch=('any')
 license=('GPL3')
@@ -42,6 +42,7 @@ package() {
 	install -Dm644 brace/usr/lib/systemd/system/ejabberd.service.d/99-brace.conf "$pkgdir"/usr/lib/systemd/system/ejabberd.service.d/99-brace.conf;
 	install -Dm644 brace/usr/lib/systemd/system/httpd.service.d/99-brace.conf "$pkgdir"/usr/lib/systemd/system/httpd.service.d/99-brace.conf;
 	install -Dm644 brace/usr/lib/systemd/system/irqbalance.service.d/99-brace.conf "$pkgdir"/usr/lib/systemd/system/irqbalance.service.d/99-brace.conf;
+	install -Dm644 brace/usr/lib/systemd/system/jellyfin.service.d/99-brace.conf "$pkgdir"/usr/lib/systemd/system/jellyfin.service.d/99-brace.conf;
 	install -Dm644 brace/usr/lib/systemd/system/minetest@.service.d/99-brace.conf "$pkgdir"/usr/lib/systemd/system/minetest@.service.d/99-brace.conf;
 	install -Dm644 brace/usr/lib/systemd/system/ModemManager.service.d/99-brace.conf "$pkgdir"/usr/lib/systemd/system/ModemManager.service.d/99-brace.conf;
 	install -Dm644 brace/usr/lib/systemd/system/murmur.service.d/99-brace.conf "$pkgdir"/usr/lib/systemd/system/murmur.service.d/99-brace.conf;

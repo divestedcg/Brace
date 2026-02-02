@@ -1,6 +1,6 @@
 Name: brace
 Version: 20260202
-Release: 1
+Release: 2
 Summary: Increases privacy/security through various configs.
 License: AGPLv3+
 BuildArch: noarch
@@ -53,6 +53,7 @@ install -Dm644 %{_sourcedir}/brace/usr/lib/systemd/system/chronyd.service.d/99-b
 install -Dm644 %{_sourcedir}/brace/usr/lib/systemd/system/ejabberd.service.d/99-brace.conf %{buildroot}/usr/lib/systemd/system/ejabberd.service.d/99-brace.conf;
 install -Dm644 %{_sourcedir}/brace/usr/lib/systemd/system/httpd.service.d/99-brace.conf %{buildroot}/usr/lib/systemd/system/httpd.service.d/99-brace.conf;
 install -Dm644 %{_sourcedir}/brace/usr/lib/systemd/system/irqbalance.service.d/99-brace.conf %{buildroot}/usr/lib/systemd/system/irqbalance.service.d/99-brace.conf;
+install -Dm644 %{_sourcedir}/brace/usr/lib/systemd/system/jellyfin.service.d/99-brace.conf %{buildroot}/usr/lib/systemd/system/jellyfin.service.d/99-brace.conf;
 install -Dm644 %{_sourcedir}/brace/usr/lib/systemd/system/minetest@.service.d/99-brace.conf %{buildroot}/usr/lib/systemd/system/minetest@.service.d/99-brace.conf;
 install -Dm644 %{_sourcedir}/brace/usr/lib/systemd/system/ModemManager.service.d/99-brace.conf %{buildroot}/usr/lib/systemd/system/ModemManager.service.d/99-brace.conf;
 install -Dm644 %{_sourcedir}/brace/usr/lib/systemd/system/murmur.service.d/99-brace.conf %{buildroot}/usr/lib/systemd/system/murmur.service.d/99-brace.conf;
@@ -106,6 +107,7 @@ install -Dm644 %{_sourcedir}/README.md %{buildroot}/usr/share/doc/brace/README.m
 /usr/lib/systemd/system/ejabberd.service.d/99-brace.conf
 /usr/lib/systemd/system/httpd.service.d/99-brace.conf
 /usr/lib/systemd/system/irqbalance.service.d/99-brace.conf
+/usr/lib/systemd/system/jellyfin.service.d/99-brace.conf
 /usr/lib/systemd/system/minetest@.service.d/99-brace.conf
 /usr/lib/systemd/system/ModemManager.service.d/99-brace.conf
 /usr/lib/systemd/system/murmur.service.d/99-brace.conf
