@@ -229,6 +229,7 @@ restore-session=false
 restore-window-size=false
 use-system-font=true
 window-size=(uint32 235, uint32 60)
+opacity=0.95
 
 [org/gnome/Ptyxis/Profiles/827304327b7d146873335ecb68f0f140]
 bold-is-bright=true

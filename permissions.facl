@@ -473,6 +473,16 @@ user::rw-
 group::r--
 other::r--
 
+# file: brace/usr/lib/systemd/system/jellyfin.service.d
+user::rwx
+group::r-x
+other::r-x
+
+# file: brace/usr/lib/systemd/system/jellyfin.service.d/99-brace.conf
+user::rw-
+group::r--
+other::r--
+
 # file: brace/usr/lib/systemd/system/minetest@.service.d
 user::rwx
 group::r-x
