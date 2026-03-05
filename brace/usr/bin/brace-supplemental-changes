@@ -56,9 +56,10 @@ if [ "$(/usr/bin/id -u)" -eq "0" ]; then
 					grubby --update-kernel=ALL --args="randomize_kstack_offset=1"; #Randomize kernel stacks
 					grubby --update-kernel=ALL --args="slab_nomerge"; #Don't merge same-size slabs
 					grubby --update-kernel=ALL --args="proc_mem.force_override=never"; #Prevent direct memory writes
-					if [ -f "/usr/bin/arc_summary" ]; then
+					if [ -f "/usr/bin/arc_summary" ] || [ -d /etc/zfs ] || [ -d /usr/share/zfs ]; then
 						#may work just fine, but need to do testing, so just don't do it for now
 						echo "Detected ZoL, not enabling bdev_allow_write_mounted=0";
+						grubby --update-kernel=ALL --remove-args="bdev_allow_write_mounted=0";
 					else
 						grubby --update-kernel=ALL --args="bdev_allow_write_mounted=0"; #Prevent direct block device writes when mounted
 					fi;
