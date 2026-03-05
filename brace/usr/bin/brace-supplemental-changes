@@ -95,6 +95,8 @@ if [ "$(/usr/bin/id -u)" -eq "0" ]; then
 					grubby --update-kernel=ALL --args="vdso32=0"; #Disable legacy 32-bit vDSO
 					grubby --update-kernel=ALL --args="efi_pstore.pstore_disable=1"; #Disable use of UEFI pstore backend
 					grubby --update-kernel=ALL --args="erst_disable"; #Disable use of ACPI ERST pstore backend
+					grubby --update-kernel=ALL --args="hash_pointers=always"; #Always hash pointers, pre-req for slub_debug
+					grubby --update-kernel=ALL --args="systemd.ssh_auto=no"; #Disable systemd v256 automatic AF_VSOCK/AF_UNIX SSH binding
 
 					#Nice to haves
 					grubby --update-kernel=ALL --args="fsck.mode=force"; #FSCK mounts every boot, systemd default is once per 30 boots
@@ -112,10 +114,10 @@ if [ "$(/usr/bin/id -u)" -eq "0" ]; then
 		select yns in "Yes" "No" "Skip"; do
 			case $yns in
 				Yes )
-					grubby --update-kernel=ALL --args="hash_pointers=always slub_debug=FZ"; #Enables SLUB sanity checks and red-zoning
+					grubby --update-kernel=ALL --args="slub_debug=FZ"; #Enables SLUB sanity checks and red-zoning
 					break;;
 				No )
-					grubby --update-kernel=ALL --remove-args="hash_pointers=always slub_debug=FZ";
+					grubby --update-kernel=ALL --remove-args="slub_debug=FZ";
 					break;;
 				Skip )
 					break;;
@@ -132,6 +134,22 @@ if [ "$(/usr/bin/id -u)" -eq "0" ]; then
 					break;;
 				No )
 					grubby --update-kernel=ALL --remove-args="ia32_emulation=false";
+					break;;
+				Skip )
+					break;;
+			esac
+		done
+	fi;
+
+	if [ -x /usr/bin/lscpu ] && lscpu | grep -q "SMT vulnerable" || [ -x /usr/bin/dmesg ] && dmesg | grep -q "SMT on, data leak possible"; then
+		echo "Your system reports CPU mitigations are ineffective due to SMT being enabled. Would you like to disable SMT?";
+		select yns in "Yes" "No" "Skip"; do
+			case $yns in
+				Yes )
+					grubby --update-kernel=ALL --args="nosmt=force"; #Disables SMT
+					break;;
+				No )
+					grubby --update-kernel=ALL --remove-args="nosmt=force";
 					break;;
 				Skip )
 					break;;
