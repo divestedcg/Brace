@@ -6,7 +6,10 @@
 #NVMe Enclosures
 #
 
-#RTL9210A, tested working
+#ASMedia ASM2464PD (USB fallback mode), tested working
+ACTION=="add|change", ATTRS{idVendor}=="174c", ATTRS{idProduct}=="2464", SUBSYSTEM=="scsi_disk", ATTR{provisioning_mode}="unmap"
+
+#Realtek RTL9210A, tested working
 ACTION=="add|change", ATTRS{idVendor}=="0bda", ATTRS{idProduct}=="9210", SUBSYSTEM=="scsi_disk", ATTR{provisioning_mode}="unmap"
 
 #JMicron JMS586, tested working
