@@ -68,7 +68,7 @@ handleInstall() {
 		$packageManager install --no-install-recommends $packagesToInstallReal;
 	fi;
 	if [ "$packageManager" == "dnf5" ]; then
-		$packageManager install --skip-unavailable $packagesFedora $packagesBaseFedora && $packageManager mark install --skip-unavailable $packagesFedora $packagesBaseFedora;
+		$packageManager install --skip-unavailable --skip-broken $packagesFedora $packagesBaseFedora && $packageManager mark user --skip-unavailable $packagesFedora $packagesBaseFedora;
 	fi;
 	if [ "$packageManager" == "dnf" ] || [ "$packageManager" == "yum" ]; then
 		$packageManager install --skip-broken $packagesFedora $packagesBaseFedora && $packageManager mark install --skip-broken $packagesFedora $packagesBaseFedora;
