@@ -192,6 +192,7 @@ hinting='slight'
 [org/gnome/shell]
 favorite-apps=['org.gnome.Nautilus.desktop', 'org.mozilla.firefox.desktop', 'org.gnome.Evolution.desktop', 'org.gnome.Yelp.desktop']
 disable-user-extensions=true
+allow-extension-installation=false
 
 [org/gnome/shell/overrides]
 dynamic-workspaces=false
@@ -230,6 +231,7 @@ restore-window-size=false
 use-system-font=true
 window-size=(uint32 235, uint32 60)
 opacity=0.95
+inhibit-logout=false
 
 [org/gnome/Ptyxis/Profiles/827304327b7d146873335ecb68f0f140]
 bold-is-bright=true
