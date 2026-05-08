@@ -1,6 +1,6 @@
 Name: brace
 Version: 20260508
-Release: 5
+Release: 6
 Summary: Increases privacy/security through various configs
 License: AGPLv3+
 BuildArch: noarch
@@ -144,7 +144,14 @@ A blocklist generated from all Fedora kmods. A static allowlist is built-in and 
 %post -n brace-mr
 origAllowed=$(grep -c "^#" /usr/lib/modprobe.d/brace-mr.conf;);
 for kmod in $(sed 's/ .*//g' /proc/modules); do
-	sed -i "/ $kmod$/ s/^/# /" /usr/lib/modprobe.d/brace-mr.conf;
+	sed -i "/ $kmod$/ s/^b/# b/" /usr/lib/modprobe.d/brace-mr.conf;
+	echo "$kmod" >> /etc/brace-mr.conf;
 done;
+sort -u -o /etc/brace-mr.conf /etc/brace-mr.conf;
+if [ -f /etc/brace-mr.conf ]; then
+for kmod in $(cat /etc/brace-mr.conf); do
+	sed -i "/ $kmod$/ s/^b/# b/" /usr/lib/modprobe.d/brace-mr.conf;
+done;
+fi;
 postAllowed=$(grep -c "^#" /usr/lib/modprobe.d/brace-mr.conf;);
 echo "Allowlisted $(($postAllowed-$origAllowed)) additional kmods for your system";
