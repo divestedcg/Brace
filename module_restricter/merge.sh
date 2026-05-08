@@ -13,7 +13,6 @@ do
 	sed -i "/ $line$/ s/^/# /" result.conf;
 done < allowed.txt;
 
-
 echo "Total modules:"
 wc -l result.conf
 echo "Expected allowed modules:"
