@@ -1,5 +1,8 @@
 sort -u kernels/*.txt > index.txt
-sort -u systems/*.txt > allowed.txt;
+
+grep -v "^#" allowed-static.txt > allowed-static-wc.txt;
+sort -u allowed-static-wc.txt systems/*.txt > allowed.txt;
+rm allowed-static-wc.txt;
 
 rm result.conf;
 

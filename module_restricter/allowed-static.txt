@@ -1,0 +1,31 @@
+# Filesystems
+exfat
+hfs
+hfsplus
+squashfs
+udf
+
+# VirtIO
+virtio_input
+
+# VFIO
+vfio
+vfio_pci
+vfio_iommu_type1
+vfio_pci_core
+
+# Compression
+zstd
+
+# HID
+hid_wiimote
+
+# Networking
+tun
+tap
+macvtap
+wireguard
+libcurve25519
+cdc_ncm
+usbnet
+cdc_ether
