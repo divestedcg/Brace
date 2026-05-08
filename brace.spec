@@ -1,7 +1,7 @@
 Name: brace
-Version: 20260420
-Release: 1
-Summary: Increases privacy/security through various configs.
+Version: 20260508
+Release: 3
+Summary: Increases privacy/security through various configs
 License: AGPLv3+
 BuildArch: noarch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
@@ -79,6 +79,7 @@ install -Dm755 %{_sourcedir}/brace/usr/bin/brace-rpm-verify %{buildroot}/usr/bin
 install -Dm644 %{_sourcedir}/brace/usr/share/polkit-1/rules.d/00-brace-packagekit.rules %{buildroot}/usr/share/polkit-1/rules.d/00-brace-packagekit.rules;
 mkdir -p %{buildroot}/usr/share/doc/brace;
 install -Dm644 %{_sourcedir}/README.md %{buildroot}/usr/share/doc/brace/README.md;
+install -Dm644 %{_sourcedir}/module_restricter/result.conf %{buildroot}/usr/lib/modprobe.d/brace-mr.conf;
 
 %files
 /etc/chrony.brace.conf
@@ -132,3 +133,18 @@ install -Dm644 %{_sourcedir}/README.md %{buildroot}/usr/share/doc/brace/README.m
 /usr/bin/brace-rpm-verify
 /usr/share/polkit-1/rules.d/00-brace-packagekit.rules
 /usr/share/doc/brace/README.md
+
+%package -n brace-mr
+Summary: Brace kernel module restrictor
+License: CC0
+%description -n brace-mr
+A blocklist generated from all Fedora kmods. A static allowlist is built-in and any kmods in use by your system are additionally allowed.
+%files -n brace-mr
+/usr/lib/modprobe.d/brace-mr.conf
+%post -n brace-mr
+origAllowed=$(grep -c "^#" /usr/lib/modprobe.d/brace-mr.conf;);
+for kmod in $(sed 's/ .*//g' /proc/modules | sort -u); do
+	sed -i "/ $kmod$/ s/^/# /" /usr/lib/modprobe.d/brace-mr.conf;
+done;
+postAllowed=$(grep -c "^#" /usr/lib/modprobe.d/brace-mr.conf;);
+echo "Allowlisted $(($postAllowed-$origAllowed)) additional kmods for your system";
