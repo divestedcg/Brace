@@ -29,3 +29,6 @@ libcurve25519
 cdc_ncm
 usbnet
 cdc_ether
+
+# Docks
+typec_displayport
