@@ -1,5 +1,29 @@
 {
 	"policies": {
+		"AIControls": {
+			"Translations": {
+				"Value": "available"
+			},
+			"PDFAltText": {
+				"Value": "available"
+			},
+			"SmartTabGroups": {
+				"Value": "blocked",
+				"Locked": true
+			},
+			"LinkPreviewKeyPoints": {
+				"Value": "blocked",
+				"Locked": true
+			},
+			"SidebarChatbot": {
+				"Value":  "blocked",
+				"Locked": true
+			},
+			"SmartWindow": {
+				"Value": "blocked",
+				"Locked": true
+			}
+		},
 		"CaptivePortal": false,
 		"DisableFirefoxAccounts": true,
 		"DisableFirefoxStudies": true,
@@ -45,6 +69,7 @@
 			"ImproveSuggest": false,
 			"Locked": false
 		},
+		"IPProtectionAvailable": false,
 		"NetworkPrediction": false,
 		"OverrideFirstRunPage": "about:home",
 		"Preferences": {
@@ -59,6 +84,7 @@
 			"FeatureRecommendations": false,
 			"SkipOnboarding": false
 		},
+		"VisualSearchEnabled": false,
 		"3rdparty": {
 			"Extensions": {
 				"uBlock0@raymondhill.net": {

@@ -32,6 +32,7 @@
 	"AutofillPredictionSettings": 2,
 	"CreateThemesSettings": 2,
 	"DevToolsGenAiSettings": 2,
+	"FindsSettings": 2,
 	"GeminiActOnWebSettings": 1,
 	"GeminiSettings": 1,
 	"GenAIInlineImageSettings": 2,
@@ -44,6 +45,7 @@
 	"HelpMeReadSettings": 2,
 	"HelpMeWriteSettings": 2,
 	"HistorySearchSettings": 2,
+	"SearchContentSharingSettings": 2,
 	"TabCompareSettings": 2,
 	"EnableMediaRouter": false,
 	"AccessibilityImageLabelsEnabled": false,
@@ -60,6 +62,7 @@
 	"BrowserNetworkTimeQueriesEnabled": false,
 	"BrowserSignin": 0,
 	"BuiltInAIAPIsEnabled": false,
+	"CacheEncryptionEnabled": true,
 	"ChromeVariations": 1,
 	"ClickToCallEnabled": false,
 	"CommandLineFlagSecurityWarningsEnabled": true,
@@ -157,6 +160,7 @@
 	"WebRtcTextLogCollectionAllowed": false,
 	"WebXRImmersiveArEnabled": false,
 	"WindowOcclusionEnabled": true,
+	"XSLTEnabled": false,
 	"AutomatedPasswordChangeSettings": 2,
 	"PasswordLeakDetectionEnabled": false,
 	"PasswordManagerPasskeysEnabled": false,
@@ -249,6 +253,7 @@
 	"DefaultBraveHttpsUpgradeSetting": 2,
 	"DefaultBraveReferrersSetting": 2,
 	"IPFSEnabled": false,
+	"EmailAliasesEnabled": false,
 	"3rdparty": {
 		"extensions": {
 			"ddkjiahejlhfcafbddmgiahcphecmpfh": {

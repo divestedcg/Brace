@@ -6,6 +6,8 @@ AllowPopupsDuringPageUnload
 PrivacyScreenEnabled
 IntensiveWakeUpThrottlingEnabled
 PromptForDownloadLocation
+LocalNetworkAccessPermissionsPolicyDefaultEnabled
+PdfXfaFormsEnabled
 
 Research:
 AmbientAuthenticationInPrivateModesEnabled
