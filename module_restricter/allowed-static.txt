@@ -1,34 +1,376 @@
-# Filesystems
-exfat
-hfs
-hfsplus
-squashfs
-udf
-
-# VirtIO
-virtio_input
-
-# VFIO
-vfio
-vfio_pci
-vfio_iommu_type1
-vfio_pci_core
-
-# Compression
-zstd
-
-# HID
-hid_wiimote
-
-# Networking
-tun
-tap
-macvtap
-wireguard
-libcurve25519
-cdc_ncm
-usbnet
-cdc_ether
-
-# Docks
-typec_displayport
+ac97_bus #Legacy AC97 bus interface
+acpi_cpufreq #ACPI Processor P-States Driver
+acpi_pad #ACPI Processor Aggregator Driver
+acpi_tad #ACPI Time and Alarm (TAD) Device Driver
+acpi_thermal_rel #Intel acpi thermal rel misc dev driver
+act_csum #Checksum updating actions
+amd_atl #AMD Address Translation Library
+amdgpu #AMD GPU
+amd_pmc #AMD PMC Driver
+amd_sfh #AMD(R) PCIe MP2 Communication Driver
+amdxcp #AMD XCP PLATFORM DEVICES
+apple_mfi_fastcharge #Fast-charge control for Apple "MFi" devices
+asus_armoury #ASUS BIOS Configuration Driver
+asus_ec_sensors #HWMON driver for sensors accessible via ACPI EC in ASUS motherboards
+asus_nb_wmi #Asus Notebooks WMI Hotkey Driver
+asus_wmi #Asus Generic WMI Driver
+ata_generic #low-level driver for generic ATA
+binfmt_misc #Kernel support for miscellaneous binaries
+bluetooth #Bluetooth Core ver 2.22
+bnep #Bluetooth BNEP ver 1.3
+bridge #Ethernet bridge driver
+btbcm #Bluetooth support for Broadcom devices ver 0.1
+btintel #Bluetooth support for Intel devices ver 0.1
+btmtk #Bluetooth support for MediaTek devices ver 0.1
+btrtl #Bluetooth support for Realtek devices ver 0.1
+btusb #Generic Bluetooth USB driver ver 0.8
+cdc_ether #USB CDC Ethernet devices
+cdc_ncm #USB CDC NCM host driver
+cec #Device node registration for cec drivers
+cfg80211 #wireless configuration support
+cirrus_qemu #Cirrus driver for QEMU emulated device
+cls_u32 #Universal 32bit based TC Classifier
+coretemp #Intel Core temperature monitor
+crc8 #CRC8 (by Williams, Ross N.) function
+dcdbas #Dell Systems Management Base Driver (version 5.6.0-3.4)
+dell_laptop #Dell laptop driver
+dell_pc #Dell PC driver
+dell_rbtn #Dell Airplane Mode Switch driver
+dell_smbios #Common functions for kernel modules using Dell SMBIOS
+dell_smm_hwmon #Dell laptop SMM BIOS hwmon driver
+dell_wmi_ddv #Dell WMI sensor driver
+dell_wmi #Dell laptop WMI hotkeys driver
+dell_wmi_descriptor #Dell WMI descriptor driver
+dell_wmi_sysman #Dell platform setting control interface
+dm_crypt #device-mapper target for transparent encryption / decryption
+drm_buddy #DRM Buddy Allocator
+drm_display_helper #DRM display adapter helper
+drm_exec #DRM execution context
+drm_gpusvm_helper #DRM GPUSVM
+drm_gpuvm #DRM GPUVM
+drm_panel_backlight_quirks #Quirks for panel backlight overrides
+drm_suballoc_helper #Range suballocator helper
+drm_ttm_helper #DRM gem ttm helpers
+e1000e #Intel(R) PRO/1000 Network Driver
+ecryptfs #eCryptfs
+edac_mce_amd #AMD MCE decoder
+ee1004 #Driver for EE1004-compliant DDR4 SPD EEPROMs
+eeepc_wmi #Eee PC WMI Hotkey Driver
+exfat #exFAT filesystem support
+failover #Generic failover infrastructure/interface
+fat #Core FAT filesystem support
+ff_memless #Force feedback support for memoryless devices
+firmware_attributes_class #Firmware attributes class helper module
+ftdi_sio #USB FTDI Serial Converters Driver
+fuse #Filesystem in Userspace
+ghash_clmulni_intel #GHASH hash function, accelerated by PCLMULQDQ-NI
+gigabyte_wmi #Gigabyte WMI temperature driver
+gpio_amdpt #AMD Promontory GPIO Driver
+gpio_generic #Driver for basic memory-mapped GPIO controllers
+gpio_keys #Keyboard driver for GPIOs
+gpu_sched #DRM GPU scheduler
+hfs #Apple Macintosh file system support
+hfsplus #Extended Macintosh Filesystem
+hid_logitech_dj #HID driver for Logitech receivers
+hid_logitech_hidpp #Support for Logitech devices relying on the HID++ specification
+hid_multitouch #HID multitouch panels
+hid_nintendo #Driver for Nintendo Switch Controllers
+hid_playstation #HID Driver for PlayStation peripherals.
+hid_sensor_accel_3d #HID Sensor Accel 3D
+hid_sensor_als #HID Sensor ALS
+hid_sensor_gyro_3d #HID Sensor Gyroscope 3D
+hid_sensor_hub #HID Sensor Hub driver
+hid_sensor_iio_common #HID Sensor common attribute processing
+hid_sensor_magn_3d #HID Sensor Magnetometer 3D
+hid_sensor_trigger #HID Sensor trigger processing
+hid_sony #HID driver for Sony / PS2 / PS3 / PS4 BD devices
+hid_wiimote #Driver for Nintendo Wii / Wii U peripherals
+hkdf #HMAC-based Key Derivation Function (HKDF)
+i2c_algo_bit #I2C-Bus bit-banging algorithm
+i2c_dev #I2C /dev entries driver
+i2c_hid_acpi #HID over I2C ACPI driver
+i2c_hid #HID over I2C core driver
+i2c_i801 #I801 SMBus driver
+i2c_piix4 #PIIX4 SMBus driver
+i2c_smbus #SMBus protocol extensions support
+i915 #Intel Graphics
+ideapad_laptop #IdeaPad ACPI Extras
+idma64 #iDMA64 core driver
+industrialio #Industrial I/O core
+industrialio_triggered_buffer #IIO helper functions for setting up triggered buffers
+int3400_thermal #INT3400 Thermal driver
+int3403_thermal #ACPI INT3403 thermal driver
+int340x_thermal_zone #Intel INT340x common thermal zone handler
+intel_cstate #Support for Intel cstate performance events
+intel_hid #Intel HID Event hotkey driver
+intel_ish_ipc #Intel(R) Integrated Sensor Hub PCI Device Driver
+intel_ishtp_hid #ISH ISHTP HID client driver
+intel_ishtp #ISHTP bus driver
+intel_oc_wdt #Intel OC Watchdog driver
+intel_pch_thermal #Intel PCH Thermal driver
+intel_pmc_bxt #Intel Broxton PMC driver
+intel_pmc_core #Intel PMC Core Driver
+intel_pmc_core_pltdrv #Intel PMC Core platform driver
+intel_pmc_ssram_telemetry #Intel PMC SSRAM Telemetry driver
+intel_powerclamp #Package Level C-state Idle Injection for Intel CPUs
+intel_rapl_common #Intel Runtime Average Power Limit (RAPL) common code
+intel_rapl_msr #Driver for Intel RAPL (Running Average Power Limit) control via MSR interface
+intel_soc_dts_iosf #SoC DTS driver using side band interface
+intel_tcc_cooling #TCC offset cooling device Driver
+intel_uncore_frequency_common #Intel Uncore Frequency Common Module
+intel_uncore_frequency #Intel Uncore Frequency Limits Driver
+intel_uncore #Support for Intel uncore performance events
+intel_vsec #Intel Extended Capabilities auxiliary bus driver
+intel_wmi_thunderbolt #Intel WMI Thunderbolt force power driver
+intel_xhci_usb_role_switch #Intel XHCI USB role switch driver
+iommufd #I/O Address Space Management for passthrough devices
+ip6t_REJECT #packet "rejection" target for IPv6
+ip6t_rpfilter #IPv6 reverse path filter match
+ip6_udp_tunnel #IPv6 Foo over UDP tunnel driver
+ipheth #Apple iPhone USB Ethernet driver
+ip_set_hash_net #net type of IP sets, revisions 0-7
+ip_set #protocol 7
+ipt_REJECT #packet "rejection" target for IPv4
+irqbypass #IRQ bypass manager utility module
+isofs #ISO 9660 CDROM file system support
+iTCO_vendor_support #Intel TCO Vendor Specific WatchDog Timer Driver Support
+iTCO_wdt #Intel TCO WatchDog Timer Driver
+iwlmvm #The new Intel(R) wireless AGN driver for Linux
+iwlwifi #Intel(R) Wireless WiFi driver for Linux
+joydev #Joystick device interfaces
+k10temp #AMD Family 10h+ CPU core temperature monitor
+kfifo_buf #Industrial I/O buffering based on kfifo
+kvm_amd #KVM support for SVM (AMD-V) extensions
+kvm_intel #KVM support for VMX (Intel VT-x) extensions
+kvm #Kernel-based Virtual Machine (KVM) Hypervisor
+led_class_multicolor #Multicolor LED class interface
+libarc4 #ARC4 Cipher Algorithm
+libcurve25519 #Curve25519 algorithm
+llc #LLC IEEE 802.2 core support
+loop #Loopback device support
+lpc_ich #LPC interface for Intel ICH
+lz4_compress #LZ4 compressor
+lz4hc_compress #LZ4 HC compressor
+mac80211 #IEEE 802.11 subsystem
+macvlan #Driver for MAC address based VLANs
+macvtap #MAC-VLAN based tap driver
+mc #Device node registration for media drivers
+mei_hdcp #MEI HDCP
+mei #Intel(R) Management Engine Interface
+mei_me #Intel(R) Management Engine Interface
+mei_pxp #MEI PXP
+mii #MII hardware support library
+mmc_core #MMC core driver
+mpt3sas #LSI MPT Fusion SAS 3.0 Device Driver
+msi_wmi #MSI laptop WMI hotkeys driver
+mt76_connac_lib #MediaTek MT76x connac layer helpers
+mt76 #MediaTek MT76x helpers
+mt7921_common #MediaTek MT7921 core driver
+mt7921e #MediaTek MT7921E (PCIe) wireless driver
+mt792x_lib #MediaTek MT792x core driver
+mtd #Core MTD registration and access routines
+net_failover #Failover driver for Paravirtual drivers
+nf_conntrack #IPv4 and IPv6 connection tracking
+nf_conntrack_tftp #TFTP connection tracking helper
+nf_defrag_ipv4 #IPv4 defragmentation support
+nf_defrag_ipv6 #IPv6 defragmentation support
+nf_nat #Network address translation core
+nf_nat_tftp #TFTP NAT helper
+nfnetlink #Netfilter messages via netlink socket
+nf_reject_ipv4 #IPv4 packet rejection core
+nf_reject_ipv6 #IPv6 packet rejection core
+nf_tables #Framework for packet filtering and classification
+nft_chain_nat #nftables network address translation support
+nft_compat #x_tables over nftables support
+nft_ct #Netfilter nf_tables conntrack module
+nft_fib_inet #nftables fib inet support
+nft_fib_ipv4 #nftables fib / ip route lookup support
+nft_fib_ipv6 #nftables fib / ipv6 route lookup support
+nft_fib #Query routing table from nftables
+nft_masq #Netfilter nftables masquerade expression support
+nft_nat #Network Address Translation support
+nft_reject_inet #Netfilter nftables reject inet support
+nft_reject_ipv4 #IPv4 packet rejection for nftables
+nft_reject #Netfilter x_tables over nftables module
+nvme_auth #NVMe Authentication framework
+nvme_core #NVMe host core framework
+nvme_keyring #NVMe Keyring implementation
+nvme #NVMe host PCIe transport driver
+overlay #Overlay filesystem
+pata_acpi #SCSI low-level driver for ATA in ACPI mode
+pinctrl_alderlake #Intel Alder Lake PCH pinctrl/GPIO driver
+pl2303 #Prolific PL2303 USB to serial adaptor driver
+platform_profile #ACPI platform profile sysfs interface
+platform_temperature_control #Processor Thermal PTC Interface
+pmt_class #Intel PMT Class driver
+pmt_discovery #Intel PMT Discovery driver
+pmt_telemetry #Intel PMT Telemetry driver
+processor_thermal_device_pci_legacy #Processor Thermal Reporting Device Driver
+processor_thermal_device_pci #Processor Thermal Reporting Device Driver
+processor_thermal_device #Processor Thermal Reporting Device Driver
+processor_thermal_mbox #Processor Thermal Mail Box Interface
+processor_thermal_power_floor #Processor Thermal power floor notification Interface
+processor_thermal_rapl #RAPL interface using MMIO
+processor_thermal_rfim #Processor Thermal RFIM Interface
+processor_thermal_soc_slider #Processor Thermal Power Slider Interface
+processor_thermal_wt_hint #Processor Thermal Work Load type hint Interface
+processor_thermal_wt_req #Processor Thermal Work Load type request Interface
+qemu_fw_cfg #QEMU fw_cfg sysfs support
+qrtr #Qualcomm IPC-router driver
+r8152 #Realtek RTL8152/RTL8153 Based USB Ethernet Adapters
+r8153_ecm #Realtek USB ECM device
+r8169 #RealTek RTL-8169 Gigabit Ethernet driver
+raid_class #RAID device class
+rapl #Support Intel/AMD RAPL energy consumption counters
+realtek #Realtek PHY driver
+rfcomm #Bluetooth RFCOMM ver 1.11
+rfkill #RF switch support
+rmi_core #RMI bus
+rmi_smbus #RMI4 SMBus driver
+rtsx_pci #Realtek PCI-E Card Reader Driver
+rtsx_pci_sdmmc #Realtek PCI-E SD/MMC Card Host Driver
+sch_cake #The CAKE shaper.
+sch_fq #Fair Queue Packet Scheduler
+sch_htb #Hierarchical Token Bucket scheduler
+scsi_transport_sas #SAS Transport Attributes
+serio_raw #Raw serio driver
+snd_acp_config #AMD ACP Machine Configuration Module
+snd_acp_legacy_common #AMD ACP legacy common features
+snd_acp_pci #AMD ACP common PCI support
+snd #Advanced Linux Sound Architecture driver for soundcards.
+snd_amd_acpi_mach #AMD ACP tables and support for ACPI enumeration
+snd_amd_sdw_acpi #AMD SoundWire ACPI helpers
+snd_compress #ALSA Compressed offload framework
+snd_ctl_led #ALSA control interface to LED trigger code.
+snd_hda_codec_alc269 #Realtek ALC269 and compatible HD-audio codecs
+snd_hda_codec_alc882 #Realtek ALC882 and compatible HD-audio codecs
+snd_hda_codec_atihdmi #AMD/ATI HDMI HD-audio codec
+snd_hda_codec_generic #Generic HD-audio codec parser
+snd_hda_codec #HDA codec core
+snd_hda_codec_hdmi #Generic HDMI HD-audio codec
+snd_hda_codec_intelhdmi #Intel HDMI HD-audio codec
+snd_hda_codec_realtek_lib #Realtek HD-audio codec helper
+snd_hda_core #HD-audio bus
+snd_hda_ext_core #HDA extended core
+snd_hda_intel #Intel HDA driver
+snd_hda_scodec_component #HD Audio component binding library
+snd_hrtimer #ALSA hrtimer backend
+snd_hwdep #Hardware dependent layer
+snd_intel_dspcfg #Intel DSP config driver
+snd_intel_sdw_acpi #Intel Soundwire ACPI helpers
+snd_pci_acp3x #AMD ACP3x PCI driver
+snd_pci_acp5x #AMD Vangogh ACP PCI driver
+snd_pci_acp6x #AMD ACP Yellow Carp PCI driver
+snd_pci_ps #AMD common ACP PCI driver for ACP6.3, ACP7.0 & ACP7.1 platforms
+snd_pcm_dmaengine #PCM dmaengine helper APIs
+snd_pcm #Midlevel PCM code for ALSA.
+snd_rawmidi #Midlevel RawMidi code for ALSA.
+snd_rn_pci_acp3x #AMD ACP Renoir PCI driver
+snd_rpl_pci_acp6x #AMD ACP RPL PCI driver
+snd_seq #Advanced Linux Sound Architecture sequencer.
+snd_seq_device #ALSA sequencer device management
+snd_seq_dummy #ALSA sequencer MIDI-through client
+snd_soc_acpi #ALSA SoC ACPI module
+snd_soc_acpi_amd_match #AMD ACP6.3 tables and support for ACPI enumeration
+snd_soc_acpi_intel_match #Intel Common ACPI Match module
+snd_soc_acpi_intel_sdca_quirks #ASoC ACPI Intel SDCA quirks
+snd_soc_avs #Intel cAVS sound driver
+snd_soc_core #ALSA SoC Core
+snd_soc_hdac_hda #ASoC Extensions for legacy HDA Drivers
+snd_soc_hda_codec #HD-Audio codec driver
+snd_soc_sdca #SDCA library
+snd_soc_sdw_utils #SoundWire ASoC helpers
+snd_sof_amd_acp63 #ACP63 SOF Driver
+snd_sof_amd_acp70 #ACP70 SOF Driver
+snd_sof_amd_acp #AMD ACP sof driver
+snd_sof_amd_rembrandt #REMBRANDT SOF Driver
+snd_sof_amd_renoir #RENOIR SOF Driver
+snd_sof_amd_vangogh #VANGOGH SOF Driver
+snd_sof_intel_hda_common #SOF helpers for HDaudio platforms
+snd_sof_intel_hda_generic #SOF support for HDaudio platforms
+snd_sof_intel_hda_mlink #SOF support for HDaudio multi-link
+snd_sof_intel_hda_sdw_bpt #SOF helpers for HDaudio SoundWire BPT
+snd_sof_intel_hda #SOF support for HDaudio codecs
+snd_sof_pci_intel_cnl #SOF support for CannonLake platforms
+snd_sof_pci_intel_skl #SOF support for SkyLake platforms
+snd_sof_pci_intel_tgl #SOF support for TigerLake platforms
+snd_sof_pci #SOF support for PCI platforms
+snd_sof #Sound Open Firmware (SOF) Core
+snd_sof_utils #SOF utils
+snd_sof_xtensa_dsp #SOF Xtensa DSP support
+snd_timer #ALSA timer interface
+snd_ump #Universal MIDI Packet (UMP) Core Driver
+snd_usb_audio #USB Audio
+snd_usbmidi_lib #USB Audio/MIDI helper module
+soc_button_array #Windows-compatible SoC Button Array driver
+soundcore #Core sound module
+soundwire_amd #AMD SoundWire Init Library
+soundwire_bus #SoundWire bus
+soundwire_cadence #Cadence Soundwire Library
+soundwire_generic_allocation #SoundWire Generic Bandwidth Allocation
+soundwire_intel #Intel Soundwire Link Driver
+sp5100_tco #TCO timer driver for SP5100/SB800 chipset
+sparse_keymap #Generic support for sparse keymaps
+spd5118 #SPD 5118 driver
+spi_intel #Intel PCH/PCU SPI flash core driver
+spi_intel_pci #Intel PCH/PCU SPI flash PCI driver
+spi_nor #framework for SPI NOR
+squashfs #squashfs 4.0, a compressed read-only filesystem
+stp #SAP demux for IEEE 802.1D Spanning Tree Protocol (STP)
+sunrpc #Sun RPC core
+tap #Common library for drivers implementing the TAP interface
+tcp_bbr #TCP BBR (Bottleneck Bandwidth and RTT)
+think_lmi #ThinkLMI Driver
+thinkpad_acpi #ThinkPad ACPI Extras
+thunderbolt #Thunderbolt/USB4 core driver
+ttm #TTM memory manager subsystem (for DRM device)
+tun #Universal TUN/TAP device driver
+typec_displayport #DisplayPort Alternate Mode
+typec_thunderbolt #Thunderbolt3 USB Type-C Alternate Mode
+typec_ucsi #USB Type-C Connector System Software Interface driver
+typec #USB Type-C Connector Class
+uas #USB Attached SCSI driver
+ucsi_acpi #UCSI ACPI driver
+udf #Universal Disk Format Filesystem
+udp_tunnel #IPv4 Foo over UDP tunnel driver
+uinput #User level driver support for input subsystem
+usblp #USB Printer Device Class driver
+usbnet #USB network driver framework
+usb_storage #USB Mass Storage driver for Linux
+uvc #USB Video Class common code
+uvcvideo #USB Video Class driver
+veth #Virtual Ethernet Tunnel
+vfat #VFAT filesystem support
+vfio_iommu_type1 #Type1 IOMMU driver for VFIO
+vfio_pci_core #core driver for VFIO based PCI devices
+vfio_pci #VFIO PCI - User Level meta-driver
+vfio #VFIO - User Level meta-driver
+vhost #Host kernel accelerator for virtio
+vhost_iotlb #VHOST IOTLB
+vhost_net #Host kernel accelerator for virtio net
+video #ACPI Video Driver
+videobuf2_common #Media buffer core framework
+videobuf2_memops #common memory handling routines for videobuf2
+videobuf2_v4l2 #Driver helper framework for Video for Linux 2
+videobuf2_vmalloc #vmalloc memory handling routines for videobuf2
+videodev #Video4Linux2 core driver
+virtio_balloon #Virtio balloon driver
+virtio_dma_buf #dma-bufs for virtio exported objects
+virtiofs #Virtio Filesystem
+virtio_gpu #Virtio GPU driver
+virtio_input #Virtio input device driver
+virtio_net #Virtio network driver
+virtio_scsi #Virtio SCSI HBA driver
+vmw_vsock_virtio_transport_common #common code for virtio vsock
+vmw_vsock_virtio_transport #virtio transport for vsock
+vsock #VMware Virtual Socket Family
+wireguard #WireGuard secure network tunnel
+wmi #ACPI-WMI Mapping Driver
+wmi_bmof #WMI embedded Binary MOF driver
+x86_pkg_temp_thermal #X86 PKG TEMP Thermal Driver
+xe #Intel Xe2 Graphics
+xfs #SGI XFS with ACLs, security attributes, realtime, scrub, quota, no debug enabled
+xt_conntrack #connection tracking state match
+xt_set #IP set match and target module
+zram #Compressed RAM Block Device
+zstd #Zstd Compression Algorithm
