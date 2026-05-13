@@ -22,6 +22,7 @@ bridge #Ethernet bridge driver
 btbcm #Bluetooth support for Broadcom devices ver 0.1
 btintel #Bluetooth support for Intel devices ver 0.1
 btmtk #Bluetooth support for MediaTek devices ver 0.1
+btrfs #B-Tree File System (BTRFS)
 btrtl #Bluetooth support for Realtek devices ver 0.1
 btusb #Generic Bluetooth USB driver ver 0.8
 cdc_ether #USB CDC Ethernet devices
