@@ -13,6 +13,10 @@ build() {
 }
 
 package() {
+	install -Dm644 brace/etc/chromium/policies/managed/brace.json "$pkgdir"/etc/brave/policies/managed/brace.json;
+	sed -i -e '/ExtensionInstallForcelist/,+2d' "$pkgdir"/etc/brave/policies/managed/brace.json;
+	install -Dm644 brace/etc/chromium/policies/managed/brace.json "$pkgdir"/etc/chromium/policies/managed/brace.json;
+	install -Dm644 brace/etc/chromium/policies/managed/brace.json "$pkgdir"/etc/opt/chrome/policies/managed/brace.json;
 	install -Dm644 brace/etc/chrony.brace.conf "$pkgdir"/etc/chrony.brace.conf;
 	install -Dm644 brace/etc/dconf/db/local.d/00-brace-cinnamon "$pkgdir"/etc/dconf/db/local.d/00-brace-cinnamon;
 	install -Dm644 brace/etc/dconf/db/local.d/00-brace-extra "$pkgdir"/etc/dconf/db/local.d/00-brace-extra;
@@ -24,15 +28,14 @@ package() {
 	install -Dm644 brace/etc/profile.d/brace-env-overrides.sh "$pkgdir"/etc/profile.d/brace-env-overrides.sh;
 	install -Dm644 brace/etc/profile.d/brace-helpers.sh "$pkgdir"/etc/profile.d/brace-helpers.sh;
 	install -Dm644 brace/etc/tlp.d/00-brace.conf "$pkgdir"/etc/tlp.d/00-brace.conf;
+	install -Dm755 brace/usr/bin/brace-installer "$pkgdir"/usr/bin/brace-installer;
+	install -Dm755 brace/usr/bin/brace-rpm-verify "$pkgdir"/usr/bin/brace-rpm-verify;
+	install -Dm755 brace/usr/bin/brace-supplemental-changes "$pkgdir"/usr/bin/brace-supplemental-changes;
 	mkdir -p "$pkgdir"/usr/lib/firefox/browser/defaults/preferences;
 	install -Dm644 brace/usr/lib/firefox/browser/defaults/preferences/userjs-*.js "$pkgdir"/usr/lib/firefox/browser/defaults/preferences/;
-	install -Dm644 brace/usr/lib/firefox/distribution/policies.json "$pkgdir"/usr/lib/firefox/distribution/policies.json;
 	mkdir -p "$pkgdir"/usr/lib/thunderbird/defaults/pref;
 	install -Dm644 brace/usr/lib/firefox/browser/defaults/preferences/userjs-*.js "$pkgdir"/usr/lib/thunderbird/defaults/pref/;
-	install -Dm644 brace/etc/chromium/policies/managed/brace.json "$pkgdir"/etc/chromium/policies/managed/brace.json;
-	install -Dm644 brace/etc/chromium/policies/managed/brace.json "$pkgdir"/etc/opt/chrome/policies/managed/brace.json;
-	install -Dm644 brace/etc/chromium/policies/managed/brace.json "$pkgdir"/etc/brave/policies/managed/brace.json;
-	sed -i -e '/ExtensionInstallForcelist/,+2d' "$pkgdir"/etc/brave/policies/managed/brace.json;
+	install -Dm644 brace/usr/lib/firefox/distribution/policies.json "$pkgdir"/usr/lib/firefox/distribution/policies.json;
 	install -Dm644 brace/usr/lib/modprobe.d/brace.conf "$pkgdir"/usr/lib/modprobe.d/brace.conf;
 	install -Dm644 brace/usr/lib/modprobe.d/wireless-perf.conf "$pkgdir"/usr/lib/modprobe.d/wireless-perf.conf;
 	install -Dm644 brace/usr/lib/NetworkManager/conf.d/30-nm-privacy.conf "$pkgdir"/usr/lib/NetworkManager/conf.d/30-nm-privacy.conf;
@@ -52,15 +55,12 @@ package() {
 	install -Dm644 brace/usr/lib/systemd/system/rngd.service.d/99-brace.conf "$pkgdir"/usr/lib/systemd/system/rngd.service.d/99-brace.conf;
 	install -Dm644 brace/usr/lib/systemd/system/tor.service.d/99-brace.conf "$pkgdir"/usr/lib/systemd/system/tor.service.d/99-brace.conf;
 	install -Dm644 brace/usr/lib/systemd/system/wpa_supplicant.service.d/99-brace.conf "$pkgdir"/usr/lib/systemd/system/wpa_supplicant.service.d/99-brace.conf;
+	install -Dm644 brace/usr/lib/systemd/user/restic-backup@.service "$pkgdir"/usr/lib/systemd/user/restic-backup@.service;
+	install -Dm644 brace/usr/lib/systemd/user/restic-backup@.timer "$pkgdir"/usr/lib/systemd/user/restic-backup@.timer;
 	install -Dm644 brace/usr/lib/tmpfiles.d/99-brace-proc.conf "$pkgdir"/usr/lib/tmpfiles.d/99-brace-proc.conf;
 	install -Dm644 brace/usr/lib/tmpfiles.d/99-brace-sys.conf "$pkgdir"/usr/lib/tmpfiles.d/99-brace-sys.conf;
 	install -Dm644 brace/usr/lib/udev/rules.d/10-trim.rules "$pkgdir"/usr/lib/udev/rules.d/10-trim.rules;
 	install -Dm644 brace/usr/lib/udev/rules.d/50-usb-realtek-net-exceprt.rules "$pkgdir"/usr/lib/udev/rules.d/50-usb-realtek-net-exceprt.rules;
-	install -Dm644 brace/usr/lib/systemd/user/restic-backup@.service "$pkgdir"/usr/lib/systemd/user/restic-backup@.service;
-	install -Dm644 brace/usr/lib/systemd/user/restic-backup@.timer "$pkgdir"/usr/lib/systemd/user/restic-backup@.timer;
-	install -Dm755 brace/usr/bin/brace-supplemental-changes "$pkgdir"/usr/bin/brace-supplemental-changes;
-	install -Dm755 brace/usr/bin/brace-installer "$pkgdir"/usr/bin/brace-installer;
-	install -Dm755 brace/usr/bin/brace-rpm-verify "$pkgdir"/usr/bin/brace-rpm-verify;
 	install -Dm644 brace/usr/share/polkit-1/rules.d/00-brace-packagekit.rules "$pkgdir"/usr/share/polkit-1/rules.d/00-brace-packagekit.rules;
 	mkdir -p "$pkgdir"/usr/share/doc/brace;
 	install -Dm644 README.md "$pkgdir"/usr/share/doc/brace/README.md;
