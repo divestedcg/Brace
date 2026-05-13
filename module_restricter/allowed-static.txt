@@ -192,6 +192,7 @@ nft_nat #Network Address Translation support
 nft_reject_inet #Netfilter nftables reject inet support
 nft_reject_ipv4 #IPv4 packet rejection for nftables
 nft_reject #Netfilter x_tables over nftables module
+ntsync #Kernel driver for NT synchronization primitives
 nvme_auth #NVMe Authentication framework
 nvme_core #NVMe host core framework
 nvme_keyring #NVMe Keyring implementation
