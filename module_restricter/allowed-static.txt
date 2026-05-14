@@ -1,3 +1,4 @@
+#License: GPL-2.0-only
 ac97_bus #Legacy AC97 bus interface
 acpi_cpufreq #ACPI Processor P-States Driver
 acpi_pad #ACPI Processor Aggregator Driver
@@ -274,6 +275,7 @@ snd_seq_device #ALSA sequencer device management
 snd_seq_dummy #ALSA sequencer MIDI-through client
 snd_soc_acpi #ALSA SoC ACPI module
 snd_soc_acpi_amd_match #AMD ACP6.3 tables and support for ACPI enumeration
+snd_soc_acpi_amd_sdca_quirks #ASoC ACPI AMD SDCA quirks
 snd_soc_acpi_intel_match #Intel Common ACPI Match module
 snd_soc_acpi_intel_sdca_quirks #ASoC ACPI Intel SDCA quirks
 snd_soc_avs #Intel cAVS sound driver

@@ -1,5 +1,5 @@
 Name: brace
-Version: 20260513
+Version: 20260514
 Release: 1
 Summary: Increases privacy/security through various configs
 License: AGPLv3+
@@ -45,6 +45,7 @@ install -Dm755 %{_sourcedir}/brace/usr/bin/brace-fedora-enable-auto-updates %{bu
 install -Dm755 %{_sourcedir}/brace/usr/bin/brace-fedora-enable-rpmfusion %{buildroot}/usr/bin/brace-enable-rpmfusion;
 install -Dm755 %{_sourcedir}/brace/usr/bin/brace-fedora-update-system %{buildroot}/usr/bin/brace-update-system;
 install -Dm755 %{_sourcedir}/brace/usr/bin/brace-installer %{buildroot}/usr/bin/brace-installer;
+install -Dm755 %{_sourcedir}/brace/usr/bin/brace-mr-update %{buildroot}/usr/bin/brace-mr-update;
 install -Dm755 %{_sourcedir}/brace/usr/bin/brace-rpm-verify %{buildroot}/usr/bin/brace-rpm-verify;
 install -Dm755 %{_sourcedir}/brace/usr/bin/brace-supplemental-changes %{buildroot}/usr/bin/brace-supplemental-changes;
 install -Dm644 %{_sourcedir}/brace/usr/lib/firefox/browser/defaults/preferences/userjs-*.js %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/;
@@ -140,18 +141,7 @@ License: CC0
 %description -n brace-mr
 A blocklist generated from all Fedora kmods. A static allowlist is built-in and any kmods in use by your system are additionally allowed.
 %files -n brace-mr
+/usr/bin/brace-mr-update
 /usr/lib/modprobe.d/brace-mr.conf
 %post -n brace-mr
-origAllowed=$(grep -c "^#" /usr/lib/modprobe.d/brace-mr.conf;);
-for kmod in $(sed 's/ .*//g' /proc/modules); do
-	sed -i "/ $kmod$/ s/^b/#[D] b/" /usr/lib/modprobe.d/brace-mr.conf;
-	echo "$kmod" >> /etc/brace-mr.conf;
-done;
-sort -u -o /etc/brace-mr.conf /etc/brace-mr.conf;
-if [ -f /etc/brace-mr.conf ]; then
-for kmod in $(cat /etc/brace-mr.conf); do
-	sed -i "/ $kmod$/ s/^b/#[D] b/" /usr/lib/modprobe.d/brace-mr.conf;
-done;
-fi;
-postAllowed=$(grep -c "^#" /usr/lib/modprobe.d/brace-mr.conf;);
-echo "Allowlisted $(($postAllowed-$origAllowed)) additional kmods for your system";
+brace-mr-update

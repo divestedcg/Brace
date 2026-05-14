@@ -1,0 +1,22 @@
+#!/bin/sh
+#License: CC0
+
+if [ "$(/usr/bin/id -u)" -ne "0" ]; then echo 'This script needs to be run as root!'; exit 1; fi;
+
+origAllowed=$(grep -c "^#" /usr/lib/modprobe.d/brace-mr.conf;);
+
+for kmod in $(sed 's/ .*//g' /proc/modules); do
+	sed -i "/ $kmod$/ s/^b/#[D] b/" /usr/lib/modprobe.d/brace-mr.conf;
+	echo "$kmod" >> /etc/brace-mr.conf;
+done;
+
+if [ -f /etc/brace-mr.conf ]; then
+	sort -u -o /etc/brace-mr.conf /etc/brace-mr.conf;
+	for kmod in $(cat /etc/brace-mr.conf); do
+		sed -i "/ $kmod$/ s/^b/#[D] b/" /usr/lib/modprobe.d/brace-mr.conf;
+	done;
+fi;
+
+postAllowed=$(grep -c "^#" /usr/lib/modprobe.d/brace-mr.conf;);
+
+echo "Allowlisted $(($postAllowed-$origAllowed)) additional kmods";
