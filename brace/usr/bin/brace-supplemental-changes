@@ -1,5 +1,5 @@
 #!/bin/bash
-#Copyright (c) 2017-2025 Divested Computing Group
+#Copyright (c) 2017-2026 Divested Computing Group
 #
 #This program is free software: you can redistribute it and/or modify
 #it under the terms of the GNU Affero General Public License as published by
@@ -23,6 +23,7 @@ if [ "$(/usr/bin/id -u)" -eq "0" ]; then
 	#Stealth Firewall
 	if [ -x /usr/bin/firewall-cmd ]; then
 		echo "Do you want a default drop firewall?";
+		echo "Current default zone: $(firewall-cmd --get-default-zone)";
 		select ys in "Yes" "Skip"; do
 			case $ys in
 				Yes )
@@ -112,6 +113,7 @@ if [ "$(/usr/bin/id -u)" -eq "0" ]; then
 
 	if [ -x /usr/bin/grubby ]; then
 		echo "Do you want additional kernel memory checks at an extreme performance cost?";
+		echo "Current status: $(grep -q 'slub_debug=FZ' /proc/cmdline && echo 'enabled' || echo 'disabled')";
 		select yns in "Yes" "No" "Skip"; do
 			case $yns in
 				Yes )
@@ -128,6 +130,7 @@ if [ "$(/usr/bin/id -u)" -eq "0" ]; then
 
 	if [ -x /usr/bin/grubby ]; then
 		echo "Do you want to disable 32-bit executable support?";
+		echo "Current status: $(grep -q 'ia32_emulation=false' /proc/cmdline && echo 'blocked' || echo 'allowed')";
 		select yns in "Yes" "No" "Skip"; do
 			case $yns in
 				Yes )
@@ -144,6 +147,7 @@ if [ "$(/usr/bin/id -u)" -eq "0" ]; then
 
 	if [ -x /usr/bin/lscpu ] && lscpu | grep -q "SMT vulnerable" || [ -x /usr/bin/dmesg ] && dmesg | grep -q "SMT on, data leak possible"; then
 		echo "Your system reports CPU mitigations are ineffective due to SMT being enabled. Would you like to disable SMT?";
+		echo "Current status: $(grep -q 'nosmt=force' /proc/cmdline && echo 'SMT disabled' || echo 'SMT enabled')";
 		select yns in "Yes" "No" "Skip"; do
 			case $yns in
 				Yes )
@@ -157,6 +161,36 @@ if [ "$(/usr/bin/id -u)" -eq "0" ]; then
 			esac
 		done
 	fi;
+
+	#YAMA
+	braceYamaSysctlPath="/etc/sysctl.d/99-brace-yama.conf";
+	echo "Do you want to completely disable ptrace support?";
+	echo "Runtime status: $(sysctl kernel.yama.ptrace_scope)";
+	if [ -f "$braceYamaSysctlPath" ]; then
+		echo "Current status: user override: ptrace disabled (3)";
+	else
+		echo "Current status: brace default: ptrace restricted (1)";
+	fi;
+	select yns in "Yes" "No" "Skip"; do
+		case $yns in
+			Yes )
+				echo "kernel.yama.ptrace_scope=3" > "$braceYamaSysctlPath";
+				chmod 644 "$braceYamaSysctlPath";
+				sysctl -w "kernel.yama.ptrace_scope=3";
+				echo "Override set and ptrace support disabled immediately";
+				break;;
+			No )
+				if [ -f "$braceYamaSysctlPath" ]; then
+					rm -v "$braceYamaSysctlPath";
+					echo "Override removed, please reboot to take effect";
+				else
+					echo "Override was not set";
+				fi;
+				break;;
+			Skip )
+				break;;
+		esac
+	done
 
 	#Hostname
 	if [ -x /usr/bin/hostnamectl ]; then

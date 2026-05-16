@@ -1,3 +1,6 @@
+#!/bin/sh
+#Copyright (c) 2026 Divested Computing Group
+#
 #License: CC0
 cat kernels/*.txt | grep -v "^#" | sed 's/ #.*$//' | sort -u > index.tmp.txt;
 cat allowed-static*.txt systems/*.txt | grep -v "^#" | sed 's/ #.*$//' | sort -u > allowed.tmp.txt;

@@ -1,3 +1,6 @@
+#!/bin/sh
+#Copyright (c) 2026 Divested Computing Group
+#
 #License: CC0
 for kmod in $(find /lib/modules/$1/ -name *.ko.xz); do
 	name=$(modinfo "$kmod" | grep -m1 "^name: " | sed "s/.* //");

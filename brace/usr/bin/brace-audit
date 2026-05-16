@@ -1,5 +1,5 @@
 #!/bin/bash
-#Copyright (c) 2024-2025 Divested Computing Group
+#Copyright (c) 2024-2026 Divested Computing Group
 #
 #This program is free software: you can redistribute it and/or modify
 #it under the terms of the GNU Affero General Public License as published by
@@ -175,6 +175,10 @@ if [ -f /etc/fedora-release ] || [ -f /etc/centos-release ]; then
 	echo -e "\nChecking packages";
 	rpmPackageInstalled "divested-release";
 	rpmPackageInstalled "brace";
+	rpmPackageInstalled "brace-mr";
+	if rpmPackageInstalled "usbguard" "Guide: https://divested.dev/pages/blog-2026-02-04-usbguard-on-fedora"; then
+		systemdServiceRunning "usbguard";
+	fi;
 	#if [ "$isVirtualMachine" == "false" ]; then
 	#else
 	#	logSkip "virtual machine detected, ignoring some packages";
@@ -186,7 +190,7 @@ if [ -f /etc/fedora-release ] || [ -f /etc/centos-release ]; then
 
 	echo -e "\nChecking firewalld";
 	if rpmPackageInstalled "firewalld"; then
-		systemdServiceRunning "firewalld" "sudo systemctl enable firewalld --now";
+		systemdServiceRunning "firewalld";
 		firewalldCheckDefaultZone "drop" "sudo brace-supplemental-changes";
 		firewalldCheckActiveZones "drop" "sudo brace-supplemental-changes";
 		if [ "$publicFacing" == "true" ]; then
