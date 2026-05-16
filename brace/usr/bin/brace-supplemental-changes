@@ -83,9 +83,16 @@ if [ "$(/usr/bin/id -u)" -eq "0" ]; then
 					fi
 
 					#CPU Flaw Mitigations
+					grubby --update-kernel=ALL --remove-args="nosmt=force"; #Switch to automatic detection
+					grubby --update-kernel=ALL --args="mitigations=auto,nosmt"; #Disable SMT if vulnerable
 					grubby --update-kernel=ALL --args="spec_store_bypass_disable=on ssbd=force-on"; #Enables SSB mitigations, including all userspace processes
 					grubby --update-kernel=ALL --args="spectre_v2=on spectre_bhi=on"; #Enable spectre_v2 mitigations, including all userspace processes
 					grubby --update-kernel=ALL --args="tsx=off"; #Disable TSX
+					grubby --update-kernel=ALL --args="l1d_flush=on"; #Allow L1D flushing
+					grubby --update-kernel=ALL --args="l1tf=full,force"; #Enable all mitigations
+					grubby --update-kernel=ALL --args="kvm.mitigate_smt_rsb=1"; #Enable more coverage
+					grubby --update-kernel=ALL --args="kvm-intel.vmentry_l1d_flush=always"; #Enable more coverage
+					grubby --update-kernel=ALL --args="gather_data_sampling=force"; #Disable AVX if vulnerable
 
 					#Misc Hardening
 					#grubby --update-kernel=ALL --args="debugfs=off"; #Disable debugfs entirely #XXX: may be of use
@@ -138,23 +145,6 @@ if [ "$(/usr/bin/id -u)" -eq "0" ]; then
 					break;;
 				No )
 					grubby --update-kernel=ALL --remove-args="ia32_emulation=false";
-					break;;
-				Skip )
-					break;;
-			esac
-		done
-	fi;
-
-	if [ -x /usr/bin/lscpu ] && lscpu | grep -q "SMT vulnerable" || [ -x /usr/bin/dmesg ] && dmesg | grep -q "SMT on, data leak possible"; then
-		echo "Your system reports CPU mitigations are ineffective due to SMT being enabled. Would you like to disable SMT?";
-		echo "Current status: $(grep -q 'nosmt=force' /proc/cmdline && echo 'SMT disabled' || echo 'SMT enabled')";
-		select yns in "Yes" "No" "Skip"; do
-			case $yns in
-				Yes )
-					grubby --update-kernel=ALL --args="nosmt=force"; #Disables SMT
-					break;;
-				No )
-					grubby --update-kernel=ALL --remove-args="nosmt=force";
 					break;;
 				Skip )
 					break;;
