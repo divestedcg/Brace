@@ -162,6 +162,8 @@ mei #Intel(R) Management Engine Interface
 mei_me #Intel(R) Management Engine Interface
 mei_pxp #MEI PXP
 mii #MII hardware support library
+mlx4_core #Mellanox ConnectX HCA low-level driver
+mlx4_en #Mellanox ConnectX HCA Ethernet driver
 mmc_core #MMC core driver
 mpt3sas #LSI MPT Fusion SAS 3.0 Device Driver
 msi_wmi #MSI laptop WMI hotkeys driver
