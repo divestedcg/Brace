@@ -26,6 +26,7 @@ btmtk #Bluetooth support for MediaTek devices ver 0.1
 btrfs #B-Tree File System (BTRFS)
 btrtl #Bluetooth support for Realtek devices ver 0.1
 btusb #Generic Bluetooth USB driver ver 0.8
+cdc_acm #USB Abstract Control Model driver for USB modems and ISDN adapters
 cdc_ether #USB CDC Ethernet devices
 cdc_ncm #USB CDC NCM host driver
 cec #Device node registration for cec drivers
@@ -75,8 +76,10 @@ hfs #Apple Macintosh file system support
 hfsplus #Extended Macintosh Filesystem
 hid_logitech_dj #HID driver for Logitech receivers
 hid_logitech_hidpp #Support for Logitech devices relying on the HID++ specification
+hid_microsoft #HID driver for some microsoft "special" devices
 hid_multitouch #HID multitouch panels
 hid_nintendo #Driver for Nintendo Switch Controllers
+hidp #Bluetooth HIDP ver 1.2
 hid_playstation #HID Driver for PlayStation peripherals.
 hid_sensor_accel_3d #HID Sensor Accel 3D
 hid_sensor_als #HID Sensor ALS
