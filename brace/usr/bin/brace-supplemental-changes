@@ -98,7 +98,7 @@ if [ "$(/usr/bin/id -u)" -eq "0" ]; then
 					#grubby --update-kernel=ALL --args="debugfs=off"; #Disable debugfs entirely #XXX: may be of use
 					grubby --update-kernel=ALL --args="lockdown=confidentiality"; #Restrict userspace access to certain kernel features/attributes
 					grubby --update-kernel=ALL --args="mce=0"; #Panic on uncorrectable errors #XXX: deprecated in 5.18
-					grubby --update-kernel=ALL --args="module.sig_enforce=1"; #Block modules with invalid signatures #XXX: superceded by lockdown
+					grubby --update-kernel=ALL --args="module.sig_enforce=1"; #Block modules with invalid signatures #XXX: superseded by lockdown
 					#grubby --update-kernel=ALL --args="oops=panic"; #Panic system on oops #XXX: can turn minor issues into annoyances
 					grubby --update-kernel=ALL --args="vsyscall=none"; #Disable unnecessary legacy functionality
 					grubby --update-kernel=ALL --args="vdso32=0"; #Disable legacy 32-bit vDSO

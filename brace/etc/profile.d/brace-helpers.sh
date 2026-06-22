@@ -68,7 +68,7 @@ clearVarLogMisc() {
 	sudo rm -fv /var/log/libvirt/qemu/*.log*;
 	# misc
 	sudo rm -fv /var/log/grubby;
-	# package manangers
+	# package managers
 	sudo rm -fv /var/log/dnf*.log;
 	sudo rm -fv /var/log/hawkey.log;
 	sudo rm -fv /var/log/yum*.log;
