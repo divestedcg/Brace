@@ -36,3 +36,6 @@ pref("identity.fxaccounts.enabled", false);
 
 //Fix IPv6 when using DoH
 pref("network.dns.preferIPv6", true);
+
+//Junk
+pref("signon.firefoxRelay.feature", "disabled");

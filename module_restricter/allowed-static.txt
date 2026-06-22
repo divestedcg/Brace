@@ -74,6 +74,7 @@ gpio_keys #Keyboard driver for GPIOs
 gpu_sched #DRM GPU scheduler
 hfs #Apple Macintosh file system support
 hfsplus #Extended Macintosh Filesystem
+hid_cmedia #CM6533 HID jack controls and HS100B mute button
 hid_logitech_dj #HID driver for Logitech receivers
 hid_logitech_hidpp #Support for Logitech devices relying on the HID++ specification
 hid_microsoft #HID driver for some microsoft "special" devices
