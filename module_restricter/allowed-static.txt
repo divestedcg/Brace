@@ -168,6 +168,7 @@ mei_pxp #MEI PXP
 mii #MII hardware support library
 mlx4_core #Mellanox ConnectX HCA low-level driver
 mlx4_en #Mellanox ConnectX HCA Ethernet driver
+mmc_block #Multimedia Card (MMC) block device driver
 mmc_core #MMC core driver
 mpt3sas #LSI MPT Fusion SAS 3.0 Device Driver
 msi_wmi #MSI laptop WMI hotkeys driver
@@ -236,6 +237,7 @@ rfcomm #Bluetooth RFCOMM ver 1.11
 rfkill #RF switch support
 rmi_core #RMI bus
 rmi_smbus #RMI4 SMBus driver
+rpmb_core #RPMB class
 rtsx_pci #Realtek PCI-E Card Reader Driver
 rtsx_pci_sdmmc #Realtek PCI-E SD/MMC Card Host Driver
 sch_cake #The CAKE shaper.
