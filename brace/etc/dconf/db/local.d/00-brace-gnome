@@ -1,5 +1,6 @@
 [org/gnome/desktop/a11y/interface]
 show-status-shapes=true
+reduced-motion='reduce'
 
 [org/gnome/desktop/applications/terminal]
 exec='ptyxis'
