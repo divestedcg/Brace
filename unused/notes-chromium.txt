@@ -8,6 +8,7 @@ IntensiveWakeUpThrottlingEnabled
 PromptForDownloadLocation
 LocalNetworkAccessPermissionsPolicyDefaultEnabled
 PdfXfaFormsEnabled
+DefaultSubAppsWithoutPromptsSetting
 
 Research:
 AmbientAuthenticationInPrivateModesEnabled
