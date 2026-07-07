@@ -106,6 +106,7 @@ if [ "$(/usr/bin/id -u)" -eq "0" ]; then
 					grubby --update-kernel=ALL --args="erst_disable"; #Disable use of ACPI ERST pstore backend
 					grubby --update-kernel=ALL --args="hash_pointers=always"; #Always hash pointers, pre-req for slub_debug
 					grubby --update-kernel=ALL --args="systemd.ssh_auto=no"; #Disable systemd v256 automatic AF_VSOCK/AF_UNIX SSH binding
+					#grubby --update-kernel=ALL --args="kvm-intel.nested=0 kvm-amd.nested=0"; #Disable nested virtualization support
 
 					#Nice to haves
 					grubby --update-kernel=ALL --args="fsck.mode=force"; #FSCK mounts every boot, systemd default is once per 30 boots

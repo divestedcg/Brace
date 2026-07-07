@@ -208,6 +208,7 @@ nvme_keyring #NVMe Keyring implementation
 nvme #NVMe host PCIe transport driver
 overlay #Overlay filesystem
 pata_acpi #SCSI low-level driver for ATA in ACPI mode
+phy_package #PHY package support
 pinctrl_alderlake #Intel Alder Lake PCH pinctrl/GPIO driver
 pl2303 #Prolific PL2303 USB to serial adaptor driver
 platform_profile #ACPI platform profile sysfs interface

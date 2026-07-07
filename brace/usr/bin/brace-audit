@@ -185,7 +185,7 @@ if [ -f /etc/fedora-release ] || [ -f /etc/centos-release ]; then
 	#fi;
 	if [ "$isDesktop" == "true" ]; then
 		rpmPackageInstalled "rpmfusion-free-release" "sudo brace-enable-rpmfusion";
-		rpmPackageInstalled "mesa-va-drivers-freeworld" "sudo dnf swap mesa-va-drivers mesa-va-drivers-freeworld --allowerasing";
+		rpmPackageInstalled "mesa-va-drivers-freeworld" "sudo dnf install mesa-va-drivers-freeworld";
 	fi;
 
 	echo -e "\nChecking firewalld";

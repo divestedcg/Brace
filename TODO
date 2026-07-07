@@ -1,9 +1,6 @@
 packages:
 	gnucash -> homebank (easier to use)
 	xournalpp
-	f37 hardware decode rpmfusion
-		dnf swap mesa-va-drivers mesa-va-drivers-freeworld --allowerasing
-		dnf swap mesa-vdpau-drivers mesa-vdpau-drivers-freeworld --allowerasing
 
 bugs:
 	fix Brave extension forcelist on Debian
