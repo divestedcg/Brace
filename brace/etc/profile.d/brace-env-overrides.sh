@@ -36,7 +36,7 @@ export GLIBC_TUNABLES='glibc.malloc.tcache_count=0'
 # disable JavaScript JIT
 # https://trac.webkit.org/wiki/EnvironmentVariables
 export JavaScriptCoreUseJIT=0;
-export JSC_useFTLJIT=0;
+export JSC_useFTLJIT=0; #deprecated?
 # https://gitlab.gnome.org/GNOME/gjs/-/blob/master/doc/Environment.md
 export GJS_DISABLE_JIT=1;
 
