@@ -200,7 +200,7 @@ pref("browser.safebrowsing.downloads.remote.enabled", false);
  * If clicked, it bypasses the block for that session. This is a means for admins to enforce SB
  * [TEST] see https://github.com/arkenfox/user.js/wiki/Appendix-A-Test-Sites#-mozilla
  * [1] https://bugzilla.mozilla.org/1226490 ***/
-   // pref("browser.safebrowsing.allowOverride", false);
+pref("browser.safebrowsing.allowOverride", false); //BRACE-UNCOMMENTED
 
 /*** [SECTION 0600]: BLOCK IMPLICIT OUTBOUND [not explicitly asked for - e.g. clicked on] ***/
 pref("_user.js.parrot", "0600 syntax error: the parrot's no more!");
@@ -1051,7 +1051,7 @@ pref("_user.js.parrot", "7000 syntax error: the parrot's pushing up daisies!");
  * Location-Aware Browsing, Full Screen
  * [WHY] The API state is easily fingerprintable.
  * Geo is behind a prompt (7002). Full screen requires user interaction ***/
-   // pref("geo.enabled", false);
+pref("geo.enabled", false); //BRACE-UNCOMMENTED
    // pref("full-screen-api.enabled", false);
 /* 7002: set default permissions
  * Location, Camera, Microphone, Notifications [FF58+] Virtual Reality [FF73+]
@@ -1060,11 +1060,13 @@ pref("_user.js.parrot", "7000 syntax error: the parrot's pushing up daisies!");
  * exceptions as allow/block for frequently visited/annoying sites: i.e. not global
  * [SETTING] to add site exceptions: Ctrl+I>Permissions>
  * [SETTING] to manage site exceptions: Options>Privacy & Security>Permissions>Settings ***/
-   // pref("permissions.default.geo", 0);
+pref("permissions.default.geo", 2); //BRACE-UNCOMMENTED
    // pref("permissions.default.camera", 0);
    // pref("permissions.default.microphone", 0);
-   // pref("permissions.default.desktop-notification", 0);
-   // pref("permissions.default.xr", 0); // Virtual Reality
+pref("permissions.default.desktop-notification", 2); //BRACE-UNCOMMENTED
+pref("permissions.default.xr", 2); // Virtual Reality //BRACE-UNCOMMENTED
+pref("permissions.default.local-network", 2); //BRACE-ADDED
+pref("permissions.default.loopback-network", 2); //BRACE-ADDED
 /* 7003: disable non-modern cipher suites [1]
  * [WHY] Passive fingerprinting. Minimal/non-existent threat of downgrade attacks
  * [1] https://browserleaks.com/ssl ***/
