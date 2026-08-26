@@ -28,7 +28,9 @@ btrtl #Bluetooth support for Realtek devices ver 0.1
 btusb #Generic Bluetooth USB driver ver 0.8
 cdc_acm #USB Abstract Control Model driver for USB modems and ISDN adapters
 cdc_ether #USB CDC Ethernet devices
+cdc_mbim #USB CDC MBIM host driver
 cdc_ncm #USB CDC NCM host driver
+cdc_wdm #USB Abstract Control Model driver for USB WCM Device Management
 cec #Device node registration for cec drivers
 cfg80211 #wireless configuration support
 cirrus_qemu #Cirrus driver for QEMU emulated device
