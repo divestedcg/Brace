@@ -206,7 +206,7 @@ declare -a packagesToIgnore=();
 #
 declare -a packagesArch=();
 declare -a packagesDebian=();
-declare -a packagesFedora=('abrt*' 'cockpit*' 'PackageKit' 'bat' 'virtualbox-guest-additions' 'mediawriter' 'passim' 'sos' 'plocate' 'memstrack' 'hyperv*' 'realmd' 'NetworkManager-vpnc' 'NetworkManager-openconnect' 'NetworkManager-openvpn' 'NetworkManager-ssh');
+declare -a packagesFedora=('abrt*' 'cockpit*' 'PackageKit' 'bat' 'virtualbox-guest-additions' 'hyperv*' 'open-vm-tools' 'mediawriter' 'passim' 'sos' 'plocate' 'memstrack' 'realmd' 'NetworkManager-vpnc' 'NetworkManager-openconnect' 'NetworkManager-openvpn' 'NetworkManager-ssh');
 declare -a packagesSuse=();
 prepareOperation "biRemoval_general_unwanted";
 
@@ -279,7 +279,7 @@ prepareOperation "biWant_daemon_core";
 
 declare -a packagesArch=();
 declare -a packagesDebian=();
-declare -a packagesFedora=('podman');
+declare -a packagesFedora=('podman' '@container-management');
 declare -a packagesSuse=();
 prepareOperation "biWant_cli_containers";
 
@@ -451,6 +451,12 @@ declare -a packagesFedora=('syncthing');
 declare -a packagesSuse=('syncthing');
 prepareOperation "biWant_daemon_file_sync";
 
+declare -a packagesArch=();
+declare -a packagesDebian=();
+declare -a packagesFedora=('@printing');
+declare -a packagesSuse=();
+prepareOperation "biWant_daemon_printing";
+
 declare -a packagesArch=('iotop');
 declare -a packagesDebian=('iotop');
 declare -a packagesFedora=('iotop-c');
@@ -606,7 +612,7 @@ prepareOperation "biWant_lib_spellcheck";
 
 declare -a packagesArch=('libreoffice-fresh');
 declare -a packagesDebian=('libreoffice');
-declare -a packagesFedora=('libreoffice' 'libreoffice-writer' 'libreoffice-calc' 'libreoffice-impress' 'libreoffice-draw' 'libreoffice-base' 'libreoffice-math');
+declare -a packagesFedora=('@libreoffice' 'libreoffice' 'libreoffice-writer' 'libreoffice-calc' 'libreoffice-impress' 'libreoffice-draw' 'libreoffice-base' 'libreoffice-math');
 declare -a packagesFlathub=('org.libreoffice.LibreOffice');
 declare -a packagesSuse=('libreoffice');
 prepareOperation "biWant_gui_office_suite";
