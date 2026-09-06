@@ -1,7 +1,7 @@
 # Maintainer: Tavi <tavi@divested.dev>
 pkgname=brace
 pkgver=20260906
-pkgrel=6
+pkgrel=7
 pkgdesc="Increases privacy/security through various configs."
 arch=('any')
 license=('GPL3')

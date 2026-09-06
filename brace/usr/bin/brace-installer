@@ -20,7 +20,9 @@ green='\e[0;32m';
 red='\e[0;31m';
 yellow='\e[0;33m';
 
-if [ "$(/usr/bin/id -u)" -ne "0" ]; then echo -e "${red}ERROR: This script needs to be run as root!${coloroff}"; exit 1; fi;
+configPath='/etc/brace-installer.conf';
+
+if [ "$(/usr/bin/id -u)" -ne "0" ]; then echo -e "${red}ERROR: This script needs to be run as root!${coloroff}" 1>&2; exit 1; fi;
 
 #
 # Start Functions
@@ -43,6 +45,30 @@ whichPackageManager() {
 	fi;
 }
 
+getConfigVariable() {
+	variableName="$1";
+	variableOccurence=$(grep -c "^$variableName=.*;\$" "$configPath");
+	if [ "$variableOccurence" -gt '1' ]; then
+		echo -e "${red}ERROR: Config option declared more than once: $variableName ${coloroff}" 1>&2;
+		echo -n "skip";
+	elif [ "$variableOccurence" -eq '1' ]; then
+		if grep -q "^$variableName=true;\$" "$configPath"; then
+			echo -n "true";
+		elif grep -q "^$variableName=false;\$" "$configPath"; then
+			echo -n "false";
+		elif grep -q "^$variableName=skip;\$" "$configPath"; then
+			echo -n "skip";
+		else
+			echo -e "${red}ERROR: Config option invalid: $variableName ${coloroff}" 1>&2;
+			echo -n "skip";
+		fi;
+	else
+		echo -e "${yellow}Warning: Config option unset: $variableName ${coloroff}" 1>&2;
+		echo -n "skip";
+	fi;
+	unset variableName variableOccurence;
+}
+
 prepareOperation() {
 	if [ "$packageManager" == "apt" ]; then
 		declare -a packagesNoted=("${packagesDebian[@]}");
@@ -55,17 +81,17 @@ prepareOperation() {
 	elif [ "$packageManager" == "flatpak" ]; then
 		declare -a packagesNoted=("${packagesFlathub[@]}");
 	fi;
-	if [ "$1" == "true" ]; then
+	variableResolved=$(getConfigVariable "$1");
+	if [ "$variableResolved" == "true" ]; then
 		packagesToInstall+=("${packagesNoted[@]}");
-	elif [ "$1" == "false" ]; then
+	elif [ "$variableResolved" == "false" ]; then
 		packagesToRemove+=("${packagesNoted[@]}");
-	elif [ "$1" == "skip" ]; then
+	elif [ "$variableResolved" == "skip" ]; then
 		packagesToIgnore+=("${packagesNoted[@]}");
 	else
-		echo -e "${red}ERROR: Incorrect variable for operation!${coloroff}";
-		echo "debug: ${packagesFedora[*]}";
+		echo -e "${red}ERROR: Incorrect variable for operation!${coloroff}" 1>&2;
 	fi;
-	unset packagesNoted packagesArch packagesDebian packagesFedora packagesSuse packagesFlathub;
+	unset variableResolved packagesNoted packagesArch packagesDebian packagesFedora packagesSuse packagesFlathub;
 }
 
 handleInstall() {
@@ -77,7 +103,7 @@ handleInstall() {
 		for packageToCheck in "${packagesToInstall[@]}"
 		do
 			if [ -z "$(apt-cache madison $packageToCheck 2>/dev/null)" ]; then
-				echo -e "${yellow}Warning: Skipping missing package: $packageToCheck ${coloroff}";
+				echo -e "${yellow}Warning: Skipping missing package: $packageToCheck ${coloroff}" 1>&2;
 			else
 				packagesToInstallReal="$packagesToInstallReal $packageToCheck";
 			fi;
@@ -153,23 +179,24 @@ if [ -f /etc/centos-release ]; then yum install epel-release; fi; #TODO: adjust 
 
 packageManager=$(whichPackageManager);
 if [ -z "${packageManager}" ]; then
-	echo -e "${red}ERROR: No package manager found!${coloroff}";
-	return 1;
+	echo -e "${red}ERROR: No package manager found!${coloroff}" 1>&2;
+	exit 1;
 else
 	echo -e "${cyan}INFO: Using $packageManager as package manager${coloroff}";
+fi;
+
+if [ ! -r "$configPath" ]; then
+	echo -e "${red}ERROR: Config file missing or unreadable!${coloroff}" 1>&2;
+	exit 1;
+fi;
+if [[ $(stat --format "%a,%u,%g,%U,%G,%F" "$configPath") != "644,0,0,root,root,regular file" ]]; then
+	echo -e "${red}ERROR: Invalid config permissions!${coloroff}" 1>&2;
+	exit 1;
 fi;
 
 declare -a packagesToInstall=();
 declare -a packagesToRemove=();
 declare -a packagesToIgnore=();
-
-#XXX: replace this with an actual config to prevent arbitrary execution
-if [[ $(stat --format "%a,%u,%g,%U,%G,%F" /etc/brace-installer.conf) == "644,0,0,root,root,regular file" ]]; then
-	source /etc/brace-installer.conf;
-else
-	echo -e "${red}ERROR: Invalid config permissions!${coloroff}";
-	exit 1;
-fi;
 #
 # End of init
 #
@@ -181,599 +208,600 @@ declare -a packagesArch=();
 declare -a packagesDebian=();
 declare -a packagesFedora=('abrt*' 'cockpit*' 'PackageKit' 'bat' 'virtualbox-guest-additions' 'mediawriter' 'passim' 'sos' 'plocate' 'memstrack' 'hyperv*' 'realmd' 'NetworkManager-vpnc' 'NetworkManager-openconnect' 'NetworkManager-openvpn' 'NetworkManager-ssh');
 declare -a packagesSuse=();
-prepareOperation "$biRemoval_general_unwanted";
+prepareOperation "biRemoval_general_unwanted";
 
 declare -a packagesArch=();
 declare -a packagesDebian=();
 declare -a packagesFedora=('abiword' 'adapta-gtk-theme' 'akregator' 'amarok' 'asunder' 'calligra*' 'clipit' 'clipman' 'compiz' 'dnfdragora*' 'doxygen' 'emerald' 'empathy' 'exaile' 'falkon' 'filezilla' 'geany' 'gnomebaker' 'gnote' 'gnumeric' 'juk' 'k3b' 'kget' 'kmahjongg' 'kmines' 'konqueror' 'konversation' 'kpatience' 'ktnef' 'ktorrent' 'lxmusic' 'midori' 'osmo' 'paper-icon-theme' 'pidgin' '*powerline' 'pragha' 'qlipper' 'quassel' 'qupzilla' 'rhythmbox' 'thunderbird' 'xawtv' 'xfburn' 'xfdashboard' 'xpad' 'yarock');
 declare -a packagesSuse=();
-prepareOperation "$biRemoval_spins_unwanted";
+prepareOperation "biRemoval_spins_unwanted";
 
 declare -a packagesArch=();
 declare -a packagesDebian=();
 declare -a packagesFedora=('baobab' 'gnome-maps' 'gnome-weather' 'gnome-connections' 'gnome-boxes' 'gnome-software' 'sushi' 'gnome-browser-connector' 'gnome-classic-session' 'fedora-chromium-config-gnome');
 declare -a packagesSuse=();
-prepareOperation "$biRemoval_gnome_unwanted";
+prepareOperation "biRemoval_gnome_unwanted";
 
 declare -a packagesArch=();
 declare -a packagesDebian=();
 declare -a packagesFedora=('rygel' 'gnome-user-share' 'gnome-remote-desktop');
 declare -a packagesSuse=();
-prepareOperation "$biRemoval_gnome_sharing";
+prepareOperation "biRemoval_gnome_sharing";
 
 declare -a packagesArch=();
 declare -a packagesDebian=();
 declare -a packagesFedora=('eog' 'totem' 'evince' 'cheese' 'gnome-terminal');
 declare -a packagesSuse=();
-prepareOperation "$biRemoval_gnome_legacy";
+prepareOperation "biRemoval_gnome_legacy";
 
 declare -a packagesArch=();
 declare -a packagesDebian=();
 declare -a packagesFedora=('chkrootkit' 'rkhunter' 'lynis' 'spectre-meltdown-checker' 'bleachbit' 'gimpfx-foundry' 'ssss' 'ncdu');
 declare -a packagesSuse=();
-prepareOperation "$biRemoval_brace_cleanup";
+prepareOperation "biRemoval_brace_cleanup";
 
 declare -a packagesArch=('openssh' 'nano' 'htop' 'wget' 'screen' 'ripgrep' 'dialog' 'crda' 'pacman-contrib' 'lostfiles');
 declare -a packagesDebian=('ssh' 'nano' 'htop' 'wget' 'screen' 'ripgrep' 'unattended-upgrades');
 declare -a packagesFedora=('openssh' 'nano' 'htop' 'wget' 'screen' 'ripgrep' 'grubby' 'cryptsetup-reencrypt');
 declare -a packagesSuse=('openssh' 'nano' 'htop' 'wget' 'screen' 'ripgrep' 'grubby');
-prepareOperation "$biWant_cli_core";
+prepareOperation "biWant_cli_core";
 
 declare -a packagesArch=('pv' 'tree');
 declare -a packagesDebian=('pv' 'tree');
 declare -a packagesFedora=('pv' 'tree');
 declare -a packagesSuse=('pv' 'tree');
-prepareOperation "$biWant_cli_extras";
+prepareOperation "biWant_cli_extras";
 
 declare -a packagesArch=('dconf-editor' 'seahorse');
 declare -a packagesDebian=('dconf-cli' 'dconf-editor' 'software-properties-gtk' 'seahorse');
 declare -a packagesFedora=('dconf-editor' 'seahorse' 'openssh-askpass');
 declare -a packagesFlathub=('ca.desrt.dconf-editor' 'unverified.org.gnome.seahorse.Application');
 declare -a packagesSuse=('dconf-editor' 'seahorse');
-prepareOperation "$biWant_gui_generic_extras";
+prepareOperation "biWant_gui_generic_extras";
 
 declare -a packagesArch=('gnome-tweak-tool' 'file-roller');
 declare -a packagesDebian=('gnome-tweak-tool' 'file-roller');
 declare -a packagesFedora=('gnome-tweak-tool' 'file-roller' 'gnome-themes-extra');
 declare -a packagesSuse=('gnome-tweaks' 'file-roller');
-prepareOperation "$biWant_gui_gnome_extras";
+prepareOperation "biWant_gui_gnome_extras";
 
 declare -a packagesArch=('libva-mesa-driver' 'libva-utils' 'libva-intel-driver' 'intel-media-driver' 'gstreamer-vaapi');
 declare -a packagesDebian=('mesa-va-drivers' 'vainfo' 'i965-va-driver' 'intel-media-va-driver' 'gstreamer1.0-vaapi');
 declare -a packagesFedora=('mesa-dri-drivers' 'mesa-va-drivers-freeworld' 'libva' 'libva-utils' 'libva-intel-driver' 'libva-intel-hybrid-driver' 'intel-media-driver' 'gstreamer1-vaapi');
 declare -a packagesSuse=();
-prepareOperation "$biWant_lib_VAAPI";
+prepareOperation "biWant_lib_VAAPI";
 
 declare -a packagesArch=('rng-tools' 'irqbalance');
 declare -a packagesDebian=('rng-tools' 'irqbalance');
 declare -a packagesFedora=('rng-tools' 'irqbalance');
 declare -a packagesSuse=('rng-tools' 'irqbalance');
-prepareOperation "$biWant_daemon_core";
+prepareOperation "biWant_daemon_core";
 
 declare -a packagesArch=('libvirt' 'virt-manager' 'qemu');
 declare -a packagesDebian=();
 declare -a packagesFedora=('@virtualization');
 declare -a packagesFlathub=('unverified.org.virt_manager.virt-manager');
 declare -a packagesSuse=(); #'Install Hypervisor' can be used
-prepareOperation "$biWant_virtualization";
+prepareOperation "biWant_virtualization";
 
 declare -a packagesArch=('evolution');
 declare -a packagesDebian=('evolution');
 declare -a packagesFedora=('evolution');
 declare -a packagesFlathub=('org.gnome.Evolution');
 declare -a packagesSuse=('evolution');
-prepareOperation "$biWant_gui_comms_email";
+prepareOperation "biWant_gui_comms_email";
 
 declare -a packagesArch=('hexchat');
 declare -a packagesDebian=('hexchat');
 declare -a packagesFedora=('hexchat');
 declare -a packagesFlathub=('io.github.Hexchat');
 declare -a packagesSuse=('hexchat');
-prepareOperation "$biWant_gui_comms_irc";
+prepareOperation "biWant_gui_comms_irc";
 
 declare -a packagesArch=('mumble');
 declare -a packagesDebian=('mumble');
 declare -a packagesFedora=('mumble');
 declare -a packagesFlathub=('unverified.info.mumble.Mumble');
 declare -a packagesSuse=('mumble');
-prepareOperation "$biWant_gui_comms_mumble";
+prepareOperation "biWant_gui_comms_mumble";
 
 declare -a packagesArch=('dino');
 declare -a packagesDebian=('dino-im');
 declare -a packagesFedora=('dino');
 declare -a packagesFlathub=('im.dino.Dino');
 declare -a packagesSuse=('gajim' 'gajim-plugin-omemo');
-prepareOperation "$biWant_gui_comms_xmpp";
+prepareOperation "biWant_gui_comms_xmpp";
 
 declare -a packagesArch=('audacity');
 declare -a packagesDebian=('audacity');
 declare -a packagesFedora=('audacity');
 declare -a packagesFlathub=('unverified.org.audacityteam.Audacity');
 declare -a packagesSuse=('audacity');
-prepareOperation "$biWant_gui_editor_audio";
+prepareOperation "biWant_gui_editor_audio";
 
 declare -a packagesArch=('soundconverter');
 declare -a packagesDebian=('soundconverter');
 declare -a packagesFedora=('soundconverter');
 declare -a packagesFlathub=('unverified.org.soundconverter.SoundConverter');
 declare -a packagesSuse=('soundconverter');
-prepareOperation "$biWant_gui_editor_audio_optimizer";
+prepareOperation "biWant_gui_editor_audio_optimizer";
 
 declare -a packagesArch=('imagemagick');
 declare -a packagesDebian=('imagemagick');
 declare -a packagesFedora=('ImageMagick');
 declare -a packagesSuse=('ImageMagick');
-prepareOperation "$biWant_cli_editor_image";
+prepareOperation "biWant_cli_editor_image";
 
 declare -a packagesArch=('jpegoptim' 'optipng' 'pngquant');
 declare -a packagesDebian=('jpegoptim' 'optipng' 'pngquant');
 declare -a packagesFedora=('jpegoptim' 'optipng' 'pngquant');
 declare -a packagesSuse=('jpegoptim' 'optipng' 'pngquant');
-prepareOperation "$biWant_cli_editor_image_optimizer";
+prepareOperation "biWant_cli_editor_image_optimizer";
 
 declare -a packagesArch=('darktable');
 declare -a packagesDebian=('darktable');
 declare -a packagesFedora=('darktable');
 declare -a packagesFlathub=('unverified.org.darktable.Darktable');
 declare -a packagesSuse=('darktable');
-prepareOperation "$biWant_gui_editor_image_photo";
+prepareOperation "biWant_gui_editor_image_photo";
 
 declare -a packagesArch=('gimp');
 declare -a packagesDebian=('gimp');
 declare -a packagesFedora=('gimp');
 declare -a packagesFlathub=('org.gimp.GIMP');
 declare -a packagesSuse=('gimp');
-prepareOperation "$biWant_gui_editor_image_raster";
+prepareOperation "biWant_gui_editor_image_raster";
 
 declare -a packagesArch=('inkscape');
 declare -a packagesDebian=('inkscape');
 declare -a packagesFedora=('inkscape');
 declare -a packagesFlathub=('org.inkscape.Inkscape');
 declare -a packagesSuse=('inkscape');
-prepareOperation "$biWant_gui_editor_image_vector";
+prepareOperation "biWant_gui_editor_image_vector";
 
 declare -a packagesArch=('picard');
 declare -a packagesDebian=('picard');
 declare -a packagesFedora=('picard');
 declare -a packagesFlathub=('unverified.org.musicbrainz.Picard');
 declare -a packagesSuse=('picard');
-prepareOperation "$biWant_gui_editor_music_albums";
+prepareOperation "biWant_gui_editor_music_albums";
 
 declare -a packagesArch=('pitivi');
 declare -a packagesDebian=('pitivi');
 declare -a packagesFedora=('pitivi');
 declare -a packagesFlathub=('org.pitivi.Pitivi');
 declare -a packagesSuse=('pitivi');
-prepareOperation "$biWant_gui_editor_video";
+prepareOperation "biWant_gui_editor_video";
 
 declare -a packagesArch=();
 declare -a packagesDebian=();
 declare -a packagesFedora=('HandBrake-gui');
 declare -a packagesSuse=();
-prepareOperation "$biWant_gui_editor_video_optimizer";
+prepareOperation "biWant_gui_editor_video_optimizer";
 
 declare -a packagesArch=('restic');
 declare -a packagesDebian=('restic');
 declare -a packagesFedora=('restic');
 declare -a packagesSuse=('restic');
-prepareOperation "$biWant_cli_file_backup";
+prepareOperation "biWant_cli_file_backup";
 
 declare -a packagesArch=('zip' 'p7zip' 'pixz' 'pigz');
 declare -a packagesDebian=('p7zip' 'pixz');
 declare -a packagesFedora=('p7zip' 'pixz' 'zstd');
 declare -a packagesSuse=('p7zip' 'pixz');
-prepareOperation "$biWant_cli_file_compression";
+prepareOperation "biWant_cli_file_compression";
 
 declare -a packagesArch=();
 declare -a packagesDebian=();
 declare -a packagesFedora=('fdupes');
 declare -a packagesSuse=();
-prepareOperation "$biWant_cli_file_dupe_search";
+prepareOperation "biWant_cli_file_dupe_search";
 
 declare -a packagesArch=('gocryptfs');
 declare -a packagesDebian=('gocryptfs');
 declare -a packagesFedora=('gocryptfs');
 declare -a packagesSuse=();
-prepareOperation "$biWant_cli_file_encryption";
+prepareOperation "biWant_cli_file_encryption";
 
 declare -a packagesArch=();
 declare -a packagesDebian=();
 declare -a packagesFedora=('sirikali');
 declare -a packagesSuse=();
-prepareOperation "$biWant_gui_file_encryption_manager";
+prepareOperation "biWant_gui_file_encryption_manager";
 
 declare -a packagesArch=();
 declare -a packagesDebian=('scrub');
 declare -a packagesFedora=('srm' 'scrub');
 declare -a packagesSuse=('srm' 'scrub');
-prepareOperation "$biWant_cli_file_erasure";
+prepareOperation "biWant_cli_file_erasure";
 
 declare -a packagesArch=('testdisk');
 declare -a packagesDebian=('testdisk');
 declare -a packagesFedora=('testdisk');
 declare -a packagesSuse=('testdisk');
-prepareOperation "$biWant_cli_file_recovery";
+prepareOperation "biWant_cli_file_recovery";
 
 declare -a packagesArch=('btrfs-progs' 'compsize' 'dosfstools' 'exfat-utils' 'f2fs-tools' 'ntfs-3g' 'udftools' 'xfsprogs' 'duperemove' 'sshfs' 'parted');
 declare -a packagesDebian=('btrfs-progs' 'btrfs-compsize' 'dosfstools' 'exfat-utils' 'f2fs-tools' 'ntfs-3g' 'udftools' 'xfsprogs' 'duperemove' 'sshfs' 'parted');
 declare -a packagesFedora=('btrfs-progs' 'compsize' 'dosfstools' 'exfat-utils' 'f2fs-tools' 'ntfs-3g' 'ntfsprogs' 'udftools' 'xfsprogs' 'duperemove' 'fuse-sshfs' 'parted');
 declare -a packagesSuse=('btrfsprogs' 'compsize' 'dosfstools' 'exfat-utils' 'f2fs-tools' 'ntfs-3g' 'ntfsprogs' 'udftools' 'xfsprogs' 'duperemove' 'sshfs' 'parted');
-prepareOperation "$biWant_cli_file_systems";
+prepareOperation "biWant_cli_file_systems";
 
 declare -a packagesArch=('syncthing');
 declare -a packagesDebian=('syncthing');
 declare -a packagesFedora=('syncthing');
 declare -a packagesSuse=('syncthing');
-prepareOperation "$biWant_daemon_file_sync";
+prepareOperation "biWant_daemon_file_sync";
 
 declare -a packagesArch=('iotop');
 declare -a packagesDebian=('iotop');
 declare -a packagesFedora=('iotop-c');
 declare -a packagesSuse=('iotop');
-prepareOperation "$biWant_cli_monitor_disk_activity";
+prepareOperation "biWant_cli_monitor_disk_activity";
 
 declare -a packagesArch=('smartmontools');
 declare -a packagesDebian=('smartmontools');
 declare -a packagesFedora=('smartmontools');
 declare -a packagesSuse=('smartmontools');
-prepareOperation "$biWant_cli_monitor_disk_health";
+prepareOperation "biWant_cli_monitor_disk_health";
 
 declare -a packagesArch=('gsmartcontrol');
 declare -a packagesDebian=('gsmartcontrol');
 declare -a packagesFedora=('gsmartcontrol');
 declare -a packagesSuse=('gsmartcontrol');
-prepareOperation "$biWant_gui_monitor_disk_health";
+prepareOperation "biWant_gui_monitor_disk_health";
 
 declare -a packagesArch=('intel-gpu-tools' 'radeontop');
 declare -a packagesDebian=('intel-gpu-tools' 'radeontop');
 declare -a packagesFedora=('igt-gpu-tools' 'radeontop');
 declare -a packagesSuse=('intel-gpu-tools' 'radeontop');
-prepareOperation "$biWant_cli_monitor_gpu";
+prepareOperation "biWant_cli_monitor_gpu";
 
 declare -a packagesArch=('bmon');
 declare -a packagesDebian=('bmon');
 declare -a packagesFedora=('bmon');
 declare -a packagesSuse=('bmon');
-prepareOperation "$biWant_cli_monitor_network";
+prepareOperation "biWant_cli_monitor_network";
 
 declare -a packagesArch=('powertop');
 declare -a packagesDebian=('powertop');
 declare -a packagesFedora=('powertop');
 declare -a packagesSuse=('powertop');
-prepareOperation "$biWant_cli_monitor_power";
+prepareOperation "biWant_cli_monitor_power";
 
 declare -a packagesArch=();
 declare -a packagesDebian=();
 declare -a packagesFedora=('gnome-power-manager');
 declare -a packagesSuse=();
-prepareOperation "$biWant_gui_monitor_power";
+prepareOperation "biWant_gui_monitor_power";
 
 declare -a packagesArch=('lm_sensors');
 declare -a packagesDebian=('lm-sensors');
 declare -a packagesFedora=('lm_sensors');
 declare -a packagesSuse=('sensors');
-prepareOperation "$biWant_cli_monitor_temperature";
+prepareOperation "biWant_cli_monitor_temperature";
 
 declare -a packagesArch=('wavemon');
 declare -a packagesDebian=('wavemon');
 declare -a packagesFedora=('wavemon');
 declare -a packagesSuse=('wavemon');
-prepareOperation "$biWant_cli_monitor_wireless";
+prepareOperation "biWant_cli_monitor_wireless";
 
 declare -a packagesArch=();
 declare -a packagesDebian=();
 declare -a packagesFedora=('piper');
 declare -a packagesSuse=();
-prepareOperation "$biWant_gui_manage_mouse";
+prepareOperation "biWant_gui_manage_mouse";
 
 declare -a packagesArch=();
 declare -a packagesDebian=();
 declare -a packagesFedora=('openrgb');
 declare -a packagesSuse=();
-prepareOperation "$biWant_gui_manage_rgb";
+prepareOperation "biWant_gui_manage_rgb";
 
 declare -a packagesArch=('android-tools' 'android-udev');
 declare -a packagesDebian=('adb' 'fastboot');
 declare -a packagesFedora=('android-tools');
 declare -a packagesSuse=();
-prepareOperation "$biWant_cli_android";
+prepareOperation "biWant_cli_android";
 
 declare -a packagesArch=('tor' 'torsocks');
 declare -a packagesDebian=('tor' 'torsocks');
 declare -a packagesFedora=('tor' 'torsocks');
 declare -a packagesSuse=('tor' 'torsocks');
-if [ "$biWant_gui_browser_tor" == "true" ]; then
-	biWant_daemon_tor=true; #workaround fedora dep issue
+if [ "$(getConfigVariable 'biWant_gui_browser_tor')" == "true" ]; then #workaround fedora dep issue
+	prepareOperation "biWant_gui_browser_tor";
+else
+	prepareOperation "biWant_daemon_tor";
 fi;
-prepareOperation "$biWant_daemon_tor";
 
 declare -a packagesArch=('sound-juicer');
 declare -a packagesDebian=('sound-juicer');
 declare -a packagesFedora=('sound-juicer');
 declare -a packagesFlathub=('unverified.org.gnome.SoundJuicer');
 declare -a packagesSuse=('sound-juicer');
-prepareOperation "$biWant_gui_audio_ripper";
+prepareOperation "biWant_gui_audio_ripper";
 
 declare -a packagesArch=('qalculate-gtk');
 declare -a packagesDebian=('qalculate-gtk');
 declare -a packagesFedora=('qalculate-gtk');
 declare -a packagesFlathub=('io.github.Qalculate');
 declare -a packagesSuse=();
-prepareOperation "$biWant_gui_calculator";
+prepareOperation "biWant_gui_calculator";
 
 declare -a packagesArch=('yt-dlp');
 declare -a packagesDebian=('yt-dlp');
 declare -a packagesFedora=('yt-dlp');
 declare -a packagesSuse=('yt-dlp');
-prepareOperation "$biWant_gui_downloader_generic";
+prepareOperation "biWant_gui_downloader_generic";
 
 declare -a packagesArch=('transmission-gtk');
 declare -a packagesDebian=('transmission-gtk');
 declare -a packagesFedora=('transmission');
 declare -a packagesFlathub=('unverified.com.transmissionbt.Transmission');
 declare -a packagesSuse=('transmission-gtk');
-prepareOperation "$biWant_gui_downloader_torrent";
+prepareOperation "biWant_gui_downloader_torrent";
 
 declare -a packagesArch=('liferea');
 declare -a packagesDebian=('liferea');
 declare -a packagesFedora=('liferea');
 declare -a packagesFlathub=('unverified.net.sourceforge.liferea');
 declare -a packagesSuse=('liferea');
-prepareOperation "$biWant_gui_rss";
+prepareOperation "biWant_gui_rss";
 
 declare -a packagesArch=('obs-studio');
 declare -a packagesDebian=('obs-studio');
 declare -a packagesFedora=('obs-studio');
 declare -a packagesFlathub=('com.obsproject.Studio');
 declare -a packagesSuse=();
-prepareOperation "$biWant_gui_screencast";
+prepareOperation "biWant_gui_screencast";
 
 declare -a packagesArch=('iperf3');
 declare -a packagesDebian=('iperf3');
 declare -a packagesFedora=('iperf3');
 declare -a packagesSuse=('iperf3');
-prepareOperation "$biWant_cli_network_bench";
+prepareOperation "biWant_cli_network_bench";
 
 declare -a packagesArch=('mtr' 'whois');
 declare -a packagesDebian=('mtr' 'whois');
 declare -a packagesFedora=('mtr' 'whois');
 declare -a packagesSuse=('mtr' 'whois');
-prepareOperation "$biWant_cli_network_diag";
+prepareOperation "biWant_cli_network_diag";
 
 declare -a packagesArch=('tcpdump');
 declare -a packagesDebian=('tcpdump');
 declare -a packagesFedora=('tcpdump');
 declare -a packagesSuse=('tcpdump');
-prepareOperation "$biWant_cli_network_dump";
+prepareOperation "biWant_cli_network_dump";
 
 declare -a packagesArch=('wireshark');
 declare -a packagesDebian=('wireshark');
 declare -a packagesFedora=('wireshark');
 declare -a packagesSuse=('wireshark');
-prepareOperation "$biWant_gui_network_dump";
+prepareOperation "biWant_gui_network_dump";
 
 declare -a packagesArch=('aspell' 'aspell-en' 'hyphen' 'hyphen-en' 'libmythes' 'mythes-en');
 declare -a packagesDebian=('aspell' 'aspell-en');
 declare -a packagesFedora=('aspell' 'aspell-en');
 declare -a packagesSuse=('aspell');
-prepareOperation "$biWant_lib_spellcheck";
+prepareOperation "biWant_lib_spellcheck";
 
 declare -a packagesArch=('libreoffice-fresh');
 declare -a packagesDebian=('libreoffice');
 declare -a packagesFedora=('libreoffice' 'libreoffice-writer' 'libreoffice-calc' 'libreoffice-impress' 'libreoffice-draw' 'libreoffice-base');
 declare -a packagesFlathub=('org.libreoffice.LibreOffice');
 declare -a packagesSuse=('libreoffice');
-prepareOperation "$biWant_gui_office_suite";
+prepareOperation "biWant_gui_office_suite";
 
 declare -a packagesArch=('gnucash');
 declare -a packagesDebian=('gnucash');
 declare -a packagesFedora=('gnucash');
 declare -a packagesFlathub=('org.gnucash.GnuCash');
 declare -a packagesSuse=('gnucash');
-prepareOperation "$biWant_gui_office_accounting";
+prepareOperation "biWant_gui_office_accounting";
 
 declare -a packagesArch=();
 declare -a packagesDebian=('dia');
 declare -a packagesFedora=('dia');
 declare -a packagesSuse=('dia');
-prepareOperation "$biWant_gui_office_diagram";
+prepareOperation "biWant_gui_office_diagram";
 
 declare -a packagesArch=('scribus');
 declare -a packagesDebian=('scribus');
 declare -a packagesFedora=('scribus');
 declare -a packagesFlathub=('unverified.net.scribus.Scribus');
 declare -a packagesSuse=('scribus');
-prepareOperation "$biWant_gui_office_publisher";
+prepareOperation "biWant_gui_office_publisher";
 
 declare -a packagesArch=();
 declare -a packagesDebian=('libu2f-udev');
 declare -a packagesFedora=('u2f-hidraw-policy');
 declare -a packagesSuse=('libu2f-host0');
-prepareOperation "$biWant_lib_u2f";
+prepareOperation "biWant_lib_u2f";
 
 declare -a packagesArch=('pwgen');
 declare -a packagesDebian=('pwgen' 'diceware');
 declare -a packagesFedora=('pwgen' 'diceware');
 declare -a packagesSuse=('pwgen');
-prepareOperation "$biWant_cli_password_generator";
+prepareOperation "biWant_cli_password_generator";
 
 declare -a packagesArch=('keepassxc');
 declare -a packagesDebian=('keepassxc');
 declare -a packagesFedora=('keepassxc');
 declare -a packagesFlathub=('org.keepassxc.KeePassXC');
 declare -a packagesSuse=('keepassxc');
-prepareOperation "$biWant_gui_password_manager";
+prepareOperation "biWant_gui_password_manager";
 
 declare -a packagesArch=('apparmor');
 declare -a packagesDebian=('apparmor' 'apparmor-profiles' 'apparmor-profiles-extra' 'apparmor-utils');
 declare -a packagesFedora=();
 declare -a packagesSuse=('apparmor-profiles');
-prepareOperation "$biWant_apparmor";
+prepareOperation "biWant_apparmor";
 
 declare -a packagesArch=('firewalld');
 declare -a packagesDebian=('firewalld');
 declare -a packagesFedora=('firewalld');
 declare -a packagesSuse=('firewalld');
-prepareOperation "$biWant_daemon_firewall";
+prepareOperation "biWant_daemon_firewall";
 
 declare -a packagesArch=('firewall-config');
 declare -a packagesDebian=('firewall-config');
 declare -a packagesFedora=('firewall-config');
 declare -a packagesSuse=('firewall-config');
-prepareOperation "$biWant_gui_firewall";
+prepareOperation "biWant_gui_firewall";
 
 declare -a packagesArch=('fwupd');
 declare -a packagesDebian=('fwupd');
 declare -a packagesFedora=('fwupd');
 declare -a packagesSuse=('fwupd');
-prepareOperation "$biWant_daemon_firmware";
+prepareOperation "biWant_daemon_firmware";
 
 declare -a packagesArch=('gnome-firmware');
 declare -a packagesDebian=('gnome-firmware');
 declare -a packagesFedora=('gnome-firmware');
 declare -a packagesFlathub=('org.gnome.Firmware');
 declare -a packagesSuse=('gnome-firmware');
-prepareOperation "$biWant_gui_firmware";
+prepareOperation "biWant_gui_firmware";
 
 declare -a packagesArch=('clamav');
 declare -a packagesDebian=('clamav');
 declare -a packagesFedora=('clamav' 'clamav-freshclam');
 declare -a packagesSuse=('clamav');
-prepareOperation "$biWant_cli_antivirus";
+prepareOperation "biWant_cli_antivirus";
 
 declare -a packagesArch=('clamtk');
 declare -a packagesDebian=('clamtk');
 declare -a packagesFedora=('clamtk');
 declare -a packagesSuse=('clamtk');
-prepareOperation "$biWant_gui_antivirus";
+prepareOperation "biWant_gui_antivirus";
 
 declare -a packagesArch=('ffmpeg');
 declare -a packagesDebian=('ffmpeg');
 declare -a packagesFedora=('@multimedia' 'gstreamer1-plugin-openh264'); #ffmpeg
 declare -a packagesSuse=('ffmpeg');
-prepareOperation "$biWant_lib_codecs";
+prepareOperation "biWant_lib_codecs";
 
 declare -a packagesArch=('foliate');
 declare -a packagesDebian=();
 declare -a packagesFedora=('foliate');
 declare -a packagesFlathub=('com.github.johnfactotum.Foliate');
 declare -a packagesSuse=('foliate');
-prepareOperation "$biWant_gui_viewer_book";
+prepareOperation "biWant_gui_viewer_book";
 
 declare -a packagesArch=('meld');
 declare -a packagesDebian=('meld');
 declare -a packagesFedora=('meld');
 declare -a packagesFlathub=('unverified.org.gnome.meld');
 declare -a packagesSuse=('meld');
-prepareOperation "$biWant_gui_viewer_diff";
+prepareOperation "biWant_gui_viewer_diff";
 
 declare -a packagesArch=('ghex');
 declare -a packagesDebian=('ghex');
 declare -a packagesFedora=('ghex');
 declare -a packagesFlathub=('unverified.org.gnome.GHex');
 declare -a packagesSuse=('ghex');
-prepareOperation "$biWant_gui_viewer_hex";
+prepareOperation "biWant_gui_viewer_hex";
 
 declare -a packagesArch=('vlc');
 declare -a packagesDebian=('vlc');
 declare -a packagesFedora=('vlc');
 declare -a packagesFlathub=('unverified.org.videolan.VLC');
 declare -a packagesSuse=('vlc');
-prepareOperation "$biWant_gui_viewer_media";
+prepareOperation "biWant_gui_viewer_media";
 
 declare -a packagesArch=('lollypop');
 declare -a packagesDebian=('lollypop');
 declare -a packagesFedora=('lollypop');
 declare -a packagesFlathub=('unverified.org.gnome.Lollypop');
 declare -a packagesSuse=('lollypop');
-prepareOperation "$biWant_gui_viewer_music";
+prepareOperation "biWant_gui_viewer_music";
 
 declare -a packagesArch=('sqlitebrowser');
 declare -a packagesDebian=('sqlitebrowser');
 declare -a packagesFedora=('sqlitebrowser');
 declare -a packagesFlathub=('unverified.org.sqlitebrowser.sqlitebrowser');
 declare -a packagesSuse=('sqlitebrowser');
-prepareOperation "$biWant_gui_viewer_sqlite";
+prepareOperation "biWant_gui_viewer_sqlite";
 
 declare -a packagesArch=('chromium');
 declare -a packagesDebian=('chromium' 'chromium-sandbox');
 declare -a packagesFedora=('chromium');
 declare -a packagesFlathub=('unverified.org.chromium.Chromium');
 declare -a packagesSuse=('chromium');
-prepareOperation "$biWant_gui_browser_chromium";
+prepareOperation "biWant_gui_browser_chromium";
 
 declare -a packagesArch=('firefox');
 declare -a packagesDebian=('firefox-esr');
 declare -a packagesFedora=('firefox' 'mozilla-ublock-origin');
 declare -a packagesFlathub=('org.mozilla.firefox');
 declare -a packagesSuse=('MozillaFirefox');
-prepareOperation "$biWant_gui_browser_firefox";
+prepareOperation "biWant_gui_browser_firefox";
 
 declare -a packagesArch=('torbrowser-launcher');
 declare -a packagesDebian=('torbrowser-launcher');
 declare -a packagesFedora=('torbrowser-launcher');
 declare -a packagesFlathub=('org.torproject.torbrowser-launcher');
 declare -a packagesSuse=('torbrowser-launcher'); #torbrowser-apparmor-profile
-prepareOperation "$biWant_gui_browser_tor";
+prepareOperation "biWant_gui_browser_tor";
 
 declare -a packagesArch=('git');
 declare -a packagesDebian=('git');
 declare -a packagesFedora=('git');
 declare -a packagesSuse=('git');
-prepareOperation "$biWant_cli_devel_git";
+prepareOperation "biWant_cli_devel_git";
 
 declare -a packagesArch=();
 declare -a packagesDebian=();
 declare -a packagesFedora=('tig');
 declare -a packagesSuse=();
-prepareOperation "$biWant_cli_viewer_git";
+prepareOperation "biWant_cli_viewer_git";
 
 declare -a packagesArch=('gitg');
 declare -a packagesDebian=('gitg');
 declare -a packagesFedora=('gitg');
 declare -a packagesFlathub=('org.gnome.gitg');
 declare -a packagesSuse=('gitg');
-prepareOperation "$biWant_gui_viewer_git";
+prepareOperation "biWant_gui_viewer_git";
 
 declare -a packagesArch=('asp');
 declare -a packagesDebian=();
 declare -a packagesFedora=('rpmbuild' 'createrepo' 'rpm-sign');
 declare -a packagesSuse=('rpmbuild');
-prepareOperation "$biWant_cli_devel_packaging";
+prepareOperation "biWant_cli_devel_packaging";
 
 declare -a packagesArch=();
 declare -a packagesDebian=();
 declare -a packagesFedora=('ShellCheck');
 declare -a packagesSuse=();
-prepareOperation "$biWant_cli_devel_shell";
+prepareOperation "biWant_cli_devel_shell";
 
 declare -a packagesArch=('xonotic');
 declare -a packagesDebian=();
 declare -a packagesFedora=('xonotic');
 declare -a packagesFlathub=('org.xonotic.Xonotic');
 declare -a packagesSuse=('xonotic');
-prepareOperation "$biWant_games_arena";
+prepareOperation "biWant_games_arena";
 
 declare -a packagesArch=('aisleriot');
 declare -a packagesDebian=('aisleriot');
 declare -a packagesFedora=('aisleriot');
 declare -a packagesFlathub=('unverified.org.gnome.Aisleriot');
 declare -a packagesSuse=('aisleriot');
-prepareOperation "$biWant_games_cards";
+prepareOperation "biWant_games_cards";
 
 declare -a packagesArch=('quadrapassel' 'gnome-mines' 'gnome-chess' 'gnome-sudoku');
 declare -a packagesDebian=('quadrapassel' 'gnome-mines' 'gnome-chess' 'gnome-sudoku');
 declare -a packagesFedora=('quadrapassel' 'gnome-mines' 'gnome-chess' 'gnome-sudoku');
 declare -a packagesFlathub=('org.gnome.Quadrapassel' 'org.gnome.Mines' 'org.gnome.Chess' 'org.gnome.Sudoku');
 declare -a packagesSuse=('quadrapassel' 'gnome-mines' 'gnome-chess' 'gnome-sudoku');
-prepareOperation "$biWant_games_gnome";
+prepareOperation "biWant_games_gnome";
 
 declare -a packagesArch=('minetest');
 declare -a packagesDebian=('minetest');
 declare -a packagesFedora=('minetest');
 declare -a packagesFlathub=('org.luanti.luanti');
 declare -a packagesSuse=('minetest');
-prepareOperation "$biWant_games_sandbox";
+prepareOperation "biWant_games_sandbox";
 #
 # End of packages
 #

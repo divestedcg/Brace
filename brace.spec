@@ -1,6 +1,6 @@
 Name: brace
 Version: 20260906
-Release: 6
+Release: 7
 Summary: Increases privacy/security through various configs
 License: AGPLv3+
 BuildArch: noarch
