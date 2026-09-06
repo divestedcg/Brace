@@ -236,7 +236,7 @@ prepareOperation "biRemoval_gnome_legacy";
 
 declare -a packagesArch=();
 declare -a packagesDebian=();
-declare -a packagesFedora=('chkrootkit' 'rkhunter' 'lynis' 'spectre-meltdown-checker' 'bleachbit' 'gimpfx-foundry' 'ssss' 'ncdu');
+declare -a packagesFedora=('chkrootkit' 'rkhunter' 'lynis' 'spectre-meltdown-checker' 'bleachbit' 'gimpfx-foundry' 'ssss' 'ncdu' 'stress' 'stress-ng');
 declare -a packagesSuse=();
 prepareOperation "biRemoval_brace_cleanup";
 
@@ -277,12 +277,30 @@ declare -a packagesFedora=('rng-tools' 'irqbalance');
 declare -a packagesSuse=('rng-tools' 'irqbalance');
 prepareOperation "biWant_daemon_core";
 
-declare -a packagesArch=('libvirt' 'virt-manager' 'qemu');
+declare -a packagesArch=();
+declare -a packagesDebian=();
+declare -a packagesFedora=('podman');
+declare -a packagesSuse=();
+prepareOperation "biWant_cli_containers";
+
+declare -a packagesArch=('libvirt' 'qemu');
+declare -a packagesDebian=();
+declare -a packagesFedora=('@virtualization-headless');
+declare -a packagesSuse=();
+prepareOperation "biWant_cli_virtualization";
+
+declare -a packagesArch=('libvirt' 'qemu' 'virt-manager');
 declare -a packagesDebian=();
 declare -a packagesFedora=('@virtualization');
 declare -a packagesFlathub=('unverified.org.virt_manager.virt-manager');
 declare -a packagesSuse=(); #'Install Hypervisor' can be used
-prepareOperation "biWant_virtualization";
+prepareOperation "biWant_gui_virtualization";
+
+declare -a packagesArch=();
+declare -a packagesDebian=();
+declare -a packagesFedora=('flatpak' 'fedora-flathub-remote' 'flatseal');
+declare -a packagesSuse=();
+prepareOperation "biWant_gui_flatpak";
 
 declare -a packagesArch=('evolution');
 declare -a packagesDebian=('evolution');
@@ -582,13 +600,13 @@ prepareOperation "biWant_gui_network_dump";
 
 declare -a packagesArch=('aspell' 'aspell-en' 'hyphen' 'hyphen-en' 'libmythes' 'mythes-en');
 declare -a packagesDebian=('aspell' 'aspell-en');
-declare -a packagesFedora=('aspell' 'aspell-en');
+declare -a packagesFedora=('aspell' 'aspell-en' 'autocorr-en' 'hyphen-en' 'mythes' 'mythes-en');
 declare -a packagesSuse=('aspell');
 prepareOperation "biWant_lib_spellcheck";
 
 declare -a packagesArch=('libreoffice-fresh');
 declare -a packagesDebian=('libreoffice');
-declare -a packagesFedora=('libreoffice' 'libreoffice-writer' 'libreoffice-calc' 'libreoffice-impress' 'libreoffice-draw' 'libreoffice-base');
+declare -a packagesFedora=('libreoffice' 'libreoffice-writer' 'libreoffice-calc' 'libreoffice-impress' 'libreoffice-draw' 'libreoffice-base' 'libreoffice-math');
 declare -a packagesFlathub=('org.libreoffice.LibreOffice');
 declare -a packagesSuse=('libreoffice');
 prepareOperation "biWant_gui_office_suite";
