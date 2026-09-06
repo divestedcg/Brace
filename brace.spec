@@ -1,6 +1,6 @@
 Name: brace
-Version: 20260903
-Release: 1
+Version: 20260906
+Release: 6
 Summary: Increases privacy/security through various configs
 License: AGPLv3+
 BuildArch: noarch
@@ -24,6 +24,7 @@ echo "- /home can have discard,noatime,nodev,nosuid";
 if [ -f /usr/bin/dconf ]; then dconf update; fi;
 
 %install
+install -Dm644 %{_sourcedir}/brace/etc/brace-installer.conf %{buildroot}/etc/brace-installer.conf;
 install -Dm644 %{_sourcedir}/brace/etc/chromium/policies/managed/brace.json %{buildroot}/etc/brave/policies/managed/brace.json;
 sed -i -e '/ExtensionInstallForcelist/,+2d' %{buildroot}/etc/brave/policies/managed/brace.json;
 install -Dm644 %{_sourcedir}/brace/etc/chromium/policies/managed/brace.json %{buildroot}/etc/chromium/policies/managed/brace.json;
@@ -83,6 +84,7 @@ mkdir -p %{buildroot}/usr/share/doc/brace;
 install -Dm644 %{_sourcedir}/README.md %{buildroot}/usr/share/doc/brace/README.md;
 
 %files
+%config(noreplace)/etc/brace-installer.conf
 /etc/brave/policies/managed/brace.json
 /etc/chromium/policies/managed/brace.json
 /etc/chrony.brace.conf

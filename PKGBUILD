@@ -1,7 +1,7 @@
 # Maintainer: Tavi <tavi@divested.dev>
 pkgname=brace
-pkgver=20260903
-pkgrel=1
+pkgver=20260906
+pkgrel=6
 pkgdesc="Increases privacy/security through various configs."
 arch=('any')
 license=('GPL3')
@@ -13,6 +13,7 @@ build() {
 }
 
 package() {
+	install -Dm644 brace/etc/brace-installer.conf "$pkgdir"/etc/brace-installer.conf;
 	install -Dm644 brace/etc/chromium/policies/managed/brace.json "$pkgdir"/etc/brave/policies/managed/brace.json;
 	sed -i -e '/ExtensionInstallForcelist/,+2d' "$pkgdir"/etc/brave/policies/managed/brace.json;
 	install -Dm644 brace/etc/chromium/policies/managed/brace.json "$pkgdir"/etc/chromium/policies/managed/brace.json;

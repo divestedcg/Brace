@@ -48,6 +48,11 @@ user::rw-
 group::r--
 other::r--
 
+# file: brace/etc/brace-installer.conf
+user::rw-
+group::r--
+other::r--
+
 # file: brace/etc/brave
 user::rwx
 group::r-x
