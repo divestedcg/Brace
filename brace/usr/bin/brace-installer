@@ -179,7 +179,7 @@ fi;
 #
 declare -a packagesArch=();
 declare -a packagesDebian=();
-declare -a packagesFedora=('abrt*' 'cockpit*' 'PackageKit' 'bat' 'virtualbox-guest-additions' 'mediawriter' 'passim');
+declare -a packagesFedora=('abrt*' 'cockpit*' 'PackageKit' 'bat' 'virtualbox-guest-additions' 'mediawriter' 'passim' 'sos' 'plocate' 'memstrack' 'hyperv*' 'realmd' 'NetworkManager-vpnc' 'NetworkManager-openconnect' 'NetworkManager-openvpn' 'NetworkManager-ssh');
 declare -a packagesSuse=();
 prepareOperation "$biRemoval_general_unwanted";
 
@@ -191,7 +191,7 @@ prepareOperation "$biRemoval_spins_unwanted";
 
 declare -a packagesArch=();
 declare -a packagesDebian=();
-declare -a packagesFedora=('baobab' 'gnome-maps' 'gnome-weather' 'gnome-connections' 'gnome-boxes' 'gnome-software' 'sushi');
+declare -a packagesFedora=('baobab' 'gnome-maps' 'gnome-weather' 'gnome-connections' 'gnome-boxes' 'gnome-software' 'sushi' 'gnome-browser-connector' 'gnome-classic-session' 'fedora-chromium-config-gnome');
 declare -a packagesSuse=();
 prepareOperation "$biRemoval_gnome_unwanted";
 
@@ -364,11 +364,23 @@ declare -a packagesFedora=('p7zip' 'pixz' 'zstd');
 declare -a packagesSuse=('p7zip' 'pixz');
 prepareOperation "$biWant_cli_file_compression";
 
+declare -a packagesArch=();
+declare -a packagesDebian=();
+declare -a packagesFedora=('fdupes');
+declare -a packagesSuse=();
+prepareOperation "$biWant_cli_file_dupe_search";
+
 declare -a packagesArch=('gocryptfs');
 declare -a packagesDebian=('gocryptfs');
 declare -a packagesFedora=('gocryptfs');
 declare -a packagesSuse=();
 prepareOperation "$biWant_cli_file_encryption";
+
+declare -a packagesArch=();
+declare -a packagesDebian=();
+declare -a packagesFedora=('sirikali');
+declare -a packagesSuse=();
+prepareOperation "$biWant_gui_file_encryption_manager";
 
 declare -a packagesArch=();
 declare -a packagesDebian=('scrub');
@@ -396,7 +408,7 @@ prepareOperation "$biWant_daemon_file_sync";
 
 declare -a packagesArch=('iotop');
 declare -a packagesDebian=('iotop');
-declare -a packagesFedora=('iotop');
+declare -a packagesFedora=('iotop-c');
 declare -a packagesSuse=('iotop');
 prepareOperation "$biWant_cli_monitor_disk_activity";
 
@@ -429,6 +441,12 @@ declare -a packagesDebian=('powertop');
 declare -a packagesFedora=('powertop');
 declare -a packagesSuse=('powertop');
 prepareOperation "$biWant_cli_monitor_power";
+
+declare -a packagesArch=();
+declare -a packagesDebian=();
+declare -a packagesFedora=('gnome-power-manager');
+declare -a packagesSuse=();
+prepareOperation "$biWant_gui_monitor_power";
 
 declare -a packagesArch=('lm_sensors');
 declare -a packagesDebian=('lm-sensors');
@@ -704,11 +722,17 @@ declare -a packagesFedora=('git');
 declare -a packagesSuse=('git');
 prepareOperation "$biWant_cli_devel_git";
 
+declare -a packagesArch=();
+declare -a packagesDebian=();
+declare -a packagesFedora=('tig');
+declare -a packagesSuse=();
+prepareOperation "$biWant_cli_viewer_git";
+
 declare -a packagesArch=('gitg');
 declare -a packagesDebian=('gitg');
 declare -a packagesFedora=('gitg');
-declare -a packagesFlathub=('gitg');
-declare -a packagesSuse=('org.gnome.gitg');
+declare -a packagesFlathub=('org.gnome.gitg');
+declare -a packagesSuse=('gitg');
 prepareOperation "$biWant_gui_viewer_git";
 
 declare -a packagesArch=('asp');
@@ -716,6 +740,12 @@ declare -a packagesDebian=();
 declare -a packagesFedora=('rpmbuild' 'createrepo' 'rpm-sign');
 declare -a packagesSuse=('rpmbuild');
 prepareOperation "$biWant_cli_devel_packaging";
+
+declare -a packagesArch=();
+declare -a packagesDebian=();
+declare -a packagesFedora=('ShellCheck');
+declare -a packagesSuse=();
+prepareOperation "$biWant_cli_devel_shell";
 
 declare -a packagesArch=('xonotic');
 declare -a packagesDebian=();
