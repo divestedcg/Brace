@@ -219,7 +219,7 @@ prepareOperation "biRemoval_spins_unwanted";
 
 declare -a packagesArch=();
 declare -a packagesDebian=();
-declare -a packagesFedora=('baobab' 'gnome-maps' 'gnome-weather' 'gnome-connections' 'gnome-boxes' 'gnome-software' 'sushi' 'gnome-browser-connector' 'gnome-classic-session' 'fedora-chromium-config-gnome');
+declare -a packagesFedora=('baobab' 'gnome-photos' 'gnome-maps' 'gnome-weather' 'gnome-connections' 'gnome-boxes' 'gnome-software' 'sushi' 'gnome-browser-connector' 'gnome-classic-session' 'fedora-chromium-config-gnome');
 declare -a packagesSuse=();
 prepareOperation "biRemoval_gnome_unwanted";
 
@@ -233,11 +233,12 @@ declare -a packagesArch=();
 declare -a packagesDebian=();
 declare -a packagesFedora=('eog' 'totem' 'evince' 'cheese' 'gnome-terminal');
 declare -a packagesSuse=();
+#TODO: remove gedit after g-t-e gains a sort function
 prepareOperation "biRemoval_gnome_legacy";
 
 declare -a packagesArch=();
 declare -a packagesDebian=();
-declare -a packagesFedora=('chkrootkit' 'rkhunter' 'lynis' 'spectre-meltdown-checker' 'bleachbit' 'gimpfx-foundry' 'ssss' 'ncdu' 'stress' 'stress-ng');
+declare -a packagesFedora=('chkrootkit' 'rkhunter' 'lynis' 'spectre-meltdown-checker' 'bleachbit' 'gimpfx-foundry' 'ssss' 'ncdu' 'stress' 'stress-ng' 'onionshare');
 declare -a packagesSuse=();
 prepareOperation "biRemoval_brace_cleanup";
 
@@ -262,7 +263,7 @@ prepareOperation "biWant_gui_generic_extras";
 
 declare -a packagesArch=('gnome-tweak-tool' 'file-roller');
 declare -a packagesDebian=('gnome-tweak-tool' 'file-roller');
-declare -a packagesFedora=('gnome-tweak-tool' 'file-roller' 'gnome-themes-extra');
+declare -a packagesFedora=('gnome-tweak-tool' 'file-roller' 'gnome-themes-extra' 'loupe' 'showtime' 'papers' 'snapshot' 'ptyxis' 'gnome-text-editor');
 declare -a packagesSuse=('gnome-tweaks' 'file-roller');
 prepareOperation "biWant_gui_gnome_extras";
 
@@ -292,7 +293,7 @@ prepareOperation "biWant_cli_virtualization";
 
 declare -a packagesArch=('libvirt' 'qemu' 'virt-manager');
 declare -a packagesDebian=();
-declare -a packagesFedora=('@virtualization');
+declare -a packagesFedora=('@virtualization' 'virt-manager');
 declare -a packagesFlathub=('unverified.org.virt_manager.virt-manager');
 declare -a packagesSuse=(); #'Install Hypervisor' can be used
 prepareOperation "biWant_gui_virtualization";
