@@ -208,6 +208,7 @@ declare -a packagesArch=();
 declare -a packagesDebian=();
 declare -a packagesFedora=('abrt*' 'cockpit*' 'PackageKit' 'bat' 'virtualbox-guest-additions' 'hyperv*' 'open-vm-tools' 'mediawriter' 'passim' 'sos' 'plocate' 'memstrack' 'realmd' 'NetworkManager-vpnc' 'NetworkManager-openconnect' 'NetworkManager-openvpn' 'NetworkManager-ssh');
 declare -a packagesSuse=();
+#TODO: handle 'sssd*': need to check authselect profile first!
 prepareOperation "biRemoval_general_unwanted";
 
 declare -a packagesArch=();
@@ -439,11 +440,23 @@ declare -a packagesFedora=('testdisk');
 declare -a packagesSuse=('testdisk');
 prepareOperation "biWant_cli_file_recovery";
 
-declare -a packagesArch=('btrfs-progs' 'compsize' 'dosfstools' 'exfat-utils' 'f2fs-tools' 'ntfs-3g' 'udftools' 'xfsprogs' 'duperemove' 'sshfs' 'parted');
-declare -a packagesDebian=('btrfs-progs' 'btrfs-compsize' 'dosfstools' 'exfat-utils' 'f2fs-tools' 'ntfs-3g' 'udftools' 'xfsprogs' 'duperemove' 'sshfs' 'parted');
-declare -a packagesFedora=('btrfs-progs' 'compsize' 'dosfstools' 'exfat-utils' 'f2fs-tools' 'ntfs-3g' 'ntfsprogs' 'udftools' 'xfsprogs' 'duperemove' 'fuse-sshfs' 'parted');
-declare -a packagesSuse=('btrfsprogs' 'compsize' 'dosfstools' 'exfat-utils' 'f2fs-tools' 'ntfs-3g' 'ntfsprogs' 'udftools' 'xfsprogs' 'duperemove' 'sshfs' 'parted');
+declare -a packagesArch=('btrfs-progs' 'compsize' 'dosfstools' 'exfat-utils' 'f2fs-tools' 'ntfs-3g' 'udftools' 'xfsprogs' 'duperemove' 'parted');
+declare -a packagesDebian=('btrfs-progs' 'btrfs-compsize' 'dosfstools' 'exfat-utils' 'f2fs-tools' 'ntfs-3g' 'udftools' 'xfsprogs' 'duperemove' 'parted');
+declare -a packagesFedora=('btrfs-progs' 'compsize' 'dosfstools' 'exfat-utils' 'f2fs-tools' 'ntfs-3g' 'ntfsprogs' 'udftools' 'xfsprogs' 'duperemove' 'parted');
+declare -a packagesSuse=('btrfsprogs' 'compsize' 'dosfstools' 'exfat-utils' 'f2fs-tools' 'ntfs-3g' 'ntfsprogs' 'udftools' 'xfsprogs' 'duperemove' 'parted');
 prepareOperation "biWant_cli_file_systems";
+
+declare -a packagesArch=();
+declare -a packagesDebian=();
+declare -a packagesFedora=('nfs-utils');
+declare -a packagesSuse=();
+prepareOperation "biWant_cli_file_systems_nfs";
+
+declare -a packagesArch=('sshfs');
+declare -a packagesDebian=('sshfs');
+declare -a packagesFedora=('fuse-sshfs');
+declare -a packagesSuse=('sshfs');
+prepareOperation "biWant_cli_file_systems_sshfs";
 
 declare -a packagesArch=('syncthing');
 declare -a packagesDebian=('syncthing');

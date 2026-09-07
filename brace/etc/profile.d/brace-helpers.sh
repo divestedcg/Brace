@@ -49,7 +49,7 @@ clearUserMisc() {
 
 clearUsersMisc() {
 	#contains list of all accessed/modified files on all connected drives (local or remote)
-	sudo wipe -irqc /home/*/.local/share/gvfs-metadata;
+	sudo rm -rfv /home/*/.local/share/gvfs-metadata;
 }
 
 clearLogins() {
@@ -99,8 +99,8 @@ clearMemory() {
 }
 
 optimizeImages() {
-        find "$1" -type f -name "*.jp*g" -print0 | xargs -0 -n1 -P $(nproc) jpegoptim --strip-all;
-        find "$1" -type f -name "*.png" -print0 | xargs -0 -n1 -P $(nproc) optipng -strip all;
+        find "$1" -type f -name "*.jp*g" -print0 | xargs -0 -n1 -P "$(nproc)" jpegoptim --strip-all;
+        find "$1" -type f -name "*.png" -print0 | xargs -0 -n1 -P "$(nproc)" optipng -strip all;
 }
 
 loosePermsRecursive() {
@@ -123,3 +123,7 @@ strictPermsRecursive() {
 alias clamscanhere='clamscan --recursive --detect-pua=yes --infected --allmatch --cross-fs=no --follow-dir-symlinks=0 --follow-file-symlinks=0 .';
 alias dnf-update-security-testing="sudo dnf update --refresh --security --enablerepo=*updates-testing";
 alias dnf-update-kernel="sudo dnf update --enablerepo=*updates-testing kernel*"; #sometimes testing kernels aren't flagged as security updates
+
+alias resetGnomeAppFolders='gsettings reset-recursively org.gnome.desktop.app-folders'; #fix category issues
+alias resetGnomeAppPicker='gsettings set org.gnome.shell app-picker-layout "[]"'; #then alphabetize them
+alias resetGnomeApps='resetGnomeAppFolders && resetGnomeAppPicker && echo "please logout and back in"';
