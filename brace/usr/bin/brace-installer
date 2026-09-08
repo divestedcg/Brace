@@ -238,7 +238,7 @@ prepareOperation "biRemoval_gnome_legacy";
 
 declare -a packagesArch=();
 declare -a packagesDebian=();
-declare -a packagesFedora=('chkrootkit' 'rkhunter' 'lynis' 'spectre-meltdown-checker' 'bleachbit' 'gimpfx-foundry' 'ssss' 'ncdu' 'stress' 'stress-ng' 'onionshare');
+declare -a packagesFedora=('chkrootkit' 'rkhunter' 'lynis' 'spectre-meltdown-checker' 'bleachbit' 'gimpfx-foundry' 'ssss' 'ncdu' 'stress' 'stress-ng' 'onionshare' 'croc' 'numix-icon-theme');
 declare -a packagesSuse=();
 prepareOperation "biRemoval_brace_cleanup";
 
@@ -458,6 +458,12 @@ declare -a packagesDebian=('sshfs');
 declare -a packagesFedora=('fuse-sshfs');
 declare -a packagesSuse=('sshfs');
 prepareOperation "biWant_cli_file_systems_sshfs";
+
+declare -a packagesArch=();
+declare -a packagesDebian=();
+declare -a packagesFedora=('udisks2');
+declare -a packagesSuse=();
+prepareOperation "biWant_cli_file_systems_udisks";
 
 declare -a packagesArch=('syncthing');
 declare -a packagesDebian=('syncthing');
