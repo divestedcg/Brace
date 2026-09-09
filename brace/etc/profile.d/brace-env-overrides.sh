@@ -30,6 +30,9 @@ export vk_zero_vram=true;
 # enable gstreamer va-api plugin on unsupported drivers
 export GST_VAAPI_ALL_DRIVERS=1;
 
+# disable unnecessary gst plugins TODO: there are like 1,200 of them
+#GST_PLUGIN_FEATURE_RANK=pluginA:NONE,pluginB:NONE...
+
 # disable thread local malloc cache
 export GLIBC_TUNABLES='glibc.malloc.tcache_count=0'
 
