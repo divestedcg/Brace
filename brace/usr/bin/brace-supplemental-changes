@@ -205,36 +205,18 @@ if [ "$(/usr/bin/id -u)" -eq "0" ]; then
 		done
 	fi;
 else
-	#Thumbnails
-	echo "Do you want thumbnails enabled? (brace default disabled)";
-	select yn in "Yes" "No"; do
-		case $yn in
-			Yes )
-				#Only allow enabling thumbnailers where extra restrictions (eg. seccomp) are in place
-				gsettings set org.gnome.desktop.thumbnailers disable-all false;
-				#gsettings set org.cinnamon.desktop.thumbnailers disable-all false;
-				#gsettings set org.mate.desktop.thumbnailers disable-all false;
-				break;;
-			No )
-				gsettings set org.gnome.desktop.thumbnailers disable-all true;
-				gsettings set org.cinnamon.desktop.thumbnailers disable-all true;
-				gsettings set org.mate.desktop.thumbnailers disable-all true;
-				break;;
-		esac
-	done
-
-	#Night Light
-	echo "Do you want GNOME Night Light enabled?";
-	select yn in "Yes" "No"; do
-		case $yn in
-			Yes )
-				gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true;
-				break;;
-			No )
-				gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled false;
-				break;;
-		esac
-	done
+	echo "Ensuring unsafe functions are disabled";
+	gsettings set org.gnome.nautilus.preferences fts-enabled false || true;
+	gsettings set org.gnome.nautilus.preferences show-image-thumbnails 'never' || true;
+	gsettings set org.gnome.desktop.thumbnailers disable-all true || true;
+	gsettings set org.cinnamon.desktop.thumbnailers disable-all true || true;
+	gsettings set org.mate.desktop.thumbnailers disable-all true || true;
+	gsettings set org.freedesktop.Tracker3.Miner.Files enable-monitors false || true;
+	gsettings set org.freedesktop.Tracker3.Miner.Files crawling-interval -2 || true;
+	systemctl mask --user tracker-miner-fs-3.service || true;
+	systemctl mask --user localsearch-3.service || true;
+	if [ -x /usr/bin/tracker3 ]; then tracker3 reset -s || true; fi;
+	if [ -x /usr/bin/localsearch ]; then localsearch reset -s || true; fi;
 
 	#Power #TODO: MATE
 	echo "Do you want auto suspend enabled?";
@@ -247,38 +229,6 @@ else
 			No )
 				gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type 'nothing';
 				gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'nothing';
-				break;;
-		esac
-	done
-
-	#Search
-	echo "Do you want search enabled? (brace default disabled)";
-	select yn in "Yes" "No"; do
-		case $yn in
-			Yes )
-				gsettings set org.gnome.desktop.search-providers disable-external false;
-				break;;
-			No )
-				gsettings set org.gnome.desktop.search-providers disable-external true;
-				break;;
-		esac
-	done
-	echo "Do you want Tracker enabled? (brace default disabled)";
-	select yn in "Yes" "No"; do
-		case $yn in
-			Yes )
-				gsettings set org.freedesktop.Tracker3.Miner.Files enable-monitors true;
-				gsettings set org.freedesktop.Tracker3.Miner.Files crawling-interval -1;
-				systemctl unmask --user tracker-miner-fs-3.service || true;
-				systemctl unmask --user localsearch-3.service || true;
-				break;;
-			No )
-				gsettings set org.freedesktop.Tracker3.Miner.Files enable-monitors false;
-				gsettings set org.freedesktop.Tracker3.Miner.Files crawling-interval -2;
-				systemctl mask --user tracker-miner-fs-3.service || true;
-				systemctl mask --user localsearch-3.service || true;
-				tracker3 reset -s || true;
-				localsearch reset -s || true;
 				break;;
 		esac
 	done

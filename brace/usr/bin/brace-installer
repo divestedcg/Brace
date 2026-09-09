@@ -221,8 +221,9 @@ prepareOperation "biRemoval_spins_unwanted";
 
 declare -a packagesArch=();
 declare -a packagesDebian=();
-declare -a packagesFedora=('baobab' 'gnome-photos' 'gnome-maps' 'gnome-weather' 'gnome-connections' 'gnome-boxes' 'gnome-software' 'sushi' 'gnome-browser-connector' 'gnome-classic-session' 'fedora-chromium-config-gnome' 'epiphany');
+declare -a packagesFedora=('baobab' 'gnome-photos' 'gnome-maps' 'gnome-weather' 'gnome-connections' 'gnome-boxes' 'gnome-software' 'sushi' 'gnome-browser-connector' 'gnome-classic-session' 'fedora-chromium-config-gnome' 'epiphany' 'papers-nautilus');
 declare -a packagesSuse=();
+#TODO: 'glycin-thumbnailer' 'gnome-epub-thumbnailer' 'totem-video-thumbnailer' 'gst-thumbnailers' 'gnome-directory-thumbnailer'
 prepareOperation "biRemoval_gnome_unwanted";
 
 declare -a packagesArch=();
@@ -265,7 +266,7 @@ prepareOperation "biWant_gui_generic_extras";
 
 declare -a packagesArch=('gnome-tweak-tool' 'file-roller');
 declare -a packagesDebian=('gnome-tweak-tool' 'file-roller');
-declare -a packagesFedora=('gnome-tweak-tool' 'file-roller' 'gnome-themes-extra' 'loupe' 'showtime' 'papers' 'snapshot' 'ptyxis' 'gnome-text-editor');
+declare -a packagesFedora=('gnome-tweak-tool' 'file-roller' 'gnome-themes-extra' 'loupe' 'showtime' 'papers' 'snapshot' 'ptyxis' 'gnome-text-editor' 'nautilus');
 declare -a packagesSuse=('gnome-tweaks' 'file-roller');
 prepareOperation "biWant_gui_gnome_extras";
 

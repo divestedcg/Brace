@@ -161,12 +161,15 @@ always-use-location-entry=true
 show-delete-permanently=true
 show-create-link=true
 fts-enabled=false
+show-image-thumbnails='never'
+date-time-format='detailed'
 
 [org/gnome/settings-daemon/peripherals/keyboard]
 numlock-state='on'
 
 [org/gnome/settings-daemon/plugins/color]
 night-light-schedule-automatic=false
+night-light-enabled=false
 
 [org/gnome/settings-daemon/plugins/housekeeping]
 donation-reminder-enabled=false
