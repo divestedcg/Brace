@@ -206,11 +206,10 @@ declare -a packagesToIgnore=();
 #
 declare -a packagesArch=();
 declare -a packagesDebian=();
-declare -a packagesFedora=('abrt*' 'cockpit*' 'PackageKit' 'bat' 'virtualbox-guest-additions' 'hyperv*' 'open-vm-tools' 'mediawriter' 'passim' 'sos' 'plocate' 'memstrack' 'realmd' 'NetworkManager-vpnc' 'NetworkManager-openconnect' 'NetworkManager-openvpn' 'NetworkManager-ssh' 'whois' 'whois-nls' 'mkpasswd' 'vim-minimal' 'vim-enhanced' 'compat-ffmpeg4');
+declare -a packagesFedora=('abrt*' 'cockpit*' 'PackageKit' 'bat' 'virtualbox-guest-additions' 'hyperv*' 'open-vm-tools' 'mediawriter' 'passim' 'sos' 'plocate' 'memstrack' 'realmd' 'NetworkManager-vpnc' 'NetworkManager-openconnect' 'NetworkManager-openvpn' 'NetworkManager-libreswan' 'NetworkManager-ssh' 'NetworkManager-adsl' 'NetworkManager-ppp' 'NetworkManager-wwan' 'ModemManager' 'usb_modeswitch' 'whois' 'whois-nls' 'mkpasswd' 'vim-minimal' 'vim-enhanced' 'compat-ffmpeg4' 'python3-perf');
 declare -a packagesSuse=();
 #TODO: 'sssd*': need to check authselect profile first!
-#TODO: 'NetworkManager-adsl' 'NetworkManager-ppp'
-#TODO: 'NetworkManager-wwan' 'ModemManager' 'usb_modeswitch'
+#TODO: 'less-color': broken package?  make sure less doesn't go with it
 prepareOperation "biRemoval_general_unwanted";
 
 declare -a packagesArch=();
@@ -221,9 +220,9 @@ prepareOperation "biRemoval_spins_unwanted";
 
 declare -a packagesArch=();
 declare -a packagesDebian=();
-declare -a packagesFedora=('baobab' 'gnome-photos' 'gnome-maps' 'gnome-weather' 'gnome-connections' 'gnome-boxes' 'gnome-software' 'sushi' 'gnome-browser-connector' 'gnome-classic-session' 'fedora-chromium-config-gnome' 'epiphany' 'papers-nautilus');
+declare -a packagesFedora=('baobab' 'gnome-photos' 'gnome-maps' 'gnome-weather' 'gnome-connections' 'gnome-boxes' 'gnome-software' 'sushi' 'gnome-browser-connector' 'gnome-classic-session' 'fedora-chromium-config-gnome' 'epiphany' 'papers-nautilus' 'gnome-epub-thumbnailer' 'totem-video-thumbnailer' 'gnome-directory-thumbnailer');
 declare -a packagesSuse=();
-#TODO: 'glycin-thumbnailer' 'gnome-epub-thumbnailer' 'totem-video-thumbnailer' 'gst-thumbnailers' 'gnome-directory-thumbnailer'
+#TODO: 'glycin-thumbnailer' 'gst-thumbnailers'
 prepareOperation "biRemoval_gnome_unwanted";
 
 declare -a packagesArch=();
@@ -416,6 +415,12 @@ prepareOperation "biWant_cli_file_compression";
 
 declare -a packagesArch=();
 declare -a packagesDebian=();
+declare -a packagesFedora=('rsync');
+declare -a packagesSuse=();
+prepareOperation "biWant_cli_file_copy";
+
+declare -a packagesArch=();
+declare -a packagesDebian=();
 declare -a packagesFedora=('fdupes');
 declare -a packagesSuse=();
 prepareOperation "biWant_cli_file_dupe_search";
@@ -546,6 +551,16 @@ declare -a packagesFedora=('openrgb');
 declare -a packagesSuse=();
 prepareOperation "biWant_gui_manage_rgb";
 
+#TODO: 'pcsc'
+#TODO: 'fprintd': need to check authselect features first!
+#TODO: 'bluez'
+#TODO: 'gnome-bluetooth'
+#TODO: 'usbguard'
+#TODO: 'usbguard-notifier'
+#TODO: 'esptool'
+#TODO: 'simple-scan'
+#TODO: 'hplip'
+
 declare -a packagesArch=('android-tools' 'android-udev');
 declare -a packagesDebian=('adb' 'fastboot');
 declare -a packagesFedora=('android-tools');
@@ -645,6 +660,7 @@ declare -a packagesDebian=('gnucash');
 declare -a packagesFedora=('gnucash');
 declare -a packagesFlathub=('org.gnucash.GnuCash');
 declare -a packagesSuse=('gnucash');
+#TODO: switch to homebank maybe?
 prepareOperation "biWant_gui_office_accounting";
 
 declare -a packagesArch=();
@@ -659,6 +675,12 @@ declare -a packagesFedora=('scribus');
 declare -a packagesFlathub=('unverified.net.scribus.Scribus');
 declare -a packagesSuse=('scribus');
 prepareOperation "biWant_gui_office_publisher";
+
+declare -a packagesArch=();
+declare -a packagesDebian=();
+declare -a packagesFedora=('xournalpp');
+declare -a packagesSuse=();
+prepareOperation "biWant_gui_office_notetaking";
 
 declare -a packagesArch=();
 declare -a packagesDebian=('libu2f-udev');
@@ -773,21 +795,21 @@ prepareOperation "biWant_gui_viewer_sqlite";
 declare -a packagesArch=('chromium');
 declare -a packagesDebian=('chromium' 'chromium-sandbox');
 declare -a packagesFedora=('chromium');
-declare -a packagesFlathub=('unverified.org.chromium.Chromium');
+declare -a packagesFlathub=('unsafe.unverified.org.chromium.Chromium');
 declare -a packagesSuse=('chromium');
 prepareOperation "biWant_gui_browser_chromium";
 
 declare -a packagesArch=('firefox');
 declare -a packagesDebian=('firefox-esr');
 declare -a packagesFedora=('firefox' 'mozilla-ublock-origin');
-declare -a packagesFlathub=('org.mozilla.firefox');
+declare -a packagesFlathub=('unsafe.org.mozilla.firefox');
 declare -a packagesSuse=('MozillaFirefox');
 prepareOperation "biWant_gui_browser_firefox";
 
 declare -a packagesArch=('torbrowser-launcher');
 declare -a packagesDebian=('torbrowser-launcher');
 declare -a packagesFedora=('torbrowser-launcher');
-declare -a packagesFlathub=('org.torproject.torbrowser-launcher');
+declare -a packagesFlathub=('unsafe.org.torproject.torbrowser-launcher');
 declare -a packagesSuse=('torbrowser-launcher'); #torbrowser-apparmor-profile
 prepareOperation "biWant_gui_browser_tor";
 

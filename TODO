@@ -1,7 +1,3 @@
-packages:
-	gnucash -> homebank (easier to use)
-	xournalpp
-
 bugs:
 	fix Brave extension forcelist on Debian
 	fix profile.d files on Debian

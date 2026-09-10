@@ -54,7 +54,8 @@ Additional Inclusions
 - brace-audit			helper to verify settings are applied
 - brace-enable-auto-updates	helper to enable dnf automatic updates
 - brace-enable-rpmfusion	helper to enable rpmfusion-free repo for eg. codecs
-- brace-installer		helper with categories of packages to install
+- brace-installer		helper install & remove packages based on config file
+- brace-mr-update		helper to exclude all current kernel modules
 - brace-rpm-verify		helper to verify integrity of installed packages
 - brace-supplemental-changes	helper to change additional global and per-user settings
 - brace-update-system		helper to update to next major version
