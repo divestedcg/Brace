@@ -8,7 +8,10 @@ workspace-osd-duration=200
 workspace-expo-view-as-grid=true
 
 [org/cinnamon/desktop/background]
-primary-color='#1b5e20'
+color-shading-type='solid'
+picture-options='none'
+primary-color='#000000'
+secondary-color='#000000'
 
 [org/cinnamon/desktop/interface]
 clock-use-24h=false
@@ -103,7 +106,7 @@ show-reload-icon-toolbar=true
 start-with-dual-pane=true
 
 [org/x/editor/plugins]
-active-plugins=['docinfo', 'findinfiles', 'git', 'sort', 'spell', 'filebrowser', 'colorpicker', 'time', 'terminal']
+active-plugins=['time', 'spell', 'sort', 'docinfo']
 
 [org/x/editor/preferences/editor]
 highlight-current-line=true

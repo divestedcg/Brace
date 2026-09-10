@@ -483,6 +483,7 @@ declare -a packagesArch=();
 declare -a packagesDebian=();
 declare -a packagesFedora=('@printing');
 declare -a packagesSuse=();
+#TODO: improve this somehow
 prepareOperation "biWant_daemon_printing";
 
 declare -a packagesArch=('iotop');
@@ -553,9 +554,9 @@ prepareOperation "biWant_gui_manage_rgb";
 
 #TODO: 'pcsc'
 #TODO: 'fprintd': need to check authselect features first!
-#TODO: 'bluez'
+#TODO: 'bluez': ffmpeg & libvirt both depend on this
 #TODO: 'gnome-bluetooth'
-#TODO: 'usbguard'
+#TODO: 'usbguard': maybe move this to a helper script instead
 #TODO: 'usbguard-notifier'
 #TODO: 'esptool'
 #TODO: 'simple-scan'
@@ -681,6 +682,12 @@ declare -a packagesDebian=();
 declare -a packagesFedora=('xournalpp');
 declare -a packagesSuse=();
 prepareOperation "biWant_gui_office_notetaking";
+
+declare -a packagesArch=();
+declare -a packagesDebian=();
+declare -a packagesFedora=('pandoc-cli');
+declare -a packagesSuse=();
+prepareOperation "biWant_cli_document_converter";
 
 declare -a packagesArch=();
 declare -a packagesDebian=('libu2f-udev');

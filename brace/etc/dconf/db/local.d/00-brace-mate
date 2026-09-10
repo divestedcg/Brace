@@ -15,7 +15,10 @@ show-advanced-permissions=true
 [org/mate/desktop/background]
 background-fade=false
 show-desktop-icons=false
-primary-color='rgb(27,94,32)'
+color-shading-type='solid'
+picture-options='none'
+primary-color='rgb(0,0,0)'
+secondary-color='rgb(0,0,0)'
 
 [org/mate/desktop/font-rendering]
 antialiasing='grayscale'
@@ -88,7 +91,7 @@ show-weather=false
 wrap-workspaces=true
 
 [org/mate/pluma]
-active-plugins=['docinfo', 'findinfiles', 'git', 'sort', 'spell', 'filebrowser', 'colorpicker', 'time', 'terminal']
+active-plugins=['time', 'spell', 'sort', 'docinfo']
 color-scheme='solarized-dark'
 display-line-numbers=true
 highlight-current-line=true

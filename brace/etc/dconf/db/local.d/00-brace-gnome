@@ -7,7 +7,13 @@ exec='ptyxis'
 
 [org/gnome/desktop/background]
 show-desktop-icons=false
-primary-color='#1b5e20'
+color-shading-type='solid'
+picture-options='none'
+primary-color='#000000'
+secondary-color='#000000'
+
+[org/gnome/desktop/datetime]
+automatic-timezone=false
 
 [org/gnome/desktop/interface]
 show-battery-percentage=true
@@ -19,6 +25,9 @@ clock-show-weekday=true
 font-antialiasing='grayscale'
 font-hinting='slight'
 overlay-scrolling=false
+accent-color='orange'
+color-scheme='prefer-dark'
+gtk-theme='Adwaita-dark'
 
 [org/gnome/desktop/media-handling]
 automount-open=false
@@ -104,7 +113,7 @@ override-restrictions=true
 encrypt-header=true
 
 [org/gnome/gedit/plugins]
-active-plugins=['docinfo', 'findinfiles', 'git', 'sort', 'spell', 'filebrowser', 'colorpicker', 'time', 'terminal']
+active-plugins=['time', 'spell', 'sort', 'docinfo']
 
 [org/gnome/gedit/preferences/editor]
 highlight-current-line=true
@@ -185,8 +194,8 @@ name='Launch terminal'
 
 [org/gnome/settings-daemon/plugins/power]
 idle-dim=true
-sleep-inactive-ac-timeout=2700
 idle-brightness=10
+sleep-inactive-ac-timeout=2700
 sleep-inactive-battery-timeout=1200
 
 [org/gnome/settings-daemon/plugins/xsettings]

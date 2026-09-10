@@ -20,6 +20,12 @@ if [ "$(/usr/bin/id -u)" -eq "0" ]; then
 		systemctl enable fstrim.timer --now;
 	fi;
 
+	if [ -f "/usr/lib/systemd/user/tracker-miner-fs-3.service" ] || [ -f "/usr/lib/systemd/user/localsearch-3.service" ]; then
+		echo "Masking tracker/localsearch";
+		systemctl --global mask tracker-miner-fs-3.service;
+		systemctl --global mask localsearch-3.service;
+	fi;
+
 	#Stealth Firewall
 	if [ -x /usr/bin/firewall-cmd ]; then
 		echo "Do you want a default drop firewall?";
@@ -117,9 +123,7 @@ if [ "$(/usr/bin/id -u)" -eq "0" ]; then
 					break;;
 			esac
 		done
-	fi;
 
-	if [ -x /usr/bin/grubby ]; then
 		echo "Do you want additional kernel memory checks at an extreme performance cost?";
 		echo "Current status: $(grep -q 'slub_debug=FZ' /proc/cmdline && echo 'enabled' || echo 'disabled')";
 		select yns in "Yes" "No" "Skip"; do
@@ -134,9 +138,7 @@ if [ "$(/usr/bin/id -u)" -eq "0" ]; then
 					break;;
 			esac
 		done
-	fi;
 
-	if [ -x /usr/bin/grubby ]; then
 		echo "Do you want to disable 32-bit executable support?";
 		echo "Current status: $(grep -q 'ia32_emulation=false' /proc/cmdline && echo 'blocked' || echo 'allowed')";
 		select yns in "Yes" "No" "Skip"; do
@@ -206,19 +208,21 @@ if [ "$(/usr/bin/id -u)" -eq "0" ]; then
 	fi;
 else
 	echo "Ensuring unsafe functions are disabled";
-	gsettings set org.gnome.nautilus.preferences fts-enabled false || true;
-	gsettings set org.gnome.nautilus.preferences show-image-thumbnails 'never' || true;
-	gsettings set org.gnome.desktop.thumbnailers disable-all true || true;
-	gsettings set org.cinnamon.desktop.thumbnailers disable-all true || true;
-	gsettings set org.mate.desktop.thumbnailers disable-all true || true;
-	gsettings set org.freedesktop.Tracker3.Miner.Files enable-monitors false || true;
-	gsettings set org.freedesktop.Tracker3.Miner.Files crawling-interval -2 || true;
-	systemctl mask --user tracker-miner-fs-3.service || true;
-	systemctl mask --user localsearch-3.service || true;
-	if [ -x /usr/bin/tracker3 ]; then tracker3 reset -s || true; fi;
-	if [ -x /usr/bin/localsearch ]; then localsearch reset -s || true; fi;
+	gsettings set org.gnome.nautilus.preferences fts-enabled false;
+	gsettings set org.gnome.nautilus.preferences show-image-thumbnails 'never';
+	gsettings set org.gnome.desktop.thumbnailers disable-all true;
+	gsettings set org.cinnamon.desktop.thumbnailers disable-all true;
+	gsettings set org.mate.desktop.thumbnailers disable-all true;
+	gsettings set org.freedesktop.Tracker3.Miner.Files enable-monitors false;
+	gsettings set org.freedesktop.Tracker3.Miner.Files crawling-interval -2;
+	systemctl mask --user tracker-miner-fs-3.service;
+	systemctl mask --user localsearch-3.service;
+	if [ -x /usr/bin/tracker3 ]; then tracker3 reset -s; fi;
+	if [ -x /usr/bin/localsearch ]; then localsearch reset -s; fi;
 
-	#Power #TODO: MATE
+
+	if [ "$XDG_CURRENT_DESKTOP" == "GNOME" ]; then
+	#Power
 	echo "Do you want auto suspend enabled?";
 	select yn in "Yes" "No"; do
 		case $yn in
@@ -240,20 +244,10 @@ else
 			Yes )
 				gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark';
 				gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark';
-				gsettings set org.cinnamon.theme name 'Mint-Y-Dark';
-				gsettings set org.cinnamon.desktop.interface gtk-theme 'Mint-Y-Dark';
-				gsettings set org.cinnamon.desktop.wm.preferences theme 'Mint-Y-Dark';
-				gsettings set org.mate.desktop.interface gtk-theme 'BlackMATE';
-				gsettings set org.mate.marco.general theme 'BlackMATE';
 				break;;
 			No )
 				gsettings set org.gnome.desktop.interface color-scheme 'default';
 				gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita';
-				gsettings set org.cinnamon.theme name 'Mint-Y';
-				gsettings set org.cinnamon.desktop.interface gtk-theme 'Mint-Y';
-				gsettings set org.cinnamon.desktop.wm.preferences theme 'Mint-Y';
-				gsettings set org.mate.desktop.interface gtk-theme 'BlueMenta';
-				gsettings set org.mate.marco.general theme 'BlueMenta';
 				break;;
 		esac
 	done
@@ -264,22 +258,18 @@ else
 		case $bgyrns in
 			Black )
 				gsettings set org.gnome.desktop.background primary-color '#000000';
-				gsettings set org.cinnamon.desktop.background primary-color '#000000';
 				gsettings set org.gnome.desktop.background picture-options 'none';
 				break;;
 			Green )
 				gsettings set org.gnome.desktop.background primary-color '#1B5E20';
-				gsettings set org.cinnamon.desktop.background primary-color '#1B5E20';
 				gsettings set org.gnome.desktop.background picture-options 'none';
 				break;;
 			Yellow )
 				gsettings set org.gnome.desktop.background primary-color '#FCBD02';
-				gsettings set org.cinnamon.desktop.background primary-color '#FCBD02';
 				gsettings set org.gnome.desktop.background picture-options 'none';
 				break;;
 			Red )
 				gsettings set org.gnome.desktop.background primary-color '#880505';
-				gsettings set org.cinnamon.desktop.background primary-color '#880505';
 				gsettings set org.gnome.desktop.background picture-options 'none';
 				break;;
 			No )
@@ -289,6 +279,7 @@ else
 				break;;
 		esac
 	done
+	fi;
 fi;
 
 echo "Applied the supplemental changes";
