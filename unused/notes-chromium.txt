@@ -9,6 +9,7 @@ PromptForDownloadLocation
 LocalNetworkAccessPermissionsPolicyDefaultEnabled
 PdfXfaFormsEnabled
 DefaultSubAppsWithoutPromptsSetting
+DefaultIdleDetectionSetting
 
 Research:
 AmbientAuthenticationInPrivateModesEnabled

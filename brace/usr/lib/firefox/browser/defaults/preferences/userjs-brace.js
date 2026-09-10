@@ -25,6 +25,7 @@ pref("dom.private-attribution.submission.enabled", false);
 //Security
 pref("browser.gnome-search-provider.enabled", false);
 pref("dom.webgpu.enabled", false);
+pref("pdfjs.enableWebGPU", false);
 pref("fission.autostart", true); //MULL-COMMENT_ME
 pref("security.tls.enable_kyber", true);
 pref("network.http.http3.enable_kyber", true);
