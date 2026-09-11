@@ -265,7 +265,7 @@ prepareOperation "biWant_gui_generic_extras";
 
 declare -a packagesArch=('gnome-tweak-tool' 'file-roller');
 declare -a packagesDebian=('gnome-tweak-tool' 'file-roller');
-declare -a packagesFedora=('gnome-tweak-tool' 'file-roller' 'gnome-themes-extra' 'loupe' 'showtime' 'papers' 'snapshot' 'ptyxis' 'gnome-text-editor' 'nautilus');
+declare -a packagesFedora=('gnome-tweak-tool' 'file-roller' 'gnome-themes-extra' 'adw-gtk3-theme' 'loupe' 'showtime' 'papers' 'snapshot' 'ptyxis' 'gnome-text-editor' 'nautilus');
 declare -a packagesSuse=('gnome-tweaks' 'file-roller');
 prepareOperation "biWant_gui_gnome_extras";
 

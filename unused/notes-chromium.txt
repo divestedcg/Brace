@@ -6,7 +6,6 @@ AllowPopupsDuringPageUnload
 PrivacyScreenEnabled
 IntensiveWakeUpThrottlingEnabled
 PromptForDownloadLocation
-LocalNetworkAccessPermissionsPolicyDefaultEnabled
 PdfXfaFormsEnabled
 DefaultSubAppsWithoutPromptsSetting
 DefaultIdleDetectionSetting

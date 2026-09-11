@@ -26,8 +26,6 @@ font-antialiasing='grayscale'
 font-hinting='slight'
 overlay-scrolling=false
 accent-color='orange'
-color-scheme='prefer-dark'
-gtk-theme='Adwaita-dark'
 
 [org/gnome/desktop/media-handling]
 automount-open=false
@@ -165,7 +163,7 @@ default-zoom-level='small'
 
 [org/gnome/nautilus/preferences]
 executable-text-activation='ask'
-default-folder-viewer='icon-view'
+default-folder-viewer='list-view'
 always-use-location-entry=true
 show-delete-permanently=true
 show-create-link=true

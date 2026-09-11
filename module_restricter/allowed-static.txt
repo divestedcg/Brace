@@ -119,6 +119,7 @@ intel_pch_thermal #Intel PCH Thermal driver
 intel_pmc_bxt #Intel Broxton PMC driver
 intel_pmc_core #Intel PMC Core Driver
 intel_pmc_core_pltdrv #Intel PMC Core platform driver
+intel_pmc_pwrm_telemetry #Intel PMC PWRM ACPI driver
 intel_pmc_ssram_telemetry #Intel PMC SSRAM Telemetry driver
 intel_powerclamp #Package Level C-state Idle Injection for Intel CPUs
 intel_rapl_common #Intel Runtime Average Power Limit (RAPL) common code
