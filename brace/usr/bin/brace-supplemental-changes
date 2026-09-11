@@ -243,12 +243,12 @@ else
 		case $yn in
 			Yes )
 				gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark';
-				if [ -d "/usr/share/themes/adw-gtk3-dark" ]; then
-					echo "GTK3: using unofficial Adwaita dark port";
-					gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3-dark';
-				elif [ -d "/usr/share/themes/Adwaita-dark" ]; then
+				if [ -d "/usr/share/themes/Adwaita-dark" ]; then
 					echo "GTK3: using legacy Adwaita dark";
 					gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark';
+				elif [ -d "/usr/share/themes/adw-gtk3-dark" ]; then
+					echo "GTK3: using unofficial Adwaita dark port";
+					gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3-dark';
 				else
 					echo "GTK3: dark theme unavailable";
 					gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita';
@@ -256,13 +256,7 @@ else
 				break;;
 			No )
 				gsettings set org.gnome.desktop.interface color-scheme 'default';
-				if [ -d "/usr/share/themes/adw-gtk3" ]; then
-					echo "GTK3: using unofficial Adwaita port";
-					gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3';
-				else
-					echo "GTK3: using legacy Adwaita";
-					gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita';
-				fi;
+				gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita';
 				break;;
 		esac
 	done
