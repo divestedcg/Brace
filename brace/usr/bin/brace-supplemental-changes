@@ -20,11 +20,10 @@ if [ "$(/usr/bin/id -u)" -eq "0" ]; then
 		systemctl enable fstrim.timer --now;
 	fi;
 
-	if [ -f "/usr/lib/systemd/user/tracker-miner-fs-3.service" ] || [ -f "/usr/lib/systemd/user/localsearch-3.service" ]; then
-		echo "Masking tracker/localsearch";
-		systemctl --global mask tracker-miner-fs-3.service;
-		systemctl --global mask localsearch-3.service;
-	fi;
+	echo "Unconditionally masking unwanted services";
+	#only handle ones that can't be uninstalled
+	systemctl mask geoclue.service;
+	systemctl --global mask localsearch-3.service tracker-miner-fs-3.service;
 
 	#Stealth Firewall
 	if [ -x /usr/bin/firewall-cmd ]; then

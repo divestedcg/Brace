@@ -473,16 +473,6 @@ user::rw-
 group::r--
 other::r--
 
-# file: brace/usr/lib/systemd/system/irqbalance.service.d
-user::rwx
-group::r-x
-other::r-x
-
-# file: brace/usr/lib/systemd/system/irqbalance.service.d/99-brace.conf
-user::rw-
-group::r--
-other::r--
-
 # file: brace/usr/lib/systemd/system/jellyfin.service.d
 user::rwx
 group::r-x
@@ -559,16 +549,6 @@ group::r-x
 other::r-x
 
 # file: brace/usr/lib/systemd/system/redis.service.d/99-brace.conf.disabled
-user::rw-
-group::r--
-other::r--
-
-# file: brace/usr/lib/systemd/system/rngd.service.d
-user::rwx
-group::r-x
-other::r-x
-
-# file: brace/usr/lib/systemd/system/rngd.service.d/99-brace.conf
 user::rw-
 group::r--
 other::r--

@@ -1,7 +1,7 @@
 # Maintainer: Tavi <tavi@divested.dev>
 pkgname=brace
-pkgver=20260911
-pkgrel=2
+pkgver=20260912
+pkgrel=1
 pkgdesc="Increases privacy/security through various configs."
 arch=('any')
 license=('GPL3')
@@ -45,7 +45,6 @@ package() {
 	install -Dm644 brace/usr/lib/systemd/system/chronyd.service.d/99-brace.conf "$pkgdir"/usr/lib/systemd/system/chronyd.service.d/99-brace.conf;
 	install -Dm644 brace/usr/lib/systemd/system/ejabberd.service.d/99-brace.conf "$pkgdir"/usr/lib/systemd/system/ejabberd.service.d/99-brace.conf;
 	install -Dm644 brace/usr/lib/systemd/system/httpd.service.d/99-brace.conf "$pkgdir"/usr/lib/systemd/system/httpd.service.d/99-brace.conf;
-	install -Dm644 brace/usr/lib/systemd/system/irqbalance.service.d/99-brace.conf "$pkgdir"/usr/lib/systemd/system/irqbalance.service.d/99-brace.conf;
 	install -Dm644 brace/usr/lib/systemd/system/jellyfin.service.d/99-brace.conf "$pkgdir"/usr/lib/systemd/system/jellyfin.service.d/99-brace.conf;
 	install -Dm644 brace/usr/lib/systemd/system/minetest@.service.d/99-brace.conf "$pkgdir"/usr/lib/systemd/system/minetest@.service.d/99-brace.conf;
 	install -Dm644 brace/usr/lib/systemd/system/ModemManager.service.d/99-brace.conf "$pkgdir"/usr/lib/systemd/system/ModemManager.service.d/99-brace.conf;
@@ -53,7 +52,6 @@ package() {
 	install -Dm644 brace/usr/lib/systemd/system/NetworkManager.service.d/99-brace.conf "$pkgdir"/usr/lib/systemd/system/NetworkManager.service.d/99-brace.conf;
 	install -Dm644 brace/usr/lib/systemd/system/php-fpm.service.d/99-brace.conf "$pkgdir"/usr/lib/systemd/system/php-fpm.service.d/99-brace.conf;
 	install -Dm644 brace/usr/lib/systemd/system/radiusd.service.d/99-brace.conf "$pkgdir"/usr/lib/systemd/system/radiusd.service.d/99-brace.conf;
-	install -Dm644 brace/usr/lib/systemd/system/rngd.service.d/99-brace.conf "$pkgdir"/usr/lib/systemd/system/rngd.service.d/99-brace.conf;
 	install -Dm644 brace/usr/lib/systemd/system/tor.service.d/99-brace.conf "$pkgdir"/usr/lib/systemd/system/tor.service.d/99-brace.conf;
 	install -Dm644 brace/usr/lib/systemd/system/wpa_supplicant.service.d/99-brace.conf "$pkgdir"/usr/lib/systemd/system/wpa_supplicant.service.d/99-brace.conf;
 	install -Dm644 brace/usr/lib/systemd/user/restic-backup@.service "$pkgdir"/usr/lib/systemd/user/restic-backup@.service;

@@ -206,10 +206,11 @@ declare -a packagesToIgnore=();
 #
 declare -a packagesArch=();
 declare -a packagesDebian=();
-declare -a packagesFedora=('abrt*' 'cockpit*' 'PackageKit' 'bat' 'virtualbox-guest-additions' 'hyperv*' 'open-vm-tools' 'mediawriter' 'passim' 'sos' 'plocate' 'memstrack' 'realmd' 'NetworkManager-vpnc' 'NetworkManager-openconnect' 'NetworkManager-openvpn' 'NetworkManager-libreswan' 'NetworkManager-ssh' 'NetworkManager-adsl' 'NetworkManager-ppp' 'NetworkManager-wwan' 'ModemManager' 'usb_modeswitch' 'whois' 'whois-nls' 'mkpasswd' 'vim-minimal' 'vim-enhanced' 'compat-ffmpeg4' 'python3-perf');
+declare -a packagesFedora=('abrt*' 'cockpit*' 'PackageKit' 'PackageKit-gstreamer-plugin' 'PackageKit-gtk3-module' 'bat' 'virtualbox-guest-additions' 'hyperv*' 'open-vm-tools' 'mediawriter' 'passim' 'sos' 'plocate' 'memstrack' 'realmd' 'NetworkManager-vpnc' 'NetworkManager-openconnect' 'NetworkManager-openvpn' 'NetworkManager-libreswan' 'NetworkManager-ssh' 'NetworkManager-adsl' 'NetworkManager-ppp' 'NetworkManager-wwan' 'ModemManager' 'usb_modeswitch' 'whois' 'whois-nls' 'mkpasswd' 'vim-minimal' 'vim-enhanced' 'compat-ffmpeg4' 'python3-perf');
 declare -a packagesSuse=();
 #TODO: 'sssd*': need to check authselect profile first!
 #TODO: 'less-color': broken package?  make sure less doesn't go with it
+#TODO: 'PackageKit-glib': simple-scan depends on it
 prepareOperation "biRemoval_general_unwanted";
 
 declare -a packagesArch=();
@@ -240,7 +241,7 @@ prepareOperation "biRemoval_gnome_legacy";
 
 declare -a packagesArch=();
 declare -a packagesDebian=();
-declare -a packagesFedora=('chkrootkit' 'rkhunter' 'lynis' 'spectre-meltdown-checker' 'bleachbit' 'gimpfx-foundry' 'ssss' 'ncdu' 'stress' 'stress-ng' 'onionshare' 'croc' 'numix-icon-theme');
+declare -a packagesFedora=('chkrootkit' 'rkhunter' 'lynis' 'spectre-meltdown-checker' 'bleachbit' 'gimpfx-foundry' 'ssss' 'ncdu' 'stress' 'stress-ng' 'onionshare' 'croc' 'numix-icon-theme' 'rng-tools' 'irqbalance');
 declare -a packagesSuse=();
 prepareOperation "biRemoval_brace_cleanup";
 
@@ -274,12 +275,6 @@ declare -a packagesDebian=('mesa-va-drivers' 'vainfo' 'i965-va-driver' 'intel-me
 declare -a packagesFedora=('mesa-dri-drivers' 'mesa-va-drivers-freeworld' 'libva' 'libva-utils' 'libva-intel-driver' 'libva-intel-hybrid-driver' 'intel-media-driver' 'gstreamer1-vaapi');
 declare -a packagesSuse=();
 prepareOperation "biWant_lib_VAAPI";
-
-declare -a packagesArch=('rng-tools' 'irqbalance');
-declare -a packagesDebian=('rng-tools' 'irqbalance');
-declare -a packagesFedora=('rng-tools' 'irqbalance');
-declare -a packagesSuse=('rng-tools' 'irqbalance');
-prepareOperation "biWant_daemon_core";
 
 declare -a packagesArch=();
 declare -a packagesDebian=();

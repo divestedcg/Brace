@@ -123,7 +123,8 @@ strictPermsRecursive() {
 alias clamscanhere='clamscan --recursive --detect-pua=yes --infected --allmatch --cross-fs=no --follow-dir-symlinks=0 --follow-file-symlinks=0 .';
 alias dnf-update-security-testing="sudo dnf update --refresh --security --enablerepo=*updates-testing";
 alias dnf-update-kernel="sudo dnf update --enablerepo=*updates-testing kernel*"; #sometimes testing kernels aren't flagged as security updates
-
+alias removeRpmFusionRepos="sudo dnf remove --installed-from-repo=rpmfusion* '*'";
+alias showBatteryChargeLimits='grep . /sys/class/power_supply/BAT*/charge*';
 alias resetGnomeAppFolders='gsettings reset-recursively org.gnome.desktop.app-folders'; #fix category issues
 alias resetGnomeAppPicker='gsettings set org.gnome.shell app-picker-layout "[]"'; #then alphabetize them
 alias resetGnomeApps='resetGnomeAppFolders && resetGnomeAppPicker && echo "please logout and back in"';

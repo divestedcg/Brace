@@ -1,6 +1,6 @@
 Name: brace
-Version: 20260911
-Release: 2
+Version: 20260912
+Release: 1
 Summary: Increases privacy/security through various configs
 License: AGPLv3+
 BuildArch: noarch
@@ -61,7 +61,6 @@ install -Dm644 %{_sourcedir}/brace/usr/lib/systemd/resolved.conf.d/brace.conf %{
 install -Dm644 %{_sourcedir}/brace/usr/lib/systemd/system/chronyd.service.d/99-brace.conf %{buildroot}/usr/lib/systemd/system/chronyd.service.d/99-brace.conf;
 install -Dm644 %{_sourcedir}/brace/usr/lib/systemd/system/ejabberd.service.d/99-brace.conf %{buildroot}/usr/lib/systemd/system/ejabberd.service.d/99-brace.conf;
 install -Dm644 %{_sourcedir}/brace/usr/lib/systemd/system/httpd.service.d/99-brace.conf %{buildroot}/usr/lib/systemd/system/httpd.service.d/99-brace.conf;
-install -Dm644 %{_sourcedir}/brace/usr/lib/systemd/system/irqbalance.service.d/99-brace.conf %{buildroot}/usr/lib/systemd/system/irqbalance.service.d/99-brace.conf;
 install -Dm644 %{_sourcedir}/brace/usr/lib/systemd/system/jellyfin.service.d/99-brace.conf %{buildroot}/usr/lib/systemd/system/jellyfin.service.d/99-brace.conf;
 install -Dm644 %{_sourcedir}/brace/usr/lib/systemd/system/minetest@.service.d/99-brace.conf %{buildroot}/usr/lib/systemd/system/minetest@.service.d/99-brace.conf;
 install -Dm644 %{_sourcedir}/brace/usr/lib/systemd/system/ModemManager.service.d/99-brace.conf %{buildroot}/usr/lib/systemd/system/ModemManager.service.d/99-brace.conf;
@@ -69,7 +68,6 @@ install -Dm644 %{_sourcedir}/brace/usr/lib/systemd/system/murmur.service.d/99-br
 install -Dm644 %{_sourcedir}/brace/usr/lib/systemd/system/NetworkManager.service.d/99-brace.conf %{buildroot}/usr/lib/systemd/system/NetworkManager.service.d/99-brace.conf;
 install -Dm644 %{_sourcedir}/brace/usr/lib/systemd/system/php-fpm.service.d/99-brace.conf %{buildroot}/usr/lib/systemd/system/php-fpm.service.d/99-brace.conf;
 install -Dm644 %{_sourcedir}/brace/usr/lib/systemd/system/radiusd.service.d/99-brace.conf %{buildroot}/usr/lib/systemd/system/radiusd.service.d/99-brace.conf;
-install -Dm644 %{_sourcedir}/brace/usr/lib/systemd/system/rngd.service.d/99-brace.conf %{buildroot}/usr/lib/systemd/system/rngd.service.d/99-brace.conf;
 install -Dm644 %{_sourcedir}/brace/usr/lib/systemd/system/tor.service.d/99-brace.conf %{buildroot}/usr/lib/systemd/system/tor.service.d/99-brace.conf;
 install -Dm644 %{_sourcedir}/brace/usr/lib/systemd/system/wpa_supplicant.service.d/99-brace.conf %{buildroot}/usr/lib/systemd/system/wpa_supplicant.service.d/99-brace.conf;
 install -Dm644 %{_sourcedir}/brace/usr/lib/systemd/user/restic-backup@.service %{buildroot}/usr/lib/systemd/user/restic-backup@.service;
@@ -117,7 +115,6 @@ install -Dm644 %{_sourcedir}/README.md %{buildroot}/usr/share/doc/brace/README.m
 /usr/lib/systemd/system/chronyd.service.d/99-brace.conf
 /usr/lib/systemd/system/ejabberd.service.d/99-brace.conf
 /usr/lib/systemd/system/httpd.service.d/99-brace.conf
-/usr/lib/systemd/system/irqbalance.service.d/99-brace.conf
 /usr/lib/systemd/system/jellyfin.service.d/99-brace.conf
 /usr/lib/systemd/system/minetest@.service.d/99-brace.conf
 /usr/lib/systemd/system/ModemManager.service.d/99-brace.conf
@@ -125,7 +122,6 @@ install -Dm644 %{_sourcedir}/README.md %{buildroot}/usr/share/doc/brace/README.m
 /usr/lib/systemd/system/NetworkManager.service.d/99-brace.conf
 /usr/lib/systemd/system/php-fpm.service.d/99-brace.conf
 /usr/lib/systemd/system/radiusd.service.d/99-brace.conf
-/usr/lib/systemd/system/rngd.service.d/99-brace.conf
 /usr/lib/systemd/system/tor.service.d/99-brace.conf
 /usr/lib/systemd/system/wpa_supplicant.service.d/99-brace.conf
 /usr/lib/systemd/user/restic-backup@.service
