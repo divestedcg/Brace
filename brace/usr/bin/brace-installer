@@ -206,11 +206,13 @@ declare -a packagesToIgnore=();
 #
 declare -a packagesArch=();
 declare -a packagesDebian=();
-declare -a packagesFedora=('abrt*' 'cockpit*' 'PackageKit' 'PackageKit-gstreamer-plugin' 'PackageKit-gtk3-module' 'bat' 'virtualbox-guest-additions' 'hyperv*' 'open-vm-tools' 'mediawriter' 'passim' 'sos' 'plocate' 'memstrack' 'realmd' 'NetworkManager-vpnc' 'NetworkManager-openconnect' 'NetworkManager-openvpn' 'NetworkManager-libreswan' 'NetworkManager-ssh' 'NetworkManager-adsl' 'NetworkManager-ppp' 'NetworkManager-wwan' 'ModemManager' 'usb_modeswitch' 'whois' 'whois-nls' 'mkpasswd' 'vim-minimal' 'vim-enhanced' 'compat-ffmpeg4' 'python3-perf');
+declare -a packagesFedora=('abrt*' 'cockpit*' 'PackageKit' 'bat' 'virtualbox-guest-additions' 'hyperv*' 'open-vm-tools' 'mediawriter' 'passim' 'sos' 'plocate' 'memstrack' 'realmd' 'NetworkManager-vpnc' 'NetworkManager-openconnect' 'NetworkManager-openvpn' 'NetworkManager-libreswan' 'NetworkManager-ssh' 'NetworkManager-adsl' 'NetworkManager-ppp' 'NetworkManager-wwan' 'ModemManager' 'usb_modeswitch' 'whois' 'whois-nls' 'mkpasswd' 'vim-minimal' 'vim-enhanced' 'compat-ffmpeg4' 'python3-perf');
 declare -a packagesSuse=();
 #TODO: 'sssd*': need to check authselect profile first!
 #TODO: 'less-color': broken package?  make sure less doesn't go with it
 #TODO: 'PackageKit-glib': simple-scan depends on it
+#TODO: 'PackageKit-gstreamer-plugin': @multimedia pulls it in
+#TODO: 'PackageKit-gtk3-module': test this later
 prepareOperation "biRemoval_general_unwanted";
 
 declare -a packagesArch=();
