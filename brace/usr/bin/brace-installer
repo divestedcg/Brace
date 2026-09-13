@@ -40,8 +40,6 @@ whichPackageManager() {
 		echo -n "pacman";
 	elif type "apt" > /dev/null 2>&1; then
 		echo -n "apt";
-	#elif type "flatpak" > /dev/null 2>&1; then
-	#	echo -n "flatpak";
 	fi;
 }
 
@@ -78,95 +76,117 @@ prepareOperation() {
 		declare -a packagesNoted=("${packagesArch[@]}");
 	elif [ "$packageManager" == "zypper" ]; then
 		declare -a packagesNoted=("${packagesSuse[@]}");
-	elif [ "$packageManager" == "flatpak" ]; then
-		declare -a packagesNoted=("${packagesFlathub[@]}");
+	fi;
+	if [ "$flatpakUseFedoraRemote" == "true" ]; then
+		declare -a packagesNotedFlatpak=("${packagesFedoraPak[@]}");
+	else
+		declare -a packagesNotedFlatpak=("${packagesFlathub[@]}");
 	fi;
 	variableResolved=$(getConfigVariable "$1");
 	if [ "$variableResolved" == "true" ]; then
-		packagesToInstall+=("${packagesNoted[@]}");
+		if [ ${#packagesNotedFlatpak[@]} -gt '0' ] && [ "$preferFlatpak" == "true" ] && type "flatpak" > /dev/null 2>&1; then
+			packagesToRemove+=("${packagesNoted[@]}");
+			packagesToInstallFlatpak+=("${packagesNotedFlatpak[@]}");
+		elif [ ${#packagesNoted[@]} -eq '0' ] && [ ${#packagesNotedFlatpak[@]} -gt '0' ] && type "flatpak" > /dev/null 2>&1; then
+			packagesToInstallFlatpak+=("${packagesNotedFlatpak[@]}");
+		else
+			packagesToInstall+=("${packagesNoted[@]}");
+			packagesToRemoveFlatpak+=("${packagesNotedFlatpak[@]}");
+		fi;
 	elif [ "$variableResolved" == "false" ]; then
 		packagesToRemove+=("${packagesNoted[@]}");
+		packagesToRemoveFlatpak+=("${packagesNotedFlatpak[@]}");
 	elif [ "$variableResolved" == "skip" ]; then
 		packagesToIgnore+=("${packagesNoted[@]}");
+		packagesToIgnoreFlatpak+=("${packagesNotedFlatpak[@]}");
 	else
 		echo -e "${red}ERROR: Incorrect variable for operation!${coloroff}" 1>&2;
 	fi;
-	unset variableResolved packagesNoted packagesArch packagesDebian packagesFedora packagesSuse packagesFlathub packagesFedoraPak;
+	unset variableResolved packagesNoted packagesNotedFlatpak packagesArch packagesDebian packagesFedora packagesSuse packagesFlathub packagesFedoraPak;
 }
 
 handleInstall() {
-	if [ ${#packagesToInstall[@]} -eq '0' ]; then
+	packageManagerToUse="$1";
+	if { [ ${#packagesToInstall[@]} -eq '0' ] && [ ! "$packageManagerToUse" == "flatpak" ]; } || { [ ${#packagesToInstallFlatpak[@]} -eq '0' ] && [ "$packageManagerToUse" == "flatpak" ]; }; then
 		echo -e "${cyan}INFO: No packages to install${coloroff}" && return 0;
-	fi;
-	if [ "$packageManager" == "apt" ]; then
-		#Credit (CC BY-SA 4.0): https://superuser.com/a/1623381
-		for packageToCheck in "${packagesToInstall[@]}"
-		do
-			if [ -z "$(apt-cache madison $packageToCheck 2>/dev/null)" ]; then
-				echo -e "${yellow}Warning: Skipping missing package: $packageToCheck ${coloroff}" 1>&2;
-			else
-				packagesToInstallReal="$packagesToInstallReal $packageToCheck";
+	else
+		if [ "$packageManagerToUse" == "apt" ]; then
+			#Credit (CC BY-SA 4.0): https://superuser.com/a/1623381
+			for packageToCheck in "${packagesToInstall[@]}"
+			do
+				if [ -z "$(apt-cache madison $packageToCheck 2>/dev/null)" ]; then
+					echo -e "${yellow}Warning: Skipping missing package: $packageToCheck ${coloroff}" 1>&2;
+				else
+					packagesToInstallReal="$packagesToInstallReal $packageToCheck";
+				fi;
+			done
+			$packageManagerToUse install --no-install-recommends "$packagesToInstallReal";
+		elif [ "$packageManagerToUse" == "dnf5" ]; then
+			if $packageManagerToUse install --skip-unavailable --skip-broken "${packagesToInstall[@]}"; then
+				$packageManagerToUse mark user --skip-unavailable "${packagesToInstall[@]}";
 			fi;
-		done
-		$packageManager install --no-install-recommends "$packagesToInstallReal";
-	elif [ "$packageManager" == "dnf5" ]; then
-		if $packageManager install --skip-unavailable --skip-broken "${packagesToInstall[@]}"; then
-			$packageManager mark user --skip-unavailable "${packagesToInstall[@]}";
+		elif [ "$packageManagerToUse" == "dnf" ] || [ "$packageManagerToUse" == "yum" ]; then
+			if $packageManagerToUse install --skip-broken "${packagesToInstall[@]}"; then
+				$packageManagerToUse mark install --skip-broken "${packagesToInstall[@]}";
+			fi;
+		elif [ "$packageManagerToUse" == "pacman" ]; then
+			$packageManagerToUse -S --needed "${packagesToInstall[@]}";
+		elif [ "$packageManagerToUse" == "zypper" ]; then
+			$packageManagerToUse install "${packagesToInstall[@]}";
+		elif [ "$packageManagerToUse" == "flatpak" ]; then
+			if [ "$flatpakUseFedoraRemote" == "true" ]; then
+				$packageManagerToUse remote-add --system --if-not-exists --title "Fedora Flatpaks" fedora oci+https://registry.fedoraproject.org
+				$packageManagerToUse install fedora "${packagesToInstallFlatpak[@]}";
+			else
+				$packageManagerToUse remote-add --system --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+				$packageManagerToUse install flathub "${packagesToInstallFlatpak[@]}";
+			fi;
 		fi;
-	elif [ "$packageManager" == "dnf" ] || [ "$packageManager" == "yum" ]; then
-		if $packageManager install --skip-broken "${packagesToInstall[@]}"; then
-			$packageManager mark install --skip-broken "${packagesToInstall[@]}";
-		fi;
-	elif [ "$packageManager" == "pacman" ]; then
-		$packageManager -S --needed "${packagesToInstall[@]}";
-	elif [ "$packageManager" == "zypper" ]; then
-		$packageManager install "${packagesToInstall[@]}";
-	elif [ "$packageManager" == "flatpak" ]; then
-		$packageManager install "${packagesToInstall[@]}";
 	fi;
-	unset packagesToInstall packageToCheck packagesToInstallReal;
+
+	unset packageManagerToUse packageToCheck packagesToInstallReal;
 }
 
 handleRemove() {
-	if [ ${#packagesToRemove[@]} -eq '0' ]; then
+	packageManagerToUse="$1";
+	if { [ ${#packagesToRemove[@]} -eq '0' ] && [ ! "$packageManagerToUse" == "flatpak" ]; } || { [ ${#packagesToRemoveFlatpak[@]} -eq '0' ] && [ "$packageManagerToUse" == "flatpak" ]; }; then
 		echo -e "${cyan}INFO: No packages to remove${coloroff}" && return 0;
+	else
+		if [ "$packageManagerToUse" == "apt" ]; then
+			$packageManagerToUse remove "${packagesToRemove[@]}";
+		elif [ "$packageManagerToUse" == "dnf5" ]; then
+			$packageManagerToUse remove "${packagesToRemove[@]}";
+		elif [ "$packageManagerToUse" == "dnf" ] || [ "$packageManagerToUse" == "yum" ]; then
+			$packageManagerToUse remove --skip-broken "${packagesToRemove[@]}";
+		elif [ "$packageManagerToUse" == "pacman" ]; then
+			for packageToRemove in "${packagesToRemove[@]}"; do
+				$packageManagerToUse -Rsc "$packageToRemove";
+			done;
+		elif [ "$packageManagerToUse" == "zypper" ]; then
+			$packageManagerToUse remove "${packagesToRemove[@]}";
+		elif [ "$packageManagerToUse" == "flatpak" ]; then
+			$packageManagerToUse remove "${packagesToRemoveFlatpak[@]}";
+		fi;
 	fi;
-	if [ "$packageManager" == "apt" ]; then
-		$packageManager remove "${packagesToRemove[@]}";
-	elif [ "$packageManager" == "dnf5" ]; then
-		$packageManager remove "${packagesToRemove[@]}";
-	elif [ "$packageManager" == "dnf" ] || [ "$packageManager" == "yum" ]; then
-		$packageManager remove --skip-broken "${packagesToRemove[@]}";
-	elif [ "$packageManager" == "pacman" ]; then
-		for packageToRemove in "${packagesToRemove[@]}"; do
-			$packageManager -Rsc "$packageToRemove";
-		done;
-	elif [ "$packageManager" == "zypper" ]; then
-		$packageManager remove "${packagesToRemove[@]}";
-	elif [ "$packageManager" == "flatpak" ]; then
-		$packageManager remove "${packagesToRemove[@]}";
-	fi;
-	unset packagesToRemove packageToRemove;
+	unset packageManagerToUse packageToRemove;
 }
 
 handleCleanup() {
-	if [ "$packageManager" == "apt" ]; then
-		$packageManager autoremove;
-	fi;
-	if [ "$packageManager" == "dnf5" ] || [ "$packageManager" == "dnf" ] || [ "$packageManager" == "yum" ]; then
-		$packageManager autoremove;
-	fi;
-	if [ "$packageManager" == "flatpak" ]; then
-		$packageManager remove --unused;
-	fi;
-	if [ "$packageManager" == "pacman" ]; then
-		$packageManager -Rns "$(pacman -Qttdq)";
+	packageManagerToUse="$1";
+	if [ "$packageManagerToUse" == "apt" ]; then
+		$packageManagerToUse autoremove;
+	elif [ "$packageManagerToUse" == "dnf5" ] || [ "$packageManagerToUse" == "dnf" ] || [ "$packageManagerToUse" == "yum" ]; then
+		$packageManagerToUse autoremove;
+	elif [ "$packageManagerToUse" == "flatpak" ]; then
+		$packageManagerToUse remove --unused;
+	elif [ "$packageManagerToUse" == "pacman" ]; then
+		$packageManagerToUse -Rns "$(pacman -Qttdq)";
 		paccache -rk0;
-	fi;
-	if [ "$packageManager" == "zypper" ]; then
+	elif [ "$packageManagerToUse" == "zypper" ]; then
 		#TODO: handle this, similar to pacman
 		true;
 	fi;
+	unset packageManagerToUse;
 }
 #
 # End of functions
@@ -178,11 +198,9 @@ handleCleanup() {
 if [ -f /etc/centos-release ]; then yum install epel-release; fi; #TODO: adjust this
 
 packageManager=$(whichPackageManager);
-if [ -z "${packageManager}" ]; then
-	echo -e "${red}ERROR: No package manager found!${coloroff}" 1>&2;
+if [ -z "${packageManager}" ] && ! type "flatpak" > /dev/null 2>&1; then
+	echo -e "${red}ERROR: No package managers found!${coloroff}" 1>&2;
 	exit 1;
-else
-	echo -e "${cyan}INFO: Using $packageManager as package manager${coloroff}";
 fi;
 
 if [ ! -r "$configPath" ]; then
@@ -194,9 +212,15 @@ if [[ $(stat --format "%a,%u,%g,%U,%G,%F" "$configPath") != "644,0,0,root,root,r
 	exit 1;
 fi;
 
+preferFlatpak=$(getConfigVariable "biPreferFlatpak");
+flatpakUseFedoraRemote=$(getConfigVariable "biFlatpakUseFedoraRemote");
+
 declare -a packagesToInstall=();
+declare -a packagesToInstallFlatpak=();
 declare -a packagesToRemove=();
+declare -a packagesToRemoveFlatpak=();
 declare -a packagesToIgnore=();
+declare -a packagesToIgnoreFlatpak=();
 #
 # End of init
 #
@@ -271,7 +295,7 @@ declare -a packagesArch=('gnome-tweak-tool' 'file-roller');
 declare -a packagesDebian=('gnome-tweak-tool' 'file-roller');
 declare -a packagesFedora=('gnome-tweak-tool' 'file-roller' 'gnome-themes-extra' 'adw-gtk3-theme' 'loupe' 'showtime' 'papers' 'snapshot' 'ptyxis' 'gnome-text-editor' 'nautilus');
 #declare -a packagesFlathub=('unverified.org.gnome.FileRoller' 'org.gnome.Loupe' 'org.gnome.Showtime' 'org.gnome.Papers' 'org.gnome.Snapshot' 'app.devsuite.Ptyxis' 'org.gnome.TextEditor');
-#declare -a packagesFedoraPak='org.gnome.FileRoller' 'org.gnome.Loupe' 'org.gnome.Showtime' 'org.gnome.Papers' 'org.gnome.Snapshot' 'org.gnome.Ptyxis' 'org.gnome.TextEditor');
+#declare -a packagesFedoraPak=('org.gnome.FileRoller' 'org.gnome.Loupe' 'org.gnome.Showtime' 'org.gnome.Papers' 'org.gnome.Snapshot' 'org.gnome.Ptyxis' 'org.gnome.TextEditor');
 declare -a packagesSuse=('gnome-tweaks' 'file-roller');
 prepareOperation "biWant_gui_gnome_extras";
 
@@ -661,7 +685,7 @@ prepareOperation "biWant_cli_network_dump";
 declare -a packagesArch=('wireshark');
 declare -a packagesDebian=('wireshark');
 declare -a packagesFedora=('wireshark');
-#declare -a packagesFedoraPak=('unverified.org.wireshark.Wireshark');
+#declare -a packagesFlathub=('unverified.org.wireshark.Wireshark');
 declare -a packagesFedoraPak=('org.wireshark.Wireshark');
 declare -a packagesSuse=('wireshark');
 prepareOperation "biWant_gui_network_dump";
@@ -926,16 +950,34 @@ prepareOperation "biWant_games_sandbox";
 # End of packages
 #
 
-#Process the queue
-echo -e "${cyan}INFO: Preparing to install: ${packagesToInstall[*]}${coloroff}";
-handleInstall;
-echo -e "${cyan}INFO: Preparing to remove: ${packagesToRemove[*]}${coloroff}";
-handleRemove;
-echo -e "${cyan}INFO: Ignoring: ${packagesToIgnore[*]}${coloroff}";
+#Process the primary queue
+if [ -z "${packageManager}" ]; then
+	echo -e "${yellow}WARNING: No primary package manager found!${coloroff}" 1>&2;
+else
+	echo -e "${cyan}INFO: Processing via $packageManager${coloroff}";
+	echo -e "${cyan}INFO: Preparing to install: ${packagesToInstall[*]}${coloroff}";
+	handleInstall "$packageManager";
+	echo -e "${cyan}INFO: Preparing to remove: ${packagesToRemove[*]}${coloroff}";
+	handleRemove "$packageManager";
+	echo -e "${cyan}INFO: Ignoring: ${packagesToIgnore[*]}${coloroff}";
+	echo -e "${cyan}INFO: Cleaning up${coloroff}";
+	handleCleanup "$packageManager";
+fi;
+unset packagesToInstall packagesToRemove packagesToIgnore;
 
-#Cleanup
-echo -e "${cyan}INFO: Cleaning up${coloroff}";
-handleCleanup;
+#Process the flatpak queue
+if type "flatpak" > /dev/null 2>&1; then
+	echo -e "${cyan}INFO: Processing via flatpak${coloroff}";
+	echo -e "${cyan}INFO: Preparing to install: ${packagesToInstallFlatpak[*]}${coloroff}";
+	handleInstall "flatpak";
+	echo -e "${cyan}INFO: Preparing to remove: ${packagesToRemoveFlatpak[*]}${coloroff}";
+	handleRemove "flatpak";
+	echo -e "${cyan}INFO: Ignoring: ${packagesToIgnoreFlatpak[*]}${coloroff}";
+	echo -e "${cyan}INFO: Cleaning up again${coloroff}";
+	handleCleanup "flatpak";
+fi;
+unset packagesToInstallFlatpak packagesToRemoveFlatpak packagesToIgnoreFlatpak;
+unset packageManager preferFlatpak flatpakUseFedoraRemote;
 
 #Finish
 echo -e "${green}INFO: Installer complete!${coloroff}";
