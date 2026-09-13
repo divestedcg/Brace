@@ -269,6 +269,7 @@ prepareOperation "biWant_gui_generic_extras";
 declare -a packagesArch=('gnome-tweak-tool' 'file-roller');
 declare -a packagesDebian=('gnome-tweak-tool' 'file-roller');
 declare -a packagesFedora=('gnome-tweak-tool' 'file-roller' 'gnome-themes-extra' 'adw-gtk3-theme' 'loupe' 'showtime' 'papers' 'snapshot' 'ptyxis' 'gnome-text-editor' 'nautilus');
+declare -a packagesFlathub=('unverified.org.gnome.FileRoller' 'org.gnome.Loupe' 'org.gnome.Showtime' 'org.gnome.Papers' 'org.gnome.Snapshot' 'app.devsuite.Ptyxis' 'org.gnome.TextEditor');
 declare -a packagesSuse=('gnome-tweaks' 'file-roller');
 prepareOperation "biWant_gui_gnome_extras";
 
@@ -293,13 +294,14 @@ prepareOperation "biWant_cli_virtualization";
 declare -a packagesArch=('libvirt' 'qemu' 'virt-manager');
 declare -a packagesDebian=();
 declare -a packagesFedora=('@virtualization' 'virt-manager');
-declare -a packagesFlathub=('unverified.org.virt_manager.virt-manager');
+declare -a packagesFlathub=('org.virt_manager.virt-manager');
 declare -a packagesSuse=(); #'Install Hypervisor' can be used
 prepareOperation "biWant_gui_virtualization";
 
 declare -a packagesArch=();
 declare -a packagesDebian=();
 declare -a packagesFedora=('flatpak' 'fedora-flathub-remote' 'flatseal');
+declare -a packagesFlathub=('com.github.tchx84.Flatseal');
 declare -a packagesSuse=();
 prepareOperation "biWant_gui_flatpak";
 
@@ -313,14 +315,13 @@ prepareOperation "biWant_gui_comms_email";
 declare -a packagesArch=('hexchat');
 declare -a packagesDebian=('hexchat');
 declare -a packagesFedora=('hexchat');
-declare -a packagesFlathub=('io.github.Hexchat');
 declare -a packagesSuse=('hexchat');
 prepareOperation "biWant_gui_comms_irc";
 
 declare -a packagesArch=('mumble');
 declare -a packagesDebian=('mumble');
 declare -a packagesFedora=('mumble');
-declare -a packagesFlathub=('unverified.info.mumble.Mumble');
+declare -a packagesFlathub=('info.mumble.Mumble');
 declare -a packagesSuse=('mumble');
 prepareOperation "biWant_gui_comms_mumble";
 
@@ -395,6 +396,7 @@ prepareOperation "biWant_gui_editor_video";
 declare -a packagesArch=();
 declare -a packagesDebian=();
 declare -a packagesFedora=('HandBrake-gui');
+declare -a packagesFlathub=('fr.handbrake.ghb');
 declare -a packagesSuse=();
 prepareOperation "biWant_gui_editor_video_optimizer";
 
@@ -431,6 +433,7 @@ prepareOperation "biWant_cli_file_encryption";
 declare -a packagesArch=();
 declare -a packagesDebian=();
 declare -a packagesFedora=('sirikali');
+declare -a packagesFlathub=('io.github.mhogomchungu.sirikali');
 declare -a packagesSuse=();
 prepareOperation "biWant_gui_file_encryption_manager";
 
@@ -522,6 +525,7 @@ prepareOperation "biWant_cli_monitor_power";
 declare -a packagesArch=();
 declare -a packagesDebian=();
 declare -a packagesFedora=('gnome-power-manager');
+declare -a packagesFlathub=('unverified.org.gnome.PowerStats');
 declare -a packagesSuse=();
 prepareOperation "biWant_gui_monitor_power";
 
@@ -540,12 +544,14 @@ prepareOperation "biWant_cli_monitor_wireless";
 declare -a packagesArch=();
 declare -a packagesDebian=();
 declare -a packagesFedora=('piper');
+declare -a packagesFlathub=('unverified.org.freedesktop.Piper');
 declare -a packagesSuse=();
 prepareOperation "biWant_gui_manage_mouse";
 
 declare -a packagesArch=();
 declare -a packagesDebian=();
 declare -a packagesFedora=('openrgb');
+declare -a packagesFlathub=('org.openrgb.OpenRGB');
 declare -a packagesSuse=();
 prepareOperation "biWant_gui_manage_rgb";
 
@@ -677,6 +683,7 @@ prepareOperation "biWant_gui_office_publisher";
 declare -a packagesArch=();
 declare -a packagesDebian=();
 declare -a packagesFedora=('xournalpp');
+declare -a packagesFlathub=('com.github.xournalpp.xournalpp');
 declare -a packagesSuse=();
 prepareOperation "biWant_gui_office_notetaking";
 
@@ -792,7 +799,7 @@ prepareOperation "biWant_gui_viewer_music";
 declare -a packagesArch=('sqlitebrowser');
 declare -a packagesDebian=('sqlitebrowser');
 declare -a packagesFedora=('sqlitebrowser');
-declare -a packagesFlathub=('unverified.org.sqlitebrowser.sqlitebrowser');
+declare -a packagesFlathub=('org.sqlitebrowser.sqlitebrowser');
 declare -a packagesSuse=('sqlitebrowser');
 prepareOperation "biWant_gui_viewer_sqlite";
 
