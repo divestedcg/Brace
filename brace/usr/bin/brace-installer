@@ -91,7 +91,7 @@ prepareOperation() {
 	else
 		echo -e "${red}ERROR: Incorrect variable for operation!${coloroff}" 1>&2;
 	fi;
-	unset variableResolved packagesNoted packagesArch packagesDebian packagesFedora packagesSuse packagesFlathub;
+	unset variableResolved packagesNoted packagesArch packagesDebian packagesFedora packagesSuse packagesFlathub packagesFedoraPak;
 }
 
 handleInstall() {
@@ -263,6 +263,7 @@ declare -a packagesArch=('dconf-editor' 'seahorse');
 declare -a packagesDebian=('dconf-cli' 'dconf-editor' 'software-properties-gtk' 'seahorse');
 declare -a packagesFedora=('dconf-editor' 'seahorse' 'openssh-askpass');
 #declare -a packagesFlathub=('ca.desrt.dconf-editor' 'unverified.org.gnome.seahorse.Application');
+#declare -a packagesFedoraPak=('ca.desrt.dconf-editor' 'org.gnome.seahorse.Application');
 declare -a packagesSuse=('dconf-editor' 'seahorse');
 prepareOperation "biWant_gui_generic_extras";
 
@@ -270,6 +271,7 @@ declare -a packagesArch=('gnome-tweak-tool' 'file-roller');
 declare -a packagesDebian=('gnome-tweak-tool' 'file-roller');
 declare -a packagesFedora=('gnome-tweak-tool' 'file-roller' 'gnome-themes-extra' 'adw-gtk3-theme' 'loupe' 'showtime' 'papers' 'snapshot' 'ptyxis' 'gnome-text-editor' 'nautilus');
 #declare -a packagesFlathub=('unverified.org.gnome.FileRoller' 'org.gnome.Loupe' 'org.gnome.Showtime' 'org.gnome.Papers' 'org.gnome.Snapshot' 'app.devsuite.Ptyxis' 'org.gnome.TextEditor');
+#declare -a packagesFedoraPak='org.gnome.FileRoller' 'org.gnome.Loupe' 'org.gnome.Showtime' 'org.gnome.Papers' 'org.gnome.Snapshot' 'org.gnome.Ptyxis' 'org.gnome.TextEditor');
 declare -a packagesSuse=('gnome-tweaks' 'file-roller');
 prepareOperation "biWant_gui_gnome_extras";
 
@@ -295,6 +297,7 @@ declare -a packagesArch=('libvirt' 'qemu' 'virt-manager');
 declare -a packagesDebian=();
 declare -a packagesFedora=('@virtualization' 'virt-manager');
 #declare -a packagesFlathub=('org.virt_manager.virt-manager');
+#declare -a packagesFedoraPak=('org.virt_manager.virt-manager');
 declare -a packagesSuse=(); #'Install Hypervisor' can be used
 prepareOperation "biWant_gui_virtualization";
 
@@ -302,6 +305,7 @@ declare -a packagesArch=();
 declare -a packagesDebian=();
 declare -a packagesFedora=('flatpak' 'fedora-flathub-remote' 'flatseal');
 #declare -a packagesFlathub=('com.github.tchx84.Flatseal');
+#declare -a packagesFedoraPak=('com.github.tchx84.Flatseal');
 declare -a packagesSuse=();
 prepareOperation "biWant_gui_flatpak";
 
@@ -309,12 +313,14 @@ declare -a packagesArch=('evolution');
 declare -a packagesDebian=('evolution');
 declare -a packagesFedora=('evolution');
 #declare -a packagesFlathub=('org.gnome.Evolution');
+#declare -a packagesFedoraPak=('org.gnome.Evolution');
 declare -a packagesSuse=('evolution');
 prepareOperation "biWant_gui_comms_email";
 
 declare -a packagesArch=('hexchat');
 declare -a packagesDebian=('hexchat');
 declare -a packagesFedora=('hexchat');
+declare -a packagesFedoraPak=('io.github.Hexchat');
 declare -a packagesSuse=('hexchat');
 prepareOperation "biWant_gui_comms_irc";
 
@@ -336,6 +342,7 @@ declare -a packagesArch=('audacity');
 declare -a packagesDebian=('audacity');
 declare -a packagesFedora=('audacity');
 #declare -a packagesFlathub=('unverified.org.audacityteam.Audacity');
+declare -a packagesFedoraPak=('org.audacityteam.Audacity');
 declare -a packagesSuse=('audacity');
 prepareOperation "biWant_gui_editor_audio";
 
@@ -343,6 +350,7 @@ declare -a packagesArch=('soundconverter');
 declare -a packagesDebian=('soundconverter');
 declare -a packagesFedora=('soundconverter');
 #declare -a packagesFlathub=('unverified.org.soundconverter.SoundConverter');
+declare -a packagesFedoraPak=('org.soundconverter.SoundConverter');
 declare -a packagesSuse=('soundconverter');
 prepareOperation "biWant_gui_editor_audio_optimizer";
 
@@ -362,6 +370,7 @@ declare -a packagesArch=('darktable');
 declare -a packagesDebian=('darktable');
 declare -a packagesFedora=('darktable');
 #declare -a packagesFlathub=('unverified.org.darktable.Darktable');
+declare -a packagesFedoraPak=('org.darktable.Darktable');
 declare -a packagesSuse=('darktable');
 prepareOperation "biWant_gui_editor_image_photo";
 
@@ -369,6 +378,7 @@ declare -a packagesArch=('gimp');
 declare -a packagesDebian=('gimp');
 declare -a packagesFedora=('gimp');
 declare -a packagesFlathub=('org.gimp.GIMP');
+declare -a packagesFedoraPak=('org.gimp.GIMP');
 declare -a packagesSuse=('gimp');
 prepareOperation "biWant_gui_editor_image_raster";
 
@@ -376,6 +386,7 @@ declare -a packagesArch=('inkscape');
 declare -a packagesDebian=('inkscape');
 declare -a packagesFedora=('inkscape');
 declare -a packagesFlathub=('org.inkscape.Inkscape');
+declare -a packagesFedoraPak=('org.inkscape.Inkscape');
 declare -a packagesSuse=('inkscape');
 prepareOperation "biWant_gui_editor_image_vector";
 
@@ -383,6 +394,7 @@ declare -a packagesArch=('picard');
 declare -a packagesDebian=('picard');
 declare -a packagesFedora=('picard');
 #declare -a packagesFlathub=('unverified.org.musicbrainz.Picard');
+declare -a packagesFedoraPak=('org.musicbrainz.Picard');
 declare -a packagesSuse=('picard');
 prepareOperation "biWant_gui_editor_music_albums";
 
@@ -526,6 +538,7 @@ declare -a packagesArch=();
 declare -a packagesDebian=();
 declare -a packagesFedora=('gnome-power-manager');
 #declare -a packagesFlathub=('unverified.org.gnome.PowerStats');
+declare -a packagesFedoraPak=('org.gnome.PowerStats');
 declare -a packagesSuse=();
 prepareOperation "biWant_gui_monitor_power";
 
@@ -585,6 +598,7 @@ declare -a packagesArch=('sound-juicer');
 declare -a packagesDebian=('sound-juicer');
 declare -a packagesFedora=('sound-juicer');
 #declare -a packagesFlathub=('unverified.org.gnome.SoundJuicer');
+declare -a packagesFedoraPak=('org.gnome.SoundJuicer');
 declare -a packagesSuse=('sound-juicer');
 prepareOperation "biWant_gui_audio_ripper";
 
@@ -592,6 +606,7 @@ declare -a packagesArch=('qalculate-gtk');
 declare -a packagesDebian=('qalculate-gtk');
 declare -a packagesFedora=('qalculate-gtk');
 declare -a packagesFlathub=('io.github.Qalculate');
+declare -a packagesFedoraPak=('io.github.Qalculate');
 declare -a packagesSuse=();
 prepareOperation "biWant_gui_calculator";
 
@@ -605,6 +620,7 @@ declare -a packagesArch=('transmission-gtk');
 declare -a packagesDebian=('transmission-gtk');
 declare -a packagesFedora=('transmission');
 #declare -a packagesFlathub=('unverified.com.transmissionbt.Transmission');
+declare -a packagesFedoraPak=('com.transmissionbt.Transmission');
 declare -a packagesSuse=('transmission-gtk');
 prepareOperation "biWant_gui_downloader_torrent";
 
@@ -612,6 +628,7 @@ declare -a packagesArch=('liferea');
 declare -a packagesDebian=('liferea');
 declare -a packagesFedora=('liferea');
 #declare -a packagesFlathub=('unverified.net.sourceforge.liferea');
+declare -a packagesFedoraPak=('net.sourceforge.liferea');
 declare -a packagesSuse=('liferea');
 prepareOperation "biWant_gui_rss";
 
@@ -619,6 +636,7 @@ declare -a packagesArch=('obs-studio');
 declare -a packagesDebian=('obs-studio');
 declare -a packagesFedora=('obs-studio');
 declare -a packagesFlathub=('com.obsproject.Studio');
+declare -a packagesFedoraPak=('com.obsproject.Studio');
 declare -a packagesSuse=();
 prepareOperation "biWant_gui_screencast";
 
@@ -643,6 +661,8 @@ prepareOperation "biWant_cli_network_dump";
 declare -a packagesArch=('wireshark');
 declare -a packagesDebian=('wireshark');
 declare -a packagesFedora=('wireshark');
+#declare -a packagesFedoraPak=('unverified.org.wireshark.Wireshark');
+declare -a packagesFedoraPak=('org.wireshark.Wireshark');
 declare -a packagesSuse=('wireshark');
 prepareOperation "biWant_gui_network_dump";
 
@@ -656,6 +676,7 @@ declare -a packagesArch=('libreoffice-fresh');
 declare -a packagesDebian=('libreoffice');
 declare -a packagesFedora=('@libreoffice' 'libreoffice' 'libreoffice-writer' 'libreoffice-calc' 'libreoffice-impress' 'libreoffice-draw' 'libreoffice-base' 'libreoffice-math');
 declare -a packagesFlathub=('org.libreoffice.LibreOffice');
+declare -a packagesFedoraPak=('org.libreoffice.LibreOffice');
 declare -a packagesSuse=('libreoffice');
 prepareOperation "biWant_gui_office_suite";
 
@@ -663,6 +684,7 @@ declare -a packagesArch=('gnucash');
 declare -a packagesDebian=('gnucash');
 declare -a packagesFedora=('gnucash');
 declare -a packagesFlathub=('org.gnucash.GnuCash');
+declare -a packagesFedoraPak=('org.gnucash.GnuCash');
 declare -a packagesSuse=('gnucash');
 #TODO: switch to homebank maybe?
 prepareOperation "biWant_gui_office_accounting";
@@ -670,6 +692,7 @@ prepareOperation "biWant_gui_office_accounting";
 declare -a packagesArch=();
 declare -a packagesDebian=('dia');
 declare -a packagesFedora=('dia');
+declare -a packagesFedoraPak=('org.gnome.dia');
 declare -a packagesSuse=('dia');
 prepareOperation "biWant_gui_office_diagram";
 
@@ -677,6 +700,7 @@ declare -a packagesArch=('scribus');
 declare -a packagesDebian=('scribus');
 declare -a packagesFedora=('scribus');
 #declare -a packagesFlathub=('unverified.net.scribus.Scribus');
+declare -a packagesFedoraPak=('net.scribus.Scribus');
 declare -a packagesSuse=('scribus');
 prepareOperation "biWant_gui_office_publisher";
 
@@ -684,6 +708,7 @@ declare -a packagesArch=();
 declare -a packagesDebian=();
 declare -a packagesFedora=('xournalpp');
 declare -a packagesFlathub=('com.github.xournalpp.xournalpp');
+declare -a packagesFedoraPak=('com.github.xournalpp.xournalpp');
 declare -a packagesSuse=();
 prepareOperation "biWant_gui_office_notetaking";
 
@@ -709,6 +734,7 @@ declare -a packagesArch=('keepassxc');
 declare -a packagesDebian=('keepassxc');
 declare -a packagesFedora=('keepassxc');
 #declare -a packagesFlathub=('org.keepassxc.KeePassXC');
+declare -a packagesFedoraPak=('org.keepassxc.KeePassXC');
 declare -a packagesSuse=('keepassxc');
 prepareOperation "biWant_gui_password_manager";
 
@@ -727,6 +753,7 @@ prepareOperation "biWant_daemon_firewall";
 declare -a packagesArch=('firewall-config');
 declare -a packagesDebian=('firewall-config');
 declare -a packagesFedora=('firewall-config');
+#declare -a packagesFedoraPak=('org.fedoraproject.FirewallConfig');
 declare -a packagesSuse=('firewall-config');
 prepareOperation "biWant_gui_firewall";
 
@@ -765,6 +792,7 @@ declare -a packagesArch=('foliate');
 declare -a packagesDebian=();
 declare -a packagesFedora=('foliate');
 declare -a packagesFlathub=('com.github.johnfactotum.Foliate');
+declare -a packagesFedoraPak=('com.github.johnfactotum.Foliate');
 declare -a packagesSuse=('foliate');
 prepareOperation "biWant_gui_viewer_book";
 
@@ -772,6 +800,7 @@ declare -a packagesArch=('meld');
 declare -a packagesDebian=('meld');
 declare -a packagesFedora=('meld');
 #declare -a packagesFlathub=('unverified.org.gnome.meld');
+declare -a packagesFedoraPak=('org.gnome.Meld');
 declare -a packagesSuse=('meld');
 prepareOperation "biWant_gui_viewer_diff";
 
@@ -779,6 +808,7 @@ declare -a packagesArch=('ghex');
 declare -a packagesDebian=('ghex');
 declare -a packagesFedora=('ghex');
 #declare -a packagesFlathub=('unverified.org.gnome.GHex');
+declare -a packagesFedoraPak=('org.gnome.GHex');
 declare -a packagesSuse=('ghex');
 prepareOperation "biWant_gui_viewer_hex";
 
@@ -786,6 +816,7 @@ declare -a packagesArch=('vlc');
 declare -a packagesDebian=('vlc');
 declare -a packagesFedora=('vlc');
 #declare -a packagesFlathub=('unverified.org.videolan.VLC');
+#declare -a packagesFedoraPak=('org.videolan.vlc'); #TODO: are codecs broken in this?
 declare -a packagesSuse=('vlc');
 prepareOperation "biWant_gui_viewer_media";
 
@@ -793,6 +824,7 @@ declare -a packagesArch=('lollypop');
 declare -a packagesDebian=('lollypop');
 declare -a packagesFedora=('lollypop');
 #declare -a packagesFlathub=('unverified.org.gnome.Lollypop');
+declare -a packagesFedoraPak=('org.gnome.Lollypop');
 declare -a packagesSuse=('lollypop');
 prepareOperation "biWant_gui_viewer_music";
 
@@ -800,6 +832,7 @@ declare -a packagesArch=('sqlitebrowser');
 declare -a packagesDebian=('sqlitebrowser');
 declare -a packagesFedora=('sqlitebrowser');
 declare -a packagesFlathub=('org.sqlitebrowser.sqlitebrowser');
+declare -a packagesFedoraPak=('org.sqlitebrowser.sqlitebrowser');
 declare -a packagesSuse=('sqlitebrowser');
 prepareOperation "biWant_gui_viewer_sqlite";
 
@@ -807,6 +840,7 @@ declare -a packagesArch=('chromium');
 declare -a packagesDebian=('chromium' 'chromium-sandbox');
 declare -a packagesFedora=('chromium');
 #declare -a packagesFlathub=('unsafe.unverified.org.chromium.Chromium');
+#declare -a packagesFedoraPak=('unsafe.org.chromium.Chromium');
 declare -a packagesSuse=('chromium');
 prepareOperation "biWant_gui_browser_chromium";
 
@@ -814,6 +848,7 @@ declare -a packagesArch=('firefox');
 declare -a packagesDebian=('firefox-esr');
 declare -a packagesFedora=('firefox' 'mozilla-ublock-origin');
 #declare -a packagesFlathub=('unsafe.org.mozilla.firefox');
+#declare -a packagesFedoraPak=('unsafe.org.mozilla.firefox');
 declare -a packagesSuse=('MozillaFirefox');
 prepareOperation "biWant_gui_browser_firefox";
 
@@ -821,6 +856,7 @@ declare -a packagesArch=('torbrowser-launcher');
 declare -a packagesDebian=('torbrowser-launcher');
 declare -a packagesFedora=('torbrowser-launcher');
 #declare -a packagesFlathub=('unsafe.org.torproject.torbrowser-launcher');
+#declare -a packagesFedoraPak=('unsafe.org.torproject.torbrowser-launcher');
 declare -a packagesSuse=('torbrowser-launcher'); #torbrowser-apparmor-profile
 prepareOperation "biWant_gui_browser_tor";
 
@@ -840,6 +876,7 @@ declare -a packagesArch=('gitg');
 declare -a packagesDebian=('gitg');
 declare -a packagesFedora=('gitg');
 declare -a packagesFlathub=('org.gnome.gitg');
+declare -a packagesFedoraPak=('org.gnome.gitg');
 declare -a packagesSuse=('gitg');
 prepareOperation "biWant_gui_viewer_git";
 
@@ -859,6 +896,7 @@ declare -a packagesArch=('xonotic');
 declare -a packagesDebian=();
 declare -a packagesFedora=('xonotic');
 declare -a packagesFlathub=('org.xonotic.Xonotic');
+declare -a packagesFedoraPak=('org.xonotic.Xonotic');
 declare -a packagesSuse=('xonotic');
 prepareOperation "biWant_games_arena";
 
@@ -866,6 +904,7 @@ declare -a packagesArch=('aisleriot');
 declare -a packagesDebian=('aisleriot');
 declare -a packagesFedora=('aisleriot');
 #declare -a packagesFlathub=('unverified.org.gnome.Aisleriot');
+declare -a packagesFedoraPak=('org.gnome.Aisleriot');
 declare -a packagesSuse=('aisleriot');
 prepareOperation "biWant_games_cards";
 
@@ -873,6 +912,7 @@ declare -a packagesArch=('quadrapassel' 'gnome-mines' 'gnome-chess' 'gnome-sudok
 declare -a packagesDebian=('quadrapassel' 'gnome-mines' 'gnome-chess' 'gnome-sudoku');
 declare -a packagesFedora=('quadrapassel' 'gnome-mines' 'gnome-chess' 'gnome-sudoku');
 declare -a packagesFlathub=('org.gnome.Quadrapassel' 'org.gnome.Mines' 'org.gnome.Chess' 'org.gnome.Sudoku');
+declare -a packagesFedoraPak=('org.gnome.Quadrapassel' 'org.gnome.Mines' 'org.gnome.Chess' 'org.gnome.Sudoku');
 declare -a packagesSuse=('quadrapassel' 'gnome-mines' 'gnome-chess' 'gnome-sudoku');
 prepareOperation "biWant_games_gnome";
 
