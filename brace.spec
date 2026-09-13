@@ -18,7 +18,8 @@ echo "Please pepper your /etc/fstab like so:";
 echo "- / can have discard,noatime";
 echo "- /boot can have discard,noatime,nodev,nosuid,noexec";
 echo "- /boot/efi can have discard,noatime,nodev,nosuid,noexec";
-echo "- /home can have discard,noatime,nodev,nosuid";
+echo "- /home can have discard,noatime,nodev,nosuid and preferably noexec";
+echo "- for btrfs use discard=async instead";
 
 %postun
 if [ -f /usr/bin/dconf ]; then dconf update; fi;
