@@ -77,17 +77,19 @@ prepareOperation() {
 	elif [ "$packageManager" == "zypper" ]; then
 		declare -a packagesNoted=("${packagesSuse[@]}");
 	fi;
-	if [ "$flatpakUseFedoraRemote" == "true" ]; then
-		declare -a packagesNotedFlatpak=("${packagesFedoraPak[@]}");
-	else
-		declare -a packagesNotedFlatpak=("${packagesFlathub[@]}");
+	if [ "$manageFlatpak" == "true" ]; then
+		if [ "$flatpakUseFedoraRemote" == "true" ]; then
+			declare -a packagesNotedFlatpak=("${packagesFedoraPak[@]}");
+		else
+			declare -a packagesNotedFlatpak=("${packagesFlathub[@]}");
+		fi;
 	fi;
 	variableResolved=$(getConfigVariable "$1");
 	if [ "$variableResolved" == "true" ]; then
-		if [ ${#packagesNotedFlatpak[@]} -gt '0' ] && [ "$preferFlatpak" == "true" ] && type "flatpak" > /dev/null 2>&1; then
+		if [ ${#packagesNotedFlatpak[@]} -gt '0' ] && [ "$preferFlatpak" == "true" ]; then
 			packagesToRemove+=("${packagesNoted[@]}");
 			packagesToInstallFlatpak+=("${packagesNotedFlatpak[@]}");
-		elif [ ${#packagesNoted[@]} -eq '0' ] && [ ${#packagesNotedFlatpak[@]} -gt '0' ] && type "flatpak" > /dev/null 2>&1; then
+		elif [ ${#packagesNoted[@]} -eq '0' ] && [ ${#packagesNotedFlatpak[@]} -gt '0' ]; then
 			packagesToInstallFlatpak+=("${packagesNotedFlatpak[@]}");
 		else
 			packagesToInstall+=("${packagesNoted[@]}");
@@ -212,6 +214,8 @@ if [[ $(stat --format "%a,%u,%g,%U,%G,%F" "$configPath") != "644,0,0,root,root,r
 	exit 1;
 fi;
 
+manageFlatpak=$(getConfigVariable "biManageFlatpak");
+if ! type "flatpak" > /dev/null 2>&1; then manageFlatpak="false"; fi;
 preferFlatpak=$(getConfigVariable "biPreferFlatpak");
 flatpakUseFedoraRemote=$(getConfigVariable "biFlatpakUseFedoraRemote");
 
@@ -966,7 +970,7 @@ fi;
 unset packagesToInstall packagesToRemove packagesToIgnore;
 
 #Process the flatpak queue
-if type "flatpak" > /dev/null 2>&1; then
+if [ "$manageFlatpak" == "true" ]; then
 	echo -e "${cyan}INFO: Processing via flatpak${coloroff}";
 	echo -e "${cyan}INFO: Preparing to install: ${packagesToInstallFlatpak[*]}${coloroff}";
 	handleInstall "flatpak";
