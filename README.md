@@ -56,7 +56,6 @@ Additional Inclusions
 - brace-enable-rpmfusion	helper to enable rpmfusion-free repo for eg. codecs
 - brace-installer		helper install & remove packages based on config file
 - brace-mr-update		helper to exclude all current kernel modules
-- brace-rpm-verify		helper to verify integrity of installed packages
 - brace-supplemental-changes	helper to change additional global and per-user settings
 - brace-update-system		helper to update to next major version
 - restic-backup@.*		systemd units for daily backups
@@ -77,10 +76,6 @@ Credits
 	- Topi Miettinen (@topimiettinen)
 	- GPL-2.0+: https://salsa.debian.org/corsac/hardening-runtime/-/blob/1a315536726cf41b64af6dc65c7cf9b250b5dda1/debian/copyright
 	- https://salsa.debian.org/corsac/hardening-runtime/-/commit/1a315536726cf41b64af6dc65c7cf9b250b5dda1
-- brace-rpm-verify
-	- @doktor5000
-	- CC BY-SA 3.0: https://stackoverflow.com/help/licensing
-	- https://unix.stackexchange.com/a/217024
 - firewalld IPv6 drop zone fix
 	- Mark
 	- CC BY-SA 3.0: https://stackoverflow.com/help/licensing

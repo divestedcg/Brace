@@ -29,16 +29,24 @@ if [ "$(/usr/bin/id -u)" -eq "0" ]; then
 	if [ -x /usr/bin/firewall-cmd ]; then
 		echo "Do you want a default drop firewall?";
 		echo "Current default zone: $(firewall-cmd --get-default-zone)";
-		select ys in "Yes" "Skip"; do
-			case $ys in
+		select ys in "Yes" "No" "Skip"; do
+			case $yns in
 				Yes )
 					firewall-cmd --set-default-zone=drop;
 					#firewall-cmd --add-protocol=icmp --permanent;
 					firewall-cmd --add-protocol=ipv6-icmp --permanent;
 					firewall-cmd --add-service=dhcpv6-client --permanent;
+					if systemctl is-active -q sshd; then
+						echo "sshd is enabled, allowing service";
+						firewall-cmd --add-service=sshd --permanent;
+					fi;
+					firewall-cmd --reload;
+					break;;
+				No )
+					firewall-cmd --set-default-zone=public;
+					firewall-cmd --reload;
 					break;;
 				Skip )
-					#firewall-cmd --set-default-zone=public;
 					break;;
 			esac
 		done
@@ -76,7 +84,7 @@ if [ "$(/usr/bin/id -u)" -eq "0" ]; then
 					grubby --update-kernel=ALL --args="iommu.strict=1"; #Do not defer invalidation of hardware TLBs
 					grubby --update-kernel=ALL --args="intel_iommu=on"; #Ensure the IOMMU driver is enabled
 					if [ -x /usr/bin/lspci ]; then
-						if lspci | grep -q "VGA .*.AMD" > /dev/null 2>&1; then
+						if lspci | grep -q "VGA .*.AMD"; then
 							echo "Detected AMD GPU, disabling amd iommu forced isolation enablement";
 							grubby --update-kernel=ALL --remove-args="amd_iommu=force_isolation";
 						else
@@ -102,8 +110,6 @@ if [ "$(/usr/bin/id -u)" -eq "0" ]; then
 					#Misc Hardening
 					#grubby --update-kernel=ALL --args="debugfs=off"; #Disable debugfs entirely #XXX: may be of use
 					grubby --update-kernel=ALL --args="lockdown=confidentiality"; #Restrict userspace access to certain kernel features/attributes
-					grubby --update-kernel=ALL --args="mce=0"; #Panic on uncorrectable errors #XXX: deprecated in 5.18
-					grubby --update-kernel=ALL --args="module.sig_enforce=1"; #Block modules with invalid signatures #XXX: superseded by lockdown
 					#grubby --update-kernel=ALL --args="oops=panic"; #Panic system on oops #XXX: can turn minor issues into annoyances
 					grubby --update-kernel=ALL --args="vsyscall=none"; #Disable unnecessary legacy functionality
 					grubby --update-kernel=ALL --args="vdso32=0"; #Disable legacy 32-bit vDSO

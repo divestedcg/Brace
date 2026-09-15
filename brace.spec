@@ -1,6 +1,6 @@
 Name: brace
 Version: 20260915
-Release: 1
+Release: 2
 Summary: Increases privacy/security through various configs
 License: AGPLv3+
 BuildArch: noarch
@@ -48,7 +48,6 @@ install -Dm755 %{_sourcedir}/brace/usr/bin/brace-fedora-enable-rpmfusion %{build
 install -Dm755 %{_sourcedir}/brace/usr/bin/brace-fedora-update-system %{buildroot}/usr/bin/brace-update-system;
 install -Dm755 %{_sourcedir}/brace/usr/bin/brace-installer %{buildroot}/usr/bin/brace-installer;
 install -Dm755 %{_sourcedir}/brace/usr/bin/brace-mr-update %{buildroot}/usr/bin/brace-mr-update;
-install -Dm755 %{_sourcedir}/brace/usr/bin/brace-rpm-verify %{buildroot}/usr/bin/brace-rpm-verify;
 install -Dm755 %{_sourcedir}/brace/usr/bin/brace-supplemental-changes %{buildroot}/usr/bin/brace-supplemental-changes;
 install -Dm644 %{_sourcedir}/brace/usr/lib/firefox/browser/defaults/preferences/userjs-*.js %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/;
 mkdir -p %{buildroot}/usr/lib64/thunderbird/defaults/pref;
@@ -101,7 +100,6 @@ install -Dm644 %{_sourcedir}/README.md %{buildroot}/usr/share/doc/brace/README.m
 /usr/bin/brace-enable-auto-updates
 /usr/bin/brace-enable-rpmfusion
 /usr/bin/brace-installer
-/usr/bin/brace-rpm-verify
 /usr/bin/brace-supplemental-changes
 /usr/bin/brace-update-system
 /usr/lib64/firefox/browser/defaults/preferences/userjs-*.js

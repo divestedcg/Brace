@@ -17,8 +17,6 @@
 if [ "$(/usr/bin/id -u)" -ne "0" ]; then echo 'This script needs to be run as root!'; exit 1; fi;
 
 coloroff='\e[0m';
-black='\e[0;30m';
-blue='\e[0;34m';
 cyan='\e[0;36m';
 green='\e[0;32m';
 purple='\e[0;35m';
@@ -102,7 +100,7 @@ verifyHardenedMalloc() {
 }
 
 verifyKernelCommandLine() {
-	declare -a optionsToCheck=("init_on_alloc=1" "init_on_free=1" "page_alloc.shuffle=1" "pti=on" "kpti=on" "randomize_kstack_offset=1" "slab_nomerge" "proc_mem.force_override=never" "bdev_allow_write_mounted=0" "iommu=force" "iommu.passthrough=0" "iommu.strict=1" "intel_iommu=on" "amd_iommu=force_isolation" "mitigations=auto,nosmt" "spec_store_bypass_disable=on" "ssbd=force-on" "spectre_v2=on" "spectre_bhi=on" "tsx=off" "l1d_flush=on" "l1tf=full,force" "kvm.mitigate_smt_rsb=1" "kvm-intel.vmentry_l1d_flush=always" "gather_data_sampling=force" "lockdown=confidentiality" "mce=0" "module.sig_enforce=1" "vsyscall=none" "vdso32=0" "efi_pstore.pstore_disable=1" "erst_disable" "hash_pointers=always" "systemd.ssh_auto=no" "fsck.mode=force" "i8042.reset=1" "slub_debug=FZ" "ia32_emulation=false");
+	declare -a optionsToCheck=("init_on_alloc=1" "init_on_free=1" "page_alloc.shuffle=1" "pti=on" "kpti=on" "randomize_kstack_offset=1" "slab_nomerge" "proc_mem.force_override=never" "bdev_allow_write_mounted=0" "iommu=force" "iommu.passthrough=0" "iommu.strict=1" "intel_iommu=on" "amd_iommu=force_isolation" "mitigations=auto,nosmt" "spec_store_bypass_disable=on" "ssbd=force-on" "spectre_v2=on" "spectre_bhi=on" "tsx=off" "l1d_flush=on" "l1tf=full,force" "kvm.mitigate_smt_rsb=1" "kvm-intel.vmentry_l1d_flush=always" "gather_data_sampling=force" "lockdown=confidentiality" "vsyscall=none" "vdso32=0" "efi_pstore.pstore_disable=1" "erst_disable" "hash_pointers=always" "systemd.ssh_auto=no" "fsck.mode=force" "i8042.reset=1" "slub_debug=FZ" "ia32_emulation=false");
 	for optionToCheck in "${optionsToCheck[@]}"; do
 		if grep -q "$optionToCheck" /proc/cmdline > /dev/null 2>&1; then
 			logYes "kernel hardening via command line:" "found $optionToCheck";
@@ -139,7 +137,7 @@ fwupdmgrSecurity() {
 #verifyFST() { #TODO
 #}
 
-if [ -f /etc/fedora-release ] || [ -f /etc/centos-release ]; then
+if [ -f /etc/fedora-release ]; then
 	if grep -q hypervisor /proc/cpuinfo; then
 		isVirtualMachine="true";
 	else
@@ -249,5 +247,5 @@ if [ -f /etc/fedora-release ] || [ -f /etc/centos-release ]; then
 	echo "END OF brace-audit"
 	echo "================================================================"
 else
-	echo "Currently only Fedora and CentOS are supported";
+	echo "Currently only Fedora is supported";
 fi;

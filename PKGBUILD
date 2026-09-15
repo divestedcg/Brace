@@ -1,7 +1,7 @@
 # Maintainer: Tavi <tavi@divested.dev>
 pkgname=brace
 pkgver=20260915
-pkgrel=1
+pkgrel=2
 pkgdesc="Increases privacy/security through various configs."
 arch=('any')
 license=('GPL3')
@@ -30,7 +30,6 @@ package() {
 	install -Dm644 brace/etc/profile.d/brace-helpers.sh "$pkgdir"/etc/profile.d/brace-helpers.sh;
 	install -Dm644 brace/etc/tlp.d/00-brace.conf "$pkgdir"/etc/tlp.d/00-brace.conf;
 	install -Dm755 brace/usr/bin/brace-installer "$pkgdir"/usr/bin/brace-installer;
-	install -Dm755 brace/usr/bin/brace-rpm-verify "$pkgdir"/usr/bin/brace-rpm-verify;
 	install -Dm755 brace/usr/bin/brace-supplemental-changes "$pkgdir"/usr/bin/brace-supplemental-changes;
 	mkdir -p "$pkgdir"/usr/lib/firefox/browser/defaults/preferences;
 	install -Dm644 brace/usr/lib/firefox/browser/defaults/preferences/userjs-*.js "$pkgdir"/usr/lib/firefox/browser/defaults/preferences/;

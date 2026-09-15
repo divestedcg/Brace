@@ -197,8 +197,6 @@ handleCleanup() {
 #
 # Start of init
 #
-if [ -f /etc/centos-release ]; then yum install epel-release; fi; #TODO: adjust this
-
 packageManager=$(whichPackageManager);
 if [ -z "${packageManager}" ] && ! type "flatpak" > /dev/null 2>&1; then
 	echo -e "${red}ERROR: No package managers found!${coloroff}" 1>&2;
