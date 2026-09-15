@@ -216,8 +216,10 @@ fi;
 
 manageFlatpak=$(getConfigVariable "biManageFlatpak");
 if ! type "flatpak" > /dev/null 2>&1; then manageFlatpak="false"; fi;
-preferFlatpak=$(getConfigVariable "biPreferFlatpak");
-flatpakUseFedoraRemote=$(getConfigVariable "biFlatpakUseFedoraRemote");
+if [ "$manageFlatpak" == "true" ]; then
+	preferFlatpak=$(getConfigVariable "biPreferFlatpak");
+	flatpakUseFedoraRemote=$(getConfigVariable "biFlatpakUseFedoraRemote");
+fi;
 
 declare -a packagesToInstall=();
 declare -a packagesToInstallFlatpak=();
@@ -241,11 +243,12 @@ declare -a packagesSuse=();
 #TODO: 'PackageKit-glib': simple-scan depends on it
 #TODO: 'PackageKit-gstreamer-plugin': @multimedia pulls it in
 #TODO: 'PackageKit-gtk3-module': test this later
+#TODO: '*gtk2*': verify nothing depends on it
 prepareOperation "biRemoval_general_unwanted";
 
 declare -a packagesArch=();
 declare -a packagesDebian=();
-declare -a packagesFedora=('abiword' 'adapta-gtk-theme' 'akregator' 'amarok' 'asunder' 'calligra*' 'clipit' 'clipman' 'compiz' 'dnfdragora*' 'doxygen' 'emerald' 'empathy' 'exaile' 'falkon' 'filezilla' 'geany' 'gnomebaker' 'gnote' 'gnumeric' 'juk' 'k3b' 'kget' 'kmahjongg' 'kmines' 'konqueror' 'konversation' 'kpatience' 'ktnef' 'ktorrent' 'lxmusic' 'midori' 'osmo' 'paper-icon-theme' 'pidgin' '*powerline' 'pragha' 'qlipper' 'quassel' 'qupzilla' 'rhythmbox' 'thunderbird' 'xawtv' 'xfburn' 'xfdashboard' 'xpad' 'yarock');
+declare -a packagesFedora=('abiword' 'adapta-gtk-theme' 'akregator' 'amarok' 'asunder' 'calligra*' 'clipit' 'clipman' 'compiz' 'dnfdragora*' 'doxygen' 'emerald' 'empathy' 'exaile' 'falkon' 'filezilla' 'geany' 'gnomebaker' 'gnote' 'gnumeric' 'juk' 'k3b' 'kget' 'kmahjongg' 'kmines' 'konqueror' 'konversation' 'kpatience' 'ktnef' 'ktorrent' 'lxmusic' 'midori' 'osmo' 'paper-icon-theme' 'pidgin' '*powerline' 'pragha' 'qlipper' 'quassel' 'qupzilla' 'rhythmbox' 'thunderbird' 'xawtv' 'xfburn' 'xfdashboard' 'xpad' 'yarock' 'hexchat');
 declare -a packagesSuse=();
 prepareOperation "biRemoval_spins_unwanted";
 
@@ -271,7 +274,7 @@ prepareOperation "biRemoval_gnome_legacy";
 
 declare -a packagesArch=();
 declare -a packagesDebian=();
-declare -a packagesFedora=('chkrootkit' 'rkhunter' 'lynis' 'spectre-meltdown-checker' 'bleachbit' 'gimpfx-foundry' 'ssss' 'ncdu' 'stress' 'stress-ng' 'onionshare' 'croc' 'numix-icon-theme' 'rng-tools' 'irqbalance');
+declare -a packagesFedora=('chkrootkit' 'rkhunter' 'lynis' 'spectre-meltdown-checker' 'bleachbit' 'gimpfx-foundry' 'ssss' 'ncdu' 'stress' 'stress-ng' 'onionshare' 'croc' 'numix-icon-theme' 'rng-tools' 'irqbalance' 'firejail' 'fapolicyd');
 declare -a packagesSuse=();
 prepareOperation "biRemoval_brace_cleanup";
 
@@ -345,11 +348,12 @@ declare -a packagesFedora=('evolution');
 declare -a packagesSuse=('evolution');
 prepareOperation "biWant_gui_comms_email";
 
-declare -a packagesArch=('hexchat');
-declare -a packagesDebian=('hexchat');
-declare -a packagesFedora=('hexchat');
-declare -a packagesFedoraPak=('io.github.Hexchat');
-declare -a packagesSuse=('hexchat');
+declare -a packagesArch=('polari');
+declare -a packagesDebian=('polari');
+declare -a packagesFedora=('polari');
+declare -a packagesFlathub=('org.gnome.Polari');
+declare -a packagesFedoraPak=('org.gnome.Polari');
+declare -a packagesSuse=('polari');
 prepareOperation "biWant_gui_comms_irc";
 
 declare -a packagesArch=('mumble');
@@ -650,6 +654,7 @@ declare -a packagesFedora=('transmission');
 #declare -a packagesFlathub=('unverified.com.transmissionbt.Transmission');
 declare -a packagesFedoraPak=('com.transmissionbt.Transmission');
 declare -a packagesSuse=('transmission-gtk');
+#TODO: switch to fragments maybe?
 prepareOperation "biWant_gui_downloader_torrent";
 
 declare -a packagesArch=('liferea');
@@ -844,7 +849,7 @@ declare -a packagesArch=('vlc');
 declare -a packagesDebian=('vlc');
 declare -a packagesFedora=('vlc');
 #declare -a packagesFlathub=('unverified.org.videolan.VLC');
-#declare -a packagesFedoraPak=('org.videolan.vlc'); #TODO: are codecs broken in this?
+#declare -a packagesFedoraPak=('org.videolan.vlc'); #XXX: codecs
 declare -a packagesSuse=('vlc');
 prepareOperation "biWant_gui_viewer_media";
 
@@ -854,6 +859,7 @@ declare -a packagesFedora=('lollypop');
 #declare -a packagesFlathub=('unverified.org.gnome.Lollypop');
 declare -a packagesFedoraPak=('org.gnome.Lollypop');
 declare -a packagesSuse=('lollypop');
+#TODO: switch to gnome-music maybe?
 prepareOperation "biWant_gui_viewer_music";
 
 declare -a packagesArch=('sqlitebrowser');

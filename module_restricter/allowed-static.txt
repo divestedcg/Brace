@@ -183,6 +183,8 @@ mt792x_lib #MediaTek MT792x core driver
 mtd #Core MTD registration and access routines
 net_failover #Failover driver for Paravirtual drivers
 nf_conntrack #IPv4 and IPv6 connection tracking
+nf_conntrack_broadcast #Broadcast connection tracking helper
+nf_conntrack_netbios_ns #NetBIOS name service broadcast connection tracking helper
 nf_conntrack_tftp #TFTP connection tracking helper
 nf_defrag_ipv4 #IPv4 defragmentation support
 nf_defrag_ipv6 #IPv6 defragmentation support
