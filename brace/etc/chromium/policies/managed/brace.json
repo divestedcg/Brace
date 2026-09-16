@@ -31,6 +31,7 @@
 	"ExtensionInstallForcelist": [
 					"ddkjiahejlhfcafbddmgiahcphecmpfh;https://clients2.google.com/service/update2/crx"
 					],
+	"ExtensionReviewPromptsEnabled": false,
 	"AIModeSettings": 1,
 	"AutofillPredictionSettings": 2,
 	"ChromeSuggestionsSettings": 1,
