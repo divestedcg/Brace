@@ -21,8 +21,11 @@ if [ "$(/usr/bin/id -u)" -eq "0" ]; then
 	fi;
 
 	echo "Unconditionally masking unwanted services";
-	#only handle ones that can't be uninstalled
-	systemctl mask geoclue.service;
+	systemctl mask --now avahi-daemon.service avahi-daemon.socket;
+	systemctl mask --now cups-browsed.service;
+	systemctl mask --now geoclue.service;
+	systemctl mask --now passim.service;
+	systemctl mask --now packagekit.service;
 	systemctl --global mask localsearch-3.service tracker-miner-fs-3.service;
 
 	#Stealth Firewall
@@ -213,18 +216,9 @@ if [ "$(/usr/bin/id -u)" -eq "0" ]; then
 	fi;
 else
 	echo "Ensuring unsafe functions are disabled";
-	gsettings set org.gnome.nautilus.preferences fts-enabled false;
-	gsettings set org.gnome.nautilus.preferences show-image-thumbnails 'never';
-	gsettings set org.gnome.desktop.thumbnailers disable-all true;
-	gsettings set org.cinnamon.desktop.thumbnailers disable-all true;
-	gsettings set org.mate.desktop.thumbnailers disable-all true;
-	gsettings set org.freedesktop.Tracker3.Miner.Files enable-monitors false;
-	gsettings set org.freedesktop.Tracker3.Miner.Files crawling-interval -2;
-	systemctl mask --user tracker-miner-fs-3.service;
-	systemctl mask --user localsearch-3.service;
+	systemctl --user mask --now localsearch-3.service tracker-miner-fs-3.service;
 	if [ -x /usr/bin/tracker3 ]; then tracker3 reset -s; fi;
 	if [ -x /usr/bin/localsearch ]; then localsearch reset -s; fi;
-
 
 	if [ "$XDG_CURRENT_DESKTOP" == "GNOME" ]; then
 	#Power

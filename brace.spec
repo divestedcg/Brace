@@ -1,6 +1,6 @@
 Name: brace
-Version: 20260915
-Release: 2
+Version: 20260918
+Release: 1
 Summary: Increases privacy/security through various configs
 License: AGPLv3+
 BuildArch: noarch
@@ -36,6 +36,7 @@ install -Dm644 %{_sourcedir}/brace/etc/dconf/db/local.d/00-brace-extra %{buildro
 install -Dm644 %{_sourcedir}/brace/etc/dconf/db/local.d/00-brace-gnome %{buildroot}/etc/dconf/db/local.d/00-brace-gnome;
 install -Dm644 %{_sourcedir}/brace/etc/dconf/db/local.d/00-brace-mate %{buildroot}/etc/dconf/db/local.d/00-brace-mate;
 install -Dm644 %{_sourcedir}/brace/etc/dconf/db/local.d/00-brace-pantheon %{buildroot}/etc/dconf/db/local.d/00-brace-pantheon;
+install -Dm644 %{_sourcedir}/brace/etc/dconf/db/local.d/locks/00-brace-locked %{buildroot}/etc/dconf/db/local.d/locks/00-brace-locked;
 install -Dm644 %{_sourcedir}/brace/etc/dconf/profile/user-full %{buildroot}/etc/dconf/profile/user;
 install -Dm644 %{_sourcedir}/brace/etc/profile.d/brace-env-overrides.sh %{buildroot}/etc/profile.d/brace-env-overrides.sh;
 install -Dm644 %{_sourcedir}/brace/etc/profile.d/brace-helpers.sh %{buildroot}/etc/profile.d/brace-helpers.sh;
@@ -91,6 +92,7 @@ install -Dm644 %{_sourcedir}/README.md %{buildroot}/usr/share/doc/brace/README.m
 /etc/dconf/db/local.d/00-brace-gnome
 /etc/dconf/db/local.d/00-brace-mate
 /etc/dconf/db/local.d/00-brace-pantheon
+/etc/dconf/db/local.d/locks/00-brace-locked
 /etc/dconf/profile/user
 /etc/opt/chrome/policies/managed/brace.json
 /etc/profile.d/brace-env-overrides.sh

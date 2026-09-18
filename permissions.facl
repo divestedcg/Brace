@@ -133,6 +133,16 @@ user::rw-
 group::r--
 other::r--
 
+# file: brace/etc/dconf/db/local.d/locks
+user::rwx
+group::r-x
+other::r-x
+
+# file: brace/etc/dconf/db/local.d/00-brace-locked
+user::rw-
+group::r--
+other::r--
+
 # file: brace/etc/dconf/profile
 user::rwx
 group::r-x

@@ -1,7 +1,7 @@
 # Maintainer: Tavi <tavi@divested.dev>
 pkgname=brace
-pkgver=20260915
-pkgrel=2
+pkgver=20260918
+pkgrel=1
 pkgdesc="Increases privacy/security through various configs."
 arch=('any')
 license=('GPL3')
@@ -24,6 +24,7 @@ package() {
 	install -Dm644 brace/etc/dconf/db/local.d/00-brace-gnome "$pkgdir"/etc/dconf/db/local.d/00-brace-gnome;
 	install -Dm644 brace/etc/dconf/db/local.d/00-brace-mate "$pkgdir"/etc/dconf/db/local.d/00-brace-mate;
 	install -Dm644 brace/etc/dconf/db/local.d/00-brace-pantheon "$pkgdir"/etc/dconf/db/local.d/00-brace-pantheon;
+	install -Dm644 brace/etc/dconf/db/local.d/locks/00-brace-locked "$pkgdir"/etc/dconf/db/local.d/locks/00-brace-locked;
 	install -Dm644 brace/etc/dconf/profile/user "$pkgdir"/etc/dconf/profile/user;
 	install -Dm755 brace/etc/default/grub.d/brace.cfg "$pkgdir"/etc/default/grub.d/brace.cfg;
 	install -Dm644 brace/etc/profile.d/brace-env-overrides.sh "$pkgdir"/etc/profile.d/brace-env-overrides.sh;

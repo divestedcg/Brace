@@ -91,9 +91,18 @@ suppress-wireless-networks-available=true
 [org/gnome/recipes]
 user='anonymous'
 
+[org/gnome/system/dns-sd]
+display-local='disabled'
+
 [org/gnome/system/location]
 max-accuracy-level='city'
 enabled=false
+
+[org/gnome/system/smb]
+display-mode='disabled'
+
+[org/gnome/system/wsdd]
+display-mode='disabled'
 
 [org/virt-manager/virt-manager]
 xmleditor-enabled=true
