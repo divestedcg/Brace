@@ -3,11 +3,19 @@ brace
 
 Overview
 --------
-Brace offers a wide range of opinionated settings that prioritize privacy, security, and usability for a curated set of Linux programs.
+Brace offers a wide range of opinionated settings that prioritize privacy, security, and usability for a curated set of Linux programs. It notably achieves this without any binaries or recompilation.
 
 Compatibility
 -------------
 - Fedora
+  - Server & Cloud
+  - Workstation (recommended DE)
+    - 44 tested on 2026-09-19
+    - 45 tested on 2026-09-10
+  - MATE spin
+    - 44 tested on 2026-09-19
+  - Cinnamon spin
+    - 44 tested on 2026-09-19
 
 Fallback Compatibility
 ----------------------
@@ -15,6 +23,8 @@ Fallback Compatibility
 - Arch Linux
 - openSUSE
 - RHEL-like (CentOS, Rocky, Alma)
+  - Rocky 10.2 Workstation tested on 2026-09-19
+    - first: dnf install epel-release rpmfusion-free-release && crb enable
 - Debian
 
 License

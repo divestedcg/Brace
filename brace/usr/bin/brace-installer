@@ -246,7 +246,7 @@ prepareOperation "biRemoval_general_unwanted";
 
 declare -a packagesArch=();
 declare -a packagesDebian=();
-declare -a packagesFedora=('abiword' 'adapta-gtk-theme' 'akregator' 'amarok' 'asunder' 'calligra*' 'clipit' 'clipman' 'compiz' 'dnfdragora*' 'doxygen' 'emerald' 'empathy' 'exaile' 'falkon' 'filezilla' 'geany' 'gnomebaker' 'gnote' 'gnumeric' 'juk' 'k3b' 'kget' 'kmahjongg' 'kmines' 'konqueror' 'konversation' 'kpatience' 'ktnef' 'ktorrent' 'lxmusic' 'midori' 'osmo' 'paper-icon-theme' 'pidgin' '*powerline' 'pragha' 'qlipper' 'quassel' 'qupzilla' 'rhythmbox' 'thunderbird' 'xawtv' 'xfburn' 'xfdashboard' 'xpad' 'yarock' 'hexchat');
+declare -a packagesFedora=('abiword' 'adapta-gtk-theme' 'akregator' 'amarok' 'asunder' 'calligra*' 'clipit' 'clipman' 'compiz' 'dnfdragora*' 'doxygen' 'emerald' 'empathy' 'exaile' 'falkon' 'filezilla' 'geany' 'gnomebaker' 'gnote' 'gnumeric' 'juk' 'k3b' 'kget' 'kmahjongg' 'kmines' 'konqueror' 'konversation' 'kpatience' 'ktnef' 'ktorrent' 'lxmusic' 'midori' 'osmo' 'paper-icon-theme' 'pidgin' '*powerline' 'pragha' 'qlipper' 'quassel' 'qupzilla' 'rhythmbox' 'thunderbird' 'xawtv' 'xfburn' 'xfdashboard' 'xpad' 'yarock' 'hexchat' 'gparted' 'blivet-gui' 'shotwell' 'mpv');
 declare -a packagesSuse=();
 prepareOperation "biRemoval_spins_unwanted";
 
@@ -265,9 +265,10 @@ prepareOperation "biRemoval_gnome_sharing";
 
 declare -a packagesArch=();
 declare -a packagesDebian=();
-declare -a packagesFedora=('eog' 'totem' 'evince' 'cheese' 'gnome-terminal');
+declare -a packagesFedora=('eog' 'totem' 'evince' 'cheese');
 declare -a packagesSuse=();
 #TODO: remove gedit after g-t-e gains a sort function
+#TODO: 'gnome-terminal' is used by Cinnamon
 prepareOperation "biRemoval_gnome_legacy";
 
 declare -a packagesArch=();
@@ -288,20 +289,20 @@ declare -a packagesFedora=('pv' 'tree');
 declare -a packagesSuse=('pv' 'tree');
 prepareOperation "biWant_cli_extras";
 
-declare -a packagesArch=('dconf-editor' 'seahorse');
-declare -a packagesDebian=('dconf-cli' 'dconf-editor' 'software-properties-gtk' 'seahorse');
-declare -a packagesFedora=('dconf-editor' 'seahorse' 'openssh-askpass');
-#declare -a packagesFlathub=('ca.desrt.dconf-editor' 'unverified.org.gnome.seahorse.Application');
-#declare -a packagesFedoraPak=('ca.desrt.dconf-editor' 'org.gnome.seahorse.Application');
-declare -a packagesSuse=('dconf-editor' 'seahorse');
+declare -a packagesArch=('file-roller' 'dconf-editor' 'seahorse');
+declare -a packagesDebian=('file-roller' 'dconf-cli' 'dconf-editor' 'software-properties-gtk' 'seahorse');
+declare -a packagesFedora=('file-roller' 'dconf-editor' 'seahorse' 'openssh-askpass');
+#declare -a packagesFlathub=('unverified.org.gnome.FileRoller' 'ca.desrt.dconf-editor' 'unverified.org.gnome.seahorse.Application');
+#declare -a packagesFedoraPak=('org.gnome.FileRoller' 'ca.desrt.dconf-editor' 'org.gnome.seahorse.Application');
+declare -a packagesSuse=('dconf-editor' 'seahorse' 'file-roller');
 prepareOperation "biWant_gui_generic_extras";
 
-declare -a packagesArch=('gnome-tweak-tool' 'file-roller');
-declare -a packagesDebian=('gnome-tweak-tool' 'file-roller');
-declare -a packagesFedora=('gnome-tweak-tool' 'file-roller' 'gnome-themes-extra' 'adw-gtk3-theme' 'loupe' 'showtime' 'papers' 'snapshot' 'ptyxis' 'gnome-text-editor' 'nautilus');
-#declare -a packagesFlathub=('unverified.org.gnome.FileRoller' 'org.gnome.Loupe' 'org.gnome.Showtime' 'org.gnome.Papers' 'org.gnome.Snapshot' 'app.devsuite.Ptyxis' 'org.gnome.TextEditor');
-#declare -a packagesFedoraPak=('org.gnome.FileRoller' 'org.gnome.Loupe' 'org.gnome.Showtime' 'org.gnome.Papers' 'org.gnome.Snapshot' 'org.gnome.Ptyxis' 'org.gnome.TextEditor');
-declare -a packagesSuse=('gnome-tweaks' 'file-roller');
+declare -a packagesArch=('gnome-tweak-tool' );
+declare -a packagesDebian=('gnome-tweak-tool');
+declare -a packagesFedora=('gnome-tweak-tool' 'gnome-themes-extra' 'adw-gtk3-theme' 'loupe' 'showtime' 'papers' 'snapshot' 'ptyxis' 'gnome-text-editor' 'nautilus');
+#declare -a packagesFlathub=('org.gnome.Loupe' 'org.gnome.Showtime' 'org.gnome.Papers' 'org.gnome.Snapshot' 'app.devsuite.Ptyxis' 'org.gnome.TextEditor');
+#declare -a packagesFedoraPak=('org.gnome.Loupe' 'org.gnome.Showtime' 'org.gnome.Papers' 'org.gnome.Snapshot' 'org.gnome.Ptyxis' 'org.gnome.TextEditor');
+declare -a packagesSuse=('gnome-tweaks');
 prepareOperation "biWant_gui_gnome_extras";
 
 declare -a packagesArch=('libva-mesa-driver' 'libva-utils' 'libva-intel-driver' 'intel-media-driver' 'gstreamer-vaapi');
@@ -648,7 +649,7 @@ prepareOperation "biWant_gui_downloader_generic";
 
 declare -a packagesArch=('transmission-gtk');
 declare -a packagesDebian=('transmission-gtk');
-declare -a packagesFedora=('transmission');
+declare -a packagesFedora=('transmission-gtk');
 #declare -a packagesFlathub=('unverified.com.transmissionbt.Transmission');
 declare -a packagesFedoraPak=('com.transmissionbt.Transmission');
 declare -a packagesSuse=('transmission-gtk');

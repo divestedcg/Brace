@@ -16,7 +16,8 @@ show-advanced-permissions=true
 background-fade=false
 show-desktop-icons=false
 color-shading-type='solid'
-picture-options='none'
+picture-options='wallpaper'
+picture-filename=''
 primary-color='rgb(0,0,0)'
 secondary-color='rgb(0,0,0)'
 

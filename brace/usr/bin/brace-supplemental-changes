@@ -32,7 +32,7 @@ if [ "$(/usr/bin/id -u)" -eq "0" ]; then
 	if [ -x /usr/bin/firewall-cmd ]; then
 		echo "Do you want a default drop firewall?";
 		echo "Current default zone: $(firewall-cmd --get-default-zone)";
-		select ys in "Yes" "No" "Skip"; do
+		select yns in "Yes" "No" "Skip"; do
 			case $yns in
 				Yes )
 					firewall-cmd --set-default-zone=drop;
@@ -41,7 +41,7 @@ if [ "$(/usr/bin/id -u)" -eq "0" ]; then
 					firewall-cmd --add-service=dhcpv6-client --permanent;
 					if systemctl is-active -q sshd; then
 						echo "sshd is enabled, allowing service";
-						firewall-cmd --add-service=sshd --permanent;
+						firewall-cmd --add-service=ssh --permanent;
 					fi;
 					firewall-cmd --reload;
 					break;;
@@ -56,7 +56,7 @@ if [ "$(/usr/bin/id -u)" -eq "0" ]; then
 	fi
 
 	#Kernel Command Line
-	if [ -x /usr/bin/grubby ]; then
+	if [ -x /usr/bin/grubby ] || [ -x /usr/sbin/grubby ]; then
 		echo "Do you want a stricter kernel?";
 		select ys in "Yes" "Skip"; do
 			case $ys in

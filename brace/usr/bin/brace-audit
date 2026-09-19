@@ -137,7 +137,7 @@ fwupdmgrSecurity() {
 #verifyFST() { #TODO
 #}
 
-if [ -f /etc/fedora-release ]; then
+if [ -f /etc/fedora-release ] || [ -f /etc/redhat-release ]; then
 	if grep -q hypervisor /proc/cpuinfo; then
 		isVirtualMachine="true";
 	else
