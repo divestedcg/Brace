@@ -298,13 +298,13 @@ prepareOperation "biRemoval_gnome_legacy";
 
 declare -a packagesArch=();
 declare -a packagesDebian=();
-declare -a packagesFedora=('chkrootkit' 'rkhunter' 'lynis' 'spectre-meltdown-checker' 'bleachbit' 'gimpfx-foundry' 'ssss' 'ncdu' 'stress' 'stress-ng' 'onionshare' 'croc' 'numix-icon-theme' 'rng-tools' 'irqbalance' 'firejail' 'fapolicyd' 'intel-mediasdk' 'libva-intel-hybrid-driver');
+declare -a packagesFedora=('chkrootkit' 'rkhunter' 'lynis' 'spectre-meltdown-checker' 'bleachbit' 'gimpfx-foundry' 'ssss' 'ncdu' 'stress' 'stress-ng' 'onionshare' 'croc' 'numix-icon-theme' 'rng-tools' 'irqbalance' 'firejail' 'fapolicyd' 'intel-mediasdk' 'libva-intel-hybrid-driver' 'pixz');
 declare -a packagesSuse=();
 prepareOperation "biRemoval_brace_cleanup";
 
 declare -a packagesArch=('openssh' 'nano' 'htop' 'wget' 'screen' 'ripgrep' 'dialog' 'crda' 'pacman-contrib' 'lostfiles');
 declare -a packagesDebian=('ssh' 'nano' 'htop' 'wget' 'screen' 'ripgrep' 'unattended-upgrades');
-declare -a packagesFedora=('openssh' 'nano' 'htop' 'wget' 'screen' 'ripgrep' 'grubby' 'cryptsetup-reencrypt');
+declare -a packagesFedora=('openssh' 'nano' 'htop' 'wget' 'screen' 'ripgrep' 'grubby' 'cryptsetup-reencrypt' 'zstd');
 declare -a packagesSuse=('openssh' 'nano' 'htop' 'wget' 'screen' 'ripgrep' 'grubby');
 prepareOperation "biWant_cli_core";
 
@@ -480,10 +480,10 @@ declare -a packagesFedora=('restic');
 declare -a packagesSuse=('restic');
 prepareOperation "biWant_cli_file_backup";
 
-declare -a packagesArch=('zip' 'p7zip' 'pixz' 'pigz');
-declare -a packagesDebian=('p7zip' 'pixz');
-declare -a packagesFedora=('p7zip' 'pixz' 'zstd');
-declare -a packagesSuse=('p7zip' 'pixz');
+declare -a packagesArch=('p7zip');
+declare -a packagesDebian=('p7zip');
+declare -a packagesFedora=('7zip-standalone');
+declare -a packagesSuse=('p7zip');
 prepareOperation "biWant_cli_file_compression";
 
 declare -a packagesArch=();
