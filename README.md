@@ -5,17 +5,28 @@ Overview
 --------
 Brace offers a wide range of opinionated settings that prioritize privacy, security, and usability for a curated set of Linux programs. It notably achieves this without any binaries or recompilation.
 
-Compatibility
--------------
+Compatibility (ranked)
+----------------------
 - Fedora
   - Server & Cloud
   - Workstation (recommended DE)
-    - 44 tested on 2026-09-19
-    - 45 tested on 2026-09-10
+    - tested: 44 on 2026-09-19
+    - tested: 45 on 2026-09-10
   - MATE spin
-    - 44 tested on 2026-09-19
+    - tested: 44 on 2026-09-19
   - Cinnamon spin
-    - 44 tested on 2026-09-19
+    - tested: 44 on 2026-09-19
+  - Qubes TemplateVM
+    - optionally layer Flatpaks into a dependent app qube using `brace-installer usermode`
+    - limitation: no kernel command line change support possible
+      - you can manually set them via the Qube Manager in dom0
+  - Silverblue
+    - not recommended
+    - install via rpm-ostree
+    - limitation: no support for removing anything bundled
+    - limitation: only Flatpaks for additional software
+    - limitation: no kernel command line change support yet
+    - tested: 44.20260920.0
 
 Fallback Compatibility
 ----------------------
@@ -23,7 +34,7 @@ Fallback Compatibility
 - Arch Linux
 - openSUSE
 - RHEL-like (CentOS, Rocky, Alma)
-  - Rocky 10.2 Workstation tested on 2026-09-19
+  - tested: Rocky 10.2 Workstation on 2026-09-19
     - first: dnf install epel-release rpmfusion-free-release && crb enable
 - Debian
 

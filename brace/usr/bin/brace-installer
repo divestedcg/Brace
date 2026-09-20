@@ -22,7 +22,19 @@ yellow='\e[0;33m';
 
 configPath='/etc/brace-installer.conf';
 
-if [ "$(/usr/bin/id -u)" -ne "0" ]; then echo -e "${red}ERROR: This script needs to be run as root!${coloroff}" 1>&2; exit 1; fi;
+if [ "$1" == "usermode" ]; then
+	usermode="true";
+	configPathUser="$HOME/.config/brace-installer.conf";
+	if [ ! -f "$configPathUser" ] && [ -f "$configPath" ]; then
+		grep -e "^biWant_gui_" -e "^biWant_games_" -e "^#" -e "^$" "$configPath" > "$configPathUser"; #XXX
+		echo -e "${yellow}Warning: Config not found, seeding user config from system, edit, then try again${coloroff}" 1>&2;
+		exit 1;
+	fi;
+	configPath="$configPathUser";
+	unset configPathUser;
+else
+	if [ "$(/usr/bin/id -u)" -ne "0" ]; then echo -e "${red}ERROR: This script needs to be run as root!${coloroff}" 1>&2; exit 1; fi;
+fi;
 
 #
 # Start Functions
@@ -137,11 +149,11 @@ handleInstall() {
 			$packageManagerToUse install "${packagesToInstall[@]}";
 		elif [ "$packageManagerToUse" == "flatpak" ]; then
 			if [ "$flatpakUseFedoraRemote" == "true" ]; then
-				$packageManagerToUse remote-add --system --if-not-exists --title "Fedora Flatpaks" fedora oci+https://registry.fedoraproject.org
-				$packageManagerToUse install fedora "${packagesToInstallFlatpak[@]}";
+				$packageManagerToUse remote-add $flatpakInstallType --if-not-exists --title "Fedora Flatpaks" fedora oci+https://registry.fedoraproject.org
+				$packageManagerToUse install $flatpakInstallType fedora "${packagesToInstallFlatpak[@]}";
 			else
-				$packageManagerToUse remote-add --system --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-				$packageManagerToUse install flathub "${packagesToInstallFlatpak[@]}";
+				$packageManagerToUse remote-add $flatpakInstallType --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+				$packageManagerToUse install $flatpakInstallType flathub "${packagesToInstallFlatpak[@]}";
 			fi;
 		fi;
 	fi;
@@ -167,7 +179,7 @@ handleRemove() {
 		elif [ "$packageManagerToUse" == "zypper" ]; then
 			$packageManagerToUse remove "${packagesToRemove[@]}";
 		elif [ "$packageManagerToUse" == "flatpak" ]; then
-			$packageManagerToUse remove "${packagesToRemoveFlatpak[@]}";
+			$packageManagerToUse remove $flatpakInstallType "${packagesToRemoveFlatpak[@]}";
 		fi;
 	fi;
 	unset packageManagerToUse packageToRemove;
@@ -180,7 +192,7 @@ handleCleanup() {
 	elif [ "$packageManagerToUse" == "dnf5" ] || [ "$packageManagerToUse" == "dnf" ] || [ "$packageManagerToUse" == "yum" ]; then
 		$packageManagerToUse autoremove;
 	elif [ "$packageManagerToUse" == "flatpak" ]; then
-		$packageManagerToUse remove --unused;
+		$packageManagerToUse remove $flatpakInstallType --unused;
 	elif [ "$packageManagerToUse" == "pacman" ]; then
 		$packageManagerToUse -Rns "$(pacman -Qttdq)";
 		paccache -rk0;
@@ -197,26 +209,39 @@ handleCleanup() {
 #
 # Start of init
 #
-packageManager=$(whichPackageManager);
-if [ -z "${packageManager}" ] && ! type "flatpak" > /dev/null 2>&1; then
-	echo -e "${red}ERROR: No package managers found!${coloroff}" 1>&2;
-	exit 1;
-fi;
+flatpakInstallType="--system";
+if [ "$usermode" == "true" ]; then
+	packageManager="usermode";
+	if type "flatpak" > /dev/null 2>&1; then
+		manageFlatpak="true";
+		flatpakInstallType="--user";
+		echo -e "${cyan}INFO: Continuing in usermode${coloroff}";
+	else
+		echo -e "${red}ERROR: Flatpak is required for usermode!${coloroff}" 1>&2;
+		exit 1;
+	fi;
+else
+	packageManager=$(whichPackageManager);
+	if [ -z "${packageManager}" ] && ! type "flatpak" > /dev/null 2>&1; then
+		echo -e "${red}ERROR: No package managers found!${coloroff}" 1>&2;
+		exit 1;
+	fi;
 
-if [ ! -r "$configPath" ]; then
-	echo -e "${red}ERROR: Config file missing or unreadable!${coloroff}" 1>&2;
-	exit 1;
-fi;
-if [[ $(stat --format "%a,%u,%g,%U,%G,%F" "$configPath") != "644,0,0,root,root,regular file" ]]; then
-	echo -e "${red}ERROR: Invalid config permissions!${coloroff}" 1>&2;
-	exit 1;
-fi;
+	if [ ! -r "$configPath" ]; then
+		echo -e "${red}ERROR: Config file missing or unreadable!${coloroff}" 1>&2;
+		exit 1;
+	fi;
+	if [[ $(stat --format "%a,%u,%g,%U,%G,%F" "$configPath") != "644,0,0,root,root,regular file" ]]; then
+		echo -e "${red}ERROR: Invalid config permissions!${coloroff}" 1>&2;
+		exit 1;
+	fi;
 
-manageFlatpak=$(getConfigVariable "biManageFlatpak");
-if ! type "flatpak" > /dev/null 2>&1; then manageFlatpak="false"; fi;
-if [ "$manageFlatpak" == "true" ]; then
-	preferFlatpak=$(getConfigVariable "biPreferFlatpak");
-	flatpakUseFedoraRemote=$(getConfigVariable "biFlatpakUseFedoraRemote");
+	manageFlatpak=$(getConfigVariable "biManageFlatpak");
+	if ! type "flatpak" > /dev/null 2>&1; then manageFlatpak="false"; fi;
+	if [ "$manageFlatpak" == "true" ]; then
+		preferFlatpak=$(getConfigVariable "biPreferFlatpak");
+		flatpakUseFedoraRemote=$(getConfigVariable "biFlatpakUseFedoraRemote");
+	fi;
 fi;
 
 declare -a packagesToInstall=();
@@ -986,7 +1011,7 @@ if [ "$manageFlatpak" == "true" ]; then
 	handleCleanup "flatpak";
 fi;
 unset packagesToInstallFlatpak packagesToRemoveFlatpak packagesToIgnoreFlatpak;
-unset packageManager preferFlatpak flatpakUseFedoraRemote;
+unset configPath usermode packageManager preferFlatpak flatpakUseFedoraRemote flatpakInstallType;
 
 #Finish
 echo -e "${green}INFO: Installer complete!${coloroff}";
