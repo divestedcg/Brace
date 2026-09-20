@@ -298,7 +298,7 @@ prepareOperation "biRemoval_gnome_legacy";
 
 declare -a packagesArch=();
 declare -a packagesDebian=();
-declare -a packagesFedora=('chkrootkit' 'rkhunter' 'lynis' 'spectre-meltdown-checker' 'bleachbit' 'gimpfx-foundry' 'ssss' 'ncdu' 'stress' 'stress-ng' 'onionshare' 'croc' 'numix-icon-theme' 'rng-tools' 'irqbalance' 'firejail' 'fapolicyd');
+declare -a packagesFedora=('chkrootkit' 'rkhunter' 'lynis' 'spectre-meltdown-checker' 'bleachbit' 'gimpfx-foundry' 'ssss' 'ncdu' 'stress' 'stress-ng' 'onionshare' 'croc' 'numix-icon-theme' 'rng-tools' 'irqbalance' 'firejail' 'fapolicyd' 'intel-mediasdk' 'libva-intel-hybrid-driver');
 declare -a packagesSuse=();
 prepareOperation "biRemoval_brace_cleanup";
 
@@ -330,11 +330,17 @@ declare -a packagesFedora=('gnome-tweak-tool' 'gnome-themes-extra' 'adw-gtk3-the
 declare -a packagesSuse=('gnome-tweaks');
 prepareOperation "biWant_gui_gnome_extras";
 
-declare -a packagesArch=('libva-mesa-driver' 'libva-utils' 'libva-intel-driver' 'intel-media-driver' 'gstreamer-vaapi');
-declare -a packagesDebian=('mesa-va-drivers' 'vainfo' 'i965-va-driver' 'intel-media-va-driver' 'gstreamer1.0-vaapi');
-declare -a packagesFedora=('mesa-dri-drivers' 'mesa-va-drivers-freeworld' 'libva' 'libva-utils' 'libva-intel-driver' 'libva-intel-hybrid-driver' 'intel-media-driver' 'gstreamer1-vaapi');
+declare -a packagesArch=('libva-mesa-driver' 'libva-utils' 'intel-media-driver');
+declare -a packagesDebian=('mesa-va-drivers' 'vainfo' 'intel-media-va-driver');
+declare -a packagesFedora=('mesa-dri-drivers' 'mesa-va-drivers-freeworld' 'libva' 'libva-utils' 'libva-intel-media-driver' 'intel-media-driver');
 declare -a packagesSuse=();
 prepareOperation "biWant_lib_VAAPI";
+
+declare -a packagesArch=('libva-intel-driver');
+declare -a packagesDebian=('i965-va-driver');
+declare -a packagesFedora=('libva-intel-driver');
+declare -a packagesSuse=();
+prepareOperation "biWant_lib_VAAPI_legacy";
 
 declare -a packagesArch=();
 declare -a packagesDebian=();
