@@ -32,11 +32,12 @@ package() {
 	install -Dm644 brace/etc/tlp.d/00-brace.conf "$pkgdir"/etc/tlp.d/00-brace.conf;
 	install -Dm755 brace/usr/bin/brace-installer "$pkgdir"/usr/bin/brace-installer;
 	install -Dm755 brace/usr/bin/brace-supplemental-changes "$pkgdir"/usr/bin/brace-supplemental-changes;
-	mkdir -p "$pkgdir"/usr/lib/firefox/browser/defaults/preferences;
-	install -Dm644 brace/usr/lib/firefox/browser/defaults/preferences/userjs-*.js "$pkgdir"/usr/lib/firefox/browser/defaults/preferences/;
-	mkdir -p "$pkgdir"/usr/lib/thunderbird/defaults/pref;
-	install -Dm644 brace/usr/lib/firefox/browser/defaults/preferences/userjs-*.js "$pkgdir"/usr/lib/thunderbird/defaults/pref/;
+	install -Dm644 brace/usr/lib/firefox/browser/defaults/preferences/userjs-arkenfox.js "$pkgdir"/usr/lib/firefox/browser/defaults/preferences/userjs-arkenfox.js;
+	install -Dm644 brace/usr/lib/firefox/browser/defaults/preferences/userjs-brace.js "$pkgdir"/usr/lib/firefox/browser/defaults/preferences/userjs-brace.js;
+	install -Dm644 brace/usr/lib/firefox/browser/defaults/preferences/userjs-brace-perf.js "$pkgdir"/usr/lib/firefox/browser/defaults/preferences/userjs-brace-perf.js;
 	install -Dm644 brace/usr/lib/firefox/distribution/policies.json "$pkgdir"/usr/lib/firefox/distribution/policies.json;
+	install -Dm644 brace/usr/lib/firefox/browser/defaults/preferences/userjs-arkenfox.js "$pkgdir"/usr/lib/thunderbird/defaults/pref/userjs-arkenfox.js;
+	install -Dm644 brace/usr/lib/firefox/browser/defaults/preferences/userjs-brace.js "$pkgdir"/usr/lib/thunderbird/defaults/pref/userjs-brace.js;
 	install -Dm644 brace/usr/lib/modprobe.d/brace.conf "$pkgdir"/usr/lib/modprobe.d/brace.conf;
 	install -Dm644 brace/usr/lib/modprobe.d/wireless-perf.conf "$pkgdir"/usr/lib/modprobe.d/wireless-perf.conf;
 	install -Dm644 brace/usr/lib/NetworkManager/conf.d/30-nm-privacy.conf "$pkgdir"/usr/lib/NetworkManager/conf.d/30-nm-privacy.conf;
@@ -61,6 +62,5 @@ package() {
 	install -Dm644 brace/usr/lib/udev/rules.d/10-trim.rules "$pkgdir"/usr/lib/udev/rules.d/10-trim.rules;
 	install -Dm644 brace/usr/lib/udev/rules.d/50-usb-realtek-net-exceprt.rules "$pkgdir"/usr/lib/udev/rules.d/50-usb-realtek-net-exceprt.rules;
 	install -Dm644 brace/usr/share/polkit-1/rules.d/00-brace-packagekit.rules "$pkgdir"/usr/share/polkit-1/rules.d/00-brace-packagekit.rules;
-	mkdir -p "$pkgdir"/usr/share/doc/brace;
 	install -Dm644 README.md "$pkgdir"/usr/share/doc/brace/README.md;
 }

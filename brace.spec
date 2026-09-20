@@ -42,7 +42,6 @@ install -Dm644 %{_sourcedir}/brace/etc/profile.d/brace-env-overrides.sh %{buildr
 install -Dm644 %{_sourcedir}/brace/etc/profile.d/brace-helpers.sh %{buildroot}/etc/profile.d/brace-helpers.sh;
 install -Dm644 %{_sourcedir}/brace/etc/tlp.d/00-brace.conf %{buildroot}/etc/tlp.d/00-brace.conf;
 install -Dm644 %{_sourcedir}/brace/usr/lib/dracut/dracut.conf.d/99-trim.conf %{buildroot}/usr/lib/dracut/dracut.conf.d/99-trim.conf;
-mkdir -p %{buildroot}/usr/lib64/firefox/browser/defaults/preferences;
 install -Dm755 %{_sourcedir}/brace/usr/bin/brace-audit %{buildroot}/usr/bin/brace-audit;
 install -Dm755 %{_sourcedir}/brace/usr/bin/brace-fedora-enable-auto-updates %{buildroot}/usr/bin/brace-enable-auto-updates;
 install -Dm755 %{_sourcedir}/brace/usr/bin/brace-fedora-enable-rpmfusion %{buildroot}/usr/bin/brace-enable-rpmfusion;
@@ -50,10 +49,12 @@ install -Dm755 %{_sourcedir}/brace/usr/bin/brace-fedora-update-system %{buildroo
 install -Dm755 %{_sourcedir}/brace/usr/bin/brace-installer %{buildroot}/usr/bin/brace-installer;
 install -Dm755 %{_sourcedir}/brace/usr/bin/brace-mr-update %{buildroot}/usr/bin/brace-mr-update;
 install -Dm755 %{_sourcedir}/brace/usr/bin/brace-supplemental-changes %{buildroot}/usr/bin/brace-supplemental-changes;
-install -Dm644 %{_sourcedir}/brace/usr/lib/firefox/browser/defaults/preferences/userjs-*.js %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/;
-mkdir -p %{buildroot}/usr/lib64/thunderbird/defaults/pref;
-install -Dm644 %{_sourcedir}/brace/usr/lib/firefox/browser/defaults/preferences/userjs-*.js %{buildroot}/usr/lib64/thunderbird/defaults/pref/;
+install -Dm644 %{_sourcedir}/brace/usr/lib/firefox/browser/defaults/preferences/userjs-arkenfox.js %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/userjs-arkenfox.js;
+install -Dm644 %{_sourcedir}/brace/usr/lib/firefox/browser/defaults/preferences/userjs-brace.js %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/userjs-brace.js;
+install -Dm644 %{_sourcedir}/brace/usr/lib/firefox/browser/defaults/preferences/userjs-brace-perf.js %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/userjs-brace-perf.js;
 install -Dm644 %{_sourcedir}/brace/usr/lib/firefox/distribution/policies.json %{buildroot}/usr/lib64/firefox/distribution/policies.json;
+install -Dm644 %{_sourcedir}/brace/usr/lib/firefox/browser/defaults/preferences/userjs-arkenfox.js %{buildroot}/usr/lib64/thunderbird/defaults/pref/userjs-arkenfox.js;
+install -Dm644 %{_sourcedir}/brace/usr/lib/firefox/browser/defaults/preferences/userjs-brace.js %{buildroot}/usr/lib64/thunderbird/defaults/pref/userjs-brace.js;
 install -Dm644 %{_sourcedir}/brace/usr/lib/modprobe.d/brace.conf %{buildroot}/usr/lib/modprobe.d/brace.conf;
 install -Dm644 %{_sourcedir}/brace/usr/lib/modprobe.d/wireless-perf.conf %{buildroot}/usr/lib/modprobe.d/wireless-perf.conf;
 install -Dm644 %{_sourcedir}/brace/usr/lib/NetworkManager/conf.d/30-nm-privacy.conf %{buildroot}/usr/lib/NetworkManager/conf.d/30-nm-privacy.conf;
@@ -79,7 +80,6 @@ install -Dm644 %{_sourcedir}/brace/usr/lib/udev/rules.d/10-trim.rules %{buildroo
 install -Dm644 %{_sourcedir}/brace/usr/lib/udev/rules.d/50-usb-realtek-net-exceprt.rules %{buildroot}/usr/lib/udev/rules.d/50-usb-realtek-net-exceprt.rules;
 install -Dm644 %{_sourcedir}/brace/usr/share/polkit-1/rules.d/00-brace-packagekit.rules %{buildroot}/usr/share/polkit-1/rules.d/00-brace-packagekit.rules;
 install -Dm644 %{_sourcedir}/module_restricter/result.conf %{buildroot}/usr/lib/modprobe.d/brace-mr.conf;
-mkdir -p %{buildroot}/usr/share/doc/brace;
 install -Dm644 %{_sourcedir}/README.md %{buildroot}/usr/share/doc/brace/README.md;
 
 %files
@@ -104,9 +104,12 @@ install -Dm644 %{_sourcedir}/README.md %{buildroot}/usr/share/doc/brace/README.m
 /usr/bin/brace-installer
 /usr/bin/brace-supplemental-changes
 /usr/bin/brace-update-system
-/usr/lib64/firefox/browser/defaults/preferences/userjs-*.js
+/usr/lib64/firefox/browser/defaults/preferences/userjs-arkenfox.js
+/usr/lib64/firefox/browser/defaults/preferences/userjs-brace.js
+/usr/lib64/firefox/browser/defaults/preferences/userjs-brace-perf.js
 /usr/lib64/firefox/distribution/policies.json
-/usr/lib64/thunderbird/defaults/pref/userjs-*.js
+/usr/lib64/thunderbird/defaults/pref/userjs-arkenfox.js
+/usr/lib64/thunderbird/defaults/pref/userjs-brace.js
 /usr/lib/dracut/dracut.conf.d/99-trim.conf
 /usr/lib/modprobe.d/brace.conf
 /usr/lib/modprobe.d/wireless-perf.conf
