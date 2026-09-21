@@ -28,6 +28,28 @@ if [ "$(/usr/bin/id -u)" -eq "0" ]; then
 	systemctl mask --now packagekit.service;
 	systemctl --global mask localsearch-3.service tracker-miner-fs-3.service;
 
+	#PAM
+	if [ -x /usr/bin/authselect ]; then
+		echo "Set recommended authselect profile & features?";
+		echo -e "Current config:\n$(authselect current)";
+		select ys in "Yes" "Skip"; do
+			case $ys in
+				Yes )
+					#this automatically:
+					# - enables lastlog printing
+					# - disables sssd, mdns, fingerprint support
+					#flags then:
+					# - enable locking for 10 minutes after 3 failed attempts
+					# - prevent access to accounts with empty password set
+					authselect select local with-faillock without-nullok;
+					echo -e "New config:\n$(authselect current)";
+					break;;
+				Skip )
+					break;;
+			esac
+		done
+	fi
+
 	#Stealth Firewall
 	if [ -x /usr/bin/firewall-cmd ]; then
 		echo "Do you want a default drop firewall?";
@@ -242,10 +264,10 @@ else
 		case $yn in
 			Yes )
 				gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark';
-				if [ -d "/usr/share/themes/Adwaita-dark" ]; then
+				if [ -f "/usr/share/themes/Adwaita-dark/index.theme" ]; then
 					echo "GTK3: using legacy Adwaita dark";
 					gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark';
-				elif [ -d "/usr/share/themes/adw-gtk3-dark" ]; then
+				elif [ -f "/usr/share/themes/adw-gtk3-dark/index.theme" ]; then
 					echo "GTK3: using unofficial Adwaita dark port";
 					gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3-dark';
 				else
