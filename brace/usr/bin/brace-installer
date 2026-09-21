@@ -262,7 +262,7 @@ declare -a packagesDebian=();
 declare -a packagesFedora=('abrt*' 'cockpit*' 'PackageKit' 'bat' 'virtualbox-guest-additions' 'hyperv*' 'open-vm-tools' 'mediawriter' 'passim' 'sos' 'plocate' 'memstrack' 'realmd' 'NetworkManager-vpnc' 'NetworkManager-openconnect' 'NetworkManager-openvpn' 'NetworkManager-libreswan' 'NetworkManager-ssh' 'NetworkManager-adsl' 'NetworkManager-ppp' 'NetworkManager-wwan' 'ModemManager' 'usb_modeswitch' 'whois' 'whois-nls' 'mkpasswd' 'vim-minimal' 'vim-enhanced' 'compat-ffmpeg4' 'python3-perf');
 declare -a packagesSuse=();
 #TODO: 'sssd*': need to check authselect profile first!
-#TODO: 'less-color': broken package?  make sure less doesn't go with it
+#TODO: 'less-color': broken package? make sure less doesn't go with it
 #TODO: 'PackageKit-glib': simple-scan depends on it
 #TODO: 'PackageKit-gstreamer-plugin': @multimedia pulls it in
 #TODO: 'PackageKit-gtk3-module': test this later
@@ -298,20 +298,20 @@ prepareOperation "biRemoval_gnome_legacy";
 
 declare -a packagesArch=();
 declare -a packagesDebian=();
-declare -a packagesFedora=('chkrootkit' 'rkhunter' 'lynis' 'spectre-meltdown-checker' 'bleachbit' 'gimpfx-foundry' 'ssss' 'ncdu' 'stress' 'stress-ng' 'onionshare' 'croc' 'numix-icon-theme' 'rng-tools' 'irqbalance' 'firejail' 'fapolicyd' 'intel-mediasdk' 'libva-intel-hybrid-driver' 'pixz');
+declare -a packagesFedora=('chkrootkit' 'rkhunter' 'lynis' 'spectre-meltdown-checker' 'bleachbit' 'gimpfx-foundry' 'ssss' 'ncdu' 'stress' 'stress-ng' 'onionshare' 'croc' 'numix-icon-theme' 'rng-tools' 'irqbalance' 'firejail' 'fapolicyd' 'intel-mediasdk' 'libva-intel-hybrid-driver' 'pixz' 'compsize' 'srm' 'pv' 'ripgrep' 'duperemove');
 declare -a packagesSuse=();
 prepareOperation "biRemoval_brace_cleanup";
 
-declare -a packagesArch=('openssh' 'nano' 'htop' 'wget' 'screen' 'ripgrep' 'dialog' 'crda' 'pacman-contrib' 'lostfiles');
-declare -a packagesDebian=('ssh' 'nano' 'htop' 'wget' 'screen' 'ripgrep' 'unattended-upgrades');
-declare -a packagesFedora=('openssh' 'nano' 'htop' 'wget' 'screen' 'ripgrep' 'grubby' 'cryptsetup-reencrypt' 'zstd');
-declare -a packagesSuse=('openssh' 'nano' 'htop' 'wget' 'screen' 'ripgrep' 'grubby');
+declare -a packagesArch=('openssh' 'nano' 'htop' 'wget' 'screen' 'dialog' 'wireless-regdb');
+declare -a packagesDebian=('ssh' 'nano' 'htop' 'wget' 'screen' 'unattended-upgrades');
+declare -a packagesFedora=('openssh' 'nano' 'htop' 'wget' 'screen' 'grubby' 'cryptsetup-reencrypt' 'zstd');
+declare -a packagesSuse=('openssh' 'nano' 'htop' 'wget' 'screen' 'grubby');
 prepareOperation "biWant_cli_core";
 
-declare -a packagesArch=('pv' 'tree');
-declare -a packagesDebian=('pv' 'tree');
-declare -a packagesFedora=('pv' 'tree');
-declare -a packagesSuse=('pv' 'tree');
+declare -a packagesArch=('tree');
+declare -a packagesDebian=('tree');
+declare -a packagesFedora=('tree');
+declare -a packagesSuse=('tree');
 prepareOperation "biWant_cli_extras";
 
 declare -a packagesArch=('file-roller' 'dconf-editor' 'seahorse');
@@ -513,8 +513,8 @@ prepareOperation "biWant_gui_file_encryption_manager";
 
 declare -a packagesArch=();
 declare -a packagesDebian=('scrub');
-declare -a packagesFedora=('srm' 'scrub');
-declare -a packagesSuse=('srm' 'scrub');
+declare -a packagesFedora=('scrub');
+declare -a packagesSuse=('scrub');
 prepareOperation "biWant_cli_file_erasure";
 
 declare -a packagesArch=('testdisk');
@@ -523,10 +523,10 @@ declare -a packagesFedora=('testdisk');
 declare -a packagesSuse=('testdisk');
 prepareOperation "biWant_cli_file_recovery";
 
-declare -a packagesArch=('btrfs-progs' 'compsize' 'dosfstools' 'exfat-utils' 'f2fs-tools' 'ntfs-3g' 'udftools' 'xfsprogs' 'duperemove' 'parted');
-declare -a packagesDebian=('btrfs-progs' 'btrfs-compsize' 'dosfstools' 'exfat-utils' 'f2fs-tools' 'ntfs-3g' 'udftools' 'xfsprogs' 'duperemove' 'parted');
-declare -a packagesFedora=('btrfs-progs' 'compsize' 'dosfstools' 'exfat-utils' 'f2fs-tools' 'ntfs-3g' 'ntfsprogs' 'udftools' 'xfsprogs' 'duperemove' 'parted');
-declare -a packagesSuse=('btrfsprogs' 'compsize' 'dosfstools' 'exfat-utils' 'f2fs-tools' 'ntfs-3g' 'ntfsprogs' 'udftools' 'xfsprogs' 'duperemove' 'parted');
+declare -a packagesArch=('btrfs-progs' 'dosfstools' 'exfat-utils' 'f2fs-tools' 'ntfs-3g' 'udftools' 'xfsprogs' 'parted');
+declare -a packagesDebian=('btrfs-progs' 'dosfstools' 'exfat-utils' 'f2fs-tools' 'ntfs-3g' 'udftools' 'xfsprogs' 'parted');
+declare -a packagesFedora=('btrfs-progs' 'dosfstools' 'f2fs-tools' 'ntfs-3g' 'ntfsprogs' 'udftools' 'xfsprogs' 'parted');
+declare -a packagesSuse=('btrfsprogs' 'dosfstools' 'exfat-utils' 'f2fs-tools' 'ntfs-3g' 'ntfsprogs' 'udftools' 'xfsprogs' 'parted');
 prepareOperation "biWant_cli_file_systems";
 
 declare -a packagesArch=();
