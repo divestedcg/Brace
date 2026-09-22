@@ -296,6 +296,12 @@ prepareOperation "biRemoval_gnome_legacy";
 declare -a packagesFedora=('chkrootkit' 'rkhunter' 'lynis' 'spectre-meltdown-checker' 'bleachbit' 'gimpfx-foundry' 'ssss' 'ncdu' 'stress' 'stress-ng' 's-tui' 'onionshare' 'croc' 'numix-icon-theme' 'rng-tools' 'irqbalance' 'firejail' 'fapolicyd' 'intel-mediasdk' 'libva-intel-hybrid-driver' 'pixz' 'compsize' 'srm' 'pv' 'ripgrep' 'duperemove' 'unrar' 'msr-tools');
 prepareOperation "biRemoval_brace_cleanup";
 
+declare -a packagesFedora=('*.i686');
+prepareOperation "biRemoval_32bit";
+
+declare -a packagesFedora=('*-devel');
+prepareOperation "biRemoval_devel";
+
 declare -a packagesArch=('openssh' 'nano' 'htop' 'wget' 'screen' 'dialog' 'wireless-regdb');
 declare -a packagesDebian=('ssh' 'nano' 'htop' 'wget' 'screen' 'unattended-upgrades');
 declare -a packagesFedora=('openssh' 'nano' 'htop' 'wget' 'screen' 'grubby' 'cryptsetup-reencrypt' 'zstd');
@@ -475,7 +481,16 @@ prepareOperation "biWant_cli_file_dupe_search";
 declare -a packagesArch=('gocryptfs');
 declare -a packagesDebian=('gocryptfs');
 declare -a packagesFedora=('gocryptfs');
-prepareOperation "biWant_cli_file_encryption";
+prepareOperation "biWant_cli_file_encryption_gocryptfs";
+
+declare -a packagesFedora=('cryfs');
+prepareOperation "biWant_cli_file_encryption_cryfs";
+
+declare -a packagesFedora=('fuse-encfs');
+prepareOperation "biWant_cli_file_encryption_encfs";
+
+declare -a packagesFedora=('ecryptfs-utils');
+prepareOperation "biWant_cli_file_encryption_ecryptfs";
 
 declare -a packagesFedora=('sirikali');
 #declare -a packagesFlathub=('io.github.mhogomchungu.sirikali');
@@ -520,6 +535,15 @@ declare -a packagesFedora=('@printing');
 #TODO: improve this somehow
 prepareOperation "biWant_daemon_printing";
 
+declare -a packagesFedora=('sedutil');
+prepareOperation "biWant_cli_manage_sed";
+
+declare -a packagesFedora=('nvme-cli');
+prepareOperation "biWant_cli_manage_nvme";
+
+declare -a packagesFedora=('opensc');
+prepareOperation "biWant_cli_manage_smartcard";
+
 declare -a packagesArch=('iotop');
 declare -a packagesDebian=('iotop');
 declare -a packagesFedora=('iotop-c');
@@ -538,11 +562,17 @@ declare -a packagesFedora=('gsmartcontrol');
 declare -a packagesSuse=('gsmartcontrol');
 prepareOperation "biWant_gui_monitor_disk_health";
 
-declare -a packagesArch=('intel-gpu-tools' 'radeontop');
-declare -a packagesDebian=('intel-gpu-tools' 'radeontop');
-declare -a packagesFedora=('igt-gpu-tools' 'radeontop');
-declare -a packagesSuse=('intel-gpu-tools' 'radeontop');
-prepareOperation "biWant_cli_monitor_gpu";
+declare -a packagesArch=('radeontop');
+declare -a packagesDebian=('radeontop');
+declare -a packagesFedora=('radeontop');
+declare -a packagesSuse=('radeontop');
+prepareOperation "biWant_cli_monitor_gpu_amd";
+
+declare -a packagesArch=('intel-gpu-tools');
+declare -a packagesDebian=('intel-gpu-tools');
+declare -a packagesFedora=('igt-gpu-tools');
+declare -a packagesSuse=('intel-gpu-tools');
+prepareOperation "biWant_cli_monitor_gpu_intel";
 
 declare -a packagesArch=('bmon');
 declare -a packagesDebian=('bmon');
@@ -565,7 +595,10 @@ declare -a packagesArch=('lm_sensors');
 declare -a packagesDebian=('lm-sensors');
 declare -a packagesFedora=('lm_sensors');
 declare -a packagesSuse=('sensors');
-prepareOperation "biWant_cli_monitor_temperature"; #TODO: remove in favor of sensors-lite?
+prepareOperation "biWant_cli_monitor_sensors"; #TODO: remove in favor of sensors-lite?
+
+declare -a packagesFedora=('hddtemp');
+prepareOperation "biWant_cli_monitor_temperature_disk";
 
 declare -a packagesArch=('wavemon');
 declare -a packagesDebian=('wavemon');
@@ -581,8 +614,6 @@ declare -a packagesFedora=('openrgb');
 #declare -a packagesFlathub=('org.openrgb.OpenRGB'); #needs udev rules
 prepareOperation "biWant_gui_manage_rgb";
 
-#TODO: 'sedutil' 'nvme-cli'
-#TODO: 'pcsc'
 #TODO: 'bluez': ffmpeg & libvirt both depend on this
 #TODO: 'gnome-bluetooth'
 #TODO: 'usbguard': maybe move this to a helper script instead
@@ -868,6 +899,9 @@ declare -a packagesFedora=('git');
 declare -a packagesSuse=('git');
 prepareOperation "biWant_cli_devel_git";
 
+declare -a packagesFedora=('git-lfs');
+prepareOperation "biWant_cli_devel_git_lfs";
+
 declare -a packagesFedora=('tig');
 prepareOperation "biWant_cli_viewer_git";
 
@@ -887,8 +921,14 @@ prepareOperation "biWant_cli_devel_packaging";
 declare -a packagesFedora=('ShellCheck');
 prepareOperation "biWant_cli_devel_shell";
 
-#TODO: 'esptool'
-#TODO: 'tidy'
+declare -a packagesFedora=('valgrind');
+prepareOperation "biWant_cli_devel_memory_debugger";
+
+declare -a packagesFedora=('tidy');
+prepareOperation "biWant_cli_devel_html_formatter";
+
+declare -a packagesFedora=('esptool');
+prepareOperation "biWant_cli_devel_esp_flasher";
 
 declare -a packagesArch=('xonotic');
 declare -a packagesFedora=('xonotic');
