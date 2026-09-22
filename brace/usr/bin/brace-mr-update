@@ -11,14 +11,18 @@ for kmod in $(sed 's/ .*//g' /proc/modules); do
 	sed -i "/ $kmod$/ s/^b/#[D] b/" /usr/lib/modprobe.d/brace-mr.conf;
 	echo "$kmod" >> /etc/brace-mr.conf;
 done;
+unset kmod;
 
 if [ -f /etc/brace-mr.conf ]; then
 	sort -u -o /etc/brace-mr.conf /etc/brace-mr.conf;
 	for kmod in $(cat /etc/brace-mr.conf); do
 		sed -i "/ $kmod$/ s/^b/#[D] b/" /usr/lib/modprobe.d/brace-mr.conf;
 	done;
+	unset kmod;
 fi;
 
 postAllowed=$(grep -c "^#" /usr/lib/modprobe.d/brace-mr.conf;);
 
-echo "Allowlisted $(($postAllowed-$origAllowed)) additional kmods";
+echo "Allowlisted $(( postAllowed - origAllowed )) additional kmods";
+
+unset origAllowed postAllowed;

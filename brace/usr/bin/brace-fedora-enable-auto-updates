@@ -49,6 +49,7 @@ if [ -f /etc/fedora-release ]; then
 	echo "#stdin_format = \"hostname - {body}\"" >> "$automaticConfig"
 
 	systemctl enable dnf5-automatic.timer --now;
+	unset automaticConfig;
 else
 	echo "Currently only Fedora is supported";
 fi;

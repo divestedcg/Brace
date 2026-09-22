@@ -1031,7 +1031,8 @@ if [ "$manageFlatpak" == "true" ]; then
 	handleCleanup "flatpak";
 fi;
 unset packagesToInstallFlatpak packagesToRemoveFlatpak packagesToIgnoreFlatpak;
-unset configPath usermode packageManager preferFlatpak flatpakUseFedoraRemote flatpakInstallType;
+
+unset configPath usermode packageManager manageFlatpak preferFlatpak flatpakUseFedoraRemote flatpakInstallType;
 
 #Finish
 echo -e "${green}INFO: Installer complete!${coloroff}";

@@ -108,6 +108,7 @@ verifyKernelCommandLine() {
 			logNo "kernel hardening via command line:" "missing $optionToCheck" "sudo brace-supplemental-changes";
 		fi;
 	done;
+	unset optionToCheck optionsToCheck;
 }
 
 secureBootEnforcing() {
@@ -246,6 +247,7 @@ if [ -f /etc/fedora-release ] || [ -f /etc/redhat-release ]; then
 	echo -e "\n================================================================"
 	echo "END OF brace-audit"
 	echo "================================================================"
+	unset isVirtualMachine isDesktop publicFacing;
 else
 	echo "Currently only Fedora is supported";
 fi;

@@ -214,6 +214,7 @@ if [ "$(/usr/bin/id -u)" -eq "0" ]; then
 				break;;
 		esac
 	done
+	unset braceYamaSysctlPath;
 
 	#Hostname
 	if [ -x /usr/bin/hostnamectl ]; then
@@ -227,6 +228,7 @@ if [ "$(/usr/bin/id -u)" -eq "0" ]; then
 					fi;
 					hostnamectl set-hostname "$randhost";
 					#echo "127.0.0.1 $randhost" >> /etc/hosts;
+					unset randhost;
 					break;;
 				localhost )
 					hostnamectl set-hostname "localhost";
