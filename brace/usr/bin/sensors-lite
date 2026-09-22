@@ -14,47 +14,48 @@
 #You should have received a copy of the GNU Affero General Public License
 #along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-if [ "$1" == "-f" ] && [ -f "/usr/bin/bc" ]; then useFahrenheit=true; fi;
+if [ "$1" == "-f" ]; then useFahrenheit=true; fi;
 
 prettyPrintOutput() {
-	sort -n | column -s $'\t' -t
+	column -s $'\t' -t
 }
 
 getSensorValuePretty() {
-	sensorValueRaw=$(cat "$1");
-	sensorValueC=$(( sensorValueRaw / 1000 ));
-	if [ "$useFahrenheit" == "true" ]; then
-		local sensorValueF;
-		sensorValueF=$(echo "1.8 * $sensorValueC + 32" | bc);
-		echo -n "$sensorValueF°F";
-		unset sensorValueF;
-	else
-		echo -n "$sensorValueC°C";
-	fi;
-	unset sensorValueRaw sensorValueC;
-}
-
-getOutputTZ() {
-	for sensorLabel in /sys/class/thermal/thermal_zone*/type; do
-		if [ -f "$sensorLabel" ]; then
-			local sensorValue="${sensorLabel//type/temp}";
-			if [ -f "$sensorValue" ]; then
-				local sensorLabelActual;
-				sensorLabelActual=$(cat "$sensorLabel");
-				echo -e "$sensorLabelActual:\t$(getSensorValuePretty "$sensorValue")";
-				unset sensorLabelActual;
-			fi;
-			unset sensorValue;
+	local sensorFile;
+	sensorFile=$(basename "$1");
+	local sensorValueRaw;
+	if ! sensorValueRaw=$(cat "$1" 2> /dev/null); then
+		echo -n "N/A";
+		return 1;
+	elif [[ "$sensorFile" == *"fan"* ]]; then
+		echo -n "$sensorValueRaw RPM";
+	elif [[ "$sensorFile" == *"temp"* ]]; then
+		local sensorValueC=$(( sensorValueRaw / 1000 ));
+		if [ "$useFahrenheit" == "true" ]; then
+			#Credit (CC BY-SA 4.0): https://stackoverflow.com/a/72457290
+			local sensorValueF=$(( 18 * sensorValueC + 320 ));
+			sensorValueF=${sensorValueF:0: -1}.${sensorValueF: -1: 1}
+			echo -n "$sensorValueF°F";
+			unset sensorValueF;
+		else
+			echo -n "$sensorValueC°C";
 		fi;
-		unset sensorLabel;
-	done;
+		unset sensorValueC;
+	elif [[ "$sensorFile" == *"power"* ]]; then
+		echo -n "$( echo " scale=2; $sensorValueRaw * 0.000001 / 1" | bc) W";
+	elif [[ "$sensorFile" == *"in"* ]] || [[ "$sensorFile" == *"curr"* ]]; then
+		echo -n "$( echo " scale=2; $sensorValueRaw * 0.001 / 1" | bc) V";
+	else
+		echo -n "$sensorValueRaw";
+	fi;
+	unset sensorFile sensorValueRaw;
 }
 
 getOutputHM() {
 	for sensorLabel in /sys/devices/platform/*/hwmon/hwmon*/temp*_label; do
-		if [ -f "$sensorLabel" ]; then
+		if [ -r "$sensorLabel" ]; then
 			local sensorValue="${sensorLabel//_label/_input}";
-			if [ -f "$sensorValue" ]; then
+			if [ -r "$sensorValue" ]; then
 				local sensorLabelActual;
 				sensorLabelActual=$(cat "$sensorLabel");
 				echo -e "$sensorLabelActual:\t$(getSensorValuePretty "$sensorValue")";
@@ -62,13 +63,80 @@ getOutputHM() {
 			fi;
 			unset sensorValue;
 		fi;
-		unset sensorLabel;
 	done;
+	unset sensorLabel;
+
+	for sensorValue in /sys/devices/platform/*/hwmon/hwmon*/fan*_input; do
+		getOutputHM_direct "$sensorValue";
+	done;
+	for sensorValue in /sys/devices/platform/*/wmi_bus/wmi_bus*/*/hwmon/hwmon*/fan*_input; do
+		getOutputHM_direct "$sensorValue";
+	done;
+	unset sensorValue;
 }
 
-#TODO: disks, fans
+getOutputHM_direct() {
+	sensorValue="$1";
+	if [ -r "$sensorValue" ]; then
+		local sensorLabel;
+		sensorLabel=$(echo "$sensorValue" | sed 's|.*/||' | sed 's|_input||')
+		echo -e "$sensorLabel:\t$(getSensorValuePretty "$sensorValue")";
+		unset sensorLabel;
+	fi;
+	unset sensorValue;
+}
 
-getOutputTZ | prettyPrintOutput;
+getOutputTZ() {
+	for sensorLabel in /sys/class/thermal/thermal_zone*/type; do
+		if [ -r "$sensorLabel" ]; then
+			local sensorValue="${sensorLabel//type/temp}";
+			if [ -r "$sensorValue" ]; then
+				local sensorLabelActual;
+				sensorLabelActual=$(cat "$sensorLabel");
+				echo -e "$sensorLabelActual:\t$(getSensorValuePretty "$sensorValue")";
+				unset sensorLabelActual;
+			fi;
+			unset sensorValue;
+		fi;
+	done;
+	unset sensorLabel;
+}
+
+getOutputPS() {
+	#charger
+	for sensorValue in /sys/devices/platform/*/power_supply/*/hwmon*/*_input; do
+		getOutputPS_direct "$sensorValue";
+	done;
+	#battery (Dell)
+	for sensorValue in /sys/devices/LNXSYSTM:00/LNXSYBUS:00/*/power_supply/BAT*/hwmon*/*_input; do
+		getOutputPS_direct "$sensorValue";
+	done;
+	#battery (ThinkPad)
+	for sensorValue in /sys/devices/LNXSYSTM:00/LNXSYBUS:00/*/device:*/*/*/power_supply/BAT*/hwmon*/*_input; do
+		getOutputPS_direct "$sensorValue";
+	done;
+	unset sensorValue;
+}
+
+getOutputPS_direct() {
+	sensorValue="$1";
+	if [ -r "$sensorValue" ]; then
+		local sensorLabel;
+		sensorLabel=$(echo "$sensorValue" | sed 's|.*/power_supply/||' | sed 's|/hwmon.*/|-|' | sed 's|_input||');
+		echo -e "$sensorLabel:\t$(getSensorValuePretty "$sensorValue")";
+		unset sensorLabel;
+	fi;
+	unset sensorValue;
+}
+
+#TODO: disk temps & more
+#TODO: handle duplicate
+
+echo -e "\nhwmon:"
 getOutputHM | prettyPrintOutput;
+echo -e "\nthermal zones:"
+getOutputTZ | prettyPrintOutput;
+echo -e "\npower_supply:"
+getOutputPS | prettyPrintOutput;
 
 unset useFahrenheit;
