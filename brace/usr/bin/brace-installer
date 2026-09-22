@@ -257,10 +257,7 @@ declare -a packagesToIgnoreFlatpak=();
 #
 # Start of packages
 #
-declare -a packagesArch=();
-declare -a packagesDebian=();
 declare -a packagesFedora=('abrt*' 'cockpit*' 'PackageKit' 'PackageKit-gtk3-module' 'bat' 'virtualbox-guest-additions' 'hyperv*' 'open-vm-tools' 'mediawriter' 'passim' 'sos' 'plocate' 'memstrack' 'realmd' 'NetworkManager-vpnc' 'NetworkManager-openconnect' 'NetworkManager-openvpn' 'NetworkManager-libreswan' 'NetworkManager-ssh' 'NetworkManager-adsl' 'NetworkManager-ppp' 'NetworkManager-wwan' 'ModemManager' 'usb_modeswitch' 'whois' 'whois-nls' 'mkpasswd' 'vim-minimal' 'vim-enhanced' 'compat-ffmpeg4' 'python3-perf' 'gtk2' '*backgrounds*' 'anaconda*' 'setroubleshoot*' 'kpartx' 'mpage' 'wl-clipboard' 'gamemode' 'lrzsz' 'pinfo' 'psacct' 'prefixdevname' 'zziplib' 'tcl');
-declare -a packagesSuse=();
 if [ -f /etc/fedora-release ]; then packagesFedora+=('python3-dnf' 'deltarpm'); fi; #EL <=10 still uses DNF4
 if [ -f /etc/authselect/authselect.conf ]; then
 	if grep -q "^local$" /etc/authselect/authselect.conf; then
@@ -279,39 +276,24 @@ fi;
 #TODO: 'plymouth*': maybe
 prepareOperation "biRemoval_general_unwanted";
 
-declare -a packagesArch=();
-declare -a packagesDebian=();
 declare -a packagesFedora=('abiword' 'adapta-gtk-theme' 'akregator' 'amarok' 'asunder' 'calligra*' 'clipit' 'clipman' 'compiz' 'dnfdragora*' 'doxygen' 'emerald' 'empathy' 'exaile' 'falkon' 'filezilla' 'geany' 'gnomebaker' 'gnote' 'gnumeric' 'juk' 'k3b' 'kget' 'kmahjongg' 'kmines' 'konqueror' 'konversation' 'kpatience' 'ktnef' 'ktorrent' 'lxmusic' 'midori' 'osmo' 'paper-icon-theme' 'pidgin' '*powerline' 'pragha' 'qlipper' 'quassel' 'qupzilla' 'rhythmbox' 'thunderbird' 'xawtv' 'xfburn' 'xfdashboard' 'xpad' 'yarock' 'hexchat' 'gparted' 'blivet-gui' 'shotwell' 'mpv');
-declare -a packagesSuse=();
 prepareOperation "biRemoval_spins_unwanted";
 
-declare -a packagesArch=();
-declare -a packagesDebian=();
 declare -a packagesFedora=('baobab' 'gnome-photos' 'gnome-maps' 'gnome-weather' 'gnome-connections' 'gnome-boxes' 'gnome-software' 'sushi' 'gnome-browser-connector' 'gnome-classic-session' 'fedora-chromium-config-gnome' 'epiphany' 'papers-nautilus' 'gnome-epub-thumbnailer' 'totem-video-thumbnailer' 'gnome-directory-thumbnailer' 'gnome-extensions-app' 'gnome-shell-extension*' 'gnome-tour');
-declare -a packagesSuse=();
 #TODO: 'glycin-thumbnailer' 'gst-thumbnailers'
 prepareOperation "biRemoval_gnome_unwanted";
 
-declare -a packagesArch=();
-declare -a packagesDebian=();
 declare -a packagesFedora=('rygel' 'gnome-user-share' 'gnome-remote-desktop');
-declare -a packagesSuse=();
 prepareOperation "biRemoval_gnome_sharing";
 
-declare -a packagesArch=();
-declare -a packagesDebian=();
 declare -a packagesFedora=('eog' 'totem' 'evince' 'cheese');
-declare -a packagesSuse=();
 if [ ! -x /usr/bin/cinnamon ]; then
 	packagesFedora+=('gnome-terminal');
 fi;
 #TODO: remove gedit after g-t-e gains a sort function
 prepareOperation "biRemoval_gnome_legacy";
 
-declare -a packagesArch=();
-declare -a packagesDebian=();
 declare -a packagesFedora=('chkrootkit' 'rkhunter' 'lynis' 'spectre-meltdown-checker' 'bleachbit' 'gimpfx-foundry' 'ssss' 'ncdu' 'stress' 'stress-ng' 's-tui' 'onionshare' 'croc' 'numix-icon-theme' 'rng-tools' 'irqbalance' 'firejail' 'fapolicyd' 'intel-mediasdk' 'libva-intel-hybrid-driver' 'pixz' 'compsize' 'srm' 'pv' 'ripgrep' 'duperemove' 'unrar' 'msr-tools');
-declare -a packagesSuse=();
 prepareOperation "biRemoval_brace_cleanup";
 
 declare -a packagesArch=('openssh' 'nano' 'htop' 'wget' 'screen' 'dialog' 'wireless-regdb');
@@ -345,41 +327,30 @@ prepareOperation "biWant_gui_gnome_extras";
 declare -a packagesArch=('libva-mesa-driver' 'libva-utils' 'intel-media-driver');
 declare -a packagesDebian=('mesa-va-drivers' 'vainfo' 'intel-media-va-driver');
 declare -a packagesFedora=('mesa-dri-drivers' 'mesa-va-drivers-freeworld' 'libva' 'libva-utils' 'libva-intel-media-driver' 'intel-media-driver');
-declare -a packagesSuse=();
 prepareOperation "biWant_lib_VAAPI";
 
 declare -a packagesArch=('libva-intel-driver');
 declare -a packagesDebian=('i965-va-driver');
 declare -a packagesFedora=('libva-intel-driver');
-declare -a packagesSuse=();
 prepareOperation "biWant_lib_VAAPI_legacy";
 
-declare -a packagesArch=();
-declare -a packagesDebian=();
 declare -a packagesFedora=('podman' '@container-management');
-declare -a packagesSuse=();
 prepareOperation "biWant_cli_containers";
 
 declare -a packagesArch=('libvirt' 'qemu');
-declare -a packagesDebian=();
 declare -a packagesFedora=('@virtualization-headless');
-declare -a packagesSuse=();
 prepareOperation "biWant_cli_virtualization";
 
 declare -a packagesArch=('libvirt' 'qemu' 'virt-manager');
-declare -a packagesDebian=();
 declare -a packagesFedora=('@virtualization' 'virt-manager');
 #declare -a packagesFlathub=('org.virt_manager.virt-manager');
 #declare -a packagesFedoraPak=('org.virt_manager.virt-manager');
 declare -a packagesSuse=(); #'Install Hypervisor' can be used
 prepareOperation "biWant_gui_virtualization";
 
-declare -a packagesArch=();
-declare -a packagesDebian=();
 declare -a packagesFedora=('flatpak' 'fedora-flathub-remote' 'flatseal');
 #declare -a packagesFlathub=('com.github.tchx84.Flatseal');
 #declare -a packagesFedoraPak=('com.github.tchx84.Flatseal');
-declare -a packagesSuse=();
 prepareOperation "biWant_gui_flatpak";
 
 declare -a packagesArch=('evolution');
@@ -479,11 +450,8 @@ declare -a packagesFlathub=('org.pitivi.Pitivi');
 declare -a packagesSuse=('pitivi');
 prepareOperation "biWant_gui_editor_video";
 
-declare -a packagesArch=();
-declare -a packagesDebian=();
 declare -a packagesFedora=('HandBrake-gui');
 declare -a packagesFlathub=('fr.handbrake.ghb');
-declare -a packagesSuse=();
 prepareOperation "biWant_gui_editor_video_optimizer";
 
 declare -a packagesArch=('restic');
@@ -498,32 +466,21 @@ declare -a packagesFedora=('7zip' '7zip-standalone' 'unrar-free');
 declare -a packagesSuse=('p7zip');
 prepareOperation "biWant_cli_file_compression";
 
-declare -a packagesArch=();
-declare -a packagesDebian=();
 declare -a packagesFedora=('rsync');
-declare -a packagesSuse=();
 prepareOperation "biWant_cli_file_copy";
 
-declare -a packagesArch=();
-declare -a packagesDebian=();
 declare -a packagesFedora=('fdupes');
-declare -a packagesSuse=();
 prepareOperation "biWant_cli_file_dupe_search";
 
 declare -a packagesArch=('gocryptfs');
 declare -a packagesDebian=('gocryptfs');
 declare -a packagesFedora=('gocryptfs');
-declare -a packagesSuse=();
 prepareOperation "biWant_cli_file_encryption";
 
-declare -a packagesArch=();
-declare -a packagesDebian=();
 declare -a packagesFedora=('sirikali');
 #declare -a packagesFlathub=('io.github.mhogomchungu.sirikali');
-declare -a packagesSuse=();
 prepareOperation "biWant_gui_file_encryption_manager";
 
-declare -a packagesArch=();
 declare -a packagesDebian=('scrub');
 declare -a packagesFedora=('scrub');
 declare -a packagesSuse=('scrub');
@@ -541,10 +498,7 @@ declare -a packagesFedora=('btrfs-progs' 'dosfstools' 'f2fs-tools' 'ntfs-3g' 'nt
 declare -a packagesSuse=('btrfsprogs' 'dosfstools' 'exfat-utils' 'f2fs-tools' 'ntfs-3g' 'ntfsprogs' 'udftools' 'xfsprogs' 'parted');
 prepareOperation "biWant_cli_file_systems";
 
-declare -a packagesArch=();
-declare -a packagesDebian=();
 declare -a packagesFedora=('nfs-utils');
-declare -a packagesSuse=();
 prepareOperation "biWant_cli_file_systems_nfs";
 
 declare -a packagesArch=('sshfs');
@@ -553,10 +507,7 @@ declare -a packagesFedora=('fuse-sshfs');
 declare -a packagesSuse=('sshfs');
 prepareOperation "biWant_cli_file_systems_sshfs";
 
-declare -a packagesArch=();
-declare -a packagesDebian=();
 declare -a packagesFedora=('udisks2');
-declare -a packagesSuse=();
 prepareOperation "biWant_cli_file_systems_udisks";
 
 declare -a packagesArch=('syncthing');
@@ -565,10 +516,7 @@ declare -a packagesFedora=('syncthing');
 declare -a packagesSuse=('syncthing');
 prepareOperation "biWant_daemon_file_sync";
 
-declare -a packagesArch=();
-declare -a packagesDebian=();
 declare -a packagesFedora=('@printing');
-declare -a packagesSuse=();
 #TODO: improve this somehow
 prepareOperation "biWant_daemon_printing";
 
@@ -608,12 +556,9 @@ declare -a packagesFedora=('powertop');
 declare -a packagesSuse=('powertop');
 prepareOperation "biWant_cli_monitor_power"; #TODO: remove in favor of upower -b?
 
-declare -a packagesArch=();
-declare -a packagesDebian=();
 declare -a packagesFedora=('gnome-power-manager');
 #declare -a packagesFlathub=('unverified.org.gnome.PowerStats');
 declare -a packagesFedoraPak=('org.gnome.PowerStats');
-declare -a packagesSuse=();
 prepareOperation "biWant_gui_monitor_power"; #TODO: remove in favor of upower -b?
 
 declare -a packagesArch=('lm_sensors');
@@ -628,18 +573,12 @@ declare -a packagesFedora=('wavemon');
 declare -a packagesSuse=('wavemon');
 prepareOperation "biWant_cli_monitor_wireless";
 
-declare -a packagesArch=();
-declare -a packagesDebian=();
 declare -a packagesFedora=('piper');
 #declare -a packagesFlathub=('unverified.org.freedesktop.Piper');
-declare -a packagesSuse=();
 prepareOperation "biWant_gui_manage_mouse";
 
-declare -a packagesArch=();
-declare -a packagesDebian=();
 declare -a packagesFedora=('openrgb');
 #declare -a packagesFlathub=('org.openrgb.OpenRGB'); #needs udev rules
-declare -a packagesSuse=();
 prepareOperation "biWant_gui_manage_rgb";
 
 #TODO: 'sedutil' 'nvme-cli'
@@ -654,7 +593,6 @@ prepareOperation "biWant_gui_manage_rgb";
 declare -a packagesArch=('android-tools' 'android-udev');
 declare -a packagesDebian=('adb' 'fastboot');
 declare -a packagesFedora=('android-tools');
-declare -a packagesSuse=();
 prepareOperation "biWant_cli_android";
 
 declare -a packagesArch=('tor' 'torsocks');
@@ -680,7 +618,6 @@ declare -a packagesDebian=('qalculate-gtk');
 declare -a packagesFedora=('qalculate-gtk');
 declare -a packagesFlathub=('io.github.Qalculate');
 declare -a packagesFedoraPak=('io.github.Qalculate');
-declare -a packagesSuse=();
 prepareOperation "biWant_gui_calculator";
 
 declare -a packagesArch=('yt-dlp');
@@ -711,7 +648,6 @@ declare -a packagesDebian=('obs-studio');
 declare -a packagesFedora=('obs-studio');
 declare -a packagesFlathub=('com.obsproject.Studio');
 declare -a packagesFedoraPak=('com.obsproject.Studio');
-declare -a packagesSuse=();
 prepareOperation "biWant_gui_screencast";
 
 declare -a packagesArch=('iperf3');
@@ -763,7 +699,6 @@ declare -a packagesSuse=('gnucash');
 #TODO: switch to homebank maybe?
 prepareOperation "biWant_gui_office_accounting";
 
-declare -a packagesArch=();
 declare -a packagesDebian=('dia');
 declare -a packagesFedora=('dia');
 declare -a packagesFedoraPak=('org.gnome.dia');
@@ -778,21 +713,14 @@ declare -a packagesFedoraPak=('net.scribus.Scribus');
 declare -a packagesSuse=('scribus');
 prepareOperation "biWant_gui_office_publisher";
 
-declare -a packagesArch=();
-declare -a packagesDebian=();
 declare -a packagesFedora=('xournalpp');
 declare -a packagesFlathub=('com.github.xournalpp.xournalpp');
 declare -a packagesFedoraPak=('com.github.xournalpp.xournalpp');
-declare -a packagesSuse=();
 prepareOperation "biWant_gui_office_notetaking";
 
-declare -a packagesArch=();
-declare -a packagesDebian=();
 declare -a packagesFedora=('pandoc-cli');
-declare -a packagesSuse=();
 prepareOperation "biWant_cli_document_converter";
 
-declare -a packagesArch=();
 declare -a packagesDebian=('libu2f-udev');
 declare -a packagesFedora=('u2f-hidraw-policy');
 declare -a packagesSuse=('libu2f-host0');
@@ -863,7 +791,6 @@ declare -a packagesSuse=('ffmpeg');
 prepareOperation "biWant_lib_codecs";
 
 declare -a packagesArch=('foliate');
-declare -a packagesDebian=();
 declare -a packagesFedora=('foliate');
 declare -a packagesFlathub=('com.github.johnfactotum.Foliate');
 declare -a packagesFedoraPak=('com.github.johnfactotum.Foliate');
@@ -941,10 +868,7 @@ declare -a packagesFedora=('git');
 declare -a packagesSuse=('git');
 prepareOperation "biWant_cli_devel_git";
 
-declare -a packagesArch=();
-declare -a packagesDebian=();
 declare -a packagesFedora=('tig');
-declare -a packagesSuse=();
 prepareOperation "biWant_cli_viewer_git";
 
 declare -a packagesArch=('gitg');
@@ -956,22 +880,17 @@ declare -a packagesSuse=('gitg');
 prepareOperation "biWant_gui_viewer_git";
 
 declare -a packagesArch=('asp');
-declare -a packagesDebian=();
 declare -a packagesFedora=('rpmbuild' 'createrepo' 'rpm-sign');
 declare -a packagesSuse=('rpmbuild');
 prepareOperation "biWant_cli_devel_packaging";
 
-declare -a packagesArch=();
-declare -a packagesDebian=();
 declare -a packagesFedora=('ShellCheck');
-declare -a packagesSuse=();
 prepareOperation "biWant_cli_devel_shell";
 
 #TODO: 'esptool'
 #TODO: 'tidy'
 
 declare -a packagesArch=('xonotic');
-declare -a packagesDebian=();
 declare -a packagesFedora=('xonotic');
 declare -a packagesFlathub=('org.xonotic.Xonotic');
 declare -a packagesFedoraPak=('org.xonotic.Xonotic');
