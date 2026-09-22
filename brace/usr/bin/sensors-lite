@@ -24,7 +24,8 @@ getSensorValuePretty() {
 	local sensorFile;
 	sensorFile="${1##*/}";
 	local sensorValueRaw;
-	if ! sensorValueRaw=$(cat "$1" 2> /dev/null); then
+	sensorValueRaw=$(cat "$1" 2> /dev/null);
+	if [ "$?" -ne "0" ] || [ -z "$sensorValueRaw" ]  || [[ ! "$sensorValueRaw" =~ ^[0-9]+$ ]]; then
 		echo -n "N/A";
 		return 1;
 	elif [[ "$sensorFile" == "fan"*"_input" ]]; then
@@ -77,7 +78,7 @@ getOutput_direct() {
 		local sensorLabel;
 		sensorLabel+=$(getNameFile "${sensorValue%\/*}/name"); #subsystem
 		sensorLabel+=$(getNameFile "${sensorValue/_input/_label}"); #pretty
-		sensorLabel+=$(sed 's|.*/||;s|_input||' <<< "$sensorValue"); #raw
+		sensorLabel+=$(sed 's|.*/||; s|_input||;' <<< "$sensorValue"); #raw
 		echo -e "$sensorLabel:\t$(getSensorValuePretty "$sensorValue")";
 		unset sensorLabel;
 	fi;
