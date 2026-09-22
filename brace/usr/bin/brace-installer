@@ -259,7 +259,7 @@ declare -a packagesToIgnoreFlatpak=();
 #
 declare -a packagesArch=();
 declare -a packagesDebian=();
-declare -a packagesFedora=('abrt*' 'cockpit*' 'PackageKit' 'PackageKit-gtk3-module' 'bat' 'virtualbox-guest-additions' 'hyperv*' 'open-vm-tools' 'mediawriter' 'passim' 'sos' 'plocate' 'memstrack' 'realmd' 'NetworkManager-vpnc' 'NetworkManager-openconnect' 'NetworkManager-openvpn' 'NetworkManager-libreswan' 'NetworkManager-ssh' 'NetworkManager-adsl' 'NetworkManager-ppp' 'NetworkManager-wwan' 'ModemManager' 'usb_modeswitch' 'whois' 'whois-nls' 'mkpasswd' 'vim-minimal' 'vim-enhanced' 'compat-ffmpeg4' 'python3-perf' 'gtk2' '*backgrounds*' 'anaconda*' 'setroubleshoot*' 'kpartx' 'mpage' 'wl-clipboard' 'gamemode' 'lrzsz' 'pinfo' 'psacct' 'prefixdevname');
+declare -a packagesFedora=('abrt*' 'cockpit*' 'PackageKit' 'PackageKit-gtk3-module' 'bat' 'virtualbox-guest-additions' 'hyperv*' 'open-vm-tools' 'mediawriter' 'passim' 'sos' 'plocate' 'memstrack' 'realmd' 'NetworkManager-vpnc' 'NetworkManager-openconnect' 'NetworkManager-openvpn' 'NetworkManager-libreswan' 'NetworkManager-ssh' 'NetworkManager-adsl' 'NetworkManager-ppp' 'NetworkManager-wwan' 'ModemManager' 'usb_modeswitch' 'whois' 'whois-nls' 'mkpasswd' 'vim-minimal' 'vim-enhanced' 'compat-ffmpeg4' 'python3-perf' 'gtk2' '*backgrounds*' 'anaconda*' 'setroubleshoot*' 'kpartx' 'mpage' 'wl-clipboard' 'gamemode' 'lrzsz' 'pinfo' 'psacct' 'prefixdevname' 'zziplib' 'tcl');
 declare -a packagesSuse=();
 if [ -f /etc/fedora-release ]; then packagesFedora+=('python3-dnf' 'deltarpm'); fi; #EL <=10 still uses DNF4
 if [ -f /etc/authselect/authselect.conf ]; then
@@ -277,7 +277,6 @@ fi;
 #TODO: 'PackageKit-glib': simple-scan depends on it
 #TODO: 'PackageKit-gstreamer-plugin': @multimedia pulls it in
 #TODO: 'plymouth*': maybe
-#TODO: 'tcl': test this
 prepareOperation "biRemoval_general_unwanted";
 
 declare -a packagesArch=();
@@ -325,7 +324,7 @@ declare -a packagesArch=('tree');
 declare -a packagesDebian=('tree');
 declare -a packagesFedora=('tree');
 declare -a packagesSuse=('tree');
-prepareOperation "biWant_cli_extras";
+prepareOperation "biWant_cli_extras"; #TODO: restore ncdu after some time due to recent maintainer change
 
 declare -a packagesArch=('file-roller' 'dconf-editor' 'seahorse');
 declare -a packagesDebian=('file-roller' 'dconf-cli' 'dconf-editor' 'software-properties-gtk' 'seahorse');
@@ -335,7 +334,7 @@ declare -a packagesFedora=('file-roller' 'dconf-editor' 'seahorse' 'openssh-askp
 declare -a packagesSuse=('dconf-editor' 'seahorse' 'file-roller');
 prepareOperation "biWant_gui_generic_extras";
 
-declare -a packagesArch=('gnome-tweak-tool' );
+declare -a packagesArch=('gnome-tweak-tool');
 declare -a packagesDebian=('gnome-tweak-tool');
 declare -a packagesFedora=('gnome-tweak-tool' 'gnome-themes-extra' 'adw-gtk3-theme' 'loupe' 'showtime' 'papers' 'snapshot' 'ptyxis' 'gnome-text-editor' 'nautilus');
 #declare -a packagesFlathub=('org.gnome.Loupe' 'org.gnome.Showtime' 'org.gnome.Papers' 'org.gnome.Snapshot' 'app.devsuite.Ptyxis' 'org.gnome.TextEditor');
@@ -601,13 +600,13 @@ declare -a packagesArch=('bmon');
 declare -a packagesDebian=('bmon');
 declare -a packagesFedora=('bmon');
 declare -a packagesSuse=('bmon');
-prepareOperation "biWant_cli_monitor_network";
+prepareOperation "biWant_cli_monitor_network"; #XXX: switched maintainer/repo recently
 
 declare -a packagesArch=('powertop');
 declare -a packagesDebian=('powertop');
 declare -a packagesFedora=('powertop');
 declare -a packagesSuse=('powertop');
-prepareOperation "biWant_cli_monitor_power";
+prepareOperation "biWant_cli_monitor_power"; #TODO: remove in favor of upower -b?
 
 declare -a packagesArch=();
 declare -a packagesDebian=();
@@ -615,13 +614,13 @@ declare -a packagesFedora=('gnome-power-manager');
 #declare -a packagesFlathub=('unverified.org.gnome.PowerStats');
 declare -a packagesFedoraPak=('org.gnome.PowerStats');
 declare -a packagesSuse=();
-prepareOperation "biWant_gui_monitor_power";
+prepareOperation "biWant_gui_monitor_power"; #TODO: remove in favor of upower -b?
 
 declare -a packagesArch=('lm_sensors');
 declare -a packagesDebian=('lm-sensors');
 declare -a packagesFedora=('lm_sensors');
 declare -a packagesSuse=('sensors');
-prepareOperation "biWant_cli_monitor_temperature";
+prepareOperation "biWant_cli_monitor_temperature"; #TODO: remove in favor of sensors-lite?
 
 declare -a packagesArch=('wavemon');
 declare -a packagesDebian=('wavemon');
@@ -643,6 +642,7 @@ declare -a packagesFedora=('openrgb');
 declare -a packagesSuse=();
 prepareOperation "biWant_gui_manage_rgb";
 
+#TODO: 'sedutil' 'nvme-cli'
 #TODO: 'pcsc'
 #TODO: 'bluez': ffmpeg & libvirt both depend on this
 #TODO: 'gnome-bluetooth'
