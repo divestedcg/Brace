@@ -101,22 +101,27 @@ getOutputHM() {
 	while IFS= LC_ALL=C read -r -d '' -u 9 file
 	do
 		if [[ "$file" == *"/hwmon"* ]]; then
-			getOutput_direct "$file";
+			getOutput_direct "$file" &
 		fi;
 	done 9< <( find /sys/devices/ -type f -name '*_input' -exec printf '%s\0' {} + )
+}
+
+getOutputTZ_direct() {
+	local sensorLabel="$1";
+	local sensorValue="${sensorLabel//type/temp}";
+	if [ -r "$sensorValue" ]; then
+		local sensorLabelActual;
+		sensorLabelActual=$(cat "$sensorLabel");
+		echo -e "$sensorLabelActual:\t$(getSensorValuePretty "$sensorValue")";
+		unset sensorLabelActual;
+	fi;
+	unset sensorValue sensorLabel;
 }
 
 getOutputTZ() {
 	for sensorLabel in /sys/class/thermal/thermal_zone*/type; do
 		if [ -r "$sensorLabel" ]; then
-			local sensorValue="${sensorLabel//type/temp}";
-			if [ -r "$sensorValue" ]; then
-				local sensorLabelActual;
-				sensorLabelActual=$(cat "$sensorLabel");
-				echo -e "$sensorLabelActual:\t$(getSensorValuePretty "$sensorValue")";
-				unset sensorLabelActual;
-			fi;
-			unset sensorValue;
+			getOutputTZ_direct "$sensorLabel" &
 		fi;
 	done;
 	unset sensorLabel;
