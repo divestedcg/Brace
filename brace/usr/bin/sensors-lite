@@ -22,7 +22,7 @@ prettyPrintOutput() {
 
 getSensorValuePretty() {
 	local sensorFile;
-	sensorFile=$(basename "$1");
+	sensorFile="${1##*/}";
 	local sensorValueRaw;
 	if ! sensorValueRaw=$(cat "$1" 2> /dev/null); then
 		echo -n "N/A";
@@ -34,62 +34,50 @@ getSensorValuePretty() {
 		if [ "$useFahrenheit" == "true" ]; then
 			#Credit (CC BY-SA 4.0): https://stackoverflow.com/a/72457290
 			local sensorValueF=$(( 18 * sensorValueC + 320 ));
-			sensorValueF=${sensorValueF:0: -1}.${sensorValueF: -1: 1}
-			echo -n "$sensorValueF°F";
+			echo -n "${sensorValueF:0: -1}.${sensorValueF: -1: 1}°F";
 			unset sensorValueF;
 		else
 			echo -n "$sensorValueC°C";
 		fi;
 		unset sensorValueC;
 	elif [[ "$sensorFile" == "power"*"_input" ]]; then
-		echo -n "$( echo " scale=2; $sensorValueRaw * 0.000001 / 1" | bc) W";
+		echo -n "$(bc <<< " scale=2; $sensorValueRaw * 0.000001 / 1") W";
 	elif [[ "$sensorFile" == "in"*"_input" ]]; then
-		echo -n "$( echo " scale=2; $sensorValueRaw * 0.001 / 1" | bc) V";
+		echo -n "$(bc <<< " scale=2; $sensorValueRaw * 0.001 / 1") V";
 	elif [[ "$sensorFile" == "curr"*"_input" ]]; then
 		echo -n "$sensorValueRaw ? A"; #TODO
 	elif [[ "$sensorFile" == "freq"*"_input" ]]; then
-		echo -n "$( echo " scale=2; $sensorValueRaw * 0.000001 / 1" | bc) MHz";
+		echo -n "$(bc <<< " scale=2; $sensorValueRaw * 0.000001 / 1") MHz";
 	else
 		echo -n "$sensorValueRaw";
 	fi;
 	unset sensorFile sensorValueRaw;
 }
 
+getNameFile() {
+	local nameFile="$1";
+	if [ -r "$nameFile" ]; then
+		local nameFileResult;
+		nameFileResult=$(<"$nameFile");
+		if [ ! -z "$nameFileResult" ]; then
+			echo -ne "$nameFileResult:\t";
+		else
+			echo -ne "\t";
+		fi;
+		unset nameFileResult;
+	else
+		echo -ne "\t";
+	fi;
+	unset nameFile;
+}
+
 getOutput_direct() {
-	sensorValue="$1";
+	local sensorValue="$1";
 	if [ -r "$sensorValue" ]; then
 		local sensorLabel;
-		local nameFile;
-		nameFile=$(dirname "$sensorValue");
-		nameFile+="/name";
-		if [ -r "$nameFile" ]; then
-			local nameFileResult;
-			nameFileResult=$(cat "$nameFile" 2> /dev/null);
-			if [ ! -z "$nameFileResult" ]; then
-				sensorLabel+="$nameFileResult:\t";
-			else
-				sensorLabel+="\t";
-			fi;
-			unset nameFileResult;
-		else
-			sensorLabel+="\t";
-		fi;
-		unset nameFile;
-		local sensorLabelFile="${sensorValue//_input/_label}";
-		if [ -r "$sensorLabelFile" ]; then
-			local lableFileResult;
-			lableFileResult=$(cat "$sensorLabelFile" 2> /dev/null);
-			if [ ! -z "$lableFileResult" ]; then
-				sensorLabel+="$lableFileResult:\t";
-			else
-				sensorLabel+="\t";
-			fi;
-			unset lableFileResult;
-		else
-			sensorLabel+="\t";
-		fi;
-		unset sensorLabelFile;
-		sensorLabel+=$(echo "$sensorValue" | sed 's|.*/||' | sed 's|_input||')
+		sensorLabel+=$(getNameFile "${sensorValue%\/*}/name"); #subsystem
+		sensorLabel+=$(getNameFile "${sensorValue/_input/_label}"); #pretty
+		sensorLabel+=$(sed 's|.*/||;s|_input||' <<< "$sensorValue"); #raw
 		echo -e "$sensorLabel:\t$(getSensorValuePretty "$sensorValue")";
 		unset sensorLabel;
 	fi;
@@ -98,22 +86,18 @@ getOutput_direct() {
 
 getOutputHM() {
 	#Credit (CC BY-SA 4.0): https://unix.stackexchange.com/a/139381
-	while IFS= LC_ALL=C read -r -d '' -u 9 file
-	do
+	while IFS= LC_ALL=C read -r -d '' -u 9 file; do
 		if [[ "$file" == *"/hwmon"* ]]; then
 			getOutput_direct "$file" &
 		fi;
-	done 9< <( find /sys/devices/ -type f -name '*_input' -exec printf '%s\0' {} + )
+	done 9< <( find /sys/devices/ -type f -name '*_input' -exec printf '%s\0' {} + );
 }
 
 getOutputTZ_direct() {
 	local sensorLabel="$1";
-	local sensorValue="${sensorLabel//type/temp}";
+	local sensorValue="${sensorLabel/type/temp}";
 	if [ -r "$sensorValue" ]; then
-		local sensorLabelActual;
-		sensorLabelActual=$(cat "$sensorLabel");
-		echo -e "$sensorLabelActual:\t$(getSensorValuePretty "$sensorValue")";
-		unset sensorLabelActual;
+		echo -e "$(<"$sensorLabel"):\t$(getSensorValuePretty "$sensorValue")";
 	fi;
 	unset sensorValue sensorLabel;
 }
@@ -127,7 +111,7 @@ getOutputTZ() {
 	unset sensorLabel;
 }
 
-echo -e "\nhwmon:"
+echo "hwmon:"
 getOutputHM | prettyPrintOutput;
 echo -e "\nthermal zones:"
 getOutputTZ | prettyPrintOutput;

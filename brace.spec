@@ -1,6 +1,6 @@
 Name: brace
-Version: 20260921
-Release: 3
+Version: 20260922
+Release: 1
 Summary: Increases privacy/security through various configs
 License: AGPLv3+
 BuildArch: noarch
@@ -49,6 +49,7 @@ install -Dm755 %{_sourcedir}/brace/usr/bin/brace-fedora-update-system %{buildroo
 install -Dm755 %{_sourcedir}/brace/usr/bin/brace-installer %{buildroot}/usr/bin/brace-installer;
 install -Dm755 %{_sourcedir}/brace/usr/bin/brace-mr-update %{buildroot}/usr/bin/brace-mr-update;
 install -Dm755 %{_sourcedir}/brace/usr/bin/brace-supplemental-changes %{buildroot}/usr/bin/brace-supplemental-changes;
+install -Dm755 %{_sourcedir}/brace/usr/bin/sensors-lite %{buildroot}/usr/bin/sensors-lite;
 install -Dm644 %{_sourcedir}/brace/usr/lib/firefox/browser/defaults/preferences/userjs-arkenfox.js %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/userjs-arkenfox.js;
 install -Dm644 %{_sourcedir}/brace/usr/lib/firefox/browser/defaults/preferences/userjs-brace.js %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/userjs-brace.js;
 install -Dm644 %{_sourcedir}/brace/usr/lib/firefox/browser/defaults/preferences/userjs-brace-perf.js %{buildroot}/usr/lib64/firefox/browser/defaults/preferences/userjs-brace-perf.js;
@@ -104,6 +105,7 @@ install -Dm644 %{_sourcedir}/README.md %{buildroot}/usr/share/doc/brace/README.m
 /usr/bin/brace-installer
 /usr/bin/brace-supplemental-changes
 /usr/bin/brace-update-system
+/usr/bin/sensors-lite
 /usr/lib64/firefox/browser/defaults/preferences/userjs-arkenfox.js
 /usr/lib64/firefox/browser/defaults/preferences/userjs-brace.js
 /usr/lib64/firefox/browser/defaults/preferences/userjs-brace-perf.js

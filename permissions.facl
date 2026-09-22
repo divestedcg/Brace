@@ -273,6 +273,11 @@ user::rwx
 group::---
 other::---
 
+# file: brace/usr/bin/sensors-lite
+user::rwx
+group::---
+other::---
+
 # file: brace/usr/lib
 user::rwx
 group::r-x
