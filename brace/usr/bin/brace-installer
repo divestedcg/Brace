@@ -293,7 +293,7 @@ fi;
 #TODO: remove gedit after g-t-e gains a sort function
 prepareOperation "biRemoval_gnome_legacy";
 
-declare -a packagesFedora=('chkrootkit' 'rkhunter' 'lynis' 'spectre-meltdown-checker' 'bleachbit' 'gimpfx-foundry' 'ssss' 'ncdu' 'stress' 'stress-ng' 's-tui' 'onionshare' 'croc' 'numix-icon-theme' 'rng-tools' 'irqbalance' 'firejail' 'fapolicyd' 'intel-mediasdk' 'libva-intel-hybrid-driver' 'pixz' 'compsize' 'srm' 'pv' 'ripgrep' 'duperemove' 'unrar' 'msr-tools' 'neofetch' 'fastfetch' 'cpuid' 'exiftool' 'backintime-qt' 'tlp' 'tlp-rdw' 'basez' 'fzf' 'pngcrush' 'smbios-utils' 'smbios-utils-python' 'mtd-utils' 'dialog' 'pdfcrack' 'hashcat' 'brotli');
+declare -a packagesFedora=('chkrootkit' 'rkhunter' 'lynis' 'spectre-meltdown-checker' 'bleachbit' 'gimpfx-foundry' 'ssss' 'ncdu' 'stress' 'stress-ng' 's-tui' 'onionshare' 'croc' 'numix-icon-theme' 'rng-tools' 'irqbalance' 'firejail' 'fapolicyd' 'intel-mediasdk' 'libva-intel-hybrid-driver' 'pixz' 'compsize' 'srm' 'pv' 'ripgrep' 'duperemove' 'unrar' 'msr-tools' 'neofetch' 'fastfetch' 'cpuid' 'exiftool' 'backintime-qt' 'tlp' 'tlp-rdw' 'basez' 'fzf' 'pngcrush' 'smbios-utils' 'smbios-utils-python' 'mtd-utils' 'dialog' 'pdfcrack' 'hashcat' 'brotli' 'unhide');
 prepareOperation "biRemoval_brace_cleanup";
 
 declare -a packagesFedora=('*.i686');
