@@ -1,6 +1,6 @@
 Name: brace
 Version: 20260922
-Release: 3
+Release: 4
 Summary: Increases privacy/security through various configs
 License: AGPLv3+
 BuildArch: noarch
@@ -40,7 +40,6 @@ install -Dm644 %{_sourcedir}/brace/etc/dconf/db/local.d/locks/00-brace-locked %{
 install -Dm644 %{_sourcedir}/brace/etc/dconf/profile/user-full %{buildroot}/etc/dconf/profile/user;
 install -Dm644 %{_sourcedir}/brace/etc/profile.d/brace-env-overrides.sh %{buildroot}/etc/profile.d/brace-env-overrides.sh;
 install -Dm644 %{_sourcedir}/brace/etc/profile.d/brace-helpers.sh %{buildroot}/etc/profile.d/brace-helpers.sh;
-install -Dm644 %{_sourcedir}/brace/etc/tlp.d/00-brace.conf %{buildroot}/etc/tlp.d/00-brace.conf;
 install -Dm644 %{_sourcedir}/brace/usr/lib/dracut/dracut.conf.d/99-trim.conf %{buildroot}/usr/lib/dracut/dracut.conf.d/99-trim.conf;
 install -Dm755 %{_sourcedir}/brace/usr/bin/brace-audit %{buildroot}/usr/bin/brace-audit;
 install -Dm755 %{_sourcedir}/brace/usr/bin/brace-fedora-enable-auto-updates %{buildroot}/usr/bin/brace-enable-auto-updates;
@@ -98,7 +97,6 @@ install -Dm644 %{_sourcedir}/README.md %{buildroot}/usr/share/doc/brace/README.m
 /etc/opt/chrome/policies/managed/brace.json
 /etc/profile.d/brace-env-overrides.sh
 /etc/profile.d/brace-helpers.sh
-/etc/tlp.d/00-brace.conf
 /usr/bin/brace-audit
 /usr/bin/brace-enable-auto-updates
 /usr/bin/brace-enable-rpmfusion

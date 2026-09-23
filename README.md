@@ -67,7 +67,6 @@ Supported Configuration Targets
 - NetworkManager
 - polkit
 - systemd
-- TLP
 - udev
 
 Additional Inclusions

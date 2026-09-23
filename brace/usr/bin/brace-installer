@@ -257,7 +257,7 @@ declare -a packagesToIgnoreFlatpak=();
 #
 # Start of packages
 #
-declare -a packagesFedora=('abrt*' 'cockpit*' 'PackageKit' 'PackageKit-gtk3-module' 'bat' 'virtualbox-guest-additions' 'hyperv*' 'open-vm-tools' 'mediawriter' 'passim' 'sos' 'plocate' 'memstrack' 'realmd' 'NetworkManager-vpnc' 'NetworkManager-openconnect' 'NetworkManager-openvpn' 'NetworkManager-libreswan' 'NetworkManager-ssh' 'NetworkManager-adsl' 'NetworkManager-ppp' 'NetworkManager-wwan' 'ModemManager' 'usb_modeswitch' 'whois' 'whois-nls' 'mkpasswd' 'vim-minimal' 'vim-enhanced' 'compat-ffmpeg4' 'python3-perf' 'gtk2' '*backgrounds*' 'anaconda*' 'setroubleshoot*' 'kpartx' 'mpage' 'wl-clipboard' 'gamemode' 'lrzsz' 'pinfo' 'psacct' 'prefixdevname' 'zziplib' 'tcl');
+declare -a packagesFedora=('abrt*' 'cockpit*' 'PackageKit' 'PackageKit-gtk3-module' 'bat' 'virtualbox-guest-additions' 'hyperv*' 'open-vm-tools' 'mediawriter' 'passim' 'sos' 'plocate' 'memstrack' 'realmd' 'NetworkManager-vpnc' 'NetworkManager-openconnect' 'NetworkManager-openvpn' 'NetworkManager-libreswan' 'NetworkManager-ssh' 'NetworkManager-adsl' 'NetworkManager-ppp' 'NetworkManager-wwan' 'ModemManager' 'usb_modeswitch' 'whois' 'whois-nls' 'mkpasswd' 'vim-minimal' 'vim-enhanced' 'compat-ffmpeg4' 'python3-perf' 'gtk2' '*backgrounds*' 'anaconda*' 'setroubleshoot*' 'kpartx' 'mpage' 'paps' 'wl-clipboard' 'gamemode' 'lrzsz' 'pinfo' 'psacct' 'prefixdevname' 'zziplib' 'tcl' 'dos2unix' 'iptstate' 'samba-client');
 if [ -f /etc/fedora-release ]; then packagesFedora+=('python3-dnf' 'deltarpm'); fi; #EL <=10 still uses DNF4
 if [ -f /etc/authselect/authselect.conf ]; then
 	if grep -q "^local$" /etc/authselect/authselect.conf; then
@@ -293,7 +293,7 @@ fi;
 #TODO: remove gedit after g-t-e gains a sort function
 prepareOperation "biRemoval_gnome_legacy";
 
-declare -a packagesFedora=('chkrootkit' 'rkhunter' 'lynis' 'spectre-meltdown-checker' 'bleachbit' 'gimpfx-foundry' 'ssss' 'ncdu' 'stress' 'stress-ng' 's-tui' 'onionshare' 'croc' 'numix-icon-theme' 'rng-tools' 'irqbalance' 'firejail' 'fapolicyd' 'intel-mediasdk' 'libva-intel-hybrid-driver' 'pixz' 'compsize' 'srm' 'pv' 'ripgrep' 'duperemove' 'unrar' 'msr-tools');
+declare -a packagesFedora=('chkrootkit' 'rkhunter' 'lynis' 'spectre-meltdown-checker' 'bleachbit' 'gimpfx-foundry' 'ssss' 'ncdu' 'stress' 'stress-ng' 's-tui' 'onionshare' 'croc' 'numix-icon-theme' 'rng-tools' 'irqbalance' 'firejail' 'fapolicyd' 'intel-mediasdk' 'libva-intel-hybrid-driver' 'pixz' 'compsize' 'srm' 'pv' 'ripgrep' 'duperemove' 'unrar' 'msr-tools' 'neofetch' 'fastfetch' 'cpuid' 'exiftool' 'backintime-qt' 'tlp' 'tlp-rdw' 'basez' 'fzf' 'pngcrush' 'smbios-utils' 'smbios-utils-python' 'mtd-utils');
 prepareOperation "biRemoval_brace_cleanup";
 
 declare -a packagesFedora=('*.i686');
@@ -541,6 +541,12 @@ prepareOperation "biWant_cli_manage_sed";
 declare -a packagesFedora=('nvme-cli');
 prepareOperation "biWant_cli_manage_nvme";
 
+declare -a packagesFedora=('hdparm');
+prepareOperation "biWant_cli_manage_hdd";
+
+declare -a packagesFedora=('sg3_utils');
+prepareOperation "biWant_cli_manage_scsi";
+
 declare -a packagesFedora=('opensc');
 prepareOperation "biWant_cli_manage_smartcard";
 
@@ -614,12 +620,16 @@ declare -a packagesFedora=('openrgb');
 #declare -a packagesFlathub=('org.openrgb.OpenRGB'); #needs udev rules
 prepareOperation "biWant_gui_manage_rgb";
 
+declare -a packagesFedora=('kdiskmark');
+prepareOperation "biWant_gui_bench_disk";
+
 #TODO: 'bluez': ffmpeg & libvirt both depend on this
 #TODO: 'gnome-bluetooth'
 #TODO: 'usbguard': maybe move this to a helper script instead
 #TODO: 'usbguard-notifier'
 #TODO: 'simple-scan'
 #TODO: 'hplip'
+#TODO: 'vulkan-tools'
 
 declare -a packagesArch=('android-tools' 'android-udev');
 declare -a packagesDebian=('adb' 'fastboot');
@@ -689,7 +699,7 @@ prepareOperation "biWant_cli_network_bench";
 
 declare -a packagesArch=('mtr');
 declare -a packagesDebian=('mtr');
-declare -a packagesFedora=('traceroute' 'mtr');
+declare -a packagesFedora=('net-tools' 'traceroute' 'mtr');
 declare -a packagesSuse=('mtr');
 prepareOperation "biWant_cli_network_diag";
 
@@ -926,6 +936,9 @@ prepareOperation "biWant_cli_devel_memory_debugger";
 
 declare -a packagesFedora=('tidy');
 prepareOperation "biWant_cli_devel_html_formatter";
+
+declare -a packagesFedora=('python3-csscompressor');
+prepareOperation "biWant_cli_devel_css_formatter";
 
 declare -a packagesFedora=('esptool');
 prepareOperation "biWant_cli_devel_esp_flasher";

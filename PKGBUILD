@@ -1,7 +1,7 @@
 # Maintainer: Tavi <tavi@divested.dev>
 pkgname=brace
 pkgver=20260922
-pkgrel=3
+pkgrel=4
 pkgdesc="Increases privacy/security through various configs."
 arch=('any')
 license=('GPL3')
@@ -29,7 +29,6 @@ package() {
 	install -Dm755 brace/etc/default/grub.d/brace.cfg "$pkgdir"/etc/default/grub.d/brace.cfg;
 	install -Dm644 brace/etc/profile.d/brace-env-overrides.sh "$pkgdir"/etc/profile.d/brace-env-overrides.sh;
 	install -Dm644 brace/etc/profile.d/brace-helpers.sh "$pkgdir"/etc/profile.d/brace-helpers.sh;
-	install -Dm644 brace/etc/tlp.d/00-brace.conf "$pkgdir"/etc/tlp.d/00-brace.conf;
 	install -Dm755 brace/usr/bin/brace-installer "$pkgdir"/usr/bin/brace-installer;
 	install -Dm755 brace/usr/bin/brace-supplemental-changes "$pkgdir"/usr/bin/brace-supplemental-changes;
 	install -Dm755 brace/usr/bin/sensors-lite "$pkgdir"/usr/bin/sensors-lite;
