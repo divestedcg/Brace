@@ -126,3 +126,7 @@ alias showBatteryStats='upower -b';
 alias resetGnomeAppFolders='gsettings reset-recursively org.gnome.desktop.app-folders'; #fix category issues
 alias resetGnomeAppPicker='gsettings set org.gnome.shell app-picker-layout "[]"'; #then alphabetize them
 alias resetGnomeApps='resetGnomeAppFolders && resetGnomeAppPicker && echo "please logout and back in"';
+
+# brace removes avahi so make the command to manually add a printer handy
+# Credit: https://wiki.archlinux.org/title/CUPS#AirPrint_and_IPP_Everywhere
+alias driverlessHelp='echo -e "to add a driverless printer:\nlpadmin -p [name] -E -v "ipp://[IP address]/ipp/print" -m everywhere";';
