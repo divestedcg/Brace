@@ -230,8 +230,8 @@ other::r-x
 
 # file: brace/usr/bin/brace-audit
 user::rwx
-group::---
-other::---
+group::r-x
+other::r-x
 
 # file: brace/usr/bin/brace-fedora-enable-auto-updates
 user::rwx
@@ -260,13 +260,13 @@ other::r-x
 
 # file: brace/usr/bin/brace-supplemental-changes
 user::rwx
-group::---
-other::---
+group::r-x
+other::r-x
 
 # file: brace/usr/bin/sensors-lite
 user::rwx
-group::---
-other::---
+group::r-x
+other::r-x
 
 # file: brace/usr/lib
 user::rwx
