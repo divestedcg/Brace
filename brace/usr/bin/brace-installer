@@ -796,7 +796,7 @@ prepareOperation "biWant_apparmor";
 
 declare -a packagesArch=('firewalld');
 declare -a packagesDebian=('firewalld');
-declare -a packagesFedora=('firewalld');
+declare -a packagesFedora=('firewalld' 'libcap-ng-python3');
 declare -a packagesSuse=('firewalld');
 prepareOperation "biWant_daemon_firewall";
 
