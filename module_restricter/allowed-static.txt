@@ -146,6 +146,7 @@ iTCO_vendor_support #Intel TCO Vendor Specific WatchDog Timer Driver Support
 iTCO_wdt #Intel TCO WatchDog Timer Driver
 iwlmvm #The new Intel(R) wireless AGN driver for Linux
 iwlwifi #Intel(R) Wireless WiFi driver for Linux
+jfs #The Journaled Filesystem (JFS)
 joydev #Joystick device interfaces
 k10temp #AMD Family 10h+ CPU core temperature monitor
 kfifo_buf #Industrial I/O buffering based on kfifo
@@ -169,11 +170,13 @@ mei #Intel(R) Management Engine Interface
 mei_me #Intel(R) Management Engine Interface
 mei_pxp #MEI PXP
 mii #MII hardware support library
+minix #Minix file system
 mlx4_core #Mellanox ConnectX HCA low-level driver
 mlx4_en #Mellanox ConnectX HCA Ethernet driver
 mmc_block #Multimedia Card (MMC) block device driver
 mmc_core #MMC core driver
 mpt3sas #LSI MPT Fusion SAS 3.0 Device Driver
+msdos #MS-DOS filesystem support
 msi_wmi #MSI laptop WMI hotkeys driver
 mt76_connac_lib #MediaTek MT76x connac layer helpers
 mt76 #MediaTek MT76x helpers
@@ -182,8 +185,8 @@ mt7921e #MediaTek MT7921E (PCIe) wireless driver
 mt792x_lib #MediaTek MT792x core driver
 mtd #Core MTD registration and access routines
 net_failover #Failover driver for Paravirtual drivers
-nf_conntrack #IPv4 and IPv6 connection tracking
 nf_conntrack_broadcast #Broadcast connection tracking helper
+nf_conntrack #IPv4 and IPv6 connection tracking
 nf_conntrack_netbios_ns #NetBIOS name service broadcast connection tracking helper
 nf_conntrack_tftp #TFTP connection tracking helper
 nf_defrag_ipv4 #IPv4 defragmentation support
@@ -206,6 +209,9 @@ nft_nat #Network Address Translation support
 nft_reject_inet #Netfilter nftables reject inet support
 nft_reject_ipv4 #IPv4 packet rejection for nftables
 nft_reject #Netfilter x_tables over nftables module
+nls_ucs2_utils #NLS UCS-2
+ntfs3 #ntfs3 read/write filesystem
+ntfs #NTFS read-write filesystem driver
 ntsync #Kernel driver for NT synchronization primitives
 nvme_auth #NVMe Authentication framework
 nvme_core #NVMe host core framework
