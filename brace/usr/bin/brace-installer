@@ -273,7 +273,6 @@ fi;
 #TODO: 'less-color': broken package? make sure less doesn't go with it
 #TODO: 'PackageKit-glib': simple-scan depends on it
 #TODO: 'PackageKit-gstreamer-plugin': @multimedia pulls it in
-#TODO: 'plymouth*': maybe
 prepareOperation "biRemoval_general_unwanted";
 
 declare -a packagesFedora=('abiword' 'adapta-gtk-theme' 'akregator' 'amarok' 'asunder' 'calligra*' 'clipit' 'clipman' 'compiz' 'dnfdragora*' 'doxygen' 'emerald' 'empathy' 'exaile' 'falkon' 'filezilla' 'geany' 'gnomebaker' 'gnote' 'gnumeric' 'juk' 'k3b' 'kget' 'kmahjongg' 'kmines' 'konqueror' 'konversation' 'kpatience' 'ktnef' 'ktorrent' 'lxmusic' 'midori' 'osmo' 'paper-icon-theme' 'pidgin' '*powerline' 'pragha' 'qlipper' 'quassel' 'qupzilla' 'rhythmbox' 'thunderbird' 'xawtv' 'xfburn' 'xfdashboard' 'xpad' 'yarock' 'hexchat' 'gparted' 'blivet-gui' 'shotwell' 'mpv');
@@ -293,7 +292,7 @@ fi;
 #TODO: remove gedit after g-t-e gains a sort function
 prepareOperation "biRemoval_gnome_legacy";
 
-declare -a packagesFedora=('chkrootkit' 'rkhunter' 'lynis' 'spectre-meltdown-checker' 'bleachbit' 'gimpfx-foundry' 'ssss' 'ncdu' 'stress' 'stress-ng' 's-tui' 'onionshare' 'croc' 'numix-icon-theme' 'rng-tools' 'irqbalance' 'firejail' 'fapolicyd' 'intel-mediasdk' 'libva-intel-hybrid-driver' 'pixz' 'compsize' 'srm' 'pv' 'ripgrep' 'duperemove' 'unrar' 'msr-tools' 'neofetch' 'fastfetch' 'cpuid' 'exiftool' 'backintime-qt' 'tlp' 'tlp-rdw' 'basez' 'fzf' 'pngcrush' 'smbios-utils' 'smbios-utils-python' 'mtd-utils' 'dialog' 'pdfcrack' 'hashcat' 'brotli' 'unhide' 'hw-probe' 'v4l-utils' 'acpica-tools' 'edid-decode' 'python3-pandas' 'nmap' 'diskscan' 'perf' 'snapd');
+declare -a packagesFedora=('chkrootkit' 'rkhunter' 'lynis' 'spectre-meltdown-checker' 'bleachbit' 'gimpfx-foundry' 'ssss' 'ncdu' 'stress' 'stress-ng' 's-tui' 'onionshare' 'croc' 'numix-icon-theme' 'rng-tools' 'irqbalance' 'firejail' 'fapolicyd' 'intel-mediasdk' 'libva-intel-hybrid-driver' 'pixz' 'compsize' 'srm' 'pv' 'ripgrep' 'duperemove' 'unrar' 'msr-tools' 'neofetch' 'fastfetch' 'cpuid' 'exiftool' 'backintime-qt' 'tlp' 'tlp-rdw' 'basez' 'fzf' 'pngcrush' 'smbios-utils' 'smbios-utils-python' 'mtd-utils' 'dialog' 'pdfcrack' 'hashcat' 'brotli' 'unhide' 'hw-probe' 'v4l-utils' 'acpica-tools' 'edid-decode' 'python3-pandas' 'nmap' 'diskscan' 'perf' 'snapd' 'usbguard-dbus' 'usbguard-tools');
 prepareOperation "biRemoval_brace_cleanup";
 
 declare -a packagesFedora=('*.i686');
@@ -534,6 +533,27 @@ declare -a packagesFedora=('syncthing');
 declare -a packagesSuse=('syncthing');
 prepareOperation "biWant_daemon_file_sync";
 
+declare -a packagesFedora=('tuned');
+prepareOperation "biWant_daemon_platform_tuning";
+
+declare -a packagesFedora=('tuned-ppd');
+prepareOperation "biWant_gui_platform_tuning";
+
+declare -a packagesFedora=('thermald' 'intel-lpmd');
+prepareOperation "biWant_daemon_platform_tuning_intel";
+
+declare -a packagesFedora=('mcelog');
+prepareOperation "biWant_daemon_memory_error_reporting";
+
+declare -a packagesFedora=('bolt');
+prepareOperation "biWant_daemon_thunderbolt";
+
+declare -a packagesFedora=('usbguard');
+prepareOperation "biWant_daemon_usbguard";
+
+declare -a packagesFedora=('usbguard-notifier');
+prepareOperation "biWant_gui_usbguard";
+
 declare -a packagesFedora=('@printing');
 #TODO: improve this somehow
 prepareOperation "biWant_daemon_printing";
@@ -628,8 +648,6 @@ prepareOperation "biWant_gui_bench_disk";
 
 #TODO: 'bluez': ffmpeg & libvirt both depend on this
 #TODO: 'gnome-bluetooth'
-#TODO: 'usbguard': maybe move this to a helper script instead
-#TODO: 'usbguard-notifier'
 #TODO: 'simple-scan'
 #TODO: 'hplip'
 #TODO: 'vulkan-tools'
@@ -641,6 +659,12 @@ declare -a packagesArch=('android-tools' 'android-udev');
 declare -a packagesDebian=('adb' 'fastboot');
 declare -a packagesFedora=('android-tools');
 prepareOperation "biWant_cli_android";
+
+declare -a packagesFedora=('plymouth');
+prepareOperation "biWant_daemon_plymouth";
+
+declare -a packagesFedora=('plymouth-system-theme');
+prepareOperation "biWant_gui_plymouth";
 
 declare -a packagesArch=('tor' 'torsocks');
 declare -a packagesDebian=('tor' 'torsocks');
