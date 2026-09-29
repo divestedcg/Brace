@@ -65,5 +65,6 @@ export CHROMIUM_USER_FLAGS=" \
 --extension-content-verification=enforce_strict \
 --extensions-install-verification=enforce_strict \
 --no-pings \
+--override-enabled-cdm-interface-version=999 \
 --enable-features=ClearCrossSiteCrossBrowsingContextGroupWindowName,IsolateSandboxedIframes:grouping/per-document,OriginKeyedProcessesByDefault,PartitionAllocWithAdvancedChecks:enabled-processes/all-processes,PartitionConnectionsByNetworkIsolationKey,ReduceAcceptLanguage,ScopeMemoryCachePerContext,SplitCacheByIncludeCredentials,SplitCacheByNetworkIsolationKey,SplitCodeCacheByNetworkIsolationKey,SplitHostCacheByNetworkAnonymizationKey,StrictOriginIsolation \
 --disable-features=AimEnabled,AutofillServerCommunication,CrashReporting,DocumentReporting,InterestFeedV2,Journeys,LensOverlay,LensStandalone,MediaDrmPreprovisioning,NTPPopularSitesBakedInContent,OptimizationHints,OptimizationHintsFetchingSRP,Reporting,SkillsEnabled,StarterPackExpansion,TabHoverCardImages,WebGPUBlobCache,WebGPUService";
