@@ -1,5 +1,5 @@
 #!/bin/sh
-#Copyright (c) 2020 Divested Computing Group
+#Copyright (c) 2020-2026 Divested Computing Group
 #
 #This program is free software: you can redistribute it and/or modify
 #it under the terms of the GNU Affero General Public License as published by
@@ -36,7 +36,7 @@ export GST_VAAPI_ALL_DRIVERS=1;
 # disable thread local malloc cache
 export GLIBC_TUNABLES='glibc.malloc.tcache_count=0'
 
-# disable JavaScript JIT
+# disable JavaScript JIT, credit @RKNF404
 # https://trac.webkit.org/wiki/EnvironmentVariables
 export JavaScriptCoreUseJIT=0;
 export JSC_useFTLJIT=0; #deprecated?
@@ -52,3 +52,18 @@ if [ "$(/usr/bin/id -ru)" -ge 1000 ] && [ "$(/usr/bin/id -u)" -ge 1000 ] && [ "$
 else
     umask 0022;
 fi;
+
+#Chromium hardening via flags to supplement the policy
+#Credit: https://github.com/RKNF404/chromium-hardening-guide
+#Credit: https://peter.sh/experiments/chromium-command-line-switches
+export CHROMIUM_USER_FLAGS=" \
+--component-updater=disable-pings \
+--disable-3d-apis \
+--disable-breakpad \
+--disable-crash-reporter \
+--disable-webgl \
+--extension-content-verification=enforce_strict \
+--extensions-install-verification=enforce_strict \
+--no-pings \
+--enable-features=ClearCrossSiteCrossBrowsingContextGroupWindowName,IsolateSandboxedIframes:grouping/per-document,OriginKeyedProcessesByDefault,PartitionAllocWithAdvancedChecks:enabled-processes/all-processes,PartitionConnectionsByNetworkIsolationKey,ReduceAcceptLanguage,ScopeMemoryCachePerContext,SplitCacheByIncludeCredentials,SplitCacheByNetworkIsolationKey,SplitCodeCacheByNetworkIsolationKey,SplitHostCacheByNetworkAnonymizationKey,StrictOriginIsolation \
+--disable-features=AimEnabled,AutofillServerCommunication,CrashReporting,DocumentReporting,InterestFeedV2,Journeys,LensOverlay,LensStandalone,MediaDrmPreprovisioning,NTPPopularSitesBakedInContent,OptimizationHints,OptimizationHintsFetchingSRP,Reporting,SkillsEnabled,StarterPackExpansion,TabHoverCardImages,WebGPUBlobCache,WebGPUService";
