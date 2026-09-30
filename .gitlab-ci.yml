@@ -2,9 +2,20 @@ image: fedora:latest
 
 before_script:
   - dnf update -y
-  - dnf install -y acl gawk which fakeroot rpm-build dpkg dpkg-dev pacman
+  - dnf install -y acl gawk which fakeroot rpm-build dpkg dpkg-dev pacman ShellCheck jq
   - umask 0022
   - setfacl --restore=permissions.facl
+
+check_shell:
+  stage: test
+  script:
+    - shellcheck --severity=error brace/etc/profile.d/*.sh brace/usr/bin/* module_restricter/*.sh
+
+check_json:
+  stage: test
+  script:
+    - jq -e . brace/etc/chromium/policies/managed/brace.json
+    - jq -e . brace/usr/lib/firefox/distribution/policies.json
 
 build_rpm:
   stage: build
