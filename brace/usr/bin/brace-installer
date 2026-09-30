@@ -64,6 +64,10 @@ getConfigVariable() {
 	elif [ "$variableOccurence" -eq '1' ]; then
 		if grep -q "^$variableName=true;\$" "$configPath"; then
 			echo -n "true";
+		elif grep -q "^$variableName=true-d;\$" "$configPath"; then
+			echo -n "true-d";
+		elif grep -q "^$variableName=true-f;\$" "$configPath"; then
+			echo -n "true-f";
 		elif grep -q "^$variableName=false;\$" "$configPath"; then
 			echo -n "false";
 		elif grep -q "^$variableName=skip;\$" "$configPath"; then
@@ -97,8 +101,8 @@ prepareOperation() {
 		fi;
 	fi;
 	variableResolved=$(getConfigVariable "$1");
-	if [ "$variableResolved" == "true" ]; then
-		if [ ${#packagesNotedFlatpak[@]} -gt '0' ] && [ "$preferFlatpak" == "true" ]; then
+	if [ "$variableResolved" == "true" ] || [ "$variableResolved" == "true-d" ] || [ "$variableResolved" == "true-f" ]; then
+		if [ ${#packagesNotedFlatpak[@]} -gt '0' ] && { { [ "$preferFlatpak" == "true" ] && [ "$variableResolved" = "true" ]; } || [ "$variableResolved" == "true-f" ]; }; then
 			packagesToRemove+=("${packagesNoted[@]}");
 			packagesToInstallFlatpak+=("${packagesNotedFlatpak[@]}");
 		elif [ ${#packagesNoted[@]} -eq '0' ] && [ ${#packagesNotedFlatpak[@]} -gt '0' ]; then
