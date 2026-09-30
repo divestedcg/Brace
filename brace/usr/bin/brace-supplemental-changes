@@ -108,8 +108,9 @@ if [ "$(/usr/bin/id -u)" -eq "0" ]; then
 					grubby --update-kernel=ALL --args="iommu.passthrough=0"; #Always use the IOMMU for DMA
 					grubby --update-kernel=ALL --args="iommu.strict=1"; #Do not defer invalidation of hardware TLBs
 					grubby --update-kernel=ALL --args="intel_iommu=on"; #Ensure the IOMMU driver is enabled
-					if [ -x /usr/bin/lspci ]; then
-						if lspci | grep -q "VGA .*.AMD"; then
+					grubby --update-kernel=ALL --args="amdgpu.iommu_perfopt=0"; #Prevent IOMMU bypass
+					if [ -x /usr/bin/lspci ]; then #TODO: re-test this once v7.4 is out
+						if lspci | grep -q "VGA .*.AMD"; then #TODO: adjust this to handle lines which have radeon but not amd
 							echo "Detected AMD GPU, disabling amd iommu forced isolation enablement";
 							grubby --update-kernel=ALL --remove-args="amd_iommu=force_isolation";
 						else
@@ -142,7 +143,6 @@ if [ "$(/usr/bin/id -u)" -eq "0" ]; then
 					grubby --update-kernel=ALL --args="erst_disable"; #Disable use of ACPI ERST pstore backend
 					grubby --update-kernel=ALL --args="hash_pointers=always"; #Always hash pointers, pre-req for slub_debug
 					grubby --update-kernel=ALL --args="systemd.ssh_auto=no"; #Disable systemd v256 automatic AF_VSOCK/AF_UNIX SSH binding
-					#grubby --update-kernel=ALL --args="kvm-intel.nested=0 kvm-amd.nested=0"; #Disable nested virtualization support
 
 					#Nice to haves
 					grubby --update-kernel=ALL --args="fsck.mode=force"; #FSCK mounts every boot, systemd default is once per 30 boots
@@ -178,6 +178,21 @@ if [ "$(/usr/bin/id -u)" -eq "0" ]; then
 					break;;
 				No )
 					grubby --update-kernel=ALL --remove-args="ia32_emulation=false";
+					break;;
+				Skip )
+					break;;
+			esac
+		done
+
+		echo "Do you want to disable nested virtualization support?";
+		echo "Current status: $(grep -q 'kvm-intel.nested=0 kvm-amd.nested=0' /proc/cmdline && echo 'blocked' || echo 'allowed')";
+		select yns in "Yes" "No" "Skip"; do
+			case $yns in
+				Yes )
+					grubby --update-kernel=ALL --args="kvm-intel.nested=0 kvm-amd.nested=0"; #Disable nested virtualization support
+					break;;
+				No )
+					grubby --update-kernel=ALL --remove-args="kvm-intel.nested=0 kvm-amd.nested=0";
 					break;;
 				Skip )
 					break;;
