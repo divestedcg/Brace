@@ -983,6 +983,7 @@ pref("javascript.options.jit_trustedprincipals", true); // [FF75+] [HIDDEN PREF]
  * [2] https://spectrum.ieee.org/tech-talk/telecom/security/more-worries-over-the-security-of-web-assembly
  * [3] https://www.zdnet.com/article/half-of-the-websites-using-webassembly-use-it-for-malicious-purposes ***/
 pref("javascript.options.wasm", false); //BRACE-UNCOMMENTED: attack surface reduction
+pref("javascript.options.wasm_trustedprincipals", true); //BRACE-ADDED
 /* 5507: disable rendering of SVG OpenType fonts ***/
 pref("gfx.font_rendering.opentype_svg.enabled", false); //BRACE-UNCOMMENTED: attack surface reduction
 /* 5508: disable all DRM (Digital Rights Management) content (EME: Encryption Media Extension)

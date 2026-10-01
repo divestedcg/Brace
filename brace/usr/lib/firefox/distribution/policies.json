@@ -5,7 +5,8 @@
 				"Value": "available"
 			},
 			"PDFAltText": {
-				"Value": "available"
+				"Value": "blocked",
+				"Locked": true
 			},
 			"SmartTabGroups": {
 				"Value": "blocked",
@@ -31,7 +32,6 @@
 		"AutofillAddressEnabled": false,
 		"AutofillCreditCardEnabled": false,
 		"CaptivePortal": false,
-		"CNSA2KeyAgreementEnabled": true,
 		"CrashReportsSubmit": {
 			"Enabled": false
 		},
@@ -46,7 +46,7 @@
 		"DontCheckDefaultBrowser": true,
 		"DNSOverHTTPS": {
 			"Enabled": true,
-			"Locked": false,
+			"Locked": true,
 			"Fallback": false,
 			"ProviderURL": "https://dns.quad9.net/dns-query"
 		},
@@ -65,21 +65,18 @@
 			"Enabled": false,
 			"Locked": true
 		},
-		"Extensions": {
-			"Install": [
-				"https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi"
-				]
-		},
 		"ExtensionSettings": {
 			"*": {
 				"blocked_install_message": "Denied by Brace",
-				"install_sources": [ "about:addons", "https://addons.mozilla.org/" ],
-				"installation_mode": "blocked",
-				"allowed_types": [ "extension" ]
+				"installation_mode": "blocked"
 			},
 			"uBlock0@raymondhill.net": {
 				"installation_mode": "force_installed",
-				"install_url": "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi"
+				"private_browsing": true
+			},
+			"uBOLiteRedux@raymondhill.net": {
+				"installation_mode": "blocked",
+				"private_browsing": true
 			}
 		},
 		"FirefoxHome": {
@@ -92,8 +89,21 @@
 			"Stories": false,
 			"SponsoredStories": false,
 			"Snippets": false,
+			"Weather": false,
 			"Widgets": {
-				"Enabled": false
+				"Enabled": false,
+				"Blocked": [
+					"clocks",
+					"crossword",
+					"focusTimer",
+					"lists",
+					"pictureOfTheDay",
+					"privacy",
+					"recentSearches",
+					"sportsWidget",
+					"stocks",
+					"weather"
+				]
 			},
 			"Locked": true
 		},
@@ -118,6 +128,9 @@
 				"Value": false,
 				"Status": "locked"
 			}
+		},
+		"SearchEngines": {
+			"Default": "DuckDuckGo"
 		},
 		"SearchSuggestEnabled": false,
 		"Sync": {
@@ -177,6 +190,37 @@
 							"https://divested.dev/hosts-domains-wildcards"
 						]
 					}
+				},
+				"uBOLiteRedux@raymondhill.net": {
+					"defaultFiltering": "complete",
+					"showBlockedCount": true,
+					"strictBlockMode": true,
+					"rulesets": [
+						"-*",
+						"+default",
+						"+ads",
+						"+annoyances",
+						"+malware",
+						"+privacy",
+						"+ublock-filters",
+						"+easylist",
+						"+easyprivacy",
+						"+pgl",
+						"+ublock-badware",
+						"+urlhaus-full",
+						"+adguard-mobile",
+						"+block-lan",
+						"+adguard-spyware-url",
+						"+annoyances-ai",
+						"+annoyances-cookies",
+						"+annoyances-overlays",
+						"+annoyances-social",
+						"+annoyances-widgets",
+						"+annoyances-others",
+						"+annoyances-notifications",
+						"+ublock-experimental",
+						"+ubol-tests"
+					]
 				}
 			}
 		}

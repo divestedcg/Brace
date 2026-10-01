@@ -261,7 +261,7 @@ declare -a packagesToIgnoreFlatpak=();
 #
 # Start of packages
 #
-declare -a packagesFedora=('abrt*' 'cockpit*' 'PackageKit' 'PackageKit-gtk3-module' 'bat' 'virtualbox-guest-additions' 'hyperv*' 'open-vm-tools' 'mediawriter' 'passim' 'sos' 'plocate' 'memstrack' 'realmd' 'ModemManager' 'usb_modeswitch' 'whois' 'whois-nls' 'mkpasswd' 'vim-minimal' 'vim-enhanced' 'compat-ffmpeg4' 'python3-perf' 'gtk2' '*backgrounds*' 'anaconda*' 'setroubleshoot*' 'kpartx' 'mpage' 'paps' 'wl-clipboard' 'gamemode' 'lrzsz' 'pinfo' 'psacct' 'prefixdevname' 'zziplib' 'tcl' 'dos2unix' 'iptstate' 'samba-client' 'rsyslog' 'NetworkManager-adsl' 'NetworkManager-fortisslvpn' 'NetworkManager-iodine' 'NetworkManager-l2tp' 'NetworkManager-libreswan' 'NetworkManager-openconnect' 'NetworkManager-openvpn' 'NetworkManager-ovs' 'NetworkManager-ppp' 'NetworkManager-pptp' 'NetworkManager-ssh' 'NetworkManager-strongswan' 'NetworkManager-team' 'NetworkManager-vpnc' 'NetworkManager-wwan' 'ibus-typing-booster' 'geolite2*' 'ipcalc' 'dhcp-client' 'cups-browsed' 'hplip*' 'bluez-cups');
+declare -a packagesFedora=('abrt*' 'cockpit*' 'PackageKit' 'PackageKit-gtk3-module' 'bat' 'virtualbox-guest-additions' 'hyperv*' 'open-vm-tools' 'mediawriter' 'passim' 'sos' 'plocate' 'memstrack' 'realmd' 'ModemManager' 'usb_modeswitch' 'whois' 'whois-nls' 'mkpasswd' 'vim-minimal' 'vim-enhanced' 'compat-ffmpeg4' 'python3-perf' 'gtk2' '*backgrounds*' 'anaconda*' 'setroubleshoot*' 'kpartx' 'mpage' 'paps' 'wl-clipboard' 'gamemode' 'lrzsz' 'pinfo' 'psacct' 'prefixdevname' 'zziplib' 'tcl' 'dos2unix' 'iptstate' 'samba-client' 'rsyslog' 'NetworkManager-adsl' 'NetworkManager-fortisslvpn' 'NetworkManager-iodine' 'NetworkManager-l2tp' 'NetworkManager-libreswan' 'NetworkManager-openconnect' 'NetworkManager-openvpn' 'NetworkManager-ovs' 'NetworkManager-ppp' 'NetworkManager-pptp' 'NetworkManager-ssh' 'NetworkManager-strongswan' 'NetworkManager-team' 'NetworkManager-vpnc' 'NetworkManager-wwan' 'ibus-typing-booster' 'geolite2*' 'ipcalc' 'dhcp-client' 'cups-browsed' 'hplip*' 'bluez-cups' 'fedora-chromium-config' 'fedora-bookmarks');
 if [ -f /etc/fedora-release ]; then packagesFedora+=('python3-dnf' 'deltarpm'); fi; #EL <=10 still uses DNF4
 if [ -f /etc/authselect/authselect.conf ]; then
 	if grep -q "^local$" /etc/authselect/authselect.conf; then
@@ -296,7 +296,7 @@ fi;
 #TODO: remove gedit after g-t-e gains a sort function
 prepareOperation "biRemoval_gnome_legacy";
 
-declare -a packagesFedora=('chkrootkit' 'rkhunter' 'lynis' 'spectre-meltdown-checker' 'bleachbit' 'gimpfx-foundry' 'ssss' 'ncdu' 'stress' 'stress-ng' 's-tui' 'onionshare' 'croc' 'numix-icon-theme' 'rng-tools' 'irqbalance' 'firejail' 'fapolicyd' 'intel-mediasdk' 'libva-intel-hybrid-driver' 'pixz' 'compsize' 'srm' 'pv' 'ripgrep' 'duperemove' 'unrar' 'msr-tools' 'neofetch' 'fastfetch' 'cpuid' 'exiftool' 'backintime-qt' 'tlp' 'tlp-rdw' 'basez' 'fzf' 'pngcrush' 'smbios-utils' 'smbios-utils-python' 'mtd-utils' 'dialog' 'pdfcrack' 'hashcat' 'brotli' 'unhide' 'hw-probe' 'v4l-utils' 'acpica-tools' 'edid-decode' 'python3-pandas' 'nmap' 'diskscan' 'perf' 'snapd' 'usbguard-dbus' 'usbguard-tools');
+declare -a packagesFedora=('chkrootkit' 'rkhunter' 'lynis' 'spectre-meltdown-checker' 'bleachbit' 'gimpfx-foundry' 'ssss' 'ncdu' 'stress' 'stress-ng' 's-tui' 'onionshare' 'croc' 'numix-icon-theme' 'rng-tools' 'irqbalance' 'firejail' 'fapolicyd' 'intel-mediasdk' 'libva-intel-hybrid-driver' 'pixz' 'compsize' 'srm' 'pv' 'ripgrep' 'duperemove' 'unrar' 'msr-tools' 'neofetch' 'fastfetch' 'cpuid' 'exiftool' 'backintime-qt' 'tlp' 'tlp-rdw' 'basez' 'fzf' 'pngcrush' 'smbios-utils' 'smbios-utils-python' 'mtd-utils' 'dialog' 'pdfcrack' 'hashcat' 'brotli' 'unhide' 'hw-probe' 'v4l-utils' 'acpica-tools' 'edid-decode' 'python3-pandas' 'nmap' 'diskscan' 'perf' 'snapd' 'usbguard-dbus' 'usbguard-tools' 'mozilla-ublock-origin');
 prepareOperation "biRemoval_brace_cleanup";
 
 declare -a packagesFedora=('*.i686');
@@ -929,7 +929,7 @@ prepareOperation "biWant_gui_browser_chromium";
 
 declare -a packagesArch=('firefox');
 declare -a packagesDebian=('firefox-esr');
-declare -a packagesFedora=('firefox' 'mozilla-ublock-origin');
+declare -a packagesFedora=('firefox');
 #declare -a packagesFlathub=('unsafe.org.mozilla.firefox');
 #declare -a packagesFedoraPak=('unsafe.org.mozilla.firefox');
 declare -a packagesSuse=('MozillaFirefox');
