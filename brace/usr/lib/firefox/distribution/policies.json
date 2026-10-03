@@ -127,6 +127,14 @@
 			"dom.webgpu.enabled": {
 				"Value": false,
 				"Status": "locked"
+			},
+			"webgl.disabled": {
+				"Value": true,
+				"Status": "locked"
+			},
+			"geo.enabled": {
+				"Value": false,
+				"Status": "locked"
 			}
 		},
 		"SearchEngines": {
