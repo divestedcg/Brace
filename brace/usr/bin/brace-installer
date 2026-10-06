@@ -302,7 +302,7 @@ prepareOperation "biRemoval_brace_cleanup";
 declare -a packagesFedora=('*.i686');
 prepareOperation "biRemoval_32bit";
 
-declare -a packagesFedora=('*-devel' 'libubsan' '@development-tools' 'mercurial' 'subversion' 'elixir' 'gcc-go' 'zig' 'alien' 'apk-tools' 'apt' 'brew' 'bun' 'cabal-install' 'cargo' 'carthage' 'cocoapods' 'composer' 'conan' 'conda' 'deno' 'dpkg' 'dpkg-dev*' 'dub' 'erlang-rebar3' 'fedpkg' 'gradle' 'hatch' 'homebrew' 'koji' 'luarocks' 'mamba' 'maven' 'nix-core' 'nodejs*' 'nuget' 'opam' 'pacman' 'pdm' 'perl-App-cpanminus' 'perl-Carton' 'pipx' 'pnpm' 'poetry' 'python3-conda*' 'python3-hatch-*' 'python3-pdm' 'python3-pdm-*' 'python3-pip' 'python3-poetry' 'python3-uv' 'python-pip' 'racket' 'racket-minimal' 'rubygems' 'stack' 'uv' 'vcpkg' 'xbps' 'yarnpkg' 'zypper');
+declare -a packagesFedora=('*-devel' 'libubsan' '@development-tools' 'mercurial' 'subversion' 'elixir' 'gcc-go' 'zig' 'alien' 'apk-tools' 'apt' 'brew' 'bun' 'cabal-install' 'cargo' 'carthage' 'cocoapods' 'composer' 'conan' 'conda' 'deno' 'dpkg' 'dpkg-dev*' 'dub' 'erlang-rebar3' 'fedpkg' 'gradle' 'hatch' 'homebrew' 'koji' 'luarocks' 'mamba' 'maven' 'nix-core' 'nodejs*' 'nuget' 'ocaml*' 'opam' 'pacman' 'pdm' 'perl-App-cpanminus' 'perl-Carton' 'pipx' 'pnpm' 'poetry' 'python3-conda*' 'python3-django*' 'python3-hatch-*' 'python3-pdm' 'python3-pdm-*' 'python3-pip' 'python3-poetry' 'python3-uv' 'python-pip' 'racket' 'racket-minimal' 'rubygems' 'stack' 'uv' 'vcpkg' 'xbps' 'yarnpkg' 'zypper');
 #TODO: 'python-pip-wheel': python3 depends on this
 #TODO: 'perl-CPAN': perl depends on this
 prepareOperation "biRemoval_devel";
