@@ -79,6 +79,7 @@
 	"BuiltInAIAPIsEnabled": false,
 	"CacheEncryptionEnabled": true,
 	"ChromeVariations": 1,
+	"ClipboardHistoryEnabled": 1,
 	"ClickToCallEnabled": false,
 	"CommandLineFlagSecurityWarningsEnabled": true,
 	"ComponentUpdatesEnabled": true,
