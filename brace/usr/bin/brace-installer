@@ -512,12 +512,38 @@ declare -a packagesFedora=('testdisk');
 declare -a packagesSuse=('testdisk');
 prepareOperation "biWant_cli_file_recovery";
 
-declare -a packagesArch=('btrfs-progs' 'dosfstools' 'exfatprogs' 'f2fs-tools' 'ntfs-3g' 'ntfsprogs' 'udftools' 'xfsprogs' 'parted');
-declare -a packagesDebian=('btrfs-progs' 'dosfstools' 'exfatprogs' 'f2fs-tools' 'ntfs-3g' 'udftools' 'xfsprogs' 'parted');
-declare -a packagesFedora=('btrfs-progs' 'dosfstools' 'exfatprogs' 'f2fs-tools' 'ntfs-3g' 'ntfsprogs' 'udftools' 'xfsprogs' 'parted');
-declare -a packagesSuse=('btrfsprogs' 'dosfstools' 'exfatprogs' 'f2fs-tools' 'ntfs-3g' 'ntfsprogs' 'udftools' 'xfsprogs' 'parted');
-#TODO: split this?
+declare -a packagesArch=('btrfs-progs' 'dosfstools' 'xfsprogs' 'parted');
+declare -a packagesDebian=('btrfs-progs' 'dosfstools' 'xfsprogs' 'parted');
+declare -a packagesFedora=('btrfs-progs' 'dosfstools' 'xfsprogs' 'parted');
+declare -a packagesSuse=('btrfsprogs' 'dosfstools' 'xfsprogs' 'parted');
 prepareOperation "biWant_cli_file_systems";
+
+declare -a packagesArch=('exfatprogs');
+declare -a packagesDebian=('exfatprogs');
+declare -a packagesFedora=('exfatprogs');
+declare -a packagesSuse=('exfatprogs');
+prepareOperation "biWant_cli_file_systems_exfat";
+
+declare -a packagesArch=('f2fs-tools');
+declare -a packagesDebian=('f2fs-tools');
+declare -a packagesFedora=('f2fs-tools');
+declare -a packagesSuse=('f2fs-tools');
+prepareOperation "biWant_cli_file_systems_f2fs";
+
+declare -a packagesArch=('ntfs-3g' 'ntfsprogs');
+declare -a packagesDebian=('ntfs-3g');
+declare -a packagesFedora=('ntfs-3g' 'ntfsprogs');
+declare -a packagesSuse=('ntfs-3g' 'ntfsprogs');
+prepareOperation "biWant_cli_file_systems_ntfs";
+
+declare -a packagesArch=('udftools');
+declare -a packagesDebian=('udftools');
+declare -a packagesFedora=('udftools');
+declare -a packagesSuse=('udftools');
+prepareOperation "biWant_cli_file_systems_udf";
+
+declare -a packagesFedora=('cifs-utils');
+prepareOperation "biWant_cli_file_systems_cifs";
 
 declare -a packagesFedora=('nfs-utils');
 prepareOperation "biWant_cli_file_systems_nfs";
