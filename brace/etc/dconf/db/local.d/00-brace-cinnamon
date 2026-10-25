@@ -15,7 +15,6 @@ primary-color='#000000'
 secondary-color='#000000'
 
 [org/cinnamon/desktop/interface]
-clock-use-24h=false
 clock-show-seconds=true
 clock-show-date=false
 enable-animations=false

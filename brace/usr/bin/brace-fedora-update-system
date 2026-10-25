@@ -21,7 +21,6 @@ if [ -f /etc/fedora-release ]; then
 	if rpm -qi hardened_malloc > /dev/null; then echo "Please disable or uninstall hardened_malloc before starting the system update."; fi;
 
 	dnf distro-sync --refresh;
-	dnf install dnf-plugin-system-upgrade;
 	dnf system-upgrade download --refresh --releasever="$1" --best --allowerasing;
 else
 	echo "Currently only Fedora is supported";

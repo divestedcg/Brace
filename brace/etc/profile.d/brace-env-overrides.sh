@@ -34,7 +34,8 @@ export GST_VAAPI_ALL_DRIVERS=1;
 #GST_PLUGIN_FEATURE_RANK=pluginA:NONE,pluginB:NONE...
 
 # disable thread local malloc cache
-export GLIBC_TUNABLES='glibc.malloc.tcache_count=0'
+export GLIBC_TUNABLES='glibc.malloc.tcache_count=0';
+#TODO: handle glibc.cpu.x86_shstk=on:glibc.cpu.hwcaps=SHSTK via tunables.conf
 
 # disable JavaScript JIT, credit @RKNF404
 # https://trac.webkit.org/wiki/EnvironmentVariables

@@ -83,7 +83,6 @@ show-program-list=true
 
 [org/mate/panel/objects/clock/prefs]
 show-temperature=false
-format='12-hour'
 custom-format=''
 show-seconds=true
 show-weather=false

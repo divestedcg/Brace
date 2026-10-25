@@ -18,7 +18,6 @@ automatic-timezone=false
 [org/gnome/desktop/interface]
 show-battery-percentage=true
 enable-animations=false
-clock-format='12h'
 clock-show-seconds=true
 clock-show-date=true
 clock-show-weekday=true

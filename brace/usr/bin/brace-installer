@@ -554,6 +554,9 @@ declare -a packagesFedora=('fuse-sshfs');
 declare -a packagesSuse=('sshfs');
 prepareOperation "biWant_cli_file_systems_sshfs";
 
+declare -a packagesFedora=('lvm2');
+prepareOperation "biWant_cli_file_systems_lvm";
+
 declare -a packagesFedora=('udisks2');
 prepareOperation "biWant_cli_file_systems_udisks";
 
