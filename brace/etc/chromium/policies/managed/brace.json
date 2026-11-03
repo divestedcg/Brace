@@ -41,6 +41,7 @@
 	"FindAndFillWithGeminiSettings": 2,
 	"FindsSettings": 2,
 	"GeminiActOnWebSettings": 1,
+	"GeminiChromeFileUploadSettings": 1,
 	"GeminiSparkSettings": 1,
 	"GeminiSettings": 1,
 	"GenAIInlineImageSettings": 2,
