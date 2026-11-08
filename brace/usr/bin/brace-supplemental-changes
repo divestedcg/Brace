@@ -108,7 +108,6 @@ if [ "$(/usr/bin/id -u)" -eq "0" ]; then
 					grubby --update-kernel=ALL --args="iommu.passthrough=0"; #Always use the IOMMU for DMA
 					grubby --update-kernel=ALL --args="iommu.strict=1"; #Do not defer invalidation of hardware TLBs
 					grubby --update-kernel=ALL --args="intel_iommu=on"; #Ensure the IOMMU driver is enabled
-					grubby --update-kernel=ALL --args="amdgpu.iommu_perfopt=0"; #Prevent IOMMU bypass
 					if [ -x /usr/bin/lspci ]; then #TODO: re-test this once v7.4 is out
 						if lspci | grep -q "VGA .*.AMD"; then #TODO: adjust this to handle lines which have radeon but not amd
 							echo "Detected AMD GPU, disabling amd iommu forced isolation enablement";
