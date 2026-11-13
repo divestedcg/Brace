@@ -181,13 +181,17 @@ night-light-enabled=false
 donation-reminder-enabled=false
 
 [org/gnome/settings-daemon/plugins/media-keys]
-custom-keybindings=['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']
-home=['<Super>e']
+custom-keybindings=['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/']
 
 [org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0]
 binding='<Primary><Alt>t'
 command='ptyxis --new-window'
 name='Launch terminal'
+
+[org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1]
+binding='<Super>e'
+command='nautilus --new-window'
+name='Launch file picker'
 
 [org/gnome/settings-daemon/plugins/power]
 idle-dim=true
