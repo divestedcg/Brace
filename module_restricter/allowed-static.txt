@@ -101,6 +101,7 @@ i2c_hid #HID over I2C core driver
 i2c_i801 #I801 SMBus driver
 i2c_piix4 #PIIX4 SMBus driver
 i2c_smbus #SMBus protocol extensions support
+i3c #I3C core
 i915 #Intel Graphics
 ideapad_laptop #IdeaPad ACPI Extras
 idma64 #iDMA64 core driver
@@ -245,6 +246,7 @@ r8169 #RealTek RTL-8169 Gigabit Ethernet driver
 raid_class #RAID device class
 rapl #Support Intel/AMD RAPL energy consumption counters
 realtek #Realtek PHY driver
+regmap_i3c #regmap I3C Module
 rfcomm #Bluetooth RFCOMM ver 1.11
 rfkill #RF switch support
 rmi_core #RMI bus
